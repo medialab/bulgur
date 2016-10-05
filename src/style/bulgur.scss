@@ -1,0 +1,264 @@
+
+$font-stack: 'Inconsolata', sans-serif;
+
+//colors
+$primary-color: #333;
+$background-default: #f4f4f4;
+$background-intent: #d6cfc4;
+// gutters
+$base-gutter: .3rem;
+$medium-gutter: $base-gutter * 1.33;
+$large-gutter: $medium-gutter * 1.33;
+//responsive breakpoints
+$breakpoint-phone: only screen and (min-device-width : 320px) and (max-device-width : 480px);
+$breakpoint-tablet: only screen and (min-device-width : 768px) and (max-device-width : 1024px);
+
+html
+{
+    min-height: 100%;
+    font-size: 12px;
+}
+
+body
+{
+    font-family: $font-stack;
+
+    color: $primary-color;
+    background: $background-default;
+}
+
+/*
+ * Primary layout
+ */
+
+.bulgur
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    flex-direction: row;
+
+    width: 100%;
+    height: 100%;
+
+    flex-wrap: nowrap;
+    font-size: 1rem;
+}
+
+.bulgur .aside-container
+{
+    flex: 1;
+}
+
+.bulgur .main-container
+{
+    margin: 0;
+
+    flex: 5;
+}
+
+/*
+ * Secondary layout
+ */
+
+.bulgur .aside-container
+{
+    display: flex;
+    flex-direction: column;
+
+    padding: $base-gutter;
+}
+
+.bulgur .aside-container > ul
+{
+    overflow-y: auto;
+
+    margin: 0;
+    padding: $base-gutter;
+
+    flex: 12;
+}
+
+.bulgur .main-container
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.bulgur .main-container .visualization-container
+{
+    flex: 3;
+}
+
+.bulgur .main-container .caption-container
+{
+    flex: 1;
+    position: relative;
+    border-top: 1px solid darkgrey;
+}
+
+/*
+ * Responsive layout adjustments
+ */
+
+@media #{$breakpoint-phone}
+{
+	html
+	{
+	    font-size: 20px;
+	}
+    .bulgur
+    {
+
+        flex-direction: column;
+    }
+
+    .bulgur .aside-container
+    {
+        order: 2;
+        flex-direction: row;
+    }
+}
+@media #{$breakpoint-tablet}
+{
+}
+
+/*
+ * Generic components styling
+ */
+.bulgur button,
+.bulgur input,
+.bulgur textarea
+{
+	border: none;
+    outline: none;
+    background: inherit;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.bulgur button:hover,
+.bulgur input:hover,
+.bulgur textarea:hover,
+.bulgur input:focus,
+.bulgur textarea:focus
+{
+    cursor: pointer;
+
+    background: $background-intent;
+}
+
+/*
+  * Specific components styling
+  */
+
+.bulgur .aside-container > ul > li
+{
+    margin: $base-gutter 0 $base-gutter;
+    padding: $large-gutter;
+    height : 7rem;
+
+    list-style: none;
+
+    cursor: pointer;
+    -webkit-user-select: none; /* Chrome/Safari */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+ */
+            user-select: none;
+         -o-user-select: none;
+
+    border: 1px solid $primary-color;
+}
+
+.bulgur .aside-container > ul > li:hover
+{
+    background: $background-intent;
+}
+
+.bulgur .aside-container > ul > li:last-of-type
+{
+    border: 5px solid $primary-color;
+    height : 2rem;
+}
+
+.bulgur .aside-container > button
+{
+    display: block;
+}
+
+.bulgur .aside-container > button:first-of-type
+{
+    border-bottom: 1px solid $primary-color;
+}
+.bulgur .aside-container > button:last-of-type
+{
+    border-top: 1px solid $primary-color;
+}
+
+.bulgur .view-operations
+{
+	display: flex;
+	height : 2rem;
+	position: absolute;
+	right: 2rem;
+	top: -2rem;
+}
+
+.bulgur .view-operations button{
+	margin-right: $large-gutter;
+	background: $background-default;
+	border: 1px solid $primary-color;
+}
+
+.bulgur .caption-editor
+{
+	width : 100%;
+	height: 100%;
+	margin: 0;
+	display: flex;
+	flex-grow: row nowrap;
+}
+.bulgur .caption-editor .editor-helpers-container{
+	display: flex;
+	flex-flow: column nowrap;
+}
+
+.bulgur .caption-editor .editor-helpers{
+	flex: 1;
+	padding: 0;
+	padding-top: 2rem;
+	margin: 0;
+	text-align: right;
+}
+.bulgur .caption-editor .editor-areas-container{
+	flex: 8;
+	display: flex;
+	flex-flow: column nowrap;
+	padding-right: 2rem;
+}
+
+.bulgur .caption-editor .editor-helpers li{
+	padding: 0;
+	list-style: none;
+}
+.bulgur .caption-editor .editor-areas-container input{
+	display: block;
+	border-bottom: 1px solid $primary-color;
+	font-size: 1.8rem;
+}
+
+.bulgur .caption-editor .editor-areas-container textarea{
+	flex: 1;
+}
+
+
+
+
+
+
+
+
+
+
