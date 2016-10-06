@@ -3,26 +3,40 @@ import FileDrop from 'react-file-drop';
 
 import './NewStoryDialog.scss';
 
-const NewStoryDialogLayout = (props) => (
+const NewStoryDialogLayout = ({
+  getVisualizationType,
+  actions: {
+    setVisualizationType
+  }
+}) => (
   <div className="new-story-dialog">
       <h1>I want to tell a story of ...</h1>
-
       <form className="visualization-type-choice">
-        <input type="radio" id="time" name="time" value="type" onChange={()=> console.log('lol')} checked={true} />
-        <label id="vistype-checked" htmlFor="time">
-          <img src={require('../assets/bulgur-vistype-time.png')}/>
-          <h3>time</h3>
-        </label>
-        <input type="radio" id="space" name="space" value="space" onChange={()=> console.log('lol')} checked={false} />
-        <label htmlFor="space">
-          <img src={require('../assets/bulgur-vistype-space.png')}/>
-          <h3>space</h3>
-        </label>
-        <input type="radio" id="relations" name="relations" value="relations" onChange={()=> console.log('lol')} checked={false} />
-        <label htmlFor="relations">
-          <img src={require('../assets/bulgur-vistype-relations.png')}/>
-          <h3>relations</h3>
-        </label>
+        {['time', 
+          'space', 
+          'relations'
+          ].map((visType, key) => 
+            (<div className="visualization-type-item"
+                id={getVisualizationType === visType ? 'visualization-type-checked' : ''}
+                onClick={()=> setVisualizationType(visType)}
+                key={key}
+            >
+              <input 
+                type="radio" 
+                id={visType} 
+                name={visType} 
+                value="type" 
+                onChange={() => setVisualizationType(visType)} 
+                checked={getVisualizationType === visType} 
+              />
+              <label 
+                htmlFor={visType}
+              >
+                <img src={require('../assets/bulgur-vistype-' + visType + '.png')}/>
+                <h3>{visType}</h3>
+              </label>
+            </div>)
+        )}
       </form>
 
       <h1>I want to use data from ...</h1>

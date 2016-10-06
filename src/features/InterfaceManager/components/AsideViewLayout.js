@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './AsideViewLayout.scss';
+
 const AsideViewLayout = ({
   openNewStoryModal
 }) => (

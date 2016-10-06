@@ -11,14 +11,15 @@ const InterfaceManagerLayout = ({
   isNewStoryModalOpen,
   actions: {
     openNewStoryModal,
-    closeNewStoryModal
+    closeNewStoryModal,
+    resetNewStorySettings
   }
 }) => (
   <div id={id} className={className}>
     <AsideViewLayout openNewStoryModal={openNewStoryModal}/>
     <MainViewLayout/>
     <Modal 
-      onRequestClose={closeNewStoryModal}
+      onRequestClose={()=> closeNewStoryModal() && resetNewStorySettings()}
       isOpen={isNewStoryModalOpen}
     >
       <NewStoryDialog/>

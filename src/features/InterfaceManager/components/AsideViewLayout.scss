@@ -1,0 +1,71 @@
+@import '../../../parameters.scss';
+
+/*
+ * Layout
+ */
+
+.bulgur-aside-view
+{
+    display: flex;
+    flex-direction: column;
+
+    padding: $base-gutter;
+}
+
+.bulgur-aside-view > ul
+{
+    overflow-y: auto;
+
+    margin: 0;
+    padding: $base-gutter;
+
+    flex: 12;
+}
+
+/*
+ * Specific components styling
+ */
+
+.bulgur-aside-view > ul > li
+{
+    margin: $base-gutter 0 $base-gutter;
+    padding: $large-gutter;
+    height : 7rem;
+
+    list-style: none;
+
+    cursor: pointer;
+    -webkit-user-select: none; /* Chrome/Safari */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+ */
+            user-select: none;
+         -o-user-select: none;
+
+    border: 1px solid $primary-color;
+}
+
+.bulgur-aside-view > ul > li:hover
+{
+    background: $background-intent;
+}
+
+.bulgur-aside-view > ul > li:last-of-type
+{
+    border: 5px solid $primary-color;
+    height : 2rem;
+}
+
+.bulgur-aside-view > button
+{
+    display: block;
+}
+
+.bulgur-aside-view > button:first-of-type
+{
+    border-bottom: 1px solid $primary-color;
+}
+.bulgur-aside-view > button:last-of-type
+{
+    border-top: 1px solid $primary-color;
+}
+

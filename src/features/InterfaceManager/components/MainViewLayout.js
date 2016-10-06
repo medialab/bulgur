@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './MainViewLayout.scss';
+
 const MainViewLayout = (props) => (
 	<figure className="bulgur-main-view">
 		<section className="visualization-container">

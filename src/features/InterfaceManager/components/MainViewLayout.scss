@@ -1,0 +1,84 @@
+@import '../../../parameters.scss';
+
+/*
+ * Layout
+ */
+
+.bulgur-main-view
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.bulgur-main-view .visualization-container
+{
+    flex: 3;
+}
+
+.bulgur-main-view .caption-container
+{
+    flex: 1;
+    position: relative;
+    border-top: 1px solid darkgrey;
+}
+
+
+.bulgur-main-view .view-operations
+{
+  display: flex;
+  height : 2rem;
+  position: absolute;
+  right: 2rem;
+  top: -2rem;
+}
+
+/*
+ * Specific components styling
+ */
+
+.bulgur-main-view .view-operations button{
+  margin-right: $large-gutter;
+  background: $background-default;
+  border: 1px solid $primary-color;
+}
+
+.bulgur-main-view .caption-editor
+{
+  width : 100%;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-grow: row nowrap;
+}
+.bulgur-main-view .caption-editor .editor-helpers-container{
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.bulgur-main-view .caption-editor .editor-helpers{
+  flex: 1;
+  padding: 0;
+  padding-top: 2rem;
+  margin: 0;
+  text-align: right;
+}
+.bulgur-main-view .caption-editor .editor-areas-container{
+  flex: 8;
+  display: flex;
+  flex-flow: column nowrap;
+  padding-right: 2rem;
+}
+
+.bulgur-main-view .caption-editor .editor-helpers li{
+  padding: 0;
+  list-style: none;
+}
+.bulgur-main-view .caption-editor .editor-areas-container input{
+  display: block;
+  border-bottom: 1px solid $primary-color;
+  font-size: 1.8rem;
+}
+
+.bulgur-main-view .caption-editor .editor-areas-container textarea{
+  flex: 1;
+}

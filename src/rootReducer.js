@@ -7,7 +7,9 @@
 import {combineReducers} from 'redux';
 
 import ui from './features/InterfaceManager/duck';
+import newStory from './features/NewStoryDialog/duck';
 
 export default combineReducers({
-  ui
+  ui,
+  newStory
 });
