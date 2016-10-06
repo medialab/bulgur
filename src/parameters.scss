@@ -1,0 +1,13 @@
+$font-stack: 'Inconsolata', sans-serif;
+
+//colors
+$primary-color: #333;
+$background-default: #f4f4f4;
+$background-intent: #d6cfc4;
+// gutters
+$base-gutter: .3rem;
+$medium-gutter: $base-gutter * 1.33;
+$large-gutter: $medium-gutter * 1.33;
+//responsive breakpoints
+$breakpoint-phone: only screen and (min-device-width : 320px) and (max-device-width : 480px);
+$breakpoint-tablet: only screen and (min-device-width : 768px) and (max-device-width : 1024px);

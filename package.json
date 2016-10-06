@@ -19,7 +19,11 @@
   "homepage": "https://github.com/robindemourat/bulgur#readme",
   "dependencies": {
     "react": "^15.3.2",
+    "react-dnd": "^2.1.4",
+    "react-dnd-html5-backend": "^2.1.2",
     "react-dom": "^15.3.2",
+    "react-file-drop": "^0.1.8",
+    "react-modal": "^1.4.0",
     "react-redux": "^4.4.5",
     "redux": "^3.6.0",
     "uuid": "^2.0.3"
@@ -30,6 +34,8 @@
     "babel-preset-es2015": "^6.13.2",
     "babel-preset-react": "^6.11.1",
     "css-loader": "^0.23.1",
+    "file-loader": "^0.9.0",
+    "image-webpack-loader": "^2.0.0",
     "kotatsu": "^0.14.0",
     "node-sass": "^3.8.0",
     "sass-loader": "^4.0.0",

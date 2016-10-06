@@ -4,9 +4,12 @@
  *
  * Combining the app's reducers.
  */
-import uiState from './ui';
 import {combineReducers} from 'redux';
 
-export default combineReducers({
-  uiState
+export default function reducer(state={}, action) {
+  return state;
+}
+
+/*export default combineReducers({
 });
+*/
