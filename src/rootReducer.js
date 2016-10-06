@@ -6,10 +6,8 @@
  */
 import {combineReducers} from 'redux';
 
-export default function reducer(state={}, action) {
-  return state;
-}
+import ui from './features/InterfaceManager/duck';
 
-/*export default combineReducers({
+export default combineReducers({
+  ui
 });
-*/

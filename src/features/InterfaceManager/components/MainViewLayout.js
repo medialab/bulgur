@@ -1,7 +1,7 @@
 import React from 'react';
 
-const MainContainer = (props) => (
-	<figure className="main-container">
+const MainViewLayout = (props) => (
+	<figure className="bulgur-main-view">
 		<section className="visualization-container">
 			Visualization
 		</section>
@@ -29,4 +29,4 @@ const MainContainer = (props) => (
 	</figure>
 );
 
-export default MainContainer;
+export default MainViewLayout;

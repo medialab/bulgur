@@ -8,7 +8,7 @@ html
 
 body
 {
-    font-family: $font-stack;
+    font-family: $main-font-stack;
 
     color: $primary-color;
     background: $background-default;
@@ -34,12 +34,12 @@ body
     font-size: 1rem;
 }
 
-.bulgur .aside-container
+.bulgur .bulgur-aside-view
 {
     flex: 1;
 }
 
-.bulgur .main-container
+.bulgur .bulgur-main-view
 {
     margin: 0;
 
@@ -50,7 +50,7 @@ body
  * Secondary layout
  */
 
-.bulgur .aside-container
+.bulgur-aside-view
 {
     display: flex;
     flex-direction: column;
@@ -58,7 +58,7 @@ body
     padding: $base-gutter;
 }
 
-.bulgur .aside-container > ul
+.bulgur-aside-view > ul
 {
     overflow-y: auto;
 
@@ -68,18 +68,18 @@ body
     flex: 12;
 }
 
-.bulgur .main-container
+.bulgur-main-view
 {
     display: flex;
     flex-direction: column;
 }
 
-.bulgur .main-container .visualization-container
+.bulgur-main-view .visualization-container
 {
     flex: 3;
 }
 
-.bulgur .main-container .caption-container
+.bulgur-main-view .caption-container
 {
     flex: 1;
     position: relative;
@@ -141,7 +141,7 @@ body
   * Specific components styling
   */
 
-.bulgur .aside-container > ul > li
+.bulgur-aside-view > ul > li
 {
     margin: $base-gutter 0 $base-gutter;
     padding: $large-gutter;
@@ -159,32 +159,32 @@ body
     border: 1px solid $primary-color;
 }
 
-.bulgur .aside-container > ul > li:hover
+.bulgur-aside-view > ul > li:hover
 {
     background: $background-intent;
 }
 
-.bulgur .aside-container > ul > li:last-of-type
+.bulgur-aside-view > ul > li:last-of-type
 {
     border: 5px solid $primary-color;
     height : 2rem;
 }
 
-.bulgur .aside-container > button
+.bulgur-aside-view > button
 {
     display: block;
 }
 
-.bulgur .aside-container > button:first-of-type
+.bulgur-aside-view > button:first-of-type
 {
     border-bottom: 1px solid $primary-color;
 }
-.bulgur .aside-container > button:last-of-type
+.bulgur-aside-view > button:last-of-type
 {
     border-top: 1px solid $primary-color;
 }
 
-.bulgur .view-operations
+.bulgur-main-view .view-operations
 {
 	display: flex;
 	height : 2rem;
@@ -193,13 +193,13 @@ body
 	top: -2rem;
 }
 
-.bulgur .view-operations button{
+.bulgur-main-view .view-operations button{
 	margin-right: $large-gutter;
 	background: $background-default;
 	border: 1px solid $primary-color;
 }
 
-.bulgur .caption-editor
+.bulgur-main-view .caption-editor
 {
 	width : 100%;
 	height: 100%;
@@ -207,36 +207,36 @@ body
 	display: flex;
 	flex-grow: row nowrap;
 }
-.bulgur .caption-editor .editor-helpers-container{
+.bulgur-main-view .caption-editor .editor-helpers-container{
 	display: flex;
 	flex-flow: column nowrap;
 }
 
-.bulgur .caption-editor .editor-helpers{
+.bulgur-main-view .caption-editor .editor-helpers{
 	flex: 1;
 	padding: 0;
 	padding-top: 2rem;
 	margin: 0;
 	text-align: right;
 }
-.bulgur .caption-editor .editor-areas-container{
+.bulgur-main-view .caption-editor .editor-areas-container{
 	flex: 8;
 	display: flex;
 	flex-flow: column nowrap;
 	padding-right: 2rem;
 }
 
-.bulgur .caption-editor .editor-helpers li{
+.bulgur-main-view .caption-editor .editor-helpers li{
 	padding: 0;
 	list-style: none;
 }
-.bulgur .caption-editor .editor-areas-container input{
+.bulgur-main-view .caption-editor .editor-areas-container input{
 	display: block;
 	border-bottom: 1px solid $primary-color;
 	font-size: 1.8rem;
 }
 
-.bulgur .caption-editor .editor-areas-container textarea{
+.bulgur-main-view .caption-editor .editor-areas-container textarea{
 	flex: 1;
 }
 

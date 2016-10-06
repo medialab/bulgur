@@ -38,6 +38,7 @@ const NewStoryDialogLayout = (props) => (
         <section className="data-source-example">
           <h2>A sample file</h2>
           <select>
+            <option>Choose a sample file</option>
             <option>My sample file 1</option>
             <option>My sample file 2</option>
           </select>

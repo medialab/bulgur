@@ -5,28 +5,13 @@
  * Root component of the application.
  */
 import React from 'react';
-import Modal from 'react-modal';
 
 import './Application.scss';
 
-import AsideContainer from './components/AsideContainer';
-import MainContainer from './components/MainContainer';
-import NewStoryDialog from './features/NewStoryDialog/components/NewStoryDialogContainer.js';
+import InterfaceManager from './features/InterfaceManager/components/InterfaceManagerContainer.js';
 
 const Application = (props) => (
-  <div id="wrapper" className="bulgur">
-    <AsideContainer/>
-    <MainContainer/>
-    <Modal 
-      // onAfterOpen={afterOpenFn}
-      // onRequestClose={requestCloseFn}
-      // closeTimeoutMS={n}
-      // style={customStyle}
-      isOpen={true}
-    >
-      <NewStoryDialog/>
-    </Modal>
-  </div>
+  <InterfaceManager id="wrapper" className="bulgur"/>
 );
 
 export default Application;

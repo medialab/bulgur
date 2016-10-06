@@ -17,7 +17,8 @@ App structure :
         - image.png // related ui images are inside feature modules
         - style.scss // related styles are inside features folders
     + NewStoryDialog // a feature for creating the basis of a new story from an existing data file
-    + dataToVisMapper // mapping data properties to visualisation invariant properties
+    + DataToVisMapper // mapping data properties to visualisation invariant properties
+    + InterfaceManager // manages modals opening and closing, pannels
 + helpers // modules not related directly to the app logic
     - validateFileFormat.js // consume vistype model against file extension
     - guessFieldType.js // guess whether a field is composed of dates, strings, numbers, ...

@@ -1,8 +1,10 @@
 import React from 'react';
 
-const AsideContainer = (props) => (
-	<aside className="aside-container">
-		<button type="button">↓ Import data</button>
+const AsideViewLayout = ({
+  openNewStoryModal
+}) => (
+	<aside className="bulgur-aside-view">
+		<button onClick={openNewStoryModal} type="button">↓ Import data</button>
 		<ul>
 			<li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li>
 			<li>New slide</li>
@@ -11,4 +13,4 @@ const AsideContainer = (props) => (
 	</aside>
 );
 
-export default AsideContainer;
+export default AsideViewLayout;
