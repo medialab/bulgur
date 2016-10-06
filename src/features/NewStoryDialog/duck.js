@@ -55,11 +55,11 @@ export default combineReducers({
  * Selectors
  */
 
-const getVisualizationType = state => state.newStorySettings &&
+const activeVisualizationType = state => state.newStorySettings &&
   state.newStorySettings.visualizationType;
 
 export const selector = createStructuredSelector({
-  getVisualizationType
+  activeVisualizationType
 });
 
 

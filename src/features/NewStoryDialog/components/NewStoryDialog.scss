@@ -1,5 +1,21 @@
 @import '../../../parameters.scss';
 
+.new-story-dialog
+{
+  -webkit-user-select: none; /* Chrome/Safari */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+ */
+            user-select: none;
+         -o-user-select: none;
+}
+
+.new-story-dialog .new-story-dialog-step:not(:first-of-type)
+{
+  border-top: 1px solid $background-intent;
+  margin-top: $large-gutter;
+  padding-top: $medium-gutter;
+}
+
 .new-story-dialog .visualization-type-choice
 {
   display: flex;

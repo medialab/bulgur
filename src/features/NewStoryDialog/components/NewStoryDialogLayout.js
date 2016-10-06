@@ -3,13 +3,11 @@ import FileDrop from 'react-file-drop';
 
 import './NewStoryDialog.scss';
 
-const NewStoryDialogLayout = ({
-  getVisualizationType,
-  actions: {
-    setVisualizationType
-  }
+const ChooseVisualizationTypeStep = ({
+  activeVisualizationType,
+  setVisualizationType
 }) => (
-  <div className="new-story-dialog">
+  <section className="new-story-dialog-step">
       <h1>I want to tell a story of ...</h1>
       <form className="visualization-type-choice">
         {['time', 
@@ -17,7 +15,7 @@ const NewStoryDialogLayout = ({
           'relations'
           ].map((visType, key) => 
             (<div className="visualization-type-item"
-                id={getVisualizationType === visType ? 'visualization-type-checked' : ''}
+                id={activeVisualizationType === visType ? 'visualization-type-checked' : ''}
                 onClick={()=> setVisualizationType(visType)}
                 key={key}
             >
@@ -27,7 +25,7 @@ const NewStoryDialogLayout = ({
                 name={visType} 
                 value="type" 
                 onChange={() => setVisualizationType(visType)} 
-                checked={getVisualizationType === visType} 
+                checked={activeVisualizationType === visType} 
               />
               <label 
                 htmlFor={visType}
@@ -38,29 +36,42 @@ const NewStoryDialogLayout = ({
             </div>)
         )}
       </form>
+    </section>
+);
 
-      <h1>I want to use data from ...</h1>
-
-      <section className="data-source-choice">
-        <section className="data-source-file">
-          <h2>A file from my computer</h2>
-          <FileDrop frame={document} onDrop={(e)=>console.log('file dropped', e)}>
-            Drop a file here
-          </FileDrop>
-          <i>Drop a file on the frame</i>
-        </section>
-        <section className="data-source-example">
-          <h2>A sample file</h2>
-          <select>
-            <option>Choose a sample file</option>
-            <option>My sample file 1</option>
-            <option>My sample file 2</option>
-          </select>
-        </section>
+const SetVisualizationDataSourceStep = ({
+  visualizationTypeModel
+}) => (
+  <section className="new-story-dialog-step">
+    <h1>I want to use data from ...</h1>
+    <section className="data-source-choice">
+      <section className="data-source-file">
+        <h2>A file from my computer</h2>
+        <FileDrop frame={document} onDrop={(e)=>console.log('file dropped', e)}>
+          Drop a file here
+        </FileDrop>
+        <i>Drop a file on the frame</i>
       </section>
+      <section className="data-source-example">
+        {visualizationTypeModel.samples.map((sample, key) => (
+          <div key={key} className="sample-file">
+            <h2>A sample file</h2>
+            <div>
+              <h3>{sample.title}</h3>
+              <p>{sample.description}</p>
+            </div>
+          </div>
+        ))}
+      </section>
+    </section>
+  </section>
+);
 
+const SetVisualizationParamsStep = ({
+  visualizationTypeModel
+}) => (
+  <section className="new-story-dialog-step">
       <h1>I want to use fields ...</h1>
-
       <section className="data-fields-choice">
         <ul className="data-fields-available">
           <li>Data field 1</li>
@@ -71,41 +82,67 @@ const NewStoryDialogLayout = ({
           <li>Data field 6</li>
         </ul>
 
+        {console.log(visualizationTypeModel)}
+
         <ul className="data-fields-to-parse">
-          <li>
-            <h4>Events dates</h4>
-            <select name="Select date format" id="dateformat-select">
-              <option value="dd/mm/yyyy">dd/mm/yyyy</option>
-              <option value="yyyy">yyyy</option>
-            </select>
-          </li>
-          <li>
-            <h4>
-              Events names
-            </h4>
-          </li>
-          <li>
-            <h4>
-              Events texts
-            </h4>
-          </li>
-          <li>
-            <h4>
-              Events images (urls)
-            </h4>
-          </li> 
-          <li>
-            <h4>
-              Events categories
-            </h4>
-          </li> 
+          {visualizationTypeModel.invariantParameters.map((parameter, key) => (
+            <li key={key}>
+              <h4>
+                {parameter.label}
+              </h4>
+              {parameter.acceptedValueTypes.indexOf('date') > -1 ?
+                <select name="Select date format" id="dateformat-select">
+                  <option value="dd/mm/yyyy">dd/mm/yyyy</option>
+                  <option value="yyyy">yyyy</option>
+                </select>
+                : ''}
+            </li>
+          ))}
         </ul>
       </section>
+    </section>
+);
 
-      <section className="modal-footer">
-        <button>Start telling the story</button>
-        <button>Cancel</button>
-      </section>
+const NewStoryDialogLayout = ({
+  activeVisualizationType,
+  visualizationTypesModels,
+  actions: {
+    setVisualizationType,
+    resetNewStorySettings,
+    closeNewStoryModal
+  }
+}) => (
+  <div className="new-story-dialog">
+    <ChooseVisualizationTypeStep 
+      activeVisualizationType={activeVisualizationType} 
+      setVisualizationType={setVisualizationType} 
+    />
+
+    {activeVisualizationType && visualizationTypesModels[activeVisualizationType] ? 
+      <SetVisualizationDataSourceStep 
+        visualizationTypeModel={visualizationTypesModels[activeVisualizationType]}
+      /> :
+       ''
+    }
+    {activeVisualizationType && visualizationTypesModels[activeVisualizationType] ? 
+      <SetVisualizationParamsStep 
+        visualizationTypeModel={visualizationTypesModels[activeVisualizationType]}
+      /> : 
+      ''
+    }
+
+    
+    <section className="new-story-dialog-step">
+        {
+          activeVisualizationType
+          ?
+          <button>Start telling the story</button>
+          : ''
+        }
+        <button
+          onClick={() => resetNewStorySettings() && closeNewStoryModal()}
+        >Cancel</button>
+    </section>
     </div>
 );
 
