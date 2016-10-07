@@ -1,4 +1,4 @@
-Hi.
+Hi. WIP app for testing the possible implementations of quinoa framework.
 
 App structure :
 
@@ -19,8 +19,9 @@ App structure :
     + NewStoryDialog // a feature for creating the basis of a new story from an existing data file
     + DataToVisMapper // mapping data properties to visualisation invariant properties
     + InterfaceManager // manages modals opening and closing, pannels
+    + ...
 + helpers // modules not related directly to the app logic
     - validateFileFormat.js // consume vistype model against file extension
-    - guessFieldType.js // guess whether a field is composed of dates, strings, numbers, ...
+    - ...
 ```
 
