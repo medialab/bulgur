@@ -28,9 +28,9 @@
 
 .bulgur-aside-view > ul > li
 {
+    height: 7rem;
     margin: $base-gutter 0 $base-gutter;
     padding: $large-gutter;
-    height : 7rem;
 
     list-style: none;
 
@@ -39,9 +39,10 @@
        -moz-user-select: none; /* Firefox */
         -ms-user-select: none; /* IE10+ */
             user-select: none;
-         -o-user-select: none;
 
     border: 1px solid $primary-color;
+
+         -o-user-select: none;
 }
 
 .bulgur-aside-view > ul > li:hover
@@ -51,8 +52,9 @@
 
 .bulgur-aside-view > ul > li:last-of-type
 {
+    height: 2rem;
+
     border: 5px solid $primary-color;
-    height : 2rem;
 }
 
 .bulgur-aside-view > button
@@ -68,4 +70,3 @@
 {
     border-top: 1px solid $primary-color;
 }
-

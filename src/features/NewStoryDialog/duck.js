@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
-import { createStructuredSelector } from 'reselect';
+import {combineReducers} from 'redux';
+import {createStructuredSelector} from 'reselect';
 
 /*
  * Action names
@@ -33,13 +33,13 @@ const DEFAULT_NEW_STORY_SETTINGS = {
  * Reducers
  */
 
-function newStorySettings(state=DEFAULT_NEW_STORY_SETTINGS, action) {
+function newStorySettings(state = DEFAULT_NEW_STORY_SETTINGS, action) {
   switch (action.type) {
     case SET_VISUALIZATION_TYPE:
       return {
         ...state,
         visualizationType: action.visualizationType
-      }
+      };
     case RESET_NEW_STORY_SETTINGS:
       return DEFAULT_NEW_STORY_SETTINGS;
     default:
@@ -61,6 +61,4 @@ const activeVisualizationType = state => state.newStorySettings &&
 export const selector = createStructuredSelector({
   activeVisualizationType
 });
-
-
 

@@ -29,10 +29,10 @@ const models = {
         acceptedValueTypes: ['string']
       }
     ],
-    samples : [{
-      title: 'My sample temporal data',
-      fileName: 'My sample temporal file',
-      description: 'A sample file for working with temporal data'
+    samples: [{
+      title: 'Histoire du Fort et des combats de 1870-1871 à Issy',
+      fileName: 'histoiredufort.csv',
+      description: 'Plus d\'informations: http://data.issy.com/explore/dataset/histoiredufort-feuille1/export/?disjunctive.refqr'
     }]
   },
 };

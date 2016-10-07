@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 
 import BulgurLayout from './BulgurLayout';
 import * as duck from '../duck';
@@ -8,7 +8,7 @@ import * as duck from '../duck';
 import {resetNewStorySettings} from '../../NewStoryDialog/duck';
 
 @connect(
-  state => duck.selector(state.ui), 
+  state => duck.selector(state.ui),
   dispatch => ({
     actions: bindActionCreators({
       ...duck,
@@ -17,11 +17,27 @@ import {resetNewStorySettings} from '../../NewStoryDialog/duck';
   })
 )
 class BulgurContainer extends Component {
+
+  constructor(props) {
+    super(props);
+    this.closeAndResetDialog = this.closeAndResetDialog.bind(this);
+  }
+
+  shouldComponentUpdate(newProps) {
+    return newProps.isNewStoryModalOpen !== this.props.isNewStoryModalOpen;
+  }
+
+  closeAndResetDialog() {
+    this.props.actions.resetNewStorySettings();
+    this.props.actions.closeNewStoryModal();
+  }
+
   render() {
-    const {id, className} = this.props;
     return (
-      <BulgurLayout {...this.props} />
-    )
+      <BulgurLayout
+        {...this.props}
+        closeAndResetDialog={this.closeAndResetDialog} />
+    );
   }
 }
 

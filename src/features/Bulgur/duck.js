@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
-import { createStructuredSelector } from 'reselect';
+import {combineReducers} from 'redux';
+import {createStructuredSelector} from 'reselect';
 
 /*
  * Action names
@@ -32,7 +32,7 @@ const DEFAULT_STATE = {
  * Reducers
  */
 
-function newStoryModal(state=DEFAULT_STATE, action) {
+function newStoryModal(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case OPEN_NEW_STORY_MODAL:
       return {

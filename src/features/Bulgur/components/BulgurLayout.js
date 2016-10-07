@@ -12,19 +12,17 @@ const InterfaceManagerLayout = ({
   className,
   isNewStoryModalOpen,
   actions: {
-    openNewStoryModal,
-    closeNewStoryModal,
-    resetNewStorySettings
-  }
+    openNewStoryModal
+  },
+  closeAndResetDialog
 }) => (
   <div id={id} className={className}>
-    <AsideViewLayout openNewStoryModal={openNewStoryModal}/>
-    <MainViewLayout/>
-    <Modal 
-      onRequestClose={()=> closeNewStoryModal() && resetNewStorySettings()}
-      isOpen={isNewStoryModalOpen}
-    >
-      <NewStoryDialog/>
+    <AsideViewLayout openNewStoryModal={openNewStoryModal} />
+    <MainViewLayout />
+    <Modal
+      onRequestClose={closeAndResetDialog}
+      isOpen={isNewStoryModalOpen}>
+      <NewStoryDialog />
     </Modal>
   </div>
 );

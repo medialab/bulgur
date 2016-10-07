@@ -4,10 +4,9 @@
  *
  * Rendering the application.
  */
-import uuid from 'uuid';
 import React from 'react';
 import {render} from 'react-dom';
-import Quinoa from 'quinoa';
+// import Quinoa from 'quinoa';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 
@@ -17,7 +16,7 @@ import Application from './Application';
 let CurrentApplication = Application;
 
 const store = createStore(
-  reducers, 
+  reducers,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   );
 window.store = store;
@@ -27,7 +26,7 @@ const mountNode = document.getElementById('mount');
 function renderApplication() {
   const group = (
     <Provider store={store}>
-      <CurrentApplication/>
+      <CurrentApplication />
     </Provider>
   );
 
