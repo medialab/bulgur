@@ -16,14 +16,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/robindemourat/bulgur.git"
+    "url": "git+https://github.com/medialab/bulgur.git"
   },
   "author": "https://github.com/robindemourat",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/robindemourat/bulgur/issues"
+    "url": "https://github.com/medialab/bulgur/issues"
   },
-  "homepage": "https://github.com/robindemourat/bulgur#readme",
+  "homepage": "https://github.com/medialab/bulgur#readme",
   "dependencies": {
     "react": "^15.3.2",
     "react-dnd": "^2.1.4",
