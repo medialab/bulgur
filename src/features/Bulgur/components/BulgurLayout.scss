@@ -1,0 +1,80 @@
+@import '../../../parameters.scss';
+
+/*
+ * Primary layout
+ */
+
+.bulgur
+{
+    font-family: $main-font-stack;
+    font-size: 1rem;
+
+    display: flex;
+    flex-direction: row;
+
+    color: $primary-color;
+    background: $background-default;
+
+    flex-wrap: nowrap;
+}
+
+.bulgur .bulgur-aside-view
+{
+    flex: 1;
+}
+
+.bulgur .bulgur-main-view
+{
+    margin: 0;
+
+    flex: 5;
+}
+
+
+/*
+ * Responsive layout adjustments
+ */
+
+@media #{$breakpoint-phone}
+{
+    .bulgur
+    {
+        flex-direction: column;
+    }
+
+    .bulgur .bulgur-aside-view
+    {
+        flex-direction: row;
+
+        order: 2;
+    }
+}
+@media #{$breakpoint-tablet}
+{
+}
+
+/*
+ * Generic components styling
+ */
+.bulgur button,
+.bulgur input,
+.bulgur textarea
+{
+    font-family: inherit;
+    font-size: 1rem;
+
+    border: none;
+    outline: none;
+    background: inherit;
+}
+
+.bulgur button:hover,
+.bulgur input:hover,
+.bulgur textarea:hover,
+.bulgur input:focus,
+.bulgur textarea:focus
+{
+    cursor: pointer;
+
+    background: $background-intent;
+}

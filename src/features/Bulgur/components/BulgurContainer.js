@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import InterfaceManagerLayout from './InterfaceManagerLayout';
+import BulgurLayout from './BulgurLayout';
 import * as duck from '../duck';
 
 import {resetNewStorySettings} from '../../NewStoryDialog/duck';
@@ -16,13 +16,13 @@ import {resetNewStorySettings} from '../../NewStoryDialog/duck';
     }, dispatch)
   })
 )
-class InterfaceManagerContainer extends Component {
+class BulgurContainer extends Component {
   render() {
     const {id, className} = this.props;
     return (
-      <InterfaceManagerLayout {...this.props} />
+      <BulgurLayout {...this.props} />
     )
   }
 }
 
-export default InterfaceManagerContainer;
+export default BulgurContainer;

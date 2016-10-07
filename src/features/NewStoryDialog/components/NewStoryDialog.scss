@@ -2,160 +2,181 @@
 
 .new-story-dialog
 {
-  -webkit-user-select: none; /* Chrome/Safari */
+    font-family: $main-font-stack;
+
+    -webkit-user-select: none; /* Chrome/Safari */
        -moz-user-select: none; /* Firefox */
         -ms-user-select: none; /* IE10+ */
             user-select: none;
+
          -o-user-select: none;
 }
 
 .new-story-dialog .new-story-dialog-step:not(:first-of-type)
 {
-  border-top: 1px solid $background-intent;
-  margin-top: $large-gutter;
-  padding-top: $medium-gutter;
+    margin-top: $large-gutter;
+    padding-top: $medium-gutter;
+
+    border-top: 1px solid $background-intent;
 }
 
 .new-story-dialog .visualization-type-choice
 {
-  display: flex;
-  flex-flow: row nowrap;
-  padding: 0;
-  justify-content: space-between;
+    display: flex;
+
+    padding: 0;
+
+    flex-flow: row nowrap;
+    justify-content: space-between;
 }
 
-.new-story-dialog .visualization-type-choice input{
-  display: none;
+.new-story-dialog .visualization-type-choice input
+{
+    display: none;
 }
-.new-story-dialog .visualization-type-choice .visualization-type-item{
-  border: 1px solid $background-intent;
-  flex: 1;
-  text-align: center;
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
+.new-story-dialog .visualization-type-choice .visualization-type-item
+{
+    display: flex;
+
+    text-align: center;
+
+    border: 1px solid $background-intent;
+
+    flex: 1;
+    flex-flow: column nowrap;
+    align-items: center;
 }
 
 .new-story-dialog .visualization-type-choice #visualization-type-checked
 {
-  background: $background-intent;
+    background: $background-intent;
 }
 
 .new-story-dialog .data-source-choice
 {
-  display: flex;
-  flex-flow: row nowrap;
+    display: flex;
+
+    flex-flow: row nowrap;
 }
 .new-story-dialog .data-source-choice .data-source-file
 {
-  flex: 1;
+    flex: 1;
 }
 
 .new-story-dialog .data-source-choice .data-source-file .file-drop
 {
-  height : 5rem;
-  border: 1px dashed $primary-color;
-  margin-right: $large-gutter;
-  background: $background-intent;
+    height: 5rem;
+    margin-right: $large-gutter;
+
+    border: 1px dashed $primary-color;
+    background: $background-intent;
 }
 
 
-.new-story-dialog .data-source-choice .data-source-file .file-drop > .file-drop-target {
-
-    height: 100%;
-    width: 100%;
-
-    /* a little transition sizzle */
-    transition: all 150ms linear;
-    -webkit-transition: all 150ms linear;
-    -moz-transition: all 150ms linear;
-    -ms-transition: all 150ms linear;
-    -o-transition: all 150ms linear;
-    opacity: 0;
-
-    display: flex;
+.new-story-dialog .data-source-choice .data-source-file .file-drop > .file-drop-target
+{
+    display:         flex;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
+            flex-direction: column;
 
-    flex-direction: column;
+    width: 100%;
+    height: 100%;
+
+    -webkit-transition: all 150ms linear;
+       -moz-transition: all 150ms linear;
+        -ms-transition: all 150ms linear;
+         -o-transition: all 150ms linear;
+    /* a little transition sizzle */
+            transition: all 150ms linear;
+    text-align: center;
+
+    opacity: 0;
+
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-
-    align-items: center;
+        -ms-flex-direction: column;
+            align-items: center;
     -webkit-box-align: center;
     -webkit-align-items: center;
     -ms-flex-align: center;
-
-    justify-content: center;
+            justify-content: center;
     -webkit-box-pack: center;
     -webkit-justify-content: center;
     -ms-flex-pack: center;
-
-    align-content: center;
+            align-content: center;
     -webkit-align-content: center;
     -ms-flex-line-pack: center;
-
-    text-align: center;
 }
 
-.new-story-dialog .data-source-choice .data-source-file .file-drop > .file-drop-target.file-drop-dragging-over-frame {
-    /* overlay a black mask when dragging over the frame */
-    border: none;
-    background-color: rgba(0, 0, 0, 0.65);
-    box-shadow: none;
+.new-story-dialog .data-source-choice .data-source-file .file-drop > .file-drop-target.file-drop-dragging-over-frame
+{
     z-index: 50;
+
     opacity: 1.0;
     /* --------------- */
-
     /* typography */
     color: white;
+    /* overlay a black mask when dragging over the frame */
+    border: none;
+    background-color: rgba(0, 0, 0, .65);
+    box-shadow: none;
     /* --------------- */
 }
 
-.new-story-dialog .data-source-choice .data-source-file .file-drop > .file-drop-target.file-drop-dragging-over-target {
+.new-story-dialog .data-source-choice .data-source-file .file-drop > .file-drop-target.file-drop-dragging-over-target
+{
     /* turn stuff orange when we are dragging over the target */
-     color: #ff6e40;
-     box-shadow: 0 0 13px 3px #ff6e40;
+    color: #ff6e40;
+    box-shadow: 0 0 13px 3px #ff6e40;
 }
 
 .new-story-dialog .data-source-choice .data-source-example
 {
-  flex: 1;
+    flex: 1;
 }
 
 .new-story-dialog .data-fields-choice
 {
-  display: flex;
-  flex-flow: row nowrap;
+    display: flex;
+
+    flex-flow: row nowrap;
 }
 
 .new-story-dialog .data-fields-choice .data-fields-available
 {
-  padding: $large-gutter;
-  border: 1px solid $background-intent;
+    padding: $large-gutter;
+
+    border: 1px solid $background-intent;
 }
 
 .new-story-dialog .data-fields-choice .data-fields-available li
 {
-  list-style: none;
-  background: $background-intent;
-  padding: $base-gutter;
-  margin-bottom: $base-gutter;
+    margin-bottom: $base-gutter;
+    padding: $base-gutter;
+
+    list-style: none;
+
+    background: $background-intent;
 }
 
 .new-story-dialog .data-fields-choice .data-fields-to-parse
 {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0;
-} 
+    display: flex;
+    flex-direction: row;
 
-.new-story-dialog .data-fields-choice .data-fields-to-parse li{
-  list-style: none;
-  border: 1px solid $primary-color;
-  flex: 1;
+    padding: 0;
+
+    justify-content: space-between;
+}
+
+.new-story-dialog .data-fields-choice .data-fields-to-parse li
+{
+    list-style: none;
+
+    border: 1px solid $primary-color;
+
+    flex: 1;
 }

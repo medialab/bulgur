@@ -8,10 +8,10 @@ import React from 'react';
 
 import './Application.scss';
 
-import InterfaceManager from './features/InterfaceManager/components/InterfaceManagerContainer.js';
+import Bulgur from './features/Bulgur/components/BulgurContainer.js';
 
 const Application = (props) => (
-  <InterfaceManager id="wrapper" className="bulgur"/>
+  <Bulgur id="wrapper" className="bulgur"/>
 );
 
 export default Application;

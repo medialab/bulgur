@@ -47,7 +47,7 @@ const SetVisualizationDataSourceStep = ({
     <section className="data-source-choice">
       <section className="data-source-file">
         <h2>A file from my computer</h2>
-        <FileDrop frame={document} onDrop={(e)=>console.log('file dropped', e)}>
+        <FileDrop frame={document} onDrop={(files, e)=>console.log('file dropped', e)}>
           Drop a file here
         </FileDrop>
         <i>Drop a file on the frame</i>
@@ -81,8 +81,6 @@ const SetVisualizationParamsStep = ({
           <li>Data field 5</li>
           <li>Data field 6</li>
         </ul>
-
-        {console.log(visualizationTypeModel)}
 
         <ul className="data-fields-to-parse">
           {visualizationTypeModel.invariantParameters.map((parameter, key) => (

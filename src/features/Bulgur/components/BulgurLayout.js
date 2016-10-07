@@ -5,6 +5,8 @@ import AsideViewLayout from './AsideViewLayout';
 import MainViewLayout from './MainViewLayout';
 import NewStoryDialog from '../../NewStoryDialog/components/NewStoryDialogContainer.js';
 
+import './BulgurLayout.scss';
+
 const InterfaceManagerLayout = ({
   id,
   className,
