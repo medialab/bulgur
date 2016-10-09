@@ -4,28 +4,75 @@ const models = {
     acceptedFileExtensions: ['csv'],
     invariantParameters: [
       {
-        id: 'eventsDates',
-        label: 'events dates',
-        acceptedValueTypes: ['date']
+        id: 'Year',
+        acceptedValueTypes: ['number']
       },
       {
-        id: 'eventsLabels',
-        label: 'events labels',
+        id: 'Month',
+        acceptedValueTypes: ['number']
+      },
+      {
+        id: 'Day',
+        acceptedValueTypes: ['number']
+      },
+      {
+        id: 'Time',
         acceptedValueTypes: ['string']
       },
       {
-        id: 'eventsTexts',
-        label: 'events texts',
+        id: 'End Year',
+        acceptedValueTypes: ['number']
+      },
+      {
+        id: 'End Month',
+        acceptedValueTypes: ['number']
+      },
+      {
+        id: 'End Day',
+        acceptedValueTypes: ['number']
+      },
+      {
+        id: 'End Time',
         acceptedValueTypes: ['string']
       },
       {
-        id: 'eventsUrls',
-        label: 'events urls',
+        id: 'Display Date',
+        acceptedValueTypes: ['string']
+      },
+      {
+        id: 'Headline',
+        acceptedValueTypes: ['string']
+      },
+      {
+        id: 'Text',
+        acceptedValueTypes: ['string']
+      },
+      {
+        id: 'Media',
         acceptedValueTypes: ['url']
       },
       {
-        id: 'eventCategories',
-        label: 'events categories',
+        id: 'Media Credit',
+        acceptedValueTypes: ['string']
+      },
+      {
+        id: 'Media Caption',
+        acceptedValueTypes: ['string']
+      },
+      {
+        id: 'Media Thumbnail',
+        acceptedValueTypes: ['string']
+      },
+      {
+        id: 'Type',
+        acceptedValueTypes: ['string']
+      },
+      {
+        id: 'Group',
+        acceptedValueTypes: ['string']
+      },
+      {
+        id: 'Background',
         acceptedValueTypes: ['string']
       }
     ],
@@ -33,6 +80,11 @@ const models = {
       title: 'Histoire du Fort et des combats de 1870-1871 à Issy',
       fileName: 'histoiredufort.csv',
       description: 'Plus d\'informations: http://data.issy.com/explore/dataset/histoiredufort-feuille1/export/?disjunctive.refqr'
+    },
+    {
+      title: 'Dataset officiel de timelinejs',
+      fileName: 'official-timeline-js.csv',
+      description: 'Plus d\'informations: http://timeline.knightlab.com/'
     }]
   },
 };

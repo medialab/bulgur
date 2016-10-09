@@ -19,9 +19,9 @@ describe('visualization types models', () => {
         model.samples.forEach(sample => {
           exists(resolve(__dirname + '/../../example_datasets/' + sample.fileName), (ok) => {
             expect(ok).to.equal(true);
-            done();
           });
         });
+        done();
       });
     });
   });
