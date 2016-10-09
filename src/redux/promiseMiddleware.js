@@ -5,7 +5,7 @@ export default () => ({dispatch, getState}) => (next) => (action) => {
     return action(dispatch, getState);
   }
 
-  const { promise, type, ...rest } = action;
+  const {promise, type, ...rest} = action;
 
   // If there is no promise in the action, ignore it
   if (!promise) {
@@ -16,10 +16,10 @@ export default () => ({dispatch, getState}) => (next) => (action) => {
   const FAILURE = REQUEST + '_FAIL';
 
   // Trigger the action (for loading indication for instance)
-  next({ ...rest, type: REQUEST });
+  next({...rest, type: REQUEST});
   return promise(dispatch).then(
       (result) => {
-        next({...rest, result: result, type: SUCCESS});
+        next({...rest, result, type: SUCCESS});
         return true;
       }
     ).catch((error) => next({...rest, ...error, type: FAILURE}));
