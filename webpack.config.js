@@ -1,6 +1,10 @@
 module.exports = {
   module: {
     loaders: [
+      { 
+        test: /\.(csv|gefx)$/, 
+        loader: 'raw-loader' 
+      },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loaders: [

@@ -180,3 +180,41 @@
 
     flex: 1;
 }
+
+.new-story-dialog .sample-file
+{
+    padding: $medium-gutter;
+
+    cursor: pointer;
+
+    border: 1px dashed $primary-color;
+}
+
+.new-story-dialog .sample-file:hover
+{
+    background: $background-intent;
+}
+
+.new-story-dialog .data-source-status
+{
+    margin-top: $medium-gutter;
+    padding: $medium-gutter;
+
+    text-align: center;
+}
+
+.new-story-dialog .data-source-status.loading
+{
+    background: $background-intent;
+}
+
+.new-story-dialog .data-source-status.loaded
+{
+    background: lightgreen;
+}
+
+.new-story-dialog .data-source-status.error
+{
+    color: $background-default;
+    background: brown;
+}

@@ -38,7 +38,9 @@ const ChooseVisualizationTypeStep = ({
 );
 
 const SetVisualizationDataSourceStep = ({
-  visualizationTypeModel
+  visualizationTypeModel,
+  fetchExampleFile,
+  activeDataStatus
 }) => (
   <section className="new-story-dialog-step">
     <h1>I want to use data from ...</h1>
@@ -50,18 +52,24 @@ const SetVisualizationDataSourceStep = ({
         </FileDrop>
         <i>Drop a file on the frame</i>
       </section>
-      <section className="data-source-example">
-        {visualizationTypeModel.samples.map((sample, key) => (
-          <div key={key} className="sample-file">
-            <h2>A sample file</h2>
-            <div>
+      <section className="data-source-examples">
+        <h2>A sample file</h2>
+        {visualizationTypeModel.samples.map((sample, key) => {
+          const fetchFile = () => fetchExampleFile(sample.fileName);
+          return (
+            <div key={key} onClick={fetchFile} className="sample-file">
               <h3>{sample.title}</h3>
               <p>{sample.description}</p>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </section>
     </section>
+    {activeDataStatus !== undefined ?
+      <section className={'data-source-status ' + activeDataStatus}>
+        data {activeDataStatus}
+      </section> : ''
+    }
   </section>
 );
 
@@ -101,9 +109,12 @@ const SetVisualizationParamsStep = ({
 
 const NewStoryDialogLayout = ({
   activeVisualizationType,
+  activeData,
+  activeDataStatus,
   visualizationTypesModels,
   actions: {
-    setVisualizationType
+    setVisualizationType,
+    fetchExampleFile
   },
   closeAndResetDialog
 }) => (
@@ -114,10 +125,12 @@ const NewStoryDialogLayout = ({
 
     {activeVisualizationType && visualizationTypesModels[activeVisualizationType] ?
       <SetVisualizationDataSourceStep
-        visualizationTypeModel={visualizationTypesModels[activeVisualizationType]} /> :
+        fetchExampleFile={fetchExampleFile}
+        visualizationTypeModel={visualizationTypesModels[activeVisualizationType]}
+        activeDataStatus={activeDataStatus} /> :
        ''
     }
-    {activeVisualizationType && visualizationTypesModels[activeVisualizationType] ?
+    {activeVisualizationType && visualizationTypesModels[activeVisualizationType] && activeData ?
       <SetVisualizationParamsStep
         visualizationTypeModel={visualizationTypesModels[activeVisualizationType]} /> :
       ''

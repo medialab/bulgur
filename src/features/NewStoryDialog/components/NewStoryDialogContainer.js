@@ -27,7 +27,9 @@ class NewStoryDialogContainer extends Component {
   }
 
   shouldComponentUpdate(newProps) {
-    return newProps.activeVisualizationType !== this.props.activeVisualizationType;
+    return newProps.activeVisualizationType !== this.props.activeVisualizationType ||
+          newProps.activeDataStatus !== this.props.activeDataStatus ||
+          newProps.activeData !== this.props.activeData;
   }
 
   closeAndResetDialog() {
