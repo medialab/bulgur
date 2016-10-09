@@ -1,0 +1,30 @@
+@import '../../parameters.scss';
+
+.bulgur-slide-thumbnail
+{
+  font-family: $main-font-stack;
+  height: 7rem;
+    margin: $base-gutter 0 $base-gutter;
+    padding: $base-gutter;
+
+    list-style: none;
+
+    cursor: pointer;
+    -webkit-user-select: none; /* Chrome/Safari */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+ */
+            user-select: none;
+
+    border: 1px solid $primary-color;
+
+         -o-user-select: none;
+
+  max-width: 7rem;
+  max-height: 3rem;
+  overflow: hidden;
+}
+
+.bulgur-slide-thumbnail:hover
+{
+  background: $background-intent;
+}
