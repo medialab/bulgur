@@ -2,8 +2,13 @@
 
 .bulgur-slide-thumbnail
 {
-  font-family: $main-font-stack;
-  height: 7rem;
+    font-family: $main-font-stack;
+
+    overflow: hidden;
+
+    max-width: 7rem;
+    height: 7rem;
+    max-height: 3rem;
     margin: $base-gutter 0 $base-gutter;
     padding: $base-gutter;
 
@@ -18,13 +23,9 @@
     border: 1px solid $primary-color;
 
          -o-user-select: none;
-
-  max-width: 7rem;
-  max-height: 3rem;
-  overflow: hidden;
 }
 
 .bulgur-slide-thumbnail:hover
 {
-  background: $background-intent;
+    background: $background-intent;
 }
