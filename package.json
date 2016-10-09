@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/medialab/bulgur#readme",
   "dependencies": {
+    "leaflet": "^1.0.1",
     "react": "^15.3.2",
     "react-dnd": "^2.1.4",
     "react-dnd-html5-backend": "^2.1.2",
@@ -36,6 +37,8 @@
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
     "reselect": "^2.5.4",
+    "sigma": "^1.1.0",
+    "timelinejs": "^2.35.6",
     "uuid": "^2.0.3"
   },
   "devDependencies": {
