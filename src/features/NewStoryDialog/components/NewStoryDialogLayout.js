@@ -3,7 +3,7 @@ import FileDrop from 'react-file-drop';
 
 import './NewStoryDialog.scss';
 
-const ChooseVisualizationTypeStep = ({
+export const ChooseVisualizationTypeStep = ({
   activeVisualizationType,
   setVisualizationType
 }) => (

@@ -8,7 +8,9 @@
     "build": "kotatsu build client ./src/main.js -o build --config ./webpack.config.js --babel",
     "lint": "eslint --fix src",
     "comb": "csscomb src",
-    "test": "mocha --compilers js:babel-core/register -R spec --recursive $(find src -name '*.spec.js')"
+    "test": "mocha --compilers js:babel-core/register -R spec --recursive $(find src -name '*.spec.js')",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "pre-commit": [
     "lint",
@@ -65,7 +67,8 @@
     "raw-loader": "^0.5.1",
     "react-addons-test-utils": "^15.3.2",
     "sass-loader": "^4.0.0",
-    "style-loader": "^0.13.1"
+    "style-loader": "^0.13.1",
+    "@kadira/storybook": "^2.5.2"
   },
   "babel": {
     "plugins": [
