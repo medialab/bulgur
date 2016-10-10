@@ -1,4 +1,3 @@
-
 export default () => ({dispatch, getState}) => (next) => (action) => {
   // If the action is a function, execute it
   if (typeof action === 'function') {
@@ -17,7 +16,7 @@ export default () => ({dispatch, getState}) => (next) => (action) => {
 
   // Trigger the action (for loading indication for instance)
   next({...rest, type: REQUEST});
-  return promise(dispatch).then(
+  return promise(dispatch, getState).then(
       (result) => {
         next({...rest, result, type: SUCCESS});
         return true;
