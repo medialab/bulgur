@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import * as duck from '../duck';
-import {closeNewStoryModal} from '../../Bulgur/duck';
-import {validateFileExtension, getFileAsText} from '../../../helpers/fileLoader';
+import { closeNewStoryModal } from '../../Bulgur/duck';
+import { validateFileExtension } from '../../../helpers/fileLoader';
 
 import NewStoryDialogLayout from './NewStoryDialogLayout';
 
@@ -45,15 +45,7 @@ class NewStoryDialogContainer extends Component {
     const model = this.props.visualizationTypesModels[this.props.activeVisualizationType];
     const valid = validateFileExtension(fileName, model);
     if (valid) {
-      this.props.actions.fetchUserFile();
-      getFileAsText(file, (err, str) => {
-        if (err) {
-          this.props.actions.fetchUserFileFailure(err);
-        }
-        else {
-          this.props.actions.fetchUserFileSuccess(str);
-        }
-      });
+      this.props.actions.fetchUserFile(file);
     }
     else {
       this.props.actions.showInvalidFileTypeWarning();

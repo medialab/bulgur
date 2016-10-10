@@ -55,6 +55,8 @@ const SetVisualizationDataSourceStep = ({
         <section className="data-source-file">
           <h2>A file from my computer</h2>
           <Dropzone
+            className="drop-zone"
+            activeClassName="drop-zone-active"
             onDrop={onDropInput}>
             <div>Drop files there</div>
           </Dropzone>

@@ -1,7 +1,7 @@
 
 const models = {
   time: {
-    acceptedFileExtensions: ['csv'],
+    acceptedFileExtensions: ['csv', 'tsv'],
     invariantParameters: [
       {
         id: 'Year',

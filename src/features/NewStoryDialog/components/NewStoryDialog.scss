@@ -60,7 +60,7 @@
 }
 .new-story-dialog .data-source-choice .data-source-file
 {
-    flex: 3;
+    flex: 1;
 }
 
 .new-story-dialog .data-source-choice .data-source-examples
@@ -72,6 +72,28 @@
 {
     opacity: 1!important;
 }
+
+.new-story-dialog .data-source-choice .data-source-file .drop-zone
+{
+    width: 100%!important;
+    text-align: center;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    background: $background-intent;
+    margin-right: $large-gutter;
+}
+
+.new-story-dialog .data-source-choice .data-source-file .drop-zone-active
+{
+    width: 100%!important;
+    text-align: center;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    background: $primary-color;
+    color: $background-default;
+    margin-right: $large-gutter;
+}
+
 
 .new-story-dialog .data-source-choice .data-source-example
 {

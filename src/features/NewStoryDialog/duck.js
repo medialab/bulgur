@@ -1,7 +1,12 @@
 import {combineReducers} from 'redux';
 import {createStructuredSelector} from 'reselect';
 
-import {loadExampleFile} from '../../helpers/fileLoader';
+import {
+  loadExampleFile,
+  getFileAsText,
+  convertRawStrToJson
+} from '../../helpers/fileLoader';
+
 /*
  * Action names
  */
@@ -17,7 +22,7 @@ const FETCH_USER_FILE_FAILURE = 'FETCH_USER_FILE_FAILURE';
 
 const SHOW_INVALID_FILE_TYPE = 'SHOW_INVALID_FILE_TYPE';
 const HIDE_INVALID_FILE_TYPE = 'HIDE_INVALID_FILE_TYPE';
-
+const SET_ACTIVE_DATA_FILE_FORMAT = 'SET_ACTIVE_DATA_FILE_FORMAT';
 
 const RESET_NEW_STORY_SETTINGS = 'RESET_NEW_STORY_SETTINGS';
 
@@ -25,17 +30,49 @@ const RESET_NEW_STORY_SETTINGS = 'RESET_NEW_STORY_SETTINGS';
  * Action creators
  */
 
+const parseDataFile = (str, fileName, dispatch, resolve, reject) => {
+  const activeDataFileFormat = fileName.split('.').pop();
+    dispatch({
+      type: SET_ACTIVE_DATA_FILE_FORMAT,
+      activeDataFileFormat
+    });
+    try {
+      const data = convertRawStrToJson(str, activeDataFileFormat);
+      resolve(data);
+    } 
+    catch (error) {
+      reject(error);
+    }
+};
+
 export const fetchExampleFile = (fileName) => ({
   type: FETCH_EXAMPLE_FILE,
-  promise: (/*dispatch, getState*/) => {
+  promise: (dispatch/*, getState*/) => {
     return new Promise((resolve, reject) => {
       try {
-        const data = loadExampleFile(fileName);
-        resolve(data);
+        const str = loadExampleFile(fileName);
+        parseDataFile(str, fileName, dispatch, resolve, reject);
       }
       catch (e) {
         return reject(e);
       }
+    });
+  }
+});
+
+export const fetchUserFile = (file) => ({
+  type: FETCH_USER_FILE,
+  promise: (dispatch) => {
+    return new Promise((resolve, reject) => {
+      getFileAsText(file, (err, str) => {
+        if (err) {
+          reject(err);
+        }
+        else {
+          const fileName = file.name;
+          parseDataFile(str, fileName, dispatch, resolve, reject);
+        }
+      });
     });
   }
 });
@@ -49,9 +86,6 @@ export const resetNewStorySettings = () => ({
   type: RESET_NEW_STORY_SETTINGS
 });
 
-export const fetchUserFile = () => ({
-  type: FETCH_USER_FILE
-});
 export const fetchUserFileSuccess = (result) => ({
   type: FETCH_USER_FILE_SUCCESS,
   result
@@ -65,6 +99,10 @@ export const showInvalidFileTypeWarning = () => ({
 });
 export const hideInvalidFileTypeWarning = () => ({
   type: HIDE_INVALID_FILE_TYPE
+});
+export const setActiveDataFileFormat = (activeDataFileFormat) => ({
+  type: SET_ACTIVE_DATA_FILE_FORMAT,
+  activeDataFileFormat
 });
 
 
@@ -92,7 +130,8 @@ function newStorySettings(state = DEFAULT_NEW_STORY_SETTINGS, action) {
 const DEFAULT_NEW_STORY_DATA = {
   rawData: undefined,
   loadingStatus: undefined,
-  invalidFileType: undefined
+  invalidFileType: undefined,
+  activeDataFileFormat: undefined
 };
 
 function newStoryData(state = DEFAULT_NEW_STORY_DATA, action) {
@@ -131,6 +170,11 @@ function newStoryData(state = DEFAULT_NEW_STORY_DATA, action) {
         invalidFileType: undefined,
         loadingStatus: undefined
       };
+    case SET_ACTIVE_DATA_FILE_FORMAT:
+      return {
+        ...state,
+        activeDataFileFormat: action.activeDataFileFormat
+      };
     case RESET_NEW_STORY_SETTINGS:
       return DEFAULT_NEW_STORY_DATA;
     default:
@@ -159,10 +203,14 @@ const activeDataStatus = state => state.newStoryData &&
 const invalidFileType = state => state.newStoryData &&
   state.newStoryData.invalidFileType;
 
+const activeDataFileFormat = state => state.newStoryData &&
+  state.newStoryData.activeDataFileFormat;
+
 export const selector = createStructuredSelector({
   activeVisualizationType,
   activeData,
   activeDataStatus,
+  activeDataFileFormat,
   invalidFileType
 });
 
