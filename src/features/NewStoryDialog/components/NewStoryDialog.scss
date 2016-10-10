@@ -68,30 +68,29 @@
     flex: 1;
 }
 
-.new-story-dialog .data-source-choice .data-source-file .file-input
-{
-    opacity: 1!important;
-}
-
 .new-story-dialog .data-source-choice .data-source-file .drop-zone
 {
     width: 100%!important;
-    text-align: center;
+    margin-right: $large-gutter;
     padding-top: 5rem;
     padding-bottom: 5rem;
+
+    text-align: center;
+
     background: $background-intent;
-    margin-right: $large-gutter;
 }
 
 .new-story-dialog .data-source-choice .data-source-file .drop-zone-active
 {
     width: 100%!important;
-    text-align: center;
+    margin-right: $large-gutter;
     padding-top: 5rem;
     padding-bottom: 5rem;
-    background: $primary-color;
+
+    text-align: center;
+
     color: $background-default;
-    margin-right: $large-gutter;
+    background: $primary-color;
 }
 
 
@@ -107,6 +106,7 @@
     flex-flow: row nowrap;
 }
 
+/*
 .new-story-dialog .data-fields-choice .data-fields-available
 {
     padding: $large-gutter;
@@ -123,24 +123,33 @@
 
     background: $background-intent;
 }
+*/
 
-.new-story-dialog .data-fields-choice .data-fields-to-parse
+.new-story-dialog .data-fields-choice .parameters-endpoints
 {
     display: flex;
-    flex-direction: row;
 
-    padding: 0;
+    padding: 0; //$large-gutter 0 $large-gutter;
 
+    flex-wrap: wrap;
     justify-content: space-between;
+    flex: 1;
 }
 
-.new-story-dialog .data-fields-choice .data-fields-to-parse li
+.new-story-dialog .data-fields-choice .parameters-endpoints li
 {
+    display: inline-block;
+
+    width: 30%;
+    margin-bottom: $medium-gutter;
+    padding: $medium-gutter;
+
     list-style: none;
 
-    border: 1px solid $primary-color;
+    cursor: move;
+    text-align: center;
 
-    flex: 1;
+    border: 1px dashed $background-intent;
 }
 
 .new-story-dialog .sample-file

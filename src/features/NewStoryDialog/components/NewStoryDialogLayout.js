@@ -1,7 +1,8 @@
 import React from 'react';
 
-import FileInput from 'react-file-input';
 import Dropzone from 'react-dropzone';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 import './NewStoryDialog.scss';
 
@@ -46,7 +47,6 @@ const SetVisualizationDataSourceStep = ({
   invalidFileType,
   onFileDrop
 }) => {
-  const onFileInput = (evt) => onFileDrop(evt.target.files[0]);
   const onDropInput = (files) => onFileDrop(files[0]);
   return (
     <section className="new-story-dialog-step">
@@ -58,15 +58,8 @@ const SetVisualizationDataSourceStep = ({
             className="drop-zone"
             activeClassName="drop-zone-active"
             onDrop={onDropInput}>
-            <div>Drop files there</div>
+            <div>Drop a file there ({visualizationTypeModel.acceptedFileExtensions.join(', ')})</div>
           </Dropzone>
-          <form>
-            <FileInput
-              name="fileselect"
-              placeholder="Select a file"
-              className="file-input"
-              onChange={onFileInput} />
-          </form>
         </section>
         <section className="data-source-examples">
           <h2>A sample file</h2>
@@ -95,34 +88,34 @@ const SetVisualizationDataSourceStep = ({
 );};
 
 const SetVisualizationParamsStep = ({
-  visualizationTypeModel
+  activeDataFields,
+  mapFieldToInvariantParameter,
+  invariantParameters
 }) => (
   <section className="new-story-dialog-step">
     <h1>I want to use fields ...</h1>
     <section className="data-fields-choice">
-      <ul className="data-fields-available">
-        <li>Data field 1</li>
-        <li>Data field 2</li>
-        <li>Data field 3</li>
-        <li>Data field 4</li>
-        <li>Data field 5</li>
-        <li>Data field 6</li>
-      </ul>
 
-      <ul className="data-fields-to-parse">
-        {visualizationTypeModel.invariantParameters.map((parameter, key) => (
-          <li key={key}>
-            <h4>
-              {parameter.label}
-            </h4>
-            {parameter.acceptedValueTypes.indexOf('date') > -1 ?
-              <select name="Select date format" id="dateformat-select">
-                <option value="dd/mm/yyyy">dd/mm/yyyy</option>
-                <option value="yyyy">yyyy</option>
-              </select>
-              : ''}
-          </li>
-        ))}
+      <ul className="parameters-endpoints">
+        {invariantParameters.map((parameter, key) => {
+          const onChange = (selected) => mapFieldToInvariantParameter(selected && selected.value, parameter.id);
+          return (
+            <li style={{background: parameter.mappedField ? 'lightgreen' : 'lightgrey'}} key={key}>
+              <h4>
+                <b>{parameter.id}</b> - <i>{parameter.acceptedValueTypes.join(', ')}</i>
+              </h4>
+              <Select
+                name="form-field-name"
+                value={parameter.mappedField}
+                options={activeDataFields.filter(field => {
+                    return parameter.acceptedValueTypes.indexOf(field.type) > -1;
+                  }).map(field => ({
+                    value: field.name,
+                    label: field.name
+                  }))}
+                onChange={onChange} />
+            </li>
+        );})}
       </ul>
     </section>
   </section>
@@ -132,11 +125,14 @@ const NewStoryDialogLayout = ({
   activeVisualizationType,
   activeData,
   activeDataStatus,
+  activeDataFields,
   invalidFileType,
   visualizationTypesModels,
+  invariantParameters,
   actions: {
     setVisualizationType,
-    fetchExampleFile
+    fetchExampleFile,
+    mapFieldToInvariantParameter
   },
   closeAndResetDialog,
   onFileDrop
@@ -157,7 +153,10 @@ const NewStoryDialogLayout = ({
     }
     {activeVisualizationType && visualizationTypesModels[activeVisualizationType] && activeData ?
       <SetVisualizationParamsStep
-        visualizationTypeModel={visualizationTypesModels[activeVisualizationType]} /> :
+        activeDataFields={activeDataFields}
+        visualizationTypeModel={visualizationTypesModels[activeVisualizationType]}
+        mapFieldToInvariantParameter={mapFieldToInvariantParameter}
+        invariantParameters={invariantParameters} /> :
       ''
     }
     <section className="new-story-dialog-step">

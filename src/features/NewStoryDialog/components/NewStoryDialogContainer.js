@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 
 import * as duck from '../duck';
-import { closeNewStoryModal } from '../../Bulgur/duck';
-import { validateFileExtension } from '../../../helpers/fileLoader';
+import {closeNewStoryModal} from '../../Bulgur/duck';
+import {validateFileExtension} from '../../../helpers/fileLoader';
 
 import NewStoryDialogLayout from './NewStoryDialogLayout';
 
@@ -32,7 +32,8 @@ class NewStoryDialogContainer extends Component {
     return newProps.activeVisualizationType !== this.props.activeVisualizationType ||
           newProps.activeDataStatus !== this.props.activeDataStatus ||
           newProps.activeData !== this.props.activeData ||
-          newProps.invalidFileType !== this.props.invalidFileType;
+          newProps.invalidFileType !== this.props.invalidFileType ||
+          this.props.invariantParameters !== newProps.invariantParameters;
   }
 
   closeAndResetDialog() {
