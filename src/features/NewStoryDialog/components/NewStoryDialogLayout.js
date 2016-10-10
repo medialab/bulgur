@@ -1,5 +1,7 @@
 import React from 'react';
-import FileDrop from 'react-file-drop';
+
+import FileInput from 'react-file-input';
+import Dropzone from 'react-dropzone';
 
 import './NewStoryDialog.scss';
 
@@ -40,38 +42,55 @@ export const ChooseVisualizationTypeStep = ({
 const SetVisualizationDataSourceStep = ({
   visualizationTypeModel,
   fetchExampleFile,
-  activeDataStatus
-}) => (
-  <section className="new-story-dialog-step">
-    <h1>I want to use data from ...</h1>
-    <section className="data-source-choice">
-      <section className="data-source-file">
-        <h2>A file from my computer</h2>
-        <FileDrop frame={document}>
-          Drop a file here
-        </FileDrop>
-        <i>Drop a file on the frame</i>
+  activeDataStatus,
+  invalidFileType,
+  onFileDrop
+}) => {
+  const onFileInput = (evt) => onFileDrop(evt.target.files[0]);
+  const onDropInput = (files) => onFileDrop(files[0]);
+  return (
+    <section className="new-story-dialog-step">
+      <h1>I want to use data from ...</h1>
+      <section className="data-source-choice">
+        <section className="data-source-file">
+          <h2>A file from my computer</h2>
+          <Dropzone
+            onDrop={onDropInput}>
+            <div>Drop files there</div>
+          </Dropzone>
+          <form>
+            <FileInput
+              name="fileselect"
+              placeholder="Select a file"
+              className="file-input"
+              onChange={onFileInput} />
+          </form>
+        </section>
+        <section className="data-source-examples">
+          <h2>A sample file</h2>
+          {visualizationTypeModel.samples.map((sample, key) => {
+            const fetchFile = () => fetchExampleFile(sample.fileName);
+            return (
+              <div key={key} onClick={fetchFile} className="sample-file">
+                <h3>{sample.title}</h3>
+                <p>{sample.description}</p>
+              </div>
+            );
+          })}
+        </section>
       </section>
-      <section className="data-source-examples">
-        <h2>A sample file</h2>
-        {visualizationTypeModel.samples.map((sample, key) => {
-          const fetchFile = () => fetchExampleFile(sample.fileName);
-          return (
-            <div key={key} onClick={fetchFile} className="sample-file">
-              <h3>{sample.title}</h3>
-              <p>{sample.description}</p>
-            </div>
-          );
-        })}
-      </section>
+      {invalidFileType !== undefined ?
+        <section className={'data-source-status error'}>
+          Invalid file type
+        </section> : ''
+      }
+      {activeDataStatus !== undefined ?
+        <section className={'data-source-status ' + activeDataStatus}>
+          data {activeDataStatus}
+        </section> : ''
+      }
     </section>
-    {activeDataStatus !== undefined ?
-      <section className={'data-source-status ' + activeDataStatus}>
-        data {activeDataStatus}
-      </section> : ''
-    }
-  </section>
-);
+);};
 
 const SetVisualizationParamsStep = ({
   visualizationTypeModel
@@ -111,12 +130,14 @@ const NewStoryDialogLayout = ({
   activeVisualizationType,
   activeData,
   activeDataStatus,
+  invalidFileType,
   visualizationTypesModels,
   actions: {
     setVisualizationType,
     fetchExampleFile
   },
-  closeAndResetDialog
+  closeAndResetDialog,
+  onFileDrop
 }) => (
   <div className="new-story-dialog">
     <ChooseVisualizationTypeStep
@@ -127,7 +148,9 @@ const NewStoryDialogLayout = ({
       <SetVisualizationDataSourceStep
         fetchExampleFile={fetchExampleFile}
         visualizationTypeModel={visualizationTypesModels[activeVisualizationType]}
-        activeDataStatus={activeDataStatus} /> :
+        activeDataStatus={activeDataStatus}
+        invalidFileType={invalidFileType}
+        onFileDrop={onFileDrop} /> :
        ''
     }
     {activeVisualizationType && visualizationTypesModels[activeVisualizationType] && activeData ?
@@ -137,7 +160,8 @@ const NewStoryDialogLayout = ({
     }
     <section className="new-story-dialog-step">
       {
-        activeVisualizationType
+        activeVisualizationType &&
+        activeData
         ?
           <button>Start telling the story</button>
         : ''

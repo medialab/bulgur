@@ -11,6 +11,14 @@ const SET_NEW_STORY_DATA = 'SET_NEW_STORY_DATA';
 
 const FETCH_EXAMPLE_FILE = 'FETCH_EXAMPLE_FILE';
 
+const FETCH_USER_FILE = 'FETCH_USER_FILE';
+const FETCH_USER_FILE_SUCCESS = 'FETCH_USER_FILE_SUCCESS';
+const FETCH_USER_FILE_FAILURE = 'FETCH_USER_FILE_FAILURE';
+
+const SHOW_INVALID_FILE_TYPE = 'SHOW_INVALID_FILE_TYPE';
+const HIDE_INVALID_FILE_TYPE = 'HIDE_INVALID_FILE_TYPE';
+
+
 const RESET_NEW_STORY_SETTINGS = 'RESET_NEW_STORY_SETTINGS';
 
 /*
@@ -41,6 +49,25 @@ export const resetNewStorySettings = () => ({
   type: RESET_NEW_STORY_SETTINGS
 });
 
+export const fetchUserFile = () => ({
+  type: FETCH_USER_FILE
+});
+export const fetchUserFileSuccess = (result) => ({
+  type: FETCH_USER_FILE_SUCCESS,
+  result
+});
+export const fetchUserFileFailure = (error) => ({
+  type: FETCH_USER_FILE_FAILURE,
+  error
+});
+export const showInvalidFileTypeWarning = () => ({
+  type: SHOW_INVALID_FILE_TYPE
+});
+export const hideInvalidFileTypeWarning = () => ({
+  type: HIDE_INVALID_FILE_TYPE
+});
+
+
 /*
  * Reducers
  */
@@ -64,7 +91,8 @@ function newStorySettings(state = DEFAULT_NEW_STORY_SETTINGS, action) {
 
 const DEFAULT_NEW_STORY_DATA = {
   rawData: undefined,
-  status: undefined
+  loadingStatus: undefined,
+  invalidFileType: undefined
 };
 
 function newStoryData(state = DEFAULT_NEW_STORY_DATA, action) {
@@ -75,19 +103,33 @@ function newStoryData(state = DEFAULT_NEW_STORY_DATA, action) {
         data: action.data
       };
     case FETCH_EXAMPLE_FILE:
+    case FETCH_USER_FILE:
       return {
         ...state,
-        status: 'loading'
+        loadingStatus: 'loading'
       };
     case FETCH_EXAMPLE_FILE + '_SUCCESS':
+    case FETCH_USER_FILE + '_SUCCESS':
       return {
         ...state,
-        status: 'loaded'
+        loadingStatus: 'loaded'
       };
     case FETCH_EXAMPLE_FILE + '_FAILURE':
+    case FETCH_USER_FILE + '_FAILURE':
       return {
         ...state,
-        status: 'error'
+        loadingStatus: 'error'
+      };
+    case SHOW_INVALID_FILE_TYPE:
+      return {
+        ...state,
+        invalidFileType: true
+      };
+    case HIDE_INVALID_FILE_TYPE:
+      return {
+        ...state,
+        invalidFileType: undefined,
+        loadingStatus: undefined
       };
     case RESET_NEW_STORY_SETTINGS:
       return DEFAULT_NEW_STORY_DATA;
@@ -112,11 +154,15 @@ const activeData = state => state.newStoryData &&
   state.newStoryData.data;
 
 const activeDataStatus = state => state.newStoryData &&
-  state.newStoryData.status;
+  state.newStoryData.loadingStatus;
+
+const invalidFileType = state => state.newStoryData &&
+  state.newStoryData.invalidFileType;
 
 export const selector = createStructuredSelector({
   activeVisualizationType,
   activeData,
-  activeDataStatus
+  activeDataStatus,
+  invalidFileType
 });
 

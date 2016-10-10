@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 
 import * as duck from '../duck';
 import {closeNewStoryModal} from '../../Bulgur/duck';
+import {validateFileExtension, getFileAsText} from '../../../helpers/fileLoader';
 
 import NewStoryDialogLayout from './NewStoryDialogLayout';
 
@@ -24,12 +25,14 @@ class NewStoryDialogContainer extends Component {
   constructor(props) {
     super(props);
     this.closeAndResetDialog = this.closeAndResetDialog.bind(this);
+    this.onFileDrop = this.onFileDrop.bind(this);
   }
 
   shouldComponentUpdate(newProps) {
     return newProps.activeVisualizationType !== this.props.activeVisualizationType ||
           newProps.activeDataStatus !== this.props.activeDataStatus ||
-          newProps.activeData !== this.props.activeData;
+          newProps.activeData !== this.props.activeData ||
+          newProps.invalidFileType !== this.props.invalidFileType;
   }
 
   closeAndResetDialog() {
@@ -37,11 +40,35 @@ class NewStoryDialogContainer extends Component {
     this.props.actions.closeNewStoryModal();
   }
 
+   onFileDrop(file) {
+    const fileName = file.name;
+    const model = this.props.visualizationTypesModels[this.props.activeVisualizationType];
+    const valid = validateFileExtension(fileName, model);
+    if (valid) {
+      this.props.actions.fetchUserFile();
+      getFileAsText(file, (err, str) => {
+        if (err) {
+          this.props.actions.fetchUserFileFailure(err);
+        }
+        else {
+          this.props.actions.fetchUserFileSuccess(str);
+        }
+      });
+    }
+    else {
+      this.props.actions.showInvalidFileTypeWarning();
+      setTimeout(() => {
+        this.props.actions.hideInvalidFileTypeWarning();
+      }, 2000);
+    }
+  }
+
   render() {
     return (
       <NewStoryDialogLayout
         {...this.props}
-        closeAndResetDialog={this.closeAndResetDialog} />
+        closeAndResetDialog={this.closeAndResetDialog}
+        onFileDrop={this.onFileDrop} />
     );
   }
 }
