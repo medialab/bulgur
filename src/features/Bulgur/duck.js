@@ -1,6 +1,8 @@
 import {combineReducers} from 'redux';
 import {createStructuredSelector} from 'reselect';
 
+import {SETUP_NEW_STORY} from '../NewStoryDialog/duck';
+
 /*
  * Action names
  */
@@ -21,18 +23,33 @@ export const closeNewStoryModal = () => ({
 });
 
 /*
- * Feature Default state
- */
-
-const DEFAULT_STATE = {
-    newStoryModalOpen: false
-};
-
-/*
  * Reducers
  */
 
-function newStoryModal(state = DEFAULT_STATE, action) {
+const VISUALIZATION_DEFAULT_STATE = {
+    data: undefined,
+    invariantParameters: undefined
+};
+
+function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
+  switch (action.type) {
+    case SETUP_NEW_STORY:
+      return {
+        ...state,
+        data: action.data,
+        invariantParameters: action.invariantParameters
+      };
+    default:
+      return state;
+  }
+}
+
+const NEW_STORY_MODAL_DEFAULT_STATE = {
+    newStoryModalOpen: false,
+    data: undefined,
+    invariantParameters: undefined
+};
+function newStoryModal(state = NEW_STORY_MODAL_DEFAULT_STATE, action) {
   switch (action.type) {
     case OPEN_NEW_STORY_MODAL:
       return {
@@ -50,7 +67,8 @@ function newStoryModal(state = DEFAULT_STATE, action) {
 }
 
 export default combineReducers({
-  newStoryModal
+  newStoryModal,
+  visualization
 });
 
 /*

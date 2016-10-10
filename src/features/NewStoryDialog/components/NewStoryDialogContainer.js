@@ -26,6 +26,7 @@ class NewStoryDialogContainer extends Component {
     super(props);
     this.closeAndResetDialog = this.closeAndResetDialog.bind(this);
     this.onFileDrop = this.onFileDrop.bind(this);
+    this.closeAndSetupNewStory = this.closeAndSetupNewStory.bind(this);
   }
 
   shouldComponentUpdate(newProps) {
@@ -38,6 +39,11 @@ class NewStoryDialogContainer extends Component {
 
   closeAndResetDialog() {
     this.props.actions.resetNewStorySettings();
+    this.props.actions.closeNewStoryModal();
+  }
+
+  closeAndSetupNewStory() {
+    this.props.actions.setupNewStory(this.props.invariantParameters, this.props.activeData);
     this.props.actions.closeNewStoryModal();
   }
 
@@ -61,6 +67,7 @@ class NewStoryDialogContainer extends Component {
       <NewStoryDialogLayout
         {...this.props}
         closeAndResetDialog={this.closeAndResetDialog}
+        closeAndSetupNewStory={this.closeAndSetupNewStory}
         onFileDrop={this.onFileDrop} />
     );
   }

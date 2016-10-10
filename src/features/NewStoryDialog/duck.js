@@ -29,6 +29,9 @@ const MAP_FIELD_TO_INVARIANT_PARAMETER = 'MAP_FIELD_TO_INVARIANT_PARAMETER';
 const INIT_INVARIANT_PARAMETERS = 'INIT_INVARIANT_PARAMETERS';
 const GUESS_INVARIANT_PARAMETERS = 'GUESS_INVARIANT_PARAMETERS';
 
+export const SETUP_NEW_STORY = 'SETUP_NEW_STORY';
+
+
 /*
  * Action creators
  */
@@ -124,6 +127,12 @@ export const mapFieldToInvariantParameter = (fieldName, parameterId) => ({
   type: MAP_FIELD_TO_INVARIANT_PARAMETER,
   fieldName,
   parameterId
+});
+
+export const setupNewStory = (invariantParameters, data) => ({
+  type: SETUP_NEW_STORY,
+  data,
+  invariantParameters
 });
 
 

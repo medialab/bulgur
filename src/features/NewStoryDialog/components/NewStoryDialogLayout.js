@@ -132,9 +132,10 @@ const NewStoryDialogLayout = ({
   actions: {
     setVisualizationType,
     fetchExampleFile,
-    mapFieldToInvariantParameter
+    mapFieldToInvariantParameter,
   },
   closeAndResetDialog,
+  closeAndSetupNewStory,
   onFileDrop
 }) => (
   <div className="new-story-dialog">
@@ -164,7 +165,7 @@ const NewStoryDialogLayout = ({
         activeVisualizationType &&
         activeData
         ?
-          <button>Start telling the story</button>
+          <button onClick={closeAndSetupNewStory}>Start telling the story</button>
         : ''
       }
       <button
