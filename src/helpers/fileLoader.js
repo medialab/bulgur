@@ -45,3 +45,36 @@ export function convertRawStrToJson(str = '', format) {
       return [];
   }
 }
+
+export function setDataFields(data) {
+  const fields = Object.keys(data[0]);
+  return fields.map(name => {
+    // to improve
+    let numberNumbers = 0;
+    let numberUrls = 0;
+    data.forEach(point => {
+      if (point[name] === undefined) {
+        return;
+      }
+      if (!isNaN(+point[name])) {
+        numberNumbers++;
+      }
+      else if (point[name].trim().length === 0 || point[name].indexOf('http') === 0 ||
+        point[name].indexOf('www') === 0) {
+        numberUrls++;
+      }
+    });
+    let type;
+    if (numberNumbers === data.length) {
+      type = 'number';
+    }
+    else if (numberUrls === data.length) {
+      type = 'url';
+    }
+    else type = 'string';
+    return {
+      name,
+      type
+    };
+  });
+}
