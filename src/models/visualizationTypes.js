@@ -36,7 +36,7 @@ const models = {
         acceptedValueTypes: ['string']
       },
       {
-        id: 'display Date',
+        id: 'display date',
         acceptedValueTypes: ['string']
       },
       {
@@ -52,15 +52,15 @@ const models = {
         acceptedValueTypes: ['url']
       },
       {
-        id: 'media Credit',
+        id: 'media credit',
         acceptedValueTypes: ['string']
       },
       {
-        id: 'media Caption',
+        id: 'media caption',
         acceptedValueTypes: ['string']
       },
       {
-        id: 'media Thumbnail',
+        id: 'media thumbnail',
         acceptedValueTypes: ['string']
       },
       {
@@ -85,7 +85,15 @@ const models = {
       title: 'Dataset officiel de timelinejs',
       fileName: 'official-timeline-js.csv',
       description: 'Plus d\'informations: http://timeline.knightlab.com/'
-    }]
+    }],
+    slideParameters: [
+      {
+        id: 'fromTime'
+      },
+      {
+        id: 'toTime'
+      }
+    ]
   },
   space: {
     acceptedFileExtensions: ['csv', 'tsv'],
@@ -119,7 +127,18 @@ const models = {
       title: 'Histoire du Fort et des combats de 1870-1871 à Issy',
       fileName: 'histoiredufort.csv',
       description: 'Plus d\'informations: http://data.issy.com/explore/dataset/histoiredufort-feuille1/export/?disjunctive.refqr'
-    }]
+    }],
+    slideParameters: [
+      {
+        id: 'cameraX'
+      },
+      {
+        id: 'cameraY'
+      },
+      {
+        id: 'cameraZoom'
+      }
+    ]
   },
   relations: {
     acceptedFileExtensions: ['gefx'],
@@ -133,7 +152,21 @@ const models = {
         id: 'test',
         acceptedValueTypes: ['string']
       }
+    ],
+    slideParameters: [
+      {
+        id: 'cameraX'
+      },
+      {
+        id: 'cameraY'
+      },
+      {
+        id: 'cameraAngle'
+      },
+      {
+        id: 'cameraRatio'
+      }
     ]
-  },
+  }
 };
 export default models;

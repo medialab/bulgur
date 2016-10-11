@@ -15,6 +15,11 @@ describe('visualization types models', () => {
         done();
       });
 
+      it('should have slide parameters', (done) => {
+        expect(model).to.have.property('slideParameters');
+        done();
+      })
+
       it('should have valid examples files', (done) => {
         model.samples.forEach(sample => {
           exists(resolve(__dirname + '/../../example_datasets/' + sample.fileName), (ok) => {
