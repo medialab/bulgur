@@ -28,11 +28,10 @@
 
 .bulgur-aside-view > ul > li
 {
+    width: 10rem;
     height: 7rem;
     margin: $base-gutter 0 $base-gutter;
     padding: $large-gutter;
-
-    width: 10rem;
 
     list-style: none;
 
@@ -62,6 +61,7 @@
 .bulgur-aside-view > button
 {
     display: block;
+
     text-align: left;
 }
 

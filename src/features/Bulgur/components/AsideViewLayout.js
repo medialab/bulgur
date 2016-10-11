@@ -6,12 +6,12 @@ const AsideViewLayout = ({
   openNewStoryModal
 }) => (
   <aside className="bulgur-aside-view">
-    <button onClick={openNewStoryModal} type="button">☀ Story settings</button>
+    <button onClick={openNewStoryModal} type="button">🛠 Story settings</button>
     <ul>
       <li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li>
       <li>New slide</li>
     </ul>
-    <button type="button">↑ Take away</button>
+    <button type="button">🚀 Take away</button>
   </aside>
 );
 

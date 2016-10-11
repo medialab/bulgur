@@ -111,11 +111,14 @@
 .bulgur-main-view #new-story-button
 {
     position: absolute;
-    left : 45%;
-    top : 40%;
+    top: 40%;
+    left: 45%;
+
     width: 10rem;
     height: 10rem;
-    border-radius: 50%;
+
     text-align: center;
+
     border: 1px dashed $primary-color;
+    border-radius: 50%;
 }
