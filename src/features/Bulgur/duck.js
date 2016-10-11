@@ -37,7 +37,8 @@ function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
       return {
         ...state,
         data: action.data,
-        invariantParameters: action.invariantParameters
+        invariantParameters: action.invariantParameters,
+        visualizationType: action.visualizationType
       };
     default:
       return state;
@@ -77,6 +78,9 @@ export default combineReducers({
 
 const isNewStoryModalOpen = state => state.newStoryModal.newStoryModalOpen;
 
+const visualizationData = state => state.visualization;
+
 export const selector = createStructuredSelector({
-  isNewStoryModalOpen
+  isNewStoryModalOpen,
+  visualizationData
 });

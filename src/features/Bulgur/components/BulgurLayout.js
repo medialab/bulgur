@@ -14,11 +14,20 @@ const InterfaceManagerLayout = ({
   actions: {
     openNewStoryModal
   },
-  closeAndResetDialog
+  closeAndResetDialog,
+  visualizationData: {
+    visualizationType,
+    invariantParameters = [],
+    data = []
+  }
 }) => (
   <div id={id} className={className}>
     <AsideViewLayout openNewStoryModal={openNewStoryModal} />
-    <MainViewLayout />
+    <MainViewLayout
+      openNewStoryModal={openNewStoryModal}
+      visualizationType={visualizationType}
+      invariantParameters={invariantParameters}
+      data={data} />
     <Modal
       onRequestClose={closeAndResetDialog}
       isOpen={isNewStoryModalOpen}>

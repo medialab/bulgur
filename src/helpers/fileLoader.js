@@ -42,7 +42,7 @@ export function convertRawStrToJson(str = '', format) {
     case 'tsv':
       return tsvParse(str);
     default:
-      return [];
+      return str;
   }
 }
 

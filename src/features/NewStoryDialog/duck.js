@@ -13,7 +13,6 @@ import {
  */
 
 const SET_VISUALIZATION_TYPE = 'SET_VISUALIZATION_TYPE';
-const SET_NEW_STORY_DATA = 'SET_NEW_STORY_DATA';
 
 const FETCH_EXAMPLE_FILE = 'FETCH_EXAMPLE_FILE';
 const FETCH_USER_FILE = 'FETCH_USER_FILE';
@@ -129,10 +128,11 @@ export const mapFieldToInvariantParameter = (fieldName, parameterId) => ({
   parameterId
 });
 
-export const setupNewStory = (invariantParameters, data) => ({
+export const setupNewStory = (invariantParameters, visualizationType, data) => ({
   type: SETUP_NEW_STORY,
   data,
-  invariantParameters
+  invariantParameters,
+  visualizationType
 });
 
 
@@ -166,11 +166,6 @@ const DEFAULT_NEW_STORY_DATA = {
 
 function newStoryData(state = DEFAULT_NEW_STORY_DATA, action) {
   switch (action.type) {
-    case SET_NEW_STORY_DATA:
-      return {
-        ...state,
-        data: action.data
-      };
     case FETCH_EXAMPLE_FILE:
     case FETCH_USER_FILE:
       return {
@@ -229,7 +224,7 @@ function newStoryData(state = DEFAULT_NEW_STORY_DATA, action) {
       };
     case GUESS_INVARIANT_PARAMETERS:
       invariantParameters = state.invariantParameters.map(parameter => {
-        const homonym = state.activeDataFields.find(field => field.name === parameter.id);
+        const homonym = state.activeDataFields.find(field => field.name.toLowerCase() === parameter.id.toLowerCase());
         if (homonym) {
           parameter.mappedField = homonym.name;
         }

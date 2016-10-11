@@ -4,11 +4,11 @@ const models = {
     acceptedFileExtensions: ['csv', 'tsv'],
     invariantParameters: [
       {
-        id: 'Year',
+        id: 'year',
         acceptedValueTypes: ['number']
       },
       {
-        id: 'Month',
+        id: 'month',
         acceptedValueTypes: ['number']
       },
       {
@@ -16,63 +16,63 @@ const models = {
         acceptedValueTypes: ['number']
       },
       {
-        id: 'Time',
+        id: 'time',
         acceptedValueTypes: ['string']
       },
       {
-        id: 'End Year',
+        id: 'end year',
         acceptedValueTypes: ['number']
       },
       {
-        id: 'End Month',
+        id: 'end month',
         acceptedValueTypes: ['number']
       },
       {
-        id: 'End Day',
+        id: 'end day',
         acceptedValueTypes: ['number']
       },
       {
-        id: 'End Time',
+        id: 'end time',
         acceptedValueTypes: ['string']
       },
       {
-        id: 'Display Date',
+        id: 'display Date',
         acceptedValueTypes: ['string']
       },
       {
-        id: 'Headline',
+        id: 'headline',
         acceptedValueTypes: ['string']
       },
       {
-        id: 'Text',
+        id: 'text',
         acceptedValueTypes: ['string']
       },
       {
-        id: 'Media',
+        id: 'media',
         acceptedValueTypes: ['url']
       },
       {
-        id: 'Media Credit',
+        id: 'media Credit',
         acceptedValueTypes: ['string']
       },
       {
-        id: 'Media Caption',
+        id: 'media Caption',
         acceptedValueTypes: ['string']
       },
       {
-        id: 'Media Thumbnail',
+        id: 'media Thumbnail',
         acceptedValueTypes: ['string']
       },
       {
-        id: 'Type',
+        id: 'type',
         acceptedValueTypes: ['string']
       },
       {
-        id: 'Group',
+        id: 'group',
         acceptedValueTypes: ['string']
       },
       {
-        id: 'Background',
+        id: 'background',
         acceptedValueTypes: ['string']
       }
     ],
@@ -86,6 +86,54 @@ const models = {
       fileName: 'official-timeline-js.csv',
       description: 'Plus d\'informations: http://timeline.knightlab.com/'
     }]
+  },
+  space: {
+    acceptedFileExtensions: ['csv', 'tsv'],
+    invariantParameters: [
+      {
+        id: 'latitude',
+        acceptedValueTypes: ['number']
+      },
+      {
+        id: 'longitude',
+        acceptedValueTypes: ['number']
+      },
+      {
+        id: 'title',
+        acceptedValueTypes: ['string']
+      },
+      {
+        id: 'group',
+        acceptedValueTypes: ['string']
+      },
+      {
+        id: 'description',
+        acceptedValueTypes: ['string']
+      },
+      {
+        id: 'media',
+        acceptedValueTypes: ['url']
+      }
+    ],
+    samples: [{
+      title: 'Histoire du Fort et des combats de 1870-1871 à Issy',
+      fileName: 'histoiredufort.csv',
+      description: 'Plus d\'informations: http://data.issy.com/explore/dataset/histoiredufort-feuille1/export/?disjunctive.refqr'
+    }]
+  },
+  relations: {
+    acceptedFileExtensions: ['gefx'],
+    samples: [{
+      title: 'Arctic',
+      fileName: 'arctic.gefx',
+      description: 'Taken from quinoa examples'
+    }],
+    invariantParameters: [
+      {
+        id: 'test',
+        acceptedValueTypes: ['string']
+      }
+    ]
   },
 };
 export default models;

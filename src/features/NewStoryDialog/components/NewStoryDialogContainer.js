@@ -43,7 +43,7 @@ class NewStoryDialogContainer extends Component {
   }
 
   closeAndSetupNewStory() {
-    this.props.actions.setupNewStory(this.props.invariantParameters, this.props.activeData);
+    this.props.actions.setupNewStory(this.props.invariantParameters, this.props.activeVisualizationType, this.props.activeData);
     this.props.actions.closeNewStoryModal();
   }
 

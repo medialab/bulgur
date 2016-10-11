@@ -1,12 +1,34 @@
 import React from 'react';
 
+
+import Timeline from '../../../components/Timeline/Timeline';
+import Map from '../../../components/Map/Map';
+import Graph from '../../../components/Graph/Graph';
+
 import './MainViewLayout.scss';
 
 const MainViewLayout = ({
-}) => (
-  <figure className="bulgur-main-view">
+  visualizationType,
+  data,
+  invariantParameters,
+  openNewStoryModal
+}) => {
+  const setVisualization = () => {
+    const visProps = {data, invariantParameters};
+    switch (visualizationType) {
+      case 'space':
+        return <Map {...visProps} />;
+      case 'relations':
+        return <Graph {...visProps} />;
+      case 'time':
+        return <Timeline {...visProps} />;
+      default:
+        return <button onClick={openNewStoryModal}>Tell a new story</button>;
+    }
+  };
+  return (<figure className="bulgur-main-view">
     <section className="visualization-container">
-      Visualization
+      {setVisualization()}
     </section>
     <figcaption className="caption-container">
       <div className="view-operations">
@@ -29,7 +51,7 @@ const MainViewLayout = ({
         </div>
       </div>
     </figcaption>
-  </figure>
-);
+  </figure>);
+};
 
 export default MainViewLayout;
