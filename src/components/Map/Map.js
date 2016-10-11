@@ -3,24 +3,24 @@ import React from 'react';
 import './Map.scss';
 
 const Map = ({
-  data=[],
-  invariantParameters=[]
+  data = [],
+  invariantParameters = []
 }) => {
   return (
     <div>
       <h2>Map visualization</h2>
       <p>Invariant parameters:</p>
       <ul>
-        {invariantParameters.map((parameter, key) => 
+        {invariantParameters.map((parameter, key) =>
           (<li key={key}>{parameter.id} : {parameter.mappedField}</li>)
         )}
       </ul>
+      <pre>
+        {data}
+      </pre>
     </div>
   );
-}
+};
 
 export default Map;
-
-
-
 
