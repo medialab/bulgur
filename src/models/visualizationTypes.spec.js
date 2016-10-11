@@ -18,7 +18,7 @@ describe('visualization types models', () => {
       it('should have slide parameters', (done) => {
         expect(model).to.have.property('slideParameters');
         done();
-      })
+      });
 
       it('should have valid examples files', (done) => {
         model.samples.forEach(sample => {
