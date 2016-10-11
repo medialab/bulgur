@@ -42,7 +42,6 @@
     "redux-thunk": "^2.1.0",
     "reselect": "^2.5.4",
     "sigma": "^1.1.0",
-    "timelinejs": "^2.35.6",
     "uuid": "^2.0.3"
   },
   "devDependencies": {
