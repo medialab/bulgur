@@ -45,6 +45,7 @@
     flex: 1;
     flex-flow: column nowrap;
     align-items: center;
+    padding: $medium-gutter;
 }
 
 .new-story-dialog .visualization-type-choice #visualization-type-checked

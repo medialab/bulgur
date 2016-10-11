@@ -7,6 +7,12 @@ import Graph from '../../../components/Graph/Graph';
 
 import './MainViewLayout.scss';
 
+import { 
+  editorComponent as QuinoaEditor,
+  store as quinoaStore,
+  actions as quinoaActions
+} from '../../../helpers/configQuinoa';
+
 const MainViewLayout = ({
   visualizationType,
   data,
@@ -47,6 +53,7 @@ const MainViewLayout = ({
             </ul>
           </div>
           <div className="editor-areas-container">
+            // <QuinoaEditor />
             <input placeholder="slide title" className="editor-title-input" />
             <textarea placeholder="slide content" className="editor-content-input" />
           </div>
