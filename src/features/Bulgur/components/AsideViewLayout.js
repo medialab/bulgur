@@ -6,7 +6,7 @@ const AsideViewLayout = ({
   openNewStoryModal
 }) => (
   <aside className="bulgur-aside-view">
-    <button onClick={openNewStoryModal} type="button">↓ Import data</button>
+    <button onClick={openNewStoryModal} type="button">☀ Story settings</button>
     <ul>
       <li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li>
       <li>New slide</li>

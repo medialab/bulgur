@@ -32,6 +32,8 @@
     margin: $base-gutter 0 $base-gutter;
     padding: $large-gutter;
 
+    width: 10rem;
+
     list-style: none;
 
     cursor: pointer;
@@ -60,6 +62,7 @@
 .bulgur-aside-view > button
 {
     display: block;
+    text-align: left;
 }
 
 .bulgur-aside-view > button:first-of-type

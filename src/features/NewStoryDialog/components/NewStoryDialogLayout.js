@@ -165,7 +165,7 @@ const NewStoryDialogLayout = ({
         activeVisualizationType &&
         activeData
         ?
-          <button onClick={closeAndSetupNewStory}>Start telling the story</button>
+          <button onClick={closeAndSetupNewStory}>Tell the story</button>
         : ''
       }
       <button

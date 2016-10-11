@@ -22,7 +22,7 @@ const InterfaceManagerLayout = ({
   }
 }) => (
   <div id={id} className={className}>
-    <AsideViewLayout openNewStoryModal={openNewStoryModal} />
+    {visualizationType ? <AsideViewLayout openNewStoryModal={openNewStoryModal} /> : ''}
     <MainViewLayout
       openNewStoryModal={openNewStoryModal}
       visualizationType={visualizationType}

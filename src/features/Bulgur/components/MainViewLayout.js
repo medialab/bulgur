@@ -23,34 +23,36 @@ const MainViewLayout = ({
       case 'time':
         return <Timeline {...visProps} />;
       default:
-        return <button onClick={openNewStoryModal}>Tell a new story</button>;
+        return <button id="new-story-button" onClick={openNewStoryModal}>Tell a new story</button>;
     }
   };
   return (<figure className="bulgur-main-view">
     <section className="visualization-container">
       {setVisualization()}
     </section>
-    <figcaption className="caption-container">
-      <div className="view-operations">
-        <button>Reset</button>
-        <button>Record</button>
-      </div>
-      <div className="caption-editor">
-        <div className="editor-helpers-container">
-          <ul className="editor-helpers">
-            <li><button>title</button></li>
-            <li><button>bold</button></li>
-            <li><button>italic</button></li>
-            <li><button>underline</button></li>
-            <li><button>list</button></li>
-          </ul>
+    {visualizationType ?
+      <figcaption className="caption-container">
+        <div className="view-operations">
+          <button>Reset</button>
+          <button>Record</button>
         </div>
-        <div className="editor-areas-container">
-          <input placeholder="slide title" className="editor-title-input" />
-          <textarea placeholder="slide content" className="editor-content-input" />
+        <div className="caption-editor">
+          <div className="editor-helpers-container">
+            <ul className="editor-helpers">
+              <li><button>title</button></li>
+              <li><button>bold</button></li>
+              <li><button>italic</button></li>
+              <li><button>underline</button></li>
+              <li><button>list</button></li>
+            </ul>
+          </div>
+          <div className="editor-areas-container">
+            <input placeholder="slide title" className="editor-title-input" />
+            <textarea placeholder="slide content" className="editor-content-input" />
+          </div>
         </div>
-      </div>
-    </figcaption>
+      </figcaption> : ''
+    }
   </figure>);
 };
 
