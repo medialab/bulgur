@@ -7,11 +7,14 @@
 .bulgur-main-view
 {
     display: flex;
-    flex-direction: column;
+
+    flex-flow: column nowrap;
 }
 
 .bulgur-main-view .visualization-container
 {
+    overflow: scroll;
+
     flex: 3;
 }
 

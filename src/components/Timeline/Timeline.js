@@ -16,7 +16,7 @@ const Timeline = ({
         )}
       </ul>
       <pre>
-        {data}
+        Data: {JSON.stringify(data, null, 1)}
       </pre>
     </div>
   );
