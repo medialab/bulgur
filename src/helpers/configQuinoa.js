@@ -31,16 +31,31 @@ function createQuinoaState(slides = []) {
 
 const QUINOA_DEFAULT_STATE = createQuinoaState([]);
 
-let quinoa;
+const quinoa = new Quinoa({
+  defaultState: QUINOA_DEFAULT_STATE,
+  slideCreator: createStartupSlide
+});
 
-export function initQuinoa(renderApplication) {
-  quinoa = new Quinoa({
-    defaultState: QUINOA_DEFAULT_STATE,
-    slideCreator: createStartupSlide
-  });
-  window.quinoa = quinoa;
+export function plugQuinoa(renderApplication) {
   quinoa.subscribe(renderApplication);
   quinoa.hot(renderApplication);
 }
+
+export const editorComponent = quinoa.getEditorComponent();
+// export const draftComponent = quinoa.getDraftComponent();
+
+function mapStore(quinoaLib) {
+  const {editor} = quinoaLib.getState();
+  const currentSlide = editor.slides[editor.current];
+
+  return {
+    currentSlide: editor.current,
+    slideParameters: currentSlide ? currentSlide.meta : {}
+  };
+}
+
+export const actions = quinoa.getActions();
+
+export const store = mapStore(quinoa);
 
 export default quinoa;
