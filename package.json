@@ -29,6 +29,7 @@
   "homepage": "https://github.com/medialab/bulgur#readme",
   "dependencies": {
     "d3-dsv": "^1.0.3",
+    "draft-js": "^0.9.1",
     "leaflet": "^1.0.1",
     "react": "^15.3.2",
     "react-dnd": "^2.1.4",
