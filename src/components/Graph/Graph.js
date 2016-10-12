@@ -4,12 +4,15 @@ import './Graph.scss';
 
 const Graph = ({
   data = [],
-  invariantParameters = []
+  invariantParameters = [],
+  slideParameters = {}
 }) => {
   return (
     <div>
       <h2>Graph visualization</h2>
       <p>Invariant parameters:</p>
+      <p>Slide Parameters</p>
+      {JSON.stringify(slideParameters, null, 2)}
       <ul>
         {invariantParameters.map((parameter, key) =>
           (<li key={key}>{parameter.id} : {parameter.mappedField}</li>)

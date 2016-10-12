@@ -4,11 +4,14 @@ import './Timeline.scss';
 
 const Timeline = ({
   data = [],
-  invariantParameters = []
+  invariantParameters = [],
+  slideParameters = {}
 }) => {
   return (
     <div>
       <h2>Timeline visualization</h2>
+      <p>Slide Parameters</p>
+      {JSON.stringify(slideParameters, null, 2)}
       <p>Invariant parameters:</p>
       <ul>
         {invariantParameters.map((parameter, key) =>
