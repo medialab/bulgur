@@ -21,6 +21,7 @@
 .bulgur .bulgur-aside-view
 {
     flex: 1;
+    max-width: 20%;
 }
 
 .bulgur .bulgur-main-view
@@ -28,6 +29,7 @@
     margin: 0;
 
     flex: 4;
+    min-width: 80%;
 }
 
 
@@ -45,9 +47,14 @@
     .bulgur .bulgur-aside-view
     {
         flex-direction: row;
-
         order: 2;
+        max-width: 100%;
     }
+    .bulgur .bulgur-aside-view .quinoa-editor
+    {
+        flex: 1;
+    }
+
 }
 @media #{$breakpoint-tablet}
 {

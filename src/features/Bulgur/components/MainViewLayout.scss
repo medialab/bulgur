@@ -15,7 +15,7 @@
 {
     overflow: scroll;
 
-    flex: 3;
+    flex: 2;
 }
 
 .bulgur-main-view .caption-container
@@ -25,6 +25,8 @@
     border-top: 1px solid darkgrey;
 
     flex: 1;
+    max-height: 30;
+    padding-top : $medium-gutter;
 }
 
 
@@ -72,7 +74,7 @@
 {
     margin: 0;
     padding: 0;
-    padding-top: 2rem;
+    padding-top: 5rem;
 
     text-align: right;
 
@@ -81,32 +83,53 @@
 .bulgur-main-view .caption-editor .editor-areas-container
 {
     display: flex;
-
-    padding-right: 2rem;
-
     flex: 8;
     flex-flow: column nowrap;
+    align-items: stretch;
 }
 
 .bulgur-main-view .caption-editor .editor-helpers li
 {
     padding: 0;
-
     list-style: none;
 }
-.bulgur-main-view .caption-editor .editor-areas-container input
-{
-    font-size: 1.8rem;
 
-    display: block;
-
-    border-bottom: 1px solid $primary-color;
-}
-
-.bulgur-main-view .caption-editor .editor-areas-container textarea
+.bulgur-main-view .caption-editor .editor-areas-container
 {
     flex: 1;
+    font-family: $display-font-stack;
+    font-size: 1.5rem;
 }
+
+.bulgur-main-view .caption-editor .editor-areas-container .quinoa-draft,
+.bulgur-main-view .caption-editor .editor-areas-container .quinoa-draft > div
+{
+    display: flex;
+    flex: 1;
+    flex-flow: column nowrap;
+}
+
+.bulgur-main-view .caption-editor .editor-areas-container .quinoa-draft .DraftEditor-root
+{
+    flex: 1;
+    border: 1px solid $background-intent;
+    margin: 0 0 $large-gutter;
+    padding: $medium-gutter;
+}
+
+.bulgur-main-view .caption-editor .editor-areas-container .quinoa-slide-title
+{
+    border-bottom: 1px solid $background-intent;
+}
+
+.bulgur-main-view .caption-editor .editor-areas-container .quinoa-slide-title-input
+{
+    font-size: 2rem;
+    height: 2rem;
+    font-weight: 800;
+
+}
+
 
 .bulgur-main-view #new-story-button
 {

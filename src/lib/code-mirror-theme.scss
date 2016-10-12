@@ -1,17 +1,19 @@
+@import "../parameters.scss";
+
 /**
  * Quinoa Codemirror Theme
  * ========================
  */
 .CodeMirror
 {
-    /* Set height, width, borders, and global font properties here */
-    font-family: 'Fira Mono', monospace;
+    font-family: $main-font-stack;
     font-size: 12px;
 
     height: auto;
     padding: 0;
 
-    color: black;
+    color: $primary-color;
+    background: $background-default;
 }
 
 .CodeMirror-scroll,

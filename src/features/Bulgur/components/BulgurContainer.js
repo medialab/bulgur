@@ -45,6 +45,7 @@ class BulgurContainer extends Component {
   }
 
   render() {
+    console.log(quinoaActions);
     return (
       <BulgurLayout
         {...this.props}
