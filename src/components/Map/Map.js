@@ -5,13 +5,32 @@ import './Map.scss';
 const Map = ({
   data = [],
   dataMap = [],
-  slideParameters = {}
+  viewParameters = {},
+  updateView
 }) => {
   return (
     <div>
       <h2>Map visualization</h2>
       <p>Slide Parameters</p>
-      {JSON.stringify(slideParameters, null, 2)}
+      {Object.keys(viewParameters).map((parameterKey, key) => {
+        const onInputChange = (evt) => {
+          updateView({
+            ...viewParameters,
+            [parameterKey]: evt.target.value
+          });
+        };
+        return (
+          <div key={key}>
+            <p>{parameterKey}</p>
+            <form>
+              <input
+                style={{background: 'red'}}
+                value={viewParameters[parameterKey]}
+                onChange={onInputChange} />
+            </form>
+          </div>
+        );
+      })}
       <p>Data fields / visualization parameters mapping:</p>
       <ul>
         {dataMap.map((parameter, key) =>
