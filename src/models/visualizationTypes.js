@@ -2,7 +2,7 @@
 const models = {
   time: {
     acceptedFileExtensions: ['csv', 'tsv'],
-    invariantParameters: [
+    dataMap: [
       {
         id: 'year',
         acceptedValueTypes: ['number']
@@ -88,16 +88,18 @@ const models = {
     }],
     slideParameters: [
       {
-        id: 'fromTime'
+        id: 'fromTime',
+        default: new Date().getTime()
       },
       {
-        id: 'toTime'
+        id: 'toTime',
+        default: 0
       }
     ]
   },
   space: {
     acceptedFileExtensions: ['csv', 'tsv'],
-    invariantParameters: [
+    dataMap: [
       {
         id: 'latitude',
         acceptedValueTypes: ['number']
@@ -130,13 +132,16 @@ const models = {
     }],
     slideParameters: [
       {
-        id: 'cameraX'
+        id: 'cameraX',
+        default: 0
       },
       {
-        id: 'cameraY'
+        id: 'cameraY',
+        default: 0
       },
       {
-        id: 'cameraZoom'
+        id: 'cameraZoom',
+        default: 1
       }
     ]
   },
@@ -147,7 +152,7 @@ const models = {
       fileName: 'arctic.gefx',
       description: 'Taken from quinoa examples'
     }],
-    invariantParameters: [
+    dataMap: [
       {
         id: 'test',
         acceptedValueTypes: ['string']
@@ -155,16 +160,20 @@ const models = {
     ],
     slideParameters: [
       {
-        id: 'cameraX'
+        id: 'cameraX',
+        default: 0
       },
       {
-        id: 'cameraY'
+        id: 'cameraY',
+        default: 0
       },
       {
-        id: 'cameraAngle'
+        id: 'cameraAngle',
+        default: 0
       },
       {
-        id: 'cameraRatio'
+        id: 'cameraRatio',
+        default: 1
       }
     ]
   }

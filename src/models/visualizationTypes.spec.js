@@ -10,7 +10,7 @@ describe('visualization types models', () => {
       const model = models[modelName];
       it('should present valid model keys', (done) => {
         expect(model).to.have.property('acceptedFileExtensions');
-        expect(model).to.have.property('invariantParameters');
+        expect(model).to.have.property('dataMap');
         expect(model).to.have.property('samples');
         done();
       });

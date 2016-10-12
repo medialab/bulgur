@@ -17,7 +17,7 @@ const InterfaceManagerLayout = ({
   closeAndResetDialog,
   visualizationData: {
     visualizationType,
-    invariantParameters = [],
+    dataMap = [],
     data = []
   },
   slideParameters
@@ -27,7 +27,7 @@ const InterfaceManagerLayout = ({
     <MainViewLayout
       openNewStoryModal={openNewStoryModal}
       visualizationType={visualizationType}
-      invariantParameters={invariantParameters}
+      dataMap={dataMap}
       slideParameters={slideParameters}
       data={data} />
     <Modal

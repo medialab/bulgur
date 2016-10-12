@@ -11,12 +11,12 @@ import './MainViewLayout.scss';
 const MainViewLayout = ({
   visualizationType,
   data,
-  invariantParameters,
+  dataMap,
   openNewStoryModal,
   slideParameters
 }) => {
   const setVisualization = () => {
-    const visProps = {data, invariantParameters, slideParameters};
+    const visProps = {data, dataMap, slideParameters};
     switch (visualizationType) {
       case 'space':
         return <Map {...visProps} />;

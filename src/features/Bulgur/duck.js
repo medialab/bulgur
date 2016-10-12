@@ -28,7 +28,7 @@ export const closeNewStoryModal = () => ({
 
 const VISUALIZATION_DEFAULT_STATE = {
     data: undefined,
-    invariantParameters: undefined
+    dataMap: undefined
 };
 
 function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
@@ -37,7 +37,7 @@ function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
       return {
         ...state,
         data: action.data,
-        invariantParameters: action.invariantParameters,
+        dataMap: action.dataMap,
         visualizationType: action.visualizationType
       };
     default:
@@ -48,7 +48,7 @@ function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
 const NEW_STORY_MODAL_DEFAULT_STATE = {
     newStoryModalOpen: false,
     data: undefined,
-    invariantParameters: undefined
+    dataMap: undefined
 };
 function newStoryModal(state = NEW_STORY_MODAL_DEFAULT_STATE, action) {
   switch (action.type) {

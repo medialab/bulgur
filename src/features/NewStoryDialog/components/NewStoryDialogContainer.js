@@ -34,7 +34,7 @@ class NewStoryDialogContainer extends Component {
           newProps.activeDataStatus !== this.props.activeDataStatus ||
           newProps.activeData !== this.props.activeData ||
           newProps.invalidFileType !== this.props.invalidFileType ||
-          this.props.invariantParameters !== newProps.invariantParameters;
+          this.props.dataMap !== newProps.dataMap;
   }
 
   closeAndResetDialog() {
@@ -43,7 +43,7 @@ class NewStoryDialogContainer extends Component {
   }
 
   closeAndSetupNewStory() {
-    this.props.actions.setupNewStory(this.props.invariantParameters, this.props.activeVisualizationType, this.props.activeData);
+    this.props.actions.setupNewStory(this.props.dataMap, this.props.activeVisualizationType, this.props.activeData);
     this.props.actions.closeNewStoryModal();
   }
 

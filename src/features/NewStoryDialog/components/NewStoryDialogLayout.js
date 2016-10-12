@@ -90,14 +90,14 @@ const SetVisualizationDataSourceStep = ({
 const SetVisualizationParamsStep = ({
   activeDataFields,
   mapFieldToInvariantParameter,
-  invariantParameters
+  dataMap
 }) => (
   <section className="new-story-dialog-step">
     <h1>I want to use fields ...</h1>
     <section className="data-fields-choice">
 
       <ul className="parameters-endpoints">
-        {invariantParameters.map((parameter, key) => {
+        {dataMap.map((parameter, key) => {
           const onChange = (selected) => mapFieldToInvariantParameter(selected && selected.value, parameter.id);
           return (
             <li style={{background: parameter.mappedField ? 'lightgreen' : 'lightgrey'}} key={key}>
@@ -128,7 +128,7 @@ const NewStoryDialogLayout = ({
   activeDataFields,
   invalidFileType,
   visualizationTypesModels,
-  invariantParameters,
+  dataMap,
   actions: {
     setVisualizationType,
     fetchExampleFile,
@@ -157,7 +157,7 @@ const NewStoryDialogLayout = ({
         activeDataFields={activeDataFields}
         visualizationTypeModel={visualizationTypesModels[activeVisualizationType]}
         mapFieldToInvariantParameter={mapFieldToInvariantParameter}
-        invariantParameters={invariantParameters} /> :
+        dataMap={dataMap} /> :
       ''
     }
     <section className="new-story-dialog-step">

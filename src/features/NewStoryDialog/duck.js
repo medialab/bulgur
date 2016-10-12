@@ -45,7 +45,7 @@ const parseDataFile = (str, fileName, dispatch, getState, resolve, reject) => {
     const state = getState();
     const visType = state.newStory.newStorySettings.visualizationType;
     const model = state.models.visualizationTypes[visType];
-    const parameters = model.invariantParameters.slice(0);
+    const parameters = model.dataMap.slice(0);
     dispatch({
       type: INIT_INVARIANT_PARAMETERS,
       parameters
@@ -128,10 +128,10 @@ export const mapFieldToInvariantParameter = (fieldName, parameterId) => ({
   parameterId
 });
 
-export const setupNewStory = (invariantParameters, visualizationType, data) => ({
+export const setupNewStory = (dataMap, visualizationType, data) => ({
   type: SETUP_NEW_STORY,
   data,
-  invariantParameters,
+  dataMap,
   visualizationType
 });
 
@@ -209,10 +209,10 @@ function newStoryData(state = DEFAULT_NEW_STORY_DATA, action) {
     case INIT_INVARIANT_PARAMETERS:
       return {
         ...state,
-        invariantParameters: action.parameters.slice().map(parameter => Object.assign({}, {...parameter}))
+        dataMap: action.parameters.slice().map(parameter => Object.assign({}, {...parameter}))
       };
     case MAP_FIELD_TO_INVARIANT_PARAMETER:
-      let invariantParameters = state.invariantParameters.map(parameter => {
+      let dataMap = state.dataMap.map(parameter => {
         if (parameter.id === action.parameterId) {
           parameter.mappedField = action.fieldName;
         }
@@ -220,10 +220,10 @@ function newStoryData(state = DEFAULT_NEW_STORY_DATA, action) {
       });
       return {
         ...state,
-        invariantParameters
+        dataMap
       };
     case GUESS_INVARIANT_PARAMETERS:
-      invariantParameters = state.invariantParameters.map(parameter => {
+      dataMap = state.dataMap.map(parameter => {
         const homonym = state.activeDataFields.find(field => field.name.toLowerCase() === parameter.id.toLowerCase());
         if (homonym) {
           parameter.mappedField = homonym.name;
@@ -232,7 +232,7 @@ function newStoryData(state = DEFAULT_NEW_STORY_DATA, action) {
       });
       return {
         ...state,
-        invariantParameters
+        dataMap
       };
     case RESET_NEW_STORY_SETTINGS:
       return DEFAULT_NEW_STORY_DATA;
@@ -268,8 +268,8 @@ const activeDataFileFormat = state => state.newStoryData &&
 const activeDataFields = state => state.newStoryData &&
   state.newStoryData.activeDataFields;
 
-const invariantParameters = state => state.newStoryData &&
-  state.newStoryData.invariantParameters;
+const dataMap = state => state.newStoryData &&
+  state.newStoryData.dataMap;
 
 export const selector = createStructuredSelector({
   activeVisualizationType,
@@ -278,6 +278,6 @@ export const selector = createStructuredSelector({
   activeDataFileFormat,
   activeDataFields,
   invalidFileType,
-  invariantParameters
+  dataMap
 });
 

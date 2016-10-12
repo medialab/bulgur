@@ -5,15 +5,13 @@ import uuid from 'uuid';
 
 import '../lib/quinoa.scss';
 
-function createStartupSlide(data = {}) {
+function createStartupSlide(data = {}, metaDefault = {}) {
   return {
     id: uuid.v4(),
     title: data.title || '',
     markdown: data.markdown || '',
     draft: EditorState.createEmpty(),
-    meta: {
-      parameters: 'ok'
-    }
+    meta: metaDefault
   };
 }
 

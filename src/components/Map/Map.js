@@ -4,7 +4,7 @@ import './Map.scss';
 
 const Map = ({
   data = [],
-  invariantParameters = [],
+  dataMap = [],
   slideParameters = {}
 }) => {
   return (
@@ -12,9 +12,9 @@ const Map = ({
       <h2>Map visualization</h2>
       <p>Slide Parameters</p>
       {JSON.stringify(slideParameters, null, 2)}
-      <p>Invariant parameters:</p>
+      <p>Data fields / visualization parameters mapping:</p>
       <ul>
-        {invariantParameters.map((parameter, key) =>
+        {dataMap.map((parameter, key) =>
           (<li key={key}>{parameter.id} : {parameter.mappedField}</li>)
         )}
       </ul>
