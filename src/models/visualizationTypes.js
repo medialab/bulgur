@@ -89,11 +89,11 @@ const models = {
     slideParameters: [
       {
         id: 'fromTime',
-        default: new Date().getTime()
+        default: 0
       },
       {
         id: 'toTime',
-        default: 0
+        default: new Date().getTime()
       }
     ]
   },
