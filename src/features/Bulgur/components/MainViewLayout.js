@@ -4,6 +4,7 @@ import React from 'react';
 import Timeline from '../../../components/Timeline/Timeline';
 import Map from '../../../components/Map/Map';
 import Graph from '../../../components/Graph/Graph';
+import {DraftComponent} from '../../../helpers/configQuinoa';
 
 import './MainViewLayout.scss';
 
@@ -11,10 +12,11 @@ const MainViewLayout = ({
   visualizationType,
   data,
   invariantParameters,
-  openNewStoryModal
+  openNewStoryModal,
+  slideParameters
 }) => {
   const setVisualization = () => {
-    const visProps = {data, invariantParameters};
+    const visProps = {data, invariantParameters, slideParameters};
     switch (visualizationType) {
       case 'space':
         return <Map {...visProps} />;
@@ -47,8 +49,7 @@ const MainViewLayout = ({
             </ul>
           </div>
           <div className="editor-areas-container">
-            <input placeholder="slide title" className="editor-title-input" />
-            <textarea placeholder="slide content" className="editor-content-input" />
+            <DraftComponent />
           </div>
         </div>
       </figcaption> : ''

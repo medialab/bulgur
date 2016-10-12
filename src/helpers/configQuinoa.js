@@ -1,13 +1,19 @@
 import Quinoa from 'quinoa';
 import {EditorState} from 'draft-js';
+import {createStructuredSelector} from 'reselect';
 import uuid from 'uuid';
 
-function createStartupSlide(data) {
+import '../lib/quinoa.scss';
+
+function createStartupSlide(data = {}) {
   return {
     id: uuid.v4(),
     title: data.title || '',
     markdown: data.markdown || '',
-    draft: EditorState.createEmpty()
+    draft: EditorState.createEmpty(),
+    meta: {
+      parameters: 'ok'
+    }
   };
 }
 
@@ -29,7 +35,11 @@ function createQuinoaState(slides = []) {
   };
 }
 
-const QUINOA_DEFAULT_STATE = createQuinoaState([]);
+const QUINOA_DEFAULT_STATE = createQuinoaState([
+  createStartupSlide({
+    title: 'Hello'
+  })
+]);
 
 const quinoa = new Quinoa({
   defaultState: QUINOA_DEFAULT_STATE,
@@ -41,8 +51,8 @@ export function plugQuinoa(renderApplication) {
   quinoa.hot(renderApplication);
 }
 
-export const editorComponent = quinoa.getEditorComponent();
-// export const draftComponent = quinoa.getDraftComponent();
+export const EditorComponent = quinoa.getEditorComponent();
+export const DraftComponent = quinoa.getDraftComponentForSlide();
 
 function mapStore(quinoaLib) {
   const {editor} = quinoaLib.getState();
@@ -56,6 +66,16 @@ function mapStore(quinoaLib) {
 
 export const actions = quinoa.getActions();
 
-export const store = mapStore(quinoa);
+export const state = mapStore(quinoa);
+
+const currentSlide = thatState => thatState.currentSlide;
+
+const slideParameters = thatState => thatState.slideParameters;
+
+export const selector = createStructuredSelector({
+  currentSlide,
+  slideParameters
+});
+
 
 export default quinoa;

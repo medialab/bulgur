@@ -72,10 +72,10 @@
 
 .new-story-dialog .data-source-choice .data-source-file .drop-zone
 {
-    width: 100%!important;
     margin-right: $large-gutter;
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+    padding-top: 8rem;
+    padding-right: $medium-gutter;
+    padding-bottom: 8rem;
 
     text-align: center;
 
@@ -96,8 +96,10 @@
 }
 
 
-.new-story-dialog .data-source-choice .data-source-example
+.new-story-dialog .data-source-choice .sample-file
 {
+    margin-bottom: $medium-gutter;
+
     flex: 1;
 }
 

@@ -19,7 +19,8 @@ const InterfaceManagerLayout = ({
     visualizationType,
     invariantParameters = [],
     data = []
-  }
+  },
+  slideParameters
 }) => (
   <div id={id} className={className}>
     {visualizationType ? <AsideViewLayout openNewStoryModal={openNewStoryModal} /> : ''}
@@ -27,6 +28,7 @@ const InterfaceManagerLayout = ({
       openNewStoryModal={openNewStoryModal}
       visualizationType={visualizationType}
       invariantParameters={invariantParameters}
+      slideParameters={slideParameters}
       data={data} />
     <Modal
       onRequestClose={closeAndResetDialog}

@@ -2,15 +2,15 @@ import React from 'react';
 
 import './AsideViewLayout.scss';
 
+import {EditorComponent} from '../../../helpers/configQuinoa';
+import '../../../lib/code-mirror.scss';
+
 const AsideViewLayout = ({
   openNewStoryModal
 }) => (
   <aside className="bulgur-aside-view">
     <button onClick={openNewStoryModal} type="button">🛠 Story settings</button>
-    <ul>
-      <li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li><li>My slide</li>
-      <li>New slide</li>
-    </ul>
+    <EditorComponent />
     <button type="button">🚀 Take away</button>
   </aside>
 );

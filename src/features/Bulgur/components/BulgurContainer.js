@@ -7,12 +7,22 @@ import * as duck from '../duck';
 
 import {resetNewStorySettings} from '../../NewStoryDialog/duck';
 
+import {
+  actions as quinoaActions,
+  selector as quinoaSelector,
+  state as quinoaState
+} from '../../../helpers/configQuinoa';
+
 @connect(
-  state => duck.selector(state.ui),
+  state => ({
+    ...duck.selector(state.ui),
+    ...quinoaSelector(quinoaState)
+  }),
   dispatch => ({
     actions: bindActionCreators({
       ...duck,
-      resetNewStorySettings
+      ...quinoaActions,
+      resetNewStorySettings,
     }, dispatch)
   })
 )
@@ -24,7 +34,9 @@ class BulgurContainer extends Component {
   }
 
   shouldComponentUpdate(newProps) {
-    return newProps.isNewStoryModalOpen !== this.props.isNewStoryModalOpen;
+    return newProps.isNewStoryModalOpen !== this.props.isNewStoryModalOpen ||
+           newProps.currentSlide !== this.props.currentSlide ||
+           newProps.slideParameters !== this.props.slideParameters;
   }
 
   closeAndResetDialog() {
