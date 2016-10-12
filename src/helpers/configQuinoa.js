@@ -5,13 +5,13 @@ import uuid from 'uuid';
 
 import '../lib/quinoa.scss';
 
-function createStartupSlide(data = {}, metaDefault = {}) {
+function createSlide(data = {}) {
   return {
     id: uuid.v4(),
     title: data.title || '',
     markdown: data.markdown || '',
     draft: EditorState.createEmpty(),
-    meta: metaDefault
+    meta: {}
   };
 }
 
@@ -34,14 +34,14 @@ function createQuinoaState(slides = []) {
 }
 
 const QUINOA_DEFAULT_STATE = createQuinoaState([
-  createStartupSlide({
-    title: 'Hello'
+  createSlide({
+    title: 'Welcome to the tool'
   })
 ]);
 
 const quinoa = new Quinoa({
   defaultState: QUINOA_DEFAULT_STATE,
-  slideCreator: createStartupSlide
+  slideCreator: createSlide
 });
 
 export function plugQuinoa(renderApplication) {
@@ -74,6 +74,5 @@ export const selector = createStructuredSelector({
   currentSlide,
   slideParameters
 });
-
 
 export default quinoa;
