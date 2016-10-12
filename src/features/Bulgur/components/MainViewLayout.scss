@@ -22,7 +22,7 @@
 {
     position: relative;
 
-    max-height: 30;
+    max-height: 30%;
     padding-top: $medium-gutter;
 
     border-top: 1px solid darkgrey;
@@ -88,6 +88,8 @@
     flex: 8;
     flex-flow: column nowrap;
     align-items: stretch;
+
+    margin-right: $base-gutter;
 }
 
 .bulgur-main-view .caption-editor .editor-helpers li

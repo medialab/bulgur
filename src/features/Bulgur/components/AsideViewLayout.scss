@@ -37,6 +37,13 @@
     background: $background-intent!important;
 }
 
+.bulgur-aside-view .quinoa-slide-title table,
+.bulgur-aside-view .quinoa-slide-title table .quinoa-slide-title-input
+.bulgur-aside-view .quinoa-slide-title td
+{
+    width: 100%;
+}
+
 .bulgur-aside-view .quinoa-slide:hover:not(.selected) .quinoa-slide-title
 {
     border-bottom: 1px solid white!important;
