@@ -27,6 +27,7 @@ class NewStoryDialogContainer extends Component {
     this.closeAndResetDialog = this.closeAndResetDialog.bind(this);
     this.onFileDrop = this.onFileDrop.bind(this);
     this.closeAndSetupNewStory = this.closeAndSetupNewStory.bind(this);
+    this.changeVisualizationType = this.changeVisualizationType.bind(this);
   }
 
   shouldComponentUpdate(newProps) {
@@ -40,6 +41,11 @@ class NewStoryDialogContainer extends Component {
   closeAndResetDialog() {
     this.props.actions.resetNewStorySettings();
     this.props.actions.closeNewStoryModal();
+  }
+
+  changeVisualizationType (type) {
+    this.props.actions.resetNewStorySettings();
+    this.props.actions.setVisualizationType(type);
   }
 
   closeAndSetupNewStory() {
@@ -68,6 +74,7 @@ class NewStoryDialogContainer extends Component {
         {...this.props}
         closeAndResetDialog={this.closeAndResetDialog}
         closeAndSetupNewStory={this.closeAndSetupNewStory}
+        changeVisualizationType={this.changeVisualizationType}
         onFileDrop={this.onFileDrop} />
     );
   }

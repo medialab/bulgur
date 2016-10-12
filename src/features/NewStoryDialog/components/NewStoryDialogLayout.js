@@ -130,18 +130,19 @@ const NewStoryDialogLayout = ({
   visualizationTypesModels,
   dataMap,
   actions: {
-    setVisualizationType,
     fetchExampleFile,
     mapFieldToInvariantParameter,
   },
   closeAndResetDialog,
   closeAndSetupNewStory,
+  changeVisualizationType,
   onFileDrop
 }) => (
   <div className="new-story-dialog">
     <ChooseVisualizationTypeStep
       activeVisualizationType={activeVisualizationType}
-      setVisualizationType={setVisualizationType} />
+      setVisualizationType={changeVisualizationType}
+    />
 
     {activeVisualizationType && visualizationTypesModels[activeVisualizationType] ?
       <SetVisualizationDataSourceStep
