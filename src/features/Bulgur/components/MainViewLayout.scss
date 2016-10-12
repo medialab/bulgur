@@ -75,7 +75,7 @@
 {
     margin: 0;
     padding: 0;
-    padding-top: 5rem;
+    padding-top: 4rem;
 
     text-align: right;
 
@@ -85,11 +85,11 @@
 {
     display: flex;
 
+    margin-right: $base-gutter;
+
     flex: 8;
     flex-flow: column nowrap;
     align-items: stretch;
-
-    margin-right: $base-gutter;
 }
 
 .bulgur-main-view .caption-editor .editor-helpers li
