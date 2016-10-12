@@ -141,8 +141,7 @@ const NewStoryDialogLayout = ({
   <div className="new-story-dialog">
     <ChooseVisualizationTypeStep
       activeVisualizationType={activeVisualizationType}
-      setVisualizationType={changeVisualizationType}
-    />
+      setVisualizationType={changeVisualizationType} />
 
     {activeVisualizationType && visualizationTypesModels[activeVisualizationType] ?
       <SetVisualizationDataSourceStep

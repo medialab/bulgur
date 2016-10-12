@@ -3,7 +3,9 @@ import React from 'react';
 import './AsideViewLayout.scss';
 
 import {EditorComponent} from '../../../helpers/configQuinoa';
-import '../../../lib/code-mirror.scss';
+
+import 'codemirror/lib/codemirror.css';
+import '../../../lib/code-mirror-theme.scss';
 
 const AsideViewLayout = ({
   openNewStoryModal
