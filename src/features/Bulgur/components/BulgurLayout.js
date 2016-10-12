@@ -11,16 +11,19 @@ const InterfaceManagerLayout = ({
   id,
   className,
   isNewStoryModalOpen,
+  updateSlide,
+  resetView,
   actions: {
-    openNewStoryModal
+    openNewStoryModal,
+    updateView
   },
   closeAndResetDialog,
   visualizationData: {
     visualizationType,
+    viewParameters,
     dataMap = [],
     data = []
-  },
-  slideParameters
+  }
 }) => (
   <div id={id} className={className}>
     {visualizationType ? <AsideViewLayout openNewStoryModal={openNewStoryModal} /> : ''}
@@ -28,7 +31,10 @@ const InterfaceManagerLayout = ({
       openNewStoryModal={openNewStoryModal}
       visualizationType={visualizationType}
       dataMap={dataMap}
-      slideParameters={slideParameters}
+      viewParameters={viewParameters}
+      updateSlide={updateSlide}
+      updateView={updateView}
+      resetView={resetView}
       data={data} />
     <Modal
       onRequestClose={closeAndResetDialog}

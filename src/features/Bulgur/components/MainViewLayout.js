@@ -13,10 +13,13 @@ const MainViewLayout = ({
   data,
   dataMap,
   openNewStoryModal,
-  slideParameters
+  viewParameters,
+  updateView,
+  updateSlide,
+  resetView
 }) => {
   const setVisualization = () => {
-    const visProps = {data, dataMap, slideParameters};
+    const visProps = {data, dataMap, viewParameters, updateView};
     switch (visualizationType) {
       case 'space':
         return <Map {...visProps} />;
@@ -28,6 +31,10 @@ const MainViewLayout = ({
         return <button id="new-story-button" onClick={openNewStoryModal}>Tell a new story</button>;
     }
   };
+
+  const clickOnRecord = () => updateSlide();
+  const clickOnReset = () => resetView();
+
   return (<figure className="bulgur-main-view">
     <section className="visualization-container">
       {setVisualization()}
@@ -35,8 +42,8 @@ const MainViewLayout = ({
     {visualizationType ?
       <figcaption className="caption-container">
         <div className="view-operations">
-          <button>Reset</button>
-          <button>Record</button>
+          <button onClick={clickOnReset}>Reset</button>
+          <button onClick={clickOnRecord}>Record</button>
         </div>
         <div className="caption-editor">
           <div className="editor-helpers-container">

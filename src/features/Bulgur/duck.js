@@ -9,6 +9,7 @@ import {SETUP_NEW_STORY} from '../NewStoryDialog/duck';
 
 const OPEN_NEW_STORY_MODAL = 'OPEN_NEW_STORY_MODAL';
 const CLOSE_NEW_STORY_MODAL = 'CLOSE_NEW_STORY_MODAL';
+const UPDATE_VIEW = 'UPDATE_VIEW';
 
 /*
  * Action creators
@@ -22,13 +23,20 @@ export const closeNewStoryModal = () => ({
   type: CLOSE_NEW_STORY_MODAL
 });
 
+export const updateView = (parameters) => ({
+  type: UPDATE_VIEW,
+  parameters
+});
+
 /*
  * Reducers
  */
 
 const VISUALIZATION_DEFAULT_STATE = {
     data: undefined,
-    dataMap: undefined
+    dataMap: undefined,
+    visualizationType: undefined,
+    parameters: {}
 };
 
 function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
@@ -39,6 +47,11 @@ function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
         data: action.data,
         dataMap: action.dataMap,
         visualizationType: action.visualizationType
+      };
+    case UPDATE_VIEW:
+      return {
+        ...state,
+        viewParameters: action.parameters
       };
     default:
       return state;

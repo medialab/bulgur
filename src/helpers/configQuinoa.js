@@ -1,6 +1,5 @@
 import Quinoa from 'quinoa';
 import {EditorState} from 'draft-js';
-import {createStructuredSelector} from 'reselect';
 import uuid from 'uuid';
 
 import '../lib/quinoa.scss';
@@ -52,27 +51,18 @@ export function plugQuinoa(renderApplication) {
 export const EditorComponent = quinoa.getEditorComponent();
 export const DraftComponent = quinoa.getDraftComponentForSlide();
 
-function mapStore(quinoaLib) {
+export function mapStore(quinoaLib) {
   const {editor} = quinoaLib.getState();
   const currentSlide = editor.slides[editor.current];
 
   return {
     currentSlide: editor.current,
-    slideParameters: currentSlide ? currentSlide.meta : {}
+    slideParameters: currentSlide.meta
   };
 }
 
 export const actions = quinoa.getActions();
 
-export const state = mapStore(quinoa);
-
-const currentSlide = thatState => thatState.currentSlide;
-
-const slideParameters = thatState => thatState.slideParameters;
-
-export const selector = createStructuredSelector({
-  currentSlide,
-  slideParameters
-});
+export const state = quinoa.getState();
 
 export default quinoa;
