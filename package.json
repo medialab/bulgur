@@ -31,6 +31,7 @@
     "d3-dsv": "^1.0.3",
     "draft-js": "^0.9.1",
     "leaflet": "^1.0.1",
+    "quinoa": "git+https://github.com/robindemourat/quinoa.git",
     "react": "^15.3.2",
     "react-dnd": "^2.1.4",
     "react-dnd-html5-backend": "^2.1.2",
