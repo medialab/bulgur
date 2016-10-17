@@ -31,6 +31,7 @@
     "codemirror": "^5.19.0",
     "d3-dsv": "^1.0.3",
     "draft-js": "^0.9.1",
+    "gexf": "^0.2.5",
     "leaflet": "^0.7.7",
     "quinoa": "git+https://github.com/robindemourat/quinoa.git",
     "react": "^15.3.2",

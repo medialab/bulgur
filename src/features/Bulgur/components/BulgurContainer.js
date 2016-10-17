@@ -104,7 +104,7 @@ class BulgurContainer extends Component {
     // dispatch quinoa action to update slide
     this.props.quinoaActions.updateSlide(this.props.quinoaState.currentSlide, {meta: slideParameters});
     // dispatch app action to update view accordingly
-    // this.props.actions.updateView(slideParameters);
+    this.props.actions.updateView(slideParameters);
   }
 
   resetView() {
