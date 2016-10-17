@@ -9,6 +9,7 @@ import {SETUP_NEW_STORY} from '../NewStoryDialog/duck';
 
 const OPEN_NEW_STORY_MODAL = 'OPEN_NEW_STORY_MODAL';
 const CLOSE_NEW_STORY_MODAL = 'CLOSE_NEW_STORY_MODAL';
+const VIEW_EQUALS_SLIDE_PARAMETERS = 'VIEW_EQUALS_SLIDE_PARAMETERS';
 const UPDATE_VIEW = 'UPDATE_VIEW';
 
 /*
@@ -26,6 +27,11 @@ export const closeNewStoryModal = () => ({
 export const updateView = (parameters) => ({
   type: UPDATE_VIEW,
   parameters
+});
+
+export const viewEqualsSlideParameters = (payload) => ({
+  type: VIEW_EQUALS_SLIDE_PARAMETERS,
+  payload
 });
 
 /*
@@ -59,7 +65,8 @@ function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
 }
 
 const GLOBAL_UI_DEFAULT_STATE = {
-    newStoryModalOpen: false
+    newStoryModalOpen: false,
+    viewEqualsSlideParameters: false
 };
 function globalUi(state = GLOBAL_UI_DEFAULT_STATE, action) {
   switch (action.type) {
@@ -72,6 +79,11 @@ function globalUi(state = GLOBAL_UI_DEFAULT_STATE, action) {
       return {
         ...state,
         newStoryModalOpen: false
+      };
+    case VIEW_EQUALS_SLIDE_PARAMETERS:
+      return {
+        ...state,
+        viewEqualsSlideParameters: action.payload
       };
     default:
       return state;
@@ -89,9 +101,15 @@ export default combineReducers({
 
 const isNewStoryModalOpen = state => state.globalUi.newStoryModalOpen;
 
+const doesViewEqualsSlideParameters = state => state.globalUi.viewEqualsSlideParameters;
+
 const visualizationData = state => state.visualization;
+
+const activeViewParameters = state => state.visualization.viewParameters;
 
 export const selector = createStructuredSelector({
   isNewStoryModalOpen,
-  visualizationData
+  visualizationData,
+  doesViewEqualsSlideParameters,
+  activeViewParameters
 });

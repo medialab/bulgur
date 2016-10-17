@@ -16,7 +16,8 @@ const MainViewLayout = ({
   viewParameters,
   updateView,
   updateSlide,
-  resetView
+  resetView,
+  doesViewEqualsSlideParameters
 }) => {
   const setVisualization = () => {
     const visProps = {data, dataMap, viewParameters, updateView};
@@ -41,10 +42,13 @@ const MainViewLayout = ({
     </section>
     {visualizationType ?
       <figcaption className="caption-container">
-        <div className="view-operations">
-          <button onClick={clickOnReset}>Reset</button>
-          <button onClick={clickOnRecord}>Record</button>
-        </div>
+        {doesViewEqualsSlideParameters ?
+          '' :
+            <div className="view-operations">
+              <button onClick={clickOnRecord}>📷 Take snapshot</button>
+              <button onClick={clickOnReset}>⎌ Reset</button>
+            </div>
+        }
         <div className="caption-editor">
           <div className="editor-helpers-container">
             <ul className="editor-helpers">

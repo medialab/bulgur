@@ -18,6 +18,7 @@ const InterfaceManagerLayout = ({
     updateView
   },
   closeAndResetDialog,
+  doesViewEqualsSlideParameters,
   visualizationData: {
     visualizationType,
     viewParameters,
@@ -33,6 +34,7 @@ const InterfaceManagerLayout = ({
       dataMap={dataMap}
       viewParameters={viewParameters}
       updateSlide={updateSlide}
+      doesViewEqualsSlideParameters={doesViewEqualsSlideParameters}
       updateView={updateView}
       resetView={resetView}
       data={data} />

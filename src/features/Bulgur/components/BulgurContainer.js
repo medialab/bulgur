@@ -21,7 +21,7 @@ import {
     actions: bindActionCreators({
       ...duck,
       ...quinoaActions,
-      resetNewStorySettings,
+      resetNewStorySettings
     }, dispatch)
   })
 )
@@ -39,7 +39,7 @@ class BulgurContainer extends Component {
     this.updateSlideIfEmpty();
   }
 
-  shouldComponentUpdate(newProps) {
+  componentWillReceiveProps(newProps) {
     // question : is it bad to do this ?
     if (newProps.quinoaState.currentSlide !== this.props.quinoaState.currentSlide) {
       this.props.actions.updateView(newProps.quinoaState.slideParameters);
@@ -47,11 +47,28 @@ class BulgurContainer extends Component {
         this.updateSlide(this.props.quinoaState.slideParameters);
       }
     }
+    // view/params equality will be assed during next loop
+    setTimeout(() => {
+      const viewEqualsParameters = JSON.stringify(this.props.activeViewParameters) === JSON.stringify(this.props.quinoaState.slideParameters);
+      if (viewEqualsParameters &&
+          !this.props.doesViewEqualsSlideParameters) {
+        this.props.actions.viewEqualsSlideParameters(true);
+      }
+      else if (!viewEqualsParameters &&
+                this.props.doesViewEqualsSlideParameters) {
+        this.props.actions.viewEqualsSlideParameters(false);
+      }
+    });
+  }
+
+  shouldComponentUpdate(newProps) {
+
     // temp / todo : update that test
-    return true;
-    // return newProps.isNewStoryModalOpen !== this.props.isNewStoryModalOpen ||
-    //        newProps.currentSlide !== this.props.currentSlide ||
-    //        newProps.slideParameters !== this.props.slideParameters;
+    // return true;
+    return newProps.isNewStoryModalOpen !== this.props.isNewStoryModalOpen ||
+           newProps.currentSlide !== this.props.currentSlide ||
+           JSON.stringify(newProps.activeViewParameters) !== JSON.stringify(this.props.activeViewParameters) ||
+           newProps.doesViewEqualsSlideParameters !== this.props.doesViewEqualsSlideParameters;
   }
 
   componentWillUpdate() {
