@@ -95,7 +95,6 @@ const SetVisualizationParamsStep = ({
   <section className="new-story-dialog-step">
     <h1>I want to use fields ...</h1>
     <section className="data-fields-choice">
-
       <ul className="parameters-endpoints">
         {dataMap.map((parameter, key) => {
           const onChange = (selected) => mapFieldToInvariantParameter(selected && selected.value, parameter.id);
@@ -107,12 +106,16 @@ const SetVisualizationParamsStep = ({
               <Select
                 name="form-field-name"
                 value={parameter.mappedField}
-                options={activeDataFields.filter(field => {
+                options={
+                  activeDataFields.filter(field => {
                     return parameter.acceptedValueTypes.indexOf(field.type) > -1;
-                  }).map(field => ({
-                    value: field.name,
-                    label: field.name
-                  }))}
+                  }).map(field => (
+                    {
+                      value: field.name,
+                      label: field.name
+                    }
+                  ))
+                }
                 onChange={onChange} />
             </li>
         );})}
@@ -177,4 +180,3 @@ const NewStoryDialogLayout = ({
 );
 
 export default NewStoryDialogLayout;
-

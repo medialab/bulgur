@@ -161,7 +161,7 @@ const models = {
     }],
     dataMap: [
       {
-        id: 'test',
+        id: 'gefx',
         acceptedValueTypes: ['string']
       }
     ],

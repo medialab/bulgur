@@ -41,6 +41,10 @@ export function convertRawStrToJson(str = '', format) {
       return csvParse(str);
     case 'tsv':
       return tsvParse(str);
+    case 'gefx':
+      return [{
+        gefx: str
+      }];
     default:
       return str;
   }

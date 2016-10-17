@@ -30,42 +30,42 @@ const GUESS_INVARIANT_PARAMETERS = 'GUESS_INVARIANT_PARAMETERS';
 
 export const SETUP_NEW_STORY = 'SETUP_NEW_STORY';
 
-
 /*
  * Action creators
  */
 
 const parseDataFile = (str, fileName, dispatch, getState, resolve, reject) => {
   const activeDataFileFormat = fileName.split('.').pop();
+  dispatch({
+    type: SET_ACTIVE_DATA_FILE_FORMAT,
+    activeDataFileFormat
+  });
+  // (re) load invariant parameters of the vis
+  const state = getState();
+  const visType = state.newStory.newStorySettings.visualizationType;
+  const model = state.models.visualizationTypes[visType];
+  const parameters = model.dataMap.slice(0);
+  dispatch({
+    type: INIT_INVARIANT_PARAMETERS,
+    parameters
+  });
+  try {
+    const data = convertRawStrToJson(str, activeDataFileFormat);
+    // this is bad and done just temporarily
+    // TODO : find a way to handle non-tabular files
+    const fields = (activeDataFileFormat === 'gefx') ? [{name: 'gefx', type: 'string'}] : setDataFields(data);
     dispatch({
-      type: SET_ACTIVE_DATA_FILE_FORMAT,
-      activeDataFileFormat
+      type: SET_ACTIVE_DATA_FIELDS_INFO,
+      fields
     });
-    // (re) load invariant parameters of the vis
-    const state = getState();
-    const visType = state.newStory.newStorySettings.visualizationType;
-    const model = state.models.visualizationTypes[visType];
-    const parameters = model.dataMap.slice(0);
     dispatch({
-      type: INIT_INVARIANT_PARAMETERS,
-      parameters
+      type: GUESS_INVARIANT_PARAMETERS
     });
-
-    try {
-      const data = convertRawStrToJson(str, activeDataFileFormat);
-      const fields = setDataFields(data);
-      dispatch({
-        type: SET_ACTIVE_DATA_FIELDS_INFO,
-        fields
-      });
-      dispatch({
-        type: GUESS_INVARIANT_PARAMETERS
-      });
-      resolve(data);
-    }
-    catch (error) {
-      reject(error);
-    }
+    resolve(data);
+  }
+  catch (error) {
+    reject(error);
+  }
 };
 
 export const fetchExampleFile = (fileName) => ({
