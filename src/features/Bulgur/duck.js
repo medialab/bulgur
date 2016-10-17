@@ -48,10 +48,20 @@ const VISUALIZATION_DEFAULT_STATE = {
 function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
   switch (action.type) {
     case SETUP_NEW_STORY:
+      // consume original data points against dataMap
+      const finalData = action.data.map(point => {
+        return action.dataMap.reduce((finalObject, thatModel) => {
+          // map data mapped field to visualization dimension id
+          if (point[thatModel.mappedField]) {
+            finalObject[thatModel.id] = point[thatModel.mappedField];
+            // console.log(thatModel.id, finalObject[thatModel.id]);
+          }
+          return finalObject;
+        }, {});
+      });
       return {
         ...state,
-        data: action.data,
-        dataMap: action.dataMap,
+        data: finalData,
         visualizationType: action.visualizationType
       };
     case UPDATE_VIEW:
