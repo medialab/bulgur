@@ -125,23 +125,30 @@ const models = {
         acceptedValueTypes: ['url']
       }
     ],
-    samples: [{
-      title: 'Histoire du Fort et des combats de 1870-1871 à Issy',
-      fileName: 'histoiredufort.csv',
-      description: 'Plus d\'informations: http://data.issy.com/explore/dataset/histoiredufort-feuille1/export/?disjunctive.refqr'
-    }],
+    samples: [
+      {
+        title: 'Histoire du Fort et des combats de 1870-1871 à Issy',
+        fileName: 'histoiredufort.csv',
+        description: 'Plus d\'informations: http://data.issy.com/explore/dataset/histoiredufort-feuille1/export/?disjunctive.refqr'
+      },
+      {
+        title: 'Places',
+        fileName: 'places.csv',
+        description: 'Some cities coordinates'
+      }
+    ],
     slideParameters: [
       {
         id: 'cameraX',
-        default: 0
+        default: 48.8674345
       },
       {
         id: 'cameraY',
-        default: 0
+        default: 2.3455482
       },
       {
         id: 'cameraZoom',
-        default: 1
+        default: 10
       }
     ]
   },

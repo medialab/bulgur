@@ -48,23 +48,18 @@ class BulgurContainer extends Component {
       }
     }
     // view/params equality will be assed during next loop
-    setTimeout(() => {
-      const viewEqualsParameters = JSON.stringify(this.props.activeViewParameters) === JSON.stringify(this.props.quinoaState.slideParameters);
-      if (viewEqualsParameters &&
-          !this.props.doesViewEqualsSlideParameters) {
-        this.props.actions.viewEqualsSlideParameters(true);
-      }
-      else if (!viewEqualsParameters &&
-                this.props.doesViewEqualsSlideParameters) {
-        this.props.actions.viewEqualsSlideParameters(false);
-      }
-    });
+    const viewEqualsParameters = JSON.stringify(this.props.activeViewParameters) === JSON.stringify(this.props.quinoaState.slideParameters);
+    if (viewEqualsParameters &&
+        !this.props.doesViewEqualsSlideParameters) {
+      this.props.actions.viewEqualsSlideParameters(true);
+    }
+    else if (!viewEqualsParameters &&
+              this.props.doesViewEqualsSlideParameters) {
+      this.props.actions.viewEqualsSlideParameters(false);
+    }
   }
 
   shouldComponentUpdate(newProps) {
-
-    // temp / todo : update that test
-    // return true;
     return newProps.isNewStoryModalOpen !== this.props.isNewStoryModalOpen ||
            newProps.currentSlide !== this.props.currentSlide ||
            JSON.stringify(newProps.activeViewParameters) !== JSON.stringify(this.props.activeViewParameters) ||
@@ -109,7 +104,7 @@ class BulgurContainer extends Component {
     // dispatch quinoa action to update slide
     this.props.quinoaActions.updateSlide(this.props.quinoaState.currentSlide, {meta: slideParameters});
     // dispatch app action to update view accordingly
-    this.props.actions.updateView(slideParameters);
+    // this.props.actions.updateView(slideParameters);
   }
 
   resetView() {

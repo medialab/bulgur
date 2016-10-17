@@ -1,46 +1,63 @@
 import React from 'react';
+import {Map as MapComponent, Marker, Popup, TileLayer} from 'react-leaflet';
 
+// require leaflet code
+require('leaflet/dist/leaflet.css');
+// "/node_modules/leaflet/dist/images/marker-icon.png",
+// "/node_modules/leaflet/dist/images/marker-icon-2x.png",
+// "/node_modules/leaflet/dist/images/marker-shadow.png"
 import './Map.scss';
 
 const Map = ({
   data = [],
-  dataMap = [],
-  viewParameters = {},
+  viewParameters = {
+    cameraX: 48.8674345,
+    cameraY: 2.3455482,
+    cameraZoom: 13
+  },
   updateView
 }) => {
+  const position = [viewParameters.cameraX, viewParameters.cameraY];
+  const zoom = viewParameters.cameraZoom;
+
+
+  const onMoveEnd = (evt = {}) => {
+    if (evt.target) {
+      const coords = evt.target.getCenter();
+      const view = {
+        cameraZoom: evt.target.getZoom(),
+        cameraX: coords.lat,
+        cameraY: coords.lng
+      };
+      if (JSON.stringify(view) !== JSON.stringify(viewParameters)) {
+        updateView(view);
+      }
+    }
+  };
   return (
-    <div>
-      <h2>Map visualization</h2>
-      <p>Slide Parameters</p>
-      {Object.keys(viewParameters).map((parameterKey, key) => {
-        const onInputChange = (evt) => {
-          updateView({
-            ...viewParameters,
-            [parameterKey]: evt.target.value
-          });
-        };
-        return (
-          <div key={key}>
-            <p>{parameterKey}</p>
-            <form>
-              <input
-                style={{background: 'red'}}
-                value={viewParameters[parameterKey]}
-                onChange={onInputChange} />
-            </form>
-          </div>
-        );
-      })}
-      <p>Data fields / visualization parameters mapping:</p>
-      <ul>
-        {dataMap.map((parameter, key) =>
-          (<li key={key}>{parameter.id} : {parameter.mappedField}</li>)
-        )}
-      </ul>
-      <pre>
-        Data: {JSON.stringify(data, null, 1)}
-      </pre>
-    </div>
+    <MapComponent
+      center={position}
+      zoom={zoom}
+      onMoveEnd={onMoveEnd}
+      animate>
+      <TileLayer
+        url="http://{s}.tile.osm.org/{z}/{x}/{y}.png" />
+      {
+          data.map((point, index) => {
+            if (point.latitude && point.longitude) {
+              const thatPosition = [point.latitude, point.longitude];
+              return (<Marker key={index} position={thatPosition}>
+                <Popup>
+                  <span>{point.title}</span>
+                </Popup>
+              </Marker>);
+            }
+            else {
+              return '';
+            }
+          })
+        }
+    </MapComponent>
   );
 };
 

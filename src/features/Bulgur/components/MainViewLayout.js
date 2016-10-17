@@ -11,7 +11,6 @@ import './MainViewLayout.scss';
 const MainViewLayout = ({
   visualizationType,
   data,
-  dataMap,
   openNewStoryModal,
   viewParameters,
   updateView,
@@ -20,7 +19,7 @@ const MainViewLayout = ({
   doesViewEqualsSlideParameters
 }) => {
   const setVisualization = () => {
-    const visProps = {data, dataMap, viewParameters, updateView};
+    const visProps = {data, viewParameters, updateView};
     switch (visualizationType) {
       case 'space':
         return <Map {...visProps} />;
