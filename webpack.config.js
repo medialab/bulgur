@@ -2,7 +2,7 @@ module.exports = {
   module: {
     loaders: [
       { 
-        test: /\.(csv|gefx)$/, 
+        test: /\.(csv|gexf)$/, 
         loader: 'raw-loader' 
       },
       {
