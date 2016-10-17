@@ -53,7 +53,7 @@ const parseDataFile = (str, fileName, dispatch, getState, resolve, reject) => {
     const data = convertRawStrToJson(str, activeDataFileFormat);
     // this is bad and done just temporarily
     // TODO : find a way to handle non-tabular files
-    const fields = (activeDataFileFormat === 'gefx') ? [{name: 'gefx', type: 'string'}] : setDataFields(data);
+    const fields = (activeDataFileFormat === 'gexf') ? [{name: 'gexf', type: 'string'}] : setDataFields(data);
     dispatch({
       type: SET_ACTIVE_DATA_FIELDS_INFO,
       fields

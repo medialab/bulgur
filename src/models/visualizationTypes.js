@@ -153,15 +153,15 @@ const models = {
     ]
   },
   relations: {
-    acceptedFileExtensions: ['gefx'],
+    acceptedFileExtensions: ['gexf'],
     samples: [{
       title: 'Arctic',
-      fileName: 'arctic.gefx',
+      fileName: 'arctic.gexf',
       description: 'Taken from quinoa examples'
     }],
     dataMap: [
       {
-        id: 'gefx',
+        id: 'gexf',
         acceptedValueTypes: ['string']
       }
     ],
