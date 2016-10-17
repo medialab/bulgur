@@ -15,7 +15,7 @@ import {
 
 @connect(
   state => ({
-    ...duck.selector(state.ui)
+    ...duck.selector(state.activeStory)
   }),
   dispatch => ({
     actions: bindActionCreators({

@@ -58,12 +58,10 @@ function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
   }
 }
 
-const NEW_STORY_MODAL_DEFAULT_STATE = {
-    newStoryModalOpen: false,
-    data: undefined,
-    dataMap: undefined
+const GLOBAL_UI_DEFAULT_STATE = {
+    newStoryModalOpen: false
 };
-function newStoryModal(state = NEW_STORY_MODAL_DEFAULT_STATE, action) {
+function globalUi(state = GLOBAL_UI_DEFAULT_STATE, action) {
   switch (action.type) {
     case OPEN_NEW_STORY_MODAL:
       return {
@@ -81,7 +79,7 @@ function newStoryModal(state = NEW_STORY_MODAL_DEFAULT_STATE, action) {
 }
 
 export default combineReducers({
-  newStoryModal,
+  globalUi,
   visualization
 });
 
@@ -89,7 +87,7 @@ export default combineReducers({
  * Selectors
  */
 
-const isNewStoryModalOpen = state => state.newStoryModal.newStoryModalOpen;
+const isNewStoryModalOpen = state => state.globalUi.newStoryModalOpen;
 
 const visualizationData = state => state.visualization;
 
