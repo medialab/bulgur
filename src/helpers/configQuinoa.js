@@ -45,7 +45,9 @@ const quinoa = new Quinoa({
 
 export function plugQuinoa(renderApplication) {
   quinoa.subscribe(renderApplication);
-  quinoa.hot(renderApplication);
+  if (quinoa.hot) {
+    quinoa.hot(renderApplication);
+  }
 }
 
 export const EditorComponent = quinoa.getEditorComponent();

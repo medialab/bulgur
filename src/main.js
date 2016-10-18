@@ -33,8 +33,9 @@ renderApplication();
 /**
  * Hot-reloading.
  */
-
-module.hot.accept('./Application', function() {
-  CurrentApplication = require('./Application').default;
-  renderApplication();
-});
+if (module.hot) {
+  module.hot.accept('./Application', function() {
+    CurrentApplication = require('./Application').default;
+    renderApplication();
+  });
+}
