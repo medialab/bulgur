@@ -37,6 +37,8 @@ export function getFileAsText(fileToRead, callback) {
 
 export function convertRawStrToJson(str = '', format) {
   switch (format) {
+    case 'json':
+      return JSON.parse(str);
     case 'csv':
       return csvParse(str);
     case 'tsv':

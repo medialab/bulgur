@@ -12,6 +12,7 @@ const MainViewLayout = ({
   visualizationType,
   data,
   openNewStoryModal,
+  onProjectImport,
   viewParameters,
   updateView,
   updateSlide,
@@ -28,7 +29,7 @@ const MainViewLayout = ({
       case 'time':
         return <Timeline {...visProps} />;
       default:
-        return <Landing onClickOnNewStory={openNewStoryModal} />;
+        return <Landing onDropInput={onProjectImport} onClickOnNewStory={openNewStoryModal} />;
     }
   };
 

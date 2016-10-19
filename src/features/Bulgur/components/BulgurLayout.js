@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import AsideViewLayout from './AsideViewLayout';
 import MainViewLayout from './MainViewLayout';
 import NewStoryDialog from '../../NewStoryDialog/components/NewStoryDialogContainer.js';
+import TakeAwayDialog from '../../TakeAwayDialog/components/TakeAwayDialogContainer.js';
 
 import './BulgurLayout.scss';
 
@@ -11,10 +12,14 @@ const InterfaceManagerLayout = ({
   id,
   className,
   isNewStoryModalOpen,
+  isTakeAwayModalOpen,
   updateSlide,
   resetView,
+  onProjectImport,
   actions: {
     openNewStoryModal,
+    openTakeAwayModal,
+    closeTakeAwayModal,
     updateView
   },
   closeAndResetDialog,
@@ -25,12 +30,26 @@ const InterfaceManagerLayout = ({
     dataMap = [],
     data = []
   }
-}) => (
-  <div id={id} className={className}>
-    {visualizationType ? <AsideViewLayout openNewStoryModal={openNewStoryModal} /> : ''}
+}) => {
+  const closeModal = () => {
+    if (isNewStoryModalOpen) {
+      closeAndResetDialog();
+    }
+    else {
+      closeTakeAwayModal();
+    }
+  };
+
+  return (<div id={id} className={className}>
+    {visualizationType ?
+      <AsideViewLayout
+        openNewStoryModal={openNewStoryModal}
+        openTakeAwayModal={openTakeAwayModal} /> :
+    ''}
     <MainViewLayout
       openNewStoryModal={openNewStoryModal}
       visualizationType={visualizationType}
+      onProjectImport={onProjectImport}
       dataMap={dataMap}
       viewParameters={viewParameters}
       updateSlide={updateSlide}
@@ -39,11 +58,15 @@ const InterfaceManagerLayout = ({
       resetView={resetView}
       data={data} />
     <Modal
-      onRequestClose={closeAndResetDialog}
-      isOpen={isNewStoryModalOpen}>
-      <NewStoryDialog />
+      onRequestClose={closeModal}
+      isOpen={isNewStoryModalOpen || isTakeAwayModalOpen}>
+      {
+        isNewStoryModalOpen ?
+          <NewStoryDialog /> :
+            <TakeAwayDialog />
+      }
     </Modal>
-  </div>
-);
+  </div>);
+};
 
 export default InterfaceManagerLayout;

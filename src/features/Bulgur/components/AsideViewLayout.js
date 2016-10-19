@@ -8,12 +8,13 @@ import 'codemirror/lib/codemirror.css';
 import '../../../lib/code-mirror-theme.scss';
 
 const AsideViewLayout = ({
-  openNewStoryModal
+  openNewStoryModal,
+  openTakeAwayModal
 }) => (
   <aside className="bulgur-aside-view">
     <button onClick={openNewStoryModal} type="button">🛠 Story settings</button>
     <EditorComponent />
-    <button type="button">🚀 Take away</button>
+    <button type="button" onClick={openTakeAwayModal}>🚀 Take away</button>
   </aside>
 );
 

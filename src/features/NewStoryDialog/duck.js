@@ -128,7 +128,7 @@ export const mapFieldToInvariantParameter = (fieldName, parameterId) => ({
   parameterId
 });
 
-export const setupNewStory = (dataMap, visualizationType, data) => ({
+export const setupNewStory = (dataMap = [], visualizationType, data) => ({
   type: SETUP_NEW_STORY,
   data,
   dataMap,

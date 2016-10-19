@@ -1,0 +1,55 @@
+@import '../../../parameters.scss';
+
+.take-away-dialog
+{
+    font-family: $main-font-stack;
+
+    -webkit-user-select: none; /* Chrome/Safari */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+ */
+            user-select: none;
+
+         -o-user-select: none;
+}
+
+.take-away-dialog .take-away-dialog-step:not(:first-of-type)
+{
+    margin-top: $large-gutter;
+    padding-top: $medium-gutter;
+
+    border-top: 1px solid $background-intent;
+}
+
+.take-away-dialog .take-away-type-choice
+{
+    display: flex;
+
+    padding: 0;
+
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+.take-away-dialog .take-away-type-choice input
+{
+    display: none;
+}
+.take-away-dialog .take-away-type-choice .take-away-type-item
+{
+    display: flex;
+
+    padding: $medium-gutter;
+
+    text-align: center;
+
+    border: 1px solid $background-intent;
+
+    flex: 1;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.take-away-dialog .take-away-type-choice .take-away-type-item:hover
+{
+    background: $background-intent;
+}

@@ -9,6 +9,8 @@ import {SETUP_NEW_STORY} from '../NewStoryDialog/duck';
 
 const OPEN_NEW_STORY_MODAL = 'OPEN_NEW_STORY_MODAL';
 const CLOSE_NEW_STORY_MODAL = 'CLOSE_NEW_STORY_MODAL';
+const OPEN_TAKE_AWAY_MODAL = 'OPEN_TAKE_AWAY_MODAL';
+const CLOSE_TAKE_AWAY_MODAL = 'CLOSE_TAKE_AWAY_MODAL';
 const VIEW_EQUALS_SLIDE_PARAMETERS = 'VIEW_EQUALS_SLIDE_PARAMETERS';
 const UPDATE_VIEW = 'UPDATE_VIEW';
 
@@ -22,6 +24,14 @@ export const openNewStoryModal = () => ({
 
 export const closeNewStoryModal = () => ({
   type: CLOSE_NEW_STORY_MODAL
+});
+
+export const openTakeAwayModal = () => ({
+  type: OPEN_TAKE_AWAY_MODAL
+});
+
+export const closeTakeAwayModal = () => ({
+  type: CLOSE_TAKE_AWAY_MODAL
 });
 
 export const updateView = (parameters) => ({
@@ -49,7 +59,7 @@ function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
   switch (action.type) {
     case SETUP_NEW_STORY:
       // consume original data points against dataMap
-      const finalData = action.data.map(point => {
+      const finalData = (action.dataMap && action.dataMap.length) ? action.data.map(point => {
         return action.dataMap.reduce((finalObject, thatModel) => {
           // map data mapped field to visualization dimension id
           if (point[thatModel.mappedField]) {
@@ -58,7 +68,7 @@ function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
           }
           return finalObject;
         }, {});
-      });
+      }) : action.data;
       return {
         ...state,
         data: finalData,
@@ -76,6 +86,7 @@ function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
 
 const GLOBAL_UI_DEFAULT_STATE = {
     newStoryModalOpen: false,
+    takeAwayModalOpen: false,
     viewEqualsSlideParameters: false
 };
 function globalUi(state = GLOBAL_UI_DEFAULT_STATE, action) {
@@ -89,6 +100,16 @@ function globalUi(state = GLOBAL_UI_DEFAULT_STATE, action) {
       return {
         ...state,
         newStoryModalOpen: false
+      };
+    case OPEN_TAKE_AWAY_MODAL:
+      return {
+        ...state,
+        takeAwayModalOpen: true
+      };
+    case CLOSE_TAKE_AWAY_MODAL:
+      return {
+        ...state,
+        takeAwayModalOpen: false
       };
     case VIEW_EQUALS_SLIDE_PARAMETERS:
       return {
@@ -111,6 +132,8 @@ export default combineReducers({
 
 const isNewStoryModalOpen = state => state.globalUi.newStoryModalOpen;
 
+const isTakeAwayModalOpen = state => state.globalUi.takeAwayModalOpen;
+
 const doesViewEqualsSlideParameters = state => state.globalUi.viewEqualsSlideParameters;
 
 const visualizationData = state => state.visualization;
@@ -119,6 +142,7 @@ const activeViewParameters = state => state.visualization.viewParameters;
 
 export const selector = createStructuredSelector({
   isNewStoryModalOpen,
+  isTakeAwayModalOpen,
   visualizationData,
   doesViewEqualsSlideParameters,
   activeViewParameters

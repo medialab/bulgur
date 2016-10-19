@@ -58,7 +58,7 @@ const SetVisualizationDataSourceStep = ({
             className="drop-zone"
             activeClassName="drop-zone-active"
             onDrop={onDropInput}>
-            <div>Drop a file there ({visualizationTypeModel.acceptedFileExtensions.join(', ')})</div>
+            <div>Drop a file here ({visualizationTypeModel.acceptedFileExtensions.join(', ')})</div>
           </Dropzone>
         </section>
         <section className="data-source-examples">

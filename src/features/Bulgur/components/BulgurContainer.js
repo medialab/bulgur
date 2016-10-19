@@ -7,7 +7,15 @@ import * as duck from '../duck';
 
 import {visualizationTypes} from '../../../models';
 
-import {resetNewStorySettings} from '../../NewStoryDialog/duck';
+import {
+  resetNewStorySettings,
+  setupNewStory
+} from '../../NewStoryDialog/duck';
+
+import {
+  getFileAsText,
+  convertRawStrToJson
+} from '../../../helpers/fileLoader';
 
 import {
   actions as quinoaActions,
@@ -21,7 +29,8 @@ import {
     actions: bindActionCreators({
       ...duck,
       ...quinoaActions,
-      resetNewStorySettings
+      resetNewStorySettings,
+      setupNewStory
     }, dispatch)
   })
 )
@@ -33,6 +42,7 @@ class BulgurContainer extends Component {
     this.updateSlide = this.updateSlide.bind(this);
     this.resetView = this.resetView.bind(this);
     this.updateSlideIfEmpty = this.updateSlideIfEmpty.bind(this);
+    this.onProjectImport = this.onProjectImport.bind(this);
   }
 
   componentWillMount() {
@@ -61,8 +71,10 @@ class BulgurContainer extends Component {
 
   shouldComponentUpdate(newProps) {
     return newProps.isNewStoryModalOpen !== this.props.isNewStoryModalOpen ||
+           newProps.isTakeAwayModalOpen !== this.props.isTakeAwayModalOpen ||
            newProps.currentSlide !== this.props.currentSlide ||
            JSON.stringify(newProps.activeViewParameters) !== JSON.stringify(this.props.activeViewParameters) ||
+           JSON.stringify(newProps.visualizationData) !== JSON.stringify(this.props.visualizationData) ||
            newProps.doesViewEqualsSlideParameters !== this.props.doesViewEqualsSlideParameters;
   }
 
@@ -107,6 +119,23 @@ class BulgurContainer extends Component {
     this.props.actions.updateView(slideParameters);
   }
 
+  onProjectImport (files) {
+    getFileAsText(files[0], (err, str) => {
+      if (err) {
+        // todo : handle import error
+        // console.log('error while loading project', err);
+      }
+      else {
+        // todo : validate json against project model (must have props story, data, ...)
+        const project = convertRawStrToJson(str, 'json');
+        this.props.actions.setupNewStory([], project.globalParameters.visualizationType, project.data);
+        project.story.order.forEach(id => {
+          quinoaActions.addSlide(project.story.slides[id]);
+        });
+      }
+    });
+  }
+
   resetView() {
     this.props.actions.updateView(this.props.quinoaState.slideParameters);
   }
@@ -117,6 +146,7 @@ class BulgurContainer extends Component {
         {...this.props}
         closeAndResetDialog={this.closeAndResetDialog}
         updateSlide={this.updateSlide}
+        onProjectImport={this.onProjectImport}
         resetView={this.resetView} />
     );
   }
