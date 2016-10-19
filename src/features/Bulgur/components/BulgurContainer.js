@@ -18,6 +18,7 @@ import {
 } from '../../../helpers/fileLoader';
 
 import {
+  default as quinoa,
   actions as quinoaActions,
 } from '../../../helpers/configQuinoa';
 
@@ -130,7 +131,12 @@ class BulgurContainer extends Component {
         const project = convertRawStrToJson(str, 'json');
         this.props.actions.setupNewStory([], project.globalParameters.visualizationType, project.data);
         project.story.order.forEach(id => {
-          quinoaActions.addSlide(project.story.slides[id]);
+          // quinoaActions.addSlide(project.story.slides[id]);
+          // work-around on the fact that addSlide seems not to work
+          // todo : fix this upstream
+          const list = quinoa.getState().editor.order;
+          const generatedId = list[list.length - 1];
+          quinoaActions.updateSlide(generatedId, Object.assign(project.story.slides[id], {id: undefined}));
         });
       }
     });
