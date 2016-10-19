@@ -6,12 +6,14 @@ import './Graph.scss';
 /**
  * Constants.
  */
+// TODO : this should be in visualization invariant params,
+// and parametrized while creating/parametrizing the whole story
 const SIGMA_SETTINGS = {
   labelThreshold: 7,
   minNodeSize: 2,
   edgeColor: 'default',
   defaultEdgeColor: '#D1D1D1',
-  sideMargin: 20
+  sideMargin: 0
 };
 
 /**
@@ -62,17 +64,19 @@ class Graph extends Component {
     // Hooking into the camera
     // this.releaseCamera = monkeyPatchCamera(this.updateSlide);
 
-    camera.bind('coordinatesUpdated', () => {
-          const coords = {
-            cameraX: camera.x,
-            cameraY: camera.y,
-            cameraRatio: camera.ratio,
-            cameraAngle: camera.angle,
-          };
-          if (JSON.stringify(coords) !== JSON.stringify(this.props.viewParameters)) {
-            this.props.updateView(coords);
-          }
-        });
+    const onCoordinatesUpdate = () => {
+      const coords = {
+        cameraX: camera.x,
+        cameraY: camera.y,
+        cameraRatio: camera.ratio,
+        cameraAngle: camera.angle,
+      };
+      if (JSON.stringify(coords) !== JSON.stringify(this.props.viewParameters)) {
+        this.props.updateView(coords);
+      }
+    };
+
+    camera.bind('coordinatesUpdated', onCoordinatesUpdate);
   }
 
   componentWillUpdate (next) {
@@ -84,7 +88,7 @@ class Graph extends Component {
         ratio: next.viewParameters.cameraRatio,
       };
       camera.goTo(coords);
-      sigInst.refresh();
+      // sigInst.refresh();
     }
   }
 
