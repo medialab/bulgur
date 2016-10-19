@@ -23,7 +23,7 @@ App structure (src) :
 + lib // temporary dependencies
 + redux // redux logic
     - configureStore.js // store setup
-    - promiseMiddleware.js // reducer that processes promises in action handling process
+    - promiseMiddleware.js // middleware that processes promises in action handling process
     - rootReducer.js // app's main reducer
 + helpers // modules not related directly to the app logic
     - ...
