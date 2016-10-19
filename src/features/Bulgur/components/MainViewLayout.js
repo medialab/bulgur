@@ -1,6 +1,6 @@
 import React from 'react';
 
-
+import Landing from './Landing';
 import Timeline from '../../../components/Timeline/Timeline';
 import Map from '../../../components/Map/Map';
 import Graph from '../../../components/Graph/Graph';
@@ -28,7 +28,7 @@ const MainViewLayout = ({
       case 'time':
         return <Timeline {...visProps} />;
       default:
-        return <button id="new-story-button" onClick={openNewStoryModal}>Tell a new story</button>;
+        return <Landing onClickOnNewStory={openNewStoryModal} />;
     }
   };
 

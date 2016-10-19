@@ -1,0 +1,73 @@
+@import '../../../parameters.scss';
+
+.bulgur-landing-wrapper
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: flex;
+
+    width: 100%;
+    height: 100%;
+
+    flex-flow: row nowrap;
+    align-items: center;;
+}
+
+.bulgur-landing-container
+{
+    display: flex;
+
+    flex: 1;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.bulgur-landing-options-container
+{
+    display: flex;
+
+    flex-flow: column wrap;
+    align-items: center;
+}
+
+.bulgur-landing-container .new-story-option
+{
+    width: 10rem;
+    height: 10rem;
+
+    text-align: center;
+
+    border: 1px dashed $primary-color;
+    border-radius: 50%;
+}
+
+.bulgur-landing-container .drop-zone
+{
+    display: flex;
+
+    height: 10rem;
+    margin-top: $large-gutter;
+    padding: 0 $medium-gutter 0 $medium-gutter;
+
+    text-align: center;
+
+    border: 1px dashed $primary-color;
+
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.bulgur-landing-container .drop-zone-active
+{
+    width: 100%!important;
+    margin-right: $large-gutter;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+
+    text-align: center;
+
+    color: $background-default;
+    background: $primary-color;
+}
