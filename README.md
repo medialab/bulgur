@@ -1,13 +1,13 @@
-Hi. WIP app for testing the possible implementations of quinoa framework.
+WIP app for testing the possible implementations of quinoa framework.
 
-App structure :
+App structure (src) :
 
 ```
 - main.js // react/redux entrypoint
 - main.scss // scss entrypoint
 - rootReducer.js // the main reducer of the app
 - Application.js // the main application component
-- index.html // html entrypoint
+- Application.scss // the main application component style
 + components // shared components
 + models // series of models used throughout the app
 + features // separate features of the app
@@ -20,8 +20,12 @@ App structure :
     + DataToVisMapper // mapping data properties to visualisation invariant properties
     + InterfaceManager // manages modals opening and closing, pannels
     + ...
++ lib // temporary dependencies
++ redux // redux logic
+    - configureStore.js // store setup
+    - promiseMiddleware.js // reducer that processes promises in action handling process
+    - rootReducer.js // app's main reducer
 + helpers // modules not related directly to the app logic
-    - validateFileFormat.js // consume vistype model against file extension
     - ...
 ```
 
