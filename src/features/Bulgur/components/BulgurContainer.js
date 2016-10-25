@@ -22,6 +22,8 @@ import {
   actions as quinoaActions,
 } from '../../../helpers/configQuinoa';
 
+import validateProject from '../../../helpers/validateProject';
+
 @connect(
   state => ({
     ...duck.selector(state.activeStory)
@@ -129,15 +131,21 @@ class BulgurContainer extends Component {
       else {
         // todo : validate json against project model (must have props story, data, ...)
         const project = convertRawStrToJson(str, 'json');
-        this.props.actions.setupNewStory([], project.globalParameters.visualizationType, project.data);
-        project.story.order.forEach(id => {
-          quinoaActions.addSlide(project.story.slides[id]);
-          // work-around on the fact that addSlide seems not to work
-          // todo : fix this upstream
-          const list = quinoa.getState().editor.order;
-          const generatedId = list[list.length - 1];
-          quinoaActions.updateSlide(generatedId, Object.assign(project.story.slides[id], {id: undefined}));
-        });
+        const valid = validateProject(project);
+        if (valid) {
+          this.props.actions.setupNewStory([], project.globalParameters.visualizationType, project.data);
+          project.story.order.forEach(id => {
+            quinoaActions.addSlide(project.story.slides[id]);
+            // workaround on the fact that addSlide seems not to work
+            // todo : fix this upstream
+            const list = quinoa.getState().editor.order;
+            const generatedId = list[list.length - 1];
+            quinoaActions.updateSlide(generatedId, Object.assign(project.story.slides[id], {id: undefined}));
+          });
+        }
+        else {
+          // console.error('you tried to input an invalid project');
+        }
       }
     });
   }
