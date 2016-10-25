@@ -11,61 +11,53 @@
 
     padding: $base-gutter;
     padding-right: $large-gutter;
-}
+    .quinoa-slide
+    {
+        // min-width: 15rem;
+        min-height: 3rem;
+        margin: $base-gutter 0 $base-gutter;
+        padding: $large-gutter;
 
-.bulgur-aside-view .quinoa-slide
-{
-    // min-width: 15rem;
-    min-height: 3rem;
-    margin: $base-gutter 0 $base-gutter;
-    padding: $large-gutter;
+        color: $primary-color;
+        border: 1px solid $background-intent!important;
+        &.selected
+        {
+            border: 6px solid $primary-color!important;
+        }
+        &:hover:not(.selected) .quinoa-slide-title
+        {
+            border-bottom: 1px solid white!important;
+        }
+        &:hover:not(.selected),
+        &:hover:not(.selected) .CodeMirror,
+        &:hover:not(.selected) .quinoa-slide-title-input
+        {
+            color: $background-default!important;
+            background: $background-intent!important;
+        }
+        .quinoa-slide-title-hashtag
+        {
+            cursor: move;
+        }
+    }
+    .quinoa-slide-title table,
+    .quinoa-slide-title table .quinoa-slide-title-input
+    .quinoa-slide-title td
+    {
+        width: 100%;
+    }
+    > button
+    {
+        display: block;
 
-    color: $primary-color;
-    border: 1px solid $background-intent!important;
-}
-
-.bulgur-aside-view .quinoa-slide.selected
-{
-    border: 6px solid $primary-color!important;
-}
-
-.bulgur-aside-view .quinoa-slide:hover:not(.selected),
-.bulgur-aside-view .quinoa-slide:hover:not(.selected) .CodeMirror,
-.bulgur-aside-view .quinoa-slide:hover:not(.selected) .quinoa-slide-title-input
-{
-    color: $background-default!important;
-    background: $background-intent!important;
-}
-
-.bulgur-aside-view .quinoa-slide-title table,
-.bulgur-aside-view .quinoa-slide-title table .quinoa-slide-title-input
-.bulgur-aside-view .quinoa-slide-title td
-{
-    width: 100%;
-}
-
-.bulgur-aside-view .quinoa-slide:hover:not(.selected) .quinoa-slide-title
-{
-    border-bottom: 1px solid white!important;
-}
-
-.bulgur-aside-view .quinoa-slide .quinoa-slide-title-hashtag
-{
-    cursor: move;
-}
-
-.bulgur-aside-view > button
-{
-    display: block;
-
-    text-align: left;
-}
-
-.bulgur-aside-view > button:first-of-type
-{
-    border-bottom: 1px solid $primary-color;
-}
-.bulgur-aside-view > button:last-of-type
-{
-    border-top: 1px solid $primary-color;
+        text-align: left;
+    }
+    > button:first-of-type
+    {
+        border-bottom: 1px solid $primary-color;
+    }
+    > button:last-of-type
+    {
+        border-top: 1px solid $primary-color;
+    }
 }

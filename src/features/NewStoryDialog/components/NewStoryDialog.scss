@@ -10,186 +10,169 @@
             user-select: none;
 
          -o-user-select: none;
-}
 
-.new-story-dialog .new-story-dialog-step:not(:first-of-type)
-{
-    margin-top: $large-gutter;
-    padding-top: $medium-gutter;
+    .new-story-dialog-step:not(:first-of-type)
+    {
+        margin-top: $large-gutter;
+        padding-top: $medium-gutter;
 
-    border-top: 1px solid $background-intent;
-}
+        border-top: 1px solid $background-intent;
+    }
 
-.new-story-dialog .visualization-type-choice
-{
-    display: flex;
+    .visualization-type-choice
+    {
+        display: flex;
 
-    padding: 0;
+        padding: 0;
 
-    flex-flow: row nowrap;
-    justify-content: space-between;
-}
+        flex-flow: row nowrap;
+        justify-content: space-between;
 
-.new-story-dialog .visualization-type-choice input
-{
-    display: none;
-}
-.new-story-dialog .visualization-type-choice .visualization-type-item
-{
-    display: flex;
+        input
+        {
+            display: none;
+        }
 
-    padding: $medium-gutter;
+        .visualization-type-item
+        {
+            display: flex;
 
-    text-align: center;
+            padding: $medium-gutter;
 
-    border: 1px solid $background-intent;
+            text-align: center;
 
-    flex: 1;
-    flex-flow: column nowrap;
-    align-items: center;
-}
+            border: 1px solid $background-intent;
 
-.new-story-dialog .visualization-type-choice #visualization-type-checked
-{
-    background: $background-intent;
-}
+            flex: 1;
+            flex-flow: column nowrap;
+            align-items: center;
+        }
 
-.new-story-dialog .data-source-choice
-{
-    display: flex;
+        #visualization-type-checked
+        {
+            background: $background-intent;
+        }
+    }
 
-    flex-flow: row nowrap;
-}
-.new-story-dialog .data-source-choice .data-source-file
-{
-    flex: 1;
-}
+    .data-source-choice
+    {
+        display: flex;
 
-.new-story-dialog .data-source-choice .data-source-examples
-{
-    flex: 1;
-}
+        flex-flow: row nowrap;
 
-.new-story-dialog .data-source-choice .data-source-file .drop-zone
-{
-    margin-right: $large-gutter;
-    padding-top: 8rem;
-    padding-right: $medium-gutter;
-    padding-bottom: 8rem;
+        .data-source-file
+        {
+            flex: 1;
+        }
 
-    text-align: center;
+        .data-source-examples
+        {
+            flex: 1;
+        }
 
-    background: $background-intent;
-}
+        .data-source-file .drop-zone
+        {
+            margin-right: $large-gutter;
+            padding-top: 8rem;
+            padding-right: $medium-gutter;
+            padding-bottom: 8rem;
 
-.new-story-dialog .data-source-choice .data-source-file .drop-zone-active
-{
-    width: 100%!important;
-    margin-right: $large-gutter;
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+            text-align: center;
 
-    text-align: center;
+            background: $background-intent;
+        }
 
-    color: $background-default;
-    background: $primary-color;
-}
+        .data-source-file .drop-zone-active
+        {
+            width: 100%!important;
+            margin-right: $large-gutter;
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+
+            text-align: center;
+
+            color: $background-default;
+            background: $primary-color;
+        }
 
 
-.new-story-dialog .data-source-choice .sample-file
-{
-    margin-bottom: $medium-gutter;
+        .sample-file
+        {
+            margin-bottom: $medium-gutter;
 
-    flex: 1;
-}
+            flex: 1;
+        }
+    }
 
-.new-story-dialog .data-fields-choice
-{
-    display: flex;
+    .data-fields-choice
+    {
+        display: flex;
 
-    flex-flow: row nowrap;
-}
+        flex-flow: row nowrap;
 
-/*
-.new-story-dialog .data-fields-choice .data-fields-available
-{
-    padding: $large-gutter;
+        .parameters-endpoints
+        {
+            display: flex;
 
-    border: 1px solid $background-intent;
-}
+            padding: 0; //$large-gutter 0 $large-gutter;
 
-.new-story-dialog .data-fields-choice .data-fields-available li
-{
-    margin-bottom: $base-gutter;
-    padding: $base-gutter;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            flex: 1;
+        }
 
-    list-style: none;
+        .parameters-endpoints li
+        {
+            display: inline-block;
 
-    background: $background-intent;
-}
-*/
+            width: 30%;
+            margin-bottom: $medium-gutter;
+            padding: $medium-gutter;
 
-.new-story-dialog .data-fields-choice .parameters-endpoints
-{
-    display: flex;
+            list-style: none;
 
-    padding: 0; //$large-gutter 0 $large-gutter;
+            cursor: move;
+            text-align: center;
 
-    flex-wrap: wrap;
-    justify-content: space-between;
-    flex: 1;
-}
+            border: 1px dashed $background-intent;
+        }
+    }
 
-.new-story-dialog .data-fields-choice .parameters-endpoints li
-{
-    display: inline-block;
+    .sample-file
+    {
+        padding: $medium-gutter;
 
-    width: 30%;
-    margin-bottom: $medium-gutter;
-    padding: $medium-gutter;
+        cursor: pointer;
 
-    list-style: none;
+        border: 1px dashed $primary-color;
 
-    cursor: move;
-    text-align: center;
+        &:hover
+        {
+            background: $background-intent;
+        }
+    }
 
-    border: 1px dashed $background-intent;
-}
+    .data-source-status
+    {
+        margin-top: $medium-gutter;
+        padding: $medium-gutter;
 
-.new-story-dialog .sample-file
-{
-    padding: $medium-gutter;
+        text-align: center;
 
-    cursor: pointer;
+        &.loading
+        {
+            background: $background-intent;
+        }
 
-    border: 1px dashed $primary-color;
-}
+        &.loaded
+        {
+            background: lightgreen;
+        }
 
-.new-story-dialog .sample-file:hover
-{
-    background: $background-intent;
-}
-
-.new-story-dialog .data-source-status
-{
-    margin-top: $medium-gutter;
-    padding: $medium-gutter;
-
-    text-align: center;
-}
-
-.new-story-dialog .data-source-status.loading
-{
-    background: $background-intent;
-}
-
-.new-story-dialog .data-source-status.loaded
-{
-    background: lightgreen;
-}
-
-.new-story-dialog .data-source-status.error
-{
-    color: $background-default;
-    background: brown;
+        &.error
+        {
+            color: $background-default;
+            background: brown;
+        }
+    }
 }

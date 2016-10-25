@@ -13,61 +13,56 @@
 
     flex-flow: row nowrap;
     align-items: center;;
-}
+    .bulgur-landing-container
+    {
+        display: flex;
 
-.bulgur-landing-container
-{
-    display: flex;
+        flex: 1;
+        flex-flow: column nowrap;
+        align-items: center;
+        .bulgur-landing-options-container
+        {
+            display: flex;
 
-    flex: 1;
-    flex-flow: column nowrap;
-    align-items: center;
-}
+            flex-flow: column wrap;
+            align-items: center;
+            .new-story-option
+            {
+                width: 10rem;
+                height: 10rem;
 
-.bulgur-landing-options-container
-{
-    display: flex;
+                text-align: center;
 
-    flex-flow: column wrap;
-    align-items: center;
-}
+                border: 1px dashed $primary-color;
+                border-radius: 50%;
+            }
+            .drop-zone
+            {
+                display: flex;
 
-.bulgur-landing-container .new-story-option
-{
-    width: 10rem;
-    height: 10rem;
+                height: 10rem;
+                margin-top: $large-gutter;
+                padding: 0 $medium-gutter 0 $medium-gutter;
 
-    text-align: center;
+                text-align: center;
 
-    border: 1px dashed $primary-color;
-    border-radius: 50%;
-}
+                border: 1px dashed $primary-color;
 
-.bulgur-landing-container .drop-zone
-{
-    display: flex;
+                flex-flow: row nowrap;
+                align-items: center;
+            }
+            .drop-zone-active
+            {
+                width: 100%!important;
+                margin-right: $large-gutter;
+                padding-top: 5rem;
+                padding-bottom: 5rem;
 
-    height: 10rem;
-    margin-top: $large-gutter;
-    padding: 0 $medium-gutter 0 $medium-gutter;
+                text-align: center;
 
-    text-align: center;
-
-    border: 1px dashed $primary-color;
-
-    flex-flow: row nowrap;
-    align-items: center;
-}
-
-.bulgur-landing-container .drop-zone-active
-{
-    width: 100%!important;
-    margin-right: $large-gutter;
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-
-    text-align: center;
-
-    color: $background-default;
-    background: $primary-color;
+                color: $background-default;
+                background: $primary-color;
+            }
+        }
+    }
 }

@@ -10,46 +10,46 @@
             user-select: none;
 
          -o-user-select: none;
-}
 
-.take-away-dialog .take-away-dialog-step:not(:first-of-type)
-{
-    margin-top: $large-gutter;
-    padding-top: $medium-gutter;
+    .take-away-dialog-step:not(:first-of-type)
+    {
+        margin-top: $large-gutter;
+        padding-top: $medium-gutter;
 
-    border-top: 1px solid $background-intent;
-}
+        border-top: 1px solid $background-intent;
+    }
 
-.take-away-dialog .take-away-type-choice
-{
-    display: flex;
+    .take-away-type-choice
+    {
+        display: flex;
 
-    padding: 0;
+        padding: 0;
 
-    flex-flow: row nowrap;
-    justify-content: space-between;
-}
+        flex-flow: row nowrap;
+        justify-content: space-between;
+    }
 
-.take-away-dialog .take-away-type-choice input
-{
-    display: none;
-}
-.take-away-dialog .take-away-type-choice .take-away-type-item
-{
-    display: flex;
+    .take-away-type-choice input
+    {
+        display: none;
+    }
+    .take-away-type-choice .take-away-type-item
+    {
+        display: flex;
 
-    padding: $medium-gutter;
+        padding: $medium-gutter;
 
-    text-align: center;
+        text-align: center;
 
-    border: 1px solid $background-intent;
+        border: 1px solid $background-intent;
 
-    flex: 1;
-    flex-flow: column nowrap;
-    align-items: center;
-}
+        flex: 1;
+        flex-flow: column nowrap;
+        align-items: center;
+    }
 
-.take-away-dialog .take-away-type-choice .take-away-type-item:hover
-{
-    background: $background-intent;
+    .take-away-type-choice .take-away-type-item:hover
+    {
+        background: $background-intent;
+    }
 }

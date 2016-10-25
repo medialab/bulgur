@@ -9,132 +9,132 @@
     display: flex;
 
     flex-flow: column nowrap;
-}
 
-.bulgur-main-view .visualization-container
-{
-    overflow: scroll;
+    .visualization-container
+    {
+        overflow: scroll;
 
-    flex: 2;
-}
+        flex: 2;
+    }
 
-.bulgur-main-view .caption-container
-{
-    position: relative;
+    .caption-container
+    {
+        position: relative;
 
-    max-height: 30%;
-    padding-top: $medium-gutter;
+        max-height: 30%;
+        padding-top: $medium-gutter;
 
-    border-top: 1px solid darkgrey;
+        border-top: 1px solid darkgrey;
 
-    flex: 1;
-}
+        flex: 1;
+    }
 
 
-.bulgur-main-view .view-operations
-{
-    position: absolute;
-    top: -2rem;
-    right: 2rem;
+    .view-operations
+    {
+        position: absolute;
+        top: -2rem;
+        right: 2rem;
 
-    display: flex;
+        display: flex;
 
-    height: 2rem;
-}
+        height: 2rem;
+    }
 
-/*
- * Specific components styling
- */
+    /*
+     * Specific components styling
+     */
 
-.bulgur-main-view .view-operations button
-{
-    margin-right: $medium-gutter;
+    .view-operations button
+    {
+        margin-right: $medium-gutter;
 
-    border: 1px solid $primary-color;
-    background: $background-default;
-}
+        border: 1px solid $primary-color;
+        background: $background-default;
+    }
 
-.bulgur-main-view .caption-editor
-{
-    display: flex;
+    .caption-editor
+    {
+        display: flex;
 
-    width: 100%;
-    height: 100%;
-    margin: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
 
-    flex-grow: row nowrap;
-}
-.bulgur-main-view .caption-editor .editor-helpers-container
-{
-    display: flex;
+        flex-grow: row nowrap;
+        .editor-helpers-container
+        {
+            display: flex;
 
-    flex-flow: column nowrap;
-}
+            flex-flow: column nowrap;
+        }
 
-.bulgur-main-view .caption-editor .editor-helpers
-{
-    margin: 0;
-    padding: 0;
-    padding-top: 4rem;
+        .editor-helpers
+        {
+            margin: 0;
+            padding: 0;
+            padding-top: 4rem;
 
-    text-align: right;
+            text-align: right;
 
-    flex: 1;
-}
-.bulgur-main-view .caption-editor .editor-areas-container
-{
-    display: flex;
+            flex: 1;
+        }
+        .editor-areas-container
+        {
+            display: flex;
 
-    margin-right: $base-gutter;
+            margin-right: $base-gutter;
 
-    flex: 8;
-    flex-flow: column nowrap;
-    align-items: stretch;
-}
+            flex: 8;
+            flex-flow: column nowrap;
+            align-items: stretch;
+        }
 
-.bulgur-main-view .caption-editor .editor-helpers li
-{
-    padding: 0;
+        .editor-helpers li
+        {
+            padding: 0;
 
-    list-style: none;
-}
+            list-style: none;
+        }
 
-.bulgur-main-view .caption-editor .editor-areas-container
-{
-    font-family: $display-font-stack;
-    font-size: 1.5rem;
+        .editor-areas-container
+        {
+            font-family: $display-font-stack;
+            font-size: 1.5rem;
 
-    flex: 1;
-}
+            flex: 1;
 
-.bulgur-main-view .caption-editor .editor-areas-container .quinoa-draft,
-.bulgur-main-view .caption-editor .editor-areas-container .quinoa-draft > div
-{
-    display: flex;
+            .quinoa-draft,
+            .quinoa-draft > div
+            {
+                display: flex;
 
-    flex: 1;
-    flex-flow: column nowrap;
-}
+                flex: 1;
+                flex-flow: column nowrap;
+            }
 
-.bulgur-main-view .caption-editor .editor-areas-container .quinoa-draft .DraftEditor-root
-{
-    margin: 0 0 $large-gutter;
-    padding: $medium-gutter;
+            .quinoa-draft .DraftEditor-root
+            {
+                margin: 0 0 $large-gutter;
+                padding: $medium-gutter;
 
-    border: 1px solid $background-intent;
+                border: 1px solid $background-intent;
 
-    flex: 1;
-}
+                flex: 1;
+            }
 
-.bulgur-main-view .caption-editor .editor-areas-container .quinoa-slide-title
-{
-    border-bottom: 1px solid $background-intent;
-}
+            .quinoa-slide-title
+            {
+                border-bottom: 1px solid $background-intent;
+            }
 
-.bulgur-main-view .caption-editor .editor-areas-container .quinoa-slide-title-input
-{
-    font-size: 2rem;
-    font-weight: 800;
+            .quinoa-slide-title-input
+            {
+                font-size: 2rem;
+                font-weight: 800;
 
-    height: 2rem;
+                height: 2rem;
+            }
+        }
+    }
 }
