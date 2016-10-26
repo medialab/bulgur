@@ -11,6 +11,7 @@ import {
 
 import quinoa from '../../../helpers/configQuinoa';
 import downloadFile from '../../../helpers/fileDownloader';
+import bundleProject from '../../../helpers/projectBundler';
 
 import TakeAwayDialogLayout from './TakeAwayDialogLayout';
 
@@ -39,28 +40,7 @@ class TakeAwayDialogContainer extends Component {
 
   takeAway(takeAwayType) {
     const quinoaStory = quinoa.getState().editor;
-    const project = {
-      data: this.props.visualizationData.data,
-      globalParameters: {
-        parameters: this.props.visualizationData.parameters,
-        visualizationType: this.props.visualizationData.visualizationType
-      },
-      story: {
-        order: quinoaStory.order.slice(),
-        slides: Object.keys(quinoaStory.slides).map(slideKey => {
-          const slide = quinoaStory.slides[slideKey];
-          return {
-            id: slide.id,
-            markdown: slide.markdown,
-            title: slide.title,
-            meta: Object.assign({}, slide.meta)
-          };
-        }).reduce((sl, slide) => {
-          sl[slide.id] = slide;
-          return sl;
-        }, {})
-      }
-    };
+    const project = bundleProject(this.props.visualizationData, quinoaStory);
     switch (takeAwayType.id) {
       case 'project':
         downloadFile(JSON.stringify(project, null, 2), 'json');
