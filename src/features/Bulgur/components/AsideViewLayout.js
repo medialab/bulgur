@@ -9,10 +9,11 @@ import '../../../lib/code-mirror-theme.scss';
 
 const AsideViewLayout = ({
   openNewStoryModal,
-  openTakeAwayModal
+  openTakeAwayModal,
+  isReadOnly
 }) => (
   <aside className="bulgur-aside-view">
-    <button onClick={openNewStoryModal} type="button">🛠 Story settings</button>
+    {isReadOnly ? '' : <button onClick={openNewStoryModal} type="button">🛠 Story settings</button>}
     <EditorComponent />
     <button type="button" onClick={openTakeAwayModal}>🚀 Take away</button>
   </aside>

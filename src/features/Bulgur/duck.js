@@ -52,7 +52,8 @@ const VISUALIZATION_DEFAULT_STATE = {
     data: undefined,
     dataMap: undefined,
     visualizationType: undefined,
-    parameters: {}
+    parameters: {},
+    readOnly: false
 };
 
 function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
@@ -140,10 +141,13 @@ const visualizationData = state => state.visualization;
 
 const activeViewParameters = state => state.visualization.viewParameters;
 
+const isReadOnly = state => state.visualization.readOnly;
+
 export const selector = createStructuredSelector({
   isNewStoryModalOpen,
   isTakeAwayModalOpen,
   visualizationData,
   doesViewEqualsSlideParameters,
-  activeViewParameters
+  activeViewParameters,
+  isReadOnly
 });

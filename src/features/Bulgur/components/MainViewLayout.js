@@ -9,6 +9,7 @@ import {DraftComponent} from '../../../helpers/configQuinoa';
 import './MainViewLayout.scss';
 
 const MainViewLayout = ({
+  isReadOnly,
   visualizationType,
   data,
   openNewStoryModal,
@@ -40,7 +41,7 @@ const MainViewLayout = ({
     <section className="visualization-container">
       {setVisualization()}
     </section>
-    {visualizationType ?
+    {visualizationType && !isReadOnly ?
       <figcaption className="caption-container">
         {doesViewEqualsSlideParameters ?
           '' :
