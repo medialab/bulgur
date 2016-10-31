@@ -71,9 +71,7 @@ class Graph extends Component {
         cameraRatio: camera.ratio,
         cameraAngle: camera.angle,
       };
-      if (JSON.stringify(coords) !== JSON.stringify(this.props.viewParameters)) {
-        this.props.updateView(coords);
-      }
+      this.props.updateView(coords);
     };
 
     camera.bind('coordinatesUpdated', onCoordinatesUpdate);

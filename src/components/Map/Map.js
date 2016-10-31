@@ -17,9 +17,17 @@ const Map = ({
   },
   updateView
 }) => {
+
+  if (Object.keys(viewParameters).length === 0) {
+    viewParameters = {
+      cameraX: 48.8674345,
+      cameraY: 2.3455482,
+      cameraZoom: 13
+    };
+  }
+
   const position = [viewParameters.cameraX, viewParameters.cameraY];
   const zoom = viewParameters.cameraZoom;
-
 
   const onMoveEnd = (evt = {}) => {
     if (evt.target) {
@@ -29,9 +37,7 @@ const Map = ({
         cameraX: coords.lat,
         cameraY: coords.lng
       };
-      if (JSON.stringify(view) !== JSON.stringify(viewParameters)) {
-        updateView(view);
-      }
+      updateView(view);
     }
   };
   return (

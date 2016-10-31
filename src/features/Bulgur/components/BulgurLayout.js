@@ -46,8 +46,7 @@ const InterfaceManagerLayout = ({
       <AsideViewLayout
         openNewStoryModal={openNewStoryModal}
         openTakeAwayModal={openTakeAwayModal}
-        isReadOnly={isReadOnly}
-      /> :
+        isReadOnly={isReadOnly} /> :
     ''}
     <MainViewLayout
       isReadOnly={isReadOnly}

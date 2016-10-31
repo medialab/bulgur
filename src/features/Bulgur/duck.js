@@ -1,7 +1,10 @@
 import {combineReducers} from 'redux';
 import {createStructuredSelector} from 'reselect';
+import equals from 'shallow-equals';
 
 import {SETUP_NEW_STORY} from '../NewStoryDialog/duck';
+
+import {createDefaultSlideParameters} from '../../models/visualizationTypes';
 
 /*
  * Action names
@@ -13,6 +16,7 @@ const OPEN_TAKE_AWAY_MODAL = 'OPEN_TAKE_AWAY_MODAL';
 const CLOSE_TAKE_AWAY_MODAL = 'CLOSE_TAKE_AWAY_MODAL';
 const VIEW_EQUALS_SLIDE_PARAMETERS = 'VIEW_EQUALS_SLIDE_PARAMETERS';
 const UPDATE_VIEW = 'UPDATE_VIEW';
+const SET_QUINOA_SLIDE_PARAMETERS = 'SET_QUINOA_SLIDE_PARAMETERS';
 
 /*
  * Action creators
@@ -44,6 +48,11 @@ export const viewEqualsSlideParameters = (payload) => ({
   payload
 });
 
+export const setQuinoaSlideParameters = (parameters) => ({
+  type: SET_QUINOA_SLIDE_PARAMETERS,
+  parameters
+});
+
 /*
  * Reducers
  */
@@ -52,11 +61,14 @@ const VISUALIZATION_DEFAULT_STATE = {
     data: undefined,
     dataMap: undefined,
     visualizationType: undefined,
-    parameters: {},
-    readOnly: false
+    viewParameters: {},
+    quinoaSlideParameters: {},
+    readOnly: false,
+    viewEqualsSlideParameters: false
 };
 
 function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
+  let isSync;
   switch (action.type) {
     case SETUP_NEW_STORY:
       // consume original data points against dataMap
@@ -65,7 +77,6 @@ function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
           // map data mapped field to visualization dimension id
           if (point[thatModel.mappedField]) {
             finalObject[thatModel.id] = point[thatModel.mappedField];
-            // console.log(thatModel.id, finalObject[thatModel.id]);
           }
           return finalObject;
         }, {});
@@ -73,12 +84,22 @@ function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
       return {
         ...state,
         data: finalData,
-        visualizationType: action.visualizationType
+        visualizationType: action.visualizationType,
+        viewParameters: createDefaultSlideParameters(action.visualizationType)
       };
     case UPDATE_VIEW:
+      isSync = equals(state.quinoaSlideParameters, action.parameters);
       return {
         ...state,
-        viewParameters: action.parameters
+        viewParameters: action.parameters,
+        viewEqualsSlideParameters: isSync
+      };
+    case SET_QUINOA_SLIDE_PARAMETERS:
+      isSync = equals(state.viewParameters, action.parameters);
+      return {
+        ...state,
+        quinoaSlideParameters: action.parameters,
+        viewEqualsSlideParameters: true
       };
     default:
       return state;
@@ -87,8 +108,7 @@ function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
 
 const GLOBAL_UI_DEFAULT_STATE = {
     newStoryModalOpen: false,
-    takeAwayModalOpen: false,
-    viewEqualsSlideParameters: false
+    takeAwayModalOpen: false
 };
 function globalUi(state = GLOBAL_UI_DEFAULT_STATE, action) {
   switch (action.type) {
@@ -112,11 +132,6 @@ function globalUi(state = GLOBAL_UI_DEFAULT_STATE, action) {
         ...state,
         takeAwayModalOpen: false
       };
-    case VIEW_EQUALS_SLIDE_PARAMETERS:
-      return {
-        ...state,
-        viewEqualsSlideParameters: action.payload
-      };
     default:
       return state;
   }
@@ -135,11 +150,13 @@ const isNewStoryModalOpen = state => state.globalUi.newStoryModalOpen;
 
 const isTakeAwayModalOpen = state => state.globalUi.takeAwayModalOpen;
 
-const doesViewEqualsSlideParameters = state => state.globalUi.viewEqualsSlideParameters;
+const doesViewEqualsSlideParameters = state => state.visualization.viewEqualsSlideParameters;
 
 const visualizationData = state => state.visualization;
 
 const activeViewParameters = state => state.visualization.viewParameters;
+
+const quinoaSlideParameters = state => state.visualization.quinoaSlideParameters;
 
 const isReadOnly = state => state.visualization.readOnly;
 
@@ -149,5 +166,6 @@ export const selector = createStructuredSelector({
   visualizationData,
   doesViewEqualsSlideParameters,
   activeViewParameters,
+  quinoaSlideParameters,
   isReadOnly
 });

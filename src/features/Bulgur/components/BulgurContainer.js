@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import BulgurLayout from './BulgurLayout';
 import * as duck from '../duck';
 
-import {visualizationTypes} from '../../../models';
+import {createDefaultSlideParameters} from '../../../models/visualizationTypes';
 
 import {
   resetNewStorySettings,
@@ -55,20 +55,14 @@ class BulgurContainer extends Component {
   componentWillReceiveProps(newProps) {
     // question : is it bad to do this ?
     if (newProps.quinoaState.currentSlide !== this.props.quinoaState.currentSlide) {
-      this.props.actions.updateView(newProps.quinoaState.slideParameters);
-      if (Object.keys(newProps.quinoaState.slideParameters).length === 0) {
-        this.updateSlide(this.props.quinoaState.slideParameters);
+      const newSlide = newProps.quinoaState.slideParameters;
+      let paramsToUpdate = newSlide;
+      if (Object.keys(newSlide).length === 0) {
+        this.updateSlide(this.props.visualizationData.viewParameters);
+        paramsToUpdate = this.props.visualizationData.viewParameters;
       }
-    }
-    // view/params equality will be assed during next loop
-    const viewEqualsParameters = JSON.stringify(this.props.activeViewParameters) === JSON.stringify(this.props.quinoaState.slideParameters);
-    if (viewEqualsParameters &&
-        !this.props.doesViewEqualsSlideParameters) {
-      this.props.actions.viewEqualsSlideParameters(true);
-    }
-    else if (!viewEqualsParameters &&
-              this.props.doesViewEqualsSlideParameters) {
-      this.props.actions.viewEqualsSlideParameters(false);
+      this.props.actions.setQuinoaSlideParameters(paramsToUpdate);
+      this.props.actions.updateView(paramsToUpdate);
     }
   }
 
@@ -76,8 +70,8 @@ class BulgurContainer extends Component {
     return newProps.isNewStoryModalOpen !== this.props.isNewStoryModalOpen ||
            newProps.isTakeAwayModalOpen !== this.props.isTakeAwayModalOpen ||
            newProps.currentSlide !== this.props.currentSlide ||
-           JSON.stringify(newProps.activeViewParameters) !== JSON.stringify(this.props.activeViewParameters) ||
-           JSON.stringify(newProps.visualizationData) !== JSON.stringify(this.props.visualizationData) ||
+           JSON.stringify(newProps.visualizationData.viewParameters) !== JSON.stringify(this.props.visualizationData.viewParameters) ||
+           JSON.stringify(newProps.quinoaSlideParameters) !== JSON.stringify(this.props.quinoaSlideParameters) ||
            newProps.doesViewEqualsSlideParameters !== this.props.doesViewEqualsSlideParameters;
   }
 
@@ -87,7 +81,7 @@ class BulgurContainer extends Component {
 
   updateSlideIfEmpty() {
     if (Object.keys(this.props.quinoaState.slideParameters).length === 0
-      && this.props.visualizationData.visualizationType !== undefined
+        && this.props.visualizationData.visualizationType !== undefined
     ) {
       this.updateSlide();
     }
@@ -103,23 +97,12 @@ class BulgurContainer extends Component {
     const inputParameters = params || this.props.visualizationData.viewParameters;
     // retrieve visualization-specific slide's meta property schema
     const type = this.props.visualizationData.visualizationType;
-    const slideModel = visualizationTypes[type].slideParameters;
+    const slideDefault = createDefaultSlideParameters(type);
     // populate slide data with default where needed
-    const slideParameters = slideModel.reduce((output, parameterModel) => {
-      if (inputParameters === undefined ||
-        inputParameters[parameterModel.id] === undefined
-      ) {
-        output[parameterModel.id] = parameterModel.default;
-      }
-      else {
-        output[parameterModel.id] = inputParameters[parameterModel.id];
-      }
-      return output;
-    }, {});
+    const slideParameters = Object.assign(slideDefault, inputParameters);
     // dispatch quinoa action to update slide
     this.props.quinoaActions.updateSlide(this.props.quinoaState.currentSlide, {meta: slideParameters});
-    // dispatch app action to update view accordingly
-    this.props.actions.updateView(slideParameters);
+    this.props.actions.setQuinoaSlideParameters(slideParameters);
   }
 
   onProjectImport (files) {
@@ -129,7 +112,6 @@ class BulgurContainer extends Component {
         // console.log('error while loading project', err);
       }
       else {
-        // todo : validate json against project model (must have props story, data, ...)
         const project = convertRawStrToJson(str, 'json');
         const valid = validateProject(project);
         if (valid) {

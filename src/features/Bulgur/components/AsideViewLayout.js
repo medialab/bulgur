@@ -12,12 +12,12 @@ const AsideViewLayout = ({
   openTakeAwayModal,
   isReadOnly
 }) => (
-   <aside className="bulgur-aside-view">
-      {isReadOnly ? <h1>Bulgur</h1> : ''}
-      {isReadOnly ? '' : <button onClick={openNewStoryModal} type="button">🛠 Story settings</button>}
-      <EditorComponent />
-      {isReadOnly ? '' : <button type="button" onClick={openTakeAwayModal}>🚀 Take away</button>}
-    </aside>
+  <aside className="bulgur-aside-view">
+    {isReadOnly ? <h1>Bulgur</h1> : ''}
+    {isReadOnly ? '' : <button onClick={openNewStoryModal} type="button">🛠 Story settings</button>}
+    <EditorComponent />
+    {isReadOnly ? '' : <button type="button" onClick={openTakeAwayModal}>🚀 Take away</button>}
+  </aside>
 );
 
 export default AsideViewLayout;

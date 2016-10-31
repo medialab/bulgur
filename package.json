@@ -47,6 +47,7 @@
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
     "reselect": "^2.5.4",
+    "shallow-equals": "0.0.0",
     "sigma": "^1.1.0",
     "uuid": "^2.0.3"
   },

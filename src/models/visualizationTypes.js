@@ -186,3 +186,12 @@ const models = {
   }
 };
 export default models;
+
+export function createDefaultSlideParameters(type) {
+  const slideModel = models[type].slideParameters;
+  // populate slide data with default where needed
+  return slideModel.reduce((output, parameterModel) => {
+    output[parameterModel.id] = parameterModel.default;
+    return output;
+  }, {});
+}
