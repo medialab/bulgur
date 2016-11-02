@@ -25,13 +25,13 @@ if (window.__project__) {
       activeStory: {
         globalUi: {
           newStoryModalOpen: false,
-          takeAwayModalOpen: false,
-          viewEqualsSlideParameters: false
+          takeAwayModalOpen: false
         },
         visualization: {
           data: project.data,
           visualizationType: project.globalParameters.visualizationType,
-          parameters: project.globalParameters.parameters,
+          // globalParameters: project.globalParameters.parameters,
+          viewEqualsSlideParameters: false,
           readOnly: true
         }
       }
