@@ -8,9 +8,6 @@ const bulgurProjectModel = {
     globalParameters: {
       type: 'object',
       contains: {
-        parameters: {
-          type: 'object'
-        },
         visualizationType: {
           type: 'string'
         }

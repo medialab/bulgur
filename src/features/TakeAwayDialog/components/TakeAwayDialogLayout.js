@@ -5,7 +5,7 @@ import 'react-select/dist/react-select.css';
 import './TakeAwayDialog.scss';
 
 export const ChooseTakeAwayStep = ({
-  takeAway,
+  takeAway
 }) => (
   <section className="new-story-dialog-step">
     <h1>I want to take away my story as ...</h1>
@@ -22,7 +22,7 @@ export const ChooseTakeAwayStep = ({
         },
         {
           id: 'github',
-          label: 'a github.io online website'
+          label: 'a gist+bl.ocks online website'
         },
         ].map((takeAwayType, key) => {
           const onOptionClick = (evt) => {
@@ -55,10 +55,31 @@ const NewStoryDialogLayout = ({
   actions: {
     closeTakeAwayModal
   },
-  takeAway
+  takeAway,
+  takeAwayLog,
+  gistUrl,
+  blocksUrl
 }) => (
   <div className="take-away-dialog">
     <ChooseTakeAwayStep takeAway={takeAway} />
+    <section className="take-away-dialog-step pub-links">
+      {
+        takeAwayLog ? <p>{takeAwayLog}</p> : ''
+      }
+      {
+        blocksUrl ?
+          <h2>
+            <a target="blank" href={blocksUrl}>Webpage url : {blocksUrl}</a>
+          </h2> : ''
+      }
+      {
+        gistUrl ?
+          <h2>
+            <a target="blank" href={gistUrl}>Source code url : {gistUrl}</a>
+          </h2>
+        : ''
+      }
+    </section>
     <section className="take-away-dialog-step">
       <button
         onClick={closeTakeAwayModal}>

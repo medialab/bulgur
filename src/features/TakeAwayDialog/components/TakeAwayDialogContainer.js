@@ -38,21 +38,24 @@ class TakeAwayDialogContainer extends Component {
   }
 
   shouldComponentUpdate() {
-    return false;
+    return true;
   }
 
   takeAway(takeAwayType) {
     const quinoaStory = quinoa.getState().editor;
     const project = bundleProjectAsJson(this.props.visualizationData, quinoaStory);
+    let html;
     switch (takeAwayType.id) {
       case 'project':
         downloadFile(JSON.stringify(project, null, 2), 'json');
         break;
       case 'html':
-        const html = bundleProjectAsHtml(project);
+        html = bundleProjectAsHtml(project);
         downloadFile(html, 'html');
         break;
       case 'github':
+        html = bundleProjectAsHtml(project);
+        this.props.actions.exportToGithub(html);
         break;
       default:
         break;
