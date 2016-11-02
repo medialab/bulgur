@@ -57,6 +57,7 @@ const NewStoryDialogLayout = ({
   },
   takeAway,
   takeAwayLog,
+  takeAwayLogStatus,
   gistUrl,
   blocksUrl
 }) => (
@@ -64,7 +65,7 @@ const NewStoryDialogLayout = ({
     <ChooseTakeAwayStep takeAway={takeAway} />
     <section className="take-away-dialog-step pub-links">
       {
-        takeAwayLog ? <p>{takeAwayLog}</p> : ''
+        takeAwayLog ? <p className="take-away-log" style={{background: takeAwayLogStatus === 'success' ? 'lightgreen' : 'lightblue'}}>{takeAwayLog}</p> : ''
       }
       {
         blocksUrl ?

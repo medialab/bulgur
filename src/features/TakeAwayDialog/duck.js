@@ -44,13 +44,15 @@ function ui(state = DEFAULT_TAKE_AWAY_SETTINGS, action) {
     case EXPORT_TO_GITHUB_STATUS:
       return {
         ...state,
-        takeAwayLog: action.status
+        takeAwayLog: action.message,
+        takeAwayLogStatus: action.status
       };
     case EXPORT_TO_GITHUB + '_SUCCESS':
       window.open(action.result.blocksUrl, '_blank');
       return {
         ...state,
-        takeAwayLog: undefined,
+        takeAwayLog: 'publication was successful !',
+        takeAwayLogStatus: 'success',
         gistUrl: action.result.gistUrl,
         blocksUrl: action.result.blocksUrl
       };
@@ -73,6 +75,9 @@ const takeAwayType = state => state.ui &&
 const takeAwayLog = state => state.ui &&
   state.ui.takeAwayLog;
 
+const takeAwayLogStatus = state => state.ui &&
+  state.ui.takeAwayLogStatus;
+
 const gistUrl = state => state.ui &&
   state.ui.gistUrl;
 
@@ -82,6 +87,7 @@ const blocksUrl = state => state.ui &&
 export const selector = createStructuredSelector({
   takeAwayType,
   takeAwayLog,
+  takeAwayLogStatus,
   gistUrl,
   blocksUrl
 });
