@@ -2,20 +2,23 @@ import GitHub from 'github-api';
 import {OAuth} from 'oauthio-web';
 import {oauth_io_public_key as oKey} from '../../secrets';
 
+// initialize oauth io authentication
 OAuth.initialize(oKey);
 
 export default function publishGist(fileContent, dispatch, statusActionName) {
   return new Promise((resolve, reject) => {
     dispatch({
       type: statusActionName,
-      status: 'connecting to github'
+      message: 'connecting to github',
+      status: 'processing'
     });
     OAuth.popup('github')
     .done(function(loginResult) {
       const token = loginResult.access_token;
       dispatch({
         type: statusActionName,
-        status: 'getting user gists'
+        message: 'getting user gists',
+        status: 'processing'
       });
       loginResult.me().done((userData) => {
         const userName = userData.alias;
@@ -36,7 +39,8 @@ export default function publishGist(fileContent, dispatch, statusActionName) {
         };
         dispatch({
           type: statusActionName,
-          status: 'creating gist'
+          message: 'creating gist',
+          status: 'processing'
         });
         const gist = gh.getGist();
         gist.create(gistContent)
