@@ -43,7 +43,12 @@ class TakeAwayDialogContainer extends Component {
 
   takeAway(takeAwayType) {
     const quinoaStory = quinoa.getState().editor;
-    const project = bundleProjectAsJson(this.props.visualizationData, quinoaStory);
+    const remoteUrls = {
+      gistUrl: this.props.gistUrl,
+      blocksUrl: this.props.blocksUrl,
+      gistId: this.props.gistId
+    };
+    const project = bundleProjectAsJson(this.props.visualizationData, quinoaStory, remoteUrls);
     let html;
     switch (takeAwayType.id) {
       case 'project':
@@ -55,7 +60,7 @@ class TakeAwayDialogContainer extends Component {
         break;
       case 'github':
         html = bundleProjectAsHtml(project);
-        this.props.actions.exportToGithub(html);
+        this.props.actions.exportToGithub(html, this.props.gistId);
         break;
       default:
         break;

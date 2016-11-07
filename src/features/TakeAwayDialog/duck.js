@@ -1,59 +1,72 @@
 import {combineReducers} from 'redux';
 import {createStructuredSelector} from 'reselect';
-import publishGist from '../../helpers/githubExporter';
+import publishGist from '../../helpers/gistExporter';
 
 /*
  * Action names
  */
+ import {SETUP_NEW_STORY} from '../NewStoryDialog/duck';
+ import {RESET_APP} from '../Bulgur/duck';
 
 const SET_TAKE_AWAY_TYPE = 'SET_TAKE_AWAY_TYPE';
-const EXPORT_TO_GITHUB = 'EXPORT_TO_GITHUB';
-const EXPORT_TO_GITHUB_STATUS = 'EXPORT_TO_GITHUB_STATUS';
+const EXPORT_TO_GIST = 'EXPORT_TO_GIST';
+const EXPORT_TO_GIST_STATUS = 'EXPORT_TO_GIST_STATUS';
 
 export const TAKE_AWAY = 'TAKE_AWAY';
 
 /*
  * Action creators
  */
-export const exportToGithub = (content) => ({
-  type: EXPORT_TO_GITHUB,
+export const exportToGithub = (content, gistId) => ({
+  type: EXPORT_TO_GIST,
   promise: (dispatch) => {
     return new Promise((resolve, reject) => {
-      return publishGist(content, dispatch, EXPORT_TO_GITHUB_STATUS)
+      return publishGist(content, dispatch, EXPORT_TO_GIST_STATUS, gistId)
               .then(resolve)
               .catch(reject);
     });
   }
 });
-
 /*
  * Reducers
  */
-
-const DEFAULT_TAKE_AWAY_SETTINGS = {
+const DEFAULT_TAKE_AWAY_UI_SETTINGS = {
     takeAwayType: undefined,
-    takeAwayLog: undefined
+    takeAwayLog: undefined,
+    takeAwayLogStatus: undefined,
+    gistUrl: undefined,
+    gistId: undefined,
+    blocksUrl: undefined
 };
-function ui(state = DEFAULT_TAKE_AWAY_SETTINGS, action) {
+function takeAwayUi(state = DEFAULT_TAKE_AWAY_UI_SETTINGS, action) {
   switch (action.type) {
+    case RESET_APP:
+      return DEFAULT_TAKE_AWAY_UI_SETTINGS;
+    case SETUP_NEW_STORY:
+      return {
+        ...state,
+        gistUrl: action.remoteUrls && action.remoteUrls.gistUrl,
+        gistUri: action.remoteUrls && action.remoteUrls.gistUri,
+        blocksUrl: action.remoteUrls && action.remoteUrls.blocksUrl
+      };
     case SET_TAKE_AWAY_TYPE:
       return {
         ...state,
         takeAwayType: action.takeAwayType
       };
-    case EXPORT_TO_GITHUB_STATUS:
+    case EXPORT_TO_GIST_STATUS:
       return {
         ...state,
         takeAwayLog: action.message,
         takeAwayLogStatus: action.status
       };
-    case EXPORT_TO_GITHUB + '_SUCCESS':
-      window.open(action.result.blocksUrl, '_blank');
+    case EXPORT_TO_GIST + '_SUCCESS':
       return {
         ...state,
-        takeAwayLog: 'publication was successful !',
+        takeAwayLog: 'your story is online',
         takeAwayLogStatus: 'success',
         gistUrl: action.result.gistUrl,
+        gistId: action.result.gistId,
         blocksUrl: action.result.blocksUrl
       };
     default:
@@ -62,7 +75,7 @@ function ui(state = DEFAULT_TAKE_AWAY_SETTINGS, action) {
 }
 
 export default combineReducers({
-  ui
+  takeAwayUi
 });
 
 /*
@@ -70,25 +83,29 @@ export default combineReducers({
  */
 
 const takeAwayType = state => state.ui &&
-  state.ui.takeAwayType;
+  state.takeAwayUi.takeAwayType;
 
 const takeAwayLog = state => state.ui &&
-  state.ui.takeAwayLog;
+  state.takeAwayUi.takeAwayLog;
 
 const takeAwayLogStatus = state => state.ui &&
-  state.ui.takeAwayLogStatus;
+  state.takeAwayUi.takeAwayLogStatus;
 
 const gistUrl = state => state.ui &&
-  state.ui.gistUrl;
+  state.takeAwayUi.gistUrl;
 
 const blocksUrl = state => state.ui &&
-  state.ui.blocksUrl;
+  state.takeAwayUi.blocksUrl;
+
+const gistId = state => state.ui &&
+  state.takeAwayUi.gistId;
 
 export const selector = createStructuredSelector({
   takeAwayType,
   takeAwayLog,
   takeAwayLogStatus,
   gistUrl,
-  blocksUrl
+  blocksUrl,
+  gistId
 });
 

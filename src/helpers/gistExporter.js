@@ -5,7 +5,7 @@ import {oauth_io_public_key as oKey} from '../../secrets';
 // initialize oauth io authentication
 OAuth.initialize(oKey);
 
-export default function publishGist(fileContent, dispatch, statusActionName) {
+export default function publishGist(fileContent, dispatch, statusActionName, gistId) {
   return new Promise((resolve, reject) => {
     dispatch({
       type: statusActionName,
@@ -37,12 +37,21 @@ export default function publishGist(fileContent, dispatch, statusActionName) {
             }
           }
         };
-        dispatch({
-          type: statusActionName,
-          message: 'creating gist',
-          status: 'processing'
-        });
-        const gist = gh.getGist();
+        if (gistId) {
+          dispatch({
+            type: statusActionName,
+            message: 'updating gist',
+            status: 'processing'
+          });
+        }
+        else {
+          dispatch({
+            type: statusActionName,
+            message: 'creating gist',
+            status: 'processing'
+          });
+        }
+        const gist = gh.getGist(gistId);
         gist.create(gistContent)
           .then(() => {
             return gist.read();
@@ -50,10 +59,12 @@ export default function publishGist(fileContent, dispatch, statusActionName) {
           .then(response => {
             const gistData = response.data;
             const blocksUrl = 'https://bl.ocks.org/' + userName + '/raw/' + gistData.id;
+            window.open(blocksUrl, '_blank');
             const gistUrl = gistData.html_url;
             const results = {
               blocksUrl,
               gistUrl,
+              gistId: gistData.id,
               gist
             };
             return resolve(results);

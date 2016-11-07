@@ -2,8 +2,8 @@ import {applyMiddleware, createStore, compose} from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './rootReducer';
 import promiseMiddleware from './promiseMiddleware';
-import { persistentStore } from 'redux-pouchdb';
-import { persistentReducer } from 'redux-pouchdb';
+import {persistentStore} from 'redux-pouchdb';
+import {persistentReducer} from 'redux-pouchdb';
 
 const PouchDB = require('pouchdb');
 
@@ -26,7 +26,7 @@ export default function configureStore (initialState = {}) {
   const persistedReducer = persistentReducer(rootReducer);
 
   const store = createStoreWithMiddleware(
-    persistedReducer, 
+    persistedReducer,
     initialState
   );
 

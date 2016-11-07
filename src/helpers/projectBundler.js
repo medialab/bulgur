@@ -1,11 +1,12 @@
 
-export function bundleProjectAsJson (visualizationData, quinoaStory) {
+export function bundleProjectAsJson (visualizationData, quinoaStory, remoteUrls = {}) {
   return {
       data: visualizationData.data,
       globalParameters: {
         parameters: visualizationData.parameters,
         visualizationType: visualizationData.visualizationType
       },
+      remoteUrls,
       story: {
         order: quinoaStory.order.slice(),
         slides: Object.keys(quinoaStory.slides).map(slideKey => {
@@ -57,14 +58,3 @@ export function bundleProjectAsHtml (jsonBundle) {
 </html>
 `;
 }
-
-/*
-<!-- Loading Sigma Dependencies -->
-  <script type="text/javascript">${sigmaMain}</script>
-  <script type="text/javascript">${sigmaGexf}</script>
-  <script type="text/javascript">${sigmaForceAtlas2}</script>
-  <script type="text/javascript">${sigmaSaveCamera}</script>
-
-  <!-- App code -->
-  <script type="text/javascript">${bundle}</script>
-*/

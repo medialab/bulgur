@@ -46,6 +46,7 @@ class BulgurContainer extends Component {
     this.resetView = this.resetView.bind(this);
     this.updateSlideIfEmpty = this.updateSlideIfEmpty.bind(this);
     this.onProjectImport = this.onProjectImport.bind(this);
+    this.returnToLanding = this.returnToLanding.bind(this);
   }
 
   componentWillMount() {
@@ -115,7 +116,7 @@ class BulgurContainer extends Component {
         const project = convertRawStrToJson(str, 'json');
         const valid = validateProject(project);
         if (valid) {
-          this.props.actions.setupNewStory([], project.globalParameters.visualizationType, project.data);
+          this.props.actions.setupNewStory([], project.globalParameters.visualizationType, project.data, project.remoteUrls);
           project.story.order.forEach(id => {
             quinoaActions.addSlide(project.story.slides[id]);
             // workaround on the fact that addSlide seems not to work
@@ -136,6 +137,10 @@ class BulgurContainer extends Component {
     this.props.actions.updateView(this.props.quinoaState.slideParameters);
   }
 
+  returnToLanding() {
+    this.props.actions.resetApp();
+  }
+
   render() {
     return (
       <BulgurLayout
@@ -143,6 +148,7 @@ class BulgurContainer extends Component {
         closeAndResetDialog={this.closeAndResetDialog}
         updateSlide={this.updateSlide}
         onProjectImport={this.onProjectImport}
+        returnToLanding={this.returnToLanding}
         resetView={this.resetView} />
     );
   }

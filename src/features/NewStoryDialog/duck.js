@@ -11,7 +11,7 @@ import {
 /*
  * Action names
  */
-
+import {RESET_APP} from '../Bulgur/duck';
 const SET_VISUALIZATION_TYPE = 'SET_VISUALIZATION_TYPE';
 
 const FETCH_EXAMPLE_FILE = 'FETCH_EXAMPLE_FILE';
@@ -128,11 +128,12 @@ export const mapFieldToInvariantParameter = (fieldName, parameterId) => ({
   parameterId
 });
 
-export const setupNewStory = (dataMap = [], visualizationType, data) => ({
+export const setupNewStory = (dataMap = [], visualizationType, data, remoteUrls) => ({
   type: SETUP_NEW_STORY,
   data,
   dataMap,
-  visualizationType
+  visualizationType,
+  remoteUrls
 });
 
 
@@ -145,6 +146,8 @@ const DEFAULT_NEW_STORY_SETTINGS = {
 };
 function newStorySettings(state = DEFAULT_NEW_STORY_SETTINGS, action) {
   switch (action.type) {
+    case RESET_APP:
+      return DEFAULT_NEW_STORY_SETTINGS;
     case SET_VISUALIZATION_TYPE:
       return {
         ...state,
@@ -166,6 +169,8 @@ const DEFAULT_NEW_STORY_DATA = {
 
 function newStoryData(state = DEFAULT_NEW_STORY_DATA, action) {
   switch (action.type) {
+    case RESET_APP:
+      return DEFAULT_NEW_STORY_DATA;
     case FETCH_EXAMPLE_FILE:
     case FETCH_USER_FILE:
       return {

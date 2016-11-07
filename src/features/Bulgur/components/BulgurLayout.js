@@ -17,6 +17,7 @@ const InterfaceManagerLayout = ({
   updateSlide,
   resetView,
   onProjectImport,
+  returnToLanding,
   actions: {
     openNewStoryModal,
     openTakeAwayModal,
@@ -44,6 +45,7 @@ const InterfaceManagerLayout = ({
   return (<div id={id} className={className}>
     {visualizationType ?
       <AsideViewLayout
+        returnToLanding={returnToLanding}
         openNewStoryModal={openNewStoryModal}
         openTakeAwayModal={openTakeAwayModal}
         isReadOnly={isReadOnly} /> :

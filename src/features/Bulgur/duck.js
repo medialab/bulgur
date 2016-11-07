@@ -17,6 +17,7 @@ const CLOSE_TAKE_AWAY_MODAL = 'CLOSE_TAKE_AWAY_MODAL';
 const VIEW_EQUALS_SLIDE_PARAMETERS = 'VIEW_EQUALS_SLIDE_PARAMETERS';
 const UPDATE_VIEW = 'UPDATE_VIEW';
 const SET_QUINOA_SLIDE_PARAMETERS = 'SET_QUINOA_SLIDE_PARAMETERS';
+export const RESET_APP = 'RESET_APP';
 
 /*
  * Action creators
@@ -53,6 +54,10 @@ export const setQuinoaSlideParameters = (parameters) => ({
   parameters
 });
 
+export const resetApp = () => ({
+  type: RESET_APP
+});
+
 /*
  * Reducers
  */
@@ -70,6 +75,8 @@ const VISUALIZATION_DEFAULT_STATE = {
 function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
   let isSync;
   switch (action.type) {
+    case RESET_APP:
+      return VISUALIZATION_DEFAULT_STATE;
     case SETUP_NEW_STORY:
       // consume original data points against dataMap
       const finalData = (action.dataMap && action.dataMap.length) ? action.data.map(point => {
@@ -112,6 +119,8 @@ const GLOBAL_UI_DEFAULT_STATE = {
 };
 function globalUi(state = GLOBAL_UI_DEFAULT_STATE, action) {
   switch (action.type) {
+    case RESET_APP:
+      return GLOBAL_UI_DEFAULT_STATE;
     case OPEN_NEW_STORY_MODAL:
       return {
         ...state,
