@@ -51,6 +51,8 @@
         display: block;
 
         text-align: left;
+
+        padding: $medium-gutter 0 $medium-gutter $medium-gutter;
     }
     > button:first-of-type
     {

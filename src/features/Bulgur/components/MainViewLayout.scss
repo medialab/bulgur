@@ -33,12 +33,12 @@
     .view-operations
     {
         position: absolute;
-        top: -2rem;
-        right: 2rem;
+        top: -$large-gutter*2;
+        right: $medium-gutter;
 
         display: flex;
 
-        height: 2rem;
+        height: $large-gutter*2;
     }
 
     /*
@@ -51,6 +51,8 @@
 
         border: 1px solid $primary-color;
         background: $background-default;
+
+        padding: $medium-gutter;
     }
 
     .caption-editor

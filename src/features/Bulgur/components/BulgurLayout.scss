@@ -31,6 +31,24 @@
 
         flex: 4;
     }
+
+    .bulgur-icon-image
+    {
+        display: inline;
+        width: 1em;
+        height: 1em;
+        padding-right: .5em;
+    }
+}
+
+.ReactModal__Content button
+{
+    border: 1px solid $background-intent;
+    padding: $medium-gutter;
+    background: inherit;
+    margin-right: $medium-gutter;
+    color: $primary-color;
+    outline: none;
 }
 
 /*

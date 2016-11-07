@@ -46,8 +46,8 @@ const MainViewLayout = ({
         {doesViewEqualsSlideParameters ?
           '' :
             <div className="view-operations">
-              <button onClick={clickOnRecord}>📷 Take snapshot</button>
-              <button onClick={clickOnReset}>⎌ Reset</button>
+              <button onClick={clickOnRecord}><img className='bulgur-icon-image' src={require('../assets/snapshot.svg')} /> Take snapshot</button>
+              <button onClick={clickOnReset}><img className='bulgur-icon-image' src={require('../assets/reset.svg')} /> Reset</button>
             </div>
         }
         <div className="caption-editor">

@@ -168,10 +168,11 @@ const NewStoryDialogLayout = ({
         activeVisualizationType &&
         activeData
         ?
-          <button onClick={closeAndSetupNewStory}>Tell the story</button>
+          <button style={{background: 'lightgreen'}} onClick={closeAndSetupNewStory}>Tell the story</button>
         : ''
       }
       <button
+        style={{background: 'brown', color: 'white'}}
         onClick={closeAndResetDialog}>
         Cancel
       </button>

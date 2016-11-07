@@ -24,6 +24,7 @@ const sigInst = new sigma({
 });
 
 const camera = sigInst.addCamera('main');
+camera.isAnimated = true;
 
 // function monkeyPatchCamera(action) {
 //   const originalFn = camera.goTo;
@@ -86,7 +87,7 @@ class Graph extends Component {
         ratio: next.viewParameters.cameraRatio,
       };
       camera.goTo(coords);
-      // sigInst.refresh();
+      sigInst.refresh();
     }
   }
 
@@ -106,10 +107,6 @@ class Graph extends Component {
         }
       );
     }
-    // // If the slide has changed, we try to apply the saved camera
-    // else if (prev.currentSlide !== this.props.currentSlide) {
-    //   sigInst.loadCamera('main', this.props.camera);
-    // }
   }
 
   componentWillUnmount() {

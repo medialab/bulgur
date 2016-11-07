@@ -15,10 +15,10 @@ const AsideViewLayout = ({
 }) => (
   <aside className="bulgur-aside-view">
     {isReadOnly ? <h1>Bulgur</h1> : ''}
-    {isReadOnly ? '' : <button onClick={returnToLanding} type="button">New story / import</button>}
-    {isReadOnly ? '' : <button onClick={openNewStoryModal} type="button">🛠 Story settings</button>}
+    {isReadOnly ? '' : <button onClick={returnToLanding} type="button"><img className='bulgur-icon-image' src={require('../assets/landing.svg')} />New story / import</button>}
+    {isReadOnly ? '' : <button onClick={openNewStoryModal} type="button"><img className='bulgur-icon-image' src={require('../assets/settings.svg')} /> Story settings</button>}
     <EditorComponent />
-    {isReadOnly ? '' : <button type="button" onClick={openTakeAwayModal}>🚀 Take away</button>}
+    {isReadOnly ? '' : <button type="button" onClick={openTakeAwayModal}><img className='bulgur-icon-image' src={require('../assets/take-away.svg')} /> Take away</button>}
   </aside>
 );
 
