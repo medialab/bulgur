@@ -48,11 +48,10 @@
     .view-operations button
     {
         margin-right: $medium-gutter;
+        padding: $medium-gutter;
 
         border: 1px solid $primary-color;
         background: $background-default;
-
-        padding: $medium-gutter;
     }
 
     .caption-editor
