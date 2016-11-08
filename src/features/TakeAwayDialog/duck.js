@@ -82,22 +82,22 @@ export default combineReducers({
  * Selectors
  */
 
-const takeAwayType = state => state.ui &&
+const takeAwayType = state => state.takeAwayUi &&
   state.takeAwayUi.takeAwayType;
 
-const takeAwayLog = state => state.ui &&
+const takeAwayLog = state => state.takeAwayUi &&
   state.takeAwayUi.takeAwayLog;
 
-const takeAwayLogStatus = state => state.ui &&
+const takeAwayLogStatus = state => state.takeAwayUi &&
   state.takeAwayUi.takeAwayLogStatus;
 
-const gistUrl = state => state.ui &&
+const gistUrl = state => state.takeAwayUi &&
   state.takeAwayUi.gistUrl;
 
-const blocksUrl = state => state.ui &&
+const blocksUrl = state => state.takeAwayUi &&
   state.takeAwayUi.blocksUrl;
 
-const gistId = state => state.ui &&
+const gistId = state => state.takeAwayUi &&
   state.takeAwayUi.gistId;
 
 export const selector = createStructuredSelector({
