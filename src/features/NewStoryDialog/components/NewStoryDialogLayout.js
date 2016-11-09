@@ -31,7 +31,7 @@ export const ChooseVisualizationTypeStep = ({
               checked={activeVisualizationType === visType} />
             <label
               htmlFor={visType}>
-              <img src={require('../assets/bulgur-vistype-' + visType + '.png')} />
+              <img className="bulgur-icon-image" src={require('../assets/bulgur-vistype-' + visType + '.svg')} />
               <h3>{visType}</h3>
             </label>
           </div>);

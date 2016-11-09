@@ -41,7 +41,7 @@ export const ChooseTakeAwayStep = ({
               <label
                 onClick={onOptionClick}
                 htmlFor={takeAwayType}>
-                <img src={require('../assets/bulgur-take-away-' + takeAwayType.id + '.png')} />
+                <img className="bulgur-icon-image" src={require('../assets/bulgur-take-away-type-' + takeAwayType.id + '.svg')} />
                 <h3>{takeAwayType.label}</h3>
               </label>
             </div>);

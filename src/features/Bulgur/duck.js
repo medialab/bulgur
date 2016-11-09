@@ -104,11 +104,11 @@ function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
           }
           if (point.month) {
             start.setMonth(+point.month - 1);
-          } 
+          }
           else start.setMonth(0);
           if (point.day) {
             start.setDate(+point.day);
-          } 
+          }
           else start.setDate(1);
 
           let end;
@@ -120,11 +120,11 @@ function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
             }
             if (point['end month']) {
               end.setMonth(+point['end month'] - 1);
-            } 
+            }
             else end.setMonth(0);
             if (point['end day']) {
               end.setDate(+point['end day']);
-            } 
+            }
             else end.setDate(1);
           }
 

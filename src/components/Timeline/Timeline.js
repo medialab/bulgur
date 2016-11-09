@@ -47,8 +47,7 @@ const Timeline = ({
       options={options}
       rangechangedHandler={onRange}
       items={data}
-      animation={animation}
-     />
+      animation={animation} />
   );
 };
 

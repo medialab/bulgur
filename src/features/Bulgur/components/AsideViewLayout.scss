@@ -7,13 +7,12 @@
 .bulgur-aside-view
 {
     display: flex;
+    overflow: hidden;
     flex-direction: column;
 
     padding: $base-gutter;
     padding-right: $large-gutter;
 
-    overflow: hidden;
-    
     .quinoa-slide
     {
         // min-width: 15rem;
