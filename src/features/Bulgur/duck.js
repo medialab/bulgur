@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
 import {createStructuredSelector} from 'reselect';
 import equals from 'shallow-equals';
+import {v4} from 'uuid';
 
 import {SETUP_NEW_STORY} from '../NewStoryDialog/duck';
 
@@ -79,20 +80,77 @@ function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
       return VISUALIZATION_DEFAULT_STATE;
     case SETUP_NEW_STORY:
       // consume original data points against dataMap
-      const finalData = (action.dataMap && action.dataMap.length) ? action.data.map(point => {
-        return action.dataMap.reduce((finalObject, thatModel) => {
-          // map data mapped field to visualization dimension id
-          if (point[thatModel.mappedField]) {
-            finalObject[thatModel.id] = point[thatModel.mappedField];
+      let finalData = action.data;
+      let viewParameters;
+      const okForMap = (action.dataMap && action.dataMap.length);
+      if (okForMap) {
+        finalData = action.data.map(point => {
+            return action.dataMap.reduce((finalObject, thatModel) => {
+              // map data mapped field to visualization dimension id
+              if (point[thatModel.mappedField]) {
+                finalObject[thatModel.id] = point[thatModel.mappedField];
+              }
+              return finalObject;
+            }, {});
+        });
+      }
+      // todo : find a format for declaring that as a vis model ?
+      if (action.visualizationType === 'time') {
+        finalData = finalData.map(point => {
+          const start = new Date();
+
+          if (point.year) {
+            start.setFullYear(+point.year);
           }
-          return finalObject;
-        }, {});
-      }) : action.data;
+          if (point.month) {
+            start.setMonth(+point.month - 1);
+          } 
+          else start.setMonth(0);
+          if (point.day) {
+            start.setDate(+point.day);
+          } 
+          else start.setDate(1);
+
+          let end;
+
+          if (point['end year']) {
+            end = new Date();
+            if (point['end year']) {
+              end.setFullYear(+point['end year']);
+            }
+            if (point['end month']) {
+              end.setMonth(+point['end month'] - 1);
+            } 
+            else end.setMonth(0);
+            if (point['end day']) {
+              end.setDate(+point['end day']);
+            } 
+            else end.setDate(1);
+          }
+
+          return {
+            start,
+            end,
+            id: v4(),
+            ...point
+          };
+        });
+        const min = Math.min.apply(Math, finalData.map(point => point.start.getTime()));
+        const max = Math.max.apply(Math, finalData.map(point => point.start.getTime()));
+        const dist = max - min;
+        viewParameters = {
+          fromDate: min - dist / 4,
+          toDate: max + dist / 4
+        };
+      }
+      else {
+        viewParameters = createDefaultSlideParameters(action.visualizationType);
+      }
       return {
         ...state,
         data: finalData,
         visualizationType: action.visualizationType,
-        viewParameters: createDefaultSlideParameters(action.visualizationType)
+        viewParameters
       };
     case UPDATE_VIEW:
       isSync = equals(state.quinoaSlideParameters, action.parameters);

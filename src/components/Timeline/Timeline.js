@@ -1,46 +1,54 @@
 import React from 'react';
-
+import {default as TimelineComponent} from 'react-visjs-timeline';
 import './Timeline.scss';
 
 const Timeline = ({
   data = [],
-  dataMap = [],
   viewParameters = {},
   updateView
 }) => {
+  const range = {
+    start: viewParameters && new Date(viewParameters.fromDate),
+    end: viewParameters && new Date(viewParameters.toDate)
+  };
+
+  const animation = {
+    duration: 100,
+    easingFunction: 'easeInQuint'
+  };
+
+  const options = {
+    width: '100%',
+    height: '100%',
+    stack: true,
+    showMajorLabels: true,
+    showCurrentTime: false,
+
+    type: 'point',
+    format: {
+      minorLabels: {
+        minute: 'h:mma',
+        hour: 'ha'
+      }
+    },
+    start: range.start,
+    end: range.end
+  };
+
+  function onRange(props) {
+    if (props.byUser) {
+      const params = {fromDate: props.start.getTime(), toDate: props.end.getTime()};
+      updateView(params);
+    }
+  }
+
   return (
-    <div>
-      <h2>Timeline visualization</h2>
-      <p>Slide Parameters</p>
-      {Object.keys(viewParameters).map((parameterKey, key) => {
-        const onInputChange = (evt) => {
-          updateView({
-            ...viewParameters,
-            [parameterKey]: evt.target.value
-          });
-        };
-        return (
-          <div key={key}>
-            <p>{parameterKey}</p>
-            <form>
-              <input
-                style={{background: 'red'}}
-                value={viewParameters[parameterKey]}
-                onChange={onInputChange} />
-            </form>
-          </div>
-        );
-      })}
-      <p>Data fields / visualization parameters mapping:</p>
-      <ul>
-        {dataMap.map((parameter, key) =>
-          (<li key={key}>{parameter.id} : {parameter.mappedField}</li>)
-        )}
-      </ul>
-      <pre>
-        Data: {JSON.stringify(data, null, 1)}
-      </pre>
-    </div>
+    <TimelineComponent
+      options={options}
+      rangechangedHandler={onRange}
+      items={data}
+      animation={animation}
+     />
   );
 };
 

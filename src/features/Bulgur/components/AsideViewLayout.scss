@@ -11,6 +11,9 @@
 
     padding: $base-gutter;
     padding-right: $large-gutter;
+
+    overflow: hidden;
+    
     .quinoa-slide
     {
         // min-width: 15rem;

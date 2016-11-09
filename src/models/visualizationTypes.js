@@ -4,6 +4,10 @@ const models = {
     acceptedFileExtensions: ['csv', 'tsv'],
     dataMap: [
       {
+        id: 'content',
+        acceptedValueTypes: ['string']
+      },
+      {
         id: 'year',
         acceptedValueTypes: ['number']
       },
@@ -12,7 +16,7 @@ const models = {
         acceptedValueTypes: ['number']
       },
       {
-        id: 'Day',
+        id: 'day',
         acceptedValueTypes: ['number']
       },
       {
@@ -35,7 +39,7 @@ const models = {
         id: 'end time',
         acceptedValueTypes: ['string']
       },
-      {
+      /*{
         id: 'display date',
         acceptedValueTypes: ['string']
       },
@@ -66,33 +70,30 @@ const models = {
       {
         id: 'type',
         acceptedValueTypes: ['string']
-      },
+      },*/
       {
         id: 'group',
         acceptedValueTypes: ['string']
       },
-      {
+      /*{
         id: 'background',
         acceptedValueTypes: ['string']
-      }
+      }*/
     ],
-    samples: [{
-      title: 'Histoire du Fort et des combats de 1870-1871 à Issy',
-      fileName: 'histoiredufort.csv',
-      description: 'Plus d\'informations: http://data.issy.com/explore/dataset/histoiredufort-feuille1/export/?disjunctive.refqr'
-    },
+    samples: [
     {
-      title: 'Dataset officiel de timelinejs',
-      fileName: 'official-timeline-js.csv',
-      description: 'Plus d\'informations: http://timeline.knightlab.com/'
-    }],
+      title: 'Milestones in the history of data visualization',
+      fileName: 'milestones-history-datavis.csv',
+      description: 'More information: http://www.datavis.ca/'
+    }
+    ],
     slideParameters: [
       {
-        id: 'fromTime',
-        default: 0
+        id: 'fromDate',
+        default: new Date() - 1000 * 3600 * 24 * 365
       },
       {
-        id: 'toTime',
+        id: 'toDate',
         default: new Date().getTime()
       }
     ]

@@ -1,1 +1,8 @@
 @import '../../parameters.scss';
+
+.visualization-container {
+  > div{
+    width: 100%;
+    height: 100%;
+  }
+}

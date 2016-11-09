@@ -26,19 +26,6 @@ const sigInst = new sigma({
 const camera = sigInst.addCamera('main');
 camera.isAnimated = true;
 
-// function monkeyPatchCamera(action) {
-//   const originalFn = camera.goTo;
-//   camera.goTo = function() {
-//     if (typeof action === 'function')
-//       action();
-//     return originalFn.apply(camera, arguments);
-//   };
-
-//   return () => {
-//     camera.goTo = originalFn;
-//   };
-// }
-
 class Graph extends Component {
 
   constructor(props, context) {
@@ -52,7 +39,7 @@ class Graph extends Component {
     // Adding the relevant renderer
     this.renderer = sigInst.addRenderer({
       container: this.container,
-      camera
+      camera: 'main'
     });
 
     // Loading the graph
