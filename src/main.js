@@ -39,7 +39,6 @@ if (window.__project__) {
   }
 }
 
-
 const store = configureStore(initialState);
 window.store = store;
 

@@ -69,14 +69,14 @@ const NewStoryDialogLayout = ({
       }
       {
         blocksUrl ?
-          <h2>
-            <a target="blank" href={blocksUrl}>Webpage url : {blocksUrl}</a>
+          <h2 className="pub-link">
+            <a target="blank" href={blocksUrl}>Go to the Webpage of your story</a>
           </h2> : ''
       }
       {
         gistUrl ?
-          <h2>
-            <a target="blank" href={gistUrl}>Source code url : {gistUrl}</a>
+          <h2 className="pub-link">
+            <a target="blank" href={gistUrl}>Go to the source code of your story</a>
           </h2>
         : ''
       }

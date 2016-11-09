@@ -55,7 +55,29 @@
 
     .pub-links
     {
-        text-align: center;
+        .pub-link
+        {
+            text-align: center;
+
+            a
+            {
+                display: inline-block;
+
+                padding: $medium-gutter;
+
+                text-decoration: none;
+                text-transform: uppercase;
+
+                color: inherit;
+                background: inherit;
+                background: lightblue;
+                &:hover
+                {
+                    color: white;
+                    background: darkblue;
+                }
+            }
+        }
     }
 
     .take-away-log
