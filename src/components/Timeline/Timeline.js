@@ -7,10 +7,28 @@ const Timeline = ({
   viewParameters = {},
   updateView
 }) => {
-  const range = {
-    start: viewParameters && new Date(viewParameters.fromDate),
-    end: viewParameters && new Date(viewParameters.toDate)
-  };
+  let range;
+  if (Object.keys(viewParameters).length) {
+    range = {
+      start: viewParameters && new Date(viewParameters.fromDate),
+      end: viewParameters && new Date(viewParameters.toDate)
+    };
+  } 
+  else if (data.length) {
+    const min = Math.min.apply(Math, data.map(point => point.start));
+    const max = Math.max.apply(Math, data.map(point => point.start));
+    const dist = max - min;
+    range = {
+      start: new Date(min - dist / 4),
+      end: new Date(max + dist / 4)
+    };
+  } 
+  else {
+    range = {
+      start: new Date(0),
+      end: new Date()
+    };
+  }
 
   const animation = {
     duration: 100,
