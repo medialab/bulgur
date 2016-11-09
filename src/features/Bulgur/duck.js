@@ -129,14 +129,14 @@ function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
           }
 
           return {
-            start,
-            end,
+            start: start.getTime(),
+            end: end !== undefined ? end.getTime() : undefined,
             id: v4(),
             ...point
           };
         });
-        const min = Math.min.apply(Math, finalData.map(point => point.start.getTime()));
-        const max = Math.max.apply(Math, finalData.map(point => point.start.getTime()));
+        const min = Math.min.apply(Math, finalData.map(point => point.start));
+        const max = Math.max.apply(Math, finalData.map(point => point.start));
         const dist = max - min;
         viewParameters = {
           fromDate: min - dist / 4,
