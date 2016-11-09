@@ -38,6 +38,7 @@
     "gexf": "^0.2.5",
     "github-api": "^2.3.0",
     "leaflet": "^0.7.7",
+    "oauthio-web": "^0.6.1",
     "pouchdb": "^6.0.7",
     "quinoa": "git+https://github.com/robindemourat/quinoa.git",
     "react": "^15.3.2",
