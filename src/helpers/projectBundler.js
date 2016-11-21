@@ -32,8 +32,8 @@ export function bundleProjectAsHtml (jsonBundle) {
 <head>
   <title>Bulgur</title>
   <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
-  <link href="http://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
-  <link href="http://fonts.googleapis.com/css?family=Abhaya+Libre" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Abhaya+Libre" rel="stylesheet">
   <meta charset="utf-8">
 </head>
 <body>
@@ -45,10 +45,10 @@ export function bundleProjectAsHtml (jsonBundle) {
   </script>
 
   <!-- Loading Sigma Dependencies -->
-  <script type="text/javascript" src="http://rawgit.com/medialab/bulgur/master/external/sigma.min.js"></script>
-  <script type="text/javascript" src="http://rawgit.com/medialab/bulgur/master/external/sigma.parsers.gexf.min.js"></script>
-  <script type="text/javascript" src="http://rawgit.com/medialab/bulgur/master/external/sigma.layout.forceAtlas2.min.js"></script>
-  <script type="text/javascript" src="http://rawgit.com/medialab/bulgur/master/external/sigma.plugins.saveCamera.js"></script>
+  <script type="text/javascript" src="https://rawgit.com/medialab/bulgur/master/external/sigma.min.js"></script>
+  <script type="text/javascript" src="https://rawgit.com/medialab/bulgur/master/external/sigma.parsers.gexf.min.js"></script>
+  <script type="text/javascript" src="https://rawgit.com/medialab/bulgur/master/external/sigma.layout.forceAtlas2.min.js"></script>
+  <script type="text/javascript" src="https://rawgit.com/medialab/bulgur/master/external/sigma.plugins.saveCamera.js"></script>
 
   <!-- App code -->
   <script type="text/javascript" src="http://rawgit.com/medialab/bulgur/master/build/bundle.js">
