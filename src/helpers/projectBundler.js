@@ -51,7 +51,7 @@ export function bundleProjectAsHtml (jsonBundle) {
   <script type="text/javascript" src="https://rawgit.com/medialab/bulgur/master/external/sigma.plugins.saveCamera.js"></script>
 
   <!-- App code -->
-  <script type="text/javascript" src="http://rawgit.com/medialab/bulgur/master/build/bundle.js">
+  <script type="text/javascript" src="https://rawgit.com/medialab/bulgur/master/build/bundle.js">
   </script>
 
 </body>
