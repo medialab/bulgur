@@ -47,7 +47,7 @@ const Map = ({
       onMoveEnd={onMoveEnd}
       animate>
       <TileLayer
-        url="http://{s}.tile.osm.org/{z}/{x}/{y}.png" />
+        url="https://{s}.tile.osm.org/{z}/{x}/{y}.png" />
       {
           data.map((point, index) => {
             if (point.latitude && point.longitude) {
