@@ -40,6 +40,7 @@ const Map = ({
       updateView(view);
     }
   };
+  // http://{s}.tile.osm.org/{z}/{x}/{y}.png
   return (
     <MapComponent
       center={position}
@@ -47,7 +48,7 @@ const Map = ({
       onMoveEnd={onMoveEnd}
       animate>
       <TileLayer
-        url="https://{s}.tile.osm.org/{z}/{x}/{y}.png" />
+        url="http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png" />
       {
           data.map((point, index) => {
             if (point.latitude && point.longitude) {
