@@ -52,6 +52,7 @@ export function renderApplication() {
   );
   render(group, mountNode);
 }
+
 plugQuinoa(renderApplication);
 renderApplication();
 

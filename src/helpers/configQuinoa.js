@@ -10,7 +10,7 @@ function createSlide(data = {}) {
     title: data.title || '',
     markdown: data.markdown || '',
     draft: EditorState.createEmpty(),
-    meta: {}
+    meta: data.meta || {}
   };
 }
 
@@ -32,11 +32,16 @@ function createQuinoaState(slides = []) {
   };
 }
 
-const QUINOA_DEFAULT_STATE = createQuinoaState([
-  createSlide({
-    title: 'Welcome to the tool'
-  })
+let QUINOA_DEFAULT_STATE = createQuinoaState([
 ]);
+
+// case all-in-one readonly app
+if (window.__project__) {
+  const project = window.__project__;
+  const initialStory = project.story.order.map(id => project.story.slides[id]);
+  QUINOA_DEFAULT_STATE = createQuinoaState(initialStory.map(createSlide));
+}
+
 
 const quinoa = new Quinoa({
   defaultState: QUINOA_DEFAULT_STATE,
