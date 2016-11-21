@@ -59,7 +59,7 @@ export function mapStore(quinoaLib) {
 
   return {
     currentSlide: editor.current,
-    slideParameters: currentSlide.meta
+    slideParameters: currentSlide ? currentSlide.meta : {}
   };
 }
 
