@@ -32,14 +32,18 @@ function createQuinoaState(slides = []) {
   };
 }
 
-let QUINOA_DEFAULT_STATE = createQuinoaState([
-]);
+let QUINOA_DEFAULT_STATE;
 
 // case all-in-one readonly app
 if (window.__project__) {
   const project = window.__project__;
   const initialStory = project.story.order.map(id => project.story.slides[id]);
   QUINOA_DEFAULT_STATE = createQuinoaState(initialStory.map(createSlide));
+}
+else {
+  QUINOA_DEFAULT_STATE = createQuinoaState([
+    createSlide({title: 'welcome to bulgur'})
+  ]);
 }
 
 
