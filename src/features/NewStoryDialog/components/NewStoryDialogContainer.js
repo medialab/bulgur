@@ -11,7 +11,8 @@ import NewStoryDialogLayout from './NewStoryDialogLayout';
 @connect(
   state => ({
     ...duck.selector(state.newStory),
-    visualizationTypesModels: state.models.visualizationTypes
+    visualizationTypesModels: state.models.visualizationTypes,
+    hasActiveVisualization: state.activeStory.visualization.data && state.activeStory.visualization.data.length > 0
   }),
   dispatch => ({
     actions: bindActionCreators({
@@ -75,6 +76,7 @@ class NewStoryDialogContainer extends Component {
         closeAndResetDialog={this.closeAndResetDialog}
         closeAndSetupNewStory={this.closeAndSetupNewStory}
         changeVisualizationType={this.changeVisualizationType}
+        grassrootsMode={!this.props.hasActiveVisualization}
         onFileDrop={this.onFileDrop} />
     );
   }

@@ -139,14 +139,17 @@ const NewStoryDialogLayout = ({
   closeAndResetDialog,
   closeAndSetupNewStory,
   changeVisualizationType,
+  grassrootsMode = true,
   onFileDrop
 }) => (
   <div className="new-story-dialog">
-    <ChooseVisualizationTypeStep
+    {grassrootsMode ? <ChooseVisualizationTypeStep
       activeVisualizationType={activeVisualizationType}
-      setVisualizationType={changeVisualizationType} />
+      setVisualizationType={changeVisualizationType} /> :
+      ''
+    }
 
-    {activeVisualizationType && visualizationTypesModels[activeVisualizationType] ?
+    {grassrootsMode && activeVisualizationType && visualizationTypesModels[activeVisualizationType] ?
       <SetVisualizationDataSourceStep
         fetchExampleFile={fetchExampleFile}
         visualizationTypeModel={visualizationTypesModels[activeVisualizationType]}
