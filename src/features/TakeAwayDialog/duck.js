@@ -69,6 +69,12 @@ function takeAwayUi(state = DEFAULT_TAKE_AWAY_UI_SETTINGS, action) {
         gistId: action.result.gistId,
         blocksUrl: action.result.blocksUrl
       };
+    case EXPORT_TO_GIST + '_FAIL':
+      return {
+        ...state,
+        takeAwayLog: 'your story could not be uploaded',
+        takeAwayLogStatus: 'failure'
+      };
     default:
       return state;
   }

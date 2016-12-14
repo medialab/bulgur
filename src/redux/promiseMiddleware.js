@@ -21,5 +21,5 @@ export default () => ({dispatch, getState}) => (next) => (action) => {
         next({...rest, result, type: SUCCESS});
         return true;
       }
-    ).catch((error) => next({...rest, ...error, type: FAILURE}));
+    ).catch((error) => next({...rest, ...error, errorMessage: error, type: FAILURE}));
 };
