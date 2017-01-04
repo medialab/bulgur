@@ -1,9 +1,12 @@
 import React from 'react';
 
 import Landing from './Landing';
-import Timeline from '../../../components/Timeline/Timeline';
-import Map from '../../../components/Map/Map';
-import Graph from '../../../components/Graph/Graph';
+import {
+  QuinoaTimeline,
+  QuinoaGraph,
+  QuinoaMap
+} from 'quinoa-vis-modules';
+
 import {DraftComponent} from '../../../helpers/configQuinoa';
 
 import './MainViewLayout.scss';
@@ -24,11 +27,11 @@ const MainViewLayout = ({
     const visProps = {data, viewParameters, updateView};
     switch (visualizationType) {
       case 'space':
-        return <Map {...visProps} />;
+        return <QuinoaMap {...visProps} />;
       case 'relations':
-        return <Graph {...visProps} />;
+        return <QuinoaGraph {...visProps} />;
       case 'time':
-        return <Timeline {...visProps} />;
+        return <QuinoaTimeline {...visProps} />;
       default:
         return <Landing onDropInput={onProjectImport} onClickOnNewStory={openNewStoryModal} />;
     }

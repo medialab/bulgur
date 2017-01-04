@@ -3,6 +3,8 @@ import {createStructuredSelector} from 'reselect';
 import equals from 'shallow-equals';
 import {v4} from 'uuid';
 
+import {quinoaCreateEditorReducer} from 'quinoa';
+
 import {SETUP_NEW_STORY} from '../NewStoryDialog/duck';
 
 import {createDefaultSlideParameters} from '../../models/visualizationTypes';
