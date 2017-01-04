@@ -20,9 +20,6 @@ module.exports = {
         test: /\.css$/,
         loaders: ['style', 'css']
       }
-    ],
-    noParse: [
-      '(oauth\.min\.js)',
     ]
   }
 };
