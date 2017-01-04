@@ -3,7 +3,21 @@ import {createStructuredSelector} from 'reselect';
 import equals from 'shallow-equals';
 import {v4} from 'uuid';
 
-import {quinoaCreateEditorReducer} from 'quinoa';
+// import {EditorState} from 'draft-js';
+// import {
+//   quinoaCreateEditorReducer,
+//   quinoaActions as qActions
+// } from 'quinoa';
+// function createSlide(data = {}) {
+//   return {
+//     id: uuid.v4(),
+//     title: data.title || '',
+//     markdown: data.markdown || '',
+//     draft: EditorState.createEmpty(),
+//     meta: data.meta || {}
+//   };
+// }
+// const quinoaEditor = quinoaCreateEditorReducer(createSlide);
 
 import {SETUP_NEW_STORY} from '../NewStoryDialog/duck';
 
@@ -25,6 +39,7 @@ export const RESET_APP = 'RESET_APP';
 /*
  * Action creators
  */
+// export const quinoaActions = qActions;
 
 export const openNewStoryModal = () => ({
   type: OPEN_NEW_STORY_MODAL
@@ -208,7 +223,8 @@ function globalUi(state = GLOBAL_UI_DEFAULT_STATE, action) {
 
 export default combineReducers({
   globalUi,
-  visualization
+  visualization,
+  // quinoaEditor
 });
 
 /*

@@ -3,12 +3,13 @@ import ReactMarkdown from 'react-markdown';
 
 import './AsideViewLayout.scss';
 
-import {EditorComponent} from '../../../helpers/configQuinoa';
+import quinoa, {EditorComponent} from '../../../helpers/configQuinoa';
 
 import 'codemirror/lib/codemirror.css';
 import '../../../lib/code-mirror-theme.scss';
 
-import quinoa from '../../../helpers/configQuinoa';
+// import {quinoaCreateComponents} from 'quinoa';
+// const EditorComponent = quinoaCreateComponents().editor;
 
 const AsideViewLayout = ({
   openNewStoryModal,
@@ -17,6 +18,7 @@ const AsideViewLayout = ({
   isReadOnly
 }) => (
   <aside className="bulgur-aside-view">
+
     {isReadOnly ? <h1>Bulgur</h1> : ''}
     {isReadOnly ? '' : <button onClick={returnToLanding} type="button"><img className="bulgur-icon-image" src={require('../assets/landing.svg')} />New story / import</button>}
     {isReadOnly ? '' : <button onClick={openNewStoryModal} type="button"><img className="bulgur-icon-image" src={require('../assets/settings.svg')} /> Story settings</button>}

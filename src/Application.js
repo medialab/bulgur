@@ -23,5 +23,11 @@ const Application = ({}) => (
     id="wrapper"
     className="bulgur" />
 );
+// const Application = ({}) => (
+//   <Bulgur
+//     id="wrapper"
+//     className="bulgur" />
+// );
+
 
 export default Application;
