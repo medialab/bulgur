@@ -4,14 +4,14 @@ import Dropzone from 'react-dropzone';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
-import './NewStoryDialog.scss';
+import './NewPresentationDialog.scss';
 
 export const ChooseVisualizationTypeStep = ({
   activeVisualizationType,
   setVisualizationType
 }) => (
-  <section className="new-story-dialog-step">
-    <h1>I want to tell a story of ...</h1>
+  <section className="new-presentation-dialog-step">
+    <h1>I want to tell a presentation of ...</h1>
     <form className="visualization-type-choice">
       {['time',
         'space',
@@ -49,7 +49,7 @@ const SetVisualizationDataSourceStep = ({
 }) => {
   const onDropInput = (files) => onFileDrop(files[0]);
   return (
-    <section className="new-story-dialog-step">
+    <section className="new-presentation-dialog-step">
       <h1>I want to use data from ...</h1>
       <section className="data-source-choice">
         <section className="data-source-file">
@@ -93,7 +93,7 @@ const SetVisualizationParamsStep = ({
   mapFieldToInvariantParameter,
   dataMap
 }) => (
-  <section className="new-story-dialog-step">
+  <section className="new-presentation-dialog-step">
     <h1>I want to use fields ...</h1>
     <section className="data-fields-choice">
       <ul className="parameters-endpoints">
@@ -126,7 +126,7 @@ const SetVisualizationParamsStep = ({
   </section>
 );
 
-const NewStoryDialogLayout = ({
+const NewPresentationDialogLayout = ({
   activeVisualizationType,
   activeData,
   activeDataStatus,
@@ -139,12 +139,12 @@ const NewStoryDialogLayout = ({
     mapFieldToInvariantParameter,
   },
   closeAndResetDialog,
-  closeAndSetupNewStory,
+  closeAndSetupNewPresentation,
   changeVisualizationType,
   grassrootsMode = true,
   onFileDrop
 }) => (
-  <div className="new-story-dialog">
+  <div className="new-presentation-dialog">
     {grassrootsMode ? <ChooseVisualizationTypeStep
       activeVisualizationType={activeVisualizationType}
       setVisualizationType={changeVisualizationType} /> :
@@ -168,12 +168,12 @@ const NewStoryDialogLayout = ({
         dataMap={dataMap} /> :
       ''
     }
-    <section className="new-story-dialog-step">
+    <section className="new-presentation-dialog-step">
       {
         activeVisualizationType &&
         activeData
         ?
-          <button style={{background: 'lightgreen'}} onClick={closeAndSetupNewStory}>Tell the story</button>
+          <button style={{background: 'lightgreen'}} onClick={closeAndSetupNewPresentation}>Tell the presentation</button>
         : ''
       }
       <button
@@ -185,4 +185,4 @@ const NewStoryDialogLayout = ({
   </div>
 );
 
-export default NewStoryDialogLayout;
+export default NewPresentationDialogLayout;

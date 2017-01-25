@@ -14,7 +14,7 @@ import './MainViewLayout.scss';
 const MainViewLayout = ({
   visualizationType,
   data,
-  openNewStoryModal,
+  openNewPresentationModal,
   onProjectImport,
   viewParameters,
   updateView,
@@ -32,7 +32,7 @@ const MainViewLayout = ({
       case 'time':
         return <Timeline {...visProps} />;
       default:
-        return <Landing onDropInput={onProjectImport} onClickOnNewStory={openNewStoryModal} />;
+        return <Landing onDropInput={onProjectImport} onClickOnNewPresentation={openNewPresentationModal} />;
     }
   };
 

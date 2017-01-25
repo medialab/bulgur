@@ -13,7 +13,7 @@ const bulgurProjectModel = {
         }
       }
     },
-    story: {
+    presentation: {
       type: 'object',
       contains: {
         order: {

@@ -8,9 +8,9 @@ import * as duck from '../duck';
 import {createDefaultSlideParameters} from '../../../models/visualizationTypes';
 
 import {
-  resetNewStorySettings,
-  setupNewStory
-} from '../../NewStoryDialog/duck';
+  resetNewPresentationSettings,
+  setupNewPresentation
+} from '../../NewPresentationDialog/duck';
 
 import {
   getFileAsText,
@@ -26,14 +26,14 @@ import validateProject from '../../../helpers/validateProject';
 
 @connect(
   state => ({
-    ...duck.selector(state.activeStory)
+    ...duck.selector(state.activePresentation)
   }),
   dispatch => ({
     actions: bindActionCreators({
       ...duck,
       ...quinoaActions,
-      resetNewStorySettings,
-      setupNewStory
+      resetNewPresentationSettings,
+      setupNewPresentation
     }, dispatch)
   })
 )
@@ -68,7 +68,7 @@ class BulgurContainer extends Component {
   }
 
   shouldComponentUpdate(newProps) {
-    return newProps.isNewStoryModalOpen !== this.props.isNewStoryModalOpen ||
+    return newProps.isNewPresentationModalOpen !== this.props.isNewPresentationModalOpen ||
            newProps.isTakeAwayModalOpen !== this.props.isTakeAwayModalOpen ||
            newProps.currentSlide !== this.props.currentSlide ||
            JSON.stringify(newProps.visualizationData.viewParameters) !== JSON.stringify(this.props.visualizationData.viewParameters) ||
@@ -89,8 +89,8 @@ class BulgurContainer extends Component {
   }
 
   closeAndResetDialog() {
-    this.props.actions.resetNewStorySettings();
-    this.props.actions.closeNewStoryModal();
+    this.props.actions.resetNewPresentationSettings();
+    this.props.actions.closeNewPresentationModal();
   }
 
   updateSlide(params) {
@@ -116,14 +116,14 @@ class BulgurContainer extends Component {
         const project = convertRawStrToJson(str, 'json');
         const valid = validateProject(project);
         if (valid) {
-          this.props.actions.setupNewStory([], project.globalParameters.visualizationType, project.data, project.remoteUrls);
-          project.story.order.forEach(id => {
-            quinoaActions.addSlide(project.story.slides[id]);
+          this.props.actions.setupNewPresentation([], project.globalParameters.visualizationType, project.data, project.remoteUrls);
+          project.presentation.order.forEach(id => {
+            quinoaActions.addSlide(project.presentation.slides[id]);
             // workaround on the fact that addSlide seems not to work
             // todo : fix this upstream
             const list = quinoa.getState().editor.order;
             const generatedId = list[list.length - 1];
-            quinoaActions.updateSlide(generatedId, Object.assign(project.story.slides[id], {id: undefined}));
+            quinoaActions.updateSlide(generatedId, Object.assign(project.presentation.slides[id], {id: undefined}));
           });
         }
         else {

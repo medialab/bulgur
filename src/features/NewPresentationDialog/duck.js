@@ -22,13 +22,13 @@ const HIDE_INVALID_FILE_TYPE = 'HIDE_INVALID_FILE_TYPE';
 const SET_ACTIVE_DATA_FILE_FORMAT = 'SET_ACTIVE_DATA_FILE_FORMAT';
 const SET_ACTIVE_DATA_FIELDS_INFO = 'SET_ACTIVE_DATA_FIELDS_INFO';
 
-const RESET_NEW_STORY_SETTINGS = 'RESET_NEW_STORY_SETTINGS';
+const RESET_NEW_PRESENTATION_SETTINGS = 'RESET_NEW_PRESENTATION_SETTINGS';
 
 const MAP_FIELD_TO_INVARIANT_PARAMETER = 'MAP_FIELD_TO_INVARIANT_PARAMETER';
 const INIT_INVARIANT_PARAMETERS = 'INIT_INVARIANT_PARAMETERS';
 const GUESS_INVARIANT_PARAMETERS = 'GUESS_INVARIANT_PARAMETERS';
 
-export const SETUP_NEW_STORY = 'SETUP_NEW_STORY';
+export const SETUP_NEW_PRESENTATION = 'SETUP_NEW_PRESENTATION';
 
 /*
  * Action creators
@@ -42,7 +42,7 @@ const parseDataFile = (str, fileName, dispatch, getState, resolve, reject) => {
   });
   // (re) load invariant parameters of the vis
   const state = getState();
-  const visType = state.newStory.newStorySettings.visualizationType;
+  const visType = state.newPresentation.newPresentationSettings.visualizationType;
   const model = state.models.visualizationTypes[visType];
   const parameters = model.dataMap.slice(0);
   dispatch({
@@ -105,8 +105,8 @@ export const setVisualizationType = (visualizationType) => ({
   visualizationType
 });
 
-export const resetNewStorySettings = () => ({
-  type: RESET_NEW_STORY_SETTINGS
+export const resetNewPresentationSettings = () => ({
+  type: RESET_NEW_PRESENTATION_SETTINGS
 });
 
 export const showInvalidFileTypeWarning = () => ({
@@ -128,8 +128,8 @@ export const mapFieldToInvariantParameter = (fieldName, parameterId) => ({
   parameterId
 });
 
-export const setupNewStory = (dataMap = [], visualizationType, data, remoteUrls) => ({
-  type: SETUP_NEW_STORY,
+export const setupNewPresentation = (dataMap = [], visualizationType, data, remoteUrls) => ({
+  type: SETUP_NEW_PRESENTATION,
   data,
   dataMap,
   visualizationType,
@@ -141,36 +141,36 @@ export const setupNewStory = (dataMap = [], visualizationType, data, remoteUrls)
  * Reducers
  */
 
-const DEFAULT_NEW_STORY_SETTINGS = {
+const DEFAULT_NEW_PRESENTATION_SETTINGS = {
     visualizationType: undefined
 };
-function newStorySettings(state = DEFAULT_NEW_STORY_SETTINGS, action) {
+function newPresentationSettings(state = DEFAULT_NEW_PRESENTATION_SETTINGS, action) {
   switch (action.type) {
     case RESET_APP:
-      return DEFAULT_NEW_STORY_SETTINGS;
+      return DEFAULT_NEW_PRESENTATION_SETTINGS;
     case SET_VISUALIZATION_TYPE:
       return {
         ...state,
         visualizationType: action.visualizationType
       };
-    case RESET_NEW_STORY_SETTINGS:
-      return DEFAULT_NEW_STORY_SETTINGS;
+    case RESET_NEW_PRESENTATION_SETTINGS:
+      return DEFAULT_NEW_PRESENTATION_SETTINGS;
     default:
       return state;
   }
 }
 
-const DEFAULT_NEW_STORY_DATA = {
+const DEFAULT_NEW_PRESENTATION_DATA = {
   activeData: undefined,
   loadingStatus: undefined,
   invalidFileType: undefined,
   activeDataFileFormat: undefined
 };
 
-function newStoryData(state = DEFAULT_NEW_STORY_DATA, action) {
+function newPresentationData(state = DEFAULT_NEW_PRESENTATION_DATA, action) {
   switch (action.type) {
     case RESET_APP:
-      return DEFAULT_NEW_STORY_DATA;
+      return DEFAULT_NEW_PRESENTATION_DATA;
     case FETCH_EXAMPLE_FILE:
     case FETCH_USER_FILE:
       return {
@@ -239,42 +239,42 @@ function newStoryData(state = DEFAULT_NEW_STORY_DATA, action) {
         ...state,
         dataMap
       };
-    case RESET_NEW_STORY_SETTINGS:
-      return DEFAULT_NEW_STORY_DATA;
+    case RESET_NEW_PRESENTATION_SETTINGS:
+      return DEFAULT_NEW_PRESENTATION_DATA;
     default:
       return state;
   }
 }
 
 export default combineReducers({
-  newStorySettings,
-  newStoryData
+  newPresentationSettings,
+  newPresentationData
 });
 
 /*
  * Selectors
  */
 
-const activeVisualizationType = state => state.newStorySettings &&
-  state.newStorySettings.visualizationType;
+const activeVisualizationType = state => state.newPresentationSettings &&
+  state.newPresentationSettings.visualizationType;
 
-const activeData = state => state.newStoryData &&
-  state.newStoryData.data;
+const activeData = state => state.newPresentationData &&
+  state.newPresentationData.data;
 
-const activeDataStatus = state => state.newStoryData &&
-  state.newStoryData.loadingStatus;
+const activeDataStatus = state => state.newPresentationData &&
+  state.newPresentationData.loadingStatus;
 
-const invalidFileType = state => state.newStoryData &&
-  state.newStoryData.invalidFileType;
+const invalidFileType = state => state.newPresentationData &&
+  state.newPresentationData.invalidFileType;
 
-const activeDataFileFormat = state => state.newStoryData &&
-  state.newStoryData.activeDataFileFormat;
+const activeDataFileFormat = state => state.newPresentationData &&
+  state.newPresentationData.activeDataFileFormat;
 
-const activeDataFields = state => state.newStoryData &&
-  state.newStoryData.activeDataFields;
+const activeDataFields = state => state.newPresentationData &&
+  state.newPresentationData.activeDataFields;
 
-const dataMap = state => state.newStoryData &&
-  state.newStoryData.dataMap;
+const dataMap = state => state.newPresentationData &&
+  state.newPresentationData.dataMap;
 
 export const selector = createStructuredSelector({
   activeVisualizationType,

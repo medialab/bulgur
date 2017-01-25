@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 
 import AsideViewLayout from './AsideViewLayout';
 import MainViewLayout from './MainViewLayout';
-import NewStoryDialog from '../../NewStoryDialog/components/NewStoryDialogContainer.js';
+import NewPresentationDialog from '../../NewPresentationDialog/components/NewPresentationDialogContainer.js';
 import TakeAwayDialog from '../../TakeAwayDialog/components/TakeAwayDialogContainer.js';
 
 import './BulgurLayout.scss';
@@ -11,14 +11,14 @@ import './BulgurLayout.scss';
 const InterfaceManagerLayout = ({
   id,
   className,
-  isNewStoryModalOpen,
+  isNewPresentationModalOpen,
   isTakeAwayModalOpen,
   updateSlide,
   resetView,
   onProjectImport,
   returnToLanding,
   actions: {
-    openNewStoryModal,
+    openNewPresentationModal,
     openTakeAwayModal,
     closeTakeAwayModal,
     updateView
@@ -33,7 +33,7 @@ const InterfaceManagerLayout = ({
   }
 }) => {
   const closeModal = () => {
-    if (isNewStoryModalOpen) {
+    if (isNewPresentationModalOpen) {
       closeAndResetDialog();
     }
     else {
@@ -45,11 +45,11 @@ const InterfaceManagerLayout = ({
     {visualizationType ?
       <AsideViewLayout
         returnToLanding={returnToLanding}
-        openNewStoryModal={openNewStoryModal}
+        openNewPresentationModal={openNewPresentationModal}
         openTakeAwayModal={openTakeAwayModal} /> :
     ''}
     <MainViewLayout
-      openNewStoryModal={openNewStoryModal}
+      openNewPresentationModal={openNewPresentationModal}
       visualizationType={visualizationType}
       onProjectImport={onProjectImport}
       dataMap={dataMap}
@@ -62,10 +62,10 @@ const InterfaceManagerLayout = ({
     <Modal
       onRequestClose={closeModal}
       contentLabel="new presentation"
-      isOpen={isNewStoryModalOpen || isTakeAwayModalOpen}>
+      isOpen={isNewPresentationModalOpen || isTakeAwayModalOpen}>
       {
-        isNewStoryModalOpen ?
-          <NewStoryDialog /> :
+        isNewPresentationModalOpen ?
+          <NewPresentationDialog /> :
           <TakeAwayDialog />
       }
     </Modal>

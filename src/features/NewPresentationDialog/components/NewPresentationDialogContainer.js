@@ -3,31 +3,31 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import * as duck from '../duck';
-import {closeNewStoryModal} from '../../Bulgur/duck';
+import {closeNewPresentationModal} from '../../Bulgur/duck';
 import {validateFileExtension} from '../../../helpers/fileLoader';
 
-import NewStoryDialogLayout from './NewStoryDialogLayout';
+import NewPresentationDialogLayout from './NewPresentationDialogLayout';
 
 @connect(
   state => ({
-    ...duck.selector(state.newStory),
+    ...duck.selector(state.newPresentation),
     visualizationTypesModels: state.models.visualizationTypes,
-    hasActiveVisualization: state.activeStory.visualization.data && state.activeStory.visualization.data.length > 0
+    hasActiveVisualization: state.activePresentation.visualization.data && state.activePresentation.visualization.data.length > 0
   }),
   dispatch => ({
     actions: bindActionCreators({
       ...duck,
-      closeNewStoryModal
+      closeNewPresentationModal
     }, dispatch)
   })
 )
-class NewStoryDialogContainer extends Component {
+class NewPresentationDialogContainer extends Component {
 
   constructor(props) {
     super(props);
     this.closeAndResetDialog = this.closeAndResetDialog.bind(this);
     this.onFileDrop = this.onFileDrop.bind(this);
-    this.closeAndSetupNewStory = this.closeAndSetupNewStory.bind(this);
+    this.closeAndSetupNewPresentation = this.closeAndSetupNewPresentation.bind(this);
     this.changeVisualizationType = this.changeVisualizationType.bind(this);
   }
 
@@ -40,18 +40,18 @@ class NewStoryDialogContainer extends Component {
   }
 
   closeAndResetDialog() {
-    this.props.actions.resetNewStorySettings();
-    this.props.actions.closeNewStoryModal();
+    this.props.actions.resetNewPresentationSettings();
+    this.props.actions.closeNewPresentationModal();
   }
 
   changeVisualizationType (type) {
-    this.props.actions.resetNewStorySettings();
+    this.props.actions.resetNewPresentationSettings();
     this.props.actions.setVisualizationType(type);
   }
 
-  closeAndSetupNewStory() {
-    this.props.actions.setupNewStory(this.props.dataMap, this.props.activeVisualizationType, this.props.activeData);
-    this.props.actions.closeNewStoryModal();
+  closeAndSetupNewPresentation() {
+    this.props.actions.setupNewPresentation(this.props.dataMap, this.props.activeVisualizationType, this.props.activeData);
+    this.props.actions.closeNewPresentationModal();
   }
 
    onFileDrop(file) {
@@ -71,10 +71,10 @@ class NewStoryDialogContainer extends Component {
 
   render() {
     return (
-      <NewStoryDialogLayout
+      <NewPresentationDialogLayout
         {...this.props}
         closeAndResetDialog={this.closeAndResetDialog}
-        closeAndSetupNewStory={this.closeAndSetupNewStory}
+        closeAndSetupNewPresentation={this.closeAndSetupNewPresentation}
         changeVisualizationType={this.changeVisualizationType}
         grassrootsMode={!this.props.hasActiveVisualization}
         onFileDrop={this.onFileDrop} />
@@ -82,4 +82,4 @@ class NewStoryDialogContainer extends Component {
   }
 }
 
-export default NewStoryDialogContainer;
+export default NewPresentationDialogContainer;

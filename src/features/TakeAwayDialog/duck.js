@@ -5,7 +5,7 @@ import publishGist from '../../helpers/gistExporter';
 /*
  * Action names
  */
- import {SETUP_NEW_STORY} from '../NewStoryDialog/duck';
+ import {SETUP_NEW_PRESENTATION} from '../NewPresentationDialog/duck';
  import {RESET_APP} from '../Bulgur/duck';
 
 const SET_TAKE_AWAY_TYPE = 'SET_TAKE_AWAY_TYPE';
@@ -42,7 +42,7 @@ function takeAwayUi(state = DEFAULT_TAKE_AWAY_UI_SETTINGS, action) {
   switch (action.type) {
     case RESET_APP:
       return DEFAULT_TAKE_AWAY_UI_SETTINGS;
-    case SETUP_NEW_STORY:
+    case SETUP_NEW_PRESENTATION:
       return {
         ...state,
         gistUrl: action.remoteUrls && action.remoteUrls.gistUrl,
@@ -63,7 +63,7 @@ function takeAwayUi(state = DEFAULT_TAKE_AWAY_UI_SETTINGS, action) {
     case EXPORT_TO_GIST + '_SUCCESS':
       return {
         ...state,
-        takeAwayLog: 'your story is online',
+        takeAwayLog: 'your presentation is online',
         takeAwayLogStatus: 'success',
         gistUrl: action.result.gistUrl,
         gistId: action.result.gistId,
@@ -72,7 +72,7 @@ function takeAwayUi(state = DEFAULT_TAKE_AWAY_UI_SETTINGS, action) {
     case EXPORT_TO_GIST + '_FAIL':
       return {
         ...state,
-        takeAwayLog: 'your story could not be uploaded',
+        takeAwayLog: 'your presentation could not be uploaded',
         takeAwayLogStatus: 'failure'
       };
     default:

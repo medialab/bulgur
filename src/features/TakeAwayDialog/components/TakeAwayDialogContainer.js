@@ -21,7 +21,7 @@ import TakeAwayDialogLayout from './TakeAwayDialogLayout';
 @connect(
   state => ({
     ...duck.selector(state.takeAway),
-    ...bulgurSelector(state.activeStory)
+    ...bulgurSelector(state.activePresentation)
   }),
   dispatch => ({
     actions: bindActionCreators({
@@ -42,13 +42,13 @@ class TakeAwayDialogContainer extends Component {
   }
 
   takeAway(takeAwayType) {
-    const quinoaStory = quinoa.getState().editor;
+    const quinoaPresentation = quinoa.getState().editor;
     const remoteUrls = {
       gistUrl: this.props.gistUrl,
       blocksUrl: this.props.blocksUrl,
       gistId: this.props.gistId
     };
-    const project = bundleProjectAsJson(this.props.visualizationData, quinoaStory, remoteUrls);
+    const project = bundleProjectAsJson(this.props.visualizationData, quinoaPresentation, remoteUrls);
     let html;
     switch (takeAwayType.id) {
       case 'project':

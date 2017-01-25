@@ -11,33 +11,10 @@ import {Provider} from 'react-redux';
 import configureStore from './redux/configureStore';
 import Application from './Application';
 import {plugQuinoa} from './helpers/configQuinoa';
-import validateProject from './helpers/validateProject';
 
 let CurrentApplication = Application;
 
-let initialState = {};
-
-// case all-in-one readonly app
-if (window.__project__) {
-  const project = window.__project__;
-  if (validateProject(project)) {
-    initialState = {
-      activeStory: {
-        globalUi: {
-          newStoryModalOpen: false,
-          takeAwayModalOpen: false
-        },
-        visualization: {
-          data: project.data,
-          visualizationType: project.globalParameters.visualizationType,
-          // globalParameters: project.globalParameters.parameters,
-          viewEqualsSlideParameters: false,
-          readOnly: true
-        }
-      }
-    };
-  }
-}
+const initialState = {};
 
 const store = configureStore(initialState);
 window.store = store;

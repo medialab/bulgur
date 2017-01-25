@@ -19,7 +19,7 @@ import {v4} from 'uuid';
 // }
 // const quinoaEditor = quinoaCreateEditorReducer(createSlide);
 
-import {SETUP_NEW_STORY} from '../NewStoryDialog/duck';
+import {SETUP_NEW_PRESENTATION} from '../NewPresentationDialog/duck';
 
 import {createDefaultSlideParameters} from '../../models/visualizationTypes';
 
@@ -27,8 +27,8 @@ import {createDefaultSlideParameters} from '../../models/visualizationTypes';
  * Action names
  */
 
-const OPEN_NEW_STORY_MODAL = 'OPEN_NEW_STORY_MODAL';
-const CLOSE_NEW_STORY_MODAL = 'CLOSE_NEW_STORY_MODAL';
+const OPEN_NEW_PRESENTATION_MODAL = 'OPEN_NEW_PRESENTATION_MODAL';
+const CLOSE_NEW_PRESENTATION_MODAL = 'CLOSE_NEW_PRESENTATION_MODAL';
 const OPEN_TAKE_AWAY_MODAL = 'OPEN_TAKE_AWAY_MODAL';
 const CLOSE_TAKE_AWAY_MODAL = 'CLOSE_TAKE_AWAY_MODAL';
 const VIEW_EQUALS_SLIDE_PARAMETERS = 'VIEW_EQUALS_SLIDE_PARAMETERS';
@@ -41,12 +41,12 @@ export const RESET_APP = 'RESET_APP';
  */
 // export const quinoaActions = qActions;
 
-export const openNewStoryModal = () => ({
-  type: OPEN_NEW_STORY_MODAL
+export const openNewPresentationModal = () => ({
+  type: OPEN_NEW_PRESENTATION_MODAL
 });
 
-export const closeNewStoryModal = () => ({
-  type: CLOSE_NEW_STORY_MODAL
+export const closeNewPresentationModal = () => ({
+  type: CLOSE_NEW_PRESENTATION_MODAL
 });
 
 export const openTakeAwayModal = () => ({
@@ -94,7 +94,7 @@ function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
   switch (action.type) {
     case RESET_APP:
       return VISUALIZATION_DEFAULT_STATE;
-    case SETUP_NEW_STORY:
+    case SETUP_NEW_PRESENTATION:
       // consume original data points against dataMap
       let finalData = action.data;
       let viewParameters;
@@ -188,22 +188,22 @@ function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
 }
 
 const GLOBAL_UI_DEFAULT_STATE = {
-    newStoryModalOpen: false,
+    newPresentationModalOpen: false,
     takeAwayModalOpen: false
 };
 function globalUi(state = GLOBAL_UI_DEFAULT_STATE, action) {
   switch (action.type) {
     case RESET_APP:
       return GLOBAL_UI_DEFAULT_STATE;
-    case OPEN_NEW_STORY_MODAL:
+    case OPEN_NEW_PRESENTATION_MODAL:
       return {
         ...state,
-        newStoryModalOpen: true
+        newPresentationModalOpen: true
       };
-    case CLOSE_NEW_STORY_MODAL:
+    case CLOSE_NEW_PRESENTATION_MODAL:
       return {
         ...state,
-        newStoryModalOpen: false
+        newPresentationModalOpen: false
       };
     case OPEN_TAKE_AWAY_MODAL:
       return {
@@ -230,7 +230,7 @@ export default combineReducers({
  * Selectors
  */
 
-const isNewStoryModalOpen = state => state.globalUi.newStoryModalOpen;
+const isNewPresentationModalOpen = state => state.globalUi.newPresentationModalOpen;
 
 const isTakeAwayModalOpen = state => state.globalUi.takeAwayModalOpen;
 
@@ -243,7 +243,7 @@ const activeViewParameters = state => state.visualization.viewParameters;
 const quinoaSlideParameters = state => state.visualization.quinoaSlideParameters;
 
 export const selector = createStructuredSelector({
-  isNewStoryModalOpen,
+  isNewPresentationModalOpen,
   isTakeAwayModalOpen,
   visualizationData,
   doesViewEqualsSlideParameters,

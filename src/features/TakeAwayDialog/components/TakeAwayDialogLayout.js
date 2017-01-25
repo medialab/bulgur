@@ -7,14 +7,14 @@ import './TakeAwayDialog.scss';
 export const ChooseTakeAwayStep = ({
   takeAway
 }) => (
-  <section className="new-story-dialog-step">
-    <h1>I want to take away my story as ...</h1>
+  <section className="new-presentation-dialog-step">
+    <h1>I want to take away my presentation as ...</h1>
     <form className="take-away-type-choice">
       {
         // todo : put this data in a model file
         [{
           id: 'project',
-          label: 'a project file (for reworking on this story later)'
+          label: 'a project file (for reworking on this presentation later)'
         },
         {
           id: 'html',
@@ -51,7 +51,7 @@ export const ChooseTakeAwayStep = ({
 );
 
 
-const NewStoryDialogLayout = ({
+const NewPresentationDialogLayout = ({
   actions: {
     closeTakeAwayModal
   },
@@ -70,13 +70,13 @@ const NewStoryDialogLayout = ({
       {
         blocksUrl ?
           <h2 className="pub-link">
-            <a target="blank" href={blocksUrl}>Go to the Webpage of your story</a>
+            <a target="blank" href={blocksUrl}>Go to the Webpage of your presentation</a>
           </h2> : ''
       }
       {
         gistUrl ?
           <h2 className="pub-link">
-            <a target="blank" href={gistUrl}>Go to the source code of your story</a>
+            <a target="blank" href={gistUrl}>Go to the source code of your presentation</a>
           </h2>
         : ''
       }
@@ -90,4 +90,4 @@ const NewStoryDialogLayout = ({
   </div>
 );
 
-export default NewStoryDialogLayout;
+export default NewPresentationDialogLayout;

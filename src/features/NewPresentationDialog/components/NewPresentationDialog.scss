@@ -1,6 +1,6 @@
 @import '../../../parameters.scss';
 
-.new-story-dialog
+.new-presentation-dialog
 {
     font-family: $main-font-stack;
 
@@ -11,7 +11,7 @@
 
          -o-user-select: none;
 
-    .new-story-dialog-step:not(:first-of-type)
+    .new-presentation-dialog-step:not(:first-of-type)
     {
         margin-top: $large-gutter;
         padding-top: $medium-gutter;

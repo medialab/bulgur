@@ -1,5 +1,5 @@
 
-export function bundleProjectAsJson (visualizationData, quinoaStory, remoteUrls = {}) {
+export function bundleProjectAsJson (visualizationData, quinoaPresentation, remoteUrls = {}) {
   return {
       data: visualizationData.data,
       globalParameters: {
@@ -7,10 +7,10 @@ export function bundleProjectAsJson (visualizationData, quinoaStory, remoteUrls 
         visualizationType: visualizationData.visualizationType
       },
       remoteUrls,
-      story: {
-        order: quinoaStory.order.slice(),
-        slides: Object.keys(quinoaStory.slides).map(slideKey => {
-          const slide = quinoaStory.slides[slideKey];
+      presentation: {
+        order: quinoaPresentation.order.slice(),
+        slides: Object.keys(quinoaPresentation.slides).map(slideKey => {
+          const slide = quinoaPresentation.slides[slideKey];
           return {
             id: slide.id,
             markdown: slide.markdown,

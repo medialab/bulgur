@@ -5,19 +5,19 @@ import Dropzone from 'react-dropzone';
 import './Landing.scss';
 
 const Landing = ({
-  onClickOnNewStory,
+  onClickOnNewPresentation,
   onDropInput
 }) => (
   <div className="bulgur-landing-wrapper">
     <div className="bulgur-landing-container">
       <h1>Codename bulgur</h1>
       <div className="bulgur-landing-options-container">
-        <button className="new-story-option" onClick={onClickOnNewStory}>Tell a new story</button>
+        <button className="new-presentation-option" onClick={onClickOnNewPresentation}>Tell a new presentation</button>
         <Dropzone
           className="drop-zone"
           activeClassName="drop-zone-active"
           onDrop={onDropInput}>
-          <div>Or import an existing story's project (drop a file here)</div>
+          <div>Or import an existing presentation's project (drop a file here)</div>
         </Dropzone>
       </div>
     </div>
