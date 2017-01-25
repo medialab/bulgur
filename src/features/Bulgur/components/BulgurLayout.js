@@ -3,6 +3,9 @@ import Modal from 'react-modal';
 
 import AsideViewLayout from './AsideViewLayout';
 import MainViewLayout from './MainViewLayout';
+
+import ProjectsManagerContainer from '../../BulgurProjectsManager/components/ProjectManagerContainer';
+
 import NewPresentationDialog from '../../NewPresentationDialog/components/NewPresentationDialogContainer.js';
 import TakeAwayDialog from '../../TakeAwayDialog/components/TakeAwayDialogContainer.js';
 
@@ -32,44 +35,45 @@ const InterfaceManagerLayout = ({
     data = []
   }
 }) => {
-  const closeModal = () => {
-    if (isNewPresentationModalOpen) {
-      closeAndResetDialog();
-    }
-    else {
-      closeTakeAwayModal();
-    }
-  };
+  return (<ProjectsManagerContainer />);
+  // const closeModal = () => {
+  //   if (isNewPresentationModalOpen) {
+  //     closeAndResetDialog();
+  //   }
+  //   else {
+  //     closeTakeAwayModal();
+  //   }
+  // };
 
-  return (<div id={id} className={className}>
-    {visualizationType ?
-      <AsideViewLayout
-        returnToLanding={returnToLanding}
-        openNewPresentationModal={openNewPresentationModal}
-        openTakeAwayModal={openTakeAwayModal} /> :
-    ''}
-    <MainViewLayout
-      openNewPresentationModal={openNewPresentationModal}
-      visualizationType={visualizationType}
-      onProjectImport={onProjectImport}
-      dataMap={dataMap}
-      viewParameters={viewParameters}
-      updateSlide={updateSlide}
-      doesViewEqualsSlideParameters={doesViewEqualsSlideParameters}
-      updateView={updateView}
-      resetView={resetView}
-      data={data} />
-    <Modal
-      onRequestClose={closeModal}
-      contentLabel="new presentation"
-      isOpen={isNewPresentationModalOpen || isTakeAwayModalOpen}>
-      {
-        isNewPresentationModalOpen ?
-          <NewPresentationDialog /> :
-          <TakeAwayDialog />
-      }
-    </Modal>
-  </div>);
+  // return (<div id={id} className={className}>
+  //   {visualizationType ?
+  //     <AsideViewLayout
+  //       returnToLanding={returnToLanding}
+  //       openNewPresentationModal={openNewPresentationModal}
+  //       openTakeAwayModal={openTakeAwayModal} /> :
+  //   ''}
+  //   <MainViewLayout
+  //     openNewPresentationModal={openNewPresentationModal}
+  //     visualizationType={visualizationType}
+  //     onProjectImport={onProjectImport}
+  //     dataMap={dataMap}
+  //     viewParameters={viewParameters}
+  //     updateSlide={updateSlide}
+  //     doesViewEqualsSlideParameters={doesViewEqualsSlideParameters}
+  //     updateView={updateView}
+  //     resetView={resetView}
+  //     data={data} />
+  //   <Modal
+  //     onRequestClose={closeModal}
+  //     contentLabel="new presentation"
+  //     isOpen={isNewPresentationModalOpen || isTakeAwayModalOpen}>
+  //     {
+  //       isNewPresentationModalOpen ?
+  //         <NewPresentationDialog /> :
+  //         <TakeAwayDialog />
+  //     }
+  //   </Modal>
+  // </div>);
 };
 
 export default InterfaceManagerLayout;
