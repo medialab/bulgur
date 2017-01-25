@@ -13,7 +13,6 @@ const InterfaceManagerLayout = ({
   className,
   isNewStoryModalOpen,
   isTakeAwayModalOpen,
-  isReadOnly,
   updateSlide,
   resetView,
   onProjectImport,
@@ -47,11 +46,9 @@ const InterfaceManagerLayout = ({
       <AsideViewLayout
         returnToLanding={returnToLanding}
         openNewStoryModal={openNewStoryModal}
-        openTakeAwayModal={openTakeAwayModal}
-        isReadOnly={isReadOnly} /> :
+        openTakeAwayModal={openTakeAwayModal} /> :
     ''}
     <MainViewLayout
-      isReadOnly={isReadOnly}
       openNewStoryModal={openNewStoryModal}
       visualizationType={visualizationType}
       onProjectImport={onProjectImport}
@@ -64,11 +61,12 @@ const InterfaceManagerLayout = ({
       data={data} />
     <Modal
       onRequestClose={closeModal}
+      contentLabel="new presentation"
       isOpen={isNewStoryModalOpen || isTakeAwayModalOpen}>
       {
         isNewStoryModalOpen ?
           <NewStoryDialog /> :
-            <TakeAwayDialog />
+          <TakeAwayDialog />
       }
     </Modal>
   </div>);

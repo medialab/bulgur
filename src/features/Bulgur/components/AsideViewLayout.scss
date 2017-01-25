@@ -50,36 +50,6 @@
         width: 100%;
     }
 
-    .quinoa-readonly-container
-    {
-        font-family: $display-font-stack;
-
-        padding: 0;
-        .quinoa-readonly-slide
-        {
-            margin-bottom: $medium-gutter;
-            padding: $medium-gutter;
-
-            list-style-type: none;
-
-            cursor: pointer;
-
-            background: lightgrey;
-
-            &:hover:not(.active)
-            {
-                color: $background-default;
-                background: $background-intent;
-            }
-
-            &.active
-            {
-                color: $background-default;
-                background: $primary-color;
-            }
-        }
-    }
-
     > button
     {
         display: block;

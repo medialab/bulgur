@@ -85,7 +85,8 @@ const SetVisualizationDataSourceStep = ({
         </section> : ''
       }
     </section>
-);};
+);
+};
 
 const SetVisualizationParamsStep = ({
   activeDataFields,
@@ -118,7 +119,8 @@ const SetVisualizationParamsStep = ({
                 }
                 onChange={onChange} />
             </li>
-        );})}
+        );
+})}
       </ul>
     </section>
   </section>

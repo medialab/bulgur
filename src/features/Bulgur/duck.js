@@ -86,7 +86,6 @@ const VISUALIZATION_DEFAULT_STATE = {
     visualizationType: undefined,
     viewParameters: {},
     quinoaSlideParameters: {},
-    readOnly: false,
     viewEqualsSlideParameters: false
 };
 
@@ -243,14 +242,11 @@ const activeViewParameters = state => state.visualization.viewParameters;
 
 const quinoaSlideParameters = state => state.visualization.quinoaSlideParameters;
 
-const isReadOnly = state => state.visualization.readOnly;
-
 export const selector = createStructuredSelector({
   isNewStoryModalOpen,
   isTakeAwayModalOpen,
   visualizationData,
   doesViewEqualsSlideParameters,
   activeViewParameters,
-  quinoaSlideParameters,
-  isReadOnly
+  quinoaSlideParameters
 });
