@@ -28,6 +28,10 @@ export default class ProjectManagerContainer extends Component {
   }
 
   render () {
-    return (<ProjectManagerLayout />);
+    return (
+      <ProjectManagerLayout 
+        {...this.props}
+      />
+    );
   }
 }

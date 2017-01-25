@@ -2,11 +2,10 @@ import {applyMiddleware, createStore, compose} from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './rootReducer';
 import promiseMiddleware from './promiseMiddleware';
-// import {persistentStore} from 'redux-pouchdb';
-// import {persistentReducer} from 'redux-pouchdb';
+import {persistentStore} from 'redux-pouchdb';
 
-// const PouchDB = require('pouchdb');
-// const db = new PouchDB('bulgur');
+const PouchDB = require('pouchdb');
+const db = new PouchDB('bulgur');
 
 export default function configureStore (initialState = {}) {
   // Compose final middleware and use devtools in debug environment
@@ -18,7 +17,7 @@ export default function configureStore (initialState = {}) {
   // Create final store and subscribe router in debug env ie. for devtools
   const createStoreWithMiddleware = compose(
     middleware,
-    // persistentStore(db),
+    persistentStore(db),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )(createStore);
 

@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 import {createStructuredSelector} from 'reselect';
-import {v4} from 'uuid';
+import {persistentReducer} from 'redux-pouchdb';
 
 /*
  * Action names
@@ -16,10 +16,11 @@ const SET_ACTIVE_PRESENTATION_ID = 'SET_ACTIVE_PRESENTATION_ID';
  * Action creators
  */
 
-export const createPresentation = (presentation, setActive = true) => ({
+export const createPresentation = (id, presentation, setActive = true) => ({
   type: CREATE_PRESENTATION,
   presentation,
-  setActive
+  setActive,
+  id
 });
 
 export const promptDeletePresentation = (id) => ({
@@ -47,26 +48,67 @@ export const setActivePresentationId = (id, presentation) => ({
   id
 });
 
+const testPresentation = {
+  id: 'f1ddbb99-4922-4148-bdb3-5cc862c4aec6',
+  metadata: {
+    title: 'Ma présentation',
+  }
+}
+
 /*
  * Reducers
  */
 const PRESENTATIONS_DEFAULT_STATE = {
   presentations: {
-  },
-  activePresentationId: undefined,
-  promptedToDelete: undefined
+    'f1ddbb99-4922-4148-bdb3-5cc862c4aec6': testPresentation
+  }
 };
-
 function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
   switch (action.type) {
     case CREATE_PRESENTATION:
-      const id = v4();
+      const id = action.id
+      const presentation = {
+        ...action.presentation,
+        id
+      }
       return {
         ...state,
         presentations: {
           ...state.presentations,
-          [id]: action.presentation
-        },
+          [id]: presentation
+        }
+      };    
+    case DELETE_PRESENTATION:
+      const newState = Object.assign({}, state);
+      delete newState.presentations[action.id];
+      return newState;
+    case UPDATE_PRESENTATION:
+      return {
+        ...state,
+        presentations: {
+          ...state.presentations,
+          [action.id]: action.presentation
+        }
+      };
+    default:
+      return state;
+  }
+}
+
+const PRESENTATIONS_UI_DEFAULT_STATE = {
+  activePresentationId: undefined,
+  promptedToDelete: undefined
+};
+function presentationsUi(state = PRESENTATIONS_UI_DEFAULT_STATE, action) {
+  switch (action.type) {
+    case CREATE_PRESENTATION:
+      const id = action.id;
+      const presentation = {
+        ...action.presentation,
+        id
+      }
+      return {
+        ...state,
         activePresentationId: action.setActive ? id : state.activePresentationId
       };
     case PROMPT_DELETE_PRESENTATION:
@@ -80,20 +122,10 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
         promptedToDelete: undefined
       };
     case DELETE_PRESENTATION:
-      const newState = Object.assign({}, state);
-      delete newState.presentations[action.id];
-      return {
-        ...newState,
-        promptedToDelete: undefined,
-        activePresentationId: newState.activePresentationId === action.id ? undefined : newState.activePresentationId
-      };
-    case UPDATE_PRESENTATION:
       return {
         ...state,
-        presentations: {
-          ...state.presentations,
-          [action.id]: action.presentation
-        }
+        promptedToDelete: undefined,
+        activePresentationId: state.activePresentationId === action.id ? undefined : state.activePresentationId
       };
     case SET_ACTIVE_PRESENTATION_ID:
       return {
@@ -105,23 +137,26 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
   }
 }
 
-export default combineReducers({
-  presentations
-});
+export default persistentReducer(
+  combineReducers({
+      presentations,
+      presentationsUi
+  })
+);
 
 /*
  * Selectors
  */
 
-const activePresentation = state => state.presentations.presentations[state.presentations.activePresentationId];
-const activePresentationId = state => state.presentations.presentations.activePresentationId;
+const activePresentation = state => state.presentations.presentations[state.presentationsUi.activePresentationId];
+const activePresentationId = state => state.presentationsUi.activePresentationId;
 const presentationsList = state => Object.keys(state.presentations.presentations).map(key => state.presentations.presentations[key]);
-const promptedToDelete = state => state.presentations.presentations[state.presentations.promptedToDelete];
+const promptedToDeleteId = state => state.presentationsUi.promptedToDelete;
 
 export const selector = createStructuredSelector({
   activePresentation,
   activePresentationId,
-  promptedToDelete,
+  promptedToDeleteId,
   presentationsList
 });
 

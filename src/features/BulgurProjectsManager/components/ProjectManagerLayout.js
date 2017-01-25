@@ -3,6 +3,15 @@ import React from 'react';
 import './ProjectManagerLayout.scss';
 
 const ProjectManagerLayout = ({
+  activePresentation,
+  activePresentationId,
+  promptedToDeleteId,
+  presentationsList = [],
+  actions: {
+    promptDeletePresentation,
+    deletePresentation,
+    createPresentation
+  }
 }) => (
   <section className="project-manager-layout">
     <section>
@@ -27,16 +36,32 @@ const ProjectManagerLayout = ({
     </section>
 
     <section>
-      <button>Start a new presentation</button>
+      <button onClick={() => {
+        createPresentation('f1ddbb99-4922-4148-bdb3-5cc862c4aec6', {
+  id: 'f1ddbb99-4922-4148-bdb3-5cc862c4aec6',
+  metadata: {
+    title: 'Ma présentation',
+  }
+})
+      }}
+      >Start a new presentation</button>
       <div />
     </section>
 
     <section>
       <ul>
-        <li>Projet 1</li>
-        <li>Projet 2</li>
-        <li>Projet 3</li>
-        <li>Projet 4</li>
+        {presentationsList.map((presentation, index) => {
+          const onClickPrompt = () => promptDeletePresentation(presentation.id);
+          const onClickDelete = () => deletePresentation(presentation.id);
+          return (
+            <li key={index}>
+              <span>{presentation.metadata.title}</span>
+              <span>{promptedToDeleteId === presentation.id ? 'Sure ?' : ''}</span>
+              {promptedToDeleteId === presentation.id ? <button onClick={onClickDelete}>Delete sure</button> : <button onClick={onClickPrompt}>Delete</button>}
+            </li>
+          )
+        })
+        }
       </ul>
     </section>
   </section>
