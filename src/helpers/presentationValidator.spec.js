@@ -1,6 +1,7 @@
 const validPresentations = [
 {
     id: '87d7d238-f5b8-4c22-9871-d19357d90e21',
+    type: 'presentation',
     metadata: {
         title: 'A good map presentation',
         authors: ['Michel', 'Martine'],
