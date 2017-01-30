@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
 import {createStructuredSelector} from 'reselect';
 import {persistentReducer} from 'redux-pouchdb';
-
+import {v4 as uuid} from 'uuid';
 /*
  * Action names
  */
@@ -13,6 +13,8 @@ const UNPROMPT_DELETE_PRESENTATION = 'UNPROMPT_DELETE_PRESENTATION';
 const DELETE_PRESENTATION = 'DELETE_PRESENTATION';
 const UPDATE_PRESENTATION = 'UPDATE_PRESENTATION';
 const SET_ACTIVE_PRESENTATION_ID = 'SET_ACTIVE_PRESENTATION_ID';
+
+const COPY_PRESENTATION = 'COPY_PRESENTATION';
 
 const IMPORT_ABORD = 'IMPORT_ABORD';
 const IMPORT_OVERRIDE_PROMPT = 'IMPORT_OVERRIDE_PROMPT';
@@ -29,6 +31,11 @@ export const createPresentation = (id, presentation, setActive = true) => ({
   presentation,
   setActive,
   id
+});
+
+export const copyPresentation = (presentation) => ({
+  type: COPY_PRESENTATION,
+  presentation
 });
 
 export const promptDeletePresentation = (id) => ({
@@ -139,6 +146,24 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
         presentations: {
           ...state.presentations,
           [presentation.id]: presentation
+        }
+      };
+    case COPY_PRESENTATION:
+      const original = action.presentation;
+      const newId = uuid();
+      const newPresentation = {
+        ...original,
+        id: newId,
+        metadata: {
+          ...original.metadata,
+          title: original.metadata.title + ' - copy'
+        }
+      };
+      return {
+        ...state,
+        presentations: {
+          ...state.presentations,
+          [newId]: newPresentation
         }
       };
     default:

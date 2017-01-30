@@ -18,6 +18,7 @@ const ProjectManagerLayout = ({
     promptDeletePresentation,
     deletePresentation,
     createPresentation,
+    copyPresentation,
     importReset
   }
 }) => {
@@ -78,9 +79,11 @@ const ProjectManagerLayout = ({
           {presentationsList.map((presentation, index) => {
           const onClickPrompt = () => promptDeletePresentation(presentation.id);
           const onClickDelete = () => deletePresentation(presentation.id);
+          const onClickCopy = () => copyPresentation(presentation);
           return (
             <li key={index}>
               <span>{presentation.metadata.title}</span>
+              {promptedToDeleteId !== presentation.id ? <button onClick={onClickCopy}>Copy</button> : ''}
               <span>{promptedToDeleteId === presentation.id ? 'Sure ?' : ''}</span>
               {promptedToDeleteId === presentation.id ? <button onClick={onClickDelete}>Delete sure</button> : <button onClick={onClickPrompt}>Delete</button>}
             </li>
