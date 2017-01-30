@@ -53,7 +53,7 @@ const testPresentation = {
   metadata: {
     title: 'Ma présentation',
   }
-}
+};
 
 /*
  * Reducers
@@ -66,18 +66,18 @@ const PRESENTATIONS_DEFAULT_STATE = {
 function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
   switch (action.type) {
     case CREATE_PRESENTATION:
-      const id = action.id
+      const id = action.id;
       const presentation = {
         ...action.presentation,
         id
-      }
+      };
       return {
         ...state,
         presentations: {
           ...state.presentations,
           [id]: presentation
         }
-      };    
+      };
     case DELETE_PRESENTATION:
       const newState = Object.assign({}, state);
       delete newState.presentations[action.id];
@@ -102,14 +102,9 @@ const PRESENTATIONS_UI_DEFAULT_STATE = {
 function presentationsUi(state = PRESENTATIONS_UI_DEFAULT_STATE, action) {
   switch (action.type) {
     case CREATE_PRESENTATION:
-      const id = action.id;
-      const presentation = {
-        ...action.presentation,
-        id
-      }
       return {
         ...state,
-        activePresentationId: action.setActive ? id : state.activePresentationId
+        activePresentationId: action.setActive ? action.id : state.activePresentationId
       };
     case PROMPT_DELETE_PRESENTATION:
       return {

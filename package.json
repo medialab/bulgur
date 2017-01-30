@@ -1,7 +1,7 @@
 {
   "name": "bulgur",
   "version": "0.0.1",
-  "description": "Test implementation of quinoa",
+  "description": "Quinoa presentations editor",
   "main": "dist/entry.js",
   "scripts": {
     "dev": "kotatsu serve --config ./webpack.config.js --progress --babel --index ./index.html --public ./ ./src/main.js",
@@ -9,7 +9,7 @@
     "lint": "eslint --fix src",
     "comb": "csscomb src",
     "test": "mocha --compilers js:babel-core/register -R spec --recursive $(find src -name '*.spec.js')",
-    "deploy": "surge ./"
+    "deploy": "npm run build && surge ./"
   },
   "pre-commit": [
     "lint",

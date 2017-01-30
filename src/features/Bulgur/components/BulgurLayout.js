@@ -35,45 +35,49 @@ const InterfaceManagerLayout = ({
     data = []
   }
 }) => {
-  return (<ProjectsManagerContainer />);
-  // const closeModal = () => {
-  //   if (isNewPresentationModalOpen) {
-  //     closeAndResetDialog();
-  //   }
-  //   else {
-  //     closeTakeAwayModal();
-  //   }
-  // };
 
-  // return (<div id={id} className={className}>
-  //   {visualizationType ?
-  //     <AsideViewLayout
-  //       returnToLanding={returnToLanding}
-  //       openNewPresentationModal={openNewPresentationModal}
-  //       openTakeAwayModal={openTakeAwayModal} /> :
-  //   ''}
-  //   <MainViewLayout
-  //     openNewPresentationModal={openNewPresentationModal}
-  //     visualizationType={visualizationType}
-  //     onProjectImport={onProjectImport}
-  //     dataMap={dataMap}
-  //     viewParameters={viewParameters}
-  //     updateSlide={updateSlide}
-  //     doesViewEqualsSlideParameters={doesViewEqualsSlideParameters}
-  //     updateView={updateView}
-  //     resetView={resetView}
-  //     data={data} />
-  //   <Modal
-  //     onRequestClose={closeModal}
-  //     contentLabel="new presentation"
-  //     isOpen={isNewPresentationModalOpen || isTakeAwayModalOpen}>
-  //     {
-  //       isNewPresentationModalOpen ?
-  //         <NewPresentationDialog /> :
-  //         <TakeAwayDialog />
-  //     }
-  //   </Modal>
-  // </div>);
+  const closeModal = () => {
+    if (isNewPresentationModalOpen) {
+      closeAndResetDialog();
+    }
+    else {
+      closeTakeAwayModal();
+    }
+  };
+  // todo : remove this when landing functionalities is OK
+  if (data.length !== undefined) {
+    return (<ProjectsManagerContainer />);
+  }
+
+  return (<div id={id} className={className}>
+    {visualizationType ?
+      <AsideViewLayout
+        returnToLanding={returnToLanding}
+        openNewPresentationModal={openNewPresentationModal}
+        openTakeAwayModal={openTakeAwayModal} /> :
+    ''}
+    <MainViewLayout
+      openNewPresentationModal={openNewPresentationModal}
+      visualizationType={visualizationType}
+      onProjectImport={onProjectImport}
+      dataMap={dataMap}
+      viewParameters={viewParameters}
+      updateSlide={updateSlide}
+      doesViewEqualsSlideParameters={doesViewEqualsSlideParameters}
+      updateView={updateView}
+      resetView={resetView}
+      data={data} />
+    <Modal
+      onRequestClose={closeModal}
+      contentLabel="new presentation"
+      isOpen={isNewPresentationModalOpen || isTakeAwayModalOpen}>
+      {
+        isNewPresentationModalOpen ?
+          <NewPresentationDialog /> :
+          <TakeAwayDialog />
+      }
+    </Modal>
+  </div>);
 };
 
 export default InterfaceManagerLayout;
