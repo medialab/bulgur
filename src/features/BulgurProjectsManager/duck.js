@@ -6,11 +6,19 @@ import {persistentReducer} from 'redux-pouchdb';
  * Action names
  */
 const CREATE_PRESENTATION = 'CREATE_PRESENTATION';
+
 const PROMPT_DELETE_PRESENTATION = 'PROMPT_DELETE_PRESENTATION';
 const UNPROMPT_DELETE_PRESENTATION = 'UNPROMPT_DELETE_PRESENTATION';
+
 const DELETE_PRESENTATION = 'DELETE_PRESENTATION';
 const UPDATE_PRESENTATION = 'UPDATE_PRESENTATION';
 const SET_ACTIVE_PRESENTATION_ID = 'SET_ACTIVE_PRESENTATION_ID';
+
+const IMPORT_ABORD = 'IMPORT_ABORD';
+const IMPORT_OVERRIDE_PROMPT = 'IMPORT_OVERRIDE_PROMPT';
+const IMPORT_FAIL = 'IMPORT_FAIL';
+const IMPORT_SUCCESS = 'IMPORT_SUCCESS';
+const IMPORT_RESET = 'IMPORT_RESET';
 
 /*
  * Action creators
@@ -48,6 +56,39 @@ export const setActivePresentationId = (id, presentation) => ({
   id
 });
 
+export const importReset = () => ({
+  type: IMPORT_RESET
+});
+
+export const abordImport = () => ({
+  type: IMPORT_ABORD
+});
+
+export const promptOverrideImport = (candidate) => ({
+  type: IMPORT_OVERRIDE_PROMPT,
+  candidate
+});
+
+
+export const importSuccess = (data) => (dispatch) => {
+  dispatch({
+    type: IMPORT_SUCCESS,
+    data
+  });
+  // resets import state after a while
+  setTimeout(() => dispatch(importReset()), 5000);
+};
+
+export const importFail = (error) => (dispatch) => {
+  dispatch({
+    type: IMPORT_FAIL,
+    error
+  });
+  // resets import state after a while
+  setTimeout(() => dispatch(importReset()), 5000);
+};
+
+// todo : remove that
 const testPresentation = {
   id: 'f1ddbb99-4922-4148-bdb3-5cc862c4aec6',
   metadata: {
@@ -59,6 +100,7 @@ const testPresentation = {
  * Reducers
  */
 const PRESENTATIONS_DEFAULT_STATE = {
+  // todo : remove that
   presentations: {
     'f1ddbb99-4922-4148-bdb3-5cc862c4aec6': testPresentation
   }
@@ -67,7 +109,7 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
   switch (action.type) {
     case CREATE_PRESENTATION:
       const id = action.id;
-      const presentation = {
+      let presentation = {
         ...action.presentation,
         id
       };
@@ -88,6 +130,15 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
         presentations: {
           ...state.presentations,
           [action.id]: action.presentation
+        }
+      };
+    case IMPORT_SUCCESS:
+      presentation = action.data;
+      return {
+        ...state,
+        presentations: {
+          ...state.presentations,
+          [presentation.id]: presentation
         }
       };
     default:
@@ -132,10 +183,42 @@ function presentationsUi(state = PRESENTATIONS_UI_DEFAULT_STATE, action) {
   }
 }
 
+
+const PRESENTATION_IMPORT_DEFAULT_STATE = {
+  importCandidate: undefined,
+  importStatus: undefined,
+  importError: undefined
+};
+function presentationImport(state = PRESENTATION_IMPORT_DEFAULT_STATE, action) {
+  switch (action.type) {
+    case IMPORT_RESET:
+      return PRESENTATION_IMPORT_DEFAULT_STATE;
+    case IMPORT_FAIL:
+      return {
+        ...state,
+        importStatus: 'failure',
+        importError: action.error
+      };
+    case IMPORT_SUCCESS:
+      return {
+        ...PRESENTATIONS_DEFAULT_STATE,
+        importStatus: 'success'
+      };
+    case IMPORT_OVERRIDE_PROMPT:
+      return {
+        ...state,
+        importCandidate: action.candidate
+      };
+    default:
+      return state;
+  }
+}
+
 export default persistentReducer(
   combineReducers({
       presentations,
-      presentationsUi
+      presentationsUi,
+      presentationImport
   })
 );
 
@@ -148,10 +231,18 @@ const activePresentationId = state => state.presentationsUi.activePresentationId
 const presentationsList = state => Object.keys(state.presentations.presentations).map(key => state.presentations.presentations[key]);
 const promptedToDeleteId = state => state.presentationsUi.promptedToDelete;
 
+const importStatus = state => state.presentationImport.importStatus;
+const importError = state => state.presentationImport.importError;
+const importCandidate = state => state.presentationImport.importCandidate;
+
 export const selector = createStructuredSelector({
   activePresentation,
   activePresentationId,
   promptedToDeleteId,
-  presentationsList
+  presentationsList,
+
+  importStatus,
+  importError,
+  importCandidate
 });
 

@@ -1,16 +1,24 @@
 import React from 'react';
+import Modal from 'react-modal';
+import Dropzone from 'react-dropzone';
 
 import './ProjectManagerLayout.scss';
 
 const ProjectManagerLayout = ({
   // activePresentation,
   // activePresentationId,
+  importStatus,
+  importError,
+  onDropInput,
   promptedToDeleteId,
   presentationsList = [],
+  importCandidate,
+  overrideImportWithCandidate,
   actions: {
     promptDeletePresentation,
     deletePresentation,
-    createPresentation
+    createPresentation,
+    importReset
   }
 }) => {
   const onCreatePresentation = () => {
@@ -50,6 +58,22 @@ const ProjectManagerLayout = ({
       </section>
 
       <section>
+        <Dropzone
+          className="drop-zone"
+          activeClassName="drop-zone-active"
+          onDrop={onDropInput}>
+          <div>Import an existing presentation's project (drop a file here)</div>
+        </Dropzone>
+        <div className="import-status-display">
+          {importStatus}
+        </div>
+        <div className="import-error-display">
+          {importError === 'badJSON' ? 'Your file is badly formatted' : ''}
+          {importError === 'invalidProject' ? 'Your file is not a valid quinoa presentation' : ''}
+        </div>
+      </section>
+
+      <section>
         <ul>
           {presentationsList.map((presentation, index) => {
           const onClickPrompt = () => promptDeletePresentation(presentation.id);
@@ -65,6 +89,24 @@ const ProjectManagerLayout = ({
         }
         </ul>
       </section>
+
+      <Modal
+        onRequestClose={importReset}
+        contentLabel="Override the existing presentation"
+        isOpen={importCandidate !== undefined}>
+        <div>
+        You seem to have a working version of the presentation you are trying to import stored on your computer.
+        Do you wish to override the local version of the presentation ?
+        </div>
+        <div>
+          <button onClick={overrideImportWithCandidate}>
+            Yes, override the local version
+          </button>
+          <button onClick={importReset}>
+            Cancel
+          </button>
+        </div>
+      </Modal>
     </section>
   );
 };

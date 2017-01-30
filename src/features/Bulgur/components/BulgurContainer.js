@@ -13,7 +13,8 @@ import {
 } from '../../NewPresentationDialog/duck';
 
 import {
-  getFileAsText//,
+  getFileAsText
+  // ,
   // convertRawStrToJson
 } from '../../../helpers/fileLoader';
 
