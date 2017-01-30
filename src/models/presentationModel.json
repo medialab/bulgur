@@ -1,0 +1,164 @@
+{
+    "type": "object",
+    "keys": {
+        "id": {
+            "type": "string",
+            "required": true
+        },
+        "metadata": {
+            "type": "object",
+            "required": true,
+            "keys": {
+                "title": {
+                    "type": "string",
+                    "required": false
+                },
+                "description": {
+                    "type": "string",
+                    "required": false
+                },
+                "authors": {
+                    "type": "array",
+                    "required": false
+                },
+                "gistId": {
+                    "type": "string"
+                }
+            }
+        },
+        "datasets": {
+            "type": "object",
+            "required": true,
+            "keys": {
+                "$each": {
+                    "type": "object",
+                    "keyType": "uuid",
+                    "keys": {
+                        "metadata": {
+                            "type": "object",
+                            "required": true,
+                            "keys": {
+                                "title": {
+                                    "type": "string",
+                                    "required": false
+                                },
+                                "authors": {
+                                    "type": "array",
+                                    "required": false
+                                },
+                                "url": {
+                                    "type": "string",
+                                    "required": false
+                                },
+                                "description": {
+                                    "type": "string",
+                                    "required": false
+                                },
+                                "license": {
+                                    "type": "string",
+                                    "required": false
+                                },
+                                "format": {
+                                    "required": true,
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "data": {
+                            "type": ["string", "array"],
+                            "required": true
+                        }
+                    }
+                }
+            }
+        },
+        "visualizations": {
+            "type": "object",
+            "required": true,
+            "keys": {
+                "$each": {
+                    "keyType": "uuid",
+                    "type": "object",
+                    "keys": {
+                      "metadata": {
+                          "type": "object",
+                          "required": true,
+                          "keys": {
+                              "title": {
+                                  "type": "string",
+                                  "required": false
+                              },
+                              "visualizationType": {
+                                  "type": "string",
+                                  "possibleValues": ["map", "timeline", "graph"],
+                                  "required": true
+                              }
+                          }
+                      },
+                      "datasets": {
+                          "type": "array",
+                          "required": true,
+                          "children": {
+                              "type": "uuid"
+                          }
+                      }
+                    }
+                }
+            }
+        },
+        "slides": {
+            "type": "object",
+            "required": true,
+            "keys": {
+                "keyType": "uuid",
+                "$each": {
+                    "keyType": "uuid",
+                    "type": "object",
+                    "keys": {
+                        "id": {
+                            "type": "uuid",
+                            "required": true
+                        },
+                        "title": {
+                            "type": "string",
+                            "required": false
+                        },
+                        "markdown": {
+                            "type": "string",
+                            "required": false
+                        },
+                        "views": {
+                            "type": "object",
+                            "required": true,
+                            "keys": {
+                                "keyType": "uuid",
+                                "$each": {
+                                    "type": "object",
+                                    "keys": {
+                                        "viewParameters": {
+                                            "type": "object",
+                                            "required": true,
+                                            "keys": {
+                                                "viewDataMap": {
+                                                    "type": "object",
+                                                    "required": true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "order": {
+            "type": "array",
+            "required": true,
+            "children": {
+                "type": "uuid"
+            }
+        }
+    }
+}
