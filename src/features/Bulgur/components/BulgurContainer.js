@@ -13,16 +13,14 @@ import {
 } from '../../NewPresentationDialog/duck';
 
 import {
-  getFileAsText,
-  convertRawStrToJson
+  getFileAsText//,
+  // convertRawStrToJson
 } from '../../../helpers/fileLoader';
 
 import {
-  default as quinoa,
+  // default as quinoa,
   actions as quinoaActions,
 } from '../../../helpers/configQuinoa';
-
-import validateProject from '../../../helpers/validateProject';
 
 @connect(
   state => ({
@@ -108,28 +106,30 @@ class BulgurContainer extends Component {
 
   onProjectImport (files) {
     getFileAsText(files[0], (err, str) => {
-      if (err) {
+      // todo : remove
+      return str;
+      // if (err) {
         // todo : handle import error
         // console.log('error while loading project', err);
-      }
-      else {
-        const project = convertRawStrToJson(str, 'json');
-        const valid = validateProject(project);
-        if (valid) {
-          this.props.actions.setupNewPresentation([], project.globalParameters.visualizationType, project.data, project.remoteUrls);
-          project.presentation.order.forEach(id => {
-            quinoaActions.addSlide(project.presentation.slides[id]);
-            // workaround on the fact that addSlide seems not to work
-            // todo : fix this upstream
-            const list = quinoa.getState().editor.order;
-            const generatedId = list[list.length - 1];
-            quinoaActions.updateSlide(generatedId, Object.assign(project.presentation.slides[id], {id: undefined}));
-          });
-        }
-        else {
+      // }
+      // else {
+        // const project = convertRawStrToJson(str, 'json');
+        // const valid = validateProject(project);
+        // if (valid) {
+        //   this.props.actions.setupNewPresentation([], project.globalParameters.visualizationType, project.data, project.remoteUrls);
+        //   project.presentation.order.forEach(id => {
+        //     quinoaActions.addSlide(project.presentation.slides[id]);
+        //     // workaround on the fact that addSlide seems not to work
+        //     // todo : fix this upstream
+        //     const list = quinoa.getState().editor.order;
+        //     const generatedId = list[list.length - 1];
+        //     quinoaActions.updateSlide(generatedId, Object.assign(project.presentation.slides[id], {id: undefined}));
+        //   });
+        // }
+        // else {
           // console.error('you tried to input an invalid project');
-        }
-      }
+        // }
+      // }
     });
   }
 
