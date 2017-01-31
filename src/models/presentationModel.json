@@ -111,6 +111,14 @@
                         "required": false,
                         "type": "array"
                       },
+                      "dataMap": {
+                        "required": false,
+                        "type": "object"
+                      },
+                      "colorsMap": {
+                        "required": false,
+                        "type": "object"
+                      },
                       "datasets": {
                           "type": "array",
                           "required": true,
