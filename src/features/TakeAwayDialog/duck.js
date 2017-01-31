@@ -5,7 +5,6 @@ import publishGist from '../../helpers/gistExporter';
 /*
  * Action names
  */
- import {SETUP_NEW_PRESENTATION} from '../NewPresentationDialog/duck';
  import {RESET_APP} from '../Bulgur/duck';
 
 const SET_TAKE_AWAY_TYPE = 'SET_TAKE_AWAY_TYPE';
@@ -42,13 +41,13 @@ function takeAwayUi(state = DEFAULT_TAKE_AWAY_UI_SETTINGS, action) {
   switch (action.type) {
     case RESET_APP:
       return DEFAULT_TAKE_AWAY_UI_SETTINGS;
-    case SETUP_NEW_PRESENTATION:
-      return {
-        ...state,
-        gistUrl: action.remoteUrls && action.remoteUrls.gistUrl,
-        gistUri: action.remoteUrls && action.remoteUrls.gistUri,
-        blocksUrl: action.remoteUrls && action.remoteUrls.blocksUrl
-      };
+    // case SETUP_NEW_PRESENTATION:
+    //   return {
+    //     ...state,
+    //     gistUrl: action.remoteUrls && action.remoteUrls.gistUrl,
+    //     gistUri: action.remoteUrls && action.remoteUrls.gistUri,
+    //     blocksUrl: action.remoteUrls && action.remoteUrls.blocksUrl
+    //   };
     case SET_TAKE_AWAY_TYPE:
       return {
         ...state,

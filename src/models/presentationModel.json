@@ -46,6 +46,10 @@
                                     "type": "string",
                                     "required": false
                                 },
+                                "filename": {
+                                    "type": "string",
+                                    "required": false
+                                },
                                 "authors": {
                                     "type": "array",
                                     "required": false
@@ -98,6 +102,14 @@
                                   "required": true
                               }
                           }
+                      },
+                      "data": {
+                        "required": false,
+                        "type": "object"
+                      },
+                      "dataProfile": {
+                        "required": false,
+                        "type": "array"
                       },
                       "datasets": {
                           "type": "array",

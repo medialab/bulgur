@@ -8,9 +8,9 @@ import * as duck from '../duck';
 import {createDefaultSlideParameters} from '../../../models/visualizationTypes';
 
 import {
-  resetNewPresentationSettings,
-  setupNewPresentation
-} from '../../NewPresentationDialog/duck';
+  resetPresentationCandidateSettings,
+  setupPresentationCandidate
+} from '../../PresentationCandidateDialog/duck';
 
 import {
   getFileAsText
@@ -31,8 +31,8 @@ import {
     actions: bindActionCreators({
       ...duck,
       ...quinoaActions,
-      resetNewPresentationSettings,
-      setupNewPresentation
+      resetPresentationCandidateSettings,
+      setupPresentationCandidate
     }, dispatch)
   })
 )
@@ -66,13 +66,14 @@ class BulgurContainer extends Component {
     }
   }
 
-  shouldComponentUpdate(newProps) {
-    return newProps.isNewPresentationModalOpen !== this.props.isNewPresentationModalOpen ||
-           newProps.isTakeAwayModalOpen !== this.props.isTakeAwayModalOpen ||
-           newProps.currentSlide !== this.props.currentSlide ||
-           JSON.stringify(newProps.visualizationData.viewParameters) !== JSON.stringify(this.props.visualizationData.viewParameters) ||
-           JSON.stringify(newProps.quinoaSlideParameters) !== JSON.stringify(this.props.quinoaSlideParameters) ||
-           newProps.doesViewEqualsSlideParameters !== this.props.doesViewEqualsSlideParameters;
+  shouldComponentUpdate() {
+    return true;
+    // return newProps.isPresentationCandidateModalOpen !== this.props.isPresentationCandidateModalOpen ||
+    //        newProps.isTakeAwayModalOpen !== this.props.isTakeAwayModalOpen ||
+    //        newProps.currentSlide !== this.props.currentSlide ||
+    //        JSON.stringify(newProps.visualizationData.viewParameters) !== JSON.stringify(this.props.visualizationData.viewParameters) ||
+    //        JSON.stringify(newProps.quinoaSlideParameters) !== JSON.stringify(this.props.quinoaSlideParameters) ||
+    //        newProps.doesViewEqualsSlideParameters !== this.props.doesViewEqualsSlideParameters;
   }
 
   componentWillUpdate() {
@@ -88,8 +89,8 @@ class BulgurContainer extends Component {
   }
 
   closeAndResetDialog() {
-    this.props.actions.resetNewPresentationSettings();
-    this.props.actions.closeNewPresentationModal();
+    this.props.actions.resetPresentationCandidateSettings();
+    this.props.actions.closePresentationCandidateModal();
   }
 
   updateSlide(params) {
@@ -117,7 +118,7 @@ class BulgurContainer extends Component {
         // const project = convertRawStrToJson(str, 'json');
         // const valid = validateProject(project);
         // if (valid) {
-        //   this.props.actions.setupNewPresentation([], project.globalParameters.visualizationType, project.data, project.remoteUrls);
+        //   this.props.actions.setupPresentationCandidate([], project.globalParameters.visualizationType, project.data, project.remoteUrls);
         //   project.presentation.order.forEach(id => {
         //     quinoaActions.addSlide(project.presentation.slides[id]);
         //     // workaround on the fact that addSlide seems not to work

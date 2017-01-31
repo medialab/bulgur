@@ -12,7 +12,11 @@ if (global.window !== undefined) {
 }
 
 export function loadExampleFile(fileName) {
-  return req('./' + fileName);
+  const data = req('./' + fileName);
+  if (typeof data === 'object') {
+    return JSON.stringify(data);
+  }
+  return data;
 }
 
 export function validateFileExtension (fileName = '', visualizationModel) {

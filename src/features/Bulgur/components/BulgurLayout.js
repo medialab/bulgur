@@ -6,7 +6,7 @@ import MainViewLayout from './MainViewLayout';
 
 import ProjectsManagerContainer from '../../BulgurProjectsManager/components/ProjectManagerContainer';
 
-import NewPresentationDialog from '../../NewPresentationDialog/components/NewPresentationDialogContainer.js';
+import PresentationCandidateDialog from '../../PresentationCandidateDialog/components/PresentationCandidateDialogContainer.js';
 import TakeAwayDialog from '../../TakeAwayDialog/components/TakeAwayDialogContainer.js';
 
 import './BulgurLayout.scss';
@@ -14,14 +14,13 @@ import './BulgurLayout.scss';
 const InterfaceManagerLayout = ({
   id,
   className,
-  isNewPresentationModalOpen,
+  isPresentationCandidateModalOpen,
   isTakeAwayModalOpen,
   updateSlide,
   resetView,
   onProjectImport,
-  returnToLanding,
   actions: {
-    openNewPresentationModal,
+    openPresentationCandidateModal,
     openTakeAwayModal,
     closeTakeAwayModal,
     updateView
@@ -33,47 +32,48 @@ const InterfaceManagerLayout = ({
     viewParameters,
     dataMap = [],
     data = []
-  }
+  },
+  // todo : wire this to something
+  activePresentationId
 }) => {
 
   const closeModal = () => {
-    if (isNewPresentationModalOpen) {
+    if (isPresentationCandidateModalOpen) {
       closeAndResetDialog();
     }
     else {
       closeTakeAwayModal();
     }
   };
-  // todo : remove this when landing functionalities is OK
-  if (data.length !== undefined) {
-    return (<ProjectsManagerContainer />);
-  }
 
   return (<div id={id} className={className}>
-    {visualizationType ?
-      <AsideViewLayout
-        returnToLanding={returnToLanding}
-        openNewPresentationModal={openNewPresentationModal}
-        openTakeAwayModal={openTakeAwayModal} /> :
-    ''}
-    <MainViewLayout
-      openNewPresentationModal={openNewPresentationModal}
-      visualizationType={visualizationType}
-      onProjectImport={onProjectImport}
-      dataMap={dataMap}
-      viewParameters={viewParameters}
-      updateSlide={updateSlide}
-      doesViewEqualsSlideParameters={doesViewEqualsSlideParameters}
-      updateView={updateView}
-      resetView={resetView}
-      data={data} />
+    {activePresentationId ?
+      <div className={className}>
+        {visualizationType ?
+          <AsideViewLayout
+            openPresentationCandidateModal={openPresentationCandidateModal}
+            openTakeAwayModal={openTakeAwayModal} /> :
+      ''}
+        <MainViewLayout
+          openPresentationCandidateModal={openPresentationCandidateModal}
+          visualizationType={visualizationType}
+          onProjectImport={onProjectImport}
+          dataMap={dataMap}
+          viewParameters={viewParameters}
+          updateSlide={updateSlide}
+          doesViewEqualsSlideParameters={doesViewEqualsSlideParameters}
+          updateView={updateView}
+          resetView={resetView}
+          data={data} />
+      </div>
+      : <ProjectsManagerContainer />}
     <Modal
       onRequestClose={closeModal}
       contentLabel="new presentation"
-      isOpen={isNewPresentationModalOpen || isTakeAwayModalOpen}>
+      isOpen={isPresentationCandidateModalOpen || isTakeAwayModalOpen}>
       {
-        isNewPresentationModalOpen ?
-          <NewPresentationDialog /> :
+        isPresentationCandidateModalOpen ?
+          <PresentationCandidateDialog /> :
           <TakeAwayDialog />
       }
     </Modal>

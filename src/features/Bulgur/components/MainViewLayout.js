@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Landing from './Landing';
 import {
   Timeline,
   Network,
@@ -14,8 +13,6 @@ import './MainViewLayout.scss';
 const MainViewLayout = ({
   visualizationType,
   data,
-  openNewPresentationModal,
-  onProjectImport,
   viewParameters,
   updateView,
   updateSlide,
@@ -32,7 +29,7 @@ const MainViewLayout = ({
       case 'time':
         return <Timeline {...visProps} />;
       default:
-        return <Landing onDropInput={onProjectImport} onClickOnNewPresentation={openNewPresentationModal} />;
+        return null;
     }
   };
 

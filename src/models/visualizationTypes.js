@@ -1,85 +1,52 @@
 
 const models = {
   time: {
-    acceptedFileExtensions: ['csv', 'tsv'],
-    dataMap: [
-      {
-        id: 'content',
-        acceptedValueTypes: ['string']
-      },
-      {
-        id: 'year',
-        acceptedValueTypes: ['number']
-      },
-      {
-        id: 'month',
-        acceptedValueTypes: ['number']
-      },
-      {
-        id: 'day',
-        acceptedValueTypes: ['number']
-      },
-      {
-        id: 'time',
-        acceptedValueTypes: ['string']
-      },
-      {
-        id: 'end year',
-        acceptedValueTypes: ['number']
-      },
-      {
-        id: 'end month',
-        acceptedValueTypes: ['number']
-      },
-      {
-        id: 'end day',
-        acceptedValueTypes: ['number']
-      },
-      {
-        id: 'end time',
-        acceptedValueTypes: ['string']
-      },
-      /*{
-        id: 'display date',
-        acceptedValueTypes: ['string']
-      },
-      {
-        id: 'headline',
-        acceptedValueTypes: ['string']
-      },
-      {
-        id: 'text',
-        acceptedValueTypes: ['string']
-      },
-      {
-        id: 'media',
-        acceptedValueTypes: ['url']
-      },
-      {
-        id: 'media credit',
-        acceptedValueTypes: ['string']
-      },
-      {
-        id: 'media caption',
-        acceptedValueTypes: ['string']
-      },
-      {
-        id: 'media thumbnail',
-        acceptedValueTypes: ['string']
-      },
-      {
-        id: 'type',
-        acceptedValueTypes: ['string']
-      },*/
-      {
-        id: 'group',
-        acceptedValueTypes: ['string']
-      },
-      /*{
-        id: 'background',
-        acceptedValueTypes: ['string']
-      }*/
-    ],
+    type: 'time',
+    acceptedFileExtensions: ['csv'],
+    dataMap: {
+      main: {
+        'name': {
+          id: 'name',
+          acceptedValueTypes: ['string', 'number']
+        },
+        'category': {
+          id: 'category',
+          acceptedValueTypes: ['string', 'number']
+        },
+        'year': {
+          id: 'year',
+          acceptedValueTypes: ['number']
+        },
+        'month': {
+          id: 'month',
+          acceptedValueTypes: ['number']
+        },
+        'day': {
+          id: 'day',
+          acceptedValueTypes: ['number']
+        },
+        'time': {
+          id: 'time',
+          acceptedValueTypes: ['string']
+        },
+        'end year': {
+          id: 'end year',
+          acceptedValueTypes: ['number']
+        },
+        'end month': {
+          id: 'end month',
+          acceptedValueTypes: ['number']
+        },
+        'end day': {
+          id: 'end day',
+          acceptedValueTypes: ['number']
+        },
+        'end time': {
+          id: 'end time',
+          acceptedValueTypes: ['string']
+        },
+      }
+    },
     samples: [
     {
       title: 'Milestones in the history of data visualization',
@@ -87,6 +54,10 @@ const models = {
       description: 'More information: http://www.datavis.ca/'
     }
     ],
+    defaultViewParameters: {
+      fromDate: new Date().setFullYear(1900),
+      toDate: new Date().setFullYear(1960),
+    },
     slideParameters: [
       {
         id: 'fromDate',
@@ -99,33 +70,20 @@ const models = {
     ]
   },
   space: {
-    acceptedFileExtensions: ['csv', 'tsv'],
-    dataMap: [
-      {
-        id: 'latitude',
-        acceptedValueTypes: ['number']
-      },
-      {
-        id: 'longitude',
-        acceptedValueTypes: ['number']
-      },
-      {
-        id: 'title',
-        acceptedValueTypes: ['string']
-      },
-      {
-        id: 'group',
-        acceptedValueTypes: ['string']
-      },
-      {
-        id: 'description',
-        acceptedValueTypes: ['string']
-      },
-      {
-        id: 'media',
-        acceptedValueTypes: ['url']
+    type: 'space',
+    acceptedFileExtensions: ['csv', 'geojson'],
+    dataMap: {
+      main: {
+        title: {
+          id: 'title',
+          acceptedValueTypes: ['string']
+        },
+        category: {
+          id: 'category',
+          acceptedValueTypes: ['string', 'number']
+        }
       }
-    ],
+    },
     samples: [
       {
         title: 'Histoire du Fort et des combats de 1870-1871 à Issy',
@@ -151,21 +109,92 @@ const models = {
         id: 'cameraZoom',
         default: 10
       }
-    ]
+    ],
+    defaultViewParameters: {
+      cameraX: 48.8674345,
+      cameraY: 2.3455482,
+      cameraZoom: 4,
+      tilesUrl: 'http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png'
+    },
   },
   relations: {
-    acceptedFileExtensions: ['gexf'],
-    samples: [{
-      title: 'Arctic',
-      fileName: 'arctic.gexf',
-      description: 'Taken from quinoa examples'
-    }],
-    dataMap: [
+    type: 'relations',
+    acceptedFileExtensions: ['gexf', 'json', 'graphml'],
+    samples: [
       {
-        id: 'gexf',
-        acceptedValueTypes: ['string']
+        title: 'Arctic',
+        fileName: 'arctic.gexf',
+        description: 'Taken from quinoa examples'
+      },
+      {
+        title: 'Les misérables',
+        fileName: 'miserables.json',
+        description: 'Taken from d3 examples (todo : document more)'
       }
     ],
+    dataMap: {
+      nodes: {
+        label: {
+          id: 'label',
+          acceptedValueTypes: ['string', 'number'],
+        },
+        category: {
+          id: 'category',
+          acceptedValueTypes: ['string', 'number'],
+        },
+        description: {
+          id: 'description',
+          acceptedValueTypes: ['string'],
+        },
+        size: {
+          id: 'size',
+          acceptedValueTypes: ['number'],
+        }
+      },
+      edges: {
+        label: {
+          id: 'label',
+          acceptedValueTypes: ['string', 'number'],
+        },
+        type: {
+          id: 'type',
+          acceptedValueTypes: ['string', 'number'],
+        },
+        category: {
+          id: 'category',
+          acceptedValueTypes: ['string', 'number'],
+        },
+        description: {
+          id: 'description',
+          acceptedValueTypes: ['string', 'number'],
+        },
+        weight: {
+          id: 'weight',
+          acceptedValueTypes: ['number'],
+        },
+        id: {
+          id: 'id',
+          acceptedValueTypes: ['string', 'number'],
+        },
+        source: {
+          id: 'source',
+          acceptedValueTypes: ['string', 'number'],
+        },
+        target: {
+          id: 'target',
+          acceptedValueTypes: ['string', 'number'],
+        }
+      }
+    },
+    defaultViewParameters: {
+      cameraX: 0,
+      cameraY: 0,
+      cameraRatio: 2,
+      cameraAngle: 0,
+      labelThreshold: 7,
+      minNodeSize: 1,
+      sideMargin: 0,
+    },
     slideParameters: [
       {
         id: 'cameraX',

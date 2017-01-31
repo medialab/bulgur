@@ -29,6 +29,7 @@
   "homepage": "https://github.com/medialab/bulgur#readme",
   "dependencies": {
     "codemirror": "^5.19.0",
+    "color-scheme": "0.0.5",
     "d3-dsv": "^1.0.3",
     "draft-js": "^0.9.1",
     "file-saver": "^1.3.3",
@@ -39,6 +40,7 @@
     "quinoa-presentation-player": "git+https://github.com/medialab/quinoa-presentation-player.git",
     "quinoa-vis-modules": "git+https://github.com/medialab/quinoa-vis-modules.git",
     "react": "^15.3.2",
+    "react-color": "^2.11.1",
     "react-dnd": "^2.1.4",
     "react-dnd-html5-backend": "^2.1.2",
     "react-dom": "^15.3.2",

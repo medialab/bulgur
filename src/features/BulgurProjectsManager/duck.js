@@ -5,6 +5,8 @@ import {v4 as uuid} from 'uuid';
 /*
  * Action names
  */
+import {START_CANDIDATE_PRESENTATION_CONFIGURATION} from '../Bulgur/duck';
+
 const CREATE_PRESENTATION = 'CREATE_PRESENTATION';
 
 const PROMPT_DELETE_PRESENTATION = 'PROMPT_DELETE_PRESENTATION';
@@ -95,21 +97,12 @@ export const importFail = (error) => (dispatch) => {
   setTimeout(() => dispatch(importReset()), 5000);
 };
 
-// todo : remove that
-const testPresentation = {
-  id: 'f1ddbb99-4922-4148-bdb3-5cc862c4aec6',
-  metadata: {
-    title: 'Ma présentation',
-  }
-};
-
 /*
  * Reducers
  */
 const PRESENTATIONS_DEFAULT_STATE = {
   // todo : remove that
   presentations: {
-    'f1ddbb99-4922-4148-bdb3-5cc862c4aec6': testPresentation
   }
 };
 function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
@@ -177,6 +170,10 @@ const PRESENTATIONS_UI_DEFAULT_STATE = {
 };
 function presentationsUi(state = PRESENTATIONS_UI_DEFAULT_STATE, action) {
   switch (action.type) {
+    case START_CANDIDATE_PRESENTATION_CONFIGURATION:
+      return {
+        activePresentationId: action.id
+      };
     case CREATE_PRESENTATION:
       return {
         ...state,

@@ -11,13 +11,12 @@ import '../../../lib/code-mirror-theme.scss';
 // const EditorComponent = quinoaCreateComponents().editor;
 
 const AsideViewLayout = ({
-  openNewPresentationModal,
-  openTakeAwayModal,
-  returnToLanding
+  openPresentationCandidateModal,
+  openTakeAwayModal
 }) => (
   <aside className="bulgur-aside-view">
-    <button onClick={returnToLanding} type="button"><img className="bulgur-icon-image" src={require('../assets/landing.svg')} />New presentation / import</button>
-    <button onClick={openNewPresentationModal} type="button"><img className="bulgur-icon-image" src={require('../assets/settings.svg')} /> Presentation settings</button>
+    {/* <button onClick={returnToLanding} type="button"><img className="bulgur-icon-image" src={require('../assets/landing.svg')} />New presentation / import</button> */}
+    <button onClick={openPresentationCandidateModal} type="button"><img className="bulgur-icon-image" src={require('../assets/settings.svg')} /> Presentation settings</button>
     <EditorComponent />
     <button type="button" onClick={openTakeAwayModal}><img className="bulgur-icon-image" src={require('../assets/take-away.svg')} /> Take away</button>
   </aside>

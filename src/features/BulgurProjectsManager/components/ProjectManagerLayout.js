@@ -17,18 +17,13 @@ const ProjectManagerLayout = ({
   actions: {
     promptDeletePresentation,
     deletePresentation,
-    createPresentation,
     copyPresentation,
+    startPresentationCandidateConfiguration,
     importReset
   }
 }) => {
   const onCreatePresentation = () => {
-    createPresentation('f1ddbb99-4922-4148-bdb3-5cc862c4aec6', {
-      id: 'f1ddbb99-4922-4148-bdb3-5cc862c4aec6',
-      metadata: {
-        title: 'Ma présentation',
-      }
-    });
+    startPresentationCandidateConfiguration();
   };
   return (
     <section className="project-manager-layout">
@@ -84,8 +79,8 @@ const ProjectManagerLayout = ({
             <li key={index}>
               <span>{presentation.metadata.title}</span>
               {promptedToDeleteId !== presentation.id ? <button onClick={onClickCopy}>Copy</button> : ''}
-              <span>{promptedToDeleteId === presentation.id ? 'Sure ?' : ''}</span>
-              {promptedToDeleteId === presentation.id ? <button onClick={onClickDelete}>Delete sure</button> : <button onClick={onClickPrompt}>Delete</button>}
+              <span>{promptedToDeleteId === presentation.id ? ' Sure ? ' : ''}</span>
+              {promptedToDeleteId === presentation.id ? <button onClick={onClickDelete}>Yes, delete this presentation</button> : <button onClick={onClickPrompt}>Delete</button>}
             </li>
           );
         })

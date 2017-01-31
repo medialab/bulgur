@@ -51,7 +51,7 @@ export const ChooseTakeAwayStep = ({
 );
 
 
-const NewPresentationDialogLayout = ({
+const TakeAwayDialogLayout = ({
   actions: {
     closeTakeAwayModal
   },
@@ -90,4 +90,4 @@ const NewPresentationDialogLayout = ({
   </div>
 );
 
-export default NewPresentationDialogLayout;
+export default TakeAwayDialogLayout;

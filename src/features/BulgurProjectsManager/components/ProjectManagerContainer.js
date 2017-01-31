@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 
 import ProjectManagerLayout from './ProjectManagerLayout';
 import * as duck from '../duck';
+import * as globalDuck from '../../Bulgur/duck';
 
 import {
   getFileAsText
@@ -17,7 +18,8 @@ import validatePresentation from '../../../helpers/presentationValidator';
   }),
   dispatch => ({
     actions: bindActionCreators({
-      ...duck
+      ...duck,
+      ...globalDuck
     }, dispatch)
   })
 )

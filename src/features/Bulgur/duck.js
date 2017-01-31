@@ -1,7 +1,8 @@
 import {combineReducers} from 'redux';
 import {createStructuredSelector} from 'reselect';
 import equals from 'shallow-equals';
-import {v4} from 'uuid';
+import {v4 as uuid} from 'uuid';
+
 
 // import {EditorState} from 'draft-js';
 // import {
@@ -13,22 +14,23 @@ import {v4} from 'uuid';
 //     id: uuid.v4(),
 //     title: data.title || '',
 //     markdown: data.markdown || '',
-//     draft: EditorState.createEmpty(),
+//     draft: EditorState.create(),
 //     meta: data.meta || {}
 //   };
 // }
 // const quinoaEditor = quinoaCreateEditorReducer(createSlide);
 
-import {SETUP_NEW_PRESENTATION} from '../NewPresentationDialog/duck';
+import {SETUP_PRESENTATION_CANDIDATE} from '../PresentationCandidateDialog/duck';
 
 import {createDefaultSlideParameters} from '../../models/visualizationTypes';
 
 /*
  * Action names
  */
+export const START_PRESENTATION_CANDIDATE_CONFIGURATION = 'START_PRESENTATION_CANDIDATE_CONFIGURATION';
 
-const OPEN_NEW_PRESENTATION_MODAL = 'OPEN_NEW_PRESENTATION_MODAL';
-const CLOSE_NEW_PRESENTATION_MODAL = 'CLOSE_NEW_PRESENTATION_MODAL';
+const OPEN_PRESENTATION_CANDIDATE_MODAL = 'OPEN_PRESENTATION_CANDIDATE_MODAL';
+const CLOSE_PRESENTATION_CANDIDATE_MODAL = 'CLOSE_PRESENTATION_CANDIDATE_MODAL';
 const OPEN_TAKE_AWAY_MODAL = 'OPEN_TAKE_AWAY_MODAL';
 const CLOSE_TAKE_AWAY_MODAL = 'CLOSE_TAKE_AWAY_MODAL';
 const VIEW_EQUALS_SLIDE_PARAMETERS = 'VIEW_EQUALS_SLIDE_PARAMETERS';
@@ -39,14 +41,20 @@ export const RESET_APP = 'RESET_APP';
 /*
  * Action creators
  */
-// export const quinoaActions = qActions;
 
-export const openNewPresentationModal = () => ({
-  type: OPEN_NEW_PRESENTATION_MODAL
+export const startPresentationCandidateConfiguration = () => ({
+  type: START_PRESENTATION_CANDIDATE_CONFIGURATION,
+  id: uuid()
 });
 
-export const closeNewPresentationModal = () => ({
-  type: CLOSE_NEW_PRESENTATION_MODAL
+// export const quinoaActions = qActions;
+
+export const openPresentationCandidateModal = () => ({
+  type: OPEN_PRESENTATION_CANDIDATE_MODAL
+});
+
+export const closePresentationCandidateModal = () => ({
+  type: CLOSE_PRESENTATION_CANDIDATE_MODAL
 });
 
 export const openTakeAwayModal = () => ({
@@ -88,13 +96,12 @@ const VISUALIZATION_DEFAULT_STATE = {
     quinoaSlideParameters: {},
     viewEqualsSlideParameters: false
 };
-
 function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
   let isSync;
   switch (action.type) {
     case RESET_APP:
       return VISUALIZATION_DEFAULT_STATE;
-    case SETUP_NEW_PRESENTATION:
+    case SETUP_PRESENTATION_CANDIDATE:
       // consume original data points against dataMap
       let finalData = action.data;
       let viewParameters;
@@ -147,7 +154,7 @@ function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
           return {
             start: start.getTime(),
             end: end !== undefined ? end.getTime() : undefined,
-            id: v4(),
+            id: uuid(),
             ...point
           };
         });
@@ -188,22 +195,23 @@ function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
 }
 
 const GLOBAL_UI_DEFAULT_STATE = {
-    newPresentationModalOpen: false,
+    presentationCandidateModalOpen: false,
     takeAwayModalOpen: false
 };
 function globalUi(state = GLOBAL_UI_DEFAULT_STATE, action) {
   switch (action.type) {
     case RESET_APP:
       return GLOBAL_UI_DEFAULT_STATE;
-    case OPEN_NEW_PRESENTATION_MODAL:
+    case START_PRESENTATION_CANDIDATE_CONFIGURATION:
+    case OPEN_PRESENTATION_CANDIDATE_MODAL:
       return {
         ...state,
-        newPresentationModalOpen: true
+        presentationCandidateModalOpen: true
       };
-    case CLOSE_NEW_PRESENTATION_MODAL:
+    case CLOSE_PRESENTATION_CANDIDATE_MODAL:
       return {
         ...state,
-        newPresentationModalOpen: false
+        presentationCandidateModalOpen: false
       };
     case OPEN_TAKE_AWAY_MODAL:
       return {
@@ -230,7 +238,7 @@ export default combineReducers({
  * Selectors
  */
 
-const isNewPresentationModalOpen = state => state.globalUi.newPresentationModalOpen;
+const isPresentationCandidateModalOpen = state => state.globalUi.presentationCandidateModalOpen;
 
 const isTakeAwayModalOpen = state => state.globalUi.takeAwayModalOpen;
 
@@ -243,7 +251,7 @@ const activeViewParameters = state => state.visualization.viewParameters;
 const quinoaSlideParameters = state => state.visualization.quinoaSlideParameters;
 
 export const selector = createStructuredSelector({
-  isNewPresentationModalOpen,
+  isPresentationCandidateModalOpen,
   isTakeAwayModalOpen,
   visualizationData,
   doesViewEqualsSlideParameters,
