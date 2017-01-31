@@ -5,7 +5,10 @@ import {v4 as uuid} from 'uuid';
 /*
  * Action names
  */
-import {START_CANDIDATE_PRESENTATION_CONFIGURATION} from '../Bulgur/duck';
+import {
+  START_CANDIDATE_PRESENTATION_CONFIGURATION,
+  APPLY_PRESENTATION_CANDIDATE_CONFIGURATION
+} from '../Bulgur/duck';
 
 const CREATE_PRESENTATION = 'CREATE_PRESENTATION';
 
@@ -103,10 +106,37 @@ export const importFail = (error) => (dispatch) => {
 const PRESENTATIONS_DEFAULT_STATE = {
   // todo : remove that
   presentations: {
-  }
+  },
+  activePresentationId: undefined
 };
 function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
   switch (action.type) {
+    case APPLY_PRESENTATION_CANDIDATE_CONFIGURATION:
+      if (state.activePresentationId) {
+        // case update
+        return {
+          ...state,
+          presentations: {
+            ...state.presentations,
+            [action.presentation.id]: {
+              ...state.presentations[action.presentation.id],
+              ...action.presentation
+            }
+          },
+          activePresentationId: action.presentation.id
+        };
+      }
+ else {
+        // case create
+        return {
+          ...state,
+          presentations: {
+            ...state.presentations,
+            [action.presentation.id]: action.presentation
+          },
+          activePresentationId: action.presentation.id
+        };
+      }
     case CREATE_PRESENTATION:
       const id = action.id;
       let presentation = {

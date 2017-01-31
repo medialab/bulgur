@@ -20,14 +20,16 @@ import {v4 as uuid} from 'uuid';
 // }
 // const quinoaEditor = quinoaCreateEditorReducer(createSlide);
 
-import {SETUP_PRESENTATION_CANDIDATE} from '../PresentationCandidateDialog/duck';
-
-import {createDefaultSlideParameters} from '../../models/visualizationTypes';
+// import {createDefaultSlideParameters} from '../../models/visualizationTypes';
 
 /*
  * Action names
  */
 export const START_PRESENTATION_CANDIDATE_CONFIGURATION = 'START_PRESENTATION_CANDIDATE_CONFIGURATION';
+export const APPLY_PRESENTATION_CANDIDATE_CONFIGURATION = 'APPLY_PRESENTATION_CANDIDATE_CONFIGURATION';
+
+
+export const SET_ACTIVE_PRESENTATION_ID = 'SET_ACTIVE_PRESENTATION_ID';
 
 const OPEN_PRESENTATION_CANDIDATE_MODAL = 'OPEN_PRESENTATION_CANDIDATE_MODAL';
 const CLOSE_PRESENTATION_CANDIDATE_MODAL = 'CLOSE_PRESENTATION_CANDIDATE_MODAL';
@@ -42,9 +44,20 @@ export const RESET_APP = 'RESET_APP';
  * Action creators
  */
 
-export const startPresentationCandidateConfiguration = () => ({
+export const startPresentationCandidateConfiguration = (presentation) => ({
   type: START_PRESENTATION_CANDIDATE_CONFIGURATION,
-  id: uuid()
+  presentation,
+  id: presentation !== undefined && presentation.id ? presentation.id : uuid()
+});
+
+export const applyPresentationCandidateConfiguration = (presentation) => ({
+  type: APPLY_PRESENTATION_CANDIDATE_CONFIGURATION,
+  presentation
+});
+
+export const setActivePresentationId = (id) => ({
+  type: SET_ACTIVE_PRESENTATION_ID,
+  id
 });
 
 // export const quinoaActions = qActions;
@@ -101,80 +114,6 @@ function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
   switch (action.type) {
     case RESET_APP:
       return VISUALIZATION_DEFAULT_STATE;
-    case SETUP_PRESENTATION_CANDIDATE:
-      // consume original data points against dataMap
-      let finalData = action.data;
-      let viewParameters;
-      const okForMap = (action.dataMap && action.dataMap.length);
-      if (okForMap) {
-        finalData = action.data.map(point => {
-            return action.dataMap.reduce((finalObject, thatModel) => {
-              // map data mapped field to visualization dimension id
-              if (point[thatModel.mappedField]) {
-                finalObject[thatModel.id] = point[thatModel.mappedField];
-              }
-              return finalObject;
-            }, {});
-        });
-      }
-      // todo : find a format for declaring that as a vis model ?
-      if (action.visualizationType === 'time') {
-        finalData = finalData.map(point => {
-          const start = new Date();
-
-          if (point.year) {
-            start.setFullYear(+point.year);
-          }
-          if (point.month) {
-            start.setMonth(+point.month - 1);
-          }
-          else start.setMonth(0);
-          if (point.day) {
-            start.setDate(+point.day);
-          }
-          else start.setDate(1);
-
-          let end;
-
-          if (point['end year']) {
-            end = new Date();
-            if (point['end year']) {
-              end.setFullYear(+point['end year']);
-            }
-            if (point['end month']) {
-              end.setMonth(+point['end month'] - 1);
-            }
-            else end.setMonth(0);
-            if (point['end day']) {
-              end.setDate(+point['end day']);
-            }
-            else end.setDate(1);
-          }
-
-          return {
-            start: start.getTime(),
-            end: end !== undefined ? end.getTime() : undefined,
-            id: uuid(),
-            ...point
-          };
-        });
-        const min = Math.min.apply(Math, finalData.map(point => point.start));
-        const max = Math.max.apply(Math, finalData.map(point => point.start));
-        const dist = max - min;
-        viewParameters = {
-          fromDate: min - dist / 4,
-          toDate: max + dist / 4
-        };
-      }
-      else {
-        viewParameters = createDefaultSlideParameters(action.visualizationType);
-      }
-      return {
-        ...state,
-        data: finalData,
-        visualizationType: action.visualizationType,
-        viewParameters
-      };
     case UPDATE_VIEW:
       isSync = equals(state.quinoaSlideParameters, action.parameters);
       return {
@@ -196,12 +135,24 @@ function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
 
 const GLOBAL_UI_DEFAULT_STATE = {
     presentationCandidateModalOpen: false,
-    takeAwayModalOpen: false
+    takeAwayModalOpen: false,
+    activePresentationId: undefined
 };
 function globalUi(state = GLOBAL_UI_DEFAULT_STATE, action) {
   switch (action.type) {
     case RESET_APP:
       return GLOBAL_UI_DEFAULT_STATE;
+    case APPLY_PRESENTATION_CANDIDATE_CONFIGURATION:
+      return {
+        ...state,
+        presentationCandidateModalOpen: false,
+        activePresentationId: action.presentation.id
+      };
+    case SET_ACTIVE_PRESENTATION_ID:
+      return {
+        ...state,
+        activePresentationId: action.id
+      };
     case START_PRESENTATION_CANDIDATE_CONFIGURATION:
     case OPEN_PRESENTATION_CANDIDATE_MODAL:
       return {
@@ -238,6 +189,8 @@ export default combineReducers({
  * Selectors
  */
 
+ const activePresentationId = state => state.globalUi.activePresentationId;
+
 const isPresentationCandidateModalOpen = state => state.globalUi.presentationCandidateModalOpen;
 
 const isTakeAwayModalOpen = state => state.globalUi.takeAwayModalOpen;
@@ -248,9 +201,11 @@ const visualizationData = state => state.visualization;
 
 const activeViewParameters = state => state.visualization.viewParameters;
 
+
 const quinoaSlideParameters = state => state.visualization.quinoaSlideParameters;
 
 export const selector = createStructuredSelector({
+  activePresentationId,
   isPresentationCandidateModalOpen,
   isTakeAwayModalOpen,
   visualizationData,

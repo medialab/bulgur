@@ -3,7 +3,11 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import * as duck from '../duck';
-import {closePresentationCandidateModal} from '../../Bulgur/duck';
+import {
+  closePresentationCandidateModal,
+  applyPresentationCandidateConfiguration,
+  setActivePresentationId
+} from '../../Bulgur/duck';
 
 import PresentationCandidateDialogLayout from './PresentationCandidateDialogLayout';
 
@@ -16,7 +20,9 @@ import PresentationCandidateDialogLayout from './PresentationCandidateDialogLayo
   dispatch => ({
     actions: bindActionCreators({
       ...duck,
-      closePresentationCandidateModal
+      applyPresentationCandidateConfiguration,
+      closePresentationCandidateModal,
+      setActivePresentationId
     }, dispatch)
   })
 )

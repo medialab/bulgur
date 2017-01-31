@@ -77,14 +77,15 @@ const PresentationCandidateDialogLayout = ({
     setPresentationCandidateVisualizationType,
     setPresentationCandidateDatamapItem,
     toggleCandidateColorEdition,
-    setPresentationCandidateColor
+    setPresentationCandidateColor,
+    applyPresentationCandidateConfiguration
   },
   closeAndResetDialog,
-  closeAndSetupPresentationCandidate,
   onFileDrop,
 
   editedColor
 }) => {
+  const onApplyChange = () => applyPresentationCandidateConfiguration(presentationCandidate);
   const onDropInput = (files) => onFileDrop(files[0]);
   const setPresentationTitle = (e) => setCandidatePresentationMetadata('title', e.target.value);
   const setPresentationAuthors = (e) => setCandidatePresentationMetadata('authors', e.target.value);
@@ -99,21 +100,21 @@ const PresentationCandidateDialogLayout = ({
             onChange={setPresentationTitle}
             type="text"
             name="title"
-            value={presentationCandidate.title} />
+            value={presentationCandidate.metadata.title} />
 
           <label htmlFor="authors">Authors</label>
           <input
             onChange={setPresentationAuthors}
             type="text"
             name="authors"
-            value={presentationCandidate.authors} />
+            value={presentationCandidate.metadata.authors} />
 
           <label htmlFor="description">Description</label>
           <textarea
             onChange={setPresentationDescription}
             type="text"
             name="description"
-            value={presentationCandidate.description} />
+            value={presentationCandidate.metadata.description} />
         </form>
       </section>
 
@@ -384,7 +385,7 @@ const PresentationCandidateDialogLayout = ({
           presentationCandidate.visualizations[Object.keys(presentationCandidate.visualizations)[0]].data &&
           presentationCandidate.visualizations[Object.keys(presentationCandidate.visualizations)[0]].dataMap
         ?
-          <button style={{background: 'lightgreen'}} onClick={closeAndSetupPresentationCandidate}>Begin to build presentation</button>
+          <button style={{background: 'lightgreen'}} onClick={onApplyChange}>Edit the presentation content</button>
         : ''
       }
         <button

@@ -196,17 +196,21 @@ const EMPTY_PRESENTATION = {
 };
 
 const DEFAULT_PRESENTATION_CANDIDATE_DATA = {
-  presentationCandidate: {}
+  presentationCandidate: {
+    metadata: {}
+  }
 };
 function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, action) {
   switch (action.type) {
     case RESET_APP:
       return DEFAULT_PRESENTATION_CANDIDATE_DATA;
     case START_PRESENTATION_CANDIDATE_CONFIGURATION:
+      // configure existing presentation or setup new ?
+      const candidateBeginingState = action.presentation || EMPTY_PRESENTATION;
       return {
         ...state,
         presentationCandidate: {
-          ...EMPTY_PRESENTATION,
+          ...candidateBeginingState,
           id: action.id
         }
       };
