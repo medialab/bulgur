@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 
 import BulgurLayout from './BulgurLayout';
 import * as duck from '../duck';
+import * as managerDuck from '../../BulgurProjectsManager/duck';
 
 import {createDefaultSlideParameters} from '../../../models/visualizationTypes';
 
@@ -25,7 +26,8 @@ import {
 
 @connect(
   state => ({
-    ...duck.selector(state.activePresentation)
+    ...duck.selector(state.activePresentation),
+    ...managerDuck.selector(state.presentations)
   }),
   dispatch => ({
     actions: bindActionCreators({
@@ -46,6 +48,7 @@ class BulgurContainer extends Component {
     this.updateSlideIfEmpty = this.updateSlideIfEmpty.bind(this);
     this.onProjectImport = this.onProjectImport.bind(this);
     this.returnToLanding = this.returnToLanding.bind(this);
+    this.openSettings = this.openSettings.bind(this);
   }
 
   componentWillMount() {
@@ -140,13 +143,18 @@ class BulgurContainer extends Component {
   }
 
   returnToLanding() {
-    this.props.actions.resetApp();
+    this.props.actions.unsetActivePresentation();
+  }
+
+  openSettings () {
+    this.props.actions.startPresentationCandidateConfiguration(this.props.activePresentation);
   }
 
   render() {
     return (
       <BulgurLayout
         {...this.props}
+        openSettings={this.openSettings}
         closeAndResetDialog={this.closeAndResetDialog}
         updateSlide={this.updateSlide}
         onProjectImport={this.onProjectImport}

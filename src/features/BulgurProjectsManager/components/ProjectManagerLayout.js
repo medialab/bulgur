@@ -82,7 +82,7 @@ const ProjectManagerLayout = ({
             <li key={index}>
               <span>{presentation.metadata && presentation.metadata.title && presentation.metadata.title.length ? presentation.metadata.title : 'untitled presentation'}</span>
               <button onClick={setToActive}>Edit contents</button>
-              <button onClick={configure}>Configure</button>
+              <button onClick={configure}>Settings</button>
               {promptedToDeleteId !== presentation.id ? <button onClick={onClickCopy}>Copy</button> : ''}
               <span>{promptedToDeleteId === presentation.id ? ' Sure ? ' : ''}</span>
               {promptedToDeleteId === presentation.id ? <button onClick={onClickDelete}>Yes, delete this presentation</button> : <button onClick={onClickPrompt}>Delete</button>}

@@ -80,7 +80,7 @@ const PresentationCandidateDialogLayout = ({
     setPresentationCandidateColor,
     applyPresentationCandidateConfiguration
   },
-  closeAndResetDialog,
+  closePresentationCandidate,
   onFileDrop,
 
   editedColor
@@ -379,6 +379,8 @@ const PresentationCandidateDialogLayout = ({
       <section className="presentation-candidate-dialog-step">
         {
           presentationCandidate &&
+          presentationCandidate.visualizations &&
+          typeof presentationCandidate.visualizations === 'object' &&
           Object.keys(presentationCandidate.visualizations).length > 0 &&
           presentationCandidate.visualizations[Object.keys(presentationCandidate.visualizations)[0]].colorsMap &&
           presentationCandidate.visualizations[Object.keys(presentationCandidate.visualizations)[0]].dataProfile &&
@@ -390,7 +392,7 @@ const PresentationCandidateDialogLayout = ({
       }
         <button
           style={{background: 'brown', color: 'white'}}
-          onClick={closeAndResetDialog}>
+          onClick={closePresentationCandidate}>
         Cancel
       </button>
       </section>

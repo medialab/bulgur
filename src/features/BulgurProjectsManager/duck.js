@@ -7,7 +7,8 @@ import {v4 as uuid} from 'uuid';
  */
 import {
   START_CANDIDATE_PRESENTATION_CONFIGURATION,
-  APPLY_PRESENTATION_CANDIDATE_CONFIGURATION
+  APPLY_PRESENTATION_CANDIDATE_CONFIGURATION,
+  UNSET_ACTIVE_PRESENTATION
 } from '../Bulgur/duck';
 
 const CREATE_PRESENTATION = 'CREATE_PRESENTATION';
@@ -229,6 +230,11 @@ function presentationsUi(state = PRESENTATIONS_UI_DEFAULT_STATE, action) {
       return {
         ...state,
         activePresentationId: action.id
+      };
+    case UNSET_ACTIVE_PRESENTATION:
+      return {
+        ...state,
+        activePresentationId: undefined
       };
     default:
       return state;

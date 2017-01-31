@@ -30,6 +30,7 @@ export const APPLY_PRESENTATION_CANDIDATE_CONFIGURATION = 'APPLY_PRESENTATION_CA
 
 
 export const SET_ACTIVE_PRESENTATION_ID = 'SET_ACTIVE_PRESENTATION_ID';
+export const UNSET_ACTIVE_PRESENTATION = 'UNSET_ACTIVE_PRESENTATION';
 
 const OPEN_PRESENTATION_CANDIDATE_MODAL = 'OPEN_PRESENTATION_CANDIDATE_MODAL';
 const CLOSE_PRESENTATION_CANDIDATE_MODAL = 'CLOSE_PRESENTATION_CANDIDATE_MODAL';
@@ -58,6 +59,10 @@ export const applyPresentationCandidateConfiguration = (presentation) => ({
 export const setActivePresentationId = (id) => ({
   type: SET_ACTIVE_PRESENTATION_ID,
   id
+});
+
+export const unsetActivePresentation = () => ({
+  type: UNSET_ACTIVE_PRESENTATION
 });
 
 // export const quinoaActions = qActions;
@@ -152,6 +157,11 @@ function globalUi(state = GLOBAL_UI_DEFAULT_STATE, action) {
       return {
         ...state,
         activePresentationId: action.id
+      };
+    case UNSET_ACTIVE_PRESENTATION:
+      return {
+        ...state,
+        activePresentationId: undefined
       };
     case START_PRESENTATION_CANDIDATE_CONFIGURATION:
     case OPEN_PRESENTATION_CANDIDATE_MODAL:

@@ -30,7 +30,7 @@ class PresentationCandidateDialogContainer extends Component {
 
   constructor(props) {
     super(props);
-    this.closeAndResetDialog = this.closeAndResetDialog.bind(this);
+    this.closePresentationCandidate = this.closePresentationCandidate.bind(this);
     this.onFileDrop = this.onFileDrop.bind(this);
     this.closeAndSetupPresentationCandidate = this.closeAndSetupPresentationCandidate.bind(this);
     this.changeVisualizationType = this.changeVisualizationType.bind(this);
@@ -45,7 +45,7 @@ class PresentationCandidateDialogContainer extends Component {
     //       this.props.dataMap !== newProps.dataMap;
   }
 
-  closeAndResetDialog() {
+  closePresentationCandidate() {
     this.props.actions.resetPresentationCandidateSettings();
     this.props.actions.closePresentationCandidateModal();
   }
@@ -87,7 +87,7 @@ class PresentationCandidateDialogContainer extends Component {
       <PresentationCandidateDialogLayout
         {...this.props}
         activeVisualizationTypes={activeVisualizationTypes}
-        closeAndResetDialog={this.closeAndResetDialog}
+        closePresentationCandidate={this.closePresentationCandidate}
         closeAndSetupPresentationCandidate={this.closeAndSetupPresentationCandidate}
         changeVisualizationType={this.changeVisualizationType}
         onFileDrop={this.onFileDrop} />

@@ -19,12 +19,13 @@ const InterfaceManagerLayout = ({
   updateSlide,
   resetView,
   onProjectImport,
+  returnToLanding,
   actions: {
-    openPresentationCandidateModal,
     openTakeAwayModal,
     closeTakeAwayModal,
     updateView
   },
+  openSettings,
   closeAndResetDialog,
   doesViewEqualsSlideParameters,
   visualizationData: {
@@ -33,8 +34,8 @@ const InterfaceManagerLayout = ({
     dataMap = [],
     data = []
   },
-  // todo : wire this to something
-  activePresentationId
+  activePresentationId,
+  activePresentation
 }) => {
 
   const closeModal = () => {
@@ -49,13 +50,12 @@ const InterfaceManagerLayout = ({
   return (<div id={id} className={className}>
     {activePresentationId ?
       <div className={className}>
-        {visualizationType ?
-          <AsideViewLayout
-            openPresentationCandidateModal={openPresentationCandidateModal}
-            openTakeAwayModal={openTakeAwayModal} /> :
-      ''}
+        <AsideViewLayout
+          activePresentation={activePresentation}
+          openSettings={openSettings}
+          openTakeAwayModal={openTakeAwayModal}
+          returnToLanding={returnToLanding} />
         <MainViewLayout
-          openPresentationCandidateModal={openPresentationCandidateModal}
           visualizationType={visualizationType}
           onProjectImport={onProjectImport}
           dataMap={dataMap}
