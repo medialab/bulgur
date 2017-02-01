@@ -42,6 +42,10 @@ export const UNSET_ACTIVE_PRESENTATION = 'UNSET_ACTIVE_PRESENTATION';
 
 export const CHANGE_VIEW_BY_USER = 'CHANGE_VIEW_BY_USER';
 
+export const ADD_SLIDE = 'ADD_SLIDE';
+export const REMOVE_SLIDE = 'REMOVE_SLIDE';
+export const SET_ACTIVE_SLIDE = 'SET_ACTIVE_SLIDE';
+
 const OPEN_PRESENTATION_CANDIDATE_MODAL = 'OPEN_PRESENTATION_CANDIDATE_MODAL';
 const CLOSE_PRESENTATION_CANDIDATE_MODAL = 'CLOSE_PRESENTATION_CANDIDATE_MODAL';
 const OPEN_TAKE_AWAY_MODAL = 'OPEN_TAKE_AWAY_MODAL';
@@ -83,6 +87,23 @@ export const changeViewByUser = (id, event) => ({
   event,
   id
 });
+
+export const addSlide = (id, slideContent = {}) => ({
+  type: ADD_SLIDE,
+  slideContent,
+  id
+});
+
+export const removeSlide = (id) => ({
+  type: REMOVE_SLIDE,
+  id
+});
+
+export const setActiveSlide = (id) => ({
+  type: SET_ACTIVE_SLIDE,
+  id
+});
+
 
 // export const quinoaActions = qActions;
 
@@ -138,7 +159,8 @@ const EDITOR_DEFAULT_STATE = {
     visualizationType: undefined,
     viewParameters: {},
     quinoaSlideParameters: {},
-    viewEqualsSlideParameters: false
+    viewEqualsSlideParameters: false,
+    activeSlideId: undefined
 };
 function editor(state = EDITOR_DEFAULT_STATE, action) {
   let isSync;
@@ -223,6 +245,13 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
         quinoaSlideParameters: action.parameters,
         viewEqualsSlideParameters: true
       };
+    case ADD_SLIDE:
+    case SET_ACTIVE_SLIDE:
+      return {
+        ...state,
+        activeSlideId: action.id
+      };
+
     default:
       return state;
   }
@@ -285,6 +314,11 @@ function globalUi(state = GLOBAL_UI_DEFAULT_STATE, action) {
   }
 }
 
+
+// export default combineReducers({
+//   globalUi,
+//   editor
+// });
 export default persistentReducer(combineReducers({
   globalUi,
   editor
@@ -303,6 +337,7 @@ const isTakeAwayModalOpen = state => state.globalUi.takeAwayModalOpen;
 const globalUiMode = state => state.globalUi.uiMode;
 
 const activeViews = state => state.editor.activeViews;
+const activeSlideId = state => state.editor.activeSlideId;
 
 const doesViewEqualsSlideParameters = state => state.editor.viewEqualsSlideParameters;
 const visualizationData = state => state.editor;
@@ -316,6 +351,7 @@ export const selector = createStructuredSelector({
   globalUiMode,
 
   activeViews,
+  activeSlideId,
 
   visualizationData,
   doesViewEqualsSlideParameters,

@@ -10,24 +10,24 @@ import './Application.scss';
 
 import Bulgur from './features/Bulgur/components/BulgurContainer.js';
 
-import {
-  default as quinoa,
-  actions as quinoaActions,
-  mapStore
-} from './helpers/configQuinoa';
+// import {
+//   default as quinoa,
+//   actions as quinoaActions,
+//   mapStore
+// } from './helpers/configQuinoa';
 
-const Application = ({}) => (
-  <Bulgur
-    quinoaState={mapStore(quinoa)}
-    quinoaActions={quinoaActions}
-    id="wrapper"
-    className="bulgur" />
-);
 // const Application = ({}) => (
 //   <Bulgur
+//     quinoaState={mapStore(quinoa)}
+//     quinoaActions={quinoaActions}
 //     id="wrapper"
 //     className="bulgur" />
 // );
+const Application = ({}) => (
+  <Bulgur
+    id="wrapper"
+    className="bulgur" />
+);
 
 
 export default Application;

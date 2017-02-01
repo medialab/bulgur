@@ -59,6 +59,7 @@ const MainViewLayout = ({
     <figure className="bulgur-main-view">
       <section className="visualizations-container">
         {
+        activeViews &&
         Object.keys(activeViews)
         .map(visualizationId => (
           <section key={visualizationId} className="visualization-container">

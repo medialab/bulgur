@@ -29,10 +29,14 @@ const InterfaceManagerLayout = ({
     closeTakeAwayModal,
     changeViewByUser,
     setUiMode,
-    updateView
+    updateView,
+    removeSlide,
+    setActiveSlide
   },
 
   activeViews,
+  addSlide,
+  activeSlideId,
 
   openSettings,
   closeAndResetDialog,
@@ -54,7 +58,7 @@ const InterfaceManagerLayout = ({
     if (globalUiMode === 'edition') {
       setUiMode('preview');
     }
- else {
+   else {
       setUiMode('edition');
     }
   };
@@ -67,7 +71,11 @@ const InterfaceManagerLayout = ({
             <AsideViewLayout
               activePresentation={activePresentation}
               openSettings={openSettings}
-              returnToLanding={returnToLanding} />
+              returnToLanding={returnToLanding}
+              addSlide={addSlide}
+              removeSlide={removeSlide}
+              setActiveSlide={setActiveSlide}
+              activeSlideId={activeSlideId} />
             <MainViewLayout
               activePresentation={activePresentation}
               onProjectImport={onProjectImport}

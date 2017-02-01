@@ -10,7 +10,9 @@ import {serverUrl} from '../../../secrets';
 import {
   START_CANDIDATE_PRESENTATION_CONFIGURATION,
   APPLY_PRESENTATION_CANDIDATE_CONFIGURATION,
-  UNSET_ACTIVE_PRESENTATION
+  UNSET_ACTIVE_PRESENTATION,
+  ADD_SLIDE,
+  REMOVE_SLIDE
 } from '../Bulgur/duck';
 
 import {
@@ -169,7 +171,7 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
         }
       };
     case DELETE_PRESENTATION:
-      const newState = Object.assign({}, state);
+      let newState = Object.assign({}, state);
       delete newState.presentations[action.id];
       return newState;
     case UPDATE_PRESENTATION:
@@ -207,6 +209,39 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
           [newId]: newPresentation
         }
       };
+    /*
+     * EDITOR-RELATED
+     */
+    case ADD_SLIDE:
+      const newSlideId = action.id;
+      return {
+        ...state,
+        presentations: {
+          ...state.presentations,
+          [state.activePresentationId]: {
+            ...state.presentations[state.activePresentationId],
+            slides: {
+              ...state.presentations[state.activePresentationId].slides,
+              [newSlideId]: action.slideContent
+            },
+            order: [
+              ...state.presentations[state.activePresentationId].order,
+              newSlideId
+            ]
+          }
+        }
+      };
+    case REMOVE_SLIDE:
+      newState = {...state};
+      delete newState.presentations[state.activePresentationId].slides[action.id];
+      const order = newState.presentations[state.activePresentationId].order;
+      const position = order.indexOf(action.id);
+      const newOrder = [...order.slice(0, position), ...order.slice(position + 1)];
+      newState.presentations[state.activePresentationId].order = newOrder;
+      return newState;
+    /*
+     * EXPORT-RELATED
+     */
     case EXPORT_TO_GIST + '_SUCCESS':
       return {
         ...state,

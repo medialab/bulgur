@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import {v4 as uuid} from 'uuid';
 
 import BulgurLayout from './BulgurLayout';
 import * as duck from '../duck';
 import * as managerDuck from '../../BulgurProjectsManager/duck';
 
-import {createDefaultSlideParameters} from '../../../models/visualizationTypes';
+// import {createDefaultSlideParameters} from '../../../models/visualizationTypes';
 
 import {
   resetPresentationCandidateSettings,
@@ -19,10 +20,10 @@ import {
   // convertRawStrToJson
 } from '../../../helpers/fileLoader';
 
-import {
-  // default as quinoa,
-  actions as quinoaActions,
-} from '../../../helpers/configQuinoa';
+// import {
+//   // default as quinoa,
+//   actions as quinoaActions,
+// } from '../../../helpers/configQuinoa';
 
 @connect(
   state => ({
@@ -32,7 +33,7 @@ import {
   dispatch => ({
     actions: bindActionCreators({
       ...duck,
-      ...quinoaActions,
+      // ...quinoaActions,
       resetPresentationCandidateSettings,
       setupPresentationCandidate
     }, dispatch)
@@ -43,31 +44,33 @@ class BulgurContainer extends Component {
   constructor(props) {
     super(props);
     this.closeAndResetDialog = this.closeAndResetDialog.bind(this);
-    this.updateSlide = this.updateSlide.bind(this);
-    this.resetView = this.resetView.bind(this);
-    this.updateSlideIfEmpty = this.updateSlideIfEmpty.bind(this);
+    // this.updateSlide = this.updateSlide.bind(this);
+    // this.resetView = this.resetView.bind(this);
+    // this.updateSlideIfEmpty = this.updateSlideIfEmpty.bind(this);
     this.onProjectImport = this.onProjectImport.bind(this);
     this.returnToLanding = this.returnToLanding.bind(this);
     this.openSettings = this.openSettings.bind(this);
+
+    this.addSlide = this.addSlide.bind(this);
   }
 
   componentWillMount() {
     this.updateSlideIfEmpty();
   }
 
-  componentWillReceiveProps(newProps) {
+  // componentWillReceiveProps(newProps) {
     // question : is it bad to do this ?
-    if (newProps.quinoaState.currentSlide !== this.props.quinoaState.currentSlide) {
-      const newSlide = newProps.quinoaState.slideParameters;
-      let paramsToUpdate = newSlide;
-      if (Object.keys(newSlide).length === 0) {
-        this.updateSlide(this.props.visualizationData.viewParameters);
-        paramsToUpdate = this.props.visualizationData.viewParameters;
-      }
-      this.props.actions.setQuinoaSlideParameters(paramsToUpdate);
-      this.props.actions.updateView(paramsToUpdate);
-    }
-  }
+    // if (newProps.quinoaState.currentSlide !== this.props.quinoaState.currentSlide) {
+    //   const newSlide = newProps.quinoaState.slideParameters;
+    //   let paramsToUpdate = newSlide;
+    //   if (Object.keys(newSlide).length === 0) {
+    //     this.updateSlide(this.props.visualizationData.viewParameters);
+    //     paramsToUpdate = this.props.visualizationData.viewParameters;
+    //   }
+    //   this.props.actions.setQuinoaSlideParameters(paramsToUpdate);
+    //   this.props.actions.updateView(paramsToUpdate);
+    // }
+  // }
 
   shouldComponentUpdate() {
     return true;
@@ -83,31 +86,31 @@ class BulgurContainer extends Component {
     this.updateSlideIfEmpty();
   }
 
-  updateSlideIfEmpty() {
-    if (Object.keys(this.props.quinoaState.slideParameters).length === 0
-        && this.props.visualizationData.visualizationType !== undefined
-    ) {
-      this.updateSlide();
-    }
-  }
+  // updateSlideIfEmpty() {
+    // if (Object.keys(this.props.quinoaState.slideParameters).length === 0
+    //     && this.props.visualizationData.visualizationType !== undefined
+    // ) {
+    //   this.updateSlide();
+    // }
+  // }
 
   closeAndResetDialog() {
     this.props.actions.resetPresentationCandidateSettings();
     this.props.actions.closePresentationCandidateModal();
   }
 
-  updateSlide(params) {
+  // updateSlide(params) {
     // retrieve current view
-    const inputParameters = params || this.props.visualizationData.viewParameters;
+    // const inputParameters = params || this.props.visualizationData.viewParameters;
     // retrieve visualization-specific slide's meta property schema
-    const type = this.props.visualizationType;
-    const slideDefault = createDefaultSlideParameters(type);
+    // const type = this.props.visualizationType;
+    // const slideDefault = createDefaultSlideParameters(type);
     // populate slide data with default where needed
-    const slideParameters = Object.assign(slideDefault, inputParameters);
+    // const slideParameters = Object.assign(slideDefault, inputParameters);
     // dispatch quinoa action to update slide
-    this.props.quinoaActions.updateSlide(this.props.quinoaState.currentSlide, {meta: slideParameters});
-    this.props.actions.setQuinoaSlideParameters(slideParameters);
-  }
+    // this.props.quinoaActions.updateSlide(this.props.quinoaState.currentSlide, {meta: slideParameters});
+    // this.props.actions.setQuinoaSlideParameters(slideParameters);
+  // }
 
   onProjectImport (files) {
     getFileAsText(files[0], (err, str) => {
@@ -138,9 +141,9 @@ class BulgurContainer extends Component {
     });
   }
 
-  resetView() {
-    this.props.actions.updateView(this.props.quinoaState.slideParameters);
-  }
+  // resetView() {
+    // this.props.actions.updateView(this.props.quinoaState.slideParameters);
+  // }
 
   returnToLanding() {
     this.props.actions.unsetActivePresentation();
@@ -148,6 +151,26 @@ class BulgurContainer extends Component {
 
   openSettings () {
     this.props.actions.startPresentationCandidateConfiguration(this.props.activePresentation);
+  }
+
+  addSlide () {
+    // const views = Object.keys(this.props.activeViews).reduce((activeViews, viewKey) => {
+    //   return {
+    //     ...activeViews,
+    //     [viewKey]: {
+    //       ...activeViews[viewKey],
+    //       dataMap
+    //     }
+    //   }
+    // }, {});
+    // build slide
+    const slide = {
+      views: this.props.activeViews,
+      title: 'Slide title',
+      markdown: 'my text'
+    };
+    const id = uuid();
+    this.props.actions.addSlide(id, slide);
   }
 
   render() {
@@ -159,6 +182,7 @@ class BulgurContainer extends Component {
         updateSlide={this.updateSlide}
         onProjectImport={this.onProjectImport}
         returnToLanding={this.returnToLanding}
+        addSlide={this.addSlide}
         resetView={this.resetView} />
     );
   }
