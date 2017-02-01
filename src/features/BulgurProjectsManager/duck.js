@@ -277,7 +277,8 @@ export default persistentReducer(
       presentations,
       presentationsUi,
       presentationImport
-  })
+  }),
+  'bulgur'
 );
 
 /*
