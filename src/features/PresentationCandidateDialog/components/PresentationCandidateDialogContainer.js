@@ -14,8 +14,7 @@ import PresentationCandidateDialogLayout from './PresentationCandidateDialogLayo
 @connect(
   state => ({
     ...duck.selector(state.presentationCandidate),
-    visualizationTypesModels: state.models.visualizationTypes,
-    hasActiveVisualization: state.activePresentation.visualization.data && state.activePresentation.visualization.data.length > 0
+    visualizationTypesModels: state.models.visualizationTypes
   }),
   dispatch => ({
     actions: bindActionCreators({

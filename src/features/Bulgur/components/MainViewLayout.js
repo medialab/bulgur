@@ -1,9 +1,9 @@
 import React from 'react';
 
 import {
-  // Timeline,
-  // Network,
-  // Map
+  Timeline,
+  Network,
+  Map
 } from 'quinoa-vis-modules';
 
 import {DraftComponent} from '../../../helpers/configQuinoa';
@@ -11,29 +11,46 @@ import {DraftComponent} from '../../../helpers/configQuinoa';
 import './MainViewLayout.scss';
 
 const MainViewLayout = ({
-  activePresentation,
-  viewParameters,
-  // updateView,
+  // activePresentation,
+  // viewParameters,
   updateSlide,
   resetView,
-  doesViewEqualsSlideParameters
+  doesViewEqualsSlideParameters,
+  activeViews,
+  onUserViewChange
 }) => {
-  /*
-  const setVisualization = () => {
-    const visProps = {data, viewParameters, updateView};
-    return null;
-    switch (visualizationType) {
-      case 'space':
-        return <Map {...visProps} />;
-      case 'relations':
-        return <Network {...visProps} />;
-      case 'time':
-        return <Timeline {...visProps} />;
-      default:
-        return null;
+
+  const setVisualization = (view, id) => {
+    const onChange = (event) => onUserViewChange(id, event);
+    // todo : improve code to have no need to do that ugly hack
+    try {
+      switch (view.metadata.visualizationType) {
+        case 'space':
+          return (<Map
+            allowUserViewChange
+            data={view.data}
+            onUserViewChange={onChange}
+            viewParameters={view.viewParameters} />);
+        case 'relations':
+          return (<Network
+            allowUserViewChange
+            data={view.data}
+            onUserViewChange={onChange}
+            viewParameters={view.viewParameters} />);
+        case 'time':
+          return (<Timeline
+            allowUserViewChange
+            data={view.data}
+            onUserViewChange={onChange}
+            viewParameters={view.viewParameters} />);
+        default:
+          return null;
+      }
+    }
+ catch (e) {
+      return null;
     }
   };
-  */
 
   const clickOnRecord = () => updateSlide();
   const clickOnReset = () => resetView();
@@ -42,11 +59,10 @@ const MainViewLayout = ({
     <figure className="bulgur-main-view">
       <section className="visualizations-container">
         {
-        Object.keys(activePresentation.visualizations)
+        Object.keys(activeViews)
         .map(visualizationId => (
           <section key={visualizationId} className="visualization-container">
-            {JSON.stringify(viewParameters, null, 2)}
-            {/*setVisualization()*/}
+            {setVisualization(activeViews[visualizationId], visualizationId)}
           </section>
         ))
       }

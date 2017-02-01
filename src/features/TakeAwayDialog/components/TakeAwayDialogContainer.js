@@ -24,7 +24,7 @@ import TakeAwayDialogLayout from './TakeAwayDialogLayout';
 @connect(
   state => ({
     ...duck.selector(state.takeAway),
-    ...bulgurSelector(state.activePresentation),
+    ...bulgurSelector(state.bulgurEditor),
     ...presentationsSelector(state.presentations)
   }),
   dispatch => ({

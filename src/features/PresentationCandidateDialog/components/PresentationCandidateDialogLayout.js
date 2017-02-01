@@ -25,7 +25,7 @@ const previewVisualization = (visualization, models) => {
     ...models[visualization.metadata.visualizationType].defaultViewParameters,
     colorsMap: visualization.colorsMap
   };
-  // flatten datamap fields
+  // flatten datamap fields (todo: refactor as helper)
   const dataMap = Object.keys(visualization.dataMap).reduce((result, collectionId) => ({
     ...result,
     [collectionId]: Object.keys(visualization.dataMap[collectionId]).reduce((propsMap, parameterId) => {
@@ -44,13 +44,22 @@ const previewVisualization = (visualization, models) => {
     switch (visualization.metadata.visualizationType) {
       case 'time':
         data = mapTimelineData(visualization.data, dataMap);
-        return <Timeline data={data} viewParameters={viewParameters} />;
+        return (<Timeline
+          data={data}
+          allowUserViewChange
+          viewParameters={viewParameters} />);
       case 'space':
         data = mapMapData(visualization.data, dataMap);
-        return <Map data={data} viewParameters={viewParameters} />;
+        return (<Map
+          data={data}
+          allowUserViewChange
+          viewParameters={viewParameters} />);
       case 'relations':
         data = mapNetworkData(visualization.data, dataMap);
-        return <Network data={data} viewParameters={viewParameters} />;
+        return (<Network
+          data={data}
+          allowUserViewChange
+          viewParameters={viewParameters} />);
       default:
         return (<div>No preview</div>);
     }

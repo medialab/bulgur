@@ -27,15 +27,16 @@ const InterfaceManagerLayout = ({
   actions: {
     openTakeAwayModal,
     closeTakeAwayModal,
+    changeViewByUser,
     setUiMode,
     updateView
   },
+
+  activeViews,
+
   openSettings,
   closeAndResetDialog,
   doesViewEqualsSlideParameters,
-  visualizationData: {
-    data = []
-  },
   activePresentationId,
   activePresentation
 }) => {
@@ -75,7 +76,8 @@ const InterfaceManagerLayout = ({
               returnToLanding={returnToLanding}
               updateView={updateView}
               resetView={resetView}
-              data={data} />
+              activeViews={activeViews}
+              onUserViewChange={changeViewByUser} />
           </section>
         :
           <section className="bulgur-main-row">

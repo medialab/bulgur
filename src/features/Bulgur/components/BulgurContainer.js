@@ -26,7 +26,7 @@ import {
 
 @connect(
   state => ({
-    ...duck.selector(state.activePresentation),
+    ...duck.selector(state.bulgurEditor),
     ...managerDuck.selector(state.presentations)
   }),
   dispatch => ({

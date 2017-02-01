@@ -2,7 +2,15 @@ import {combineReducers} from 'redux';
 import {createStructuredSelector} from 'reselect';
 import equals from 'shallow-equals';
 import {v4 as uuid} from 'uuid';
+import {persistentReducer} from 'redux-pouchdb';
 
+import {
+  mapMapData,
+  mapTimelineData,
+  mapNetworkData
+} from 'quinoa-vis-modules';
+
+import models from '../../models/visualizationTypes';
 
 // import {EditorState} from 'draft-js';
 // import {
@@ -29,8 +37,10 @@ export const START_PRESENTATION_CANDIDATE_CONFIGURATION = 'START_PRESENTATION_CA
 export const APPLY_PRESENTATION_CANDIDATE_CONFIGURATION = 'APPLY_PRESENTATION_CANDIDATE_CONFIGURATION';
 
 
-export const SET_ACTIVE_PRESENTATION_ID = 'SET_ACTIVE_PRESENTATION_ID';
+export const SET_ACTIVE_PRESENTATION = 'SET_ACTIVE_PRESENTATION';
 export const UNSET_ACTIVE_PRESENTATION = 'UNSET_ACTIVE_PRESENTATION';
+
+export const CHANGE_VIEW_BY_USER = 'CHANGE_VIEW_BY_USER';
 
 const OPEN_PRESENTATION_CANDIDATE_MODAL = 'OPEN_PRESENTATION_CANDIDATE_MODAL';
 const CLOSE_PRESENTATION_CANDIDATE_MODAL = 'CLOSE_PRESENTATION_CANDIDATE_MODAL';
@@ -59,13 +69,19 @@ export const applyPresentationCandidateConfiguration = (presentation) => ({
   presentation
 });
 
-export const setActivePresentationId = (id) => ({
-  type: SET_ACTIVE_PRESENTATION_ID,
-  id
+export const setActivePresentation = (presentation) => ({
+  type: SET_ACTIVE_PRESENTATION,
+  presentation
 });
 
 export const unsetActivePresentation = () => ({
   type: UNSET_ACTIVE_PRESENTATION
+});
+
+export const changeViewByUser = (id, event) => ({
+  type: CHANGE_VIEW_BY_USER,
+  event,
+  id
 });
 
 // export const quinoaActions = qActions;
@@ -114,7 +130,9 @@ export const resetApp = () => ({
  * Reducers
  */
 
-const VISUALIZATION_DEFAULT_STATE = {
+const EDITOR_DEFAULT_STATE = {
+    activeViews: undefined,
+    // todo : remove these
     data: undefined,
     dataMap: undefined,
     visualizationType: undefined,
@@ -122,11 +140,75 @@ const VISUALIZATION_DEFAULT_STATE = {
     quinoaSlideParameters: {},
     viewEqualsSlideParameters: false
 };
-function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
+function editor(state = EDITOR_DEFAULT_STATE, action) {
   let isSync;
   switch (action.type) {
     case RESET_APP:
-      return VISUALIZATION_DEFAULT_STATE;
+      return EDITOR_DEFAULT_STATE;
+
+    case APPLY_PRESENTATION_CANDIDATE_CONFIGURATION:
+    case SET_ACTIVE_PRESENTATION:
+      const defaultViews = Object.keys(action.presentation.visualizations).reduce((result, visualizationKey) => {
+        const visualization = action.presentation.visualizations[visualizationKey];
+        const viewParameters = {
+          ...models[visualization.metadata.visualizationType].defaultViewParameters,
+          colorsMap: visualization.colorsMap
+        };
+        let data;
+        // flatten datamap fields (todo: refactor as helper)
+        const dataMap = Object.keys(visualization.dataMap).reduce((dataMapResult, collectionId) => ({
+          ...dataMapResult,
+          [collectionId]: Object.keys(visualization.dataMap[collectionId]).reduce((propsMap, parameterId) => {
+            const parameter = visualization.dataMap[collectionId][parameterId];
+            if (parameter.mappedField) {
+              return {
+                ...propsMap,
+                [parameterId]: parameter.mappedField
+              };
+            }
+            return propsMap;
+          }, {})
+        }), {});
+        switch (visualization.metadata.visualizationType) {
+          case 'space':
+            data = mapMapData(visualization.data, dataMap);
+            break;
+          case 'time':
+            data = mapTimelineData(visualization.data, dataMap);
+            break;
+          case 'relation':
+            data = mapNetworkData(visualization.data, dataMap);
+            break;
+          default:
+            data = visualization.data;
+            break;
+        }
+        return {
+          ...result,
+          [visualizationKey]: {
+            ...visualization,
+            viewParameters,
+            data
+          }
+        };
+      }, {});
+      return {
+        ...state,
+        activeViews: {
+          ...defaultViews
+        }
+      };
+    case CHANGE_VIEW_BY_USER:
+      return {
+        ...state,
+        activeViews: {
+          ...state.activeViews,
+          [action.id]: {
+            ...state.activeViews[action.id],
+            ...action.event.viewParameters
+          }
+        }
+      };
     case UPDATE_VIEW:
       isSync = equals(state.quinoaSlideParameters, action.parameters);
       return {
@@ -162,10 +244,10 @@ function globalUi(state = GLOBAL_UI_DEFAULT_STATE, action) {
         presentationCandidateModalOpen: false,
         activePresentationId: action.presentation.id
       };
-    case SET_ACTIVE_PRESENTATION_ID:
+    case SET_ACTIVE_PRESENTATION:
       return {
         ...state,
-        activePresentationId: action.id
+        activePresentationId: action.presentation.id
       };
     case UNSET_ACTIVE_PRESENTATION:
       return {
@@ -203,11 +285,10 @@ function globalUi(state = GLOBAL_UI_DEFAULT_STATE, action) {
   }
 }
 
-export default combineReducers({
+export default persistentReducer(combineReducers({
   globalUi,
-  visualization,
-  // quinoaEditor
-});
+  editor
+}), 'bulgur-editor');
 
 /*
  * Selectors
@@ -221,19 +302,21 @@ const isTakeAwayModalOpen = state => state.globalUi.takeAwayModalOpen;
 
 const globalUiMode = state => state.globalUi.uiMode;
 
-const doesViewEqualsSlideParameters = state => state.visualization.viewEqualsSlideParameters;
+const activeViews = state => state.editor.activeViews;
 
-const visualizationData = state => state.visualization;
-
-const activeViewParameters = state => state.visualization.viewParameters;
-
-const quinoaSlideParameters = state => state.visualization.quinoaSlideParameters;
+const doesViewEqualsSlideParameters = state => state.editor.viewEqualsSlideParameters;
+const visualizationData = state => state.editor;
+const activeViewParameters = state => state.editor.viewParameters;
+const quinoaSlideParameters = state => state.editor.quinoaSlideParameters;
 
 export const selector = createStructuredSelector({
   activePresentationId,
   isPresentationCandidateModalOpen,
   isTakeAwayModalOpen,
   globalUiMode,
+
+  activeViews,
+
   visualizationData,
   doesViewEqualsSlideParameters,
   activeViewParameters,
