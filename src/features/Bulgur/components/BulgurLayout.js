@@ -1,6 +1,8 @@
 import React from 'react';
 import Modal from 'react-modal';
 
+import QuinoaPresentationPlayer from 'quinoa-presentation-player';
+
 import AsideViewLayout from './AsideViewLayout';
 import MainViewLayout from './MainViewLayout';
 import BulgurFooter from '../../../components/BulgurFooter/BulgurFooter';
@@ -16,6 +18,7 @@ const InterfaceManagerLayout = ({
   id,
   className,
   isPresentationCandidateModalOpen,
+  globalUiMode,
   isTakeAwayModalOpen,
   updateSlide,
   resetView,
@@ -24,6 +27,7 @@ const InterfaceManagerLayout = ({
   actions: {
     openTakeAwayModal,
     closeTakeAwayModal,
+    setUiMode,
     updateView
   },
   openSettings,
@@ -45,26 +49,43 @@ const InterfaceManagerLayout = ({
     }
   };
 
+  const togglePreview = () => {
+    if (globalUiMode === 'edition') {
+      setUiMode('preview');
+    }
+ else {
+      setUiMode('edition');
+    }
+  };
+
   return (<div id={id} className={className}>
     {activePresentationId ?
       <div className={className}>
-        <section className="bulgur-main-row">
-          <AsideViewLayout
-            activePresentation={activePresentation}
-            openSettings={openSettings}
-            returnToLanding={returnToLanding} />
-          <MainViewLayout
-            activePresentation={activePresentation}
-            onProjectImport={onProjectImport}
-            updateSlide={updateSlide}
-            doesViewEqualsSlideParameters={doesViewEqualsSlideParameters}
-            returnToLanding={returnToLanding}
-            updateView={updateView}
-            resetView={resetView}
-            data={data} />
-        </section>
+        {globalUiMode === 'edition' ?
+          <section className="bulgur-main-row">
+            <AsideViewLayout
+              activePresentation={activePresentation}
+              openSettings={openSettings}
+              returnToLanding={returnToLanding} />
+            <MainViewLayout
+              activePresentation={activePresentation}
+              onProjectImport={onProjectImport}
+              updateSlide={updateSlide}
+              doesViewEqualsSlideParameters={doesViewEqualsSlideParameters}
+              returnToLanding={returnToLanding}
+              updateView={updateView}
+              resetView={resetView}
+              data={data} />
+          </section>
+        :
+          <section className="bulgur-main-row">
+            <QuinoaPresentationPlayer presentation={activePresentation} />
+          </section>}
         <BulgurFooter
-          openTakeAwayModal={openTakeAwayModal} />
+          returnToLanding={returnToLanding}
+          openTakeAwayModal={openTakeAwayModal}
+          togglePreview={togglePreview}
+          uiMode={globalUiMode} />
       </div>
       : <ProjectsManagerContainer />}
     <Modal

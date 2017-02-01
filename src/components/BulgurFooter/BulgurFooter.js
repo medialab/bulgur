@@ -3,14 +3,17 @@ import React from 'react';
 import './BulgurFooter.scss';
 
 const BulgurFooter = ({
-  openTakeAwayModal
+  openTakeAwayModal,
+  togglePreview,
+  returnToLanding,
+  uiMode
 }) => (
   <footer className="bulgur-footer">
     <div className="left-group">
-      <span>Bulgur | by <a href="http://www.medialab.sciences-po.fr/fr/" target="blank">médialab</a></span>
+      <span><button onClick={returnToLanding}>Bulgur</button> | by <a href="http://www.medialab.sciences-po.fr/fr/" target="blank">médialab</a></span>
     </div>
     <div className="right-group">
-      <button>Preview</button>
+      <button onClick={togglePreview}>{uiMode === 'edition' ? 'Preview' : 'Edit'}</button>
       <button onClick={openTakeAwayModal}><img className="bulgur-icon-image" src={require('./assets/take-away.svg')} />Take away</button>
     </div>
   </footer>

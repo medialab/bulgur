@@ -36,6 +36,9 @@ const OPEN_PRESENTATION_CANDIDATE_MODAL = 'OPEN_PRESENTATION_CANDIDATE_MODAL';
 const CLOSE_PRESENTATION_CANDIDATE_MODAL = 'CLOSE_PRESENTATION_CANDIDATE_MODAL';
 const OPEN_TAKE_AWAY_MODAL = 'OPEN_TAKE_AWAY_MODAL';
 const CLOSE_TAKE_AWAY_MODAL = 'CLOSE_TAKE_AWAY_MODAL';
+const SET_UI_MODE = 'SET_UI_MODE';
+
+
 const VIEW_EQUALS_SLIDE_PARAMETERS = 'VIEW_EQUALS_SLIDE_PARAMETERS';
 const UPDATE_VIEW = 'UPDATE_VIEW';
 const SET_QUINOA_SLIDE_PARAMETERS = 'SET_QUINOA_SLIDE_PARAMETERS';
@@ -81,6 +84,11 @@ export const openTakeAwayModal = () => ({
 
 export const closeTakeAwayModal = () => ({
   type: CLOSE_TAKE_AWAY_MODAL
+});
+
+export const setUiMode = (mode = 'edition') => ({
+  type: SET_UI_MODE,
+  mode
 });
 
 export const updateView = (parameters) => ({
@@ -141,7 +149,8 @@ function visualization(state = VISUALIZATION_DEFAULT_STATE, action) {
 const GLOBAL_UI_DEFAULT_STATE = {
     presentationCandidateModalOpen: false,
     takeAwayModalOpen: false,
-    activePresentationId: undefined
+    activePresentationId: undefined,
+    uiMode: 'edition' // in ['edition', 'preview']
 };
 function globalUi(state = GLOBAL_UI_DEFAULT_STATE, action) {
   switch (action.type) {
@@ -184,6 +193,11 @@ function globalUi(state = GLOBAL_UI_DEFAULT_STATE, action) {
         ...state,
         takeAwayModalOpen: false
       };
+    case SET_UI_MODE:
+      return {
+        ...state,
+        uiMode: action.mode
+      };
     default:
       return state;
   }
@@ -205,12 +219,13 @@ const isPresentationCandidateModalOpen = state => state.globalUi.presentationCan
 
 const isTakeAwayModalOpen = state => state.globalUi.takeAwayModalOpen;
 
+const globalUiMode = state => state.globalUi.uiMode;
+
 const doesViewEqualsSlideParameters = state => state.visualization.viewEqualsSlideParameters;
 
 const visualizationData = state => state.visualization;
 
 const activeViewParameters = state => state.visualization.viewParameters;
-
 
 const quinoaSlideParameters = state => state.visualization.quinoaSlideParameters;
 
@@ -218,6 +233,7 @@ export const selector = createStructuredSelector({
   activePresentationId,
   isPresentationCandidateModalOpen,
   isTakeAwayModalOpen,
+  globalUiMode,
   visualizationData,
   doesViewEqualsSlideParameters,
   activeViewParameters,
