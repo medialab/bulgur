@@ -1,6 +1,6 @@
 import {post} from 'superagent';
 
-import {githubAPIClientId, githubTokenProviderUrl} from '../../secrets';
+import {githubAPIClientId, serverUrl} from '../../secrets';
 
 export default function getGithubToken () {
   return new Promise((resolve, reject) => {
@@ -14,7 +14,7 @@ export default function getGithubToken () {
       const code = event.data;
       if (typeof code === 'string') {
         // exchange the code for a token
-        post(githubTokenProviderUrl)
+        post(serverUrl + '/oauth-proxy')
         .set('Accept', 'application/json')
         .send({code})
         .end((err, response) => {

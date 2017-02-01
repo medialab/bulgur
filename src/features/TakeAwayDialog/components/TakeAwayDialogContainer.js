@@ -9,10 +9,13 @@ import {
   selector as bulgurSelector
 } from '../../Bulgur/duck';
 
-import quinoa from '../../../helpers/configQuinoa';
+import {
+  selector as presentationsSelector
+} from '../../BulgurProjectsManager/duck';
+
+// import quinoa from '../../../helpers/configQuinoa';
 import downloadFile from '../../../helpers/fileDownloader';
 import {
-  bundleProjectAsJson,
   bundleProjectAsHtml
 } from '../../../helpers/projectBundler';
 
@@ -21,7 +24,8 @@ import TakeAwayDialogLayout from './TakeAwayDialogLayout';
 @connect(
   state => ({
     ...duck.selector(state.takeAway),
-    ...bulgurSelector(state.activePresentation)
+    ...bulgurSelector(state.activePresentation),
+    ...presentationsSelector(state.presentations)
   }),
   dispatch => ({
     actions: bindActionCreators({
@@ -42,25 +46,34 @@ class TakeAwayDialogContainer extends Component {
   }
 
   takeAway(takeAwayType) {
-    const quinoaPresentation = quinoa.getState().editor;
-    const remoteUrls = {
-      gistUrl: this.props.gistUrl,
-      blocksUrl: this.props.blocksUrl,
-      gistId: this.props.gistId
-    };
-    const project = bundleProjectAsJson(this.props.visualizationData, quinoaPresentation, remoteUrls);
-    let html;
+    // const quinoaPresentation = quinoa.getState().editor;
     switch (takeAwayType.id) {
       case 'project':
-        downloadFile(JSON.stringify(project, null, 2), 'json');
+        downloadFile(JSON.stringify(this.props.activePresentation, null, 2), 'json');
         break;
       case 'html':
-        html = bundleProjectAsHtml(project);
-        downloadFile(html, 'html');
+        bundleProjectAsHtml(this.props.activePresentation, (err, html) => {
+          if (err === null) {
+            downloadFile(html, 'html');
+          }
+ else {
+            // todo : handle error display in redux logic ?
+          }
+        });
+
         break;
       case 'github':
-        html = bundleProjectAsHtml(project);
-        this.props.actions.exportToGithub(html, this.props.gistId);
+        bundleProjectAsHtml(this.props.activePresentation, (err, html) => {
+          if (err === null) {
+            this.props.actions.exportToGist(html, this.props.activePresentation.metadata.gistId);
+          }
+ else {
+            // todo : handle error display in redux logic ?
+          }
+        });
+        break;
+      case 'server':
+        this.props.actions.exportToServer(this.props.activePresentation);
         break;
       default:
         break;

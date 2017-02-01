@@ -2,6 +2,8 @@ import {combineReducers} from 'redux';
 import {createStructuredSelector} from 'reselect';
 import {persistentReducer} from 'redux-pouchdb';
 import {v4 as uuid} from 'uuid';
+
+import {serverUrl} from '../../../secrets';
 /*
  * Action names
  */
@@ -10,6 +12,11 @@ import {
   APPLY_PRESENTATION_CANDIDATE_CONFIGURATION,
   UNSET_ACTIVE_PRESENTATION
 } from '../Bulgur/duck';
+
+import {
+  EXPORT_TO_GIST,
+  EXPORT_TO_SERVER
+} from '../TakeAwayDialog/duck';
 
 const CREATE_PRESENTATION = 'CREATE_PRESENTATION';
 
@@ -198,6 +205,37 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
         presentations: {
           ...state.presentations,
           [newId]: newPresentation
+        }
+      };
+    case EXPORT_TO_GIST + '_SUCCESS':
+      return {
+        ...state,
+        presentations: {
+          ...state.presentations,
+          [state.activePresentationId]: {
+            ...state.presentations[state.activePresentationId],
+            metadata: {
+              ...state.presentations[state.activePresentationId].metadata,
+              gistUrl: action.result.gistUrl,
+              gistId: action.result.gistId,
+              blocksUrl: action.result.blocksUrl
+            }
+          }
+        }
+      };
+    case EXPORT_TO_SERVER + '_SUCCESS':
+      return {
+        ...state,
+        presentations: {
+          ...state.presentations,
+          [state.activePresentationId]: {
+            ...state.presentations[state.activePresentationId],
+            metadata: {
+              ...state.presentations[state.activePresentationId].metadata,
+              serverJSONUrl: serverUrl + '/presentations/' + state.presentations[state.activePresentationId].id,
+              serverHTMLUrl: serverUrl + '/presentations/' + state.presentations[state.activePresentationId].id + '?format=html'
+            }
+          }
         }
       };
     default:

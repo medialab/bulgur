@@ -18,14 +18,14 @@ export const ChooseTakeAwayStep = ({
         },
         {
           id: 'html',
-          label: 'an all-in-one html file to upload to the website of my choice'
+          label: 'an html file to upload to the website of my choice'
         },
         {
           id: 'github',
           label: 'a gist+bl.ocks online website'
         },
         {
-          id: 'quinoa',
+          id: 'server',
           label: 'a sciences po\'s quinoa server powered website'
         }
         ].map((takeAwayType, key) => {
@@ -60,29 +60,39 @@ const TakeAwayDialogLayout = ({
     closeTakeAwayModal
   },
   takeAway,
-  takeAwayLog,
-  takeAwayLogStatus,
-  gistUrl,
-  blocksUrl
+  takeAwayGistLog,
+  takeAwayGistLogStatus,
+  takeAwayServerLog,
+  takeAwayServerLogStatus,
+  activePresentation
 }) => (
   <div className="take-away-dialog">
     <ChooseTakeAwayStep takeAway={takeAway} />
     <section className="take-away-dialog-step pub-links">
       {
-        takeAwayLog ? <p className="take-away-log" style={{background: takeAwayLogStatus === 'success' ? 'lightgreen' : 'lightblue'}}>{takeAwayLog}</p> : ''
+        takeAwayGistLog ? <p className="take-away-log" style={{background: takeAwayGistLogStatus === 'success' ? 'lightgreen' : 'lightblue'}}>{takeAwayGistLog}</p> : ''
       }
       {
-        blocksUrl ?
+        takeAwayServerLog ? <p className="take-away-log" style={{background: takeAwayServerLogStatus === 'success' ? 'lightgreen' : 'lightblue'}}>{takeAwayServerLog}</p> : ''
+      }
+      {
+        activePresentation && activePresentation.metadata && activePresentation.metadata.blocksUrl ?
           <h2 className="pub-link">
-            <a target="blank" href={blocksUrl}>Go to the Webpage of your presentation</a>
+            <a target="blank" href={activePresentation.metadata.blocksUrl}>Go to the bl.ocks webpage of your presentation</a>
           </h2> : ''
       }
       {
-        gistUrl ?
+        activePresentation && activePresentation.metadata && activePresentation.metadata.gistUrl ?
           <h2 className="pub-link">
-            <a target="blank" href={gistUrl}>Go to the source code of your presentation</a>
+            <a target="blank" href={activePresentation.metadata.gistUrl}>Go to the gist source code of your presentation</a>
           </h2>
         : ''
+      }
+      {
+        activePresentation && activePresentation.metadata && activePresentation.metadata.serverHTMLUrl ?
+          <h2 className="pub-link">
+            <a target="blank" href={activePresentation.metadata.serverHTMLUrl}>Go to the quinoa server's webpage of your presentation</a>
+          </h2> : ''
       }
     </section>
     <section className="take-away-dialog-step">
