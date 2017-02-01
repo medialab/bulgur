@@ -127,7 +127,7 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
           activePresentationId: action.presentation.id
         };
       }
- else {
+      else {
         // case create
         return {
           ...state,
@@ -138,6 +138,16 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
           activePresentationId: action.presentation.id
         };
       }
+    case SET_ACTIVE_PRESENTATION_ID:
+      return {
+        ...state,
+        activePresentationId: action.id
+      };
+    case UNSET_ACTIVE_PRESENTATION:
+      return {
+        ...state,
+        activePresentationId: undefined
+      };
     case CREATE_PRESENTATION:
       const id = action.id;
       let presentation = {
@@ -226,16 +236,6 @@ function presentationsUi(state = PRESENTATIONS_UI_DEFAULT_STATE, action) {
         promptedToDelete: undefined,
         activePresentationId: state.activePresentationId === action.id ? undefined : state.activePresentationId
       };
-    case SET_ACTIVE_PRESENTATION_ID:
-      return {
-        ...state,
-        activePresentationId: action.id
-      };
-    case UNSET_ACTIVE_PRESENTATION:
-      return {
-        ...state,
-        activePresentationId: undefined
-      };
     default:
       return state;
   }
@@ -284,8 +284,8 @@ export default persistentReducer(
  * Selectors
  */
 
-const activePresentation = state => state.presentations.presentations[state.presentationsUi.activePresentationId];
-const activePresentationId = state => state.presentationsUi.activePresentationId;
+const activePresentation = state => state.presentations.presentations[state.presentations.activePresentationId];
+const activePresentationId = state => state.presentations.activePresentationId;
 const presentationsList = state => Object.keys(state.presentations.presentations).map(key => state.presentations.presentations[key]);
 const promptedToDeleteId = state => state.presentationsUi.promptedToDelete;
 
