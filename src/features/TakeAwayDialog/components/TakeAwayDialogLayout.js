@@ -14,7 +14,7 @@ export const ChooseTakeAwayStep = ({
         // todo : put this data in a model file
         [{
           id: 'project',
-          label: 'a project file (for reworking on this presentation later)'
+          label: 'a project file (for reworking on this presentation on another browser/computer)'
         },
         {
           id: 'html',
@@ -24,6 +24,10 @@ export const ChooseTakeAwayStep = ({
           id: 'github',
           label: 'a gist+bl.ocks online website'
         },
+        {
+          id: 'quinoa',
+          label: 'a sciences po\'s quinoa server powered website'
+        }
         ].map((takeAwayType, key) => {
           const onOptionClick = (evt) => {
             evt.stopPropagation();
