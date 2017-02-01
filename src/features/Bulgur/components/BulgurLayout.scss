@@ -11,17 +11,17 @@
 
     display: flex;
     flex-direction: column;
-    flex-wrap: nowrap;
-
 
     color: $primary-color;
     background: $background-default;
 
+    flex-wrap: nowrap;
+
     .bulgur-main-row
     {
-
         display: flex;
         flex-direction: row;
+
         flex-wrap: nowrap;
         flex: 10;
         .bulgur-aside-view
@@ -40,10 +40,13 @@
         }
     }
 
-    .bulgur-footer{
-        flex: 1;
+    .bulgur-footer
+    {
         z-index: 1;
+
         max-height: 2rem;
+
+        flex: 1;
     }
 
     .bulgur-icon-image

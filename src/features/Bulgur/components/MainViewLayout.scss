@@ -12,14 +12,16 @@
 
     .visualizations-container
     {
+        display: flex;
         overflow: hide;
 
         flex: 2;
-        display: flex;
         flex-flow: row nowrap;
-        .visualization-container {
-            flex: 1;
+        .visualization-container
+        {
             height: 100%;
+
+            flex: 1;
         }
     }
 
