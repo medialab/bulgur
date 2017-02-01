@@ -10,26 +10,40 @@
     font-size: 1rem;
 
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    flex-wrap: nowrap;
+
 
     color: $primary-color;
     background: $background-default;
 
-    flex-wrap: nowrap;
-
-    .bulgur-aside-view
+    .bulgur-main-row
     {
-        max-width: 20%;
 
-        flex: 1;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        flex: 10;
+        .bulgur-aside-view
+        {
+            max-width: 20%;
+
+            flex: 1;
+        }
+
+        .bulgur-main-view
+        {
+            min-width: 80%;
+            margin: 0;
+
+            flex: 4;
+        }
     }
 
-    .bulgur-main-view
-    {
-        min-width: 80%;
-        margin: 0;
-
-        flex: 4;
+    .bulgur-footer{
+        flex: 1;
+        z-index: 1;
+        max-height: 2rem;
     }
 
     .bulgur-icon-image

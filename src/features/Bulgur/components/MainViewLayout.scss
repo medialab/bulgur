@@ -10,11 +10,17 @@
 
     flex-flow: column nowrap;
 
-    .visualization-container
+    .visualizations-container
     {
         overflow: hide;
 
         flex: 2;
+        display: flex;
+        flex-flow: row nowrap;
+        .visualization-container {
+            flex: 1;
+            height: 100%;
+        }
     }
 
     .caption-container

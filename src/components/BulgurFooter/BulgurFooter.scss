@@ -1,0 +1,11 @@
+@import '../../parameters.scss';
+
+
+.bulgur-footer
+{
+  background: lightgrey;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+  justify-content: space-between;
+}
