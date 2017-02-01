@@ -100,7 +100,7 @@ class BulgurContainer extends Component {
     // retrieve current view
     const inputParameters = params || this.props.visualizationData.viewParameters;
     // retrieve visualization-specific slide's meta property schema
-    const type = this.props.visualizationData.visualizationType;
+    const type = this.props.visualizationType;
     const slideDefault = createDefaultSlideParameters(type);
     // populate slide data with default where needed
     const slideParameters = Object.assign(slideDefault, inputParameters);

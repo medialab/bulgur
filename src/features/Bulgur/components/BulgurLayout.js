@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 
 import AsideViewLayout from './AsideViewLayout';
 import MainViewLayout from './MainViewLayout';
+import BulgurFooter from '../../../components/BulgurFooter/BulgurFooter';
 
 import ProjectsManagerContainer from '../../BulgurProjectsManager/components/ProjectManagerContainer';
 
@@ -29,9 +30,6 @@ const InterfaceManagerLayout = ({
   closeAndResetDialog,
   doesViewEqualsSlideParameters,
   visualizationData: {
-    visualizationType,
-    viewParameters,
-    dataMap = [],
     data = []
   },
   activePresentationId,
@@ -50,21 +48,23 @@ const InterfaceManagerLayout = ({
   return (<div id={id} className={className}>
     {activePresentationId ?
       <div className={className}>
-        <AsideViewLayout
-          activePresentation={activePresentation}
-          openSettings={openSettings}
-          openTakeAwayModal={openTakeAwayModal}
-          returnToLanding={returnToLanding} />
-        <MainViewLayout
-          visualizationType={visualizationType}
-          onProjectImport={onProjectImport}
-          dataMap={dataMap}
-          viewParameters={viewParameters}
-          updateSlide={updateSlide}
-          doesViewEqualsSlideParameters={doesViewEqualsSlideParameters}
-          updateView={updateView}
-          resetView={resetView}
-          data={data} />
+        <section className="bulgur-main-row">
+          <AsideViewLayout
+            activePresentation={activePresentation}
+            openSettings={openSettings}
+            returnToLanding={returnToLanding} />
+          <MainViewLayout
+            activePresentation={activePresentation}
+            onProjectImport={onProjectImport}
+            updateSlide={updateSlide}
+            doesViewEqualsSlideParameters={doesViewEqualsSlideParameters}
+            returnToLanding={returnToLanding}
+            updateView={updateView}
+            resetView={resetView}
+            data={data} />
+        </section>
+        <BulgurFooter
+          openTakeAwayModal={openTakeAwayModal} />
       </div>
       : <ProjectsManagerContainer />}
     <Modal
