@@ -3,9 +3,11 @@
 
 .bulgur-footer
 {
-  background: lightgrey;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: stretch;
-  justify-content: space-between;
+    display: flex;
+
+    background: lightgrey;
+
+    flex-flow: row nowrap;
+    align-items: stretch;
+    justify-content: space-between;
 }
