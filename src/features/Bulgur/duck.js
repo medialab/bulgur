@@ -45,6 +45,7 @@ export const CHANGE_VIEW_BY_USER = 'CHANGE_VIEW_BY_USER';
 export const ADD_SLIDE = 'ADD_SLIDE';
 export const REMOVE_SLIDE = 'REMOVE_SLIDE';
 export const SET_ACTIVE_SLIDE = 'SET_ACTIVE_SLIDE';
+export const UPDATE_SLIDE = 'UPDATE_SLIDE';
 
 const OPEN_PRESENTATION_CANDIDATE_MODAL = 'OPEN_PRESENTATION_CANDIDATE_MODAL';
 const CLOSE_PRESENTATION_CANDIDATE_MODAL = 'CLOSE_PRESENTATION_CANDIDATE_MODAL';
@@ -90,6 +91,12 @@ export const changeViewByUser = (id, event) => ({
 
 export const addSlide = (id, slideContent = {}) => ({
   type: ADD_SLIDE,
+  slideContent,
+  id
+});
+
+export const updateSlide = (id, slideContent = {}) => ({
+  type: UPDATE_SLIDE,
   slideContent,
   id
 });

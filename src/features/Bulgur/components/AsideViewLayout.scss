@@ -14,9 +14,12 @@
     padding-right: $large-gutter;
     padding-left: $large-gutter;
 
-    .slides-container {
-        max-height: 100%;
+    .slides-container
+    {
         overflow: auto;
+
+        max-height: 100%;
+
         flex: 5;
     }
 

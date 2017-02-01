@@ -20,7 +20,7 @@ const InterfaceManagerLayout = ({
   isPresentationCandidateModalOpen,
   globalUiMode,
   isTakeAwayModalOpen,
-  updateSlide,
+  // updateSlide,
   resetView,
   onProjectImport,
   returnToLanding,
@@ -31,7 +31,8 @@ const InterfaceManagerLayout = ({
     setUiMode,
     updateView,
     removeSlide,
-    setActiveSlide
+    setActiveSlide,
+    updateSlide
   },
 
   activeViews,
@@ -75,7 +76,8 @@ const InterfaceManagerLayout = ({
               addSlide={addSlide}
               removeSlide={removeSlide}
               setActiveSlide={setActiveSlide}
-              activeSlideId={activeSlideId} />
+              activeSlideId={activeSlideId}
+              updateSlide={updateSlide} />
             <MainViewLayout
               activePresentation={activePresentation}
               onProjectImport={onProjectImport}

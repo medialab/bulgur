@@ -12,7 +12,8 @@ import {
   APPLY_PRESENTATION_CANDIDATE_CONFIGURATION,
   UNSET_ACTIVE_PRESENTATION,
   ADD_SLIDE,
-  REMOVE_SLIDE
+  REMOVE_SLIDE,
+  UPDATE_SLIDE
 } from '../Bulgur/duck';
 
 import {
@@ -228,6 +229,21 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
               ...state.presentations[state.activePresentationId].order,
               newSlideId
             ]
+          }
+        }
+      };
+    case UPDATE_SLIDE:
+      const slideId = action.id;
+      return {
+        ...state,
+        presentations: {
+          ...state.presentations,
+          [state.activePresentationId]: {
+            ...state.presentations[state.activePresentationId],
+            slides: {
+              ...state.presentations[state.activePresentationId].slides,
+              [slideId]: action.slideContent
+            }
           }
         }
       };

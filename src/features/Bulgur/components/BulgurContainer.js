@@ -55,7 +55,7 @@ class BulgurContainer extends Component {
   }
 
   componentWillMount() {
-    this.updateSlideIfEmpty();
+    // this.updateSlideIfEmpty();
   }
 
   // componentWillReceiveProps(newProps) {
@@ -83,7 +83,7 @@ class BulgurContainer extends Component {
   }
 
   componentWillUpdate() {
-    this.updateSlideIfEmpty();
+    // this.updateSlideIfEmpty();
   }
 
   // updateSlideIfEmpty() {

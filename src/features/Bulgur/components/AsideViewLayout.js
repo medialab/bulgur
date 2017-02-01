@@ -17,7 +17,8 @@ const AsideViewLayout = ({
   addSlide,
   removeSlide,
   setActiveSlide,
-  activeSlideId
+  activeSlideId,
+  updateSlide
 }) => (
   <aside className="bulgur-aside-view">
     <h1>
@@ -33,11 +34,28 @@ const AsideViewLayout = ({
             const onRemove = () => removeSlide(slideKey);
             const slide = activePresentation.slides[slideKey];
             const onGlobalClick = () => setActiveSlide(slideKey);
+
+            const onTitleChange = (e) => {
+              updateSlide(slideKey, {
+                ...slide,
+                title: e.target.value
+              });
+            };
+            const onTextChange = (e) => {
+              updateSlide(slideKey, {
+                ...slide,
+                markdown: e.target.value
+              });
+            };
             return (
               <li onClick={onGlobalClick} key={slideKey}>
-                <h3>{slide.title}</h3>
+                <h3>
+                  <input type="text" value={slide.title} onChange={onTitleChange} />
+                </h3>
                 <div>
-                  {slide.markdown}
+                  <textarea type="text"
+                    value={slide.markdown}
+                    onChange={onTextChange} />
                 </div>
                 <button onClick={onRemove}>Remove slide</button>
                 {activeSlideId === slideKey ? 'active' : ''}
