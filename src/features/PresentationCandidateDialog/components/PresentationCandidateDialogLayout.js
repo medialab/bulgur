@@ -352,7 +352,7 @@ const PresentationCandidateDialogLayout = ({
                       {editedColor ? <TwitterPicker color={activeColor} onChangeComplete={onColorChange} /> : null}
                     </div>
                   );
-})}
+                  })}
                   </section>
                : null}
               {// preview
