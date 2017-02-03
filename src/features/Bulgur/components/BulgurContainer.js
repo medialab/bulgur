@@ -154,15 +154,6 @@ class BulgurContainer extends Component {
   }
 
   addSlide () {
-    // const views = Object.keys(this.props.activeViews).reduce((activeViews, viewKey) => {
-    //   return {
-    //     ...activeViews,
-    //     [viewKey]: {
-    //       ...activeViews[viewKey],
-    //       dataMap
-    //     }
-    //   }
-    // }, {});
     // build slide
     const slide = {
       views: this.props.activeViews,

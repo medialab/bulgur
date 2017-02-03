@@ -17,7 +17,7 @@
         display: flex;
         overflow: hide;
 
-        flex: 2;
+        flex: 1;
         flex-flow: row nowrap;
         .visualization-container
         {
@@ -31,7 +31,7 @@
     {
         position: relative;
 
-        max-height: 30%;
+        max-height: 40%;
         padding-top: $medium-gutter;
 
         border-top: 1px solid darkgrey;
@@ -73,23 +73,6 @@
         margin: 0;
 
         flex-grow: row nowrap;
-        .editor-helpers-container
-        {
-            display: flex;
-
-            flex-flow: column nowrap;
-        }
-
-        .editor-helpers
-        {
-            margin: 0;
-            padding: 0;
-            padding-top: 4rem;
-
-            text-align: right;
-
-            flex: 1;
-        }
         .editor-areas-container
         {
             display: flex;

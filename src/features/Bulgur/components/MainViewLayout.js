@@ -6,18 +6,17 @@ import {
   Map
 } from 'quinoa-vis-modules';
 
-import {DraftComponent} from '../../../helpers/configQuinoa';
+import DraftEditor from '../../../components/DraftEditor/DraftEditor';
 
 import './MainViewLayout.scss';
 
 const MainViewLayout = ({
-  // activePresentation,
-  // viewParameters,
+  activePresentation = {},
+  activeSlideId,
   updateSlide,
-  resetView,
-  doesViewEqualsSlideParameters,
   activeViews,
-  onUserViewChange
+  onUserViewChange,
+  setActiveSlide
 }) => {
 
   const setVisualization = (view, id) => {
@@ -52,9 +51,27 @@ const MainViewLayout = ({
     }
   };
 
-  const clickOnRecord = () => updateSlide();
-  const clickOnReset = () => resetView();
+  const activeSlide = activePresentation.slides && activeSlideId && activePresentation.slides[activeSlideId];
 
+  // todo : factorize that
+  const viewsEqualActiveSlideViews = activeSlide &&
+                                JSON.stringify(activeViews) === JSON.stringify(activeSlide.views);
+
+  const clickOnRecord = () => {
+    updateSlide(activeSlideId, {
+      ...activeSlide,
+      views: activeViews
+    });
+  };
+  const clickOnReset = () => setActiveSlide(activeSlideId, activeSlide);
+
+  const updateDraft = ({draft}) => {
+    updateSlide(activeSlideId, {
+      ...activeSlide,
+      draft,
+      markdown: undefined
+    });
+  };
   return (
     <figure className="bulgur-main-view">
       <section className="visualizations-container">
@@ -69,7 +86,7 @@ const MainViewLayout = ({
       }
       </section>
       <figcaption className="caption-container">
-        {doesViewEqualsSlideParameters ?
+        {viewsEqualActiveSlideViews ?
           '' :
           <div className="view-operations">
             <button onClick={clickOnRecord}><img className="bulgur-icon-image" src={require('../assets/snapshot.svg')} /> Take snapshot</button>
@@ -77,18 +94,16 @@ const MainViewLayout = ({
           </div>
         }
         <div className="caption-editor">
-          <div className="editor-helpers-container">
-            <ul className="editor-helpers">
-              <li><button>title</button></li>
-              <li><button>bold</button></li>
-              <li><button>italic</button></li>
-              <li><button>underline</button></li>
-              <li><button>list</button></li>
-            </ul>
-          </div>
-          <div className="editor-areas-container">
-            <DraftComponent />
-          </div>
+          {activeSlide ?
+            <div className="editor-areas-container">
+              <h1>
+                <input type="text" value={activeSlide.title} />
+              </h1>
+              <DraftEditor
+                slide={activeSlide}
+                update={updateDraft} />
+            </div>
+          : null}
         </div>
       </figcaption>
     </figure>

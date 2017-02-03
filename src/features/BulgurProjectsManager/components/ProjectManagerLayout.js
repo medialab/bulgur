@@ -19,7 +19,7 @@ const ProjectManagerLayout = ({
     deletePresentation,
     copyPresentation,
     startPresentationCandidateConfiguration,
-    setActivePresentationId,
+    setActivePresentation,
     importReset
   }
 }) => {
@@ -31,7 +31,7 @@ const ProjectManagerLayout = ({
       <section>
         <h1>Bulgur</h1>
         <p>
-        Bulgur lets you make data presentations through commented maps, graphs or timelines, then export your presentation wherever you want on the web.
+        Bulgur lets you make data presentations by walking readers through a visualization, then export your presentation to a file or the web.
       </p>
         <p>
         Bulgur is part of the sciencespo’s médialab tools ecosystem :
@@ -76,7 +76,7 @@ const ProjectManagerLayout = ({
           const onClickPrompt = () => promptDeletePresentation(presentation.id);
           const onClickDelete = () => deletePresentation(presentation.id);
           const onClickCopy = () => copyPresentation(presentation);
-          const setToActive = () => setActivePresentationId(presentation.id);
+          const setToActive = () => setActivePresentation(presentation);
           const configure = () => startPresentationCandidateConfiguration(presentation);
           return (
             <li key={index}>

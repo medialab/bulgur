@@ -3,6 +3,10 @@ import {createStructuredSelector} from 'reselect';
 import {persistentReducer} from 'redux-pouchdb';
 import {v4 as uuid} from 'uuid';
 
+import {EditorState} from 'draft-js';
+import {stateFromMarkdown} from 'draft-js-import-markdown';
+import {stateToMarkdown} from 'draft-js-export-markdown';
+
 import {serverUrl} from '../../../secrets';
 /*
  * Action names
@@ -11,6 +15,7 @@ import {
   START_CANDIDATE_PRESENTATION_CONFIGURATION,
   APPLY_PRESENTATION_CANDIDATE_CONFIGURATION,
   UNSET_ACTIVE_PRESENTATION,
+  SET_ACTIVE_PRESENTATION,
   ADD_SLIDE,
   REMOVE_SLIDE,
   UPDATE_SLIDE
@@ -28,7 +33,6 @@ const UNPROMPT_DELETE_PRESENTATION = 'UNPROMPT_DELETE_PRESENTATION';
 
 const DELETE_PRESENTATION = 'DELETE_PRESENTATION';
 const UPDATE_PRESENTATION = 'UPDATE_PRESENTATION';
-const SET_ACTIVE_PRESENTATION_ID = 'SET_ACTIVE_PRESENTATION_ID';
 
 const COPY_PRESENTATION = 'COPY_PRESENTATION';
 
@@ -70,12 +74,6 @@ export const deletePresentation = (id) => ({
 
 export const updatePresentation = (id) => ({
   type: UPDATE_PRESENTATION,
-  id
-});
-
-export const setActivePresentationId = (id, presentation) => ({
-  type: SET_ACTIVE_PRESENTATION_ID,
-  presentation,
   id
 });
 
@@ -148,10 +146,10 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
           activePresentationId: action.presentation.id
         };
       }
-    case SET_ACTIVE_PRESENTATION_ID:
+    case SET_ACTIVE_PRESENTATION:
       return {
         ...state,
-        activePresentationId: action.id
+        activePresentationId: action.presentation.id
       };
     case UNSET_ACTIVE_PRESENTATION:
       return {
@@ -189,7 +187,16 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
         ...state,
         presentations: {
           ...state.presentations,
-          [presentation.id]: presentation
+          [presentation.id]: {
+            ...presentation,
+            slides: Object.keys(presentation.slides).reduce((slides, slideKey) => ({
+              ...slides,
+              [slideKey]: {
+                ...presentation.slides[slideKey],
+                draft: EditorState.createWithContent(stateFromMarkdown(presentation.slides[slideKey].markdown))
+              }
+            }), {})
+          }
         }
       };
     case COPY_PRESENTATION:
@@ -223,7 +230,10 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
             ...state.presentations[state.activePresentationId],
             slides: {
               ...state.presentations[state.activePresentationId].slides,
-              [newSlideId]: action.slideContent
+              [newSlideId]: {
+                ...action.slide,
+                draft: EditorState.createWithContent(stateFromMarkdown(action.slide.markdown || ''))
+              }
             },
             order: [
               ...state.presentations[state.activePresentationId].order,
@@ -242,11 +252,38 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
             ...state.presentations[state.activePresentationId],
             slides: {
               ...state.presentations[state.activePresentationId].slides,
-              [slideId]: action.slideContent
+              [slideId]: {
+                ...action.slide,
+                // if no markdown in action payload, infer new markdown
+                markdown: action.slide.markdown ? action.slide.markdown : stateToMarkdown(action.slide.draft.getCurrentContent()),
+                // if not draft in action payload, infer new draft
+                draft: action.slide.draft ? action.slide.draft : EditorState.createWithContent(stateFromMarkdown(action.slide.markdown)),
+              }
             }
           }
         }
       };
+    case 'redux-pouchdb/SET_REDUCER':
+      if (action.reducer === 'bulgur-presentations') {
+        // setting up draft-js instances from serialized state
+        return {
+          ...state,
+          presentations: Object.keys(state.presentations).reduce((thesePresentations, presentationId) => ({
+            ...thesePresentations,
+            [presentationId]: {
+              ...state.thesePresentations[presentationId],
+              slides: Object.keys(state.thesePresentations[presentationId].slides).reduce((slides, thatSlideId) => ({
+                  ...slides,
+                  [thatSlideId]: {
+                    ...state.thesePresentations[presentationId].slides[thatSlideId],
+                    draft: EditorState.createWithContent(stateFromMarkdown(...state.thesePresentations[presentationId].slides[thatSlideId].markdown || ''))
+                  }
+              }), {})
+            }
+          }), {})
+        };
+      }
+      return state;
     case REMOVE_SLIDE:
       newState = {...state};
       delete newState.presentations[state.activePresentationId].slides[action.id];

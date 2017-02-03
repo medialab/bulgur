@@ -33,7 +33,7 @@ const AsideViewLayout = ({
           .order.map((slideKey) => {
             const onRemove = () => removeSlide(slideKey);
             const slide = activePresentation.slides[slideKey];
-            const onGlobalClick = () => setActiveSlide(slideKey);
+            const onGlobalClick = () => setActiveSlide(slideKey, slide);
 
             const onTitleChange = (e) => {
               updateSlide(slideKey, {
@@ -44,7 +44,8 @@ const AsideViewLayout = ({
             const onTextChange = (e) => {
               updateSlide(slideKey, {
                 ...slide,
-                markdown: e.target.value
+                markdown: e.target.value,
+                draft: undefined
               });
             };
             return (

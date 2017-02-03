@@ -20,8 +20,6 @@ const InterfaceManagerLayout = ({
   isPresentationCandidateModalOpen,
   globalUiMode,
   isTakeAwayModalOpen,
-  // updateSlide,
-  resetView,
   onProjectImport,
   returnToLanding,
   actions: {
@@ -29,7 +27,6 @@ const InterfaceManagerLayout = ({
     closeTakeAwayModal,
     changeViewByUser,
     setUiMode,
-    updateView,
     removeSlide,
     setActiveSlide,
     updateSlide
@@ -41,7 +38,6 @@ const InterfaceManagerLayout = ({
 
   openSettings,
   closeAndResetDialog,
-  doesViewEqualsSlideParameters,
   activePresentationId,
   activePresentation
 }) => {
@@ -80,12 +76,11 @@ const InterfaceManagerLayout = ({
               updateSlide={updateSlide} />
             <MainViewLayout
               activePresentation={activePresentation}
+              activeSlideId={activeSlideId}
               onProjectImport={onProjectImport}
               updateSlide={updateSlide}
-              doesViewEqualsSlideParameters={doesViewEqualsSlideParameters}
+              setActiveSlide={setActiveSlide}
               returnToLanding={returnToLanding}
-              updateView={updateView}
-              resetView={resetView}
               activeViews={activeViews}
               onUserViewChange={changeViewByUser} />
           </section>

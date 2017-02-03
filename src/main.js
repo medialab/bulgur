@@ -10,7 +10,6 @@ import {Provider} from 'react-redux';
 
 import configureStore from './redux/configureStore';
 import Application from './Application';
-import {plugQuinoa} from './helpers/configQuinoa';
 
 let CurrentApplication = Application;
 
@@ -30,7 +29,6 @@ export function renderApplication() {
   render(group, mountNode);
 }
 
-plugQuinoa(renderApplication);
 renderApplication();
 
 /**

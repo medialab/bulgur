@@ -1,6 +1,5 @@
 import {combineReducers} from 'redux';
 import {createStructuredSelector} from 'reselect';
-import equals from 'shallow-equals';
 import {v4 as uuid} from 'uuid';
 import {persistentReducer} from 'redux-pouchdb';
 
@@ -11,24 +10,6 @@ import {
 } from 'quinoa-vis-modules';
 
 import models from '../../models/visualizationTypes';
-
-// import {EditorState} from 'draft-js';
-// import {
-//   quinoaCreateEditorReducer,
-//   quinoaActions as qActions
-// } from 'quinoa';
-// function createSlide(data = {}) {
-//   return {
-//     id: uuid.v4(),
-//     title: data.title || '',
-//     markdown: data.markdown || '',
-//     draft: EditorState.create(),
-//     meta: data.meta || {}
-//   };
-// }
-// const quinoaEditor = quinoaCreateEditorReducer(createSlide);
-
-// import {createDefaultSlideParameters} from '../../models/visualizationTypes';
 
 /*
  * Action names
@@ -53,10 +34,6 @@ const OPEN_TAKE_AWAY_MODAL = 'OPEN_TAKE_AWAY_MODAL';
 const CLOSE_TAKE_AWAY_MODAL = 'CLOSE_TAKE_AWAY_MODAL';
 const SET_UI_MODE = 'SET_UI_MODE';
 
-
-const VIEW_EQUALS_SLIDE_PARAMETERS = 'VIEW_EQUALS_SLIDE_PARAMETERS';
-const UPDATE_VIEW = 'UPDATE_VIEW';
-const SET_QUINOA_SLIDE_PARAMETERS = 'SET_QUINOA_SLIDE_PARAMETERS';
 export const RESET_APP = 'RESET_APP';
 
 /*
@@ -89,15 +66,15 @@ export const changeViewByUser = (id, event) => ({
   id
 });
 
-export const addSlide = (id, slideContent = {}) => ({
+export const addSlide = (id, slide = {}) => ({
   type: ADD_SLIDE,
-  slideContent,
+  slide,
   id
 });
 
-export const updateSlide = (id, slideContent = {}) => ({
+export const updateSlide = (id, slide = {}) => ({
   type: UPDATE_SLIDE,
-  slideContent,
+  slide,
   id
 });
 
@@ -106,13 +83,11 @@ export const removeSlide = (id) => ({
   id
 });
 
-export const setActiveSlide = (id) => ({
+export const setActiveSlide = (id, slide) => ({
   type: SET_ACTIVE_SLIDE,
+  slide,
   id
 });
-
-
-// export const quinoaActions = qActions;
 
 export const openPresentationCandidateModal = () => ({
   type: OPEN_PRESENTATION_CANDIDATE_MODAL
@@ -135,21 +110,6 @@ export const setUiMode = (mode = 'edition') => ({
   mode
 });
 
-export const updateView = (parameters) => ({
-  type: UPDATE_VIEW,
-  parameters
-});
-
-export const viewEqualsSlideParameters = (payload) => ({
-  type: VIEW_EQUALS_SLIDE_PARAMETERS,
-  payload
-});
-
-export const setQuinoaSlideParameters = (parameters) => ({
-  type: SET_QUINOA_SLIDE_PARAMETERS,
-  parameters
-});
-
 export const resetApp = () => ({
   type: RESET_APP
 });
@@ -161,16 +121,9 @@ export const resetApp = () => ({
 const EDITOR_DEFAULT_STATE = {
     activeViews: undefined,
     // todo : remove these
-    data: undefined,
-    dataMap: undefined,
-    visualizationType: undefined,
-    viewParameters: {},
-    quinoaSlideParameters: {},
-    viewEqualsSlideParameters: false,
     activeSlideId: undefined
 };
 function editor(state = EDITOR_DEFAULT_STATE, action) {
-  let isSync;
   switch (action.type) {
     case RESET_APP:
       return EDITOR_DEFAULT_STATE;
@@ -234,29 +187,22 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
           ...state.activeViews,
           [action.id]: {
             ...state.activeViews[action.id],
-            ...action.event.viewParameters
+            viewParameters: {
+              ...state.activeViews[action.id].viewParameters,
+              ...action.event.viewParameters
+            }
           }
         }
       };
-    case UPDATE_VIEW:
-      isSync = equals(state.quinoaSlideParameters, action.parameters);
-      return {
-        ...state,
-        viewParameters: action.parameters,
-        viewEqualsSlideParameters: isSync
-      };
-    case SET_QUINOA_SLIDE_PARAMETERS:
-      isSync = equals(state.viewParameters, action.parameters);
-      return {
-        ...state,
-        quinoaSlideParameters: action.parameters,
-        viewEqualsSlideParameters: true
-      };
+
     case ADD_SLIDE:
     case SET_ACTIVE_SLIDE:
       return {
         ...state,
-        activeSlideId: action.id
+        activeSlideId: action.id,
+        activeViews: {
+          ...action.slide.views
+        }
       };
 
     default:
@@ -346,11 +292,6 @@ const globalUiMode = state => state.globalUi.uiMode;
 const activeViews = state => state.editor.activeViews;
 const activeSlideId = state => state.editor.activeSlideId;
 
-const doesViewEqualsSlideParameters = state => state.editor.viewEqualsSlideParameters;
-const visualizationData = state => state.editor;
-const activeViewParameters = state => state.editor.viewParameters;
-const quinoaSlideParameters = state => state.editor.quinoaSlideParameters;
-
 export const selector = createStructuredSelector({
   activePresentationId,
   isPresentationCandidateModalOpen,
@@ -358,10 +299,5 @@ export const selector = createStructuredSelector({
   globalUiMode,
 
   activeViews,
-  activeSlideId,
-
-  visualizationData,
-  doesViewEqualsSlideParameters,
-  activeViewParameters,
-  quinoaSlideParameters
+  activeSlideId
 });
