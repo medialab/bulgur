@@ -28,7 +28,7 @@ const MainViewLayout = ({
         case 'map':
           return (<Map
             allowUserViewChange
-            data={data.main}
+            data={data}
             onUserViewChange={onChange}
             viewParameters={view.viewParameters} />);
         case 'network':

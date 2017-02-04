@@ -72,8 +72,8 @@ class BulgurContainer extends Component {
           dataMap: this.props.activeViews[id].dataMap
         }
       }), {}),
-      title: 'Slide title',
-      markdown: 'my text'
+      title: '',
+      markdown: ''
     };
     const id = uuid();
     this.props.actions.addSlide(id, slide);

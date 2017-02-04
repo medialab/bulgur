@@ -51,10 +51,16 @@ const AsideViewLayout = ({
             return (
               <li onClick={onGlobalClick} key={slideKey}>
                 <h3>
-                  <input type="text" value={slide.title} onChange={onTitleChange} />
+                  <input 
+                    placeholder="slide title" 
+                    type="text" 
+                    value={slide.title} 
+                    onChange={onTitleChange} />
                 </h3>
                 <div>
-                  <textarea type="text"
+                  <textarea 
+                    type="text"
+                    placeholder="slide comment"
                     value={slide.markdown}
                     onChange={onTextChange} />
                 </div>
@@ -65,8 +71,10 @@ const AsideViewLayout = ({
           }
           )
       }
+      <li>
+        <button type="button" onClick={addSlide}>Add slide</button>
+      </li>
     </ul>
-    <button type="button" onClick={addSlide}>Add slide</button>
     <button type="button" onClick={returnToLanding}>← Home</button>
   </aside>
 );

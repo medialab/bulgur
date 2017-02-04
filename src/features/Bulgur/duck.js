@@ -120,7 +120,6 @@ export const resetApp = () => ({
 
 const EDITOR_DEFAULT_STATE = {
     activeViews: undefined,
-    // todo : remove these
     activeSlideId: undefined
 };
 function editor(state = EDITOR_DEFAULT_STATE, action) {
@@ -137,7 +136,7 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
           colorsMap: visualization.colorsMap
         };
         let data;
-        // flatten datamap fields (todo: refactor as helper)
+        // flatten datamap fields (#todo: refactor as helper)
         const dataMap = Object.keys(visualization.dataMap).reduce((dataMapResult, collectionId) => ({
           ...dataMapResult,
           [collectionId]: Object.keys(visualization.dataMap[collectionId]).reduce((propsMap, parameterId) => {
@@ -152,13 +151,13 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
           }, {})
         }), {});
         switch (visualization.metadata.visualizationType) {
-          case 'space':
+          case 'map':
             data = mapMapData(visualization.data, dataMap);
             break;
-          case 'time':
+          case 'timeline':
             data = mapTimelineData(visualization.data, dataMap);
             break;
-          case 'relation':
+          case 'network':
             data = mapNetworkData(visualization.data, dataMap);
             break;
           default:
@@ -178,7 +177,10 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
         ...state,
         activeViews: {
           ...defaultViews
-        }
+        },
+        activeSlideId: action.presentation.order && action.presentation.order.length ?
+          action.presentation.order[0]
+          : state.activeSlideId
       };
     case CHANGE_VIEW_BY_USER:
       return {
@@ -194,6 +196,7 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
           }
         }
       };
+
 
     case ADD_SLIDE:
     case SET_ACTIVE_SLIDE:
