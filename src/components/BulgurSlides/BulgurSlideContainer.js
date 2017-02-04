@@ -11,6 +11,7 @@ const BulgurSlidesContainer = ({
   return (
     <ul className="bulgur-slides">
       {
+        activePresentation &&
         activePresentation
         .order
         .map(slideKey => {

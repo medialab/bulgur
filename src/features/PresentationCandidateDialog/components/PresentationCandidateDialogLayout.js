@@ -284,8 +284,7 @@ const PresentationCandidateDialogLayout = ({
                                     visualization={visualization}
                                     visualizationKey={visualizationKey}
                                     collectionId={collectionId}
-                                    onMappingChange={setPresentationCandidateDatamapItem}
-                                  />
+                                    onMappingChange={setPresentationCandidateDatamapItem} />
                                 );
                               })
                             }
