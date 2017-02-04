@@ -23,23 +23,24 @@ const MainViewLayout = ({
     const onChange = (event) => onUserViewChange(id, event);
     // todo : improve code to have no need to do that ugly hack
     try {
+      const data = activeViews[id].data;
       switch (view.metadata.visualizationType) {
-        case 'space':
+        case 'map':
           return (<Map
             allowUserViewChange
-            data={view.data}
+            data={data.main}
             onUserViewChange={onChange}
             viewParameters={view.viewParameters} />);
-        case 'relations':
+        case 'network':
           return (<Network
             allowUserViewChange
-            data={view.data}
+            data={data}
             onUserViewChange={onChange}
             viewParameters={view.viewParameters} />);
-        case 'time':
+        case 'timeline':
           return (<Timeline
             allowUserViewChange
-            data={view.data}
+            data={data}
             onUserViewChange={onChange}
             viewParameters={view.viewParameters} />);
         default:
@@ -54,13 +55,27 @@ const MainViewLayout = ({
   const activeSlide = activePresentation.slides && activeSlideId && activePresentation.slides[activeSlideId];
 
   // todo : factorize that
+  const activeViewsAsSlides = Object.keys(activeViews).reduce((views, id) => ({
+    ...views,
+    [id]: {
+      viewParameters: activeViews[id].viewParameters,
+      dataMap: activeViews[id].dataMap
+    }
+  }), {});
   const viewsEqualActiveSlideViews = activeSlide &&
-                                JSON.stringify(activeViews) === JSON.stringify(activeSlide.views);
+                                JSON.stringify(activeViewsAsSlides) === JSON.stringify(activeSlide.views);
 
   const clickOnRecord = () => {
     updateSlide(activeSlideId, {
       ...activeSlide,
-      views: activeViews
+      // todo : factorize that
+      views: Object.keys(activeViews).reduce((views, id) => ({
+        ...views,
+        [id]: {
+          viewParameters: activeViews[id].viewParameters,
+          dataMap: activeViews[id].dataMap
+        }
+      }), {})
     });
   };
   const clickOnReset = () => setActiveSlide(activeSlideId, activeSlide);
@@ -86,15 +101,15 @@ const MainViewLayout = ({
       }
       </section>
       <figcaption className="caption-container">
-        {viewsEqualActiveSlideViews ?
+        {!activeSlide || viewsEqualActiveSlideViews ?
           '' :
           <div className="view-operations">
             <button onClick={clickOnRecord}><img className="bulgur-icon-image" src={require('../assets/snapshot.svg')} /> Take snapshot</button>
             <button onClick={clickOnReset}><img className="bulgur-icon-image" src={require('../assets/reset.svg')} /> Reset</button>
           </div>
         }
-        <div className="caption-editor">
-          {activeSlide ?
+        {activeSlide ?
+          <div className="caption-editor">
             <div className="editor-areas-container">
               <h1>
                 <input type="text" value={activeSlide.title} />
@@ -103,8 +118,8 @@ const MainViewLayout = ({
                 slide={activeSlide}
                 update={updateDraft} />
             </div>
-          : null}
-        </div>
+          </div>
+        : null}
       </figcaption>
     </figure>
   );

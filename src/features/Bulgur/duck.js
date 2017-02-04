@@ -200,9 +200,14 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
       return {
         ...state,
         activeSlideId: action.id,
-        activeViews: {
-          ...action.slide.views
-        }
+        activeViews: Object.keys(state.activeViews).reduce((activeViews, id) => ({
+          ...activeViews,
+          [id]: {
+            ...state.activeViews[id],
+            // updated view parameters
+            viewParameters: action.slide.views[id].viewParameters
+          }
+        }), {})
       };
 
     default:

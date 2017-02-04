@@ -1,7 +1,7 @@
 
 const models = {
-  time: {
-    type: 'time',
+  timeline: {
+    type: 'timeline',
     acceptedFileExtensions: ['csv'],
     dataMap: {
       main: {
@@ -69,8 +69,8 @@ const models = {
       }
     ]
   },
-  space: {
-    type: 'space',
+  map: {
+    type: 'map',
     acceptedFileExtensions: ['csv', 'geojson'],
     dataMap: {
       main: {
@@ -117,8 +117,8 @@ const models = {
       tilesUrl: 'http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png'
     },
   },
-  relations: {
-    type: 'relations',
+  network: {
+    type: 'network',
     acceptedFileExtensions: ['gexf', 'json', 'graphml'],
     samples: [
       {

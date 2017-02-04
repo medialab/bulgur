@@ -271,12 +271,12 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
           presentations: Object.keys(state.presentations).reduce((thesePresentations, presentationId) => ({
             ...thesePresentations,
             [presentationId]: {
-              ...state.thesePresentations[presentationId],
-              slides: Object.keys(state.thesePresentations[presentationId].slides).reduce((slides, thatSlideId) => ({
+              ...state.presentations[presentationId],
+              slides: Object.keys(state.presentations[presentationId].slides).reduce((slides, thatSlideId) => ({
                   ...slides,
                   [thatSlideId]: {
-                    ...state.thesePresentations[presentationId].slides[thatSlideId],
-                    draft: EditorState.createWithContent(stateFromMarkdown(...state.thesePresentations[presentationId].slides[thatSlideId].markdown || ''))
+                    ...state.presentations[presentationId].slides[thatSlideId],
+                    draft: EditorState.createWithContent(stateFromMarkdown(...state.presentations[presentationId].slides[thatSlideId].markdown || ''))
                   }
               }), {})
             }
