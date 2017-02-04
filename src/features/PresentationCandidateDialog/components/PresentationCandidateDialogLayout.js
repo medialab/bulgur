@@ -355,11 +355,11 @@ const PresentationCandidateDialogLayout = ({
                                   background: color,
                                   display: 'inline-block'
                                 }} /> {category} {active ? ' edited' : null}
-                                {
-                                  editedColor && 
-                                  editedColor.collectionId === colorCollectionId && 
-                                  editedColor.category === category ? 
-                                    <TwitterPicker color={activeColor} onChangeComplete={onColorChange} /> 
+                              {
+                                  editedColor &&
+                                  editedColor.collectionId === colorCollectionId &&
+                                  editedColor.category === category ?
+                                    <TwitterPicker color={activeColor} onChangeComplete={onColorChange} />
                                     : null
                                 }
                             </div>
