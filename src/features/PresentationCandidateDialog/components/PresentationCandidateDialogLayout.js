@@ -39,6 +39,7 @@ const previewVisualization = (visualization, models) => {
       return propsMap;
     }, {})
   }), {});
+
   // todo : ooooh this is bad
   try {
     switch (visualization.metadata.visualizationType) {
@@ -354,11 +355,17 @@ const PresentationCandidateDialogLayout = ({
                                   background: color,
                                   display: 'inline-block'
                                 }} /> {category} {active ? ' edited' : null}
+                                {
+                                  editedColor && 
+                                  editedColor.collectionId === colorCollectionId && 
+                                  editedColor.category === category ? 
+                                    <TwitterPicker color={activeColor} onChangeComplete={onColorChange} /> 
+                                    : null
+                                }
                             </div>
                           );
                         })
                       }
-                      {editedColor ? <TwitterPicker color={activeColor} onChangeComplete={onColorChange} /> : null}
                     </div>
                   );
                   })}

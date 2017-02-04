@@ -242,9 +242,11 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
         ...state.presentationCandidate
       };
       delete state.presentationCandidate.datasets[action.datasetId];
-      Object.keys(state.presentationCandidate.visualizations).forEach(visualizationKey => {
-        state.presentationCandidate.visualizations[visualizationKey] = {};
-      });
+      if (state.presentationCandidate.visualizations) {
+        Object.keys(state.presentationCandidate.visualizations).forEach(visualizationKey => {
+          state.presentationCandidate.visualizations[visualizationKey] = {};
+        });
+      }
       return {
         ...state,
         presentationCandidate
