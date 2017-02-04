@@ -1,0 +1,62 @@
+@import '../../parameters.scss';
+
+.bulgur-settings-pannel
+{
+    position: relative;
+
+    max-width: 0;
+    margin: 0;
+    padding: 0;
+
+    background: transparent;
+    .colors-map-picker-wrapper
+    {
+        position: absolute;
+        top: 0;
+        left: -15rem;
+
+        width: 15rem;
+        height: 100%;
+
+        pointer-events: none;
+
+        .colors-map-picker-container
+        {
+            position: absolute;
+            bottom: $medium-gutter;
+            left: 10%;
+
+            width: 80%;
+
+            pointer-events: all;
+
+            background: green;
+        }
+    }
+
+    .slide-parameters-container
+    {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        overflow: hidden;
+
+        max-width: 0;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+
+        background: yellow;
+    }
+
+    &.open
+    {
+        max-width: unset;
+        .slide-parameters-container
+        {
+            width: 100%;
+            max-width: 100%;
+        }
+    }
+}

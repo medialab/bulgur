@@ -29,8 +29,11 @@ const InterfaceManagerLayout = ({
     setUiMode,
     removeSlide,
     setActiveSlide,
-    updateSlide
+    updateSlide,
+    toggleSlideSettingsPannel
   },
+
+  slideSettingsPannelIsOpen,
 
   activeViews,
   addSlide,
@@ -80,6 +83,8 @@ const InterfaceManagerLayout = ({
               onProjectImport={onProjectImport}
               updateSlide={updateSlide}
               setActiveSlide={setActiveSlide}
+              slideSettingsPannelIsOpen={slideSettingsPannelIsOpen}
+              toggleSlideSettingsPannel={toggleSlideSettingsPannel}
               returnToLanding={returnToLanding}
               activeViews={activeViews}
               onUserViewChange={changeViewByUser} />

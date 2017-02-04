@@ -46,6 +46,6 @@ const DatamapPicker = ({
         onChange={onChange} />
     </li>
   );
-}
+};
 
 export default DatamapPicker;

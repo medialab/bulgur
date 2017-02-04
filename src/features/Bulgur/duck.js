@@ -33,6 +33,7 @@ const CLOSE_PRESENTATION_CANDIDATE_MODAL = 'CLOSE_PRESENTATION_CANDIDATE_MODAL';
 const OPEN_TAKE_AWAY_MODAL = 'OPEN_TAKE_AWAY_MODAL';
 const CLOSE_TAKE_AWAY_MODAL = 'CLOSE_TAKE_AWAY_MODAL';
 const SET_UI_MODE = 'SET_UI_MODE';
+const TOGGLE_SLIDE_SETTINGS_PANNEL = 'TOGGLE_SLIDE_SETTINGS_PANNEL';
 
 export const RESET_APP = 'RESET_APP';
 
@@ -108,6 +109,11 @@ export const closeTakeAwayModal = () => ({
 export const setUiMode = (mode = 'edition') => ({
   type: SET_UI_MODE,
   mode
+});
+
+export const toggleSlideSettingsPannel = (to) => ({
+  type: TOGGLE_SLIDE_SETTINGS_PANNEL,
+  to
 });
 
 export const resetApp = () => ({
@@ -222,6 +228,7 @@ const GLOBAL_UI_DEFAULT_STATE = {
     presentationCandidateModalOpen: false,
     takeAwayModalOpen: false,
     activePresentationId: undefined,
+    slideSettingsPannelOpen: false,
     uiMode: 'edition' // in ['edition', 'preview']
 };
 function globalUi(state = GLOBAL_UI_DEFAULT_STATE, action) {
@@ -270,6 +277,11 @@ function globalUi(state = GLOBAL_UI_DEFAULT_STATE, action) {
         ...state,
         uiMode: action.mode
       };
+    case TOGGLE_SLIDE_SETTINGS_PANNEL:
+      return {
+        ...state,
+        slideSettingsPannelOpen: typeof action.to === 'boolean' ? action.to : !state.slideSettingsPannelOpen
+      };
     default:
       return state;
   }
@@ -295,6 +307,8 @@ const isPresentationCandidateModalOpen = state => state.globalUi.presentationCan
 
 const isTakeAwayModalOpen = state => state.globalUi.takeAwayModalOpen;
 
+const slideSettingsPannelIsOpen = state => state.globalUi.slideSettingsPannelOpen;
+
 const globalUiMode = state => state.globalUi.uiMode;
 
 const activeViews = state => state.editor.activeViews;
@@ -305,6 +319,7 @@ export const selector = createStructuredSelector({
   isPresentationCandidateModalOpen,
   isTakeAwayModalOpen,
   globalUiMode,
+  slideSettingsPannelIsOpen,
 
   activeViews,
   activeSlideId

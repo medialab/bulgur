@@ -10,20 +10,35 @@
 
     flex-flow: column nowrap;
 
-    .visualizations-container
+    .visualizations-row
     {
         position: relative;
 
         display: flex;
-        overflow: hide;
 
-        flex: 1;
         flex-flow: row nowrap;
-        .visualization-container
-        {
-            height: 100%;
+        flex: 1;
 
+        .bulgur-settings-pannel
+        {
             flex: 1;
+        }
+
+        .visualizations-container
+        {
+            position: relative;
+
+            display: flex;
+            overflow: hide;
+
+            flex: 5;
+            flex-flow: row nowrap;
+            .visualization-container
+            {
+                height: 100%;
+
+                flex: 1;
+            }
         }
     }
 
@@ -43,7 +58,8 @@
     .view-operations
     {
         position: absolute;
-        top: -$large-gutter*2;
+        top: 0;
+        // top: -$large-gutter*2;
         right: $medium-gutter;
 
         display: flex;
