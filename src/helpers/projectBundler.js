@@ -6,6 +6,7 @@ export function cleanPresentationForExport(presentation) {
     ...presentation,
     slides: Object.keys(presentation.slides).reduce((slides, id) => {
       const slide = presentation.slides[id];
+      slide.id = id;
       delete slide.draft;
       return {
         ...slides,

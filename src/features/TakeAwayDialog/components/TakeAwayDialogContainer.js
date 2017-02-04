@@ -48,14 +48,15 @@ class TakeAwayDialogContainer extends Component {
 
   takeAway(takeAwayType) {
     const JSONbundle = bundleProjectAsJSON(this.props.activePresentation);
+    const title = this.props.activePresentation.metadata.title;
     switch (takeAwayType.id) {
       case 'project':
-        downloadFile(JSONbundle, 'json');
+        downloadFile(JSONbundle, 'json', title);
         break;
       case 'html':
         bundleProjectAsHtml(this.props.activePresentation, (err, html) => {
           if (err === null) {
-            downloadFile(html, 'html');
+            downloadFile(html, 'html', title);
           }
           else {
             // todo : handle error display in redux logic ?

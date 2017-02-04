@@ -72,7 +72,7 @@
                                 }
                             }
                         },
-                        "data": {
+                        "rawData": {
                             "type": ["string", "array"],
                             "required": true
                         }
@@ -109,7 +109,7 @@
                       },
                       "dataProfile": {
                         "required": false,
-                        "type": "array"
+                        "type": "object"
                       },
                       "dataMap": {
                         "required": false,
@@ -159,15 +159,13 @@
                                 "$each": {
                                     "type": "object",
                                     "keys": {
+                                        "dataMap": {
+                                            "type": "object",
+                                            "required": true
+                                        },
                                         "viewParameters": {
                                             "type": "object",
-                                            "required": true,
-                                            "keys": {
-                                                "viewDataMap": {
-                                                    "type": "object",
-                                                    "required": true
-                                                }
-                                            }
+                                            "required": true
                                         }
                                     }
                                 }

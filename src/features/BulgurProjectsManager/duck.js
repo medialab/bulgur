@@ -276,7 +276,7 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
                   ...slides,
                   [thatSlideId]: {
                     ...state.presentations[presentationId].slides[thatSlideId],
-                    draft: EditorState.createWithContent(stateFromMarkdown(...state.presentations[presentationId].slides[thatSlideId].markdown || ''))
+                    draft: EditorState.createWithContent(stateFromMarkdown(state.presentations[presentationId].slides[thatSlideId].markdown || ''))
                   }
               }), {})
             }
