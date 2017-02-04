@@ -2,7 +2,7 @@ import GitHub from 'github-api';
 
 import getGithubToken from './getGithubToken';
 
-export default function publishGist(fileContent, dispatch, statusActionName, gistId) {
+export default function publishGist(fileContent, JSONbundle, dispatch, statusActionName, gistId) {
   return new Promise((resolve, reject) => {
     dispatch({
       type: statusActionName,
@@ -21,7 +21,8 @@ export default function publishGist(fileContent, dispatch, statusActionName, gis
         files: {
           'index.html': {
             content: fileContent
-          }
+          },
+          'project.json': JSONbundle
         }
       };
       if (gistId) {

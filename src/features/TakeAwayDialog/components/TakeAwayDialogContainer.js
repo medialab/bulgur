@@ -16,7 +16,8 @@ import {
 // import quinoa from '../../../helpers/configQuinoa';
 import downloadFile from '../../../helpers/fileDownloader';
 import {
-  bundleProjectAsHtml
+  bundleProjectAsHtml,
+  bundleProjectAsJSON
 } from '../../../helpers/projectBundler';
 
 import TakeAwayDialogLayout from './TakeAwayDialogLayout';
@@ -46,17 +47,17 @@ class TakeAwayDialogContainer extends Component {
   }
 
   takeAway(takeAwayType) {
-    // const quinoaPresentation = quinoa.getState().editor;
+    const JSONbundle = bundleProjectAsJSON(this.props.activePresentation);
     switch (takeAwayType.id) {
       case 'project':
-        downloadFile(JSON.stringify(this.props.activePresentation, null, 2), 'json');
+        downloadFile(JSONbundle, 'json');
         break;
       case 'html':
         bundleProjectAsHtml(this.props.activePresentation, (err, html) => {
           if (err === null) {
             downloadFile(html, 'html');
           }
- else {
+          else {
             // todo : handle error display in redux logic ?
           }
         });
@@ -65,9 +66,9 @@ class TakeAwayDialogContainer extends Component {
       case 'github':
         bundleProjectAsHtml(this.props.activePresentation, (err, html) => {
           if (err === null) {
-            this.props.actions.exportToGist(html, this.props.activePresentation.metadata.gistId);
+            this.props.actions.exportToGist(html, JSONbundle, this.props.activePresentation.metadata.gistId);
           }
- else {
+          else {
             // todo : handle error display in redux logic ?
           }
         });
