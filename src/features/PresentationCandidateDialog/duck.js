@@ -281,13 +281,13 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
         const dataFormat = firstDataset.metadata.format;
         // parse data
         switch (visualizationType) {
-          case 'space':
+          case 'map':
             data = parseMapData(str, dataFormat);
             break;
-          case 'relations':
+          case 'network':
             data = parseNetworkData(str, dataFormat);
             break;
-          case 'time':
+          case 'timeline':
             data = parseTimelineData(str, dataFormat);
             break;
           default:
@@ -320,7 +320,7 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
           };
         }, {});
 
-        // guessing color map if possible
+        // guessing color map if applicable
         newcolorsMap = Object.keys(dataMap)
           .reduce((colorsMap, collectionId) => {
             if (dataMap[collectionId].category.mappedField) {
@@ -332,7 +332,9 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
             }
             return {
               ...colorsMap,
-              [collectionId]: {}
+              [collectionId]: {
+                default: 'brown'
+              }
             };
           }, newcolorsMap);
       }
@@ -357,7 +359,7 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
       };
     case SET_PRESENTATION_CANDIDATE_DATAMAP_ITEM:
       if (action.parameterId === 'category') {
-        newcolorsMap = {...state.presentationCandidate.visualizations[action.visualizationId].dataMap} || {};
+        newcolorsMap = {...state.presentationCandidate.visualizations[action.visualizationId].colorsMap} || {};
         const dataset = state.presentationCandidate.visualizations[action.visualizationId].data[action.collectionId];
         newcolorsMap[action.collectionId] = bootstrapColorsMap(dataset, action.propertyName);
       }

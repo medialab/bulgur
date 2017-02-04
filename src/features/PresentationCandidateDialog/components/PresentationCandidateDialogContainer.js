@@ -70,15 +70,15 @@ class PresentationCandidateDialogContainer extends Component {
   render() {
     const activeVisualizationTypes = [
     {
-      id: 'time',
+      id: 'timeline',
       name: 'timeline'
     },
     {
-      id: 'space',
+      id: 'map',
       name: 'map'
     },
     {
-      id: 'relations',
+      id: 'network',
       name: 'network'
     }
     ];

@@ -39,22 +39,22 @@ const previewVisualization = (visualization, models) => {
       return propsMap;
     }, {})
   }), {});
-  // todo : oooo this is bad
+  // todo : ooooh this is bad
   try {
     switch (visualization.metadata.visualizationType) {
-      case 'time':
+      case 'timeline':
         data = mapTimelineData(visualization.data, dataMap);
         return (<Timeline
           data={data}
           allowUserViewChange
           viewParameters={viewParameters} />);
-      case 'space':
+      case 'map':
         data = mapMapData(visualization.data, dataMap);
         return (<Map
           data={data}
           allowUserViewChange
           viewParameters={viewParameters} />);
-      case 'relations':
+      case 'network':
         data = mapNetworkData(visualization.data, dataMap);
         return (<Network
           data={data}
@@ -335,7 +335,7 @@ const PresentationCandidateDialogLayout = ({
                     let activeColor;
                     const onColorChange = (color) => setPresentationCandidateColor(visualizationKey, editedColor.collectionId, editedColor.category, color.hex);
                     return (<div className="colorsMap-group" key={colorCollectionId}>
-                      {Object.keys(collectionMap).length > 2 ? <h4>{colorCollectionId}</h4> : null}
+                      {Object.keys(collectionMap).length > 0 ? <h4>{colorCollectionId}</h4> : null}
                       {
                         Object.keys(collectionMap)
                         .map((category, index) => {
