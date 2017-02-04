@@ -3,11 +3,9 @@ import React from 'react';
 import {validateFileExtension} from '../../../helpers/fileLoader';
 
 import Dropzone from 'react-dropzone';
-import Select from 'react-select';
-import 'react-select/dist/react-select.css';
 
 import ColorsMapPicker from '../../../components/ColorsMapPicker/ColorsMapPicker';
-
+import DatamapPicker from '../../../components/DatamapPicker/DatamapPicker';
 
 import {
   mapMapData,
@@ -278,39 +276,16 @@ const PresentationCandidateDialogLayout = ({
                             {
                               Object.keys(collectionMap)
                               .map(parameterKey => {
-                                const parameter = collectionMap[parameterKey];
-                                const onChange = (e) => {
-                                  if (e) {
-                                    setPresentationCandidateDatamapItem(visualizationKey, parameter.id, collectionId, e.value);
-                                  }
-                                };
-                                const currentParameter = parameter.mappedField;
                                 return (
-                                  <li style={{background: parameter.mappedField ? 'lightgreen' : 'lightgrey'}} key={parameterKey}>
-                                    <h4>
-                                      <b>{parameter.id}</b> - <i>{parameter.acceptedValueTypes.join(', ')}</i>
-                                    </h4>
-                                    <Select
-                                      name="form-field-name"
-                                      value={currentParameter}
-                                      options={
-                                          visualization.dataProfile[collectionId]
-                                          // filter fields correct value type
-                                          .filter(field => {
-                                            return parameter.acceptedValueTypes.find(acceptedValue => {
-                                              if (field.propertiesTypes[acceptedValue]) {
-                                                return true;
-                                              }
-                                            }) !== undefined;
-                                          }).map(field => (
-                                            {
-                                              value: field.propertyName,
-                                              label: field.propertyName
-                                            }
-                                          ))
-                                        }
-                                      onChange={onChange} />
-                                  </li>
+                                  <DatamapPicker
+                                    key={parameterKey}
+                                    parameterKey={parameterKey}
+                                    parameter={collectionMap[parameterKey]}
+                                    visualization={visualization}
+                                    visualizationKey={visualizationKey}
+                                    collectionId={collectionId}
+                                    onMappingChange={setPresentationCandidateDatamapItem}
+                                  />
                                 );
                               })
                             }

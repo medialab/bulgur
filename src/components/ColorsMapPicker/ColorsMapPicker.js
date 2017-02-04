@@ -2,6 +2,8 @@ import React from 'react';
 
 import {TwitterPicker} from 'react-color';
 
+import './ColorsMapPicker.scss';
+
 const ColorsMapPicker = ({
   colorsMap,
   visualizationKey,
@@ -35,7 +37,7 @@ const ColorsMapPicker = ({
           }
           const onClick = () => toggleColorEdition(visualizationKey, colorCollectionId, category);
           return (
-            <div onClick={onClick} key={index}>
+            <div onClick={onClick} key={index} className="colors-map-picker">
               <span
                 style={{
                   width: '1rem',
