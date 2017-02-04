@@ -164,8 +164,9 @@ export const resetPresentationCandidateSettings = () => ({
   type: RESET_PRESENTATION_CANDIDATE_SETTINGS
 });
 
-export const toggleCandidateColorEdition = (collectionId, category) => ({
+export const toggleCandidateColorEdition = (visualizationId, collectionId, category) => ({
   type: TOGGLE_CANDIDATE_COLOR_EDITION,
+  visualizationId,
   collectionId,
   category
 });
@@ -425,11 +426,12 @@ const PRESENTATION_CANDIDATE_UI_DEFAULT_STATE = {
 function presentationCandidateUi (state = PRESENTATION_CANDIDATE_UI_DEFAULT_STATE, action) {
   switch (action.type) {
     case TOGGLE_CANDIDATE_COLOR_EDITION:
-      const {collectionId, category} = action;
+      const {collectionId, category, visualizationId} = action;
       if (state.editedColor === undefined || state.editedColor.collectionId !== collectionId || state.editedColor.category !== category) {
         return {
           ...state,
           editedColor: {
+            visualizationId,
             collectionId,
             category
           }

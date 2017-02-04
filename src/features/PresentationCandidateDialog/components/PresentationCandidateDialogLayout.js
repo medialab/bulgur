@@ -6,6 +6,9 @@ import Dropzone from 'react-dropzone';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 
+import ColorsMapPicker from '../../../components/ColorsMapPicker/ColorsMapPicker';
+
+
 import {
   mapMapData,
   mapTimelineData,
@@ -14,8 +17,6 @@ import {
   Map,
   Network
 } from 'quinoa-vis-modules';
-
-import {TwitterPicker} from 'react-color';
 
 import './PresentationCandidateDialog.scss';
 
@@ -321,55 +322,12 @@ const PresentationCandidateDialogLayout = ({
                 </section> : null}
               {// colors edition
                 visualization.colorsMap ?
-                  <section style={{
-                    minHeight: '30rem',
-                    width: '45%',
-                    display: 'inline-block',
-                    position: 'relative',
-                    float: 'left'
-                  }}>
-                    <h3>How to color your categories ?</h3>
-                    {Object.keys(visualization.colorsMap)
-                    .filter(id => id !== 'default')
-                    .map(colorCollectionId => {
-                    const collectionMap = visualization.colorsMap[colorCollectionId];
-                    let activeColor;
-                    const onColorChange = (color) => setPresentationCandidateColor(visualizationKey, editedColor.collectionId, editedColor.category, color.hex);
-                    return (<div className="colorsMap-group" key={colorCollectionId}>
-                      {Object.keys(collectionMap).length > 0 ? <h4>{colorCollectionId}</h4> : null}
-                      {
-                        Object.keys(collectionMap)
-                        .map((category, index) => {
-                          const active = editedColor && editedColor.collectionId === colorCollectionId && editedColor.category === category;
-                          const color = collectionMap[category];
-                          if (active) {
-                            activeColor = color;
-                          }
-                          const onClick = () => toggleCandidateColorEdition(colorCollectionId, category);
-                          return (
-                            <div onClick={onClick} key={index}>
-                              <span
-                                style={{
-                                  width: '1rem',
-                                  height: '1rem',
-                                  background: color,
-                                  display: 'inline-block'
-                                }} /> {category} {active ? ' edited' : null}
-                              {
-                                  editedColor &&
-                                  editedColor.collectionId === colorCollectionId &&
-                                  editedColor.category === category ?
-                                    <TwitterPicker color={activeColor} onChangeComplete={onColorChange} />
-                                    : null
-                                }
-                            </div>
-                          );
-                        })
-                      }
-                    </div>
-                  );
-                  })}
-                  </section>
+                  <ColorsMapPicker
+                    colorsMap={visualization.colorsMap}
+                    visualizationKey={visualizationKey}
+                    editedColor={editedColor}
+                    changeColor={setPresentationCandidateColor}
+                    toggleColorEdition={toggleCandidateColorEdition} />
                : null}
               {// preview
                 visualization.colorsMap &&
