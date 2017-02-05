@@ -82,6 +82,7 @@ const InterfaceManagerLayout = ({
               updateSlide={updateSlide} />
             <MainViewLayout
               activePresentation={activePresentation}
+              isTakeAwayModalOpen={isTakeAwayModalOpen}
               activeSlideId={activeSlideId}
               onProjectImport={onProjectImport}
               updateSlide={updateSlide}

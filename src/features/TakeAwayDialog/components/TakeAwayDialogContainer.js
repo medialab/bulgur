@@ -13,7 +13,6 @@ import {
   selector as presentationsSelector
 } from '../../BulgurProjectsManager/duck';
 
-// import quinoa from '../../../helpers/configQuinoa';
 import downloadFile from '../../../helpers/fileDownloader';
 import {
   bundleProjectAsHtml,

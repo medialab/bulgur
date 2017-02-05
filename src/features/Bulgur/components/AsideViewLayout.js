@@ -2,15 +2,7 @@ import React from 'react';
 
 import './AsideViewLayout.scss';
 
-// import {EditorComponent} from '../../../helpers/configQuinoa';
-
 import Slides from '../../../components/BulgurSlides/BulgurSlideContainer';
-
-import 'codemirror/lib/codemirror.css';
-import '../../../lib/code-mirror-theme.scss';
-
-// import {quinoaCreateComponents} from 'quinoa';
-// const EditorComponent = quinoaCreateComponents().editor;
 
 const AsideViewLayout = ({
   openSettings,

@@ -20,11 +20,11 @@ export const TAKE_AWAY = 'TAKE_AWAY';
 /*
  * Action creators
  */
-export const exportToGist = (content, gistId) => ({
+export const exportToGist = (htmlContent, jsonBundle, gistId) => ({
   type: EXPORT_TO_GIST,
   promise: (dispatch) => {
     return new Promise((resolve, reject) => {
-      return publishToGist(content, dispatch, EXPORT_TO_GIST_STATUS, gistId)
+      return publishToGist(htmlContent, jsonBundle, dispatch, EXPORT_TO_GIST_STATUS, gistId)
               .then(resolve)
               .catch(reject);
     });
