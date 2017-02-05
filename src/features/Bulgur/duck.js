@@ -35,6 +35,10 @@ const CLOSE_TAKE_AWAY_MODAL = 'CLOSE_TAKE_AWAY_MODAL';
 const SET_UI_MODE = 'SET_UI_MODE';
 const TOGGLE_SLIDE_SETTINGS_PANNEL = 'TOGGLE_SLIDE_SETTINGS_PANNEL';
 
+export const SET_VIEW_COLOR = 'SET_VIEW_COLOR';
+const TOGGLE_VIEW_COLOR_EDITION = 'TOGGLE_VIEW_COLOR_EDITION';
+
+
 export const RESET_APP = 'RESET_APP';
 
 /*
@@ -116,6 +120,21 @@ export const toggleSlideSettingsPannel = (to) => ({
   to
 });
 
+export const toggleViewColorEdition = (visualizationId, collectionId, category) => ({
+  type: TOGGLE_VIEW_COLOR_EDITION,
+  visualizationId,
+  collectionId,
+  category
+});
+
+export const setViewColor = (visualizationId, collectionId, category, color) => ({
+  type: SET_VIEW_COLOR,
+  visualizationId,
+  collectionId,
+  category,
+  color
+});
+
 export const resetApp = () => ({
   type: RESET_APP
 });
@@ -126,7 +145,8 @@ export const resetApp = () => ({
 
 const EDITOR_DEFAULT_STATE = {
     activeViews: undefined,
-    activeSlideId: undefined
+    activeSlideId: undefined,
+    editedColor: undefined
 };
 function editor(state = EDITOR_DEFAULT_STATE, action) {
   switch (action.type) {
@@ -170,11 +190,16 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
             data = visualization.data;
             break;
         }
+        const colorsMap = visualization.colorsMap;
+        // delete visualization.colorsMap;
         return {
           ...result,
           [visualizationKey]: {
             ...visualization,
-            viewParameters,
+            viewParameters: {
+              ...viewParameters,
+              colorsMap
+            },
             data
           }
         };
@@ -217,6 +242,45 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
             viewParameters: action.slide.views[id].viewParameters
           }
         }), {})
+      };
+
+    case TOGGLE_VIEW_COLOR_EDITION:
+      const {collectionId, category, visualizationId} = action;
+      if (state.editedColor === undefined || state.editedColor.collectionId !== collectionId || state.editedColor.category !== category) {
+        return {
+          ...state,
+          editedColor: {
+            visualizationId,
+            collectionId,
+            category
+          }
+        };
+      }
+      return {
+        ...state,
+        editedColor: undefined
+      };
+    case SET_VIEW_COLOR:
+      const {color} = action;
+      return {
+        ...state,
+        editedColor: undefined,
+        activeViews: {
+          ...state.activeViews,
+          [action.visualizationId]: {
+            ...state.activeViews[action.visualizationId],
+            viewParameters: {
+              ...state.activeViews[action.visualizationId].viewParameters,
+              colorsMap: {
+                ...state.activeViews[action.visualizationId].viewParameters.colorsMap,
+                [action.collectionId]: {
+                  ...state.activeViews[action.visualizationId].viewParameters.colorsMap[action.collectionId],
+                  [action.category]: color
+                }
+              }
+            }
+          }
+        }
       };
 
     default:
@@ -311,6 +375,8 @@ const slideSettingsPannelIsOpen = state => state.globalUi.slideSettingsPannelOpe
 
 const globalUiMode = state => state.globalUi.uiMode;
 
+
+const editedColor = state => state.editor.editedColor;
 const activeViews = state => state.editor.activeViews;
 const activeSlideId = state => state.editor.activeSlideId;
 
@@ -320,6 +386,7 @@ export const selector = createStructuredSelector({
   isTakeAwayModalOpen,
   globalUiMode,
   slideSettingsPannelIsOpen,
+  editedColor,
 
   activeViews,
   activeSlideId

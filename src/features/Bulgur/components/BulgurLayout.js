@@ -30,7 +30,9 @@ const InterfaceManagerLayout = ({
     removeSlide,
     setActiveSlide,
     updateSlide,
-    toggleSlideSettingsPannel
+    toggleSlideSettingsPannel,
+    toggleViewColorEdition,
+    setViewColor
   },
 
   slideSettingsPannelIsOpen,
@@ -38,6 +40,7 @@ const InterfaceManagerLayout = ({
   activeViews,
   addSlide,
   activeSlideId,
+  editedColor,
 
   openSettings,
   closeAndResetDialog,
@@ -87,7 +90,10 @@ const InterfaceManagerLayout = ({
               toggleSlideSettingsPannel={toggleSlideSettingsPannel}
               returnToLanding={returnToLanding}
               activeViews={activeViews}
-              onUserViewChange={changeViewByUser} />
+              onUserViewChange={changeViewByUser}
+              toggleViewColorEdition={toggleViewColorEdition}
+              setViewColor={setViewColor}
+              editedColor={editedColor} />
           </section>
         :
           <section className="bulgur-main-row">

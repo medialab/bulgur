@@ -19,7 +19,10 @@ const MainViewLayout = ({
   onUserViewChange,
   setActiveSlide,
   slideSettingsPannelIsOpen,
-  toggleSlideSettingsPannel
+  toggleSlideSettingsPannel,
+  toggleViewColorEdition,
+  setViewColor,
+  editedColor
 }) => {
 
   const setVisualization = (view, id) => {
@@ -104,9 +107,14 @@ const MainViewLayout = ({
           ))
         }
         </section>
-        {activeSlide ? <SettingsPannel
-          isOpen={slideSettingsPannelIsOpen}
-          togglePannel={toggleSlideSettingsPannel} /> : null }
+        {activeSlide ?
+          <SettingsPannel
+            isOpen={slideSettingsPannelIsOpen}
+            togglePannel={toggleSlideSettingsPannel}
+            views={activeViews}
+            toggleViewColorEdition={toggleViewColorEdition}
+            setViewColor={setViewColor}
+            editedColor={editedColor} /> : null }
       </section>
       <figcaption className="caption-container">
         {!activeSlide || viewsEqualActiveSlideViews ?

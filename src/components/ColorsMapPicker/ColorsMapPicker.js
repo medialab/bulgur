@@ -11,13 +11,7 @@ const ColorsMapPicker = ({
   changeColor,
   toggleColorEdition
 }) => (
-  <section style={{
-    minHeight: '30rem',
-    width: '45%',
-    display: 'inline-block',
-    position: 'relative',
-    float: 'left'
-  }}>
+  <section className="bulgur-colors-map-picker">
     <h3>How to color your categories ?</h3>
     {Object.keys(colorsMap)
     .filter(id => id !== 'default')
