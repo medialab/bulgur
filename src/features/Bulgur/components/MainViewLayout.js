@@ -148,7 +148,7 @@ const MainViewLayout = ({
             <button onClick={clickOnReset}><img className="bulgur-icon-image" src={require('../assets/reset.svg')} /> Reset</button>
           </div>
         }
-        {activeSlide && !isTakeAwayModalOpen ?
+        {activeSlide && !isTakeAwayModalOpen && activeSlide.draft ?
           <div className="caption-editor">
             <div className="editor-areas-container">
               <h1>
