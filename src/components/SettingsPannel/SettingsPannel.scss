@@ -26,7 +26,10 @@
             bottom: $medium-gutter;
             left: 10%;
 
+            overflow-y: auto;
+
             width: 80%;
+            // max-height: 50%;
 
             pointer-events: all;
 
@@ -47,7 +50,7 @@
         margin: 0;
         padding: 0;
 
-        background: yellow;
+        overflow: auto;
     }
 
     &.open

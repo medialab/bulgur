@@ -32,7 +32,8 @@ const InterfaceManagerLayout = ({
     updateSlide,
     toggleSlideSettingsPannel,
     toggleViewColorEdition,
-    setViewColor
+    setViewColor,
+    setViewDatamapItem
   },
 
   slideSettingsPannelIsOpen,
@@ -87,6 +88,7 @@ const InterfaceManagerLayout = ({
               onProjectImport={onProjectImport}
               updateSlide={updateSlide}
               setActiveSlide={setActiveSlide}
+              setViewDatamapItem={setViewDatamapItem}
               slideSettingsPannelIsOpen={slideSettingsPannelIsOpen}
               toggleSlideSettingsPannel={toggleSlideSettingsPannel}
               returnToLanding={returnToLanding}

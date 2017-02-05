@@ -9,6 +9,8 @@ import {
   mapNetworkData
 } from 'quinoa-vis-modules';
 
+import {bootstrapColorsMap} from '../../helpers/colorHelpers';
+
 import models from '../../models/visualizationTypes';
 
 /*
@@ -37,7 +39,7 @@ const TOGGLE_SLIDE_SETTINGS_PANNEL = 'TOGGLE_SLIDE_SETTINGS_PANNEL';
 
 export const SET_VIEW_COLOR = 'SET_VIEW_COLOR';
 const TOGGLE_VIEW_COLOR_EDITION = 'TOGGLE_VIEW_COLOR_EDITION';
-
+export const SET_VIEW_DATAMAP_ITEM = 'SET_VIEW_DATAMAP_ITEM';
 
 export const RESET_APP = 'RESET_APP';
 
@@ -133,6 +135,14 @@ export const setViewColor = (visualizationId, collectionId, category, color) => 
   collectionId,
   category,
   color
+});
+
+export const setViewDatamapItem = (visualizationId, parameterId, collectionId, propertyName) => ({
+  type: SET_VIEW_DATAMAP_ITEM,
+  visualizationId,
+  parameterId,
+  collectionId,
+  propertyName
 });
 
 export const resetApp = () => ({
@@ -238,6 +248,8 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
           ...activeViews,
           [id]: {
             ...state.activeViews[id],
+            // update data map
+            dataMap: action.slide.views[id].dataMap,
             // updated view parameters
             viewParameters: action.slide.views[id].viewParameters
           }
@@ -276,6 +288,36 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
                 [action.collectionId]: {
                   ...state.activeViews[action.visualizationId].viewParameters.colorsMap[action.collectionId],
                   [action.category]: color
+                }
+              }
+            }
+          }
+        }
+      };
+    case SET_VIEW_DATAMAP_ITEM:
+      let newcolorsMap;
+      if (action.parameterId === 'category') {
+        newcolorsMap = {...state.activeViews[action.visualizationId].viewParameters.colorsMap} || {};
+        const dataset = state.activeViews[action.visualizationId].data[action.collectionId];
+        newcolorsMap[action.collectionId] = bootstrapColorsMap(dataset, action.propertyName);
+      }
+      return {
+        ...state,
+        editedColor: undefined,
+        activeViews: {
+          ...state.activeViews,
+          [action.visualizationId]: {
+            ...state.activeViews[action.visualizationId],
+            // update colorsMap
+            colorsMap: newcolorsMap || state.activeViews[action.visualizationId].viewParameters.colorsMap,
+            // updatedatamap
+            dataMap: {
+              ...state.activeViews[action.visualizationId].dataMap,
+              [action.collectionId]: {
+                ...state.activeViews[action.visualizationId].dataMap[action.collectionId],
+                [action.parameterId]: {
+                  ...state.activeViews[action.visualizationId].dataMap[action.collectionId][action.parameterId],
+                  mappedField: action.propertyName
                 }
               }
             }

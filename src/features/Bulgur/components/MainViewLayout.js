@@ -3,7 +3,10 @@ import React from 'react';
 import {
   Timeline,
   Network,
-  Map
+  Map,
+  mapMapData,
+  mapTimelineData,
+  mapNetworkData
 } from 'quinoa-vis-modules';
 
 import DraftEditor from '../../../components/DraftEditor/DraftEditor';
@@ -18,6 +21,7 @@ const MainViewLayout = ({
   activeViews,
   onUserViewChange,
   setActiveSlide,
+  setViewDatamapItem,
   slideSettingsPannelIsOpen,
   toggleSlideSettingsPannel,
   toggleViewColorEdition,
@@ -28,23 +32,41 @@ const MainViewLayout = ({
 
   const setVisualization = (view, id) => {
     const onChange = (event) => onUserViewChange(id, event);
+    let data = activePresentation.visualizations[id].data;
+    // flatten datamap fields (todo: refactor as helper)
+    const dataMap = Object.keys(view.dataMap).reduce((result, collectionId) => ({
+      ...result,
+      [collectionId]: Object.keys(view.dataMap[collectionId]).reduce((propsMap, parameterId) => {
+        const parameter = view.dataMap[collectionId][parameterId];
+        if (parameter.mappedField) {
+          return {
+            ...propsMap,
+            [parameterId]: parameter.mappedField
+          };
+        }
+        return propsMap;
+      }, {})
+    }), {});
     // todo : improve code to have no need to do that ugly hack
     try {
-      const data = activeViews[id].data;
+      // let data = activeViews[id].data;
       switch (view.metadata.visualizationType) {
         case 'map':
+          data = mapMapData(data, dataMap);
           return (<Map
             allowUserViewChange
             data={data}
             onUserViewChange={onChange}
             viewParameters={view.viewParameters} />);
         case 'network':
+          data = mapNetworkData(data, dataMap);
           return (<Network
             allowUserViewChange
             data={data}
             onUserViewChange={onChange}
             viewParameters={view.viewParameters} />);
         case 'timeline':
+          data = mapTimelineData(data, dataMap);
           return (<Timeline
             allowUserViewChange
             data={data}
@@ -113,6 +135,7 @@ const MainViewLayout = ({
             isOpen={slideSettingsPannelIsOpen}
             togglePannel={toggleSlideSettingsPannel}
             views={activeViews}
+            setViewDatamapItem={setViewDatamapItem}
             toggleViewColorEdition={toggleViewColorEdition}
             setViewColor={setViewColor}
             editedColor={editedColor} /> : null }
