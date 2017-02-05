@@ -2,7 +2,7 @@ import GitHub from 'github-api';
 
 import getGithubToken from './getGithubToken';
 
-export default function publishGist(htmlContent, JSONbundle, dispatch, statusActionName, gistId) {
+export default function publishGist(htmlContent = '', JSONbundle = {}, dispatch, statusActionName, gistId) {
   return new Promise((resolve, reject) => {
     dispatch({
       type: statusActionName,
@@ -16,13 +16,15 @@ export default function publishGist(htmlContent, JSONbundle, dispatch, statusAct
          token
       });
       const gistContent = {
-        description: 'my bulgur project',
+        description: (JSONbundle && JSONbundle.metadata && JSONbundle.metadata.title) || 'quinoa presentation',
         public: true,
         files: {
           'index.html': {
             content: htmlContent
           },
-          'project.json': JSONbundle
+          'project.json': {
+            content: JSON.stringify(JSONbundle, null, 2)
+          }
         }
       };
       if (gistId) {

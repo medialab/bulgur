@@ -16,7 +16,8 @@ import {
 import downloadFile from '../../../helpers/fileDownloader';
 import {
   bundleProjectAsHtml,
-  bundleProjectAsJSON
+  // bundleProjectAsJSON,
+  cleanPresentationForExport
 } from '../../../helpers/projectBundler';
 
 import TakeAwayDialogLayout from './TakeAwayDialogLayout';
@@ -46,11 +47,11 @@ class TakeAwayDialogContainer extends Component {
   }
 
   takeAway(takeAwayType) {
-    const JSONbundle = bundleProjectAsJSON(this.props.activePresentation);
+    const JSONbundle = cleanPresentationForExport(this.props.activePresentation); // bundleProjectAsJSON(this.props.activePresentation);
     const title = this.props.activePresentation.metadata.title;
     switch (takeAwayType.id) {
       case 'project':
-        downloadFile(JSONbundle, 'json', title);
+        downloadFile(JSON.stringify(JSONbundle, null, 2), 'json', title);
         break;
       case 'html':
         bundleProjectAsHtml(this.props.activePresentation, (err, html) => {
@@ -74,7 +75,7 @@ class TakeAwayDialogContainer extends Component {
         });
         break;
       case 'server':
-        this.props.actions.exportToServer(this.props.activePresentation);
+        this.props.actions.exportToServer(JSONbundle);
         break;
       default:
         break;
