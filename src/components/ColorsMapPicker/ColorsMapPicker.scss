@@ -14,12 +14,14 @@
 
             .twitter-picker
             {
-              width: 100%!important;
+                width: 100%!important;
             }
             .color-card
             {
+                display: flex;
+
                 padding: $base-gutter;
-                display : flex;
+
                 flex-flow: row nowrap;
                 &.active
                 {

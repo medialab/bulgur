@@ -90,18 +90,7 @@
                     "keys": {
                       "metadata": {
                           "type": "object",
-                          "required": true,
-                          "keys": {
-                              "title": {
-                                  "type": "string",
-                                  "required": false
-                              },
-                              "visualizationType": {
-                                  "type": "string",
-                                  "possibleValues": ["map", "timeline", "graph"],
-                                  "required": true
-                              }
-                          }
+                          "required": true
                       },
                       "data": {
                         "required": false,

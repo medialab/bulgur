@@ -5,21 +5,19 @@
 {
     display: flex;
 
-    // background: $background-default;
+    padding: $medium-gutter $medium-gutter $base-gutter $medium-gutter;
 
-    border-top : 1px solid $primary-color;
+    color: $background-default;
+    // background: $background-default;
+    border-top: 1px solid $primary-color;
+    background: $color-dark;
 
     flex-flow: row nowrap;
     align-items: stretch;
     justify-content: space-between;
-
-    padding: $medium-gutter $medium-gutter $base-gutter $medium-gutter;
-
-    color: $background-default;
-    background: $color-dark;
     button
     {
-      color : $background-default!important;
+        color: $background-default!important;
     }
 
     a,
@@ -27,6 +25,6 @@
     a:active,
     a:visited
     {
-      color : $background-default!important;
+        color: $background-default!important;
     }
 }

@@ -28,35 +28,38 @@
             bottom: $medium-gutter;
             left: 10%;
 
+            display: flex;
+
             width: 80%;
+            max-height: 15rem;
 
             pointer-events: all;
 
+            border: 1px solid $primary-color;
             background: $background-default;
 
-            border: 1px solid $primary-color;
-            max-height: 15rem;
-
-            display: flex;
             flex-flow: column nowrap;
             align-items: stretch;
 
             .bulgur-colors-map-picker
             {
                 overflow-y: auto;
+
                 flex: 5;
             }
 
             .open-pannel
             {
-                text-align: left;
                 padding: $medium-gutter;
+
+                text-align: left;
+
                 border-top: 1px solid $primary-color;
 
                 &.active
                 {
-                    background: red;
                     color: white;
+                    background: red;
                 }
             }
         }
@@ -75,10 +78,9 @@
         margin: 0;
         padding: 0;
 
-        border-left: 1px solid $primary-color;
-
-        background: $color-dark;
         color: $background-default;
+        border-left: 1px solid $primary-color;
+        background: $color-dark;
 
         .slide-parameters-container
         {
@@ -89,8 +91,9 @@
             }
             .bulgur-datamap-picker
             {
-                list-style-type: none;
                 margin: $medium-gutter;
+
+                list-style-type: none;
             }
         }
     }

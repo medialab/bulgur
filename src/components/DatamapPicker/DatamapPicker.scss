@@ -2,10 +2,11 @@
 
 .bulgur-datamap-picker
 {
-  background: lightgrey;
-  padding: $base-gutter;
-  &.active
-  {
-    background: lightgreen;
-  }
+    padding: $base-gutter;
+
+    background: lightgrey;
+    &.active
+    {
+        background: lightgreen;
+    }
 }
