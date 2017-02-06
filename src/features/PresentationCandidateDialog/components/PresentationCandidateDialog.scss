@@ -181,13 +181,13 @@
 
         &.loaded
         {
-            background: lightgreen;
+            background: $color-valid;
         }
 
         &.error
         {
             color: $background-default;
-            background: brown;
+            background: $color-error;
         }
     }
 }

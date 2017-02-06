@@ -24,7 +24,7 @@ const DatamapPicker = ({
       key={parameterKey}
       className={'bulgur-datamap-picker ' + (parameter.mappedField ? 'active' : '')}>
       <h4>
-        <b>{parameter.id}</b> - <i>{parameter.acceptedValueTypes.join(', ')}</i>
+        <b>{parameter.id}</b>{/* - <i>{parameter.acceptedValueTypes.join(', ')}</i>*/}
       </h4>
       <Select
         name="form-field-name"

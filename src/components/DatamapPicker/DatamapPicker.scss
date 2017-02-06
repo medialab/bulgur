@@ -4,9 +4,9 @@
 {
     padding: $base-gutter;
 
-    background: lightgrey;
+    background: $background-intent;
     &.active
     {
-        background: lightgreen;
+        background: $color-valid;
     }
 }
