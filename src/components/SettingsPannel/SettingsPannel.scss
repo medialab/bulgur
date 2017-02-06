@@ -41,10 +41,10 @@
             {
                 overflow-y: auto;
 
-                flex: 5;
-
-                padding-left: $base-gutter;
                 padding-right: $base-gutter;
+                padding-left: $base-gutter;
+
+                flex: 5;
             }
             .open-pannel
             {
@@ -71,8 +71,8 @@
         overflow: hidden;
         overflow: auto;
 
-        height: 100%;
         width: 100%;
+        height: 100%;
         margin: 0;
         padding: 0;
 

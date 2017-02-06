@@ -104,26 +104,32 @@ const PresentationCandidateDialogLayout = ({
       <section className="options-group">
         <h2>What is your presentation about ?</h2>
         <form>
+          <div className="input-group">
           <label htmlFor="title">Title</label>
           <input
             onChange={setPresentationTitle}
             type="text"
             name="title"
             value={presentationCandidate.metadata.title} />
+          </div>
 
+          <div className="input-group">
           <label htmlFor="authors">Authors</label>
           <input
             onChange={setPresentationAuthors}
             type="text"
             name="authors"
             value={presentationCandidate.metadata.authors} />
+          </div>
 
+          <div className="input-group">
           <label htmlFor="description">Description</label>
           <textarea
             onChange={setPresentationDescription}
             type="text"
             name="description"
             value={presentationCandidate.metadata.description} />
+          </div>
         </form>
       </section>
 
@@ -148,36 +154,45 @@ const PresentationCandidateDialogLayout = ({
               return (
                 <div key={datasetId} className="dataset-card">
                   <h4>Dataset settings</h4>
+                  <div className="dataset-settings">
                   <form>
                     <p>Original file name : {dataset.metadata.fileName}</p>
                     <p>Original file format : {dataset.metadata.format}</p>
+                    <div className="input-group">
                     <label htmlFor="title">Title</label>
                     <input
                       onChange={setTitle}
                       type="text"
                       name="title"
                       value={dataset.metadata.title} />
+                    </div>
+                    <div className="input-group">
                     <label htmlFor="description">Description</label>
                     <textarea
                       onChange={setDescription}
                       type="text"
                       name="description"
                       value={dataset.metadata.description} />
+                    </div>
+                    <div className="input-group">
                     <label htmlFor="url">Url</label>
                     <input
                       onChange={setUrl}
                       type="text"
                       name="url"
                       value={dataset.metadata.url} />
+                    </div>
+                    <div className="input-group">
                     <label htmlFor="license">License</label>
                     <input
                       onChange={setLicense}
                       type="text"
                       name="license"
                       value={dataset.metadata.license} />
+                    </div>
                   </form>
 
-                  <div>
+                  <div className="dataset-management">
                     <Dropzone
                       className="drop-zone"
                       activeClassName="drop-zone-active"
@@ -186,8 +201,9 @@ const PresentationCandidateDialogLayout = ({
                     </Dropzone>
                     {
                       // todo : uncomment this when multi datasets use cases arise (dataset deletion feature)
-                      <button onClick={onRemoveDataset}>Remove this dataset</button>
+                      <button className="remove-dataset" onClick={onRemoveDataset}>Remove this dataset</button>
                   }
+                  </div>
                   </div>
                 </div>
             );
@@ -228,7 +244,6 @@ const PresentationCandidateDialogLayout = ({
       </section>
       <section className="options-group">
         <h2>How to visualize the data ?</h2>
-
         {
         presentationCandidate.visualizations &&
         Object.keys(presentationCandidate.visualizations)
@@ -273,6 +288,7 @@ const PresentationCandidateDialogLayout = ({
                         return (
                           <div className="datamap-group" key={collectionId}>
                             {Object.keys(visualization.dataMap).length > 1 ? <h3>{collectionId}</h3> : null}
+                            <div className="datamap-group-mosaic">
                             {
                               Object.keys(collectionMap)
                               .map(parameterKey => {
@@ -288,13 +304,16 @@ const PresentationCandidateDialogLayout = ({
                                 );
                               })
                             }
+                            </div>
                           </div>
                         );
                       })
                       }
                   </ul>
                 </section> : null}
-              <h3>How to color your categories ?</h3>
+              <h2>How to color your categories ?</h2>
+
+              <section className="final-touch-container">
               {// colors edition
                 visualization.colorsMap ?
                   <ColorsMapPicker
@@ -309,23 +328,17 @@ const PresentationCandidateDialogLayout = ({
                 visualization.dataProfile &&
                 visualization.data &&
                 visualization.dataMap ?
-                  <section style={{
-                  height: '30rem',
-                  width: '49%',
-                  display: 'inline-block',
-                  position: 'relative',
-                  border: '1rem solid darkgrey',
-                  float: 'left'
-                }}>
+                  <section className="preview">
                     {previewVisualization(visualization, visualizationTypesModels)}
                   </section>
                 : null}
+                </section>
             </section>
           );
         })
       }
       </section>
-      <section className="presentation-candidate-dialog-step">
+      <section className="options-group presentation-candidate-dialog-step final-step">
         {
           presentationCandidate &&
           presentationCandidate.visualizations &&
@@ -336,11 +349,13 @@ const PresentationCandidateDialogLayout = ({
           presentationCandidate.visualizations[Object.keys(presentationCandidate.visualizations)[0]].data &&
           presentationCandidate.visualizations[Object.keys(presentationCandidate.visualizations)[0]].dataMap
         ?
-          <button style={{background: 'lightgreen'}} onClick={onApplyChange}>Edit the presentation content</button>
+          <button 
+          className="valid-btn"
+          onClick={onApplyChange}>Edit the presentation content</button>
         : ''
       }
         <button
-          style={{background: 'brown', color: 'white'}}
+          className="cancel-btn"
           onClick={closePresentationCandidate}>
         Cancel
       </button>

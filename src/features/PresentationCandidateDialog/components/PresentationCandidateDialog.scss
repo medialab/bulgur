@@ -4,35 +4,109 @@
 {
     font-family: $main-font-stack;
 
+    display: flex;
+    flex-direction: column;
+
     -webkit-user-select: none; /* Chrome/Safari */
        -moz-user-select: none; /* Firefox */
         -ms-user-select: none; /* IE10+ */
             user-select: none;
 
          -o-user-select: none;
-
-    .presentation-candidate-dialog-step:not(:first-of-type)
+    .options-group
     {
+        display: flex;
+        flex-direction: column;
+
         margin-top: $large-gutter;
-        padding-top: $medium-gutter;
+        margin-bottom: $large-gutter;
+        form
+        {
+            display: flex;
+            flex-direction: column;
+            .input-group
+            {
+                display: flex;
+                flex-direction: column;
 
-        border-top: 1px solid $background-intent;
+                margin-top: $medium-gutter;
+            }
+            input,
+            textarea
+            {
+                font-family: inherit;
+                font-size: 1rem;
+
+                width: 100%;
+
+                border: none;
+                border: 1px solid $primary-color;
+                outline: none;
+                background: inherit;
+            }
+            input:hover,
+            textarea:hover,
+            input:focus,
+            textarea:focus
+            {
+                cursor: pointer;
+
+                background: $background-intent;
+            }
+        }
     }
+    .dataset-settings
+    {
+        display: flex;
 
+        flex-flow: row nowrap;
+        justify-content: stretch;
+        form,
+        .dataset-management
+        {
+            flex: 1;
+        }
+        form
+        {
+            padding-right: $large-gutter;
+        }
+        .dataset-management
+        {
+            .drop-zone
+            {
+                height: 10rem;
+                margin-bottom: $medium-gutter;
+                padding-top: 4rem;
+
+                text-align: center;
+
+                border: 1px dashed $primary-color;
+            }
+            .remove-dataset
+            {
+                display: block;
+
+                width: 100%;
+                &:hover
+                {
+                    color: white;
+                    background: red;
+                }
+            }
+        }
+    }
     .visualization-type-choice
     {
         display: flex;
 
         padding: 0;
 
-        flex-flow: row nowrap;
+        flex-flow: row nowrap!important;
         justify-content: space-between;
-
         input
         {
             display: none;
         }
-
         .visualization-type-item
         {
             display: flex;
@@ -53,7 +127,6 @@
 
                 opacity: 1;
             }
-
             &.active
             {
                 cursor: default;
@@ -62,29 +135,24 @@
                 background: red;
             }
         }
-
         #visualization-type-checked
         {
             background: $background-intent;
         }
     }
-
     .data-source-choice
     {
         display: flex;
 
         flex-flow: row nowrap;
-
         .data-source-file
         {
             flex: 1;
         }
-
         .data-source-examples
         {
             flex: 1;
         }
-
         .data-source-file .drop-zone
         {
             margin-right: $large-gutter;
@@ -96,7 +164,6 @@
 
             background: $background-intent;
         }
-
         .data-source-file .drop-zone-active
         {
             width: 100%!important;
@@ -109,8 +176,6 @@
             color: $background-default;
             background: $primary-color;
         }
-
-
         .sample-file
         {
             margin-bottom: $medium-gutter;
@@ -118,24 +183,39 @@
             flex: 1;
         }
     }
-
     .data-fields-choice
     {
         display: flex;
 
         flex-flow: row nowrap;
-
         .parameters-endpoints
         {
             display: flex;
 
             padding: 0; //$large-gutter 0 $large-gutter;
 
-            flex-wrap: wrap;
-            justify-content: space-between;
+            // flex-wrap: wrap;
+            // justify-content: space-between;
             flex: 1;
-        }
+            .datamap-group
+            {
+                display: flex;
+                flex-flow: column nowrap;
+                flex: 1;
 
+                .datamap-group-mosaic
+                {
+                    display: flex;
+                    flex-flow: row wrap;
+                    justify-content: flex-start;
+
+                    .bulgur-datamap-picker
+                    {
+                        margin-right: $medium-gutter;
+                    }
+                }
+            }
+        }
         .parameters-endpoints li
         {
             display: inline-block;
@@ -152,7 +232,6 @@
             border: 1px dashed $background-intent;
         }
     }
-
     .sample-file
     {
         padding: $medium-gutter;
@@ -160,34 +239,76 @@
         cursor: pointer;
 
         border: 1px dashed $primary-color;
-
         &:hover
         {
             background: $background-intent;
         }
     }
-
     .data-source-status
     {
         margin-top: $medium-gutter;
         padding: $medium-gutter;
 
         text-align: center;
-
         &.loading
         {
             background: $background-intent;
         }
-
         &.loaded
         {
             background: $color-valid;
         }
-
         &.error
         {
             color: $background-default;
             background: $color-error;
+        }
+    }
+
+    .final-touch-container
+    {
+        display: flex;
+        flex-flow: row nowrap;
+
+        .bulgur-colors-map-picker
+        {
+            flex: 1;
+            flex-flow: row nowrap;
+            display: flex;
+            .colors-map-group{
+
+                flex: 1;
+            }
+        }
+
+        .preview
+        {
+            height: 30rem;
+            width: 49%;
+            position: relative;
+            border: 1px solid $primary-color;
+            flex: 1;
+        }
+    }
+
+    .final-step
+    {
+        flex-flow: row;
+        font-family: $main-font-stack;
+
+        .valid-btn
+        {
+            background: $color-valid;
+            border: none;
+            font-size: 1.2rem;
+            flex: 1;
+        }
+        .cancel-btn
+        {
+            background: $color-error;
+            color: $background-default;
+            border: none;
+            font-size: 1.2rem;
         }
     }
 }
