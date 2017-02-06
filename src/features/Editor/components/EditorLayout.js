@@ -5,14 +5,14 @@ import QuinoaPresentationPlayer from 'quinoa-presentation-player';
 
 import AsideViewLayout from './AsideViewLayout';
 import MainViewLayout from './MainViewLayout';
-import BulgurFooter from '../../../components/BulgurFooter/BulgurFooter';
+import Footer from '../../../components/Footer/Footer';
 
-import ProjectsManagerContainer from '../../BulgurProjectsManager/components/ProjectManagerContainer';
+import PresentationsManagerContainer from '../../PresentationsManager/components/PresentationsManagerContainer';
 
 import PresentationCandidateDialog from '../../PresentationCandidateDialog/components/PresentationCandidateDialogContainer.js';
 import TakeAwayDialog from '../../TakeAwayDialog/components/TakeAwayDialogContainer.js';
 
-import './BulgurLayout.scss';
+import './EditorLayout.scss';
 
 const InterfaceManagerLayout = ({
   id,
@@ -102,13 +102,13 @@ const InterfaceManagerLayout = ({
           <section className="bulgur-main-row">
             <QuinoaPresentationPlayer presentation={activePresentation} />
           </section>}
-        <BulgurFooter
+        <Footer
           returnToLanding={returnToLanding}
           openTakeAwayModal={openTakeAwayModal}
           togglePreview={togglePreview}
           uiMode={globalUiMode} />
       </div>
-      : <ProjectsManagerContainer />}
+      : <PresentationsManagerContainer />}
     <Modal
       onRequestClose={closeModal}
       contentLabel="new presentation"

@@ -6,7 +6,7 @@ import publishToServer from '../../helpers/serverExporter';
 /*
  * Action names
  */
- import {RESET_APP} from '../Bulgur/duck';
+ import {RESET_APP} from '../Editor/duck';
 
 const SET_TAKE_AWAY_TYPE = 'SET_TAKE_AWAY_TYPE';
 export const EXPORT_TO_GIST = 'EXPORT_TO_GIST';

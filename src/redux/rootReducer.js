@@ -6,8 +6,8 @@
  */
 import {combineReducers} from 'redux';
 
-import presentations from './../features/BulgurProjectsManager/duck';
-import bulgurEditor from './../features/Bulgur/duck';
+import presentations from './../features/PresentationsManager/duck';
+import bulgurEditor from './../features/Editor/duck';
 import presentationCandidate from './../features/PresentationCandidateDialog/duck';
 import takeAway from './../features/TakeAwayDialog/duck';
 import * as modelsModels from './../models';

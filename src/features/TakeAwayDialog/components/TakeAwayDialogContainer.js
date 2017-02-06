@@ -7,11 +7,11 @@ import * as duck from '../duck';
 import {
   closeTakeAwayModal,
   selector as bulgurSelector
-} from '../../Bulgur/duck';
+} from '../../Editor/duck';
 
 import {
   selector as presentationsSelector
-} from '../../BulgurProjectsManager/duck';
+} from '../../PresentationsManager/duck';
 
 import downloadFile from '../../../helpers/fileDownloader';
 import {

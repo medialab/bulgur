@@ -2,9 +2,9 @@ import React from 'react';
 import Modal from 'react-modal';
 import Dropzone from 'react-dropzone';
 
-import './ProjectManagerLayout.scss';
+import './PresentationsManagerLayout.scss';
 
-const ProjectManagerLayout = ({
+const PresentationsManagerLayout = ({
   // activePresentation,
   // activePresentationId,
   importStatus,
@@ -28,7 +28,7 @@ const ProjectManagerLayout = ({
     startPresentationCandidateConfiguration();
   };
   return (
-    <section className="project-manager-layout">
+    <section className="bulgur-presentations-manager-layout">
       <section className="landing-group">
         <h1>Bulgur</h1>
         <p>
@@ -108,4 +108,4 @@ const ProjectManagerLayout = ({
   );
 };
 
-export default ProjectManagerLayout;
+export default PresentationsManagerLayout;

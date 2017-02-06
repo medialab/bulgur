@@ -2,7 +2,7 @@ import React from 'react';
 
 import './AsideViewLayout.scss';
 
-import Slides from '../../../components/BulgurSlides/BulgurSlideContainer';
+import SlidesContainer from '../../../components/SlidesContainer/SlidesContainer';
 
 const AsideViewLayout = ({
   openSettings,
@@ -18,7 +18,7 @@ const AsideViewLayout = ({
     <button onClick={openSettings} type="button"><img className="bulgur-icon-image" src={require('../assets/settings.svg')} /> {activePresentation.metadata && activePresentation.metadata.title && activePresentation.metadata.title.length ? activePresentation.metadata.title : 'untitled presentation'}</button>
     {
       activePresentation.order ?
-        <Slides
+        <SlidesContainer
           activePresentation={activePresentation}
           activeSlideId={activeSlideId}
           setActiveSlide={setActiveSlide}

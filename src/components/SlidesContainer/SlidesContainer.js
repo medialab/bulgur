@@ -1,8 +1,8 @@
 import React from 'react';
 
-import './BulgurSlideContainer.scss';
+import './SlidesContainer.scss';
 
-const BulgurSlidesContainer = ({
+const SlidesContainer = ({
   activePresentation,
   activeSlideId,
   setActiveSlide,
@@ -11,7 +11,7 @@ const BulgurSlidesContainer = ({
   removeSlide
 }) => {
   return (
-    <ul className="bulgur-slides">
+    <ul className="bulgur-slides-container">
       {
         activePresentation &&
         activePresentation
@@ -68,4 +68,4 @@ const BulgurSlidesContainer = ({
 
 };
 
-export default BulgurSlidesContainer;
+export default SlidesContainer;

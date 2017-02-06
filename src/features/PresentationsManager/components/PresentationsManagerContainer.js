@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import ProjectManagerLayout from './ProjectManagerLayout';
+import PresentationsManagerLayout from './PresentationsManagerLayout';
 import * as duck from '../duck';
-import * as globalDuck from '../../Bulgur/duck';
+import * as globalDuck from '../../Editor/duck';
 
 import {
   getFileAsText
@@ -23,7 +23,7 @@ import validatePresentation from '../../../helpers/presentationValidator';
     }, dispatch)
   })
 )
-export default class ProjectManagerContainer extends Component {
+export default class PresentationsManagerContainer extends Component {
   /**
    * constructor
    */
@@ -72,7 +72,7 @@ export default class ProjectManagerContainer extends Component {
   render () {
     const overrideImportWithCandidate = () => this.props.actions.importSuccess(this.props.importCandidate);
     return (
-      <ProjectManagerLayout
+      <PresentationsManagerLayout
         onDropInput={this.onProjectImportPrompt}
         overrideImportWithCandidate={overrideImportWithCandidate}
         {...this.props} />

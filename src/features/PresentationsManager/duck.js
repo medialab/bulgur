@@ -19,7 +19,7 @@ import {
   ADD_SLIDE,
   REMOVE_SLIDE,
   UPDATE_SLIDE
-} from '../Bulgur/duck';
+} from '../Editor/duck';
 
 import {
   EXPORT_TO_GIST,

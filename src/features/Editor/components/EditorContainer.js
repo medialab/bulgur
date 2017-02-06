@@ -3,9 +3,9 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {v4 as uuid} from 'uuid';
 
-import BulgurLayout from './BulgurLayout';
+import EditorLayout from './EditorLayout';
 import * as duck from '../duck';
-import * as managerDuck from '../../BulgurProjectsManager/duck';
+import * as managerDuck from '../../PresentationsManager/duck';
 
 import {
   resetPresentationCandidateSettings,
@@ -26,7 +26,7 @@ import {
     }, dispatch)
   })
 )
-class BulgurContainer extends Component {
+class EditorContainer extends Component {
 
   constructor(props) {
     super(props);
@@ -81,7 +81,7 @@ class BulgurContainer extends Component {
 
   render() {
     return (
-      <BulgurLayout
+      <EditorLayout
         {...this.props}
         openSettings={this.openSettings}
         closeAndResetDialog={this.closeAndResetDialog}
@@ -93,4 +93,4 @@ class BulgurContainer extends Component {
   }
 }
 
-export default BulgurContainer;
+export default EditorContainer;

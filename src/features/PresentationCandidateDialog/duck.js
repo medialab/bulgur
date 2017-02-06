@@ -24,7 +24,7 @@ import {
 import {
   RESET_APP,
   START_PRESENTATION_CANDIDATE_CONFIGURATION
-} from '../Bulgur/duck';
+} from '../Editor/duck';
 
 const FETCH_EXAMPLE_FILE = 'FETCH_EXAMPLE_FILE';
 const FETCH_USER_FILE = 'FETCH_USER_FILE';

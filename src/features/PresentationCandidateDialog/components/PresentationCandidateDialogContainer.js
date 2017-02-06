@@ -7,7 +7,7 @@ import {
   closePresentationCandidateModal,
   applyPresentationCandidateConfiguration,
   setActivePresentationId
-} from '../../Bulgur/duck';
+} from '../../Editor/duck';
 
 import PresentationCandidateDialogLayout from './PresentationCandidateDialogLayout';
 

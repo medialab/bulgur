@@ -100,7 +100,7 @@ const PresentationCandidateDialogLayout = ({
   const setPresentationAuthors = (e) => setCandidatePresentationMetadata('authors', e.target.value);
   const setPresentationDescription = (e) => setCandidatePresentationMetadata('description', e.target.value);
   return (
-    <div className="presentation-candidate-dialog">
+    <div className="bulgur-presentation-candidate-dialog">
       <section className="options-group">
         <h2>What is your presentation about ?</h2>
         <form>

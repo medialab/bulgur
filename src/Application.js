@@ -8,12 +8,12 @@ import React from 'react';
 
 import './Application.scss';
 
-import Bulgur from './features/Bulgur/components/BulgurContainer.js';
+import Editor from './features/Editor/components/EditorContainer.js';
 
 const Application = ({}) => (
-  <Bulgur
+  <Editor
     id="wrapper"
-    className="bulgur" />
+    className="bulgu" />
 );
 
 

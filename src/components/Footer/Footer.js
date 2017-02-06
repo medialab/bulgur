@@ -1,8 +1,8 @@
 import React from 'react';
 
-import './BulgurFooter.scss';
+import './Footer.scss';
 
-const BulgurFooter = ({
+const Footer = ({
   openTakeAwayModal,
   togglePreview,
   returnToLanding,
@@ -19,4 +19,4 @@ const BulgurFooter = ({
   </footer>
 );
 
-export default BulgurFooter;
+export default Footer;
