@@ -1,1 +1,13 @@
 @import '../../parameters.scss';
+
+.bulgur-draft-editor
+{
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: stretch;
+  .DraftEditor-root
+  {
+    overflow-y: auto;
+    flex: 5;
+  }
+}

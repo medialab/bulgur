@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './BulgurSlideContainer.scss';
+
 const BulgurSlidesContainer = ({
   activePresentation,
   activeSlideId,
@@ -17,7 +19,11 @@ const BulgurSlidesContainer = ({
         .map(slideKey => {
             const slide = activePresentation.slides[slideKey];
             const onRemove = () => removeSlide(slideKey);
-            const onGlobalClick = () => setActiveSlide(slideKey, slide);
+            const onGlobalClick = () => {
+              if (activeSlideId !== slideKey) {
+                setActiveSlide(slideKey, slide);
+              }
+            };
 
             const onTitleChange = (e) => {
               updateSlide(slideKey, {
@@ -33,29 +39,28 @@ const BulgurSlidesContainer = ({
               });
             };
             return (
-              <li className="bulgur-slide" onClick={onGlobalClick} key={slideKey}>
+              <li className={'bulgur-slide ' + (activeSlideId === slideKey ? 'active' : '')} onClick={onGlobalClick} key={slideKey}>
                 <h3>
                   <input
                     placeholder="slide title"
                     type="text"
                     value={slide.title}
                     onChange={onTitleChange} />
+                  <button onClick={onRemove}>x</button>
                 </h3>
-                <div>
+                <div className="comment-container">
                   <textarea
                     type="text"
                     placeholder="slide comment"
                     value={slide.markdown}
                     onChange={onTextChange} />
                 </div>
-                <button onClick={onRemove}>Remove slide</button>
-                {activeSlideId === slideKey ? 'active' : ''}
               </li>
             );
           }
           )
       }
-      <li>
+      <li className="add-slide">
         <button type="button" onClick={addSlide}>Add slide</button>
       </li>
     </ul>

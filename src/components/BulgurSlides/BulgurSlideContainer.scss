@@ -1,1 +1,70 @@
 @import '../../parameters.scss';
+
+.bulgur-slides
+{
+    margin: 0;
+    padding: 0;
+    padding-left: $medium-gutter;
+    li
+    {
+        min-height: 3rem;
+        margin: $large-gutter $large-gutter $large-gutter 0;
+
+        list-style-type: none;
+    }
+    .bulgur-slide
+    {
+        padding: $base-gutter;
+
+        color: $primary-color;
+        border: 1px solid $primary-color;
+        display: flex;
+        flex-flow: column nowrap;
+        
+        h3
+        {
+            display: flex;
+
+            padding: 0;
+            margin-top: 0;
+
+            border-bottom: 1px solid black;
+
+            flex-flow: row nowrap;
+            align-items: stretch;
+            margin: 0;
+            input
+            {
+                border: none;
+
+                flex: 5;
+            }
+        }
+        .comment-container
+        {
+          width :100%;
+          textarea
+          {
+            margin-top: $base-gutter;
+            resize: none;
+            width: 100%;
+          }
+        }
+        &.active
+        {
+            border: 6px solid $primary-color;
+        }
+    }
+    .add-slide
+    {
+        button
+        {
+            display: block;
+
+            width: 100%;
+            padding: $base-gutter;
+
+            border: 1px solid $primary-color;
+        }
+    }
+}

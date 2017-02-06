@@ -3,3 +3,136 @@
 /*
  * Primary layout
  */
+.project-manager-layout
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: flex;
+
+    width: 100%;
+    height: 100%;
+
+    color: $background-default;
+    background: $color-dark;
+
+    flex-flow: row nowrap;
+    align-items: nowrap;
+    justify-content: center;
+    .landing-group
+    {
+        display: flex;
+
+        height: 100%;
+        padding: $medium-gutter;
+        padding-top: 3%;
+
+        flex: 1;
+        flex-flow: column nowrap;
+        &:first-of-type
+        {
+            padding-left: 25%;
+        }
+        &:last-of-type
+        {
+            padding-right: 25%;
+        }
+        h1
+        {
+            font-size: 3rem;
+
+            margin: 0;
+        }
+        .new-presentation
+        {
+            width: 100%;
+            margin-bottom: $medium-gutter;
+
+            border: 2px solid $background-default!important;
+        }
+        h4
+        {
+            font-size: 1.2rem;
+
+            margin-bottom: $medium-gutter;
+        }
+        .local-presentations-list
+        {
+            margin: 0;
+            padding: 0;
+            .local-presentation
+            {
+                display: flex;
+
+                margin: 0;
+                padding: $medium-gutter;
+
+                list-style-type: none;
+
+                border: 2px solid $background-default;
+                &:not(:first-of-type)
+                {
+                    border-top: none;
+                }
+
+                flex-flow: column nowrap;
+                h5
+                {
+                    font-size: 1.3rem;
+
+                    margin: 0;
+                    margin-bottom: $base-gutter;
+
+                    cursor: pointer;
+                }
+                .local-presentation-buttons
+                {
+                    display: flex;
+
+                    flex-flow: row nowrap;
+                    align-items: stretch;
+                    button
+                    {
+                        font-size: .8rem;
+
+                        flex: 1;
+                        text-align: left;
+                    }
+                }
+            }
+        }
+    }
+    button
+    {
+        color: $background-default;
+        &:hover
+        {
+            color: $primary-color;
+        }
+    }
+    .drop-zone
+    {
+        width: 100%;
+        // margin-right: $large-gutter;
+        padding-top: 8rem;
+        // padding-right: $medium-gutter;
+        padding-bottom: 8rem;
+        margin-top: $medium-gutter * 6;
+
+        text-align: center;
+
+        border: 2px dashed $background-default;
+    }
+    .drop-zone-active
+    {
+        margin-right: $large-gutter;
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+
+        text-align: center;
+
+        color: $background-default;
+        background: $primary-color;
+    }
+}

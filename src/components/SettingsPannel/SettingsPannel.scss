@@ -9,16 +9,18 @@
     padding: 0;
 
     background: transparent;
+
     .colors-map-picker-wrapper
     {
         position: absolute;
         top: 0;
-        left: -15rem;
+        left: -20rem;
 
-        width: 15rem;
+        width: 20rem;
         height: 100%;
 
         pointer-events: none;
+
 
         .colors-map-picker-container
         {
@@ -26,31 +28,71 @@
             bottom: $medium-gutter;
             left: 10%;
 
-            overflow-y: auto;
-
             width: 80%;
-            // max-height: 50%;
 
             pointer-events: all;
 
             background: $background-default;
+
+            border: 1px solid $primary-color;
+            max-height: 15rem;
+
+            display: flex;
+            flex-flow: column nowrap;
+            align-items: stretch;
+
+            .bulgur-colors-map-picker
+            {
+                overflow-y: auto;
+                flex: 5;
+            }
+
+            .open-pannel
+            {
+                text-align: left;
+                padding: $medium-gutter;
+                border-top: 1px solid $primary-color;
+
+                &.active
+                {
+                    background: red;
+                    color: white;
+                }
+            }
         }
     }
 
-    .slide-parameters-container
+    .slide-parameters-wrapper
     {
         position: absolute;
         top: 0;
         left: 0;
 
         overflow: hidden;
+        overflow: auto;
 
-        max-width: 0;
         height: 100%;
         margin: 0;
         padding: 0;
 
-        overflow: auto;
+        border-left: 1px solid $primary-color;
+
+        background: $color-dark;
+        color: $background-default;
+
+        .slide-parameters-container
+        {
+            h3,
+            h4
+            {
+                margin: $medium-gutter;
+            }
+            .bulgur-datamap-picker
+            {
+                list-style-type: none;
+                margin: $medium-gutter;
+            }
+        }
     }
 
     &.open

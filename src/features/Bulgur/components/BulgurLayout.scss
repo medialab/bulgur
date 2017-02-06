@@ -59,15 +59,20 @@
     }
 }
 
-.ReactModal__Content button
+.ReactModal__Content.ReactModal__Content--after-open
 {
-    margin-right: $medium-gutter;
-    padding: $medium-gutter;
+    border: 1px solid $primary-color!important;
+    border-radius: 0!important;
+    button
+    {
+        margin-right: $medium-gutter;
+        padding: $medium-gutter;
 
-    color: $primary-color;
-    border: 1px solid $background-intent;
-    outline: none;
-    background: inherit;
+        color: $primary-color;
+        border: 1px solid $primary-color;
+        outline: none;
+        background: inherit;
+    }
 }
 
 /*

@@ -12,15 +12,14 @@ const ColorsMapPicker = ({
   toggleColorEdition
 }) => (
   <section className="bulgur-colors-map-picker">
-    <h3>How to color your categories ?</h3>
     {Object.keys(colorsMap)
     .filter(id => id !== 'default')
     .map(colorCollectionId => {
     const collectionMap = colorsMap[colorCollectionId];
     let activeColor;
     const onColorChange = (color) => changeColor(visualizationKey, editedColor.collectionId, editedColor.category, color.hex);
-    return (<div className="colorsMap-group" key={colorCollectionId}>
-      {Object.keys(collectionMap).length > 0 ? <h4>{colorCollectionId}</h4> : null}
+    return (<div className="colors-map-group" key={colorCollectionId}>
+      {Object.keys(colorsMap).length > 2 ? <h4>{colorCollectionId}</h4> : null}
       {
         Object.keys(collectionMap)
         .map((category, index) => {
@@ -31,14 +30,18 @@ const ColorsMapPicker = ({
           }
           const onClick = () => toggleColorEdition(visualizationKey, colorCollectionId, category);
           return (
-            <div onClick={onClick} key={index} className="colors-map-picker">
-              <span
-                style={{
-                  width: '1rem',
-                  height: '1rem',
-                  background: color,
-                  display: 'inline-block'
-                }} /> {category} {active ? ' edited' : null}
+            <div onClick={onClick} key={index} className={'colors-map-item'}>
+              <div className={'color-card ' + (editedColor &&
+                  editedColor.visualizationId === visualizationKey &&
+                  editedColor.collectionId === colorCollectionId &&
+                  editedColor.category === category ? ' active' : '')}>
+                <span
+                  className="color"
+                  style={{
+                    background: color,
+                  }} />
+                <span className="category">{category}</span>
+              </div>
               {
                   editedColor &&
                   editedColor.visualizationId === visualizationKey &&

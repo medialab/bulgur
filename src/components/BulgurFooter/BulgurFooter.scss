@@ -5,9 +5,28 @@
 {
     display: flex;
 
-    background: lightgrey;
+    // background: $background-default;
+
+    border-top : 1px solid $primary-color;
 
     flex-flow: row nowrap;
     align-items: stretch;
     justify-content: space-between;
+
+    padding: $medium-gutter $medium-gutter $base-gutter $medium-gutter;
+
+    color: $background-default;
+    background: $color-dark;
+    button
+    {
+      color : $background-default!important;
+    }
+
+    a,
+    a:hover,
+    a:active,
+    a:visited
+    {
+      color : $background-default!important;
+    }
 }

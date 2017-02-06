@@ -15,9 +15,7 @@ const AsideViewLayout = ({
   updateSlide
 }) => (
   <aside className="bulgur-aside-view">
-    <h1>
-      <button onClick={openSettings} type="button"><img className="bulgur-icon-image" src={require('../assets/settings.svg')} /> {activePresentation.metadata && activePresentation.metadata.title && activePresentation.metadata.title.length ? activePresentation.metadata.title : 'untitled presentation'}</button>
-    </h1>
+    <button onClick={openSettings} type="button"><img className="bulgur-icon-image" src={require('../assets/settings.svg')} /> {activePresentation.metadata && activePresentation.metadata.title && activePresentation.metadata.title.length ? activePresentation.metadata.title : 'untitled presentation'}</button>
     {
       activePresentation.order ?
         <Slides

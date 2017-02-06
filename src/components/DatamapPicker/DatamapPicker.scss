@@ -1,1 +1,11 @@
 @import '../../parameters.scss';
+
+.bulgur-datamap-picker
+{
+  background: lightgrey;
+  padding: $base-gutter;
+  &.active
+  {
+    background: lightgreen;
+  }
+}

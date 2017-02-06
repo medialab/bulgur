@@ -20,7 +20,9 @@ const DatamapPicker = ({
   };
   const currentParameter = parameter.mappedField;
   return (
-    <li style={{background: parameter.mappedField ? 'lightgreen' : 'lightgrey'}} key={parameterKey}>
+    <li
+      key={parameterKey}
+      className={'bulgur-datamap-picker ' + (parameter.mappedField ? 'active' : '')}>
       <h4>
         <b>{parameter.id}</b> - <i>{parameter.acceptedValueTypes.join(', ')}</i>
       </h4>

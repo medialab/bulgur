@@ -141,19 +141,21 @@ const MainViewLayout = ({
             editedColor={editedColor} /> : null }
       </section>
       <figcaption className="caption-container">
-        {!activeSlide || viewsEqualActiveSlideViews ?
-          '' :
-          <div className="view-operations">
-            <button onClick={clickOnRecord}><img className="bulgur-icon-image" src={require('../assets/snapshot.svg')} /> Take snapshot</button>
-            <button onClick={clickOnReset}><img className="bulgur-icon-image" src={require('../assets/reset.svg')} /> Reset</button>
-          </div>
-        }
+        <section className="caption-header">
+          <h1>
+            <input type="text" value={activeSlide.title} />
+          </h1>
+          {!activeSlide || viewsEqualActiveSlideViews ?
+            '' :
+            <div className="view-operations">
+              <button onClick={clickOnRecord}><img className="bulgur-icon-image" src={require('../assets/snapshot.svg')} /> Take snapshot</button>
+              <button onClick={clickOnReset}><img className="bulgur-icon-image" src={require('../assets/reset.svg')} /> Reset</button>
+            </div>
+          }
+        </section>
         {activeSlide && !isTakeAwayModalOpen && activeSlide.draft ?
           <div className="caption-editor">
             <div className="editor-areas-container">
-              <h1>
-                <input type="text" value={activeSlide.title} />
-              </h1>
               <DraftEditor
                 slide={activeSlide}
                 update={updateDraft} />

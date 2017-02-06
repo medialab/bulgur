@@ -294,6 +294,7 @@ const PresentationCandidateDialogLayout = ({
                       }
                   </ul>
                 </section> : null}
+              <h3>How to color your categories ?</h3>
               {// colors edition
                 visualization.colorsMap ?
                   <ColorsMapPicker

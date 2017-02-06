@@ -31,44 +31,46 @@ const SettingsPannel = ({
                 editedColor={editedColor} />
             ))
           }
-          <button onClick={togglePannel}>{isOpen ? 'Close pannel' : 'Edit this view settings'}</button>
+          <button className={'open-pannel ' + (isOpen ? 'active' : '')} onClick={togglePannel}>{isOpen ? 'Close pannel' : 'Edit settings'}</button>
         </div>
       </div>
-      <div className="slide-parameters-container">
-        <h3>View Settings</h3>
-        {
-          Object.keys(views)
-          .map(viewKey => {
-            const view = views[viewKey];
-            return (
-              <div key={viewKey}>
-                {
-                Object.keys(view.dataMap)
-                .map(collectionId => {
-                  const collection = view.dataMap[collectionId];
-                  return (
-                    <div key={collectionId}>
-                      <h4>{collectionId}</h4>
-                      {
-                        Object.keys(collection).map((parameterKey) => (
-                          <DatamapPicker
-                            key={parameterKey}
-                            parameter={collection[parameterKey]}
-                            parameterKey={parameterKey}
-                            visualization={view}
-                            visualizationKey={viewKey}
-                            collectionId={collectionId}
-                            onMappingChange={setViewDatamapItem} />
-                        ))
-                      }
-                    </div>
-                  );
-                })
-              }
-              </div>
-              );
-          })
-        }
+      <div className="slide-parameters-wrapper">
+        <div className="slide-parameters-container">
+          <h3>View Settings</h3>
+          {
+            Object.keys(views)
+            .map(viewKey => {
+              const view = views[viewKey];
+              return (
+                <div key={viewKey}>
+                  {
+                  Object.keys(view.dataMap)
+                  .map(collectionId => {
+                    const collection = view.dataMap[collectionId];
+                    return (
+                      <div key={collectionId}>
+                        {Object.keys(view.dataMap).length > 1 ? <h4>{collectionId}</h4> : null}
+                        {
+                          Object.keys(collection).map((parameterKey) => (
+                            <DatamapPicker
+                              key={parameterKey}
+                              parameter={collection[parameterKey]}
+                              parameterKey={parameterKey}
+                              visualization={view}
+                              visualizationKey={viewKey}
+                              collectionId={collectionId}
+                              onMappingChange={setViewDatamapItem} />
+                          ))
+                        }
+                      </div>
+                    );
+                  })
+                }
+                </div>
+                );
+            })
+          }
+        </div>
       </div>
     </aside>
   );

@@ -3,11 +3,35 @@
 
 .bulgur-colors-map-picker
 {
-    position: relative;
+    .colors-map-group
+    {
+        padding: $base-gutter;
+        .colors-map-item
+        {
+            display: flex;
 
-    display: inline-block;
-    float: left;
+            flex-flow: column nowrap;
 
-    width: 45%;
-    min-height: 30rem;
+            .twitter-picker
+            {
+              width: 100%!important;
+            }
+            .color-card
+            {
+                padding: $base-gutter;
+                display : flex;
+                flex-flow: row nowrap;
+                &.active
+                {
+                    border: 2px solid $primary-color;
+                }
+                .color
+                {
+                    width: 1rem;
+                    height: 1rem;
+                    margin-right: $base-gutter;
+                }
+            }
+        }
+    }
 }

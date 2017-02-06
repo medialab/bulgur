@@ -17,7 +17,7 @@
         display: flex;
 
         flex-flow: row nowrap;
-        flex: 1;
+        flex: 3;
 
         .bulgur-settings-pannel
         {
@@ -47,24 +47,83 @@
         position: relative;
 
         max-height: 40%;
-        padding-top: $medium-gutter;
+        padding: $medium-gutter;
+        padding-top: 0;
 
-        border-top: 1px solid darkgrey;
+        border-top: 1px solid $primary-color;
 
         flex: 1;
-    }
-
-
-    .view-operations
-    {
-        position: absolute;
-        top: 0;
-        // top: -$large-gutter*2;
-        right: $medium-gutter;
 
         display: flex;
+        flex-flow: column nowrap;
+        align-items: stretch;
 
-        height: $large-gutter*2;
+        .caption-header
+        {
+            display: flex;
+            align-items: stretch;
+            flex-flow: row nowrap;
+            border-bottom: 1px solid $primary-color;
+            padding-bottom: $base-gutter;
+            overflow: hidden;
+            h1
+            {
+                margin: 0;
+                padding: 0;
+                padding-top: $base-gutter;
+                padding-right: $base-gutter;
+                flex: 5;
+                input
+                {
+                    width: 100%;
+                    height: 3rem;
+                    font-size: 1.5rem;
+                }
+            }
+        }
+
+        .caption-editor
+        {
+            flex: 5;
+
+            display: flex;
+
+            width: 100%;
+            height: 100%;
+            margin: 0;
+
+            flex-grow: row nowrap;
+            .editor-areas-container
+            {
+                display: flex;
+
+                margin-right: $base-gutter;
+
+                flex: 8;
+                flex-flow: column nowrap;
+                align-items: stretch;
+            }
+
+            .editor-helpers li
+            {
+                padding: 0;
+
+                list-style: none;
+            }
+
+            .editor-areas-container
+            {
+                font-family: $display-font-stack;
+                font-size: 1.5rem;
+
+                flex: 1;
+
+                .bulgur-draft-editor
+                {
+                    height: 100%;
+                }
+            }
+        }
     }
 
     /*
@@ -73,78 +132,15 @@
 
     .view-operations button
     {
-        margin-right: $medium-gutter;
         padding: $medium-gutter;
 
         border: 1px solid $primary-color;
-        background: $background-default;
-    }
-
-    .caption-editor
-    {
-        display: flex;
-
-        width: 100%;
-        height: 100%;
-        margin: 0;
-
-        flex-grow: row nowrap;
-        .editor-areas-container
+        border-top: none;
+        border-bottom: none;
+        height: 115%;
+        &:last-of-type
         {
-            display: flex;
-
-            margin-right: $base-gutter;
-
-            flex: 8;
-            flex-flow: column nowrap;
-            align-items: stretch;
-        }
-
-        .editor-helpers li
-        {
-            padding: 0;
-
-            list-style: none;
-        }
-
-        .editor-areas-container
-        {
-            font-family: $display-font-stack;
-            font-size: 1.5rem;
-
-            flex: 1;
-
-            .quinoa-draft,
-            .quinoa-draft > div
-            {
-                display: flex;
-
-                flex: 1;
-                flex-flow: column nowrap;
-            }
-
-            .quinoa-draft .DraftEditor-root
-            {
-                margin: 0 0 $large-gutter;
-                padding: $medium-gutter;
-
-                border: 1px solid $background-intent;
-
-                flex: 1;
-            }
-
-            .quinoa-slide-title
-            {
-                border-bottom: 1px solid $background-intent;
-            }
-
-            .quinoa-slide-title-input
-            {
-                font-size: 2rem;
-                font-weight: 800;
-
-                height: 2rem;
-            }
+            border-left: none;
         }
     }
 }

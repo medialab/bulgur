@@ -16,6 +16,7 @@ const ProjectManagerLayout = ({
   overrideImportWithCandidate,
   actions: {
     promptDeletePresentation,
+    unpromptDeletePresentation,
     deletePresentation,
     copyPresentation,
     startPresentationCandidateConfiguration,
@@ -28,33 +29,49 @@ const ProjectManagerLayout = ({
   };
   return (
     <section className="project-manager-layout">
-      <section>
+      <section className="landing-group">
         <h1>Bulgur</h1>
         <p>
-        Bulgur lets you make data presentations by walking readers through a visualization, then export your presentation to a file or the web.
-      </p>
+          Bulgur lets you make data presentations by walking readers through a visualization, then export your presentation to a file or the web.
+        </p>
         <p>
-        Bulgur is part of the sciencespo’s médialab tools ecosystem :
-      </p>
-        <ul>
-          <li>
-          table2net
-        </li>
-          <li>
-          bulgur
-        </li>
-          <li>
-          fonio
-        </li>
-        </ul>
+          Bulgur is part of the sciencespo’s médialab tools.
+        </p>
+        <button className="new-presentation" onClick={onCreatePresentation}>Start a new presentation</button>
+        <div className="presentations-group">
+          <h4>Your locally stored presentations</h4>
+          <ul className="local-presentations-list">
+            {presentationsList.map((presentation, index) => {
+            const onClickPrompt = () => promptDeletePresentation(presentation.id);
+            const onClickUnprompt = () => unpromptDeletePresentation(presentation.id);
+            const onClickDelete = () => deletePresentation(presentation.id);
+            const onClickCopy = () => copyPresentation(presentation);
+            const setToActive = () => setActivePresentation(presentation);
+            const configure = () => startPresentationCandidateConfiguration(presentation);
+            return (
+              <li key={index} className="local-presentation">
+                <h5 onClick={setToActive}>{presentation.metadata && presentation.metadata.title && presentation.metadata.title.length ? presentation.metadata.title : 'untitled presentation'}</h5>
+                <div className="local-presentation-buttons">
+                  <button onClick={setToActive}>edit</button>
+                  <button onClick={configure}>settings</button>
+                  {promptedToDeleteId !== presentation.id ? <button onClick={onClickCopy}>copy</button> : ''}
+                  {promptedToDeleteId !== presentation.id ? <button onClick={onClickPrompt}>delete</button> : null}
+                </div>
+                {promptedToDeleteId === presentation.id ? <p>Sure ?</p> : null}
+                {promptedToDeleteId === presentation.id ?
+                  <div className="local-presentation-buttons">
+                    <button onClick={onClickDelete}>Yes, delete this presentation</button>
+                    <button onClick={onClickUnprompt}>Cancel</button>
+                  </div> : null }
+              </li>
+            );
+          })
+          }
+          </ul>
+        </div>
       </section>
 
-      <section>
-        <button onClick={onCreatePresentation}>Start a new presentation</button>
-        <div />
-      </section>
-
-      <section>
+      <section className="landing-group">
         <Dropzone
           className="drop-zone"
           activeClassName="drop-zone-active"
@@ -68,29 +85,6 @@ const ProjectManagerLayout = ({
           {importError === 'badJSON' ? 'Your file is badly formatted' : ''}
           {importError === 'invalidProject' ? 'Your file is not a valid quinoa presentation' : ''}
         </div>
-      </section>
-
-      <section>
-        <ul>
-          {presentationsList.map((presentation, index) => {
-          const onClickPrompt = () => promptDeletePresentation(presentation.id);
-          const onClickDelete = () => deletePresentation(presentation.id);
-          const onClickCopy = () => copyPresentation(presentation);
-          const setToActive = () => setActivePresentation(presentation);
-          const configure = () => startPresentationCandidateConfiguration(presentation);
-          return (
-            <li key={index}>
-              <span>{presentation.metadata && presentation.metadata.title && presentation.metadata.title.length ? presentation.metadata.title : 'untitled presentation'}</span>
-              <button onClick={setToActive}>Edit contents</button>
-              <button onClick={configure}>Settings</button>
-              {promptedToDeleteId !== presentation.id ? <button onClick={onClickCopy}>Copy</button> : ''}
-              <span>{promptedToDeleteId === presentation.id ? ' Sure ? ' : ''}</span>
-              {promptedToDeleteId === presentation.id ? <button onClick={onClickDelete}>Yes, delete this presentation</button> : <button onClick={onClickPrompt}>Delete</button>}
-            </li>
-          );
-        })
-        }
-        </ul>
       </section>
 
       <Modal
