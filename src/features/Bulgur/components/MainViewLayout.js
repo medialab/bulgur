@@ -141,7 +141,7 @@ const MainViewLayout = ({
             editedColor={editedColor} /> : null }
       </section>
       <figcaption className="caption-container">
-        <section className="caption-header">
+        {activeSlide ? <section className="caption-header">
           <h1>
             <input type="text" value={activeSlide.title} />
           </h1>
@@ -152,7 +152,7 @@ const MainViewLayout = ({
               <button onClick={clickOnReset}><img className="bulgur-icon-image" src={require('../assets/reset.svg')} /> Reset</button>
             </div>
           }
-        </section>
+        </section> : null}
         {activeSlide && !isTakeAwayModalOpen && activeSlide.draft ?
           <div className="caption-editor">
             <div className="editor-areas-container">
