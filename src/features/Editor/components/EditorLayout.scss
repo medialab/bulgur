@@ -19,12 +19,13 @@
 
     .bulgur-main-row
     {
+        position: relative;
+
         display: flex;
         flex-direction: row;
 
         flex-wrap: nowrap;
         flex: 10;
-        position: relative;
         .bulgur-aside-view
         {
             max-width: 20%;
