@@ -13,7 +13,7 @@ import Editor from './features/Editor/components/EditorContainer.js';
 const Application = ({}) => (
   <Editor
     id="wrapper"
-    className="bulgu" />
+    className="bulgur" />
 );
 
 
