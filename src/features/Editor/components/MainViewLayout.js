@@ -109,6 +109,13 @@ const MainViewLayout = ({
   };
   const clickOnReset = () => setActiveSlide(activeSlideId, activeSlide);
 
+  const updateTitle = (e) => {
+    updateSlide(activeSlideId, {
+      ...activeSlide,
+      title: e.target.value
+    });
+  };
+
   const updateDraft = ({draft}) => {
     updateSlide(activeSlideId, {
       ...activeSlide,
@@ -143,7 +150,7 @@ const MainViewLayout = ({
       <figcaption className="caption-container">
         {activeSlide ? <section className="caption-header">
           <h1>
-            <input type="text" value={activeSlide.title} />
+            <input type="text" value={activeSlide.title} onChange={updateTitle} />
           </h1>
           {!activeSlide || viewsEqualActiveSlideViews ?
             '' :

@@ -105,30 +105,30 @@ const PresentationCandidateDialogLayout = ({
         <h2>What is your presentation about ?</h2>
         <form>
           <div className="input-group">
-          <label htmlFor="title">Title</label>
-          <input
-            onChange={setPresentationTitle}
-            type="text"
-            name="title"
-            value={presentationCandidate.metadata.title} />
+            <label htmlFor="title">Title</label>
+            <input
+              onChange={setPresentationTitle}
+              type="text"
+              name="title"
+              value={presentationCandidate.metadata.title} />
           </div>
 
           <div className="input-group">
-          <label htmlFor="authors">Authors</label>
-          <input
-            onChange={setPresentationAuthors}
-            type="text"
-            name="authors"
-            value={presentationCandidate.metadata.authors} />
+            <label htmlFor="authors">Authors</label>
+            <input
+              onChange={setPresentationAuthors}
+              type="text"
+              name="authors"
+              value={presentationCandidate.metadata.authors} />
           </div>
 
           <div className="input-group">
-          <label htmlFor="description">Description</label>
-          <textarea
-            onChange={setPresentationDescription}
-            type="text"
-            name="description"
-            value={presentationCandidate.metadata.description} />
+            <label htmlFor="description">Description</label>
+            <textarea
+              onChange={setPresentationDescription}
+              type="text"
+              name="description"
+              value={presentationCandidate.metadata.description} />
           </div>
         </form>
       </section>
@@ -155,55 +155,55 @@ const PresentationCandidateDialogLayout = ({
                 <div key={datasetId} className="dataset-card">
                   <h4>Dataset settings</h4>
                   <div className="dataset-settings">
-                  <form>
-                    <p>Original file name : {dataset.metadata.fileName}</p>
-                    <p>Original file format : {dataset.metadata.format}</p>
-                    <div className="input-group">
-                    <label htmlFor="title">Title</label>
-                    <input
-                      onChange={setTitle}
-                      type="text"
-                      name="title"
-                      value={dataset.metadata.title} />
-                    </div>
-                    <div className="input-group">
-                    <label htmlFor="description">Description</label>
-                    <textarea
-                      onChange={setDescription}
-                      type="text"
-                      name="description"
-                      value={dataset.metadata.description} />
-                    </div>
-                    <div className="input-group">
-                    <label htmlFor="url">Url</label>
-                    <input
-                      onChange={setUrl}
-                      type="text"
-                      name="url"
-                      value={dataset.metadata.url} />
-                    </div>
-                    <div className="input-group">
-                    <label htmlFor="license">License</label>
-                    <input
-                      onChange={setLicense}
-                      type="text"
-                      name="license"
-                      value={dataset.metadata.license} />
-                    </div>
-                  </form>
+                    <form>
+                      <p>Original file name : {dataset.metadata.fileName}</p>
+                      <p>Original file format : {dataset.metadata.format}</p>
+                      <div className="input-group">
+                        <label htmlFor="title">Title</label>
+                        <input
+                          onChange={setTitle}
+                          type="text"
+                          name="title"
+                          value={dataset.metadata.title} />
+                      </div>
+                      <div className="input-group">
+                        <label htmlFor="description">Description</label>
+                        <textarea
+                          onChange={setDescription}
+                          type="text"
+                          name="description"
+                          value={dataset.metadata.description} />
+                      </div>
+                      <div className="input-group">
+                        <label htmlFor="url">Url</label>
+                        <input
+                          onChange={setUrl}
+                          type="text"
+                          name="url"
+                          value={dataset.metadata.url} />
+                      </div>
+                      <div className="input-group">
+                        <label htmlFor="license">License</label>
+                        <input
+                          onChange={setLicense}
+                          type="text"
+                          name="license"
+                          value={dataset.metadata.license} />
+                      </div>
+                    </form>
 
-                  <div className="dataset-management">
-                    <Dropzone
-                      className="drop-zone"
-                      activeClassName="drop-zone-active"
-                      onDrop={onDropNewData}>
-                      <div>Reupload new data for this dataset</div>
-                    </Dropzone>
-                    {
+                    <div className="dataset-management">
+                      <Dropzone
+                        className="drop-zone"
+                        activeClassName="drop-zone-active"
+                        onDrop={onDropNewData}>
+                        <div>Reupload new data for this dataset</div>
+                      </Dropzone>
+                      {
                       // todo : uncomment this when multi datasets use cases arise (dataset deletion feature)
-                      <button className="remove-dataset" onClick={onRemoveDataset}>Remove this dataset</button>
+                        <button className="remove-dataset" onClick={onRemoveDataset}>Remove this dataset</button>
                   }
-                  </div>
+                    </div>
                   </div>
                 </div>
             );
@@ -289,7 +289,7 @@ const PresentationCandidateDialogLayout = ({
                           <div className="datamap-group" key={collectionId}>
                             {Object.keys(visualization.dataMap).length > 1 ? <h3>{collectionId}</h3> : null}
                             <div className="datamap-group-mosaic">
-                            {
+                              {
                               Object.keys(collectionMap)
                               .map(parameterKey => {
                                 return (
@@ -314,7 +314,7 @@ const PresentationCandidateDialogLayout = ({
               <h2>How to color your categories ?</h2>
 
               <section className="final-touch-container">
-              {// colors edition
+                {// colors edition
                 visualization.colorsMap ?
                   <ColorsMapPicker
                     colorsMap={visualization.colorsMap}
@@ -323,7 +323,7 @@ const PresentationCandidateDialogLayout = ({
                     changeColor={setPresentationCandidateColor}
                     toggleColorEdition={toggleCandidateColorEdition} />
                : null}
-              {// preview
+                {// preview
                 visualization.colorsMap &&
                 visualization.dataProfile &&
                 visualization.data &&
@@ -332,7 +332,7 @@ const PresentationCandidateDialogLayout = ({
                     {previewVisualization(visualization, visualizationTypesModels)}
                   </section>
                 : null}
-                </section>
+              </section>
             </section>
           );
         })
@@ -349,9 +349,9 @@ const PresentationCandidateDialogLayout = ({
           presentationCandidate.visualizations[Object.keys(presentationCandidate.visualizations)[0]].data &&
           presentationCandidate.visualizations[Object.keys(presentationCandidate.visualizations)[0]].dataMap
         ?
-          <button 
-          className="valid-btn"
-          onClick={onApplyChange}>Edit the presentation content</button>
+          <button
+            className="valid-btn"
+            onClick={onApplyChange}>Edit the presentation content</button>
         : ''
       }
         <button

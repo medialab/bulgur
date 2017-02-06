@@ -193,19 +193,21 @@
             display: flex;
 
             padding: 0; //$large-gutter 0 $large-gutter;
-
             // flex-wrap: wrap;
             // justify-content: space-between;
+
             flex: 1;
             .datamap-group
             {
                 display: flex;
+
                 flex-flow: column nowrap;
                 flex: 1;
 
                 .datamap-group-mosaic
                 {
                     display: flex;
+
                     flex-flow: row wrap;
                     justify-content: flex-start;
 
@@ -268,47 +270,56 @@
     .final-touch-container
     {
         display: flex;
+
         flex-flow: row nowrap;
 
         .bulgur-colors-map-picker
         {
+            display: flex;
+
             flex: 1;
             flex-flow: row nowrap;
-            display: flex;
-            .colors-map-group{
-
+            .colors-map-group
+            {
                 flex: 1;
             }
         }
 
         .preview
         {
-            height: 30rem;
-            width: 49%;
             position: relative;
+
+            width: 49%;
+            height: 30rem;
+
             border: 1px solid $primary-color;
+
             flex: 1;
         }
     }
 
     .final-step
     {
-        flex-flow: row;
         font-family: $main-font-stack;
+
+        flex-flow: row;
 
         .valid-btn
         {
-            background: $color-valid;
-            border: none;
             font-size: 1.2rem;
+
+            border: none;
+            background: $color-valid;
+
             flex: 1;
         }
         .cancel-btn
         {
-            background: $color-error;
+            font-size: 1.2rem;
+
             color: $background-default;
             border: none;
-            font-size: 1.2rem;
+            background: $color-error;
         }
     }
 }
