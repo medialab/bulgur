@@ -14,12 +14,12 @@ import {RESET_APP} from '../Editor/duck';
 /*
  * Action names
  */
-const SET_TAKE_AWAY_TYPE = 'SET_TAKE_AWAY_TYPE';
-const EXPORT_TO_GIST_STATUS = 'EXPORT_TO_GIST_STATUS';
-const EXPORT_TO_SERVER_STATUS = 'EXPORT_TO_SERVER_STATUS';
-export const EXPORT_TO_SERVER = 'EXPORT_TO_SERVER';
-export const TAKE_AWAY = 'TAKE_AWAY';
-export const EXPORT_TO_GIST = 'EXPORT_TO_GIST';
+const SET_TAKE_AWAY_TYPE = '§Bulgur/TakeAwayDialog/SET_TAKE_AWAY_TYPE';
+const EXPORT_TO_GIST_STATUS = '§Bulgur/TakeAwayDialog/EXPORT_TO_GIST_STATUS';
+const EXPORT_TO_SERVER_STATUS = '§Bulgur/TakeAwayDialog/EXPORT_TO_SERVER_STATUS';
+export const EXPORT_TO_SERVER = '§Bulgur/TakeAwayDialog/EXPORT_TO_SERVER';
+export const TAKE_AWAY = '§Bulgur/TakeAwayDialog/TAKE_AWAY';
+export const EXPORT_TO_GIST = '§Bulgur/TakeAwayDialog/EXPORT_TO_GIST';
 /*
  * Action creators
  */
