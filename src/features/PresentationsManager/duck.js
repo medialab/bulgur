@@ -1,3 +1,10 @@
+/**
+ * This module exports logic-related elements for the management of (locally stored) bulgur presentations
+ * This module follows the ducks convention for putting in the same place actions, action types,
+ * state selectors and reducers about a given feature (see https://github.com/erikras/ducks-modular-redux)
+ * @module bulgur/features/PresentationsManager
+ */
+
 import {combineReducers} from 'redux';
 import {createStructuredSelector} from 'reselect';
 import {persistentReducer} from 'redux-pouchdb';
@@ -27,14 +34,12 @@ import {
 } from '../TakeAwayDialog/duck';
 
 const CREATE_PRESENTATION = 'CREATE_PRESENTATION';
+const DELETE_PRESENTATION = 'DELETE_PRESENTATION';
+const UPDATE_PRESENTATION = 'UPDATE_PRESENTATION';
+const COPY_PRESENTATION = 'COPY_PRESENTATION';
 
 const PROMPT_DELETE_PRESENTATION = 'PROMPT_DELETE_PRESENTATION';
 const UNPROMPT_DELETE_PRESENTATION = 'UNPROMPT_DELETE_PRESENTATION';
-
-const DELETE_PRESENTATION = 'DELETE_PRESENTATION';
-const UPDATE_PRESENTATION = 'UPDATE_PRESENTATION';
-
-const COPY_PRESENTATION = 'COPY_PRESENTATION';
 
 const IMPORT_ABORD = 'IMPORT_ABORD';
 const IMPORT_OVERRIDE_PROMPT = 'IMPORT_OVERRIDE_PROMPT';
@@ -45,52 +50,75 @@ const IMPORT_RESET = 'IMPORT_RESET';
 /*
  * Action creators
  */
-
+/**
+ * @param {string} id - the uuid of the presentation to create
+ * @param {object} presentation - the data of the presentation to create
+ * @param {boolean} setActive - whether to set the presentation as active (edited) presentation in app
+ */
 export const createPresentation = (id, presentation, setActive = true) => ({
   type: CREATE_PRESENTATION,
   presentation,
   setActive,
   id
 });
-
+/**
+ * @param {object} presentation - the data of the presentation to copy
+ */
 export const copyPresentation = (presentation) => ({
   type: COPY_PRESENTATION,
   presentation
 });
-
+/**
+ * @param {string} id - the uuid of the presentation to query for deletion
+ */
 export const promptDeletePresentation = (id) => ({
   type: PROMPT_DELETE_PRESENTATION,
   id
 });
-
+/**
+ *
+ */
 export const unpromptDeletePresentation = () => ({
   type: UNPROMPT_DELETE_PRESENTATION
 });
-
+/**
+ * @param {string} id - the uuid of the presentation to delete
+ */
 export const deletePresentation = (id) => ({
   type: DELETE_PRESENTATION,
   id
 });
-
-export const updatePresentation = (id) => ({
+/**
+ * @param {string} id - the uuid of the presentation to update
+ * @param {object} presentation - the data of the presentation to update
+ */
+export const updatePresentation = (id, presentation) => ({
   type: UPDATE_PRESENTATION,
-  id
+  id,
+  presentation
 });
-
+/**
+ *
+ */
 export const importReset = () => ({
   type: IMPORT_RESET
 });
-
+/**
+ *
+ */
 export const abordImport = () => ({
   type: IMPORT_ABORD
 });
-
+/**
+ * @param {object} candidate - the data of the presentation waiting to be imported or not instead of existing one
+ */
 export const promptOverrideImport = (candidate) => ({
   type: IMPORT_OVERRIDE_PROMPT,
   candidate
 });
-
-
+/**
+ * @param {object} data - the data of the imported presentation
+ */
 export const importSuccess = (data) => (dispatch) => {
   dispatch({
     type: IMPORT_SUCCESS,
@@ -99,7 +127,9 @@ export const importSuccess = (data) => (dispatch) => {
   // resets import state after a while
   setTimeout(() => dispatch(importReset()), 5000);
 };
-
+/**
+ * @param {string} error - the error type for the import failure
+ */
 export const importFail = (error) => (dispatch) => {
   dispatch({
     type: IMPORT_FAIL,
@@ -113,11 +143,22 @@ export const importFail = (error) => (dispatch) => {
  * Reducers
  */
 const PRESENTATIONS_DEFAULT_STATE = {
-  // todo : remove that
-  presentations: {
-  },
+  /**
+   * Representation of all the presentations stored in application's state
+   * @type {object}
+   */
+  presentations: {},
+  /**
+   * Representation of the id of the presentation being edited in editor
+   * @type {string}
+   */
   activePresentationId: undefined
 };
+/**
+ * This redux reducer handles the modification of the data state for the presentations stored in the application's state
+ * @param {object} state - the state given to the reducer
+ * @param {object} action - the action to use to produce new state
+ */
 function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
   switch (action.type) {
     case APPLY_PRESENTATION_CANDIDATE_CONFIGURATION:
@@ -335,6 +376,11 @@ const PRESENTATIONS_UI_DEFAULT_STATE = {
   activePresentationId: undefined,
   promptedToDelete: undefined
 };
+/**
+ * This redux reducer handles the modification of the ui state for presentations management
+ * @param {object} state - the state given to the reducer
+ * @param {object} action - the action to use to produce new state
+ */
 function presentationsUi(state = PRESENTATIONS_UI_DEFAULT_STATE, action) {
   switch (action.type) {
     case START_CANDIDATE_PRESENTATION_CONFIGURATION:
@@ -369,10 +415,27 @@ function presentationsUi(state = PRESENTATIONS_UI_DEFAULT_STATE, action) {
 
 
 const PRESENTATION_IMPORT_DEFAULT_STATE = {
+  /**
+   * Representation of a presentation waiting to be imported or not
+   * @type {object}
+   */
   importCandidate: undefined,
+  /**
+   * Representation of the import state
+   * @type {object}
+   */
   importStatus: undefined,
+  /**
+   * Representation of the import error occured after an import failed
+   * @type {string}
+   */
   importError: undefined
 };
+/**
+ * This redux reducer handles the modifications related to importing presentations in application's state
+ * @param {object} state - the state given to the reducer
+ * @param {object} action - the action to use to produce new state
+ */
 function presentationImport(state = PRESENTATION_IMPORT_DEFAULT_STATE, action) {
   switch (action.type) {
     case IMPORT_RESET:
@@ -397,7 +460,9 @@ function presentationImport(state = PRESENTATION_IMPORT_DEFAULT_STATE, action) {
       return state;
   }
 }
-
+/**
+ * The module exports a reducer connected to pouchdb thanks to redux-pouchdb
+ */
 export default persistentReducer(
   combineReducers({
       presentations,
@@ -410,24 +475,25 @@ export default persistentReducer(
 /*
  * Selectors
  */
-
+const presentationsList = state => Object.keys(state.presentations.presentations).map(key => state.presentations.presentations[key]);
 const activePresentation = state => state.presentations.presentations[state.presentations.activePresentationId];
 const activePresentationId = state => state.presentations.activePresentationId;
-const presentationsList = state => Object.keys(state.presentations.presentations).map(key => state.presentations.presentations[key]);
-const promptedToDeleteId = state => state.presentationsUi.promptedToDelete;
 
+const promptedToDeleteId = state => state.presentationsUi.promptedToDelete;
 const importStatus = state => state.presentationImport.importStatus;
 const importError = state => state.presentationImport.importError;
 const importCandidate = state => state.presentationImport.importCandidate;
-
+/**
+ * The selector is a set of functions for accessing this feature's state
+ * @type {object}
+ */
 export const selector = createStructuredSelector({
   activePresentation,
   activePresentationId,
-  promptedToDeleteId,
-  presentationsList,
-
-  importStatus,
+  importCandidate,
   importError,
-  importCandidate
+  importStatus,
+  presentationsList,
+  promptedToDeleteId,
 });
 

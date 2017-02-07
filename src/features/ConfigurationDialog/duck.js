@@ -1,6 +1,13 @@
+/**
+ * This module exports logic-related elements for configuring the settings of a presentation
+ * This module follows the ducks convention for putting in the same place actions, action types,
+ * state selectors and reducers about a given feature (see https://github.com/erikras/ducks-modular-redux)
+ * @module bulgur/features/PresentationsManager
+ */
 import {combineReducers} from 'redux';
 import {createStructuredSelector} from 'reselect';
 import {v4 as uuid} from 'uuid';
+import {persistentReducer} from 'redux-pouchdb';
 
 import {
   loadExampleFile,
@@ -31,8 +38,6 @@ const FETCH_USER_FILE = 'FETCH_USER_FILE';
 
 const RESET_PRESENTATION_CANDIDATE_SETTINGS = 'RESET_PRESENTATION_CANDIDATE_SETTINGS';
 
-export const SETUP_PRESENTATION_CANDIDATE = 'SETUP_PRESENTATION_CANDIDATE';
-
 const SET_PRESENTATION_CANDIDATE_METADATA = 'SET_PRESENTATION_CANDIDATE_METADATA';
 const SET_PRESENTATION_CANDIDATE_DATASET = 'SET_PRESENTATION_CANDIDATE_DATASET';
 const SET_PRESENTATION_CANDIDATE_DATASET_METADATA = 'SET_PRESENTATION_CANDIDATE_DATASET_METADATA';
@@ -41,43 +46,59 @@ const UNSET_PRESENTATION_CANDIDATE_DATASET = 'UNSET_PRESENTATION_CANDIDATE_DATAS
 
 const SET_PRESENTATION_CANDIDATE_VISUALIZATION_TYPE = 'SET_PRESENTATION_CANDIDATE_VISUALIZATION_TYPE';
 const SET_PRESENTATION_CANDIDATE_DATAMAP_ITEM = 'SET_PRESENTATION_CANDIDATE_DATAMAP_ITEM';
-
 const SET_PRESENTATION_CANDIDATE_COLOR = 'SET_PRESENTATION_CANDIDATE_COLOR';
-
 const TOGGLE_CANDIDATE_COLOR_EDITION = 'TOGGLE_CANDIDATE_COLOR_EDITION';
 /*
  * Action creators
+ */
+/**
+ * @param {string} field - the name of the metadata field to modify
+ * @param {string} value - the value to set to the field to modify
  */
 export const setCandidatePresentationMetadata = (field, value) => ({
   type: SET_PRESENTATION_CANDIDATE_METADATA,
   field,
   value
 });
-
+/**
+ * @param {string} datasetId - the id of the dataset to modify
+ * @param {string} field - the name of the dataset's metadata field to modify
+ * @param {string} value - the value to set to the field to modify
+ */
 export const setCandidatePresentationDatasetMetadata = (datasetId, field, value) => ({
   type: SET_PRESENTATION_CANDIDATE_DATASET_METADATA,
   datasetId,
   field,
   value
 });
-
+/**
+ * @param {string} datasetId - the id of the dataset to update
+ * @param {string} rawData - the non-transformated raw data representing the dataset
+ */
 export const setCandidatePresentationDatasetData = (datasetId, rawData) => ({
   type: SET_PRESENTATION_CANDIDATE_DATASET_DATA,
   datasetId,
   rawData
 });
-
+/**
+ * @param {string} datasetId - the id of the dataset to unset
+ */
 export const unsetPresentationCandidateDataset = (datasetId) => ({
   type: UNSET_PRESENTATION_CANDIDATE_DATASET,
   datasetId
 });
-
+/**
+ * @param {object} dataset - the data of the new dataset to add
+ * @param {string} id - the id of the new dataset to add
+ */
 export const setCandidatePresentationDataset = (dataset = {metadata: {}, rawData: ''}, id) => ({
   type: SET_PRESENTATION_CANDIDATE_DATASET,
   dataset,
   id: id || uuid()
 });
-
+/**
+ * @param {object} sample - the data of the sample to load
+ */
 export const fetchExampleFile = (sample) => ({
   type: FETCH_EXAMPLE_FILE,
   promise: (dispatch) => {
@@ -103,7 +124,11 @@ export const fetchExampleFile = (sample) => ({
     });
   }
 });
-
+/**
+ * @param {object} file - the file representation of user file to fetch from his drive
+ * @param {string} datasetId - the id of the dataset to update
+ * @param {boolean} update - whether to update an existing dataset or create a new one
+ */
 export const fetchUserFile = (file, datasetId, update = false) => ({
   type: FETCH_USER_FILE,
   promise: (dispatch) => {
@@ -137,13 +162,21 @@ export const fetchUserFile = (file, datasetId, update = false) => ({
     });
   }
 });
-
+/**
+ * @param {string} visualizationId - the id of the presentation's visualization that changes of visualization type
+ * @param {string} visualizationId - the type of the presentation's visualization that changes of visualization type
+ */
 export const setPresentationCandidateVisualizationType = (visualizationId, visualizationType) => ({
   type: SET_PRESENTATION_CANDIDATE_VISUALIZATION_TYPE,
   visualizationType,
   visualizationId
 });
-
+/**
+ * @param {string} visualizationId - the uuid of the presentation's visualization for the datamap to change
+ * @param {string} parameterId - the uuid of the parameter for the datamap to change
+ * @param {string} collectionId - the uuid of the data's collection concerned by the datamap change
+ * @param {string} propertyName - the original data's property name to attribute to the given datamap item
+ */
 export const setPresentationCandidateDatamapItem = (visualizationId, parameterId, collectionId, propertyName) => ({
   type: SET_PRESENTATION_CANDIDATE_DATAMAP_ITEM,
   visualizationId,
@@ -151,7 +184,12 @@ export const setPresentationCandidateDatamapItem = (visualizationId, parameterId
   collectionId,
   propertyName
 });
-
+/**
+ * @param {string} visualizationId - the uuid of the presentation's visualization for the color to change
+ * @param {string} collectionId - the uuid of the data's collection concerned by the color change
+ * @param {string} category - the categorical value that has to change its color mapping
+ * @param {string} color - the color (name, #hex, rgb()) to attribute
+ */
 export const setPresentationCandidateColor = (visualizationId, collectionId, category, color) => ({
   type: SET_PRESENTATION_CANDIDATE_COLOR,
   visualizationId,
@@ -159,27 +197,27 @@ export const setPresentationCandidateColor = (visualizationId, collectionId, cat
   category,
   color
 });
-
+/**
+ *
+ */
 export const resetPresentationCandidateSettings = () => ({
   type: RESET_PRESENTATION_CANDIDATE_SETTINGS
 });
-
+/**
+ * @param {string} visualizationId - the uuid of the presentation's visualization for the color to edit
+ * @param {string} collectionId - the uuid of the data's collection concerned by the color edition change
+ * @param {string} category - the categorical value that has to change its color mapping
+ */
 export const toggleCandidateColorEdition = (visualizationId, collectionId, category) => ({
   type: TOGGLE_CANDIDATE_COLOR_EDITION,
   visualizationId,
   collectionId,
   category
 });
-
-export const setupPresentationCandidate = (dataMap = [], visualizationType, data, remoteUrls) => ({
-  type: SETUP_PRESENTATION_CANDIDATE,
-  data,
-  dataMap,
-  visualizationType,
-  remoteUrls
-});
-
-
+/**
+ * Representation of a basic, empty presentation
+ * @type {object}
+ */
 const EMPTY_PRESENTATION = {
   type: 'presentation',
   metadata: {
@@ -197,10 +235,19 @@ const EMPTY_PRESENTATION = {
 };
 
 const DEFAULT_PRESENTATION_CANDIDATE_DATA = {
+  /**
+   * Representation of the to-update/to-create presentation data
+   * @type {object}
+   */
   presentationCandidate: {
     metadata: {}
   }
 };
+/**
+ * This redux reducer handles the modification of the data state of a presentation configuration dialog
+ * @param {object} state - the state given to the reducer
+ * @param {object} action - the action to use to produce new state
+ */
 function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, action) {
   switch (action.type) {
     case RESET_APP:
@@ -421,8 +468,17 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
 }
 
 const PRESENTATION_CANDIDATE_UI_DEFAULT_STATE = {
+  /**
+   * Representation of the color being edited in the editor
+   * @type {object}
+   */
   editedColor: undefined
 };
+/**
+ * This redux reducer handles the modification of the ui state of a presentation configuration dialog
+ * @param {object} state - the state given to the reducer
+ * @param {object} action - the action to use to produce new state
+ */
 function presentationCandidateUi (state = PRESENTATION_CANDIDATE_UI_DEFAULT_STATE, action) {
   switch (action.type) {
     case TOGGLE_CANDIDATE_COLOR_EDITION:
@@ -437,7 +493,7 @@ function presentationCandidateUi (state = PRESENTATION_CANDIDATE_UI_DEFAULT_STAT
           }
         };
       }
- else {
+      else {
         return {
           ...state,
           editedColor: undefined
@@ -452,35 +508,36 @@ function presentationCandidateUi (state = PRESENTATION_CANDIDATE_UI_DEFAULT_STAT
       return state;
   }
 }
-
-export default combineReducers({
+/**
+ * The module exports a reducer connected to pouchdb thanks to redux-pouchdb
+ */
+export default persistentReducer(combineReducers({
   presentationCandidateData,
   presentationCandidateUi
-});
+}), 'bulgur-configuration');
 
 /*
  * Selectors
  */
-
-const presentationCandidate = state => state.presentationCandidateData && state.presentationCandidateData.presentationCandidate;
-
+const presentationCandidate = state => state.presentationCandidateData &&
+  state.presentationCandidateData.presentationCandidate;
 const activeVisualizationType = state => state.presentationCandidateSettings &&
   state.presentationCandidateSettings.visualizationType;
-
 const activeData = state => state.presentationCandidateData &&
   state.presentationCandidateData.data;
-
 const invalidFileType = state => state.presentationCandidateData &&
   state.presentationCandidateData.invalidFileType;
-
 const editedColor = state => state.presentationCandidateUi &&
   state.presentationCandidateUi.editedColor;
-
+/**
+ * The selector is a set of functions for accessing this feature's state
+ * @type {object}
+ */
 export const selector = createStructuredSelector({
-  editedColor,
-  presentationCandidate,
-  activeVisualizationType,
   activeData,
-  invalidFileType
+  activeVisualizationType,
+  editedColor,
+  invalidFileType,
+  presentationCandidate,
 });
 

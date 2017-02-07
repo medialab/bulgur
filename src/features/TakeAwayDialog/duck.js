@@ -1,36 +1,46 @@
+/**
+ * This module exports logic-related elements for handling the export of presentations
+ * This module follows the ducks convention for putting in the same place actions, action types,
+ * state selectors and reducers about a given feature (see https://github.com/erikras/ducks-modular-redux)
+ * @module bulgur/features/TakeAwayDialog
+ */
 import {combineReducers} from 'redux';
 import {createStructuredSelector} from 'reselect';
 import publishToGist from '../../helpers/gistExporter';
 import publishToServer from '../../helpers/serverExporter';
+import {persistentReducer} from 'redux-pouchdb';
 
+import {RESET_APP} from '../Editor/duck';
 /*
  * Action names
  */
- import {RESET_APP} from '../Editor/duck';
-
 const SET_TAKE_AWAY_TYPE = 'SET_TAKE_AWAY_TYPE';
-export const EXPORT_TO_GIST = 'EXPORT_TO_GIST';
 const EXPORT_TO_GIST_STATUS = 'EXPORT_TO_GIST_STATUS';
-
-export const EXPORT_TO_SERVER = 'EXPORT_TO_SERVER';
 const EXPORT_TO_SERVER_STATUS = 'EXPORT_TO_SERVER_STATUS';
-
+export const EXPORT_TO_SERVER = 'EXPORT_TO_SERVER';
 export const TAKE_AWAY = 'TAKE_AWAY';
-
+export const EXPORT_TO_GIST = 'EXPORT_TO_GIST';
 /*
  * Action creators
  */
-export const exportToGist = (htmlContent, jsonBundle, gistId) => ({
+/**
+ * @param {object} htmlContent - the html content of the app to export to gist
+ * @param {object} presentation - the presentation data to export to gist
+ * @param {string} id - the id of the gist to which the presentation is stored (if it has already been exported once)
+ */
+export const exportToGist = (htmlContent, presentation, gistId) => ({
   type: EXPORT_TO_GIST,
   promise: (dispatch) => {
     return new Promise((resolve, reject) => {
-      return publishToGist(htmlContent, jsonBundle, dispatch, EXPORT_TO_GIST_STATUS, gistId)
+      return publishToGist(htmlContent, presentation, dispatch, EXPORT_TO_GIST_STATUS, gistId)
               .then(resolve)
               .catch(reject);
     });
   }
 });
-
+/**
+ * @param {object} presentation - the presentation to export to the distant server
+ */
 export const exportToServer = (presentation) => ({
   type: EXPORT_TO_SERVER,
   promise: (dispatch) => {
@@ -45,12 +55,37 @@ export const exportToServer = (presentation) => ({
  * Reducers
  */
 const DEFAULT_TAKE_AWAY_UI_SETTINGS = {
+    /**
+     * The type of export being processed
+     * @type {string}
+     */
     takeAwayType: undefined,
-    takeAwayGistLog: undefined,
+    /**
+     * The global status of gist export (ongoing, success, error)
+     * @type {string}
+     */
     takeAwayGistLogStatus: undefined,
+    /**
+     * The precise status of gist export
+     * @type {string}
+     */
+    takeAwayGistLog: undefined,
+    /**
+     * The global status of server export (ongoing, success, error)
+     * @type {string}
+     */
+    takeAwayServerLogStatus: undefined,
+    /**
+     * The precise status of server export
+     * @type {string}
+     */
     takeAwayServerLog: undefined,
-    takeAwayServerLogStatus: undefined
 };
+/**
+ * This redux reducer handles the modification of the ui state for take away choices
+ * @param {object} state - the state given to the reducer
+ * @param {object} action - the action to use to produce new state
+ */
 function takeAwayUi(state = DEFAULT_TAKE_AWAY_UI_SETTINGS, action) {
   switch (action.type) {
     case RESET_APP:
@@ -102,36 +137,34 @@ function takeAwayUi(state = DEFAULT_TAKE_AWAY_UI_SETTINGS, action) {
       return state;
   }
 }
-
-export default combineReducers({
+/**
+ * The module exports a reducer connected to pouchdb thanks to redux-pouchdb
+ */
+export default persistentReducer(combineReducers({
   takeAwayUi
-});
-
+}), 'bulgur-takeaway');
 /*
  * Selectors
  */
-
 const takeAwayType = state => state.takeAwayUi &&
   state.takeAwayUi.takeAwayType;
-
 const takeAwayGistLog = state => state.takeAwayUi &&
   state.takeAwayUi.takeAwayGistLog;
-
 const takeAwayGistLogStatus = state => state.takeAwayUi &&
   state.takeAwayUi.takeAwayGistLogStatus;
-
 const takeAwayServerLog = state => state.takeAwayUi &&
   state.takeAwayUi.takeAwayServerLog;
-
 const takeAwayServerLogStatus = state => state.takeAwayUi &&
   state.takeAwayUi.takeAwayServerLogStatus;
-
-
+/**
+ * The selector is a set of functions for accessing this feature's state
+ * @type {object}
+ */
 export const selector = createStructuredSelector({
-  takeAwayType,
   takeAwayGistLog,
   takeAwayGistLogStatus,
   takeAwayServerLog,
-  takeAwayServerLogStatus
+  takeAwayServerLogStatus,
+  takeAwayType,
 });
 

@@ -1,14 +1,14 @@
 /**
  * This module exports logic-related elements for the bulgur editor feature
- * This module follows the ducks convention for putting in the same place actions, action types, 
+ * This module follows the ducks convention for putting in the same place actions, action types,
  * state selectors and reducers about a given feature (see https://github.com/erikras/ducks-modular-redux)
- * @module bulgur/editor
+ * @module bulgur/features/Editor
  */
 
-import { combineReducers } from 'redux';
-import { createStructuredSelector } from 'reselect';
-import { v4 as uuid } from 'uuid';
-import { persistentReducer } from 'redux-pouchdb';
+import {combineReducers} from 'redux';
+import {createStructuredSelector} from 'reselect';
+import {v4 as uuid} from 'uuid';
+import {persistentReducer} from 'redux-pouchdb';
 
 import {
   mapMapData,
@@ -16,7 +16,7 @@ import {
   mapNetworkData
 } from 'quinoa-vis-modules';
 
-import { bootstrapColorsMap } from '../../helpers/colorHelpers';
+import {bootstrapColorsMap} from '../../helpers/colorHelpers';
 
 import models from '../../models/visualizationTypes';
 
@@ -239,6 +239,8 @@ const EDITOR_DEFAULT_STATE = {
  * @param {object} action - the action to use to produce new state
  */
 function editor(state = EDITOR_DEFAULT_STATE, action) {
+  let newcolorsMap;
+  let data;
   switch (action.type) {
     case RESET_APP:
       return EDITOR_DEFAULT_STATE;
@@ -251,7 +253,6 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
           ...models[visualization.metadata.visualizationType].defaultViewParameters,
           colorsMap: visualization.colorsMap
         };
-        let data;
         // flatten datamap fields (#todo: refactor as helper)
         const dataMap = Object.keys(visualization.dataMap).reduce((dataMapResult, collectionId) => ({
           ...dataMapResult,
@@ -375,7 +376,6 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
         }
       };
     case SET_VIEW_DATAMAP_ITEM:
-      let newcolorsMap;
       if (action.parameterId === 'category') {
         newcolorsMap = {...state.activeViews[action.visualizationId].viewParameters.colorsMap} || {};
         const dataset = state.activeViews[action.visualizationId].data[action.collectionId];
