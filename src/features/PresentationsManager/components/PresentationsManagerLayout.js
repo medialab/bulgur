@@ -39,7 +39,7 @@ const PresentationsManagerLayout = ({
         </p>
         <button className="new-presentation" onClick={onCreatePresentation}>Start a new presentation</button>
         <div className="presentations-group">
-          <h4>Your locally stored presentations</h4>
+          {presentationsList.length > 0 ? <h4>Your locally stored presentations</h4> : null}
           <ul className="local-presentations-list">
             {presentationsList.map((presentation, index) => {
             const onClickPrompt = () => promptDeletePresentation(presentation.id);
