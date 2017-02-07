@@ -16,7 +16,7 @@ import {
   Network
 } from 'quinoa-vis-modules';
 
-import './PresentationCandidateDialog.scss';
+import './ConfigurationDialog.scss';
 
 const previewVisualization = (visualization, models) => {
   let data = {};
@@ -69,7 +69,7 @@ const previewVisualization = (visualization, models) => {
   }
 };
 
-const PresentationCandidateDialogLayout = ({
+const ConfigurationDialogLayout = ({
   presentationCandidate = {
     visualizations: {},
     datasets: {}
@@ -364,4 +364,4 @@ const PresentationCandidateDialogLayout = ({
 );
 };
 
-export default PresentationCandidateDialogLayout;
+export default ConfigurationDialogLayout;

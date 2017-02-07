@@ -10,7 +10,7 @@ import * as managerDuck from '../../PresentationsManager/duck';
 import {
   resetPresentationCandidateSettings,
   setupPresentationCandidate
-} from '../../PresentationCandidateDialog/duck';
+} from '../../ConfigurationDialog/duck';
 
 @connect(
   state => ({

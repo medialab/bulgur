@@ -9,7 +9,7 @@ import {
   setActivePresentationId
 } from '../../Editor/duck';
 
-import PresentationCandidateDialogLayout from './PresentationCandidateDialogLayout';
+import ConfigurationDialogLayout from './ConfigurationDialogLayout';
 
 @connect(
   state => ({
@@ -25,7 +25,7 @@ import PresentationCandidateDialogLayout from './PresentationCandidateDialogLayo
     }, dispatch)
   })
 )
-class PresentationCandidateDialogContainer extends Component {
+class ConfigurationDialogContainer extends Component {
 
   constructor(props) {
     super(props);
@@ -83,7 +83,7 @@ class PresentationCandidateDialogContainer extends Component {
     }
     ];
     return (
-      <PresentationCandidateDialogLayout
+      <ConfigurationDialogLayout
         {...this.props}
         activeVisualizationTypes={activeVisualizationTypes}
         closePresentationCandidate={this.closePresentationCandidate}
@@ -94,4 +94,4 @@ class PresentationCandidateDialogContainer extends Component {
   }
 }
 
-export default PresentationCandidateDialogContainer;
+export default ConfigurationDialogContainer;

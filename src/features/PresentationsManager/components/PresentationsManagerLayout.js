@@ -35,7 +35,7 @@ const PresentationsManagerLayout = ({
           Bulgur lets you make data presentations by walking readers through a visualization, then export your presentation to a file or the web.
         </p>
         <p>
-          Bulgur is part of the sciencespo’s médialab tools.
+          Bulgur is part of the <a href="http://www.medialab.sciences-po.fr/fr/">sciencespo’s médialab</a> tools.
         </p>
         <button className="new-presentation" onClick={onCreatePresentation}>Start a new presentation</button>
         <div className="presentations-group">

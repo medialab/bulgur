@@ -9,7 +9,7 @@ import Footer from '../../../components/Footer/Footer';
 
 import PresentationsManagerContainer from '../../PresentationsManager/components/PresentationsManagerContainer';
 
-import PresentationCandidateDialog from '../../PresentationCandidateDialog/components/PresentationCandidateDialogContainer.js';
+import ConfigurationDialog from '../../ConfigurationDialog/components/ConfigurationDialogContainer.js';
 import TakeAwayDialog from '../../TakeAwayDialog/components/TakeAwayDialogContainer.js';
 
 import './EditorLayout.scss';
@@ -115,7 +115,7 @@ const InterfaceManagerLayout = ({
       isOpen={isPresentationCandidateModalOpen || isTakeAwayModalOpen}>
       {
         isPresentationCandidateModalOpen ?
-          <PresentationCandidateDialog /> :
+          <ConfigurationDialog /> :
           <TakeAwayDialog />
       }
     </Modal>

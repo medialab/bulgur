@@ -8,7 +8,7 @@ import {combineReducers} from 'redux';
 
 import presentations from './../features/PresentationsManager/duck';
 import bulgurEditor from './../features/Editor/duck';
-import presentationCandidate from './../features/PresentationCandidateDialog/duck';
+import presentationCandidate from './../features/ConfigurationDialog/duck';
 import takeAway from './../features/TakeAwayDialog/duck';
 import * as modelsModels from './../models';
 

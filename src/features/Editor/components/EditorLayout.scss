@@ -15,6 +15,13 @@
     color: $primary-color;
     background: $background-default;
 
+    input,
+    textarea,
+    button
+    {
+        transition: all .5s ease;
+    }
+
     flex-wrap: nowrap;
 
     .bulgur-main-row
@@ -58,6 +65,14 @@
         width: 1em;
         height: 1em;
         padding-right: .5em;
+    }
+
+    a,
+    a:hover,
+    a:visited,
+    a:active
+    {
+        color: inherit;
     }
 }
 
