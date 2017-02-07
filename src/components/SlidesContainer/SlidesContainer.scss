@@ -5,10 +5,13 @@
     margin: 0;
     padding: 0;
     padding-left: $medium-gutter;
+
+    transition: all .5s ease;
+
     li
     {
         min-height: 3rem;
-        margin: $large-gutter $large-gutter $large-gutter 0;
+        margin: $large-gutter $medium-gutter $large-gutter 0;
 
         list-style-type: none;
     }

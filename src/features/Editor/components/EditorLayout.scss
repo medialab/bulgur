@@ -15,14 +15,14 @@
     color: $primary-color;
     background: $background-default;
 
+    flex-wrap: nowrap;
+
     input,
     textarea,
     button
     {
         transition: all .5s ease;
     }
-
-    flex-wrap: nowrap;
 
     .bulgur-main-row
     {
