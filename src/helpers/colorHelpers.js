@@ -6,7 +6,7 @@ const scheme = new ColorScheme;
  * Discriminates uniques properties values for a set of object
  * and attributes a default color to these values
  */
-export function bootstrapColorsMap (collection, propertyName) {
+export function bootstrapColorsMap (collection = [], propertyName) {
   const palette = scheme.from_hue(21).scheme('triade').colors();
   let paletteIndex = 1;
    return collection.reduce((cMap, obj) => {
