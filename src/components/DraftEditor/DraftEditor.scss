@@ -20,15 +20,17 @@
 
     .rich-buttons
     {
-      display: flex;
-      flex-flow: row nowrap;
-      align-content: space-between;
+        display: flex;
 
-      .buttons-group{
-        &:first-of-type
+        flex-flow: row nowrap;
+        align-content: space-between;
+
+        .buttons-group
         {
-          flex: 1;
+            &:first-of-type
+            {
+                flex: 1;
+            }
         }
-      }
     }
 }
