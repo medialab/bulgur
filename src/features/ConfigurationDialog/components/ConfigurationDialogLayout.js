@@ -226,6 +226,14 @@ const ConfigurationDialogLayout = ({
                         <button className="remove-dataset" onClick={onRemoveDataset}>Remove this dataset</button>
                   }
                     </div>
+                    <div className="dataset-preview">
+                      <h5>Raw data being used</h5>
+                      <pre>
+                        <code>
+                          {dataset.rawData}
+                        </code>
+                      </pre>
+                    </div>
                   </div>
                 </div>
             );
@@ -281,8 +289,9 @@ const ConfigurationDialogLayout = ({
                     const valid = validateFileExtension(datasetFileName, visualizationTypesModels[type.id]);
                     const active = visualization.metadata && visualization.metadata.visualizationType === visType;
                     const switchType = () => valid && !active && setPresentationCandidateVisualizationType(visualizationKey, visType);
+                    const activeVisType = visualization.metadata && visualization.metadata.visualizationType;
                     return (<div className={'visualization-type-item' + (valid ? ' valid' : '') + (active ? ' active' : '')}
-                      id={visualization.metadata.visualizationType === visType ? 'visualization-type-checked' : ''}
+                      id={activeVisType === visType ? 'visualization-type-checked' : ''}
                       onClick={switchType}
                       key={key}>
                       <input
@@ -291,7 +300,7 @@ const ConfigurationDialogLayout = ({
                         name={visType}
                         value="type"
                         onChange={switchType}
-                        checked={visualization.metadata.visualizationType === visType} />
+                        checked={activeVisType === visType} />
                       <label
                         htmlFor={visType}>
                         <img className="bulgur-icon-image" src={require('../assets/bulgur-vistype-' + visType + '.svg')} />

@@ -67,9 +67,24 @@
         flex-flow: row nowrap;
         justify-content: stretch;
         form,
-        .dataset-management
+        .dataset-management,
+        .dataset-preview
         {
             flex: 1;
+        }
+        .dataset-preview
+        {
+            overflow: auto;
+            max-height: 20rem;
+            margin: $medium-gutter;
+            pre{
+            background: $background-intent;
+                margin: $medium-gutter;
+            }
+            h5
+            {
+                margin: 0;
+            }
         }
         form
         {
@@ -139,10 +154,6 @@
                 color: white;
                 background: red;
             }
-        }
-        #visualization-type-checked
-        {
-            background: $background-intent;
         }
     }
     .data-source-choice
