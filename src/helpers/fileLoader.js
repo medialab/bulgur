@@ -1,7 +1,7 @@
-import {
-  csvParse,
-  tsvParse
-} from 'd3-dsv';
+/**
+ * This module helps to load files from app server or user own file system
+ * @module bulgur/utils/fileLoader
+ */
 
 let req;
 // as require.context does not work in test environment, this is a little hack
@@ -10,7 +10,11 @@ let req;
 if (global.window !== undefined) {
   req = require.context('../../example_datasets/');
 }
-
+/**
+ * Loads a file from the app example files
+ * @param {string} fileName - the name of the file to load
+ * @return {string} rawContent - the raw string content of the file loaded
+ */
 export function loadExampleFile(fileName) {
   const data = req('./' + fileName);
   if (typeof data === 'object') {
@@ -18,12 +22,21 @@ export function loadExampleFile(fileName) {
   }
   return data;
 }
-
+/**
+ * Validates whether the extension of a file is valid against its visualization model
+ * @param {string} fileName - the name of the file to validate
+ * @param {object} visualizationModel - the model of the visualization to validate the filename against
+ * @return {boolean} isValid - whether the filename is valid
+ */
 export function validateFileExtension (fileName = '', visualizationModel) {
   const fileExtension = fileName.split('.').pop();
   return visualizationModel.acceptedFileExtensions.find(ext => ext === fileExtension) !== undefined;
 }
-
+/**
+ * Reads the raw string content of a file from user file system
+ * @param {File} fileToRead - the file to read
+ * @param {function} callback
+ */
 export function getFileAsText(fileToRead, callback) {
   let reader = new FileReader();
   // Handle errors load
@@ -37,54 +50,4 @@ export function getFileAsText(fileToRead, callback) {
   };
   // Read file into memory as UTF-8
   reader.readAsText(fileToRead);
-}
-
-export function convertRawStrToJson(str = '', format) {
-  switch (format) {
-    case 'json':
-      return JSON.parse(str);
-    case 'csv':
-      return csvParse(str);
-    case 'tsv':
-      return tsvParse(str);
-    case 'gexf':
-      return [{
-        gexf: str
-      }];
-    default:
-      return str;
-  }
-}
-
-export function setDataFields(data) {
-  const fields = Object.keys(data[0]);
-  return fields.map(name => {
-    // to improve
-    let numberNumbers = 0;
-    let numberUrls = 0;
-    data.forEach(point => {
-      if (point[name] === undefined) {
-        return;
-      }
-      if (!isNaN(+point[name])) {
-        numberNumbers++;
-      }
-      else if (point[name].trim().length === 0 || point[name].indexOf('http') === 0 ||
-        point[name].indexOf('www') === 0) {
-        numberUrls++;
-      }
-    });
-    let type;
-    if (numberNumbers === data.length) {
-      type = 'number';
-    }
-    else if (numberUrls === data.length) {
-      type = 'url';
-    }
-    else type = 'string';
-    return {
-      name,
-      type
-    };
-  });
 }

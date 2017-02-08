@@ -1,3 +1,8 @@
+/**
+ * This module provides a reusable slides container component
+ * @module bulgur/components/SlidesContainer
+ */
+
 import React from 'react';
 
 import './SlidesContainer.scss';

@@ -14,7 +14,7 @@ import {
 } from 'quinoa-vis-modules';
 
 import DraftEditor from '../../../components/DraftEditor/DraftEditor';
-import SettingsPannel from '../../../components/SettingsPannel/SettingsPannel';
+import SlideSettingsPannel from '../../../components/SlideSettingsPannel/SlideSettingsPannel';
 
 import './MainViewLayout.scss';
 
@@ -164,7 +164,7 @@ const MainViewLayout = ({
         }
         </section>
         {activeSlide ?
-          <SettingsPannel
+          <SlideSettingsPannel
             isOpen={slideSettingsPannelIsOpen}
             togglePannel={toggleSlideSettingsPannel}
             views={activeViews}

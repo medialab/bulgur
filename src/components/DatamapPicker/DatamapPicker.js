@@ -1,3 +1,7 @@
+/**
+ * This module provides a reusable colorsmap picker component
+ * @module bulgur/components/DatamapPicker
+ */
 import React from 'react';
 
 import Select from 'react-select';

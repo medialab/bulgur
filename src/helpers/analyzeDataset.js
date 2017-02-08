@@ -1,4 +1,13 @@
+/**
+ * This module provides heuristics to analyse how the different dimensions of a dataset are populated
+ * @module bulgur/utils/analyzeDataset
+ */
 
+/**
+ * Analyzes a collection
+ * @param {array} collection - the collection to analyse
+  * @return {array} propertyMap - a list of all dimensions of the collections, documented w/ their coverage and properties types
+ */
 const analyzeCollection = (collection) => {
   // list unique objects properties
   const properties = collection.reduce((list, item) => {
@@ -16,7 +25,7 @@ const analyzeCollection = (collection) => {
       if (Number.isNaN(+val) === false) {
         return 'number';
       }
- else if (typeof val !== 'object') {
+      else if (typeof val !== 'object') {
         return 'string';
       }
     });
@@ -44,6 +53,11 @@ const analyzeCollection = (collection) => {
   return propertiesMap;
 };
 
+/**
+ * Analyses, for each collection of a dataset, and for each dimension/property, coverage (number of undefined values) and value types
+ * @param {object} dataset - the dataset to analyse
+ * @return {object} propertyMaps - the propertyMaps of the collections of the given dataset
+ */
 export default function analyzeDataset(dataset) {
   return Object.keys(dataset)
   .reduce((finalFields, collectionId) => ({

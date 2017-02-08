@@ -1,3 +1,7 @@
+/**
+ * This module provides a reusable colorsmap picker component
+ * @module bulgur/components/ColorMapPicker
+ */
 import React from 'react';
 
 import {TwitterPicker} from 'react-color';

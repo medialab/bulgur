@@ -1,3 +1,7 @@
+/**
+ * This module provides a reusable Footer picker component for bulgur
+ * @module bulgur/components/Footer
+ */
 import React from 'react';
 
 import './Footer.scss';

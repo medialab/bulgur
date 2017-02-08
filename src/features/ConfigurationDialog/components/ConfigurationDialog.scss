@@ -75,11 +75,17 @@
         .dataset-preview
         {
             overflow: auto;
+
             max-height: 20rem;
             margin: $medium-gutter;
-            pre{
-            background: $background-intent;
-                margin: $medium-gutter;
+            pre
+            {
+                overflow: auto;
+
+                margin-top: $medium-gutter;
+                padding: $base-gutter;
+
+                background: $background-intent;
             }
             h5
             {
@@ -219,14 +225,12 @@
 
                 flex-flow: column nowrap;
                 flex: 1;
-
                 .datamap-group-mosaic
                 {
                     display: flex;
 
                     flex-flow: row wrap;
                     justify-content: flex-start;
-
                     .bulgur-datamap-picker
                     {
                         margin-right: $medium-gutter;
@@ -282,13 +286,11 @@
             background: $color-error;
         }
     }
-
     .final-touch-container
     {
         display: flex;
 
         flex-flow: row nowrap;
-
         .bulgur-colors-map-picker
         {
             display: flex;
@@ -300,7 +302,6 @@
                 flex: 1;
             }
         }
-
         .preview
         {
             position: relative;
@@ -313,13 +314,11 @@
             flex: 1;
         }
     }
-
     .final-step
     {
         font-family: $main-font-stack;
 
         flex-flow: row;
-
         .valid-btn
         {
             font-size: 1.2rem;

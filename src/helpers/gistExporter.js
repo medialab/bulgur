@@ -1,7 +1,19 @@
+/**
+ * This module helps to export a presenetation to the gist service
+ * @module bulgur/utils/gistExporter
+ */
 import GitHub from 'github-api';
 
 import getGithubToken from './getGithubToken';
 
+/**
+ * @param {string} htmlContent - the content to publish to the index.html file of the gist
+ * @param {object} JSONbundle - the JSON representation of the presentation to publish to project.json file of the gist
+ * @param {function} dispatch - the function to use to dispatch actions to the redux logic in which the helper is called
+ * @param {string} statusActionName - the name base of the actions to dispatch to redux
+ * @param {string} gistId - (optional - in update use cases) the id of the gist to update
+ * @return {promise} promise - the promise wrapping the attempt to publish to gist
+ */
 export default function publishGist(htmlContent = '', JSONbundle = {}, dispatch, statusActionName, gistId) {
   return new Promise((resolve, reject) => {
     dispatch({

@@ -1,11 +1,15 @@
+/**
+ * This module provides a reusable slide settings pannel for the editor
+ * @module bulgur/components/SlideSettingsPannel
+ */
 import React from 'react';
 
-import './SettingsPannel.scss';
+import './SlideSettingsPannel.scss';
 
 import ColorsMapPicker from '../ColorsMapPicker/ColorsMapPicker';
 import DatamapPicker from '../DatamapPicker/DatamapPicker';
 
-const SettingsPannel = ({
+const SlideSettingsPannel = ({
   isOpen = false,
   togglePannel,
   setViewDatamapItem,
@@ -76,4 +80,4 @@ const SettingsPannel = ({
   );
 };
 
-export default SettingsPannel;
+export default SlideSettingsPannel;

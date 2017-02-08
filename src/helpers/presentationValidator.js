@@ -1,3 +1,7 @@
+/**
+ * This module helps to checks whether a presentation complies to the presentation model
+ * @module bulgur/utils/presentationValidator
+ */
 import presentationModel from '../models/presentationModel.json';
 
 const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -106,6 +110,11 @@ validateEntity = (model, entity) => {
   }
 };
 
+/**
+ * Validates the given presentation
+ * @param {object} data - the data to validate
+ $ @return {boolean} isValid - the result of the validation
+ */
 export default function validatePresentationData (data) {
   return validateEntity(presentationModel, data);
 }
