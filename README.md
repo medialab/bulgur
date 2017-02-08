@@ -1,7 +1,9 @@
 # WIP
 
-Bulgur is a tool dedicated to the making of *data presentations*, that is guided tours into data visualizations.
-Users import their data from their computer, then compose their presentation, then export it to static html or to a web publication.
+Bulgur is a tool dedicated to the making of guided tours into data visualizations, called *data presentations*.
+Users import their data from their computer, then compose their data presentation, then finally export it to static html or to a web publication.
+
+Users personal data is stored on the `localStorage` of the user's browser, but can be synced with a [gist](https://gist.github.com/) code repository or with a distant backend server.
 
 Bulgur is part of the ``quinoa`` project family, a suite of digital storytelling tools tailored for the [FORCCAST](https://forccast.hypotheses.org/) pedagogical program and [médialab sciences po](http://www.medialab.sciences-po.fr/) scientific activities.
 
@@ -38,6 +40,6 @@ npm run deploy
 
 For now Bulgur deploys to a [surge](http://surge.sh/) instance for preproduction tests.
 
-Bulgur is a static web application, which means it does not need a server of its own for working.
+Bulgur is a static web application, which means it does not need a backend for working.
 
 Nevertheless, Bulgur needs an instance of [quinoa server](https://github.com/medialab/quinoa-server) server application available in order to be able to handle all-in-one html bundling, oAuth connection to github/gist and exports to distant server.
