@@ -1,4 +1,7 @@
-
+/**
+ * This module exports the models related to visualization types (mappable values, parameters, default values, example files, ...)
+ * @module bulgur/models/visualizationTypes
+ */
 const models = {
   timeline: {
     type: 'timeline',
