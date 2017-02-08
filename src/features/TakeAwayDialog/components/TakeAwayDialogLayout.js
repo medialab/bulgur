@@ -1,9 +1,19 @@
+/**
+ * This module exports a stateless component rendering the layout of the takeway dialog feature interface
+ * @module bulgur/features/TakeAwayDialog
+ */
 import React from 'react';
 
 import 'react-select/dist/react-select.css';
 
 import './TakeAwayDialog.scss';
 
+/**
+ * Renders the options for takeaway mode choice
+ * @param {object} props - the props to render
+ * @param {function} takeAway - callback
+ * @return {ReactElement} markup
+ */
 export const ChooseTakeAwayStep = ({
   takeAway
 }) => (
@@ -54,19 +64,31 @@ export const ChooseTakeAwayStep = ({
   </section>
 );
 
-
+/**
+ * Renders the layout of the take away dialog
+ * @param {object} props - the props to render
+ * @param {object} props.activePresentation - the presentation to take away
+ * @param {string} props.takeAwayGistLog
+ * @param {string} props.takeAwayGistLogStatus
+ * @param {string} props.takeAwayServerLog
+ * @param {string} props.takeAwayServerLogStatus
+ * @param {function} props.takeAway - main callback function for container
+ * @param {object} props.actions - actions passed by redux logic
+ * @return {ReactElement} markup
+ */
 const TakeAwayDialogLayout = ({
-  actions: {
-    closeTakeAwayModal
-  },
-  takeAway,
+  activePresentation,
   takeAwayGistLog,
   takeAwayGistLogStatus,
   takeAwayServerLog,
   takeAwayServerLogStatus,
-  activePresentation
+  // actions
+  takeAway,
+  actions: {
+    closeTakeAwayModal
+  },
 }) => (
-  <div className="take-away-dialog">
+  <div className="bulgur-take-away-dialog-layout">
     <ChooseTakeAwayStep takeAway={takeAway} />
     <section className="take-away-dialog-step pub-links">
       {

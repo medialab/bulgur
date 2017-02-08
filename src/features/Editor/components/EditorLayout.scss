@@ -1,10 +1,16 @@
+/**
+ * style definitions for the EditorLayout component
+ *
+ * @module bulgur/features/Editor
+ */
+
 @import '../../../parameters.scss';
 
 /*
  * Primary layout
  */
 
-.bulgur
+.bulgur-editor
 {
     font-family: $main-font-stack;
     font-size: 1rem;

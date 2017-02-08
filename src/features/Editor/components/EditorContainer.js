@@ -1,3 +1,8 @@
+/**
+ * This module exports a stateful component connected to the redux logic of the app,
+ * dedicated to rendering the editor feature interface
+ * @module bulgur/features/Editor
+ */
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -12,6 +17,9 @@ import {
   setupPresentationCandidate
 } from '../../ConfigurationDialog/duck';
 
+/**
+ * Redux-decorated component class rendering the takeaway dialog feature to the app
+ */
 @connect(
   state => ({
     ...duck.selector(state.bulgurEditor),

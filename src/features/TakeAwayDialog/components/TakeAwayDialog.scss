@@ -1,6 +1,12 @@
+/**
+ * style definitions for the TakeAwayDialogLayout component
+ *
+ * @module bulgur/features/TakeAwayDialog
+ */
+
 @import '../../../parameters.scss';
 
-.take-away-dialog
+.bulgur-take-away-dialog-layout
 {
     font-family: $main-font-stack;
 

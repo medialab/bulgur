@@ -1,3 +1,7 @@
+/**
+ * This module exports a stateless component rendering the layout of the editor feature interface
+ * @module bulgur/features/Editor
+ */
 import React from 'react';
 import Modal from 'react-modal';
 
@@ -14,12 +18,46 @@ import TakeAwayDialog from '../../TakeAwayDialog/components/TakeAwayDialogContai
 
 import './EditorLayout.scss';
 
-const InterfaceManagerLayout = ({
+/**
+ * Renders the main layout component of the editor
+ * @param {object} props - the props to render
+ * @param {string} props.id
+ * @param {string} props.className
+ * @param {boolean} props.isPresentationCandidateModalOpen
+ * @param {string} props.globalUiMode
+ * @param {boolean} props.isTakeAwayModalOpen
+ * @param {boolean} props.slideSettingsPannelIsOpen
+ * @param {object} props.activeViews - object containing the views being displayed in the editor
+ * @param {string} props.activeSlideId
+ * @param {object} props.editedColor
+ * @param {string} props.activePresentationId
+ * @param {object} props.activePresentation
+ * @param {function} props.onProjectImport
+ * @param {function} props.returnToLanding
+ * @param {object} props.actions - actions passed by redux logic
+ * @param {function} props.addSlide
+ * @param {function} props.openSettings
+ * @param {function} props.closeAndResetDialog
+ * @return {ReactElement} markup
+ */
+const EditorLayout = ({
+  // setup related
   id,
   className,
+
+  // global ui related
   isPresentationCandidateModalOpen,
   globalUiMode,
   isTakeAwayModalOpen,
+  slideSettingsPannelIsOpen,
+  // edited presentation state
+  activeViews,
+  activeSlideId,
+  editedColor,
+  activePresentationId,
+  activePresentation,
+
+  // actions
   onProjectImport,
   returnToLanding,
   actions: {
@@ -35,18 +73,9 @@ const InterfaceManagerLayout = ({
     setViewColor,
     setViewDatamapItem
   },
-
-  slideSettingsPannelIsOpen,
-
-  activeViews,
   addSlide,
-  activeSlideId,
-  editedColor,
-
   openSettings,
   closeAndResetDialog,
-  activePresentationId,
-  activePresentation
 }) => {
 
   const closeModal = () => {
@@ -122,4 +151,4 @@ const InterfaceManagerLayout = ({
   </div>);
 };
 
-export default InterfaceManagerLayout;
+export default EditorLayout;

@@ -1,3 +1,7 @@
+/**
+ * This module exports a stateless component rendering the layout of the configuration dialog feature interface
+ * @module bulgur/features/ConfigurationDialog
+ */
 import React from 'react';
 
 import {validateFileExtension} from '../../../helpers/fileLoader';
@@ -18,6 +22,13 @@ import {
 
 import './ConfigurationDialog.scss';
 
+/**
+ * Renders a preview of the given visualization
+ * @param {object} props - the props to render
+ * @param {object} props.visualization - the definition of the visualization to preview
+ * @param {object} props.models - the models to use in order to populate default view parameters
+ * @return {ReactElement} markup
+ */
 const previewVisualization = (visualization, models) => {
   let data = {};
   const viewParameters = {
@@ -69,12 +80,24 @@ const previewVisualization = (visualization, models) => {
   }
 };
 
+/**
+ * Renders the configuration dialog layout
+ * @param {object} props - the props to render
+ * @param {object} props.presentationCandidate - the data of the presentation to configure
+ * @param {object} props.activeVisualizationTypes - models to display available visualization types
+ * @param {object} props.activeVisualizationTypesModels - models to use for displaying visualization type related configurations
+ * @param {object} props.actions - actions from the redux logic
+ * @param {function} props.closePresentationCandidate - function to trigger for closing the presentation
+ * @param {function} props.onFileDrop - callback function to be handled by container
+ * @param {object} props.editedColor - current edited color (allows just once at a time)
+ * @return {ReactElement} markup
+ */
 const ConfigurationDialogLayout = ({
   presentationCandidate = {
     visualizations: {},
     datasets: {}
   },
-  activeVisualizationType,
+  // todo : delete the following variable and do everything with visualizationTypesModels
   activeVisualizationTypes = [],
   visualizationTypesModels,
   actions: {
@@ -91,7 +114,6 @@ const ConfigurationDialogLayout = ({
   },
   closePresentationCandidate,
   onFileDrop,
-
   editedColor
 }) => {
   const onApplyChange = () => applyPresentationCandidateConfiguration(presentationCandidate);
@@ -100,7 +122,7 @@ const ConfigurationDialogLayout = ({
   const setPresentationAuthors = (e) => setCandidatePresentationMetadata('authors', e.target.value);
   const setPresentationDescription = (e) => setCandidatePresentationMetadata('description', e.target.value);
   return (
-    <div className="bulgur-presentation-candidate-dialog">
+    <div className="bulgur-configuration-dialog-layout">
       <section className="options-group">
         <h2>What is your presentation about ?</h2>
         <form>
@@ -260,7 +282,7 @@ const ConfigurationDialogLayout = ({
                     const active = visualization.metadata && visualization.metadata.visualizationType === visType;
                     const switchType = () => valid && !active && setPresentationCandidateVisualizationType(visualizationKey, visType);
                     return (<div className={'visualization-type-item' + (valid ? ' valid' : '') + (active ? ' active' : '')}
-                      id={activeVisualizationType === visType ? 'visualization-type-checked' : ''}
+                      id={visualization.metadata.visualizationType === visType ? 'visualization-type-checked' : ''}
                       onClick={switchType}
                       key={key}>
                       <input
@@ -269,7 +291,7 @@ const ConfigurationDialogLayout = ({
                         name={visType}
                         value="type"
                         onChange={switchType}
-                        checked={activeVisualizationType === visType} />
+                        checked={visualization.metadata.visualizationType === visType} />
                       <label
                         htmlFor={visType}>
                         <img className="bulgur-icon-image" src={require('../assets/bulgur-vistype-' + visType + '.svg')} />

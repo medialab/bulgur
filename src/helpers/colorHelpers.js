@@ -2,9 +2,10 @@ import ColorScheme from 'color-scheme';
 
 const scheme = new ColorScheme;
 
+// todo : rename to generateColorsMap
 /**
- * Discriminates uniques properties values for a set of object
- * and attributes a default color to these values
+ * This module discriminates uniques properties values for a set of objects
+ * and map these to a default color
  */
 export function bootstrapColorsMap (collection = [], propertyName) {
   const palette = scheme.from_hue(21).scheme('triade').colors();

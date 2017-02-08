@@ -1,3 +1,8 @@
+/**
+ * This module exports a stateful component connected to the redux logic of the app,
+ * dedicated to rendering the configuration dialog feature interface
+ * @module bulgur/features/ConfigurationDialog
+ */
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -11,6 +16,9 @@ import {
 
 import ConfigurationDialogLayout from './ConfigurationDialogLayout';
 
+/**
+ * Redux-decorated component class rendering the takeaway dialog feature to the app
+ */
 @connect(
   state => ({
     ...duck.selector(state.presentationCandidate),

@@ -1,3 +1,8 @@
+/**
+ * This module exports a stateful component connected to the redux logic of the app,
+ * dedicated to rendering the takeway dialog feature interface
+ * @module bulgur/features/TakeAwayDialog
+ */
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -22,6 +27,9 @@ import {
 
 import TakeAwayDialogLayout from './TakeAwayDialogLayout';
 
+/**
+ * Redux-decorated component class rendering the takeaway dialog feature to the app
+ */
 @connect(
   state => ({
     ...duck.selector(state.takeAway),

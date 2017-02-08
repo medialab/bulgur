@@ -1,3 +1,7 @@
+/**
+ * This module exports a stateless component rendering the main view contents of the editor feature interface
+ * @module bulgur/features/Editor
+ */
 import React from 'react';
 
 import {
@@ -14,20 +18,42 @@ import SettingsPannel from '../../../components/SettingsPannel/SettingsPannel';
 
 import './MainViewLayout.scss';
 
+/**
+ * Renders the layout of the main view of editor
+ * @param {object} props - the props to render
+ * @param {object} props.activePresentation
+ * @param {string} props.activeSlideId
+ * @param {object} props.activeViews
+ * @param {object} props.editedColor
+ * @param {function} props.slideSettingsPannelIsOpen
+ * @param {boolean} props.isTakeAwayModalOpen
+ * @param {function} props.updateSlide
+ * @param {function} props.onUserViewChange
+ * @param {function} props.setActiveSlide
+ * @param {function} props.setViwDatamapItem
+ * @param {function} props.toggleSlideSettingsPannel
+ * @param {function} props.toggleViewColorEdition
+ * @param {function} props.setViewColor
+ * @return {ReactElement} markup
+ */
 const MainViewLayout = ({
+  // content related
   activePresentation = {},
   activeSlideId,
-  updateSlide,
   activeViews,
+
+  // ui related
+  editedColor,
+  isTakeAwayModalOpen,
+  slideSettingsPannelIsOpen,
+  // actions
+  updateSlide,
   onUserViewChange,
   setActiveSlide,
   setViewDatamapItem,
-  slideSettingsPannelIsOpen,
   toggleSlideSettingsPannel,
   toggleViewColorEdition,
   setViewColor,
-  editedColor,
-  isTakeAwayModalOpen
 }) => {
 
   const setVisualization = (view, id) => {
