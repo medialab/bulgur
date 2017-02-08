@@ -1,18 +1,35 @@
+/**
+ * This module exports a stateless component rendering the layout of the presentations manager interface
+ * @module bulgur/features/PresentationsManager
+ */
 import React from 'react';
 import Modal from 'react-modal';
 import Dropzone from 'react-dropzone';
 
 import './PresentationsManagerLayout.scss';
-
+/**
+ * Renders the layout component of the feature
+ * @param {object} props - the props to render
+ * @param {array} props.presentaiontsList - the list of locally stored presentations
+ * @param {object} props.importCandidate - cached presentation waiting to be imported or not
+ * @param {string} props.importStatus
+ * @param {string} props.importError
+ * @param {string} props.promptedToDeleteId
+ * @param {function} props.onDropInput
+ * @param {function} props.overrideImportWithCandidate
+ * @param {function} props.actions - actions passed by redux logic
+ * @return {ReactElement} markup
+ */
 const PresentationsManagerLayout = ({
-  // activePresentation,
-  // activePresentationId,
-  importStatus,
-  importError,
-  onDropInput,
-  promptedToDeleteId,
+  // content-related
   presentationsList = [],
   importCandidate,
+  // ui-related
+  importStatus,
+  importError,
+  promptedToDeleteId,
+  // actions
+  onDropInput,
   overrideImportWithCandidate,
   actions: {
     promptDeletePresentation,
@@ -35,7 +52,7 @@ const PresentationsManagerLayout = ({
           Bulgur is a tool dedicated to the making of *data presentations*, that is guided tours into data visualizations.
         </p>
         <p>
-          Bulgur is part of the <a href="http://www.medialab.sciences-po.fr/">sciencespo’s médialab</a> tools.
+          Bulgur is part of the <a target="blank" href="http://www.medialab.sciences-po.fr/">sciencespo’s médialab</a> tools.
         </p>
         <button className="new-presentation" onClick={onCreatePresentation}>Start a new presentation</button>
         <div className="presentations-group">

@@ -1,3 +1,8 @@
+/**
+ * This module exports a stateful component connected to the redux logic of the app,
+ * dedicated to rendering the presentations manager feature interface
+ * @module bulgur/features/PresentationsManager
+ */
 import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -11,7 +16,9 @@ import {
 } from '../../../helpers/fileLoader';
 
 import validatePresentation from '../../../helpers/presentationValidator';
-
+/**
+ * Redux-decorated component class rendering the presentations manager feature to the app
+ */
 @connect(
   state => ({
     ...duck.selector(state.presentations)

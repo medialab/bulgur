@@ -1,5 +1,5 @@
 /**
- * Bulgor Reducers Endpoint
+ * Bulgur Reducers Endpoint
  * ===================================
  *
  * Combining the app's reducers.

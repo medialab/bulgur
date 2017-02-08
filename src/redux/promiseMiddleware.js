@@ -1,3 +1,12 @@
+/**
+ * Promise middleware
+ * ===================================
+ * If a promise is passed in an action,
+ * this middleware will resolve it and dispatch related actions names
+ * (ACTION_NAME when started, then ACTION_NAME_SUCCESS or ACTION_NAME_FAIL depending on promise outcome)
+ */
+
+
 export default () => ({dispatch, getState}) => (next) => (action) => {
   // If the action is a function, execute it
   if (typeof action === 'function') {

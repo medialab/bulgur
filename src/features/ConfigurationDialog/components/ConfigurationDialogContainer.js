@@ -34,7 +34,9 @@ import ConfigurationDialogLayout from './ConfigurationDialogLayout';
   })
 )
 class ConfigurationDialogContainer extends Component {
-
+  /**
+   * constructor
+   */
   constructor(props) {
     super(props);
     this.closePresentationCandidate = this.closePresentationCandidate.bind(this);

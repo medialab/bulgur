@@ -3,6 +3,7 @@
  * ======================================
  *
  * Rendering the application.
+ * @module bulgur
  */
 import React from 'react';
 import {render} from 'react-dom';
@@ -20,6 +21,9 @@ window.store = store;
 
 const mountNode = document.getElementById('mount');
 
+/**
+ * Mounts the application to the given mount node
+ */
 export function renderApplication() {
   const group = (
     <Provider store={store}>

@@ -73,12 +73,38 @@
         padding-right: .5em;
     }
 
+    /*
+     * Generic components styling
+     */
     a,
     a:hover,
     a:visited,
     a:active
     {
         color: inherit;
+    }
+    
+    button,
+    input,
+    textarea
+    {
+        font-family: inherit;
+        font-size: 1rem;
+
+        border: none;
+        outline: none;
+        background: inherit;
+    }
+
+    button:hover,
+    input:hover,
+    textarea:hover,
+    input:focus,
+    textarea:focus
+    {
+        cursor: pointer;
+
+        background: $background-intent;
     }
 }
 
@@ -124,30 +150,4 @@
 }
 @media #{$breakpoint-tablet}
 {
-}
-
-/*
- * Generic components styling
- */
-.bulgur button,
-.bulgur input,
-.bulgur textarea
-{
-    font-family: inherit;
-    font-size: 1rem;
-
-    border: none;
-    outline: none;
-    background: inherit;
-}
-
-.bulgur button:hover,
-.bulgur input:hover,
-.bulgur textarea:hover,
-.bulgur input:focus,
-.bulgur textarea:focus
-{
-    cursor: pointer;
-
-    background: $background-intent;
 }
