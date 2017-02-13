@@ -4,15 +4,7 @@
  */
 import React from 'react';
 
-import {
-  Timeline,
-  Network,
-  Map,
-  mapMapData,
-  mapTimelineData,
-  mapNetworkData
-} from 'quinoa-vis-modules';
-
+import VisualizationManager from '../../../components/VisualizationManager/VisualizationManager';
 import DraftEditor from '../../../components/DraftEditor/DraftEditor';
 import SlideSettingsPannel from '../../../components/SlideSettingsPannel/SlideSettingsPannel';
 
@@ -58,7 +50,7 @@ const MainViewLayout = ({
 
   const setVisualization = (view, id) => {
     const onChange = (event) => onUserViewChange(id, event);
-    let data = activePresentation.visualizations[id].data;
+    const data = activePresentation.visualizations[id].data;
     // flatten datamap fields (todo: refactor as helper)
     const dataMap = Object.keys(view.dataMap).reduce((result, collectionId) => ({
       ...result,
@@ -73,38 +65,14 @@ const MainViewLayout = ({
         return propsMap;
       }, {})
     }), {});
-    // todo : improve code to have no need to do that ugly hack
-    try {
-      // let data = activeViews[id].data;
-      switch (view.metadata.visualizationType) {
-        case 'map':
-          data = mapMapData(data, dataMap);
-          return (<Map
-            allowUserViewChange
-            data={data}
-            onUserViewChange={onChange}
-            viewParameters={view.viewParameters} />);
-        case 'network':
-          data = mapNetworkData(data, dataMap);
-          return (<Network
-            allowUserViewChange
-            data={data}
-            onUserViewChange={onChange}
-            viewParameters={view.viewParameters} />);
-        case 'timeline':
-          data = mapTimelineData(data, dataMap);
-          return (<Timeline
-            allowUserViewChange
-            data={data}
-            onUserViewChange={onChange}
-            viewParameters={view.viewParameters} />);
-        default:
-          return null;
-      }
-    }
- catch (e) {
-      return null;
-    }
+    return (
+      <VisualizationManager
+        visualizationType={view.metadata.visualizationType}
+        data={data}
+        dataMap={dataMap}
+        viewParameters={view.viewParameters}
+        onUserChange={onChange} />
+    );
   };
 
   const activeSlide = activePresentation.slides && activeSlideId && activePresentation.slides[activeSlideId];
@@ -176,7 +144,11 @@ const MainViewLayout = ({
       <figcaption className="caption-container">
         {activeSlide ? <section className="caption-header">
           <h1>
-            <input type="text" value={activeSlide.title} onChange={updateTitle} />
+            <input
+              type="text"
+              value={activeSlide.title}
+              onChange={updateTitle}
+              placeholder="Slide title" />
           </h1>
           {!activeSlide || viewsEqualActiveSlideViews ?
             '' :

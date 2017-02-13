@@ -1,3 +1,4 @@
+/* eslint react/no-set-state: 0 */
 /**
  * This module provides a reusable visualization manager, focused on the performance
  * optimizations related to re-mapping the data / re-rendering the vis
@@ -23,8 +24,21 @@ class VisualizationManager extends Component {
     this.updateData = this.updateData.bind(this);
 
     this.state = {
-      data: this.updateData(props)
+      data: undefined
+    };
+    setTimeout(() => this.updateData(props));
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (JSON.stringify(this.props.data) !== JSON.stringify(nextProps.data)
+      || JSON.stringify(this.props.dataMap) !== JSON.stringify(nextProps.dataMap)) {
+      this.updateData(nextProps);
     }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return JSON.stringify(this.state.data) !== JSON.stringify(nextState.data)
+            || JSON.stringify(this.props.viewParameters) !== JSON.stringify(nextProps.viewParameters);
   }
 
   updateData(props) {
@@ -48,18 +62,9 @@ class VisualizationManager extends Component {
       default:
         return null;
     }
-    console.log('remapping the data', visData);
     this.setState({
       data: visData
     });
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (JSON.stringify(this.props.data) !== JSON.stringify(nextProps.data) 
-      || JSON.stringify(this.props.dataMap) !== JSON.stringify(nextProps.dataMap)) {
-      
-      this.updateData(nextProps);
-    }
   }
 
   render() {
@@ -69,30 +74,35 @@ class VisualizationManager extends Component {
       onUserChange
     } = this.props;
     const {
-      data = []
+      data
     } = this.state;
-    switch (visualizationType) {
-        case 'map':
-          return (<Map
-            allowUserViewChange
-            data={data}
-            onUserViewChange={onUserChange}
-            viewParameters={viewParameters} />);
-        case 'network':
-          return (<Network
-            allowUserViewChange
-            data={data}
-            onUserViewChange={onUserChange}
-            viewParameters={viewParameters} />);
-        case 'timeline':
-          return (<Timeline
-            allowUserViewChange
-            data={data}
-            onUserViewChange={onUserChange}
-            viewParameters={viewParameters} />);
-        default:
-          return null;
+    if (data) {
+       switch (visualizationType) {
+          case 'map':
+            return (<Map
+              allowUserViewChange
+              data={data}
+              onUserViewChange={onUserChange}
+              viewParameters={viewParameters} />);
+          case 'network':
+            return (<Network
+              allowUserViewChange
+              data={data}
+              onUserViewChange={onUserChange}
+              viewParameters={viewParameters} />);
+          case 'timeline':
+            return (<Timeline
+              allowUserViewChange
+              data={data}
+              onUserViewChange={onUserChange}
+              viewParameters={viewParameters} />);
+          default:
+            return null;
       }
+    }
+ else {
+      return null;
+    }
   }
 }
 
