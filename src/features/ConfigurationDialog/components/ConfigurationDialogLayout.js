@@ -8,17 +8,9 @@ import {validateFileExtension} from '../../../helpers/fileLoader';
 
 import Dropzone from 'react-dropzone';
 
+import VisualizationManager from '../../../components/VisualizationManager/VisualizationManager';
 import ColorsMapPicker from '../../../components/ColorsMapPicker/ColorsMapPicker';
 import DatamapPicker from '../../../components/DatamapPicker/DatamapPicker';
-
-import {
-  mapMapData,
-  mapTimelineData,
-  mapNetworkData,
-  Timeline,
-  Map,
-  Network
-} from 'quinoa-vis-modules';
 
 import './ConfigurationDialog.scss';
 
@@ -27,12 +19,14 @@ import './ConfigurationDialog.scss';
  * @param {object} props - the props to render
  * @param {object} props.visualization - the definition of the visualization to preview
  * @param {object} props.models - the models to use in order to populate default view parameters
+ * @param {function} props.updateParameters - the callback function to use for updating the state
+ * @param {string} props.visualizationId - the id of the visualization to preview
  * @return {ReactElement} markup
  */
-const previewVisualization = (visualization, models) => {
-  let data = {};
+const previewVisualization = (visualization, models, updateParameters, visualizationId) => {
+  const baseViewParameters = visualization.viewParameters || models[visualization.metadata.visualizationType].defaultViewParameters;
   const viewParameters = {
-    ...models[visualization.metadata.visualizationType].defaultViewParameters,
+    ...baseViewParameters,
     colorsMap: visualization.colorsMap
   };
   // flatten datamap fields (todo: refactor as helper)
@@ -49,35 +43,15 @@ const previewVisualization = (visualization, models) => {
       return propsMap;
     }, {})
   }), {});
-
-  // todo : ooooh this is bad
-  try {
-    switch (visualization.metadata.visualizationType) {
-      case 'timeline':
-        data = mapTimelineData(visualization.data, dataMap);
-        return (<Timeline
-          data={data}
-          allowUserViewChange
-          viewParameters={viewParameters} />);
-      case 'map':
-        data = mapMapData(visualization.data, dataMap);
-        return (<Map
-          data={data}
-          allowUserViewChange
-          viewParameters={viewParameters} />);
-      case 'network':
-        data = mapNetworkData(visualization.data, dataMap);
-        return (<Network
-          data={data}
-          allowUserViewChange
-          viewParameters={viewParameters} />);
-      default:
-        return (<div>No preview</div>);
-    }
-  }
- catch (e) {
-    return (<div>Cannot provide a preview yet</div>);
-  }
+  const onChange = e => updateParameters(visualizationId, e.viewParameters);
+  return (
+    <VisualizationManager
+      visualizationType={visualization.metadata.visualizationType}
+      data={visualization.data}
+      dataMap={dataMap}
+      viewParameters={viewParameters}
+      onUserChange={onChange} />
+    );
 };
 
 /**
@@ -110,7 +84,8 @@ const ConfigurationDialogLayout = ({
     setPresentationCandidateDatamapItem,
     toggleCandidateColorEdition,
     setPresentationCandidateColor,
-    applyPresentationCandidateConfiguration
+    applyPresentationCandidateConfiguration,
+    setPreviewViewParameters
   },
   closePresentationCandidate,
   onFileDrop,
@@ -121,6 +96,7 @@ const ConfigurationDialogLayout = ({
   const setPresentationTitle = (e) => setCandidatePresentationMetadata('title', e.target.value);
   const setPresentationAuthors = (e) => setCandidatePresentationMetadata('authors', e.target.value);
   const setPresentationDescription = (e) => setCandidatePresentationMetadata('description', e.target.value);
+  const hasSlides = presentationCandidate.order && presentationCandidate.order.length;
   return (
     <div className="bulgur-configuration-dialog-layout">
       <section className="options-group">
@@ -226,9 +202,11 @@ const ConfigurationDialogLayout = ({
                         <div>Reupload new data for this dataset</div>
                       </Dropzone>
                       {
-                      // todo : uncomment this when multi datasets use cases arise (dataset deletion feature)
-                        <button className="remove-dataset" onClick={onRemoveDataset}>Remove this dataset</button>
-                  }
+                        // disabled if slides are present to avoid allowing bugs related to vis states without the required dataset
+                        !hasSlides ?
+                          <button className="remove-dataset" onClick={onRemoveDataset}>Remove this dataset</button>
+                        : null
+                      }
                     </div>
                     <div className="dataset-preview">
                       <h5>Raw data being used</h5>
@@ -279,13 +257,14 @@ const ConfigurationDialogLayout = ({
       <section className="options-group">
         <h2>How to visualize the data ?</h2>
         {
+
         presentationCandidate.visualizations &&
         Object.keys(presentationCandidate.visualizations)
         .map(visualizationKey => {
           const visualization = presentationCandidate.visualizations[visualizationKey];
           return (
             <section key={visualizationKey}>
-              <form className="visualization-type-choice">
+              {hasSlides ? null : <form className="visualization-type-choice">
                 {activeVisualizationTypes.map((type, key) => {
                     const visType = type.id;
                     const firstDataset = presentationCandidate.datasets[Object.keys(presentationCandidate.datasets)[0]];
@@ -312,7 +291,7 @@ const ConfigurationDialogLayout = ({
                       </label>
                     </div>);
                 })}
-              </form>
+              </form>}
               {visualization.metadata && visualization.metadata.visualizationType && visualization.dataMap ?
                 <section className="data-fields-choice">
                   <ul className="parameters-endpoints">
@@ -364,7 +343,7 @@ const ConfigurationDialogLayout = ({
                 visualization.data &&
                 visualization.dataMap ?
                   <section className="preview">
-                    {previewVisualization(visualization, visualizationTypesModels)}
+                    {previewVisualization(visualization, visualizationTypesModels, setPreviewViewParameters, visualizationKey)}
                   </section>
                 : null}
               </section>
@@ -386,7 +365,7 @@ const ConfigurationDialogLayout = ({
         ?
           <button
             className="valid-btn"
-            onClick={onApplyChange}>Edit the presentation content</button>
+            onClick={onApplyChange}>{hasSlides ? 'Apply changes and continue presentation edition' : 'Start to edit this presentation'}</button>
         : ''
       }
         <button

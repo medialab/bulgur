@@ -46,6 +46,7 @@ const UNSET_PRESENTATION_CANDIDATE_DATASET = 'UNSET_PRESENTATION_CANDIDATE_DATAS
 
 const SET_PRESENTATION_CANDIDATE_VISUALIZATION_TYPE = '§Bulgur/ConfigurationDialog/SET_PRESENTATION_CANDIDATE_VISUALIZATION_TYPE';
 const SET_PRESENTATION_CANDIDATE_DATAMAP_ITEM = '§Bulgur/ConfigurationDialog/SET_PRESENTATION_CANDIDATE_DATAMAP_ITEM';
+const SET_PREVIEW_VIEW_PARAMETERS = '§Bulgur/ConfigurationDialog/SET_PREVIEW_VIEW_PARAMETERS';
 const SET_PRESENTATION_CANDIDATE_COLOR = '§Bulgur/ConfigurationDialog/SET_PRESENTATION_CANDIDATE_COLOR';
 const TOGGLE_CANDIDATE_COLOR_EDITION = '§Bulgur/ConfigurationDialog/TOGGLE_CANDIDATE_COLOR_EDITION';
 /*
@@ -198,6 +199,15 @@ export const setPresentationCandidateColor = (visualizationId, collectionId, cat
   color
 });
 /**
+ * @param {string} visualizationId - the uuid of the presentation's visualization for the color to change
+ * @param {object} viewParameters - the view parameters representing the preview state
+ */
+export const setPreviewViewParameters = (visualizationId, viewParameters) => ({
+  type: SET_PREVIEW_VIEW_PARAMETERS,
+  visualizationId,
+  viewParameters
+});
+/**
  *
  */
 export const resetPresentationCandidateSettings = () => ({
@@ -254,7 +264,7 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
       return DEFAULT_PRESENTATION_CANDIDATE_DATA;
     case START_PRESENTATION_CANDIDATE_CONFIGURATION:
       // configure existing presentation or setup new ?
-      const candidateBeginingState = action.presentation || EMPTY_PRESENTATION;
+      const candidateBeginingState = action.presentation ? JSON.parse(JSON.stringify(action.presentation)) : EMPTY_PRESENTATION;
       return {
         ...state,
         presentationCandidate: {
@@ -439,14 +449,14 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
         }
       };
     case SET_PRESENTATION_CANDIDATE_COLOR:
-      const {visualizationId, collectionId, category, color} = action;
+      const {collectionId, category, color} = action;
       return {
         ...state,
         presentationCandidate: {
           ...state.presentationCandidate,
           visualizations: {
             ...state.presentationCandidate.visualizations,
-            [visualizationId]: {
+            [action.visualizationId]: {
               ...state.presentationCandidate.visualizations[action.visualizationId],
               // update colorsMap
               colorsMap: {
@@ -460,6 +470,22 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
           }
         }
       };
+    case SET_PREVIEW_VIEW_PARAMETERS:
+      const {viewParameters} = action;
+      return {
+        ...state,
+        presentationCandidate: {
+          ...state.presentationCandidate,
+          visualizations: {
+            ...state.presentationCandidate.visualizations,
+            [action.visualizationId]: {
+              ...state.presentationCandidate.visualizations[action.visualizationId],
+              viewParameters
+            }
+          }
+        }
+      };
+
     case RESET_PRESENTATION_CANDIDATE_SETTINGS:
       return DEFAULT_PRESENTATION_CANDIDATE_DATA;
     default:
@@ -472,7 +498,12 @@ const PRESENTATION_CANDIDATE_UI_DEFAULT_STATE = {
    * Representation of the color being edited in the editor
    * @type {object}
    */
-  editedColor: undefined
+  editedColor: undefined,
+  /**
+   * Representation of the previews states
+   * @type {object}
+   */
+   previewsParameters: {}
 };
 /**
  * This redux reducer handles the modification of the ui state of a presentation configuration dialog
