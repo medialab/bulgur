@@ -348,7 +348,7 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
 
       // analyze the data to produce a datamap for the visualization
       let dataProfile;
-      let newcolorsMap = {default: 'brown'};
+      let newcolorsMap = {default: '#d8d8d8'};
       if (data) {
         dataProfile = analyzeDataset(data);
         dataMap = Object.keys(dataMap).reduce((finDataMap, collectionId) => {
@@ -383,7 +383,7 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
             return {
               ...colorsMap,
               [collectionId]: {
-                default: 'brown'
+                default: '#d8d8d8'
               }
             };
           }, newcolorsMap);

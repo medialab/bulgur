@@ -158,7 +158,11 @@ const ConfigurationDialogLayout = ({
       <section className="options-group">
         <h2>What data do you want to use ?</h2>
 
-        { // future-proof code for possible multi-datasets visualizations
+        <p className="help-link-container">
+          <a className="help-link" target="blank" href="https://github.com/medialab/bulgur/wiki/What-data-formats-and--tools-can-I-use-to-build-a-presentation-dataset-%3F">What data formats and tools can I use to build a presentation dataset ?</a>
+        </p>
+        {
+        // future-proof code for possible multi-datasets visualizations
         presentationCandidate.datasets &&
         Object.keys(presentationCandidate.datasets).length > 0 ?
           <section className="second-options-group">
