@@ -30,16 +30,14 @@ Then edit the ``secrets.json`` file with your own data.
 npm run dev
 ```
 
+Bulgur is compatible with the [Redux Devtools](https://github.com/gaearon/redux-devtools) browser extension for an optimal developer experience.
+
 # Deployment
 
-Be sure to change the `CNAME` file to your own destination, then :
+For now Bulgur deploys to a [surge](http://surge.sh/) instance for preproduction tests. If you plan to do the same, be sure to change the `CNAME` file to your own destination, then :
 
 ```
 npm run deploy
 ```
 
-For now Bulgur deploys to a [surge](http://surge.sh/) instance for preproduction tests.
-
-Bulgur is a static web application, which means it does not need a backend for working.
-
-Nevertheless, Bulgur needs an instance of [quinoa server](https://github.com/medialab/quinoa-server) server application available in order to be able to handle all-in-one html bundling, oAuth connection to github/gist and exports to distant server.
+Bulgur does not need a backend for composing presentations and storing them on the localStorage. Nevertheless, Bulgur needs an instance of [quinoa server](https://github.com/medialab/quinoa-server) application available in order to be able to handle all-in-one html bundling, oAuth connection to github/gist and exports to distant server.
