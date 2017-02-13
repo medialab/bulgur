@@ -15,8 +15,6 @@ import {
   mapNetworkData
 } from 'quinoa-vis-modules';
 
-import './VisualizationManager.scss';
-
 class VisualizationManager extends Component {
 
   constructor(props) {
