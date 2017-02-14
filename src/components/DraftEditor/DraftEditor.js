@@ -1,16 +1,21 @@
 /* eslint react/no-set-state: 0 */
+/* eslint react/no-did-update-set-state: 0 */
 /**
  * This module provides a reusable draft-powered text wysiwig editor component
  * @module bulgur/components/DraftEditor
  */
 import React, {Component} from 'react';
 import Editor from 'draft-js-plugins-editor';
-import {RichUtils} from 'draft-js';
+import {
+  RichUtils,
+  EditorState
+} from 'draft-js';
+
+import {stateFromMarkdown} from 'draft-js-import-markdown';
+import {stateToMarkdown} from 'draft-js-export-markdown';
 
 import createRichButtonsPlugin from 'draft-js-richbuttons-plugin';
-import createFocusPlugin from 'draft-js-focus-plugin';
 
-const focusPlugin = createFocusPlugin();
 const richButtonsPlugin = createRichButtonsPlugin();
 
 import './DraftEditor.scss';
@@ -43,11 +48,20 @@ export default class QuinoaDraftSlide extends Component {
     // which calls illegitimately onChange when plugins are initialized
     // (https://github.com/draft-js-plugins/draft-js-plugins/issues/311)
     this.state = {
-      initialized: false
+      initialized: false,
+      focused: false,
+      editorState: props.slide && props.slide.markdown ? EditorState.createWithContent(stateFromMarkdown(props.slide.markdown)) : EditorState.createEmpty(),
+      markdown: props.slide && props.slide.markdown ? props.slide.markdown : ''
     };
-    this.onEditorChange = (arg) => {
+
+    this.onEditorChange = (editorState) => {
       if (this.state.initialized) {
-        this.props.update(arg);
+        const markdown = stateToMarkdown(editorState.getCurrentContent());
+        this.setState({
+          editorState,
+          markdown
+        });
+        this.props.update(markdown);
       }
       else {
         this.setState({
@@ -58,22 +72,51 @@ export default class QuinoaDraftSlide extends Component {
     this.handleKeyCommand = this.handleKeyCommand.bind(this);
   }
 
+  componentWillReceiveProps() {
+    // update editor if markdown representation of content is different between props and state
+    if (this.props.slide && this.props.slide.markdown && this.props.slide.markdown !== this.state.markdown) {
+      this.setState({
+        editorState: EditorState.createWithContent(stateFromMarkdown(this.props.slide.markdown)),
+        markdown: this.props.slide.markdown
+      });
+    }
+  }
+
+  shouldComponentUpdate() {
+    return true;
+    //this.state.markdown !== nextState.markdown;
+  }
+
+  componentDidUpdate() {
+    if (this.props.slide && typeof this.props.slide.markdown === 'string' && this.props.slide.markdown !== this.state.markdown) {
+      this.setState({
+        editorState: EditorState.createWithContent(stateFromMarkdown(this.props.slide.markdown)),
+        markdown: this.props.slide.markdown
+      });
+    }
+  }
+
   handleKeyCommand(command) {
-    const newState = RichUtils.handleKeyCommand(this.props.slide.draft, command);
+    const newState = RichUtils.handleKeyCommand(this.state.editorState, command);
     if (newState && typeof this.props.update === 'function') {
-      this.onEditorChange({draft: newState});
+      this.onEditorChange(newState);
       return 'handled';
     }
     return 'not-handled';
   }
 
   render() {
-    const {
-      slide
-    } = this.props;
-    const onChange = state => this.onEditorChange({draft: state});
+    const onChange = state => this.onEditorChange(state);
+    const onGlobalClick = e => {
+      e.stopPropagation();
+      this.editorComponent.focus();
+    };
+    const onFocus = () => this.setState({focused: true});
+    const onBlur = () => this.setState({focused: false});
     return (
-      <div className="bulgur-draft-editor">
+      <div
+        className={'bulgur-draft-editor ' + (this.state.focused ? 'focused' : '')}
+        onClick={onGlobalClick}>
         <div className="rich-buttons">
           <div className="buttons-group">
             <BoldButton />
@@ -88,11 +131,15 @@ export default class QuinoaDraftSlide extends Component {
           </div>
         </div>
         <Editor
-          editorState={slide.draft}
+          editorState={this.state.editorState}
           onChange={onChange}
           handleKeyCommand={this.handleKeyCommand}
+          ref={(editorComponent) => {
+this.editorComponent = editorComponent;
+}}
+          onFocus={onFocus}
+          onBlur={onBlur}
           plugins={[
-              focusPlugin,
               richButtonsPlugin
             ]} />
       </div>

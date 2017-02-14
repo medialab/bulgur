@@ -32,11 +32,11 @@ const MainViewLayout = ({
   // content related
   activePresentation = {},
   activeSlideId,
-  activeViews,
+  activeViews = {},
 
   // ui related
   editedColor,
-  isTakeAwayModalOpen,
+  // isTakeAwayModalOpen,
   slideSettingsPannelIsOpen,
   // actions
   updateSlide,
@@ -110,13 +110,21 @@ const MainViewLayout = ({
     });
   };
 
-  const updateDraft = ({draft}) => {
+  const updateDraft = (markdown) => {
     updateSlide(activeSlideId, {
       ...activeSlide,
-      draft,
-      markdown: undefined
+      markdown
     });
   };
+
+  // const updateDraft = ({draft}) => {
+  //   updateSlide(activeSlideId, {
+  //     ...activeSlide,
+  //     draft,
+  //     markdown: undefined
+  //   });
+  // };
+
   return (
     <figure className="bulgur-main-view">
       <section className="visualizations-row">
@@ -158,7 +166,7 @@ const MainViewLayout = ({
             </div>
           }
         </section> : null}
-        {activeSlide && !isTakeAwayModalOpen && activeSlide.draft ?
+        {/*activeSlide && !isTakeAwayModalOpen && activeSlide.draft ?
           <div className="caption-editor">
             <div className="editor-areas-container">
               <DraftEditor
@@ -166,7 +174,14 @@ const MainViewLayout = ({
                 update={updateDraft} />
             </div>
           </div>
-        : null}
+        : null*/}
+        <div className="caption-editor">
+          <div className="editor-areas-container">
+            <DraftEditor
+              slide={activeSlide}
+              update={updateDraft} />
+          </div>
+        </div>
       </figcaption>
     </figure>
   );
