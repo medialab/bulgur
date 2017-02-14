@@ -30,7 +30,9 @@ import {
  */
 import {
   RESET_APP,
-  START_PRESENTATION_CANDIDATE_CONFIGURATION
+  START_PRESENTATION_CANDIDATE_CONFIGURATION,
+  APPLY_PRESENTATION_CANDIDATE_CONFIGURATION,
+  CLOSE_PRESENTATION_CANDIDATE_MODAL
 } from '../Editor/duck';
 
 const FETCH_EXAMPLE_FILE = '§Bulgur/FETCH_EXAMPLE_FILE';
@@ -261,6 +263,8 @@ const DEFAULT_PRESENTATION_CANDIDATE_DATA = {
 function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, action) {
   switch (action.type) {
     case RESET_APP:
+    case CLOSE_PRESENTATION_CANDIDATE_MODAL:
+    case APPLY_PRESENTATION_CANDIDATE_CONFIGURATION:
       return DEFAULT_PRESENTATION_CANDIDATE_DATA;
     case START_PRESENTATION_CANDIDATE_CONFIGURATION:
       // configure existing presentation or setup new ?
@@ -512,6 +516,10 @@ const PRESENTATION_CANDIDATE_UI_DEFAULT_STATE = {
  */
 function presentationCandidateUi (state = PRESENTATION_CANDIDATE_UI_DEFAULT_STATE, action) {
   switch (action.type) {
+    case RESET_APP:
+    case CLOSE_PRESENTATION_CANDIDATE_MODAL:
+    case APPLY_PRESENTATION_CANDIDATE_CONFIGURATION:
+      return PRESENTATION_CANDIDATE_UI_DEFAULT_STATE;
     case TOGGLE_CANDIDATE_COLOR_EDITION:
       const {collectionId, category, visualizationId} = action;
       if (state.editedColor === undefined || state.editedColor.collectionId !== collectionId || state.editedColor.category !== category) {

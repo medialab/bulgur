@@ -209,10 +209,10 @@ const ConfigurationDialogLayout = ({
                       }
                     </div>
                     <div className="dataset-preview">
-                      <h5>Raw data being used</h5>
+                      <h5>Raw data being used (first 20 lines)</h5>
                       <pre>
                         <code>
-                          {dataset.rawData}
+                          {dataset.rawData.split('\n').slice(0, 20).join('\n')}
                         </code>
                       </pre>
                     </div>
