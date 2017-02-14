@@ -16,7 +16,7 @@
     li
     {
         min-height: 3rem;
-        margin: $large-gutter $medium-gutter $large-gutter 0;
+        margin: $medium-gutter $medium-gutter $medium-gutter 0;
 
         list-style-type: none;
     }
@@ -31,6 +31,10 @@
 
         flex-flow: column nowrap;
 
+        input,
+        textarea{
+            font-size: .7rem;
+        }
         h3
         {
             display: flex;
@@ -55,6 +59,11 @@
             overflow: hidden;
 
             width: 100%;
+            h3
+            {
+                color: white;
+                border-bottom: 1px solid white;
+            }
             textarea
             {
                 width: 100%;
@@ -65,7 +74,15 @@
         }
         &.active
         {
-            border: 6px solid $primary-color;
+            // border: 6px solid $primary-color;
+            color: white;
+            background: red;
+            textarea,
+            input
+            {
+                color: white;
+                background: red;
+            }
         }
     }
     .add-slide

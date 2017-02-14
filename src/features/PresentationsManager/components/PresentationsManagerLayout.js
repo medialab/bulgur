@@ -49,7 +49,10 @@ const PresentationsManagerLayout = ({
       <section className="landing-group">
         <h1>Bulgur</h1>
         <p>
-          Bulgur is a tool dedicated to the making of *data presentations*, that is guided tours into data visualizations.
+          Bulgur is a tool dedicated to the making of guided tours into data visualizations, called <i>data presentations</i>.
+        </p>
+        <p>
+          Import a data file from your computer, choose a visualization technique, build your presentation. Then export it to a static html file or to a web publication.
         </p>
         <p>
           Bulgur is part of the <a target="blank" href="http://www.medialab.sciences-po.fr/">sciencespo’s médialab</a> tools.
