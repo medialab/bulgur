@@ -28,16 +28,17 @@ class VisualizationManager extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.data !== nextProps.data // JSON.stringify(this.props.data) !== JSON.stringify(nextProps.data)
-      || this.props.dataMap !== nextProps.dataMap //|| JSON.stringify(this.props.dataMap) !== JSON.stringify(nextProps.dataMap)
+    if (
+    this.props.data !== nextProps.data
+    || JSON.stringify(this.props.dataMap) !== JSON.stringify(nextProps.dataMap)
     ) {
       this.updateData(nextProps);
     }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return this.state.data !== nextState.data//JSON.stringify(this.state.data) !== JSON.stringify(nextState.data)
-           || JSON.stringify(this.props.viewParameters) !== JSON.stringify(nextProps.viewParameters);
+    return this.state.data !== nextState.data
+    || this.props.viewParameters !== nextProps.viewParameters;
   }
 
   updateData(props) {
@@ -106,9 +107,9 @@ class VisualizationManager extends Component {
 }
 
 VisualizationManager.propTypes = {
-  // dataMap: PropTypes.Object
-  // data: PropTypes.Object,
-  // viewParameters: PropTypes.Object,
+  // dataMap: PropTypes.Object // commented to avoid messing with the linter
+  // data: PropTypes.Object, // commented to avoid messing with the linter
+  // viewParameters: PropTypes.Object, // commented to avoid messing with the linter
   visualizationType: PropTypes.String,
   onUserChange: PropTypes.func
 };
