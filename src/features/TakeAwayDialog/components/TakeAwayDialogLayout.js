@@ -34,20 +34,20 @@ export const ChooseTakeAwayStep = ({
         {
           id: 'html',
           label: 'an html file to upload to the website of my choice',
-          active: serverAvailable
+          active: serverAvailable === true
         },
         {
           id: 'github',
           label: 'a gist+bl.ocks online website',
-          active: serverAvailable && gistAvailable
+          active: serverAvailable === true && gistAvailable === true
         },
         {
           id: 'server',
           label: 'a sciences po\'s quinoa server powered website',
-          active: serverAvailable
+          active: serverAvailable === true
         }
         ]
-        .filter(option => option.active)
+        .filter(option => option.active === true)
         .map((takeAwayType, key) => {
           const onOptionClick = (evt) => {
             evt.stopPropagation();
@@ -82,6 +82,8 @@ export const ChooseTakeAwayStep = ({
  * @param {string} props.takeAwayGistLogStatus
  * @param {string} props.takeAwayServerLog
  * @param {string} props.takeAwayServerLogStatus
+ * @param {boolean} props.serverAvailable - whether app is connected to a distant server
+ * @param {boolean} props.gistAvailable - whether app is connected to gist
  * @param {function} props.takeAway - main callback function for container
  * @param {object} props.actions - actions passed by redux logic
  * @return {ReactElement} markup
@@ -92,6 +94,8 @@ const TakeAwayDialogLayout = ({
   takeAwayGistLogStatus,
   takeAwayServerLog,
   takeAwayServerLogStatus,
+  serverAvailable,
+  gistAvailable,
   // actions
   takeAway,
   actions: {
@@ -99,7 +103,11 @@ const TakeAwayDialogLayout = ({
   },
 }) => (
   <div className="bulgur-take-away-dialog-layout">
-    <ChooseTakeAwayStep takeAway={takeAway} />
+    <ChooseTakeAwayStep 
+      takeAway={takeAway} 
+      serverAvailable={serverAvailable}
+      gistAvailable={gistAvailable}
+    />
     <section className="take-away-dialog-step pub-links">
       {
         takeAwayGistLog ? <p className="take-away-log" style={{background: takeAwayGistLogStatus === 'success' ? 'lightgreen' : 'lightblue'}}>{takeAwayGistLog}</p> : ''
