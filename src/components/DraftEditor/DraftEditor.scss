@@ -7,15 +7,16 @@
 
 .bulgur-draft-editor
 {
+    font-size: 1rem;
+
     display: flex;
 
     padding: $base-gutter;
 
+    transition: all .5s ease;
+
     flex-flow: column nowrap;
     align-items: stretch;
-
-    transition: all .5s ease;
-    font-size: 1rem;
 
     .DraftEditor-root
     {
