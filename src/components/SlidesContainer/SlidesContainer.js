@@ -4,6 +4,7 @@
  */
 
 import React from 'react';
+import Textarea from 'react-textarea-autosize';
 
 import './SlidesContainer.scss';
 
@@ -54,9 +55,9 @@ const SlidesContainer = ({
                   <button onClick={onRemove}>x</button>
                 </h3>
                 <div className="comment-container">
-                  <textarea
-                    type="text"
+                  <Textarea
                     placeholder="slide comment"
+                    maxRow={15}
                     value={slide.markdown}
                     onChange={onTextChange} />
                 </div>
