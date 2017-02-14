@@ -25,6 +25,12 @@ import {
   cleanPresentationForExport
 } from '../../../helpers/projectBundler';
 
+import {
+  githubTokenProviderUrl,
+  githubAPIClientId,
+  serverUrl
+} from '../../../../secrets';
+
 import TakeAwayDialogLayout from './TakeAwayDialogLayout';
 
 /**
@@ -91,9 +97,13 @@ class TakeAwayDialogContainer extends Component {
   }
 
   render() {
+    const serverAvailable = serverUrl !== undefined;
+    const gistAvailable = githubTokenProviderUrl !== undefined && githubAPIClientId !== undefined;
     return (
       <TakeAwayDialogLayout
         {...this.props}
+        serverAvailable={serverAvailable}
+        gistAvailable={gistAvailable}
         takeAway={this.takeAway} />
     );
   }

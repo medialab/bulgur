@@ -12,10 +12,14 @@ import './TakeAwayDialog.scss';
  * Renders the options for takeaway mode choice
  * @param {object} props - the props to render
  * @param {function} takeAway - callback
+ * @param {boolean} serverAvailable - whether app is implemented with a distant server connection
+ * @param {boolean} gistAvailable - whether app is implemented with a gistAvailable connection
  * @return {ReactElement} markup
  */
 export const ChooseTakeAwayStep = ({
-  takeAway
+  takeAway,
+  serverAvailable,
+  gistAvailable
 }) => (
   <section className="new-presentation-dialog-step">
     <h1>I want to take away my presentation as ...</h1>
@@ -24,21 +28,27 @@ export const ChooseTakeAwayStep = ({
         // todo : put this data in a model file
         [{
           id: 'project',
-          label: 'a project file (for reworking on this presentation on another browser/computer)'
+          label: 'a project file (for reworking on this presentation on another browser/computer)',
+          active: true
         },
         {
           id: 'html',
-          label: 'an html file to upload to the website of my choice'
+          label: 'an html file to upload to the website of my choice',
+          active: serverAvailable
         },
         {
           id: 'github',
-          label: 'a gist+bl.ocks online website'
+          label: 'a gist+bl.ocks online website',
+          active: serverAvailable && gistAvailable
         },
         {
           id: 'server',
-          label: 'a sciences po\'s quinoa server powered website'
+          label: 'a sciences po\'s quinoa server powered website',
+          active: serverAvailable
         }
-        ].map((takeAwayType, key) => {
+        ]
+        .filter(option => option.active)
+        .map((takeAwayType, key) => {
           const onOptionClick = (evt) => {
             evt.stopPropagation();
             takeAway(takeAwayType);
