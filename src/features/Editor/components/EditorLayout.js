@@ -5,6 +5,8 @@
 import React from 'react';
 import Modal from 'react-modal';
 
+import './EditorLayout.scss';
+
 import QuinoaPresentationPlayer from 'quinoa-presentation-player';
 
 import AsideViewLayout from './AsideViewLayout';
@@ -15,8 +17,6 @@ import PresentationsManagerContainer from '../../PresentationsManager/components
 
 import ConfigurationDialog from '../../ConfigurationDialog/components/ConfigurationDialogContainer.js';
 import TakeAwayDialog from '../../TakeAwayDialog/components/TakeAwayDialogContainer.js';
-
-import './EditorLayout.scss';
 
 /**
  * Renders the main layout component of the editor

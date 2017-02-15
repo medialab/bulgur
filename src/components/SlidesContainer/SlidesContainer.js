@@ -46,20 +46,26 @@ const SlidesContainer = ({
             };
             return (
               <li className={'bulgur-slide ' + (activeSlideId === slideKey ? 'active' : '')} onClick={onGlobalClick} key={slideKey}>
-                <h3>
-                  <input
-                    placeholder="slide title"
-                    type="text"
-                    value={slide.title}
-                    onChange={onTitleChange} />
-                  <button onClick={onRemove}>x</button>
-                </h3>
-                <div className="comment-container">
-                  <Textarea
-                    placeholder="slide comment"
-                    maxRow={15}
-                    value={slide.markdown}
-                    onChange={onTextChange} />
+                <div className="slide-content">
+                  <h3>
+                    <input
+                      placeholder="slide title"
+                      type="text"
+                      value={slide.title}
+                      onChange={onTitleChange} />
+                  </h3>
+                  <div className="comment-container">
+                    <Textarea
+                      placeholder="slide comment"
+                      maxRows={15}
+                      value={slide.markdown}
+                      onChange={onTextChange} />
+                  </div>
+                  <div className="operations-container">
+                    <button>■ Move</button>
+                    <button>⎘ Duplicate</button>
+                    <button className="remove-btn" onClick={onRemove}>⌫ Remove</button>
+                  </div>
                 </div>
               </li>
             );

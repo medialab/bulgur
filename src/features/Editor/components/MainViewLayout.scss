@@ -140,17 +140,39 @@
      * Specific components styling
      */
 
-    .view-operations button
+    .view-operations
     {
-        height: 115%;
-        padding: $medium-gutter;
+        max-width: 0;
+        overflow: hidden;
+        max-height: 4rem;
+        transition: all .5s ease;
+        &.visible{
+            max-width: 100%;
+        }
+        button{
+            padding: $medium-gutter;
 
-        border: 1px solid $primary-color;
-        border-top: none;
-        border-bottom: none;
-        &:last-of-type
-        {
-            border-left: none;
+            border: 1px solid $primary-color;
+            border-top: none;
+            // border-bottom: none;
+            transition: all .5s ease;
+            height: 4rem;
+            &:last-of-type
+            {
+                border-left: none;
+            }
+            &:hover{
+                background: red;
+                color: white;
+            }
+
+            &#take-snapshot-btn{
+                color: white;
+                background: red;
+                &:hover{
+                    background: brown;
+                }
+            }
         }
     }
 }

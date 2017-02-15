@@ -158,11 +158,11 @@ const MainViewLayout = ({
               onChange={updateTitle}
               placeholder="Slide title" />
           </h1>
-          {!activeSlide || viewsEqualActiveSlideViews ?
+          {!activeSlide ?
             '' :
-            <div className="view-operations">
-              <button onClick={clickOnRecord}><img className="bulgur-icon-image" src={require('../assets/snapshot.svg')} /> Take snapshot</button>
-              <button onClick={clickOnReset}><img className="bulgur-icon-image" src={require('../assets/reset.svg')} /> Reset</button>
+            <div className={'view-operations ' + (viewsEqualActiveSlideViews ? '' : 'visible')}>
+              <button id="take-snapshot-btn" onClick={clickOnRecord}><img className="bulgur-icon-image" src={require('../assets/snapshot.svg')} /> Take snapshot</button>
+              <button id="reset-view-btn" onClick={clickOnReset}><img className="bulgur-icon-image" src={require('../assets/reset.svg')} /> Reset view</button>
             </div>
           }
         </section> : null}

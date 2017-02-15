@@ -22,10 +22,12 @@
     {
         overflow-y: auto;
 
-        flex: 5;
+        padding: $base-gutter;
+
         cursor: text;
         transition: background .5s ease;
-        padding: $base-gutter;
+
+        flex: 5;
     }
 
     .rich-buttons

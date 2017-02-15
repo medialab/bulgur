@@ -12,7 +12,6 @@
     padding-left: $medium-gutter;
 
     transition: all .5s ease;
-
     li
     {
         min-height: 3rem;
@@ -29,61 +28,91 @@
         color: $primary-color;
         border: 1px solid $primary-color;
 
-        flex-flow: column nowrap;
+        flex-flow: row nowrap;
 
-        input,
-        textarea
-        {
-            font-size: .7rem;
-        }
-        h3
+        .slide-content
         {
             display: flex;
 
-            margin: 0;
-            margin-top: 0;
-            padding: 0;
+            padding-right: $base-gutter;
 
-            border-bottom: 1px solid black;
-
-            flex-flow: row nowrap;
-            align-items: stretch;
-            input
-            {
-                border: none;
-
-                flex: 5;
-            }
-        }
-        .comment-container
-        {
-            overflow: hidden;
-
-            width: 100%;
-            h3
-            {
-                color: white;
-                border-bottom: 1px solid white;
-            }
+            flex: 3;
+            flex-flow: column nowrap;
+            max-width: 100%;
+            input,
             textarea
             {
-                width: 100%;
-                margin-top: $base-gutter;
+                font-size: .7rem;
+                padding-right: $base-gutter;
+            }
+            h3
+            {
+                display: flex;
 
-                resize: none;
+                margin: 0;
+                margin-top: 0;
+                padding: 0;
+
+                border-bottom: 1px solid black;
+
+                flex-flow: row nowrap;
+                align-items: stretch;
+                input
+                {
+                    border: none;
+
+                    flex: 5;
+                }
+            }
+            .comment-container
+            {
+                overflow: hidden;
+
+                width: 100%;
+                h3
+                {
+                    color: white;
+                    border-bottom: 1px solid white;
+                }
+                textarea
+                {
+                    width: 100%;
+                    margin-top: $base-gutter;
+
+                    resize: none;
+                }
+            }
+            .operations-container
+            {
+                display : flex;
+                flex-flow: row nowrap;
+                font-size: .6rem!important;
+                align-items: stretch;
+                justify-content: space-between;
+
+                button:hover{
+                    background: $primary-color!important;
+                    color: $background-default!important;
+                }
+                .remove-btn{
+                    &:hover{
+                        background: red!important;
+                        color : white!important;
+                    }
+                }
             }
         }
         &.active
         {
             // border: 6px solid $primary-color;
-            color: white;
-            background: red;
-            textarea,
+            // color: white;
+            background: $background-intent
+            /*textarea,
             input
             {
                 color: white;
                 background: red;
-            }
+            }*/
         }
     }
     .add-slide

@@ -27,11 +27,11 @@ const {
   // MonospaceButton,
   UnderlineButton,
   // block buttons
-  ParagraphButton,
-  BlockquoteButton,
+  // ParagraphButton,
+  // BlockquoteButton,
   // CodeButton,
   // OLButton,
-  ULButton,
+  // ULButton,
   // H1Button,
   // H2Button,
   // H3Button,
@@ -124,11 +124,13 @@ export default class QuinoaDraftSlide extends Component {
             <UnderlineButton />
           </div>
 
+          {/*
           <div className="buttons-group">
             <ParagraphButton />
             <BlockquoteButton />
             <ULButton>List</ULButton>
           </div>
+        */}
         </div>
         <Editor
           editorState={this.state.editorState}
