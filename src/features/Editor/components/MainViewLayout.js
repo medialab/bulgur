@@ -166,15 +166,6 @@ const MainViewLayout = ({
             </div>
           }
         </section> : null}
-        {/*activeSlide && !isTakeAwayModalOpen && activeSlide.draft ?
-          <div className="caption-editor">
-            <div className="editor-areas-container">
-              <DraftEditor
-                slide={activeSlide}
-                update={updateDraft} />
-            </div>
-          </div>
-        : null*/}
         <div className="caption-editor">
           <div className="editor-areas-container">
             <DraftEditor
