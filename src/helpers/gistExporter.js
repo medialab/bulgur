@@ -61,12 +61,9 @@ export default function publishGist(htmlContent = '', JSONbundle = {}, dispatch,
         })
         .then(response => {
           const gistData = response.data;
-          const ownerName = gistData.owner.login;
-          const blocksUrl = 'https://bl.ocks.org/' + ownerName + '/raw/' + gistData.id;
-          window.open(blocksUrl, '_blank');
+          // const ownerName = gistData.owner.login;
           const gistUrl = gistData.html_url;
           const results = {
-            blocksUrl,
             gistUrl,
             gistId: gistData.id,
             gist

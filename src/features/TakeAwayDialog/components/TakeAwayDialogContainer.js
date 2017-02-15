@@ -103,6 +103,7 @@ class TakeAwayDialogContainer extends Component {
       <TakeAwayDialogLayout
         {...this.props}
         serverAvailable={serverAvailable}
+        serverUrl={serverUrl}
         gistAvailable={gistAvailable}
         takeAway={this.takeAway} />
     );

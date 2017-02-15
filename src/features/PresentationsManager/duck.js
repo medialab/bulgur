@@ -311,8 +311,7 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
             metadata: {
               ...state.presentations[state.activePresentationId].metadata,
               gistUrl: action.result.gistUrl,
-              gistId: action.result.gistId,
-              blocksUrl: action.result.blocksUrl
+              gistId: action.result.gistId
             }
           }
         }

@@ -43,7 +43,7 @@ export const ChooseTakeAwayStep = ({
         },
         {
           id: 'server',
-          label: 'a sciences po\'s quinoa server powered website',
+          label: 'a sciences po\'s server powered website',
           active: serverAvailable === true
         }
         ]
@@ -83,6 +83,7 @@ export const ChooseTakeAwayStep = ({
  * @param {string} props.takeAwayServerLog
  * @param {string} props.takeAwayServerLogStatus
  * @param {boolean} props.serverAvailable - whether app is connected to a distant server
+ * @param {string} props.serverUrl - the url base of the distant server
  * @param {boolean} props.gistAvailable - whether app is connected to gist
  * @param {function} props.takeAway - main callback function for container
  * @param {object} props.actions - actions passed by redux logic
@@ -95,6 +96,7 @@ const TakeAwayDialogLayout = ({
   takeAwayServerLog,
   takeAwayServerLogStatus,
   serverAvailable,
+  serverUrl,
   gistAvailable,
   // actions
   takeAway,
@@ -115,9 +117,9 @@ const TakeAwayDialogLayout = ({
         takeAwayServerLog ? <p className="take-away-log" style={{background: takeAwayServerLogStatus === 'success' ? 'lightgreen' : 'lightblue'}}>{takeAwayServerLog}</p> : ''
       }
       {
-        activePresentation && activePresentation.metadata && activePresentation.metadata.blocksUrl ?
+        activePresentation && activePresentation.metadata && activePresentation.metadata.gistId ?
           <h2 className="pub-link">
-            <a target="blank" href={activePresentation.metadata.blocksUrl}>Go to the bl.ocks webpage of your presentation</a>
+            <a target="blank" href={serverUrl + '/gist-presentation/' + activePresentation.metadata.gistId}>Go to the gist-based webpage of your presentation</a>
           </h2> : ''
       }
       {
