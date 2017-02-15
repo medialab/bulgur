@@ -103,11 +103,10 @@ const TakeAwayDialogLayout = ({
   },
 }) => (
   <div className="bulgur-take-away-dialog-layout">
-    <ChooseTakeAwayStep 
-      takeAway={takeAway} 
+    <ChooseTakeAwayStep
+      takeAway={takeAway}
       serverAvailable={serverAvailable}
-      gistAvailable={gistAvailable}
-    />
+      gistAvailable={gistAvailable} />
     <section className="take-away-dialog-step pub-links">
       {
         takeAwayGistLog ? <p className="take-away-log" style={{background: takeAwayGistLogStatus === 'success' ? 'lightgreen' : 'lightblue'}}>{takeAwayGistLog}</p> : ''
