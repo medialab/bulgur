@@ -15,6 +15,7 @@ import './PresentationsManagerLayout.scss';
  * @param {string} props.importStatus
  * @param {string} props.importError
  * @param {string} props.promptedToDeleteId
+ * @param {number} props.maxNumberOfLocalPresentations
  * @param {function} props.onDropInput
  * @param {function} props.overrideImportWithCandidate
  * @param {function} props.actions - actions passed by redux logic
@@ -28,6 +29,7 @@ const PresentationsManagerLayout = ({
   importStatus,
   importError,
   promptedToDeleteId,
+  maxNumberOfLocalPresentations,
   // actions
   onDropInput,
   overrideImportWithCandidate,
@@ -44,6 +46,7 @@ const PresentationsManagerLayout = ({
   const onCreatePresentation = () => {
     startPresentationCandidateConfiguration();
   };
+  const allowNewPresentations = presentationsList.length < maxNumberOfLocalPresentations;
   return (
     <section className="bulgur-presentations-manager-layout">
       <section className="landing-group">
@@ -57,7 +60,7 @@ const PresentationsManagerLayout = ({
         <p>
           Bulgur is part of the <a target="blank" href="http://www.medialab.sciences-po.fr/">sciencespo’s médialab</a> tools.
         </p>
-        <button className="new-presentation" onClick={onCreatePresentation}>Start a new presentation</button>
+        {allowNewPresentations ? <button className="new-presentation" onClick={onCreatePresentation}>Start a new presentation</button> : null }
         <div className="presentations-group">
           {presentationsList.length > 0 ? <h4>Your locally stored presentations</h4> : null}
           <ul className="local-presentations-list">
@@ -92,12 +95,14 @@ const PresentationsManagerLayout = ({
       </section>
 
       <section className="landing-group">
-        <Dropzone
-          className="drop-zone"
-          activeClassName="drop-zone-active"
-          onDrop={onDropInput}>
-          <div>Import an existing presentation's project (drop a file here)</div>
-        </Dropzone>
+        {allowNewPresentations ?
+          <Dropzone
+            className="drop-zone"
+            activeClassName="drop-zone-active"
+            onDrop={onDropInput}>
+            <div>Import an existing presentation's project (drop a file here)</div>
+          </Dropzone>
+        : 'You have reached the maximum number of local presentations. You have to make a bit of room before creating new ones. Remember you can save your presentations to the web and import them later !'}
         <div className="import-status-display">
           {importStatus}
         </div>

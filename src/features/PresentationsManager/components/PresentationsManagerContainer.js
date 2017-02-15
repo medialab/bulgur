@@ -10,6 +10,7 @@ import {connect} from 'react-redux';
 import PresentationsManagerLayout from './PresentationsManagerLayout';
 import * as duck from '../duck';
 import * as globalDuck from '../../Editor/duck';
+import {maxNumberOfLocalPresentations} from '../../../../config';
 
 import {
   getFileAsText
@@ -80,6 +81,7 @@ export default class PresentationsManagerContainer extends Component {
     const overrideImportWithCandidate = () => this.props.actions.importSuccess(this.props.importCandidate);
     return (
       <PresentationsManagerLayout
+        maxNumberOfLocalPresentations={maxNumberOfLocalPresentations}
         onDropInput={this.onProjectImportPrompt}
         overrideImportWithCandidate={overrideImportWithCandidate}
         {...this.props} />
