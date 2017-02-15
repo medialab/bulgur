@@ -23,11 +23,20 @@
         overflow-y: auto;
 
         flex: 5;
+        cursor: text;
+        transition: background .5s ease;
+        padding: $base-gutter;
     }
 
     .rich-buttons
     {
         display: flex;
+
+        margin-bottom: $medium-gutter;
+        padding-top: $base-gutter;
+        padding-bottom: $base-gutter;
+
+        border-bottom: 1px solid black;
 
         flex-flow: row nowrap;
         align-content: space-between;
@@ -41,7 +50,8 @@
         }
     }
 
-    &.focused
+    &.focused .DraftEditor-root,
+    &:hover .DraftEditor-root
     {
         background: $background-intent;
     }
