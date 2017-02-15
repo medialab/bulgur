@@ -21,7 +21,8 @@ import {
   SET_ACTIVE_PRESENTATION,
   ADD_SLIDE,
   REMOVE_SLIDE,
-  UPDATE_SLIDE
+  UPDATE_SLIDE,
+  MOVE_SLIDE
 } from '../Editor/duck';
 
 import {
@@ -159,6 +160,7 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
   let position;
   let order;
   let newOrder;
+  let slideId;
   switch (action.type) {
     case APPLY_PRESENTATION_CANDIDATE_CONFIGURATION:
       if (state.activePresentationId) {
@@ -278,7 +280,7 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
         }
       };
     case UPDATE_SLIDE:
-      const slideId = action.id;
+      slideId = action.id;
       return {
         ...state,
         presentations: {
@@ -292,6 +294,21 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
                 ...action.slide
               }
             }
+          }
+        }
+      };
+    case MOVE_SLIDE:
+      slideId = state.presentations[state.activePresentationId].order[action.fromIndex];
+      order = state.presentations[state.activePresentationId].order.slice();
+      order.splice(action.fromIndex, 1);
+      order.splice(action.toIndex, 0, slideId);
+      return {
+        ...state,
+        presentations: {
+          ...state.presentations,
+          [state.activePresentationId]: {
+            ...state.presentations[state.activePresentationId],
+            order
           }
         }
       };

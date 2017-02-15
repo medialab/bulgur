@@ -16,6 +16,7 @@ import SlidesContainer from '../../../components/SlidesContainer/SlidesContainer
  * @param {function} props.returnToLanding
  * @param {function} props.addSlide
  * @param {function} props.updateSlide
+ * @param {function} props.moveSlide
  * @param {function} props.removeSlide
  * @param {function} props.duplicateSlide
  * @param {function} props.setActiveSlide
@@ -28,6 +29,7 @@ const AsideViewLayout = ({
   returnToLanding,
   addSlide,
   updateSlide,
+  moveSlide,
   removeSlide,
   duplicateSlide,
   setActiveSlide,
@@ -43,6 +45,7 @@ const AsideViewLayout = ({
           setActiveSlide={setActiveSlide}
           addSlide={addSlide}
           updateSlide={updateSlide}
+          moveSlide={moveSlide}
           removeSlide={removeSlide}
           duplicateSlide={duplicateSlide} /> : null}
     <button type="button" onClick={returnToLanding}>← Home</button>

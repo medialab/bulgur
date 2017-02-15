@@ -1,25 +1,32 @@
+/* eslint react/prefer-stateless-function:0 */
 /**
  * This module provides a reusable slides container component
  * @module bulgur/components/SlidesContainer
  */
 
 import React from 'react';
-import Textarea from 'react-textarea-autosize';
 
+import {DragDropContext} from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+
+import Slide from './Slide';
 import './SlidesContainer.scss';
 
-const SlidesContainer = ({
-  activePresentation,
-  activeSlideId,
-  setActiveSlide,
-  addSlide,
-  updateSlide,
-  duplicateSlide,
-  removeSlide
-}) => {
-  return (
-    <ul className="bulgur-slides-container">
-      {
+class SlidesContainer extends React.Component {
+  render() {
+    const {
+      activePresentation,
+      activeSlideId,
+      setActiveSlide,
+      addSlide,
+      updateSlide,
+      moveSlide,
+      duplicateSlide,
+      removeSlide
+    } = this.props;
+    return (
+      <ul className="bulgur-slides-container">
+        {
         activePresentation &&
         activePresentation
         .order
@@ -47,40 +54,31 @@ const SlidesContainer = ({
             const onDuplicateSlide = () => {
               duplicateSlide(slide, slideIndex);
             };
+            const onMove = (from, to) => {
+              moveSlide(from, to);
+            };
             return (
-              <li className={'bulgur-slide ' + (activeSlideId === slideKey ? 'active' : '')} onClick={onGlobalClick} key={slideKey}>
-                <div className="slide-content">
-                  <h3>
-                    <input
-                      placeholder="slide title"
-                      type="text"
-                      value={slide.title}
-                      onChange={onTitleChange} />
-                  </h3>
-                  <div className="comment-container">
-                    <Textarea
-                      placeholder="slide comment"
-                      maxRows={15}
-                      value={slide.markdown}
-                      onChange={onTextChange} />
-                  </div>
-                  <div className="operations-container">
-                    <button>■ Move</button>
-                    <button onClick={onDuplicateSlide}>⎘ Duplicate</button>
-                    <button className="remove-btn" onClick={onRemove}>⌫ Remove</button>
-                  </div>
-                </div>
-              </li>
+              <Slide
+                key={slideKey}
+                slide={slide}
+                slideKey={slideKey}
+                slideIndex={slideIndex}
+                active={activeSlideId === slideKey}
+                onMove={onMove}
+                onRemove={onRemove}
+                onGlobalClick={onGlobalClick}
+                onTitleChange={onTitleChange}
+                onTextChange={onTextChange}
+                onDuplicateSlide={onDuplicateSlide} />
             );
           }
           )
       }
-      <li className="add-slide">
-        <button type="button" onClick={addSlide}>Add slide</button>
-      </li>
-    </ul>
+        <li className="add-slide">
+          <button type="button" onClick={addSlide}>Add slide</button>
+        </li>
+      </ul>
   );
-
-};
-
-export default SlidesContainer;
+  }
+}
+export default DragDropContext(HTML5Backend)(SlidesContainer);

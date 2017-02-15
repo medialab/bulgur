@@ -38,6 +38,7 @@ export const ADD_SLIDE = '$Bulgur/Editor/ADD_SLIDE';
 export const REMOVE_SLIDE = '$Bulgur/Editor/REMOVE_SLIDE';
 export const SET_ACTIVE_SLIDE = '$Bulgur/Editor/SET_ACTIVE_SLIDE';
 export const UPDATE_SLIDE = '$Bulgur/Editor/UPDATE_SLIDE';
+export const MOVE_SLIDE = '$Bulgur/Editor/MOVE_SLIDE';
 /*
  * actions related to global ui
  */
@@ -115,6 +116,15 @@ export const updateSlide = (id, slide = {}) => ({
   type: UPDATE_SLIDE,
   slide,
   id
+});
+/**
+ * @param {number} fromIndex - the original index of the slide to move
+ * @param {number} toIndex - the target index of the slide to move
+ */
+export const moveSlide = (fromIndex, toIndex) => ({
+  type: MOVE_SLIDE,
+  fromIndex,
+  toIndex
 });
 /**
  * @param {string} id - the id of the slide to remove

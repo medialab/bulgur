@@ -110,15 +110,12 @@
         }
         &.active
         {
-            // border: 6px solid $primary-color;
-            // color: white;
             background: $background-intent;
-            /*textarea,
-            input
-            {
-                color: white;
-                background: red;
-            }*/
+        }
+        &.dragged,
+        &.drag-hovered
+        {
+            opacity: .3;
         }
     }
     .add-slide

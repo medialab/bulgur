@@ -69,6 +69,7 @@ const EditorLayout = ({
     removeSlide,
     setActiveSlide,
     updateSlide,
+    moveSlide,
     toggleSlideSettingsPannel,
     toggleViewColorEdition,
     setViewColor,
@@ -112,7 +113,8 @@ const EditorLayout = ({
               removeSlide={removeSlide}
               setActiveSlide={setActiveSlide}
               activeSlideId={activeSlideId}
-              updateSlide={updateSlide} />
+              updateSlide={updateSlide}
+              moveSlide={moveSlide} />
             <MainViewLayout
               activePresentation={activePresentation}
               isTakeAwayModalOpen={isTakeAwayModalOpen}
