@@ -117,14 +117,6 @@ const MainViewLayout = ({
     });
   };
 
-  // const updateDraft = ({draft}) => {
-  //   updateSlide(activeSlideId, {
-  //     ...activeSlide,
-  //     draft,
-  //     markdown: undefined
-  //   });
-  // };
-
   return (
     <figure className="bulgur-main-view">
       <section className="visualizations-row">

@@ -14,6 +14,7 @@
     left: 0;
 
     display: flex;
+    overflow-y: auto;
 
     width: 100%;
     height: 100%;
@@ -24,8 +25,6 @@
     flex-flow: row nowrap;
     align-items: nowrap;
     justify-content: center;
-
-    overflow-y: auto;
     .landing-group
     {
         display: flex;

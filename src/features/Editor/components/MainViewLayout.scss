@@ -142,34 +142,42 @@
 
     .view-operations
     {
-        max-width: 0;
         overflow: hidden;
+
+        max-width: 0;
         max-height: 4rem;
+
         transition: all .5s ease;
-        &.visible{
+        &.visible
+        {
             max-width: 100%;
         }
-        button{
+        button
+        {
+            height: 4rem;
             padding: $medium-gutter;
+            // border-bottom: none;
+
+            transition: all .5s ease;
 
             border: 1px solid $primary-color;
             border-top: none;
-            // border-bottom: none;
-            transition: all .5s ease;
-            height: 4rem;
             &:last-of-type
             {
                 border-left: none;
             }
-            &:hover{
-                background: red;
+            &:hover
+            {
                 color: white;
+                background: red;
             }
 
-            &#take-snapshot-btn{
+            &#take-snapshot-btn
+            {
                 color: white;
                 background: red;
-                &:hover{
+                &:hover
+                {
                     background: brown;
                 }
             }

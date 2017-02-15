@@ -99,11 +99,13 @@ export const changeViewByUser = (id, event) => ({
 /**
  * @param {string} id - the id of the slide to add
  * @param {object} slide - the content of the slide to add
+ * @param {object} order - the position in slides list in which to add the slide
  */
-export const addSlide = (id, slide = {}) => ({
+export const addSlide = (id, slide = {}, order) => ({
   type: ADD_SLIDE,
   slide,
-  id
+  id,
+  order
 });
 /**
  * @param {string} id - the id of the slide to update

@@ -36,6 +36,7 @@ import TakeAwayDialog from '../../TakeAwayDialog/components/TakeAwayDialogContai
  * @param {function} props.returnToLanding
  * @param {object} props.actions - actions passed by redux logic
  * @param {function} props.addSlide
+ * @param {function} props.duplicateSlide
  * @param {function} props.openSettings
  * @param {function} props.closeAndResetDialog
  * @return {ReactElement} markup
@@ -74,6 +75,7 @@ const EditorLayout = ({
     setViewDatamapItem
   },
   addSlide,
+  duplicateSlide,
   openSettings,
   closeAndResetDialog,
 }) => {
@@ -106,6 +108,7 @@ const EditorLayout = ({
               openSettings={openSettings}
               returnToLanding={returnToLanding}
               addSlide={addSlide}
+              duplicateSlide={duplicateSlide}
               removeSlide={removeSlide}
               setActiveSlide={setActiveSlide}
               activeSlideId={activeSlideId}

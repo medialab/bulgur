@@ -34,15 +34,16 @@
         {
             display: flex;
 
+            max-width: 100%;
             padding-right: $base-gutter;
 
             flex: 3;
             flex-flow: column nowrap;
-            max-width: 100%;
             input,
             textarea
             {
                 font-size: .7rem;
+
                 padding-right: $base-gutter;
             }
             h3
@@ -84,20 +85,25 @@
             }
             .operations-container
             {
-                display : flex;
-                flex-flow: row nowrap;
                 font-size: .6rem!important;
+
+                display: flex;
+
+                flex-flow: row nowrap;
                 align-items: stretch;
                 justify-content: space-between;
 
-                button:hover{
-                    background: $primary-color!important;
+                button:hover
+                {
                     color: $background-default!important;
+                    background: $primary-color!important;
                 }
-                .remove-btn{
-                    &:hover{
+                .remove-btn
+                {
+                    &:hover
+                    {
+                        color: white!important;
                         background: red!important;
-                        color : white!important;
                     }
                 }
             }
@@ -106,7 +112,7 @@
         {
             // border: 6px solid $primary-color;
             // color: white;
-            background: $background-intent
+            background: $background-intent;
             /*textarea,
             input
             {

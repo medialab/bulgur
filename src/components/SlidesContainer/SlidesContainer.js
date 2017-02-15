@@ -14,6 +14,7 @@ const SlidesContainer = ({
   setActiveSlide,
   addSlide,
   updateSlide,
+  duplicateSlide,
   removeSlide
 }) => {
   return (
@@ -22,7 +23,7 @@ const SlidesContainer = ({
         activePresentation &&
         activePresentation
         .order
-        .map(slideKey => {
+        .map((slideKey, slideIndex) => {
             const slide = activePresentation.slides[slideKey];
             const onRemove = () => removeSlide(slideKey);
             const onGlobalClick = () => {
@@ -40,9 +41,11 @@ const SlidesContainer = ({
             const onTextChange = (e) => {
               updateSlide(slideKey, {
                 ...slide,
-                markdown: e.target.value,
-                draft: undefined
+                markdown: e.target.value
               });
+            };
+            const onDuplicateSlide = () => {
+              duplicateSlide(slide, slideIndex);
             };
             return (
               <li className={'bulgur-slide ' + (activeSlideId === slideKey ? 'active' : '')} onClick={onGlobalClick} key={slideKey}>
@@ -63,7 +66,7 @@ const SlidesContainer = ({
                   </div>
                   <div className="operations-container">
                     <button>■ Move</button>
-                    <button>⎘ Duplicate</button>
+                    <button onClick={onDuplicateSlide}>⎘ Duplicate</button>
                     <button className="remove-btn" onClick={onRemove}>⌫ Remove</button>
                   </div>
                 </div>

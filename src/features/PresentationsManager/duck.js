@@ -156,6 +156,9 @@ const PRESENTATIONS_DEFAULT_STATE = {
  * @param {object} action - the action to use to produce new state
  */
 function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
+  let position;
+  let order;
+  let newOrder;
   switch (action.type) {
     case APPLY_PRESENTATION_CANDIDATE_CONFIGURATION:
       if (state.activePresentationId) {
@@ -252,6 +255,12 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
      */
     case ADD_SLIDE:
       const newSlideId = action.id;
+      position = action.order || state.presentations[state.activePresentationId].order.length;
+      newOrder = [
+        ...state.presentations[state.activePresentationId].order.slice(0, position),
+        newSlideId,
+        ...state.presentations[state.activePresentationId].order.slice(position)
+      ];
       return {
         ...state,
         presentations: {
@@ -262,13 +271,9 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
               ...state.presentations[state.activePresentationId].slides,
               [newSlideId]: {
                 ...action.slide,
-                // draft: EditorState.createWithContent(stateFromMarkdown(action.slide.markdown || ''))
               }
             },
-            order: [
-              ...state.presentations[state.activePresentationId].order,
-              newSlideId
-            ]
+            order: newOrder
           }
         }
       };
@@ -293,9 +298,9 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
     case REMOVE_SLIDE:
       newState = {...state};
       delete newState.presentations[state.activePresentationId].slides[action.id];
-      const order = newState.presentations[state.activePresentationId].order;
-      const position = order.indexOf(action.id);
-      const newOrder = [...order.slice(0, position), ...order.slice(position + 1)];
+      order = newState.presentations[state.activePresentationId].order;
+      position = order.indexOf(action.id);
+      newOrder = [...order.slice(0, position), ...order.slice(position + 1)];
       newState.presentations[state.activePresentationId].order = newOrder;
       return newState;
     /*

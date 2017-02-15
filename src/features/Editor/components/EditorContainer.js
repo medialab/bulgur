@@ -43,6 +43,7 @@ class EditorContainer extends Component {
     this.openSettings = this.openSettings.bind(this);
 
     this.addSlide = this.addSlide.bind(this);
+    this.duplicateSlide = this.duplicateSlide.bind(this);
   }
 
   shouldComponentUpdate() {
@@ -87,6 +88,15 @@ class EditorContainer extends Component {
     this.props.actions.addSlide(id, slide);
   }
 
+  duplicateSlide (slide, slideIndex) {
+    const id = uuid();
+    const newSlide = {
+      ...slide
+    };
+    const position = slideIndex + 1;
+    this.props.actions.addSlide(id, newSlide, position);
+  }
+
   render() {
     return (
       <EditorLayout
@@ -94,6 +104,7 @@ class EditorContainer extends Component {
         openSettings={this.openSettings}
         closeAndResetDialog={this.closeAndResetDialog}
         updateSlide={this.updateSlide}
+        duplicateSlide={this.duplicateSlide}
         returnToLanding={this.returnToLanding}
         addSlide={this.addSlide}
         resetView={this.resetView} />
