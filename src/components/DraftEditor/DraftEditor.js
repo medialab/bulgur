@@ -136,6 +136,7 @@ export default class QuinoaDraftSlide extends Component {
           editorState={this.state.editorState}
           onChange={onChange}
           handleKeyCommand={this.handleKeyCommand}
+          placeholder="Write your slide's comment here"
           ref={(editorComponent) => {
 this.editorComponent = editorComponent;
 }}

@@ -148,7 +148,7 @@ const MainViewLayout = ({
               type="text"
               value={activeSlide.title}
               onChange={updateTitle}
-              placeholder="Slide title" />
+              placeholder="Write your slide title here" />
           </h1>
           {!activeSlide ?
             '' :
