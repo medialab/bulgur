@@ -38,12 +38,12 @@ export const ChooseTakeAwayStep = ({
         },
         {
           id: 'github',
-          label: 'a gist+bl.ocks online website',
+          label: 'a gist-powered website',
           active: serverAvailable === true && gistAvailable === true
         },
         {
           id: 'server',
-          label: 'a sciences po\'s server powered website',
+          label: 'a forccast-powered website',
           active: serverAvailable === true
         }
         ]
