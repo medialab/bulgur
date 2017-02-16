@@ -20,6 +20,8 @@
 
     .DraftEditor-root
     {
+        position: relative;
+
         overflow-y: auto;
 
         padding: $base-gutter;
@@ -28,14 +30,15 @@
         transition: background .5s ease;
 
         flex: 5;
-        position: relative;
 
         .public-DraftEditorPlaceholder-inner
         {
             font-style: italic;
+
             position: absolute;
             top: $base-gutter/2;
             left: $base-gutter;
+
             opacity: .5;
         }
     }
