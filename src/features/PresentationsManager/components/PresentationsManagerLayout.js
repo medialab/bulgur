@@ -67,9 +67,58 @@ const PresentationsManagerLayout = ({
         <p>
           Bulgur is part of the <a target="blank" href="http://www.medialab.sciences-po.fr/">sciencespo’s médialab</a> tools.
         </p>
+        <iframe
+          width="100%"
+          height="315"
+          src="https://www.youtube.com/embed/VsnhrYjP02M"
+          frameBorder="0"
+          allowFullScreen />
+      </section>
+
+      <section className="landing-group">
         {allowNewPresentations ? <button className="new-presentation" onClick={onCreatePresentation}>Start a new presentation</button> : null }
+        {allowNewPresentations ?
+          <div>
+            <h3>... or import a project from your computer</h3>
+            <Dropzone
+              className="drop-zone"
+              activeClassName="drop-zone-active"
+              onDrop={onDropInput}>
+              <div>drop the .json file here</div>
+            </Dropzone>
+          </div>
+        : 'You have reached the maximum number of local presentations. You have to make a bit of room before creating new ones. Remember you can save your presentations to the web and import them later !'}
+
+
+        {allowNewPresentations ?
+          <div className="import-from-url">
+            <h3>...or fetch an existant project from a distant server</h3>
+            <form onSubmit={importFromDistantJSON}>
+              <input
+                value={importFromUrlCandidate}
+                onChange={onImportFromUrlChange} type="text"
+                placeholder="copy-paste the URL of the project" />
+              <input
+                type="submit"
+                value="Import" />
+            </form>
+            <p>
+              <i>You can import a project from the forccast server or from a <a target="blank" href="https://gist.github.com">gist</a> repository.</i>
+            </p>
+          </div> : null}
+        <div className="import-status-display">
+          {importStatus}
+        </div>
+        <div className="import-error-display">
+          {importError === 'badJSON' ? 'Your file is badly formatted' : ''}
+          {importError === 'invalidProject' ? 'Your file is not a valid quinoa presentation' : ''}
+          {importError === 'invalidUrl' ? 'The url did not point to a valid presentation' : ''}
+          {importError === 'invalidGist' ? 'The gist is not properly formatted as a quinoa presentation' : ''}
+          {importError === 'fetchError' ? 'The fetch process of the file failed' : ''}
+        </div>
+
         <div className="presentations-group">
-          {presentationsList.length > 0 ? <h4>Your locally stored presentations</h4> : null}
+          {presentationsList.length > 0 ? <h4>... or continue one of your locally stored presentations</h4> : null}
           <ul className="local-presentations-list">
             {presentationsList.map((presentation, index) => {
             const onClickPrompt = () => promptDeletePresentation(presentation.id);
@@ -98,42 +147,6 @@ const PresentationsManagerLayout = ({
           })
           }
           </ul>
-        </div>
-      </section>
-
-      <section className="landing-group">
-        {allowNewPresentations ?
-          <Dropzone
-            className="drop-zone"
-            activeClassName="drop-zone-active"
-            onDrop={onDropInput}>
-            <div>Import an existing presentation's project from your computer <br />(drop the .json file here)</div>
-          </Dropzone>
-        : 'You have reached the maximum number of local presentations. You have to make a bit of room before creating new ones. Remember you can save your presentations to the web and import them later !'}
-
-
-        {allowNewPresentations ?
-          <div className="import-from-url">
-            <h3>...or fetch an existant project from a distant server</h3>
-            <form onSubmit={importFromDistantJSON}>
-              <input
-                value={importFromUrlCandidate}
-                onChange={onImportFromUrlChange} type="text"
-                placeholder="copy-paste the URL of the project" />
-            </form>
-            <p>
-              <i>You can import from the forccast server or from a gist page.</i>
-            </p>
-          </div> : null}
-        <div className="import-status-display">
-          {importStatus}
-        </div>
-        <div className="import-error-display">
-          {importError === 'badJSON' ? 'Your file is badly formatted' : ''}
-          {importError === 'invalidProject' ? 'Your file is not a valid quinoa presentation' : ''}
-          {importError === 'invalidUrl' ? 'The url did not point to a valid presentation' : ''}
-          {importError === 'invalidGist' ? 'The gist is not properly formatted as a quinoa presentation' : ''}
-          {importError === 'fetchError' ? 'The fetch process of the file failed' : ''}
         </div>
       </section>
 

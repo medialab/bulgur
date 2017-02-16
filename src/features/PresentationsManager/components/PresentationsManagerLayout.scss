@@ -54,8 +54,15 @@
         {
             width: 100%;
             margin-bottom: $medium-gutter;
-
+            background: lightgreen;
+            padding: $large-gutter;
             border: 2px solid $background-default!important;
+            color: $primary-color;
+            font-width: 1.2rem;
+            &:hover{
+                background: darkgreen;
+                color: $background-default;
+            }
         }
         h4
         {
@@ -123,7 +130,6 @@
     .drop-zone
     {
         width: 100%;
-        margin-top: $medium-gutter * 6;
         // margin-right: $large-gutter;
         padding-top: 8rem;
         // padding-right: $medium-gutter;
@@ -147,9 +153,13 @@
 
     .import-from-url
     {
-        input
-        {
-            width: 100%;
+        form{
+            display: flex;
+            flex-flow: row nowrap;
+            input[type="text"]
+            {
+                flex: 1;
+            }
         }
     }
 }
