@@ -21,8 +21,6 @@ const SET_BUNDLE_HTML_STATUS = '§Bulgur/TakeAwayDialog/SET_BUNDLE_HTML_STATUS';
 export const EXPORT_TO_SERVER = '§Bulgur/TakeAwayDialog/EXPORT_TO_SERVER';
 export const TAKE_AWAY = '§Bulgur/TakeAwayDialog/TAKE_AWAY';
 export const EXPORT_TO_GIST = '§Bulgur/TakeAwayDialog/EXPORT_TO_GIST';
-export const UPDATE_ACTIVE_PRESENTATION_FROM_SERVER = '§Bulgur/TakeAwayDialog/UPDATE_ACTIVE_PRESENTATION_FROM_SERVER';
-export const UPDATE_ACTIVE_PRESENTATION_FROM_GIST = '§Bulgur/TakeAwayDialog/UPDATE_ACTIVE_PRESENTATION_FROM_GIST';
 /*
  * Action creators
  */
@@ -48,6 +46,46 @@ export const setBundleHtmlStatus = (status, log) => dispatch => {
   });
 };
 /**
+ * @param {string} status - the status of the gist export process to display
+ * @param {string} log - the log message of the gist export process to display
+ */
+export const setExportToGistStatus = (status, log) => dispatch => {
+  if (status === 'failure' || status === 'success') {
+    setTimeout(() => {
+      dispatch({
+        type: EXPORT_TO_GIST_STATUS,
+        status: undefined,
+        log: undefined
+      });
+    }, 5000);
+  }
+  dispatch({
+    type: EXPORT_TO_GIST_STATUS,
+    status,
+    log
+  });
+};
+/**
+ * @param {string} status - the status of the server export process to display
+ * @param {string} log - the log message of the server export process to display
+ */
+export const setExportToServerStatus = (status, log) => dispatch => {
+  if (status === 'failure' || status === 'success') {
+    setTimeout(() => {
+      dispatch({
+        type: EXPORT_TO_SERVER_STATUS,
+        status: undefined,
+        log: undefined
+      });
+    }, 5000);
+  }
+  dispatch({
+    type: EXPORT_TO_SERVER_STATUS,
+    status,
+    log
+  });
+};
+/**
  * @param {object} htmlContent - the html content of the app to export to gist
  * @param {object} presentation - the presentation data to export to gist
  * @param {string} id - the id of the gist to which the presentation is stored (if it has already been exported once)
@@ -62,7 +100,16 @@ export const exportToGist = (htmlContent, presentation, gistId) => ({
     });
     return new Promise((resolve, reject) => {
       return publishToGist(htmlContent, presentation, dispatch, EXPORT_TO_GIST_STATUS, gistId)
-              .then(resolve)
+              .then((d) => {
+                resolve(d);
+                // remove message after a while
+                setTimeout(() =>
+                  dispatch({
+                    type: EXPORT_TO_GIST_STATUS,
+                    takeAwayGistLog: undefined,
+                    takeAwayGistLogStatus: undefined
+                  }), 5000);
+              })
               .catch((e) => {
                 reject(e);
                 // remove message after a while
@@ -85,7 +132,16 @@ export const exportToServer = (presentation) => ({
   promise: (dispatch) => {
     return new Promise((resolve, reject) => {
       return publishToServer(presentation, dispatch, EXPORT_TO_SERVER_STATUS)
-              .then(resolve)
+              .then((d) => {
+                resolve(d);
+                // remove message after a while
+                setTimeout(() =>
+                  dispatch({
+                    type: EXPORT_TO_GIST_STATUS,
+                    takeAwayGistLog: undefined,
+                    takeAwayGistLogStatus: undefined
+                  }), 5000);
+              })
               .catch((e) => {
                 reject(e);
                 // remove message after a while
@@ -157,13 +213,13 @@ function takeAwayUi(state = DEFAULT_TAKE_AWAY_UI_SETTINGS, action) {
     case EXPORT_TO_GIST_STATUS:
       return {
         ...state,
-        takeAwayGistLog: action.message,
+        takeAwayGistLog: action.log,
         takeAwayGistLogStatus: action.status
       };
     case EXPORT_TO_GIST + '_SUCCESS':
       return {
         ...state,
-        takeAwayGistLog: 'your presentation is online on gist',
+        takeAwayGistLog: 'your presentation is synchronized with gist',
         takeAwayGistLogStatus: 'success'
       };
     case EXPORT_TO_GIST + '_FAIL':
@@ -176,13 +232,13 @@ function takeAwayUi(state = DEFAULT_TAKE_AWAY_UI_SETTINGS, action) {
     case EXPORT_TO_SERVER_STATUS:
       return {
         ...state,
-        takeAwayServerLog: action.message,
+        takeAwayServerLog: action.log,
         takeAwayServerLogStatus: action.status
       };
     case EXPORT_TO_SERVER + '_SUCCESS':
       return {
         ...state,
-        takeAwayServerLog: 'your presentation is online on forccast server',
+        takeAwayServerLog: 'your presentation is synchronized with the forccast server',
         takeAwayServerLogStatus: 'success'
       };
     case EXPORT_TO_SERVER + '_FAIL':

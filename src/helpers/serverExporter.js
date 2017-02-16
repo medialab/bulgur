@@ -16,7 +16,7 @@ export default function publishToServer (presentation, dispatch, statusActionNam
   return new Promise((resolve, reject) => {
     dispatch({
       type: statusActionName,
-      message: 'publishing to server',
+      log: 'publishing to server',
       status: 'ongoing'
     });
     patch(serverUrl + '/presentations/' + presentation.id)

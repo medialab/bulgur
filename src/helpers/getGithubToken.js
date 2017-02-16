@@ -40,9 +40,6 @@ export default function getGithubToken () {
           }
         });
       }
- else {
-        reject();
-      }
     });
   });
 }

@@ -7,6 +7,7 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {debounce} from 'lodash';
+import {get} from 'superagent';
 
 import * as duck from '../duck';
 import {
@@ -15,7 +16,8 @@ import {
 } from '../../Editor/duck';
 
 import {
-  selector as presentationsSelector
+  selector as presentationsSelector,
+  updatePresentation
 } from '../../PresentationsManager/duck';
 
 import downloadFile from '../../../helpers/fileDownloader';
@@ -45,7 +47,8 @@ import TakeAwayDialogLayout from './TakeAwayDialogLayout';
   dispatch => ({
     actions: bindActionCreators({
       ...duck,
-      closeTakeAwayModal
+      closeTakeAwayModal,
+      updatePresentation
     }, dispatch)
   })
 )
@@ -54,10 +57,69 @@ class TakeAwayDialogContainer extends Component {
   constructor(props) {
     super(props);
     this.takeAway = debounce(this.takeAway.bind(this), 300);
+    this.updateActivePresentationFromServer = this.updateActivePresentationFromServer.bind(this);
+    this.updateActivePresentationFromGist = this.updateActivePresentationFromGist.bind(this);
   }
 
   shouldComponentUpdate() {
     return true;
+  }
+
+  updateActivePresentationFromServer() {
+    // todo : rewrite that as an action
+    this.props.actions.setExportToServerStatus('ongoing', 'updating from the distant server');
+    const url = this.props.activePresentation.metadata.serverJSONUrl;
+    get(url)
+      .end((err, res) => {
+        if (err) {
+          return this.props.actions.setExportToServerStatus('failure', 'connection with distant server has failed');
+        }
+        try {
+          const project = JSON.parse(res.text);
+          this.props.actions.updatePresentation(project.id, project);
+          this.props.actions.setExportToServerStatus('success', 'your presentation is now synchronized with the forccast server');
+        }
+ catch (e) {
+          this.props.actions.setExportToServerStatus('failure', 'The distant version is badly formatted');
+        }
+      });
+  }
+  updateActivePresentationFromGist() {
+    // todo : rewrite that as an action
+    const gistId = this.props.activePresentation.metadata.gistId;
+    const entryUrl = 'https://api.github.com/gists/' + gistId;
+    return get(entryUrl)
+    .end((err, res) => {
+      if (err) {
+        return this.props.actions.setExportToGistStatus('failure', 'The gist could not be retrieved');
+      }
+      try {
+        const info = JSON.parse(res.text);
+        if (info.files && info.files['project.json']) {
+          const rawUrl = info.files['project.json'].raw_url;
+          return get(rawUrl)
+          .end((rawErr, rawRes) => {
+            if (rawErr) {
+              return this.props.actions.setExportToGistStatus('failure', 'The gist could not be retrieved');
+            }
+            try {
+              const project = JSON.parse(rawRes.text);
+              this.props.actions.updatePresentation(project.id, project);
+              this.props.actions.setExportToGistStatus('success', 'your presentation is now synchronized with the gist repository');
+            }
+ catch (parseError) {
+              this.props.actions.setExportToGistStatus('failure', 'The gist project file was badly formatted');
+            }
+          });
+        }
+        else {
+          return this.props.actions.importFail('invalidGist');
+        }
+      }
+      catch (parseError) {
+        return this.props.actions.importFail('invalidUrl');
+      }
+    });
   }
 
   takeAway(takeAwayType) {
@@ -109,6 +171,8 @@ class TakeAwayDialogContainer extends Component {
         serverAvailable={serverAvailable}
         serverUrl={serverUrl}
         gistAvailable={gistAvailable}
+        updateActivePresentationFromServer={this.updateActivePresentationFromServer}
+        updateActivePresentationFromGist={this.updateActivePresentationFromGist}
         takeAway={this.takeAway} />
     );
   }

@@ -88,6 +88,8 @@ export const ChooseTakeAwayStep = ({
  * @param {string} props.serverUrl - the url base of the distant server
  * @param {boolean} props.gistAvailable - whether app is connected to gist
  * @param {function} props.takeAway - main callback function for container
+ * @param {function} props.updateActivePresentationFromGist -
+ * @param {function} props.updateActivePresentationFromServer -
  * @param {object} props.actions - actions passed by redux logic
  * @return {ReactElement} markup
  */
@@ -104,10 +106,10 @@ const TakeAwayDialogLayout = ({
   gistAvailable,
   // actions
   takeAway,
+  updateActivePresentationFromGist,
+  updateActivePresentationFromServer,
   actions: {
     closeTakeAwayModal,
-    updateActivePresentationFromGist,
-    updateActivePresentationFromServer
   },
 }) => (
   <div className="bulgur-take-away-dialog-layout">
@@ -125,6 +127,7 @@ const TakeAwayDialogLayout = ({
       {
         activePresentation && activePresentation.metadata && activePresentation.metadata.gistId ?
           <div>
+            <h2>Your presentation on gist servers</h2>
             <p>
               <a target="blank" href={activePresentation.metadata.gistUrl}>Go to the gist source code of your presentation</a>
             </p>
@@ -151,6 +154,7 @@ const TakeAwayDialogLayout = ({
       {
         activePresentation && activePresentation.metadata && activePresentation.metadata.serverHTMLUrl ?
           <div>
+            <h2>Your presentation on forccast servers</h2>
             <p>
               <a target="blank" href={activePresentation.metadata.serverHTMLUrl}>Go to the forccast server's webpage of your presentation</a>
             </p>

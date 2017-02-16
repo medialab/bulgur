@@ -18,8 +18,8 @@ export default function publishGist(htmlContent = '', JSONbundle = {}, dispatch,
   return new Promise((resolve, reject) => {
     dispatch({
       type: statusActionName,
-      message: 'connecting to github',
-      status: 'processing'
+      log: 'connecting to github',
+      status: 'ongoing'
     });
 
     getGithubToken()
@@ -42,14 +42,14 @@ export default function publishGist(htmlContent = '', JSONbundle = {}, dispatch,
       if (gistId) {
         dispatch({
           type: statusActionName,
-          message: 'updating gist',
+          log: 'updating gist',
           status: 'processing'
         });
       }
       else {
         dispatch({
           type: statusActionName,
-          message: 'creating gist',
+          log: 'creating gist',
           status: 'processing'
         });
       }
