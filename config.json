@@ -1,4 +1,4 @@
 {
   "maxNumberOfLocalPresentations": 5,
-  "maxDataFileSizeKb": 2000
+  "maxDataFileSizeInBytes": 2000000
 }

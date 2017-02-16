@@ -58,6 +58,7 @@ const previewVisualization = (visualization, models, updateParameters, visualiza
  * Renders the configuration dialog layout
  * @param {object} props - the props to render
  * @param {object} props.presentationCandidate - the data of the presentation to configure
+ * @param {string} props.fetchUserFileStatus - the status of the file the user is trying to upload
  * @param {object} props.activeVisualizationTypes - models to display available visualization types
  * @param {object} props.activeVisualizationTypesModels - models to use for displaying visualization type related configurations
  * @param {object} props.actions - actions from the redux logic
@@ -71,6 +72,7 @@ const ConfigurationDialogLayout = ({
     visualizations: {},
     datasets: {}
   },
+  fetchUserFileStatus,
   // todo : delete the following variable and do everything with visualizationTypesModels
   activeVisualizationTypes = [],
   visualizationTypesModels,
@@ -253,6 +255,11 @@ const ConfigurationDialogLayout = ({
             </section>
           </section>
       }
+        {
+          fetchUserFileStatus ?
+            <div style={{background: 'red', color: 'white'}}>{fetchUserFileStatus}</div>
+          : null
+        }
       </section>
       <section className="options-group">
         <h2>How to visualize the data ?</h2>

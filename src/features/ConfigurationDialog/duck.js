@@ -19,6 +19,8 @@ import {bootstrapColorsMap} from '../../helpers/colorHelpers';
 
 import visualizationTypesModels from '../../models/visualizationTypes';
 
+import {maxDataFileSizeInBytes} from '../../../config';
+
 import {
   parseNetworkData,
   parseMapData,
@@ -136,6 +138,11 @@ export const fetchUserFile = (file, datasetId, update = false) => ({
   type: FETCH_USER_FILE,
   promise: (dispatch) => {
     return new Promise((resolve, reject) => {
+      if (file.size > maxDataFileSizeInBytes) {
+        // fading the message away
+        setTimeout(() => dispatch({type: FETCH_USER_FILE}), 5000);
+        return reject('File is too big (maximum allowed : ' + maxDataFileSizeInBytes / 1000 + ' kb)');
+      }
       getFileAsText(file, (err, str) => {
         if (err) {
           reject(err);
@@ -312,6 +319,20 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
       return {
         ...state,
         presentationCandidate
+      };
+    case SET_PRESENTATION_CANDIDATE_DATASET_DATA:
+      return {
+        ...state,
+        presentationCandidate: {
+          ...state.presentationCandidate,
+          datasets: {
+            ...state.presentationCandidate.datasets,
+            [action.datasetId]: {
+              ...state.presentationCandidate.datasets[action.datasetId],
+              rawData: action.rawData
+            }
+          }
+        }
       };
     case SET_PRESENTATION_CANDIDATE_DATASET_METADATA:
       return {
@@ -507,7 +528,12 @@ const PRESENTATION_CANDIDATE_UI_DEFAULT_STATE = {
    * Representation of the previews states
    * @type {object}
    */
-   previewsParameters: {}
+   previewsParameters: {},
+   /**
+   * Representation of the status of file fetching status
+   * @type {string}
+   */
+   fetchUserFileStatus: undefined
 };
 /**
  * This redux reducer handles the modification of the ui state of a presentation configuration dialog
@@ -543,6 +569,16 @@ function presentationCandidateUi (state = PRESENTATION_CANDIDATE_UI_DEFAULT_STAT
         ...state,
         editedColor: undefined
       };
+    case FETCH_USER_FILE:
+      return {
+        ...state,
+        fetchUserFileStatus: undefined
+      };
+    case FETCH_USER_FILE + '_FAIL':
+      return {
+        ...state,
+        fetchUserFileStatus: action.errorMessage
+      };
     default:
       return state;
   }
@@ -568,6 +604,8 @@ const invalidFileType = state => state.presentationCandidateData &&
   state.presentationCandidateData.invalidFileType;
 const editedColor = state => state.presentationCandidateUi &&
   state.presentationCandidateUi.editedColor;
+const fetchUserFileStatus = state => state.presentationCandidateUi &&
+  state.presentationCandidateUi.fetchUserFileStatus;
 /**
  * The selector is a set of functions for accessing this feature's state
  * @type {object}
@@ -578,5 +616,6 @@ export const selector = createStructuredSelector({
   editedColor,
   invalidFileType,
   presentationCandidate,
+  fetchUserFileStatus
 });
 
