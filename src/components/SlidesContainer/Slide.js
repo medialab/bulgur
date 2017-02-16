@@ -117,7 +117,7 @@ class Slide extends React.Component {
               onChange={onTextChange} />
           </div>
           <div className="operations-container">
-            {connectDragSource(<button>■ Move</button>)}
+            {connectDragSource(<button className="move-btn">■ Move</button>)}
             <button onClick={onDuplicateSlide}>⎘ Duplicate</button>
             <button className="remove-btn" onClick={onRemove}>⌫ Remove</button>
           </div>

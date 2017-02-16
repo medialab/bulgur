@@ -35,7 +35,7 @@ const SlideSettingsPannel = ({
                 editedColor={editedColor} />
             ))
           }
-          <button className={'open-pannel ' + (isOpen ? 'active' : '')} onClick={togglePannel}>{isOpen ? '✕ Close pannel' : 'Slide settings'}</button>
+          <button className={'open-pannel ' + (isOpen ? 'active' : '')} onClick={togglePannel}>{isOpen ? '✕ Close pannel' : '⚙ Slide settings'}</button>
         </div>
       </div>
       <div className="slide-parameters-wrapper">

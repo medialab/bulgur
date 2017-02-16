@@ -16,6 +16,15 @@
 
             flex-flow: column nowrap;
 
+            cursor: pointer;
+
+            transition: all .5s ease;
+
+
+            &:hover{
+                background: $background-intent;
+            }
+
             .twitter-picker
             {
                 width: 100%!important;
