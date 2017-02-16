@@ -176,8 +176,9 @@
             {
                 color: white;
                 background: red;
-                &.inactive{
-                    background : lightgreen;
+                &.inactive
+                {
+                    background: lightgreen;
                 }
                 &:hover:not(.inactive)
                 {

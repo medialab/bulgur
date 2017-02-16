@@ -14,14 +14,14 @@
         {
             display: flex;
 
-            flex-flow: column nowrap;
-
             cursor: pointer;
-
             transition: all .5s ease;
 
+            flex-flow: column nowrap;
 
-            &:hover{
+
+            &:hover
+            {
                 background: $background-intent;
             }
 

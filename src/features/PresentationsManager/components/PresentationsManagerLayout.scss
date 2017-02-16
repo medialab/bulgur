@@ -54,14 +54,17 @@
         {
             width: 100%;
             margin-bottom: $medium-gutter;
-            background: lightgreen;
             padding: $large-gutter;
-            border: 2px solid $background-default!important;
+
             color: $primary-color;
+            border: 2px solid $background-default!important;
+            background: lightgreen;
+
             font-width: 1.2rem;
-            &:hover{
-                background: darkgreen;
+            &:hover
+            {
                 color: $background-default;
+                background: darkgreen;
             }
         }
         h4
@@ -153,10 +156,12 @@
 
     .import-from-url
     {
-        form{
+        form
+        {
             display: flex;
+
             flex-flow: row nowrap;
-            input[type="text"]
+            input[type='text']
             {
                 flex: 1;
             }
