@@ -153,7 +153,7 @@ const MainViewLayout = ({
           {!activeSlide ?
             '' :
             <div className={'view-operations ' + (viewsEqualActiveSlideViews ? '' : 'visible')}>
-              <button id="take-snapshot-btn" onClick={clickOnRecord}><img className="bulgur-icon-image" src={require('../assets/snapshot.svg')} /> Take snapshot</button>
+              <button id="take-snapshot-btn" className={viewsEqualActiveSlideViews ? 'inactive' : 'active'} onClick={clickOnRecord}><img className="bulgur-icon-image" src={require('../assets/snapshot.svg')} /> Take snapshot</button>
               <button id="reset-view-btn" onClick={clickOnReset}><img className="bulgur-icon-image" src={require('../assets/reset.svg')} /> Reset view</button>
             </div>
           }

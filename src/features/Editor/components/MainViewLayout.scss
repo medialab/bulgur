@@ -176,7 +176,10 @@
             {
                 color: white;
                 background: red;
-                &:hover
+                &.inactive{
+                    background : lightgreen;
+                }
+                &:hover:not(.inactive)
                 {
                     background: brown;
                 }
