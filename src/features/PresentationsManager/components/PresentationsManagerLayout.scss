@@ -37,11 +37,12 @@
         flex-flow: column nowrap;
         &:first-of-type
         {
-            padding-left: 25%;
+            padding-left: 15%;
         }
         &:last-of-type
         {
-            padding-right: 25%;
+            padding-right: 15%;
+            padding-left: 5%;
         }
         h1
         {
@@ -142,5 +143,12 @@
 
         color: $background-default;
         background: $primary-color;
+    }
+
+    .import-from-url
+    {
+        input{
+            width: 100%;
+        }
     }
 }

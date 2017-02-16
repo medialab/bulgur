@@ -16,8 +16,10 @@ import './PresentationsManagerLayout.scss';
  * @param {string} props.importError
  * @param {string} props.promptedToDeleteId
  * @param {number} props.maxNumberOfLocalPresentations
+ * @param {string} props.importFromUrlCandidate
  * @param {function} props.onDropInput
  * @param {function} props.overrideImportWithCandidate
+ * @param {function} props.importFromDistantJSON
  * @param {function} props.actions - actions passed by redux logic
  * @return {ReactElement} markup
  */
@@ -30,9 +32,11 @@ const PresentationsManagerLayout = ({
   importError,
   promptedToDeleteId,
   maxNumberOfLocalPresentations,
+  importFromUrlCandidate,
   // actions
   onDropInput,
   overrideImportWithCandidate,
+  importFromDistantJSON,
   actions: {
     promptDeletePresentation,
     unpromptDeletePresentation,
@@ -40,12 +44,15 @@ const PresentationsManagerLayout = ({
     copyPresentation,
     startPresentationCandidateConfiguration,
     setActivePresentation,
-    importReset
+    importReset,
+    setImportFromUrlCandidate
   }
 }) => {
   const onCreatePresentation = () => {
     startPresentationCandidateConfiguration();
   };
+
+  const onImportFromUrlChange = (e) => setImportFromUrlCandidate(e.target.value);
   const allowNewPresentations = presentationsList.length < maxNumberOfLocalPresentations;
   return (
     <section className="bulgur-presentations-manager-layout">
@@ -75,10 +82,10 @@ const PresentationsManagerLayout = ({
               <li key={index} className="local-presentation">
                 <h5 onClick={setToActive}>{presentation.metadata && presentation.metadata.title && presentation.metadata.title.length ? presentation.metadata.title : 'untitled presentation'}</h5>
                 <div className="local-presentation-buttons">
-                  <button onClick={setToActive}>edit</button>
-                  <button onClick={configure}>settings</button>
-                  {promptedToDeleteId !== presentation.id ? <button onClick={onClickCopy}>copy</button> : ''}
-                  {promptedToDeleteId !== presentation.id ? <button onClick={onClickPrompt}>delete</button> : null}
+                  <button onClick={setToActive}>✏ edit</button>
+                  <button onClick={configure}>⚙ settings</button>
+                  {promptedToDeleteId !== presentation.id ? <button onClick={onClickCopy}>⎘ duplicate</button> : ''}
+                  {promptedToDeleteId !== presentation.id ? <button onClick={onClickPrompt}>⌫ delete</button> : null}
                 </div>
                 {promptedToDeleteId === presentation.id ? <p>Sure ?</p> : null}
                 {promptedToDeleteId === presentation.id ?
@@ -100,15 +107,33 @@ const PresentationsManagerLayout = ({
             className="drop-zone"
             activeClassName="drop-zone-active"
             onDrop={onDropInput}>
-            <div>Import an existing presentation's project (drop a file here)</div>
+            <div>Import an existing presentation's project from your computer <br />(drop the .json file here)</div>
           </Dropzone>
         : 'You have reached the maximum number of local presentations. You have to make a bit of room before creating new ones. Remember you can save your presentations to the web and import them later !'}
+
+
+        {allowNewPresentations ?
+          <div className="import-from-url">
+            <h3>...or fetch an existant project from a distant server</h3>
+            <form onSubmit={importFromDistantJSON}>
+              <input
+                value={importFromUrlCandidate}
+                onChange={onImportFromUrlChange} type="text"
+                placeholder="copy-paste the URL of the project" />
+            </form>
+            <p>
+              <i>You can import from the forccast server or from a gist page.</i>
+            </p>
+          </div> : null}
         <div className="import-status-display">
           {importStatus}
         </div>
         <div className="import-error-display">
           {importError === 'badJSON' ? 'Your file is badly formatted' : ''}
           {importError === 'invalidProject' ? 'Your file is not a valid quinoa presentation' : ''}
+          {importError === 'invalidUrl' ? 'The url did not point to a valid presentation' : ''}
+          {importError === 'invalidGist' ? 'The gist is not properly formatted as a quinoa presentation' : ''}
+          {importError === 'fetchError' ? 'The fetch process of the file failed' : ''}
         </div>
       </section>
 

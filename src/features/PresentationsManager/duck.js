@@ -43,6 +43,7 @@ const IMPORT_OVERRIDE_PROMPT = '§Bulgur/PresentationsManager/IMPORT_OVERRIDE_PR
 const IMPORT_FAIL = '§Bulgur/PresentationsManager/IMPORT_FAIL';
 const IMPORT_SUCCESS = '§Bulgur/PresentationsManager/IMPORT_SUCCESS';
 const IMPORT_RESET = '§Bulgur/PresentationsManager/IMPORT_RESET';
+const SET_IMPORT_FROM_URL_CANDIDATE = '§Bulgur/PresentationsManager/SET_IMPORT_FROM_URL_CANDIDATE';
 
 /*
  * Action creators
@@ -135,6 +136,13 @@ export const importFail = (error) => (dispatch) => {
   // resets import state after a while
   setTimeout(() => dispatch(importReset()), 5000);
 };
+/**
+ * @param {string}  value - the new value to set for import from url candidate
+ */
+ export const setImportFromUrlCandidate = (value) => ({
+  type: SET_IMPORT_FROM_URL_CANDIDATE,
+  value
+ });
 
 /*
  * Reducers
@@ -359,7 +367,15 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
 }
 
 const PRESENTATIONS_UI_DEFAULT_STATE = {
+  /**
+   * Representation of the id of the presentation being edited in editor
+   * @type {string}
+   */
   activePresentationId: undefined,
+  /**
+   * Representation of the id of the item being prompted to delete
+   * @type {string}
+   */
   promptedToDelete: undefined
 };
 /**
@@ -415,7 +431,12 @@ const PRESENTATION_IMPORT_DEFAULT_STATE = {
    * Representation of the import error occured after an import failed
    * @type {string}
    */
-  importError: undefined
+  importError: undefined,
+  /**
+   * Representation of the content of import from url input
+   * @type {string}
+   */
+  importFromUrlCandidate: ''
 };
 /**
  * This redux reducer handles the modifications related to importing presentations in application's state
@@ -441,6 +462,11 @@ function presentationImport(state = PRESENTATION_IMPORT_DEFAULT_STATE, action) {
       return {
         ...state,
         importCandidate: action.candidate
+      };
+    case SET_IMPORT_FROM_URL_CANDIDATE:
+      return {
+        ...state,
+        importFromUrlCandidate: action.value
       };
     default:
       return state;
@@ -469,6 +495,7 @@ const promptedToDeleteId = state => state.presentationsUi.promptedToDelete;
 const importStatus = state => state.presentationImport.importStatus;
 const importError = state => state.presentationImport.importError;
 const importCandidate = state => state.presentationImport.importCandidate;
+const importFromUrlCandidate = state => state.presentationImport.importFromUrlCandidate;
 /**
  * The selector is a set of functions for accessing this feature's state
  * @type {object}
@@ -476,9 +503,12 @@ const importCandidate = state => state.presentationImport.importCandidate;
 export const selector = createStructuredSelector({
   activePresentation,
   activePresentationId,
+
   importCandidate,
   importError,
   importStatus,
+  importFromUrlCandidate,
+
   presentationsList,
   promptedToDeleteId,
 });
