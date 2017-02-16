@@ -17,12 +17,36 @@ import {RESET_APP} from '../Editor/duck';
 const SET_TAKE_AWAY_TYPE = '§Bulgur/TakeAwayDialog/SET_TAKE_AWAY_TYPE';
 const EXPORT_TO_GIST_STATUS = '§Bulgur/TakeAwayDialog/EXPORT_TO_GIST_STATUS';
 const EXPORT_TO_SERVER_STATUS = '§Bulgur/TakeAwayDialog/EXPORT_TO_SERVER_STATUS';
+const SET_BUNDLE_HTML_STATUS = '§Bulgur/TakeAwayDialog/SET_BUNDLE_HTML_STATUS';
 export const EXPORT_TO_SERVER = '§Bulgur/TakeAwayDialog/EXPORT_TO_SERVER';
 export const TAKE_AWAY = '§Bulgur/TakeAwayDialog/TAKE_AWAY';
 export const EXPORT_TO_GIST = '§Bulgur/TakeAwayDialog/EXPORT_TO_GIST';
+export const UPDATE_ACTIVE_PRESENTATION_FROM_SERVER = '§Bulgur/TakeAwayDialog/UPDATE_ACTIVE_PRESENTATION_FROM_SERVER';
+export const UPDATE_ACTIVE_PRESENTATION_FROM_GIST = '§Bulgur/TakeAwayDialog/UPDATE_ACTIVE_PRESENTATION_FROM_GIST';
 /*
  * Action creators
  */
+/**
+ * @param {string} status - the status of the html bundling process to display
+ * @param {string} log - the log message of the html bundling process to display
+ */
+export const setBundleHtmlStatus = (status, log) => dispatch => {
+  // remove message after a while if it is an "end-of-operation" status
+  if (status === 'failure' || status === 'success') {
+    setTimeout(() => {
+      dispatch({
+        type: SET_BUNDLE_HTML_STATUS,
+        status: undefined,
+        log: undefined
+      });
+    }, 5000);
+  }
+  dispatch({
+    type: SET_BUNDLE_HTML_STATUS,
+    status,
+    log
+  });
+};
 /**
  * @param {object} htmlContent - the html content of the app to export to gist
  * @param {object} presentation - the presentation data to export to gist
@@ -31,13 +55,28 @@ export const EXPORT_TO_GIST = '§Bulgur/TakeAwayDialog/EXPORT_TO_GIST';
 export const exportToGist = (htmlContent, presentation, gistId) => ({
   type: EXPORT_TO_GIST,
   promise: (dispatch) => {
+    dispatch({
+      type: EXPORT_TO_GIST_STATUS,
+      takeAwayGistLog: 'connecting to github',
+      takeAwayGistLogStatus: 'ongoing'
+    });
     return new Promise((resolve, reject) => {
       return publishToGist(htmlContent, presentation, dispatch, EXPORT_TO_GIST_STATUS, gistId)
               .then(resolve)
-              .catch(reject);
+              .catch((e) => {
+                reject(e);
+                // remove message after a while
+                setTimeout(() =>
+                  dispatch({
+                    type: EXPORT_TO_GIST_STATUS,
+                    takeAwayGistLog: undefined,
+                    takeAwayGistLogStatus: undefined
+                  }), 5000);
+              });
     });
   }
 });
+
 /**
  * @param {object} presentation - the presentation to export to the distant server
  */
@@ -47,7 +86,16 @@ export const exportToServer = (presentation) => ({
     return new Promise((resolve, reject) => {
       return publishToServer(presentation, dispatch, EXPORT_TO_SERVER_STATUS)
               .then(resolve)
-              .catch(reject);
+              .catch((e) => {
+                reject(e);
+                // remove message after a while
+                setTimeout(() =>
+                  dispatch({
+                    type: EXPORT_TO_GIST_STATUS,
+                    takeAwayGistLog: undefined,
+                    takeAwayGistLogStatus: undefined
+                  }), 5000);
+              });
     });
   }
 });
@@ -80,6 +128,16 @@ const DEFAULT_TAKE_AWAY_UI_SETTINGS = {
      * @type {string}
      */
     takeAwayServerLog: undefined,
+    /**
+     * The global status of html bundling
+     * @type {string}
+     */
+    bundleToHtmlLogStatus: undefined,
+    /**
+     * The precise status of html bundling
+     * @type {string}
+     */
+    bundleToHtmlLog: undefined,
 };
 /**
  * This redux reducer handles the modification of the ui state for take away choices
@@ -124,7 +182,7 @@ function takeAwayUi(state = DEFAULT_TAKE_AWAY_UI_SETTINGS, action) {
     case EXPORT_TO_SERVER + '_SUCCESS':
       return {
         ...state,
-        takeAwayServerLog: 'your presentation is online on quinoa server',
+        takeAwayServerLog: 'your presentation is online on forccast server',
         takeAwayServerLogStatus: 'success'
       };
     case EXPORT_TO_SERVER + '_FAIL':
@@ -132,6 +190,12 @@ function takeAwayUi(state = DEFAULT_TAKE_AWAY_UI_SETTINGS, action) {
         ...state,
         takeAwayServerLog: 'your presentation could not be uploaded on server',
         takeAwayServerLogStatus: 'failure'
+      };
+    case SET_BUNDLE_HTML_STATUS:
+      return {
+        ...state,
+        bundleToHtmlLog: action.log,
+        bundleToHtmlLogStatus: action.status
       };
     default:
       return state;
@@ -156,6 +220,10 @@ const takeAwayServerLog = state => state.takeAwayUi &&
   state.takeAwayUi.takeAwayServerLog;
 const takeAwayServerLogStatus = state => state.takeAwayUi &&
   state.takeAwayUi.takeAwayServerLogStatus;
+const bundleToHtmlLog = state => state.takeAwayUi &&
+  state.takeAwayUi.bundleToHtmlLog;
+const bundleToHtmlLogStatus = state => state.takeAwayUi &&
+  state.takeAwayUi.bundleToHtmlLogStatus;
 /**
  * The selector is a set of functions for accessing this feature's state
  * @type {object}
@@ -166,5 +234,7 @@ export const selector = createStructuredSelector({
   takeAwayServerLog,
   takeAwayServerLogStatus,
   takeAwayType,
+  bundleToHtmlLog,
+  bundleToHtmlLogStatus
 });
 

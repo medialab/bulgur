@@ -17,6 +17,15 @@
 
          -o-user-select: none;
 
+    code{
+        -webkit-user-select: all; /* Chrome/Safari */
+       -moz-user-select: all; /* Firefox */
+        -ms-user-select: all; /* IE10+ */
+            user-select: all;
+
+         -o-user-select: all;
+    }
+
     .take-away-dialog-step:not(:first-of-type)
     {
         margin-top: $large-gutter;
@@ -43,7 +52,6 @@
     {
         display: flex;
 
-        padding: $medium-gutter;
 
         text-align: center;
 
@@ -56,6 +64,13 @@
         &:not(:first-of-type)
         {
             border-left: none;
+        }
+
+        label
+        {
+            width: 100%;
+            height: 100%;
+            padding: $medium-gutter;
         }
     }
 
@@ -96,5 +111,21 @@
         padding: $medium-gutter;
 
         text-align: center;
+
+        transition: all .5s ease;
+
+        &.success
+        {
+            background: lightgreen;
+        }
+        &.failure
+        {
+            background: red;
+            color: white;
+        }
+        &.ongoing
+        {
+            background: lightblue;
+        }
     }
 }

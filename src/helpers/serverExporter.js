@@ -17,7 +17,7 @@ export default function publishToServer (presentation, dispatch, statusActionNam
     dispatch({
       type: statusActionName,
       message: 'publishing to server',
-      status: 'processing'
+      status: 'ongoing'
     });
     patch(serverUrl + '/presentations/' + presentation.id)
       .send(presentation)

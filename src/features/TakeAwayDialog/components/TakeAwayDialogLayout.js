@@ -82,6 +82,8 @@ export const ChooseTakeAwayStep = ({
  * @param {string} props.takeAwayGistLogStatus
  * @param {string} props.takeAwayServerLog
  * @param {string} props.takeAwayServerLogStatus
+ * @param {string} props.bundleToHtmlLog
+ * @param {string} props.bundleToHtmlLogStatus
  * @param {boolean} props.serverAvailable - whether app is connected to a distant server
  * @param {string} props.serverUrl - the url base of the distant server
  * @param {boolean} props.gistAvailable - whether app is connected to gist
@@ -95,13 +97,17 @@ const TakeAwayDialogLayout = ({
   takeAwayGistLogStatus,
   takeAwayServerLog,
   takeAwayServerLogStatus,
+  bundleToHtmlLog,
+  bundleToHtmlLogStatus,
   serverAvailable,
   serverUrl,
   gistAvailable,
   // actions
   takeAway,
   actions: {
-    closeTakeAwayModal
+    closeTakeAwayModal,
+    updateActivePresentationFromGist,
+    updateActivePresentationFromServer
   },
 }) => (
   <div className="bulgur-take-away-dialog-layout">
@@ -111,29 +117,56 @@ const TakeAwayDialogLayout = ({
       gistAvailable={gistAvailable} />
     <section className="take-away-dialog-step pub-links">
       {
-        takeAwayGistLog ? <p className="take-away-log" style={{background: takeAwayGistLogStatus === 'success' ? 'lightgreen' : 'lightblue'}}>{takeAwayGistLog}</p> : ''
+        bundleToHtmlLog ? <p className={'take-away-log ' + bundleToHtmlLogStatus}>{bundleToHtmlLog}</p> : ''
       }
       {
-        takeAwayServerLog ? <p className="take-away-log" style={{background: takeAwayServerLogStatus === 'success' ? 'lightgreen' : 'lightblue'}}>{takeAwayServerLog}</p> : ''
+        takeAwayGistLog ? <p className={'take-away-log ' + takeAwayGistLogStatus}>{takeAwayGistLog}</p> : ''
       }
       {
         activePresentation && activePresentation.metadata && activePresentation.metadata.gistId ?
-          <h2 className="pub-link">
-            <a target="blank" href={serverUrl + '/gist-presentation/' + activePresentation.metadata.gistId}>Go to the gist-based webpage of your presentation</a>
-          </h2> : ''
+          <div>
+            <p>
+              <a target="blank" href={activePresentation.metadata.gistUrl}>Go to the gist source code of your presentation</a>
+            </p>
+            <p>
+              <a target="blank" href={serverUrl + '/gist-presentation/' + activePresentation.metadata.gistId}>Go to the gist-based webpage of your presentation</a>
+            </p>
+            <div>
+              <p>HTML code to copy-paste to embed it on the web : </p>
+              <pre>
+                <code>
+                  {`<iframe allowfullscreen src="${serverUrl + '/gist-presentation/' + activePresentation.metadata.gistId}" width="1000" height="500" frameborder=0></iframe>`}
+                </code>
+              </pre>
+            </div>
+            <div>
+              <button onClick={updateActivePresentationFromGist}>Update your local version of the presentation from the distant gist repository</button>
+            </div>
+          </div>
+          : ''
       }
       {
-        activePresentation && activePresentation.metadata && activePresentation.metadata.gistUrl ?
-          <h2 className="pub-link">
-            <a target="blank" href={activePresentation.metadata.gistUrl}>Go to the gist source code of your presentation</a>
-          </h2>
-        : ''
+        takeAwayServerLog ? <p className={'take-away-log ' + takeAwayServerLogStatus}>{takeAwayServerLog}</p> : ''
       }
       {
         activePresentation && activePresentation.metadata && activePresentation.metadata.serverHTMLUrl ?
-          <h2 className="pub-link">
-            <a target="blank" href={activePresentation.metadata.serverHTMLUrl}>Go to the quinoa server's webpage of your presentation</a>
-          </h2> : ''
+          <div>
+            <p>
+              <a target="blank" href={activePresentation.metadata.serverHTMLUrl}>Go to the forccast server's webpage of your presentation</a>
+            </p>
+            <div>
+              <p>HTML code to copy-paste to embed it on the web : </p>
+              <pre>
+                <code>
+                  {`<iframe allowfullscreen src="${activePresentation.metadata.serverHTMLUrl}" width="1000" height="500" frameborder=0></iframe>`}
+                </code>
+              </pre>
+            </div>
+            <div>
+              <button onClick={updateActivePresentationFromServer}>Update your local version of the presentation from the distant forccast repository</button>
+            </div>
+          </div>
+          : ''
       }
     </section>
     <section className="take-away-dialog-step">

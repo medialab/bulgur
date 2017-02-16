@@ -68,23 +68,27 @@ class TakeAwayDialogContainer extends Component {
         downloadFile(JSON.stringify(JSONbundle, null, 2), 'json', title);
         break;
       case 'html':
+        this.props.actions.setBundleHtmlStatus('ongoing', 'Asking the server to bundle a custom html file');
         bundleProjectAsHtml(this.props.activePresentation, (err, html) => {
           if (err === null) {
             downloadFile(html, 'html', title);
+            this.props.actions.setBundleHtmlStatus('success', 'Bundling is a success !');
           }
           else {
-            // todo : handle error display in redux logic ?
+            this.props.actions.setBundleHtmlStatus('failure', 'Bundling failed, somehow ...');
           }
         });
 
         break;
       case 'github':
+        this.props.actions.setBundleHtmlStatus('ongoing', 'Asking the server to bundle a custom html file');
         bundleProjectAsHtml(this.props.activePresentation, (err, html) => {
           if (err === null) {
             this.props.actions.exportToGist(html, JSONbundle, this.props.activePresentation.metadata.gistId);
+            this.props.actions.setBundleHtmlStatus('success', 'Bundling is a success !');
           }
           else {
-            // todo : handle error display in redux logic ?
+            this.props.actions.setBundleHtmlStatus('failure', 'Bundling failed, somehow ...');
           }
         });
         break;
