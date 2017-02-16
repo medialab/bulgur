@@ -20,6 +20,11 @@ const slideSource = {
 };
 
 const slideTarget = {
+  /**
+   * Drag on hover behavior
+   * Initial design & implementation @yomguithereal
+   * (https://github.com/medialab/quinoa/blob/master/src/components/draggable.js)
+   */
   hover(props, monitor, component) {
     const dragIndex = monitor.getItem().index,
           hoverIndex = props.slideIndex;

@@ -21,7 +21,10 @@
     "type": "git",
     "url": "git+https://github.com/medialab/bulgur.git"
   },
-  "author": "https://github.com/robindemourat",
+  "author": "Robin de Mourat <robin.demourat@sciencespo.fr> (https://github.com/robindemourat)",
+  "contributors": [
+    "Guillaume Plique <guillaume.plique@sciencespo.fr> (https://github.com/Yomguithereal)"
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/medialab/bulgur/issues"
