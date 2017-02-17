@@ -19,9 +19,11 @@ export default function publishToServer (presentation, dispatch, statusActionNam
       log: 'publishing to server',
       status: 'ongoing'
     });
-    patch(serverUrl + '/presentations/' + presentation.id)
+    const serverHTMLUrl = serverUrl + '/presentations/' + presentation.id;
+    presentation.metadata.serverHTMLUrl = serverHTMLUrl + '?format=html';
+    patch(serverHTMLUrl)
       .send(presentation)
-      .end((err) => {
+      .end(err => {
           if (err) {
             return reject(err);
           }

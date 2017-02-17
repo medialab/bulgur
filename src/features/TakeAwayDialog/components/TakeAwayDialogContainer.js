@@ -107,7 +107,7 @@ class TakeAwayDialogContainer extends Component {
               this.props.actions.updatePresentation(project.id, project);
               this.props.actions.setExportToGistStatus('success', 'your presentation is now synchronized with the gist repository');
             }
- catch (parseError) {
+            catch (parseError) {
               this.props.actions.setExportToGistStatus('failure', 'The gist project file was badly formatted');
             }
           });

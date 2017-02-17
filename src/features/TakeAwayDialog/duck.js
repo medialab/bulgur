@@ -137,7 +137,7 @@ export const exportToServer = (presentation) => ({
                 // remove message after a while
                 setTimeout(() =>
                   dispatch({
-                    type: EXPORT_TO_GIST_STATUS,
+                    type: EXPORT_TO_SERVER_STATUS,
                     takeAwayGistLog: undefined,
                     takeAwayGistLogStatus: undefined
                   }), 5000);
@@ -147,7 +147,7 @@ export const exportToServer = (presentation) => ({
                 // remove message after a while
                 setTimeout(() =>
                   dispatch({
-                    type: EXPORT_TO_GIST_STATUS,
+                    type: EXPORT_TO_SERVER_STATUS,
                     takeAwayGistLog: undefined,
                     takeAwayGistLogStatus: undefined
                   }), 5000);
@@ -238,7 +238,7 @@ function takeAwayUi(state = DEFAULT_TAKE_AWAY_UI_SETTINGS, action) {
     case EXPORT_TO_SERVER + '_SUCCESS':
       return {
         ...state,
-        takeAwayServerLog: 'your presentation is synchronized with the forccast server',
+        takeAwayServerLog: 'your presentation is now synchronized with the forccast server',
         takeAwayServerLogStatus: 'success'
       };
     case EXPORT_TO_SERVER + '_FAIL':
