@@ -114,6 +114,10 @@
                           "children": {
                               "type": "uuid"
                           }
+                      },
+                      "viewParameters": {
+                        "required": false,
+                        "type": "object"
                       }
                     }
                 }
