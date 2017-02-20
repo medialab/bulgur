@@ -19,7 +19,7 @@ export default function publishGist(htmlContent = '', JSONbundle = {}, dispatch,
     dispatch({
       type: statusActionName,
       log: 'connecting to github',
-      status: 'ongoing'
+      status: 'processing'
     });
 
     getGithubToken()
