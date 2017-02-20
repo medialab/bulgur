@@ -57,7 +57,7 @@ const SlideSettingsPannel = ({
                         {Object.keys(view.dataMap).length > 1 ? <h4>{collectionId}</h4> : null}
                         {
                           Object.keys(collection).map((parameterKey) => {
-                            const setChange = (visualizationId, parameterId, thatCollectionId, propertyName) => 
+                            const setChange = (visualizationId, parameterId, thatCollectionId, propertyName) =>
                               setViewDatamapItem(presentation.visualizations, visualizationId, parameterId, thatCollectionId, propertyName);
                             return (
                               <DatamapPicker

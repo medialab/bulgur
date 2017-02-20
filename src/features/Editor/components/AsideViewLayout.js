@@ -13,7 +13,6 @@ import SlidesContainer from '../../../components/SlidesContainer/SlidesContainer
  * @param {object} props - the props to render
  * @param {function} props.openSettings
  * @param {object} props.activePresentation - the presentation being edited in the editor
- * @param {function} props.returnToLanding
  * @param {function} props.addSlide
  * @param {function} props.updateSlide
  * @param {function} props.moveSlide
@@ -26,7 +25,6 @@ import SlidesContainer from '../../../components/SlidesContainer/SlidesContainer
 const AsideViewLayout = ({
   openSettings,
   activePresentation = {},
-  returnToLanding,
   addSlide,
   updateSlide,
   moveSlide,
@@ -48,7 +46,7 @@ const AsideViewLayout = ({
           moveSlide={moveSlide}
           removeSlide={removeSlide}
           duplicateSlide={duplicateSlide} /> : null}
-    <button type="button" onClick={returnToLanding}>← Home</button>
+    {activePresentation.order && activePresentation.order.length ? <button type="button" onClick={addSlide}>+ Add slide</button> : null}
   </aside>
 );
 

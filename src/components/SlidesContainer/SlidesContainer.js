@@ -74,9 +74,12 @@ class SlidesContainer extends React.Component {
           }
           )
       }
-        <li className="add-slide">
-          <button type="button" onClick={addSlide}>Add slide</button>
-        </li>
+        {activePresentation 
+          && activePresentation.order
+          && activePresentation.order.length === 0 ?
+          <li className="add-slide">
+          <button type="button" onClick={addSlide}>Click here to add a first slide</button>
+        </li> : null}
       </ul>
   );
   }
