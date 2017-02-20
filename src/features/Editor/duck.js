@@ -419,7 +419,6 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
           ...result,
           [thatCollectionId]: Object.keys(newcolorsMap[thatCollectionId])
         }), {});
-        console.log('new shown categories', shownCategories);
       }
       return {
         ...state,
@@ -434,7 +433,7 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
               colorsMap: newcolorsMap || state.activeViews[action.visualizationId].viewParameters.colorsMap,
               shownCategories: shownCategories || state.activeViews[action.visualizationId].viewParameters.shownCategories
             },
-            // updatedatamap
+            // update datamap
             dataMap: {
               ...state.activeViews[action.visualizationId].dataMap,
               [action.collectionId]: {

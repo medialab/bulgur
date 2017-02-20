@@ -43,8 +43,8 @@
                 .color
                 {
                     width: 1rem;
-                    height: 1rem;
                     min-width: 1rem;
+                    height: 1rem;
                     margin-right: $base-gutter;
                 }
             }
@@ -52,7 +52,8 @@
             &.hidden
             {
                 .color,
-                .category{
+                .category
+                {
                     opacity: .2;
                 }
             }
