@@ -130,9 +130,9 @@ const models = {
         description: 'Taken from quinoa examples'
       },
       {
-        title: 'Les misérables',
+        title: 'Les misérables Co-Occurences',
         fileName: 'miserables.json',
-        description: 'Taken from d3 examples (todo : document more)'
+        description: 'List of co-occurences of characters in the novel "les misérables", computed by Jacques Bertin and his assistants(https://bost.ocks.org/mike/miserables/)'
       }
     ],
     dataMap: {
