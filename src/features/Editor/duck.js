@@ -55,6 +55,7 @@ export const CHANGE_VIEW_BY_USER = '$Bulgur/Editor/CHANGE_VIEW_BY_USER';
 export const SET_VIEW_COLOR = '$Bulgur/Editor/SET_VIEW_COLOR';
 const TOGGLE_VIEW_COLOR_EDITION = '$Bulgur/Editor/TOGGLE_VIEW_COLOR_EDITION';
 export const SET_VIEW_DATAMAP_ITEM = '$Bulgur/Editor/SET_VIEW_DATAMAP_ITEM';
+export const SET_SHOWN_CATEGORIES = '$Bulgur/Editor/SET_SHOWN_CATEGORIES';
 
 /*
  * Action creators
@@ -220,6 +221,18 @@ export const setViewDatamapItem = (visualizations, visualizationId, parameterId,
   visualizations
 });
 /**
+ * Sets the list of categories to show for a given data collection in a given visualization
+ * @param {string} visualizationId - the changed parameter's visualisation id to change
+ * @param {string} collectionId - the changed parameter's collection id to change
+ * @param {string} shownCategories - the array of new categories to set
+ */
+export const setShownCategories = (visualizationId, collectionId, shownCategories) => ({
+  type: SET_SHOWN_CATEGORIES,
+  visualizationId,
+  collectionId,
+  shownCategories
+});
+/**
  *
  */
 export const resetApp = () => ({
@@ -255,6 +268,7 @@ const EDITOR_DEFAULT_STATE = {
 function editor(state = EDITOR_DEFAULT_STATE, action) {
   let newcolorsMap;
   let data;
+  let shownCategories;
   switch (action.type) {
     case RESET_APP:
       return EDITOR_DEFAULT_STATE;
@@ -282,6 +296,10 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
             return propsMap;
           }, {})
         }), {});
+        shownCategories = Object.keys(visualization.colorsMap).reduce((currentObject, collectionId) => ({
+          ...currentObject,
+          [collectionId]: Object.keys(visualization.colorsMap[collectionId])
+        }), {});
         switch (visualization.metadata.visualizationType) {
           case 'map':
             data = mapMapData(visualization.data, dataMap);
@@ -304,6 +322,7 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
             ...visualization,
             viewParameters: {
               ...viewParameters,
+              shownCategories,
               colorsMap
             },
             data
@@ -392,9 +411,15 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
       };
     case SET_VIEW_DATAMAP_ITEM:
       if (action.parameterId === 'category') {
-        newcolorsMap = {...state.activeViews[action.visualizationId].viewParameters.colorsMap} || {};
+        const visualization = state.activeViews[action.visualizationId];
+        newcolorsMap = {...visualization.viewParameters.colorsMap} || {};
         const dataset = action.visualizations[action.visualizationId].data[action.collectionId];
         newcolorsMap[action.collectionId] = generateColorsMap(dataset, action.propertyName);
+        shownCategories = Object.keys(newcolorsMap).reduce((result, thatCollectionId) => ({
+          ...result,
+          [thatCollectionId]: Object.keys(newcolorsMap[thatCollectionId])
+        }), {});
+        console.log('new shown categories', shownCategories);
       }
       return {
         ...state,
@@ -407,6 +432,7 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
               ...state.activeViews[action.visualizationId].viewParameters,
               // update colorsMap
               colorsMap: newcolorsMap || state.activeViews[action.visualizationId].viewParameters.colorsMap,
+              shownCategories: shownCategories || state.activeViews[action.visualizationId].viewParameters.shownCategories
             },
             // updatedatamap
             dataMap: {
@@ -417,6 +443,24 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
                   ...state.activeViews[action.visualizationId].dataMap[action.collectionId][action.parameterId],
                   mappedField: action.propertyName
                 }
+              }
+            }
+          }
+        }
+      };
+    case SET_SHOWN_CATEGORIES:
+      return {
+        ...state,
+        editedColor: undefined,
+        activeViews: {
+          ...state.activeViews,
+          [action.visualizationId]: {
+            ...state.activeViews[action.visualizationId],
+            viewParameters: {
+              ...state.activeViews[action.visualizationId].viewParameters,
+              shownCategories: {
+                ...state.activeViews[action.visualizationId].viewParameters.shownCategories,
+                [action.collectionId]: action.shownCategories
               }
             }
           }

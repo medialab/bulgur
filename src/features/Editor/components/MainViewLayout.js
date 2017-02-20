@@ -26,6 +26,7 @@ import './MainViewLayout.scss';
  * @param {function} props.toggleSlideSettingsPannel
  * @param {function} props.toggleViewColorEdition
  * @param {function} props.setViewColor
+ * @param {function} props.setShownCategories
  * @return {ReactElement} markup
  */
 const MainViewLayout = ({
@@ -46,6 +47,7 @@ const MainViewLayout = ({
   toggleSlideSettingsPannel,
   toggleViewColorEdition,
   setViewColor,
+  setShownCategories
 }) => {
 
   const setVisualization = (view, id) => {
@@ -137,6 +139,7 @@ const MainViewLayout = ({
             togglePannel={toggleSlideSettingsPannel}
             views={activeViews}
             setViewDatamapItem={setViewDatamapItem}
+            setShownCategories={setShownCategories}
             toggleViewColorEdition={toggleViewColorEdition}
             setViewColor={setViewColor}
             editedColor={editedColor}

@@ -18,6 +18,7 @@ const SlideSettingsPannel = ({
   toggleViewColorEdition,
   setViewColor,
   editedColor,
+  setShownCategories,
   presentation
 }) => {
   return (
@@ -30,7 +31,9 @@ const SlideSettingsPannel = ({
               <ColorsMapPicker
                 key={viewKey}
                 colorsMap={views[viewKey].viewParameters.colorsMap}
-                visualizationKey={viewKey}
+                shownCategories={views[viewKey].viewParameters.shownCategories}
+                setShownCategories={setShownCategories}
+                visualizationId={viewKey}
                 toggleColorEdition={toggleViewColorEdition}
                 changeColor={setViewColor}
                 editedColor={editedColor} />

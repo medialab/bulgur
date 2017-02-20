@@ -73,7 +73,8 @@ const EditorLayout = ({
     toggleSlideSettingsPannel,
     toggleViewColorEdition,
     setViewColor,
-    setViewDatamapItem
+    setViewDatamapItem,
+    setShownCategories
   },
   addSlide,
   duplicateSlide,
@@ -130,6 +131,7 @@ const EditorLayout = ({
               onUserViewChange={changeViewByUser}
               toggleViewColorEdition={toggleViewColorEdition}
               setViewColor={setViewColor}
+              setShownCategories={setShownCategories}
               editedColor={editedColor} />
           </section>
         :
