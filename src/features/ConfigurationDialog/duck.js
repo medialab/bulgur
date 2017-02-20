@@ -15,7 +15,7 @@ import {
 } from '../../helpers/fileLoader';
 
 import analyzeDataset from '../../helpers/analyzeDataset';
-import {bootstrapColorsMap} from '../../helpers/colorHelpers';
+import {generateColorsMap} from '../../helpers/colorHelpers';
 
 import visualizationTypesModels from '../../models/visualizationTypes';
 
@@ -412,7 +412,7 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
               const dataset = data[collectionId];
               return {
                 ...colorsMap,
-                [collectionId]: bootstrapColorsMap(dataset, dataMap[collectionId].category.mappedField)
+                [collectionId]: generateColorsMap(dataset, dataMap[collectionId].category.mappedField)
               };
             }
             return {
@@ -446,7 +446,7 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
       if (action.parameterId === 'category') {
         newcolorsMap = {...state.presentationCandidate.visualizations[action.visualizationId].colorsMap} || {};
         const dataset = state.presentationCandidate.visualizations[action.visualizationId].data[action.collectionId];
-        newcolorsMap[action.collectionId] = bootstrapColorsMap(dataset, action.propertyName);
+        newcolorsMap[action.collectionId] = generateColorsMap(dataset, action.propertyName);
       }
      return {
         ...state,

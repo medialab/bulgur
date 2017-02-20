@@ -16,7 +16,7 @@ import {
   mapNetworkData
 } from 'quinoa-vis-modules';
 
-import {bootstrapColorsMap} from '../../helpers/colorHelpers';
+import {generateColorsMap} from '../../helpers/colorHelpers';
 
 import models from '../../models/visualizationTypes';
 
@@ -261,6 +261,7 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
 
     case APPLY_PRESENTATION_CANDIDATE_CONFIGURATION:
     case SET_ACTIVE_PRESENTATION:
+      // todo : refactor as a helper
       const defaultViews = Object.keys(action.presentation.visualizations).reduce((result, visualizationKey) => {
         const visualization = action.presentation.visualizations[visualizationKey];
         const viewParameters = {
@@ -393,7 +394,7 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
       if (action.parameterId === 'category') {
         newcolorsMap = {...state.activeViews[action.visualizationId].viewParameters.colorsMap} || {};
         const dataset = action.visualizations[action.visualizationId].data[action.collectionId];
-        newcolorsMap[action.collectionId] = bootstrapColorsMap(dataset, action.propertyName);
+        newcolorsMap[action.collectionId] = generateColorsMap(dataset, action.propertyName);
       }
       return {
         ...state,
