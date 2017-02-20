@@ -142,8 +142,8 @@ const MainViewLayout = ({
             editedColor={editedColor}
             presentation={activePresentation} /> : null }
       </section>
-      <figcaption className="caption-container">
-        {activeSlide ? <section className="caption-header">
+      {activeSlide ? <figcaption className="caption-container">
+        <section className="caption-header">
           <h1>
             <input
               type="text"
@@ -151,22 +151,19 @@ const MainViewLayout = ({
               onChange={updateTitle}
               placeholder="Write your slide title here" />
           </h1>
-          {!activeSlide ?
-            '' :
-            <div className={'view-operations ' + (viewsEqualActiveSlideViews ? '' : 'visible')}>
-              <button id="take-snapshot-btn" className={viewsEqualActiveSlideViews ? 'inactive' : 'active'} onClick={clickOnRecord}><img className="bulgur-icon-image" src={require('../assets/snapshot.svg')} /> Take snapshot</button>
-              <button id="reset-view-btn" onClick={clickOnReset}><img className="bulgur-icon-image" src={require('../assets/reset.svg')} /> Reset view</button>
-            </div>
-          }
-        </section> : null}
+          <div className={'view-operations ' + (viewsEqualActiveSlideViews ? '' : 'visible')}>
+            <button id="take-snapshot-btn" className={viewsEqualActiveSlideViews ? 'inactive' : 'active'} onClick={clickOnRecord}><img className="bulgur-icon-image" src={require('../assets/snapshot.svg')} /> Take snapshot</button>
+            <button id="reset-view-btn" onClick={clickOnReset}><img className="bulgur-icon-image" src={require('../assets/reset.svg')} /> Reset view</button>
+          </div>
+        </section>
         <div className="caption-editor">
           <div className="editor-areas-container">
-            {activeSlide ? <DraftEditor
+            <DraftEditor
               slide={activeSlide}
-              update={updateDraft} /> : null}
+              update={updateDraft} />
           </div>
         </div>
-      </figcaption>
+      </figcaption> : null}
     </figure>
   );
 };
