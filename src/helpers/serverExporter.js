@@ -17,7 +17,7 @@ export default function publishToServer (presentation, dispatch, statusActionNam
     dispatch({
       type: statusActionName,
       log: 'publishing to server',
-      status: 'ongoing'
+      status: 'processing'
     });
     const serverHTMLUrl = serverUrl + '/presentations/' + presentation.id;
     presentation.metadata.serverHTMLUrl = serverHTMLUrl + '?format=html';

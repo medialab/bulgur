@@ -96,7 +96,7 @@ export const exportToGist = (htmlContent, presentation, gistId) => ({
     dispatch({
       type: EXPORT_TO_GIST_STATUS,
       takeAwayGistLog: 'connecting to github',
-      takeAwayGistLogStatus: 'ongoing'
+      takeAwayGistLogStatus: 'processing'
     });
     return new Promise((resolve, reject) => {
       return publishToGist(htmlContent, presentation, dispatch, EXPORT_TO_GIST_STATUS, gistId)
@@ -165,7 +165,7 @@ const DEFAULT_TAKE_AWAY_UI_SETTINGS = {
      */
     takeAwayType: undefined,
     /**
-     * The global status of gist export (ongoing, success, error)
+     * The global status of gist export (processing, success, error)
      * @type {string}
      */
     takeAwayGistLogStatus: undefined,
@@ -175,7 +175,7 @@ const DEFAULT_TAKE_AWAY_UI_SETTINGS = {
      */
     takeAwayGistLog: undefined,
     /**
-     * The global status of server export (ongoing, success, error)
+     * The global status of server export (processing, success, error)
      * @type {string}
      */
     takeAwayServerLogStatus: undefined,

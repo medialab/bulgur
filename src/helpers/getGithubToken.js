@@ -18,8 +18,10 @@ export default function getGithubToken () {
     '&scope=gist&redirect_url=' + appUrl);
     // get code from oauth response
     window.addEventListener('message', function (event) {
-      const code = event.data;
+      let code = event.data;
       if (typeof code === 'string') {
+        // clean the code
+        code = code.split('&')[0];
         // exchange the code for a token
         post(serverUrl + '/oauth-proxy')
         .set('Accept', 'application/json')

@@ -67,7 +67,7 @@ class TakeAwayDialogContainer extends Component {
 
   updateActivePresentationFromServer() {
     // todo : rewrite that as an action
-    this.props.actions.setExportToServerStatus('ongoing', 'updating from the distant server');
+    this.props.actions.setExportToServerStatus('processing', 'updating from the distant server');
     const url = this.props.activePresentation.metadata.serverJSONUrl;
     get(url)
       .end((err, res) => {
@@ -130,7 +130,7 @@ class TakeAwayDialogContainer extends Component {
         downloadFile(JSON.stringify(JSONbundle, null, 2), 'json', title);
         break;
       case 'html':
-        this.props.actions.setBundleHtmlStatus('ongoing', 'Asking the server to bundle a custom html file');
+        this.props.actions.setBundleHtmlStatus('processing', 'Asking the server to bundle a custom html file');
         bundleProjectAsHtml(this.props.activePresentation, (err, html) => {
           if (err === null) {
             downloadFile(html, 'html', title);
@@ -143,7 +143,7 @@ class TakeAwayDialogContainer extends Component {
 
         break;
       case 'github':
-        this.props.actions.setBundleHtmlStatus('ongoing', 'Asking the server to bundle a custom html file');
+        this.props.actions.setBundleHtmlStatus('processing', 'Asking the server to bundle a custom html file');
         bundleProjectAsHtml(this.props.activePresentation, (err, html) => {
           if (err === null) {
             this.props.actions.exportToGist(html, JSONbundle, this.props.activePresentation.metadata.gistId);
