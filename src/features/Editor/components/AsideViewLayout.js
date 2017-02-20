@@ -46,7 +46,6 @@ const AsideViewLayout = ({
           moveSlide={moveSlide}
           removeSlide={removeSlide}
           duplicateSlide={duplicateSlide} /> : null}
-    {activePresentation.order && activePresentation.order.length ? <button type="button" onClick={addSlide}>+ Add slide</button> : null}
   </aside>
 );
 
