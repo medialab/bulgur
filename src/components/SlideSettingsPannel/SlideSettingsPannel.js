@@ -17,7 +17,8 @@ const SlideSettingsPannel = ({
   views = {},
   toggleViewColorEdition,
   setViewColor,
-  editedColor
+  editedColor,
+  presentation
 }) => {
   return (
     <aside className={'bulgur-settings-pannel ' + (isOpen ? 'open' : '')}>
@@ -55,16 +56,20 @@ const SlideSettingsPannel = ({
                       <div key={collectionId}>
                         {Object.keys(view.dataMap).length > 1 ? <h4>{collectionId}</h4> : null}
                         {
-                          Object.keys(collection).map((parameterKey) => (
-                            <DatamapPicker
-                              key={parameterKey}
-                              parameter={collection[parameterKey]}
-                              parameterKey={parameterKey}
-                              visualization={view}
-                              visualizationKey={viewKey}
-                              collectionId={collectionId}
-                              onMappingChange={setViewDatamapItem} />
-                          ))
+                          Object.keys(collection).map((parameterKey) => {
+                            const setChange = (visualizationId, parameterId, thatCollectionId, propertyName) => 
+                              setViewDatamapItem(presentation.visualizations, visualizationId, parameterId, thatCollectionId, propertyName);
+                            return (
+                              <DatamapPicker
+                                key={parameterKey}
+                                parameter={collection[parameterKey]}
+                                parameterKey={parameterKey}
+                                visualization={view}
+                                visualizationKey={viewKey}
+                                collectionId={collectionId}
+                                onMappingChange={setChange} />
+                            );
+                          })
                         }
                       </div>
                     );

@@ -205,17 +205,19 @@ export const setViewColor = (visualizationId, collectionId, category, color) => 
   color
 });
 /**
+ * @param {object} visualizations - the visualizations of the active presentation to use for data mapping
  * @param {string} visualizationId - the changed parameter's visualisation id to change
  * @param {string} parameterId - the id of the visualization's parameter to changed
  * @param {string} collectionId - the changed parameter's collection id to change
  * @param {string} propertyName - the property name to set for the new data map parameter
  */
-export const setViewDatamapItem = (visualizationId, parameterId, collectionId, propertyName) => ({
+export const setViewDatamapItem = (visualizations, visualizationId, parameterId, collectionId, propertyName) => ({
   type: SET_VIEW_DATAMAP_ITEM,
   visualizationId,
   parameterId,
   collectionId,
-  propertyName
+  propertyName,
+  visualizations
 });
 /**
  *
@@ -390,7 +392,7 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
     case SET_VIEW_DATAMAP_ITEM:
       if (action.parameterId === 'category') {
         newcolorsMap = {...state.activeViews[action.visualizationId].viewParameters.colorsMap} || {};
-        const dataset = state.activeViews[action.visualizationId].data[action.collectionId];
+        const dataset = action.visualizations[action.visualizationId].data[action.collectionId];
         newcolorsMap[action.collectionId] = bootstrapColorsMap(dataset, action.propertyName);
       }
       return {
@@ -400,8 +402,11 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
           ...state.activeViews,
           [action.visualizationId]: {
             ...state.activeViews[action.visualizationId],
-            // update colorsMap
-            colorsMap: newcolorsMap || state.activeViews[action.visualizationId].viewParameters.colorsMap,
+            viewParameters: {
+              ...state.activeViews[action.visualizationId].viewParameters,
+              // update colorsMap
+              colorsMap: newcolorsMap || state.activeViews[action.visualizationId].viewParameters.colorsMap,
+            },
             // updatedatamap
             dataMap: {
               ...state.activeViews[action.visualizationId].dataMap,

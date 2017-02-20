@@ -139,7 +139,8 @@ const MainViewLayout = ({
             setViewDatamapItem={setViewDatamapItem}
             toggleViewColorEdition={toggleViewColorEdition}
             setViewColor={setViewColor}
-            editedColor={editedColor} /> : null }
+            editedColor={editedColor}
+            presentation={activePresentation} /> : null }
       </section>
       <figcaption className="caption-container">
         {activeSlide ? <section className="caption-header">

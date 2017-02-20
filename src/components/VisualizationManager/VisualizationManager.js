@@ -26,7 +26,6 @@ class VisualizationManager extends Component {
     };
     setTimeout(() => this.updateData(props));
   }
-
   componentWillReceiveProps(nextProps) {
     if (
     this.props.data !== nextProps.data
