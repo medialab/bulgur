@@ -33,14 +33,14 @@ export default function configureStore (initialState = {}) {
     // related middlewares
     middleware,
     // connections to pouchdb
-    persistentStore(db),
-    // connection to redux dev tools
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    persistentStore(db)
   )(createStore);
 
   const store = createStoreWithMiddleware(
     rootReducer,
-    initialState
+    initialState,
+    // connection to redux dev tools
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   );
   // live-reloading handling
   if (module.hot) {
