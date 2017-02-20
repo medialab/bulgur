@@ -160,9 +160,9 @@ const MainViewLayout = ({
         </section> : null}
         <div className="caption-editor">
           <div className="editor-areas-container">
-            <DraftEditor
+            {activeSlide ? <DraftEditor
               slide={activeSlide}
-              update={updateDraft} />
+              update={updateDraft} /> : null}
           </div>
         </div>
       </figcaption>
