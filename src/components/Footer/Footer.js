@@ -14,7 +14,7 @@ const Footer = ({
 }) => (
   <footer className="bulgur-footer">
     <div className="left-group">
-      <span><button onClick={returnToLanding}>← Bulgur</button> | by <a href="http://www.medialab.sciences-po.fr/fr/" target="blank">médialab</a></span>
+      <span><button onClick={returnToLanding}>Bulgur</button> | by <a href="http://www.medialab.sciences-po.fr/fr/" target="blank">médialab</a></span>
     </div>
     <div className="right-group">
       <button onClick={togglePreview}>{uiMode === 'edition' ? 'Preview' : 'Edit'}</button>
