@@ -3,9 +3,41 @@
 Bulgur is a tool dedicated to the making of guided tours into data visualizations, called *data presentations*.
 Users import their data from their computer, then compose their data presentation, then finally export it to static html or to a web publication.
 
-Users personal data is stored on the `localStorage` of the user's browser, but can be synced with a [gist](https://gist.github.com/) code repository or with a distant backend server.
+Users personal data is stored on the `localStorage` of the user's browser, nevertheless it can also be synchronized with a [gist](https://gist.github.com/) code repository or with a distant backend server.
 
 Bulgur is part of the ``quinoa`` project family, a suite of digital storytelling tools tailored for the [FORCCAST](https://forccast.hypotheses.org/) pedagogical program and [médialab sciences po](http://www.medialab.sciences-po.fr/) scientific activities.
+
+# Features
+
+Create a new presentation :
+
+* set presentation-level metadata which will be consumed for SEO-friendly html outputs
+* set dataset-level metadata
+* choose a visualization type and initial visualization settings
+
+Import a presentation :
+
+* import from a presentation json file
+* import from a forccast or gist url
+
+Configure views in slides :
+
+* set camera position
+* set column-to-parameter settings
+* set colors for categories of objects
+* set visual filtering for specific categories of objects
+
+Write and manage slides :
+
+* create, move or duplicate slides
+* edit comments in markdown or wysiwig editors
+* capture specific visualization views for each slide
+
+Keep your data on your browser or synchronize it with distant sources :
+
+* store data on browser's local storage
+* import and export data relative to a specific presentation from a forccast server repository
+* import and export data relative to a specific presentation from a gist repository
 
 # Requirements
 
