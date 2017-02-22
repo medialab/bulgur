@@ -18,10 +18,9 @@
     display: flex;
     flex-direction: column;
 
-    color: $primary-color;
-    background: $background-default;
-
     flex-wrap: nowrap;
+
+    @extends .normal-item;
 
     input,
     textarea,
@@ -59,9 +58,7 @@
     {
         z-index: 1;
 
-        max-height: 2rem;
-
-        flex: 1;
+        // flex: 1;
     }
 
     .bulgur-icon-image

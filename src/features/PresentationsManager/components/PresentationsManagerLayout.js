@@ -4,7 +4,9 @@
  */
 import React from 'react';
 import Modal from 'react-modal';
-import Dropzone from 'react-dropzone';
+
+import DropZone from '../../../components/DropZone/DropZone';
+import PresentationCard from '../../../components/PresentationCard/PresentationCard';
 
 import './PresentationsManagerLayout.scss';
 /**
@@ -58,41 +60,84 @@ const PresentationsManagerLayout = ({
     <section className="bulgur-presentations-manager-layout">
       <section className="landing-group">
         <h1>Bulgur</h1>
-        <p>
-          Bulgur is a tool dedicated to the making of guided tours into data visualizations, called <i>data presentations</i>.
+        <div className="row-section">
+          <p>
+            Bulgur is a tool dedicated to the making of guided tours into data visualizations, called <i>data presentations</i>.
+          </p>
+          <p>
+            Import a data file from your computer, choose a visualization technique, build your presentation. Then export it to a static html file or to a web publication.
+          </p>
+        </div>
+        <div className="row-section">
+          <iframe
+            width="100%"
+            height="300"
+            src="https://www.youtube.com/embed/VsnhrYjP02M"
+            frameBorder="0"
+            allowFullScreen />
+        </div>
+        <div className="row-section about">
+          <p>
+          Bulgur is crafted for being used in innovative courses of controversy mapping led by the <a target="blank" href="https://forccast.hypotheses.org/">FORCCAST program</a>.
         </p>
-        <p>
-          Import a data file from your computer, choose a visualization technique, build your presentation. Then export it to a static html file or to a web publication.
+          <p>
+          Bulgur is an open source program designed and developped at <a className="medialab" target="blank" href="http://www.medialab.sciences-po.fr/">médialab sciences po</a>.
         </p>
-        <p>
-          Bulgur is part of the <a target="blank" href="http://www.medialab.sciences-po.fr/">sciencespo’s médialab</a> tools.
-        </p>
-        <iframe
-          width="100%"
-          height="315"
-          src="https://www.youtube.com/embed/VsnhrYjP02M"
-          frameBorder="0"
-          allowFullScreen />
+          <p>
+            <a className="medialab" target="blank" href="http://www.medialab.sciences-po.fr/">
+              <img src={require('../assets/logo-medialab.png')} />
+            </a>
+          </p>
+        </div>
       </section>
 
       <section className="landing-group">
-        {allowNewPresentations ? <button className="new-presentation" onClick={onCreatePresentation}>Start a new presentation</button> : null }
+
         {allowNewPresentations ?
-          <div>
+          <div className="row-section">
+            <button className="new-presentation" onClick={onCreatePresentation}>Start a new presentation</button>
+          </div> : null }
+
+        <div className="row-section presentations-group">
+          {presentationsList.length > 0 ? <h4>... or continue one of your locally stored presentations</h4> : null}
+          <ul className="local-presentations-list">
+            {presentationsList.map((presentation, index) => {
+            const onClickPrompt = () => promptDeletePresentation(presentation.id);
+            const onClickUnprompt = () => unpromptDeletePresentation(presentation.id);
+            const onClickDelete = () => deletePresentation(presentation.id);
+            const onClickCopy = () => copyPresentation(presentation);
+            const setToActive = () => setActivePresentation(presentation);
+            const configure = () => startPresentationCandidateConfiguration(presentation);
+            const promptedToDelete = promptedToDeleteId === presentation.id;
+            return (
+              <PresentationCard
+                key={index}
+                presentation={presentation}
+                promptedToDelete={promptedToDelete}
+                setToActive={setToActive}
+                configure={configure}
+                onClickDelete={onClickDelete}
+                onClickPrompt={onClickPrompt}
+                onClickUnprompt={onClickUnprompt}
+                onClickCopy={onClickCopy} />
+            );
+          })
+          }
+          </ul>
+        </div>
+        {allowNewPresentations ?
+          <div className="row-section">
             <h3>... or import a project from your computer</h3>
-            <Dropzone
-              className="drop-zone"
-              activeClassName="drop-zone-active"
+            <DropZone
+              accept="application/json"
               onDrop={onDropInput}>
-              <div>drop the .json file here</div>
-            </Dropzone>
+              Drop a <code>json</code> file in this zone
+            </DropZone>
           </div>
         : 'You have reached the maximum number of local presentations. You have to make a bit of room before creating new ones. Remember you can save your presentations to the web and import them later !'}
-
-
         {allowNewPresentations ?
-          <div className="import-from-url">
-            <h3>...or fetch an existant project from a distant server</h3>
+          <div className="row-section import-from-url">
+            <h3>... or fetch an existant project from a distant server</h3>
             <form onSubmit={importFromDistantJSON}>
               <input
                 value={importFromUrlCandidate}
@@ -115,38 +160,6 @@ const PresentationsManagerLayout = ({
           {importError === 'invalidUrl' ? 'The url did not point to a valid presentation' : ''}
           {importError === 'invalidGist' ? 'The gist is not properly formatted as a quinoa presentation' : ''}
           {importError === 'fetchError' ? 'The fetch process of the file failed' : ''}
-        </div>
-
-        <div className="presentations-group">
-          {presentationsList.length > 0 ? <h4>... or continue one of your locally stored presentations</h4> : null}
-          <ul className="local-presentations-list">
-            {presentationsList.map((presentation, index) => {
-            const onClickPrompt = () => promptDeletePresentation(presentation.id);
-            const onClickUnprompt = () => unpromptDeletePresentation(presentation.id);
-            const onClickDelete = () => deletePresentation(presentation.id);
-            const onClickCopy = () => copyPresentation(presentation);
-            const setToActive = () => setActivePresentation(presentation);
-            const configure = () => startPresentationCandidateConfiguration(presentation);
-            return (
-              <li key={index} className="local-presentation">
-                <h5 onClick={setToActive}>{presentation.metadata && presentation.metadata.title && presentation.metadata.title.length ? presentation.metadata.title : 'untitled presentation'}</h5>
-                <div className="local-presentation-buttons">
-                  <button onClick={setToActive}>✏ edit</button>
-                  <button onClick={configure}>⚙ settings</button>
-                  {promptedToDeleteId !== presentation.id ? <button onClick={onClickCopy}>⎘ duplicate</button> : ''}
-                  {promptedToDeleteId !== presentation.id ? <button onClick={onClickPrompt}>⌫ delete</button> : null}
-                </div>
-                {promptedToDeleteId === presentation.id ? <p>Sure ?</p> : null}
-                {promptedToDeleteId === presentation.id ?
-                  <div className="local-presentation-buttons">
-                    <button onClick={onClickDelete}>Yes, delete this presentation</button>
-                    <button onClick={onClickUnprompt}>Cancel</button>
-                  </div> : null }
-              </li>
-            );
-          })
-          }
-          </ul>
         </div>
       </section>
 

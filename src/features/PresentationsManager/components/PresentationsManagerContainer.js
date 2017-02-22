@@ -123,6 +123,9 @@ export default class PresentationsManagerContainer extends Component {
   }
 
   onProjectImportPrompt (files) {
+    if (!files || !files.length) {
+      return;
+    }
     getFileAsText(files[0], (err, str) => {
       // todo : remove
       if (err) {
