@@ -7,6 +7,7 @@
  */
 import React from 'react';
 
+import './core.scss';
 import './Application.scss';
 
 import Editor from './features/Editor/components/EditorContainer.js';

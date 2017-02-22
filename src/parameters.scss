@@ -3,13 +3,16 @@
  *
  * @module bulgur
  */
-$main-font-stack: 'Source Code Pro', sans-serif;
+$main-font-stack: 'Source Sans Pro', sans-serif;
+$editable-font-stack: 'Source Code Pro', sans-serif;
 $display-font-stack: 'Source Sans Pro', serif;
+// todo : remove these
 //colors
 $primary-color: #333;
 $background-default: #f4f4f4;
 $background-intent: #d6cfc4;
 
+// todo: remove these
 $color-dark: #353635;
 $color-light: #fff;
 $color-valid: #68ce74;
@@ -19,5 +22,129 @@ $base-gutter: .3rem;
 $medium-gutter: $base-gutter * 2.66;
 $large-gutter: $medium-gutter * 2.66;
 //responsive breakpoints
-$breakpoint-phone: only screen and (min-device-width : 320px) and (max-device-width : 480px);
-$breakpoint-tablet: only screen and (min-device-width : 768px) and (max-device-width : 1024px);
+$breakpoint-phone: screen and (min-device-width : 320px) and (max-device-width : 480px);
+$breakpoint-tablet: screen and (min-device-width : 768px) and (max-device-width : 1024px);
+
+// font sizes
+$font-size-1: $base-gutter * 2;
+$font-size-2: $font-size-1 * 1.6;
+$font-size-3: $font-size-2 * 1.6;
+$font-size-4: $font-size-3 * 1.6;
+$font-size-5: $font-size-4 * 1.6;
+
+@import './mixins';
+
+// abstract classes
+// supposed to use in other scss definition
+// with @extend operator
+.text-editable
+{
+    font-style: $editable-font-stack;
+
+    cursor: text;
+}
+
+.normal-item
+{
+    color: #333;
+    background: #f4f4f4;
+}
+
+.normal-item-secondary
+{
+    color: #dddbd9;
+}
+
+.primary-item
+{
+    color: #333;
+    background: #e5e7e6;
+}
+
+.primary-item-intent
+{
+    color: #333;
+    background: #dddbd9;
+}
+
+.interactive-item
+{
+    cursor: pointer;
+
+    color: #333;
+    background: #e5e7e6;
+}
+.interactive-item-intent
+{
+    color: #333;
+    background: #dddbd9;
+}
+.interactive-item-active
+{
+    color: #333;
+    background: #d6cfc4;
+}
+.interactive-item-intent-active
+{
+    color: #333;
+    background: #c3baac;
+}
+.interactive-item-intent-inactive
+{
+    color: #a4a1a1;
+    background: #e5e7e6;
+}
+
+.important-item
+{
+    color: #fff;
+    background: #3fb0ac;
+}
+
+.important-item-intent
+{
+    color: #fff;
+    background: #173e43;
+}
+.important-item-active
+{
+    color: #fff;
+    background: #fff;
+}
+.important-item-intent-active
+{
+    color: #fff;
+    background: #072024;
+}
+.important-item-inactive
+{
+    color: #fff;
+    background: #b8e4e3;
+}
+
+.dangerous-item
+{
+    color: #fff;
+    background: #b56969;
+}
+
+.dangerous-item-intent
+{
+    color: #fff;
+    background: #c83c3c;
+}
+.dangerous-item-active
+{
+    color: #fff;
+    background: #692323;
+}
+.dangerous-item-intent-active
+{
+    color: #fff;
+    background: #3f1010;
+}
+.dangerous-item-inactive
+{
+    color: #fff;
+    background: #d9c3c3;
+}
