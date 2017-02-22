@@ -24,15 +24,17 @@
         display: flex;
 
         padding: $base-gutter;
+
         border: 1px solid $primary-color;
 
         flex-flow: row nowrap;
-
         @extend .interactive-item;
-        &:hover{
+        &:hover
+        {
             @extend .interactive-item-intent;
         }
-        &.active{
+        &.active
+        {
             @extend .interactive-item-active;
         }
         &:hover.active
@@ -42,8 +44,9 @@
 
         &.dragged
         {
+            opacity: .3;
+
             @extend .interactive-item-inactive;
-            opacity: 0.3;
         }
 
         .slide-content
@@ -134,7 +137,8 @@
         .first-slide
         {
             @extend .important-item;
-            &:hover{
+            &:hover
+            {
                 @extend .important-item-intent;
             }
         }

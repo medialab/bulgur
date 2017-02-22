@@ -65,7 +65,7 @@ const PresentationsManagerLayout = ({
             Bulgur is a tool dedicated to the making of guided tours into data visualizations, called <i>data presentations</i>.
           </p>
           <p>
-            Import a data file from your computer, choose a visualization technique, build your presentation. Then export it to a static html file or to a web publication.
+            Import a data file from your computer, choose a visualization technique, build your presentation. Then export it to an html file or to an online webpage.
           </p>
         </div>
         <div className="row-section">
