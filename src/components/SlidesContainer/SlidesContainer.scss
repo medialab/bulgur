@@ -11,7 +11,7 @@
     padding: 0;
     padding-left: $medium-gutter;
 
-    transition: all .5s ease;
+    transition: all $time-short ease;
     li
     {
         min-height: 3rem;
@@ -24,11 +24,27 @@
         display: flex;
 
         padding: $base-gutter;
-
-        color: $primary-color;
         border: 1px solid $primary-color;
 
         flex-flow: row nowrap;
+
+        @extend .interactive-item;
+        &:hover{
+            @extend .interactive-item-intent;
+        }
+        &.active{
+            @extend .interactive-item-active;
+        }
+        &:hover.active
+        {
+            @extend .interactive-item-intent-active;
+        }
+
+        &.dragged
+        {
+            @extend .interactive-item-inactive;
+            opacity: 0.3;
+        }
 
         .slide-content
         {
@@ -112,17 +128,16 @@
                 }
             }
         }
-        &.active
-        {
-            background: $background-intent;
-        }
-        &.dragged
-        {
-            opacity: .3;
-        }
     }
     .add-slide
     {
+        .first-slide
+        {
+            @extend .important-item;
+            &:hover{
+                @extend .important-item-intent;
+            }
+        }
         button
         {
             display: block;

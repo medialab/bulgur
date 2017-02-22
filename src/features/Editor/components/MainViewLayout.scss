@@ -147,7 +147,7 @@
         max-width: 0;
         max-height: 4rem;
 
-        transition: all .5s ease;
+        transition: all $time-short ease;
         &.visible
         {
             max-width: 100%;
@@ -158,7 +158,7 @@
             padding: $medium-gutter;
             // border-bottom: none;
 
-            transition: all .5s ease;
+            transition: all $time-short ease;
 
             border: 1px solid $primary-color;
             border-top: none;

@@ -15,7 +15,7 @@
             display: flex;
 
             cursor: pointer;
-            transition: all .5s ease;
+            transition: all $time-short ease;
 
             flex-flow: column nowrap;
 

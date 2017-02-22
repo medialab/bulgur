@@ -9,11 +9,31 @@
 {
     display: flex;
 
-    padding: $medium-gutter;
+    padding: 0;
 
     border-top: 1px solid $primary-color;
 
     flex-flow: row nowrap;
     align-items: stretch;
     justify-content: space-between;
+
+    .left-group
+    {
+      padding: $base-gutter;
+      padding-bottom: 0;
+    }
+
+    .right-group
+    {
+      button
+      {
+        @extend .important-item;
+        padding: $medium-gutter;
+        margin-left: $medium-gutter;
+        &:hover
+        {
+          @extend .important-item-intent;
+        }
+      }
+    }
 }

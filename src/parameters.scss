@@ -32,6 +32,9 @@ $font-size-3: $font-size-2 * 1.6;
 $font-size-4: $font-size-3 * 1.6;
 $font-size-5: $font-size-4 * 1.6;
 
+// time
+$time-short: .5s;
+
 @import './mixins';
 
 // abstract classes
@@ -89,7 +92,7 @@ $font-size-5: $font-size-4 * 1.6;
     color: #333;
     background: #c3baac;
 }
-.interactive-item-intent-inactive
+.interactive-item-inactive
 {
     color: #a4a1a1;
     background: #e5e7e6;

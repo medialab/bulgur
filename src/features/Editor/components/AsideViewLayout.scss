@@ -19,7 +19,34 @@
     // padding-left: $large-gutter;
 
     border-right: 1px solid $primary-color;
+    .aside-header
+    {
+        display: flex;
 
+        flex-flow: column nowrap;
+        button
+        {
+            padding: $medium-gutter;
+
+            text-align: left;
+        }
+        .returnToLanding-btn
+        {
+            @extend .primary-item;
+            &:hover
+            {
+                @extend .primary-item-intent;
+            }
+        }
+        .settings-btn
+        {
+            img
+            {
+                position: relative;
+                top: $base-gutter;
+            }
+        }
+    }
     .bulgur-slides-container
     {
         overflow: auto;
@@ -28,7 +55,6 @@
 
         flex: 5;
     }
-
     > button
     {
         display: block;

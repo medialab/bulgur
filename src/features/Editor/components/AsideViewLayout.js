@@ -36,9 +36,9 @@ const AsideViewLayout = ({
   activeSlideId,
 }) => (
   <aside className="bulgur-aside-view">
-    <div>
-      <button onClick={returnToLanding} type="button">☰</button>
-      <button onClick={openSettings} type="button"><img className="bulgur-icon-image" src={require('../assets/settings.svg')} /> {activePresentation.metadata && activePresentation.metadata.title && activePresentation.metadata.title.length ? activePresentation.metadata.title : 'untitled presentation'}</button>
+    <div className="aside-header">
+      <button className="returnToLanding-btn" onClick={returnToLanding} type="button">☰ Back to home</button>
+      <button className="settings-btn" onClick={openSettings} type="button"><img className="bulgur-icon-image" src={require('../assets/settings.svg')} /> {activePresentation.metadata && activePresentation.metadata.title && activePresentation.metadata.title.length ? activePresentation.metadata.title : 'untitled presentation'} - <i>settings</i></button>
     </div>
     {
       activePresentation.order ?

@@ -13,7 +13,7 @@
 
     padding: $base-gutter;
 
-    transition: all .5s ease;
+    transition: all $time-short ease;
 
     flex-flow: column nowrap;
     align-items: stretch;
@@ -27,7 +27,7 @@
         padding: $base-gutter;
 
         cursor: text;
-        transition: background .5s ease;
+        transition: background $time-short ease;
 
         flex: 5;
 

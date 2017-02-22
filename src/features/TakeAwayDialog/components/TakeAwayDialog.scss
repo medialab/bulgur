@@ -110,7 +110,7 @@
     {
         padding: $medium-gutter;
 
-        transition: all .5s ease;
+        transition: all $time-short ease;
         text-align: center;
 
         &.success
