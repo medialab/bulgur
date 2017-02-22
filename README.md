@@ -3,7 +3,7 @@
 Bulgur is a tool dedicated to the making of guided tours into data visualizations, called *data presentations*.
 Users import their data from their computer, then compose their data presentation, then finally export it to static html or to a web publication.
 
-Users personal data is stored on the `localStorage` of the user's browser, nevertheless it can also be synchronized with a [gist](https://gist.github.com/) code repository or with a distant backend server.
+Users personal data is stored on the `localStorage` of the user's browser, nevertheless it can also be synchronized with a [gist](https://gist.github.com/) code repository and/or with a distant backend server.
 
 Bulgur is part of the ``quinoa`` project family, a suite of digital storytelling tools tailored for the [FORCCAST](https://forccast.hypotheses.org/) pedagogical program and [médialab sciences po](http://www.medialab.sciences-po.fr/) scientific activities.
 
