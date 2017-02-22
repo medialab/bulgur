@@ -137,7 +137,7 @@ const PresentationsManagerLayout = ({
         : 'You have reached the maximum number of local presentations. You have to make a bit of room before creating new ones. Remember you can save your presentations to the web and import them later !'}
         {allowNewPresentations ?
           <div className="row-section import-from-url">
-            <h3>... or fetch an existant project from a distant server</h3>
+            <h3>... or fetch an existing project from a distant server</h3>
             <form onSubmit={importFromDistantJSON}>
               <input
                 value={importFromUrlCandidate}

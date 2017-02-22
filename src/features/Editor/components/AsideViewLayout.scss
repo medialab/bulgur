@@ -14,11 +14,13 @@
     display: flex;
     overflow: hidden;
     flex-direction: column;
+
+    background: #f4f4f4;
     // padding: $base-gutter;
     // padding-right: $large-gutter;
     // padding-left: $large-gutter;
 
-    border-right: 1px solid $primary-color;
+    border-right: 1px solid #dddbd9;
     .aside-header
     {
         display: flex;

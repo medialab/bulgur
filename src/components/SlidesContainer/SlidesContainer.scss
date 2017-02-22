@@ -25,7 +25,7 @@
 
         padding: $base-gutter;
 
-        border: 1px solid $primary-color;
+        border: 1px solid #dddbd9;
 
         flex-flow: row nowrap;
         @extend .interactive-item;
@@ -73,7 +73,7 @@
                 margin-top: 0;
                 padding: 0;
 
-                border-bottom: 1px solid black;
+                border-bottom: 1px solid #dddbd9;
 
                 flex-flow: row nowrap;
                 align-items: stretch;
@@ -134,9 +134,11 @@
     }
     .add-slide
     {
+
         .first-slide
         {
             @extend .important-item;
+            border: none;
             &:hover
             {
                 @extend .important-item-intent;
@@ -149,7 +151,13 @@
             width: 100%;
             padding: $base-gutter;
 
-            border: 1px solid $primary-color;
+            border: 1px solid #dddbd9;
+
+            @extend .interactive-item;
+            &:hover
+            {
+                @extend .interactive-item-intent;
+            }
         }
     }
 }

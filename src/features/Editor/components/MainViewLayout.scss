@@ -51,6 +51,8 @@
     {
         position: relative;
 
+        background: #f4f4f4;
+
         display: flex;
 
         max-height: 40%;
@@ -58,7 +60,7 @@
         padding-top: 0;
         padding-right: 0;
 
-        border-top: 1px solid $primary-color;
+        border-top: 1px solid #dddbd9;
 
         flex: 1;
         flex-flow: column nowrap;
@@ -71,7 +73,7 @@
 
             padding-bottom: $base-gutter;
 
-            border-bottom: 1px solid $primary-color;
+            border-bottom: 1px solid #dddbd9;
 
             align-items: stretch;
             flex-flow: row nowrap;
@@ -160,29 +162,22 @@
 
             transition: all $time-short ease;
 
-            border: 1px solid $primary-color;
-            border-top: none;
-            &:last-of-type
-            {
-                border-left: none;
-            }
-            &:hover
-            {
-                color: white;
-                background: red;
+
+            @extend .interactive-item;
+            &:hover{
+                @extend .interactive-item-intent;
             }
 
             &#take-snapshot-btn
             {
-                color: white;
-                background: red;
+                @extend .important-item;
                 &.inactive
                 {
-                    background: lightgreen;
+                    @extend .important-item-inactive;
                 }
                 &:hover:not(.inactive)
                 {
-                    background: brown;
+                    @extend .important-item-intent;
                 }
             }
         }

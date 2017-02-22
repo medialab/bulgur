@@ -11,7 +11,8 @@
 
     padding: 0;
 
-    border-top: 1px solid $primary-color;
+    border-top: 1px solid #dddbd9;
+    background: #f4f4f4;
 
     flex-flow: row nowrap;
     align-items: stretch;
@@ -19,7 +20,8 @@
 
     .left-group
     {
-        padding: $base-gutter;
+        padding: $medium-gutter;
+        padding-top: $base-gutter;
         padding-bottom: 0;
     }
 
@@ -27,9 +29,8 @@
     {
         button
         {
-            margin-left: $medium-gutter;
             padding: $medium-gutter;
-
+            border-left: 1px solid #FFFFFF;
             @extend .important-item;
             &:hover
             {
