@@ -130,8 +130,10 @@ class TakeAwayDialogContainer extends Component {
         downloadFile(JSON.stringify(JSONbundle, null, 2), 'json', title);
         break;
       case 'html':
+        this.props.actions.setTakeAwayType('html');
         this.props.actions.setBundleHtmlStatus('processing', 'Asking the server to bundle a custom html file');
         bundleProjectAsHtml(this.props.activePresentation, (err, html) => {
+          this.props.actions.setTakeAwayType(undefined);
           if (err === null) {
             downloadFile(html, 'html', title);
             this.props.actions.setBundleHtmlStatus('success', 'Bundling is a success !');

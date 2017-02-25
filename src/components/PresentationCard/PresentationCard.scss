@@ -19,7 +19,6 @@
     {
         @extend .primary-item-intent;
     }
-
     .card-header,
     .card-body
     {
@@ -27,41 +26,10 @@
 
         flex-flow: row nowrap;
     }
-
-    .card-header
-    {
-        h5
-        {
-            font-size: $font-size-3;
-
-            display: flex;
-
-            margin: 0;
-            margin-bottom: $medium-gutter;
-
-            cursor: pointer;
-
-            flex-flow: row nowrap;
-
-            .icons-container
-            {
-                margin-right: $medium-gutter;
-                padding-top: $base-gutter;
-            }
-
-            img
-            {
-                height: $font-size-3;
-            }
-        }
-    }
-
     .card-body
     {
-        .description
+        .info-column
         {
-            font-style: italic;
-
             overflow-y: hidden;
 
             max-height: 10rem;
@@ -69,6 +37,32 @@
             padding-right: $medium-gutter;
 
             flex: 3;
+            h5
+            {
+                font-size: $font-size-3;
+
+                display: flex;
+
+                margin: 0;
+                margin-bottom: $medium-gutter;
+
+                cursor: pointer;
+
+                flex-flow: row nowrap;
+                .icons-container
+                {
+                    margin-right: $medium-gutter;
+                    padding-top: $base-gutter;
+                }
+                img
+                {
+                    height: $font-size-3;
+                }
+            }
+            .description
+            {
+                font-style: italic;
+            }
         }
         .buttons-column
         {
@@ -76,13 +70,11 @@
 
             flex: 1;
             flex-flow: column nowrap;
-
             .edit-btn
             {
                 font-size: $font-size-3;
 
                 @extend .important-item;
-
                 &:hover
                 {
                     @extend .important-item-intent;
@@ -101,7 +93,6 @@
             }
         }
     }
-
     .card-footer
     {
         .button-row

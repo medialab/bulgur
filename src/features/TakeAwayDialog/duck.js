@@ -10,7 +10,11 @@ import publishToGist from '../../helpers/gistExporter';
 import publishToServer from '../../helpers/serverExporter';
 import {persistentReducer} from 'redux-pouchdb';
 
-import {RESET_APP} from '../Editor/duck';
+import {
+  RESET_APP,
+  OPEN_TAKE_AWAY_MODAL,
+  CLOSE_TAKE_AWAY_MODAL
+} from '../Editor/duck';
 /*
  * Action names
  */
@@ -45,6 +49,13 @@ export const setBundleHtmlStatus = (status, log) => dispatch => {
     log
   });
 };
+/**
+ * @param {string} takeAwayType - the type to set for the interface
+ */
+export const setTakeAwayType = (takeAwayType) => ({
+  type: SET_TAKE_AWAY_TYPE,
+  takeAwayType
+});
 /**
  * @param {string} status - the status of the gist export process to display
  * @param {string} log - the log message of the gist export process to display
@@ -202,6 +213,8 @@ const DEFAULT_TAKE_AWAY_UI_SETTINGS = {
  */
 function takeAwayUi(state = DEFAULT_TAKE_AWAY_UI_SETTINGS, action) {
   switch (action.type) {
+    case OPEN_TAKE_AWAY_MODAL:
+    case CLOSE_TAKE_AWAY_MODAL:
     case RESET_APP:
       return DEFAULT_TAKE_AWAY_UI_SETTINGS;
     case SET_TAKE_AWAY_TYPE:

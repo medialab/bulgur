@@ -4,80 +4,87 @@
  */
 import React from 'react';
 
-import 'react-select/dist/react-select.css';
-
 import './TakeAwayDialog.scss';
+
+import BigSelect from '../../../components/BigSelect/BigSelect';
+import Toaster from '../../../components/Toaster/Toaster';
 
 /**
  * Renders the options for takeaway mode choice
  * @param {object} props - the props to render
  * @param {function} takeAway - callback
+ * @param {function} setTakeAwayType - callback
+ * @param {string} takeAwayType - the active takeawayType
  * @param {boolean} serverAvailable - whether app is implemented with a distant server connection
  * @param {boolean} gistAvailable - whether app is implemented with a gistAvailable connection
  * @return {ReactElement} markup
  */
 export const ChooseTakeAwayStep = ({
   takeAway,
+  setTakeAwayType,
+  takeAwayType,
   serverAvailable,
-  gistAvailable
-}) => (
-  <section className="new-presentation-dialog-step">
-    <h1>I want to take away my presentation as ...</h1>
-    <form className="take-away-type-choice">
-      {
-        // todo : put this data in a model file
-        [{
+  gistAvailable,
+  serverHtmlUrl,
+  gistId
+}) => {
+  const optionSelect = (option) => {
+    switch (option.id) {
+      case 'server':
+        if (!serverHtmlUrl) {
+          takeAway(option);
+        }
+        return setTakeAwayType(option.id);
+
+      case 'github':
+        if (!gistId) {
+          takeAway(option);
+        }
+        return setTakeAwayType(option.id);
+      default:
+        return takeAway(option);
+    }
+  };
+ // todo : put this data in a model file ? to decide
+  const options = [{
           id: 'project',
-          label: 'a project file (for reworking on this presentation on another browser/computer)',
-          active: true
+          icon: require('../assets/bulgur-take-away-type-project.svg'),
+          label: 'project file',
+          possible: true
         },
         {
           id: 'html',
-          label: 'an html file to upload to the website of my choice',
-          active: serverAvailable === true
+          icon: require('../assets/bulgur-take-away-type-html.svg'),
+          label: 'html file',
+          possible: serverAvailable === true
         },
         {
           id: 'github',
-          label: 'a gist-powered website',
-          active: serverAvailable === true && gistAvailable === true
+          icon: require('../assets/bulgur-take-away-type-github.svg'),
+          label: 'gist-powered website',
+          possible: serverAvailable === true && gistAvailable === true
         },
         {
           id: 'server',
-          label: 'a forccast-powered website',
-          active: serverAvailable === true
+          icon: require('../assets/bulgur-take-away-type-server.svg'),
+          label: 'forccast-powered website',
+          possible: serverAvailable === true
         }
         ]
-        .filter(option => option.active === true)
-        .map((takeAwayType, key) => {
-          const onOptionClick = (evt) => {
-            evt.stopPropagation();
-            takeAway(takeAwayType);
-          };
-          return (
-            <div className="take-away-type-item"
-              key={key}>
-              <input
-                type="radio"
-                id={takeAwayType}
-                name={takeAwayType}
-                value="type"
-                checked={false} />
-              <label
-                onClick={onOptionClick}
-                htmlFor={takeAwayType}>
-                <img className="bulgur-icon-image" src={require('../assets/bulgur-take-away-type-' + takeAwayType.id + '.svg')} />
-                <h3>{takeAwayType.label}</h3>
-              </label>
-            </div>);
-      })}
-    </form>
-  </section>
-);
+        .filter(option => option.possible === true);
+  return (
+    <BigSelect
+      options={options}
+      activeOptionId={takeAwayType}
+      onOptionSelect={optionSelect} />
+  );
+};
 
 /**
  * Renders the layout of the take away dialog
  * @param {object} props - the props to render
  * @param {object} props.activePresentation - the presentation to take away
+ * @param {string} props.takeAwayType - the active takeaway type
  * @param {string} props.takeAwayGistLog
  * @param {string} props.takeAwayGistLogStatus
  * @param {string} props.takeAwayServerLog
@@ -95,6 +102,7 @@ export const ChooseTakeAwayStep = ({
  */
 const TakeAwayDialogLayout = ({
   activePresentation,
+  takeAwayType,
   takeAwayGistLog,
   takeAwayGistLogStatus,
   takeAwayServerLog,
@@ -110,76 +118,103 @@ const TakeAwayDialogLayout = ({
   updateActivePresentationFromServer,
   actions: {
     closeTakeAwayModal,
+    setTakeAwayType
   },
-}) => (
-  <div className="bulgur-take-away-dialog-layout">
-    <ChooseTakeAwayStep
-      takeAway={takeAway}
-      serverAvailable={serverAvailable}
-      gistAvailable={gistAvailable} />
-    <section className="take-away-dialog-step pub-links">
-      {
-        bundleToHtmlLog ? <p className={'take-away-log ' + bundleToHtmlLogStatus}>{bundleToHtmlLog}</p> : ''
-      }
-      {
-        takeAwayGistLog ? <p className={'take-away-log ' + takeAwayGistLogStatus}>{takeAwayGistLog}</p> : ''
-      }
-      {
-        activePresentation && activePresentation.metadata && activePresentation.metadata.gistId ?
-          <div>
-            <h2>Your presentation on gist servers</h2>
-            <p>
-              <a target="blank" href={activePresentation.metadata.gistUrl}>Go to the gist source code of your presentation</a>
-            </p>
-            <p>
-              <a target="blank" href={serverUrl + '/gist-presentation/' + activePresentation.metadata.gistId}>Go to the gist-based webpage of your presentation</a>
-            </p>
-            <div>
-              <p>HTML code to copy-paste to embed it on the web : </p>
-              <pre>
-                <code>
-                  {`<iframe allowfullscreen src="${serverUrl + '/gist-presentation/' + activePresentation.metadata.gistId}" width="1000" height="500" frameborder=0></iframe>`}
-                </code>
-              </pre>
+}) => {
+  const updateActivePresentationToServer = () => takeAway({id: 'server'});
+  const updateActivePresentationToGist = () => takeAway({id: 'github'});
+  return (
+    <div className="bulgur-take-away-dialog-layout">
+      <h1 className="modal-header">
+      Take away your presentation
+    </h1>
+      <section className="modal-content">
+        <section className="modal-row">
+          <ChooseTakeAwayStep
+            takeAway={takeAway}
+            setTakeAwayType={setTakeAwayType}
+            serverAvailable={serverAvailable}
+            takeAwayType={takeAwayType}
+            gistAvailable={gistAvailable}
+            serverHtmlUrl={activePresentation && activePresentation.metadata && activePresentation.metadata.serverHTMLUrl}
+            gistId={activePresentation && activePresentation.metadata && activePresentation.metadata.gistId} />
+        </section>
+        <section className={'modal-row ' + (bundleToHtmlLogStatus || takeAwayGistLogStatus || takeAwayServerLogStatus ? '' : 'empty')}>
+          <Toaster status={bundleToHtmlLogStatus} log={bundleToHtmlLog} />
+          <Toaster status={takeAwayGistLogStatus} log={takeAwayGistLog} />
+          <Toaster status={takeAwayServerLogStatus} log={takeAwayServerLog} />
+        </section>
+        <section className="modal-row">
+          {
+          takeAwayType === 'github' &&
+          activePresentation && activePresentation.metadata && activePresentation.metadata.gistId ?
+            <div className="sync-section-container">
+              <h2><img src={require('../assets/bulgur-take-away-type-github.svg')} />Your presentation is online on the gist platform</h2>
+              <div className="sync-section">
+                <div className="column">
+                  <p>
+                    <a target="blank" href={activePresentation.metadata.gistUrl}>
+                      → Go to the gist source code of your presentation
+                    </a>
+                    <a target="blank" href={serverUrl + '/gist-presentation/' + activePresentation.metadata.gistId}>
+                      → Go to the gist-based webpage of your presentation
+                    </a>
+                  </p>
+                  <p>Embed inside an html webpage :</p>
+                  <pre>
+                    <code>
+                      {`<iframe allowfullscreen src="${serverUrl + '/gist-presentation/' + activePresentation.metadata.gistId}" width="1000" height="500" frameborder=0></iframe>`}
+                    </code>
+                  </pre>
+                </div>
+                <div className="column">
+                  <div className="operations">
+                    <button onClick={updateActivePresentationToGist}>↑ Update local version to the online repository</button>
+                    <button onClick={updateActivePresentationFromGist}>↓ Update local version from the online repository</button>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div>
-              <button onClick={updateActivePresentationFromGist}>Update your local version of the presentation from the distant gist repository</button>
+            : null
+        }
+          {
+          takeAwayType === 'server' &&
+          activePresentation && activePresentation.metadata && activePresentation.metadata.serverHTMLUrl ?
+            <div className="sync-section-container">
+              <h2><img src={require('../assets/bulgur-take-away-type-server.svg')} />Your presentation is online on the forccast server</h2>
+              <div className="sync-section">
+                <div className="column">
+                  <p>
+                    <a target="blank" href={activePresentation.metadata.serverHTMLUrl}>
+                    → Go to the forccast server's webpage of your presentation
+                    </a>
+                  </p>
+                  <p>Embed inside an html webpage :</p>
+                  <pre>
+                    <code>
+                      {`<iframe allowfullscreen src="${activePresentation.metadata.serverHTMLUrl}" width="1000" height="500" frameborder=0></iframe>`}
+                    </code>
+                  </pre>
+                </div>
+                <div className="column">
+                  <div className="operations">
+                    <button onClick={updateActivePresentationToServer}>↑ Update local version to the online repository</button>
+                    <button onClick={updateActivePresentationFromServer}>↓ Update local version from the online repository</button>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          : ''
-      }
-      {
-        takeAwayServerLog ? <p className={'take-away-log ' + takeAwayServerLogStatus}>{takeAwayServerLog}</p> : ''
-      }
-      {
-        activePresentation && activePresentation.metadata && activePresentation.metadata.serverHTMLUrl ?
-          <div>
-            <h2>Your presentation on forccast servers</h2>
-            <p>
-              <a target="blank" href={activePresentation.metadata.serverHTMLUrl}>Go to the forccast server's webpage of your presentation</a>
-            </p>
-            <div>
-              <p>HTML code to copy-paste to embed it on the web : </p>
-              <pre>
-                <code>
-                  {`<iframe allowfullscreen src="${activePresentation.metadata.serverHTMLUrl}" width="1000" height="500" frameborder=0></iframe>`}
-                </code>
-              </pre>
-            </div>
-            <div>
-              <button onClick={updateActivePresentationFromServer}>Update your local version of the presentation from the distant forccast repository</button>
-            </div>
-          </div>
-          : ''
-      }
-    </section>
-    <section className="take-away-dialog-step">
-      <button
-        onClick={closeTakeAwayModal}>
-        Cancel
+            : ''
+        }
+        </section>
+      </section>
+      <section className="modal-footer">
+        <button
+          onClick={closeTakeAwayModal}>
+        Close
       </button>
-    </section>
-  </div>
-);
+      </section>
+    </div>);
+};
 
 export default TakeAwayDialogLayout;

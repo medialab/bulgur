@@ -119,9 +119,9 @@ const SlideSettingsPannel = ({
         <button className={'open-pannel ' + (isOpen ? 'active' : '')}
           onClick={togglePannel}>
           {isOpen ?
-            <span><img className="bulgur-icon-image" src={require('./assets/close.svg')} />Close slide settings</span>
+            <span><img className="bulgur-icon-image" src={require('./assets/close.svg')} />Close view settings</span>
               :
-            <span><img className="bulgur-icon-image" src={require('./assets/settings.svg')} />Open slide settings</span>
+            <span><img className="bulgur-icon-image" src={require('./assets/settings.svg')} />Open view settings</span>
           }</button>
       </div>
     </aside>

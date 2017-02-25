@@ -1,0 +1,38 @@
+/**
+ * style definitions for the Toaster component
+ *
+ * @module bulgur/components/Toaster
+ */
+@import '../../parameters.scss';
+
+.bulgur-toaster
+{
+    max-height: 0;
+    margin: 0;
+    padding: 0;
+
+    transition: all $time-short ease;
+    text-align: center;
+
+    &.success,
+    &.error,
+    &.processing
+    {
+        max-height: 100rem;
+        padding: $medium-gutter;
+    }
+
+    &.processing
+    {
+        @extend .important-item;
+    }
+
+    &.success
+    {
+        @extend .important-item-inactive;
+    }
+    &.error
+    {
+        @extend .dangerous-item;
+    }
+}
