@@ -58,8 +58,8 @@
         padding-top: 0;
         padding-right: 0;
 
-        border-top: 1px solid #dddbd9;
-        background: #f4f4f4;
+        border-top: 1px solid $color-sec-stroke;
+        background: $color-sec-bg;
 
         flex: 1;
         flex-flow: column nowrap;
@@ -72,7 +72,7 @@
 
             padding-bottom: $base-gutter;
 
-            border-bottom: 1px solid #dddbd9;
+            border-bottom: 1px solid $color-sec-stroke;
 
             align-items: stretch;
             flex-flow: row nowrap;
@@ -86,7 +86,7 @@
                 flex: 5;
                 input
                 {
-                    font-size: 1.5rem;
+                    font-size: $font-size-2;
 
                     width: 100%;
                     height: 3rem;
@@ -143,24 +143,26 @@
 
     .view-operations
     {
+        display: flex;
         overflow: hidden;
 
-        max-width: 0;
-        max-height: 4rem;
+        width: $legend-width;
 
         transition: all $time-short ease;
-        &.visible
-        {
-            max-width: 100%;
-        }
+
+        flex-flow: row nowrap;
+        align-items: stretch;
+
         button
         {
-            height: 4rem;
             padding: $medium-gutter;
-            // border-bottom: none;
 
+            cursor: default;
             transition: all $time-short ease;
 
+            opacity: .1;
+
+            flex: 1;
             @extend .interactive-item;
             &:hover
             {
@@ -178,6 +180,17 @@
                 {
                     @extend .important-item-intent;
                 }
+            }
+        }
+
+        // .view-operations state modificators
+        &.visible
+        {
+            button
+            {
+                cursor: pointer;
+
+                opacity: 1;
             }
         }
     }

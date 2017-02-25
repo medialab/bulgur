@@ -11,9 +11,10 @@
 
     padding: 0;
 
-    border-top: 1px solid #dddbd9;
-    background: #f4f4f4;
+    border-top: 1px solid $color-sec-stroke;
+    // background: $color-sec-bg;
 
+    @extend .primary-item;
     flex-flow: row nowrap;
     align-items: stretch;
     justify-content: space-between;
@@ -21,19 +22,29 @@
     .left-group
     {
         padding: $medium-gutter;
-        padding-top: $base-gutter;
+        padding-top: $medium-gutter;
         padding-bottom: 0;
     }
 
     .right-group
     {
+        display: flex;
+
+        width: $legend-width;
+
+        flex-flow: row nowrap;
+        align-items: stretch;
         button
         {
             padding: $medium-gutter;
 
-            border-left: 1px solid #fff;
-
+            flex: 1;
             @extend .important-item;
+
+            &:not(:first-of-type)
+            {
+                border-left: 1px solid #fff;
+            }
             &:hover
             {
                 @extend .important-item-intent;

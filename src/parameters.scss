@@ -11,12 +11,14 @@ $display-font-stack: 'Source Sans Pro', serif;
 $primary-color: #333;
 $background-default: #f4f4f4;
 $background-intent: #d6cfc4;
-
-// todo: remove these
 $color-dark: #353635;
 $color-light: #fff;
 $color-valid: #68ce74;
 $color-error: brown;
+
+// new colors
+$color-sec-bg: #f4f4f4;
+$color-sec-stroke: #dddbd9;
 // gutters
 $base-gutter: .3rem;
 $medium-gutter: $base-gutter * 2.66;
@@ -28,12 +30,17 @@ $breakpoint-tablet: screen and (min-device-width : 768px) and (max-device-width 
 // font sizes
 $font-size-1: $base-gutter * 2;
 $font-size-2: $font-size-1 * 1.6;
+$font-size-2-5: $font-size-1 * 1.9;
 $font-size-3: $font-size-2 * 1.6;
 $font-size-4: $font-size-3 * 1.6;
 $font-size-5: $font-size-4 * 1.6;
 
 // time
-$time-short: .5s;
+$time-short: .2s;
+
+// dimensions
+$legend-width: 20rem;
+
 
 @import './mixins';
 
@@ -50,12 +57,19 @@ $time-short: .5s;
 .normal-item
 {
     color: #333;
-    background: #f4f4f4;
+    background: $color-sec-bg;
+}
+.normal-item-inactive
+{
+    cursor: default;
+
+    color: #a4a1a1;
+    background: $color-sec-bg;
 }
 
 .normal-item-secondary
 {
-    color: #dddbd9;
+    color: $color-sec-stroke;
 }
 
 .primary-item
@@ -67,7 +81,7 @@ $time-short: .5s;
 .primary-item-intent
 {
     color: #333;
-    background: #dddbd9;
+    background: $color-sec-stroke;
 }
 
 .interactive-item
@@ -80,7 +94,7 @@ $time-short: .5s;
 .interactive-item-intent
 {
     color: #333;
-    background: #dddbd9;
+    background: $color-sec-stroke;
 }
 .interactive-item-active
 {
@@ -94,6 +108,8 @@ $time-short: .5s;
 }
 .interactive-item-inactive
 {
+    cursor: default;
+
     color: #a4a1a1;
     background: #e5e7e6;
 }
@@ -112,7 +128,7 @@ $time-short: .5s;
 .important-item-active
 {
     color: #fff;
-    background: #fff;
+    background: #173e43;
 }
 .important-item-intent-active
 {
@@ -121,6 +137,8 @@ $time-short: .5s;
 }
 .important-item-inactive
 {
+    cursor: default;
+
     color: #fff;
     background: #b8e4e3;
 }
@@ -148,6 +166,8 @@ $time-short: .5s;
 }
 .dangerous-item-inactive
 {
+    cursor: default;
+
     color: #fff;
     background: #d9c3c3;
 }

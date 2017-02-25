@@ -14,12 +14,9 @@
     display: flex;
     overflow: hidden;
     flex-direction: column;
-    // padding: $base-gutter;
-    // padding-right: $large-gutter;
-    // padding-left: $large-gutter;
 
-    border-right: 1px solid #dddbd9;
-    background: #f4f4f4;
+    border-right: 1px solid $color-sec-stroke;
+    background: $color-sec-bg;
     .aside-header
     {
         display: flex;
@@ -34,6 +31,11 @@
         .returnToLanding-btn
         {
             @extend .primary-item;
+
+            .bulgur-icon
+            {
+                padding-right: $base-gutter;
+            }
             &:hover
             {
                 @extend .primary-item-intent;

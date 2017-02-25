@@ -5,10 +5,11 @@
 import React from 'react';
 import Modal from 'react-modal';
 
+import './PresentationsManagerLayout.scss';
+
 import DropZone from '../../../components/DropZone/DropZone';
 import PresentationCard from '../../../components/PresentationCard/PresentationCard';
 
-import './PresentationsManagerLayout.scss';
 /**
  * Renders the layout component of the feature
  * @param {object} props - the props to render

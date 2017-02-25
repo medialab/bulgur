@@ -5,7 +5,6 @@
 import React from 'react';
 
 import Select from 'react-select';
-import 'react-select/dist/react-select.css';
 
 import './DatamapPicker.scss';
 
@@ -23,17 +22,23 @@ const DatamapPicker = ({
     }
   };
   const currentParameter = parameter.mappedField;
+
   return (
     <li
       key={parameterKey}
       className={'bulgur-datamap-picker ' + (parameter.mappedField ? 'active' : '')}>
-      <h4>
-        <b>{parameter.id}</b>{/* - <i>{parameter.acceptedValueTypes.join(', ')}</i>*/}
-      </h4>
-      <Select
-        name="form-field-name"
-        value={currentParameter}
-        options={
+      <h5>
+        <b>{parameter.id}</b>
+        <span>►</span>{/* - <i>{parameter.acceptedValueTypes.join(', ')}</i>*/}
+      </h5>
+
+      <div className="select-container">
+        <Select
+          name="form-field-name"
+          value={currentParameter}
+          searchable={false}
+          clearable={false}
+          options={
             visualization.dataProfile[collectionId]
             // filter fields correct value type
             .filter(field => {
@@ -49,7 +54,8 @@ const DatamapPicker = ({
               }
             ))
           }
-        onChange={onChange} />
+          onChange={onChange} />
+      </div>
     </li>
   );
 };

@@ -35,7 +35,18 @@ const ColorsMapPicker = ({
     };
     return (
       <div className="colors-map-group" key={colorCollectionId}>
-        {Object.keys(colorsMap).length > 2 ? <h4>{colorCollectionId}</h4> : null}
+        {Object.keys(colorsMap).length > 2 ? <h4>{colorCollectionId.charAt(0).toUpperCase() + colorCollectionId.slice(1)} categories</h4> : null}
+        {shownCategories && Object.keys(collectionMap).length > 1 ?
+          <div className="global-operations">
+            <button onClick={showAll} className={shownCategories[colorCollectionId].length !== Object.keys(collectionMap).length ? 'active' : 'inactive'}>
+              <img className="bulgur-icon-image" src={require('./assets/show.svg')} />
+            Show all
+          </button>
+            <button onClick={hideAll} className={shownCategories[colorCollectionId].length ? 'active' : 'inactive'}>
+              <img className="bulgur-icon-image" src={require('./assets/hide.svg')} />
+            Hide all
+          </button>
+          </div> : null}
         {
         Object.keys(collectionMap)
         .map((category, index) => {
@@ -56,7 +67,7 @@ const ColorsMapPicker = ({
                 newList = [...shownCategories[colorCollectionId].slice(0, itsIndex), ...shownCategories[colorCollectionId].slice(itsIndex + 1)];
               // add to list
               }
- else {
+              else {
                 newList = [...shownCategories[colorCollectionId], category];
               }
               setShownCategories(visualizationId, colorCollectionId, newList);
@@ -75,7 +86,13 @@ const ColorsMapPicker = ({
                   }} />
                 <span className="category">{category}</span>
                 {shownCategories ?
-                  <button onClick={onFilterClick} className="filter">{shown ? 'Hide' : 'Show'}</button>
+                  <button title={shown ? 'Hide' : 'Show'} onClick={onFilterClick} className="filter">
+                    {shown ?
+                      <img className="bulgur-icon-image" src={require('./assets/hide.svg')} />
+                      :
+                      <img className="bulgur-icon-image" src={require('./assets/show.svg')} />
+                  }
+                  </button>
                 : null}
               </div>
               {
@@ -90,11 +107,6 @@ const ColorsMapPicker = ({
           );
         })
       }
-        {shownCategories ?
-          <div className="global-operations">
-            {shownCategories[colorCollectionId].length !== Object.keys(collectionMap).length ? <button onClick={showAll}>Show all</button> : null}
-            {shownCategories[colorCollectionId].length ? <button onClick={hideAll}>Hide all</button> : null}
-          </div> : null}
       </div>
   );
   })}

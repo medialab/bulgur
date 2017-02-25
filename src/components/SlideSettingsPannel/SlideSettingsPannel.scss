@@ -6,112 +6,176 @@
 @import '../../parameters.scss';
 .bulgur-settings-pannel
 {
-    position: relative;
+    position: absolute;
+    right: 0;
+    bottom: 0;
 
-    max-width: 0;
-    margin: 0;
-    padding: 0;
+    display: flex;
+    overflow: hidden;
+
+    width: $legend-width;
+    height: 100%;
+    padding: 0 0 $medium-gutter 0;
+
+    pointer-events: none;
 
     background: transparent;
-    .colors-map-picker-wrapper
+
+    align-items: stretch;
+    .settings-wrapper
     {
-        position: absolute;
-        top: 0;
-        left: -20rem;
+        display: flex;
 
-        width: 20rem;
-        height: 100%;
+        pointer-events: all;
 
-        pointer-events: none;
-        .colors-map-picker-container
+        background: transparent;
+
+        flex: 1;
+        flex-flow: column nowrap;
+        align-items: stretch;
+
+        .settings-container
         {
-            position: absolute;
-            bottom: $medium-gutter;
-            left: 10%;
+            position: relative;
 
-            display: flex;
+            flex: 1;
 
-            width: 80%;
-            max-height: 15rem;
-
-            pointer-events: all;
-
-            border: 1px solid $primary-color;
-            background: $background-default;
-
-            flex-flow: column nowrap;
-            align-items: stretch;
-            .bulgur-colors-map-picker
+            .settings-contents
             {
-                overflow-y: auto;
+                position: absolute;
+                top: 0;
+                left: $legend-width;
 
-                padding-right: $base-gutter;
-                padding-left: $base-gutter;
+                display: flex;
 
-                flex: 5;
-            }
-            .open-pannel
-            {
-                min-height: 3rem;
-                padding: $medium-gutter;
+                width: $legend-width;
+                height: 100%;
 
-                text-align: left;
+                transition: all $time-short ease;
 
-                border-top: 1px solid $primary-color;
-                &.active
+                border-left: 1px solid $color-sec-stroke;
+
+                @extend .normal-item;
+                flex-flow: column nowrap;
+                align-items: stretch;
+
+                &.visible
                 {
-                    color: white;
-                    background: red;
+                    left: 0;
                 }
             }
         }
+
+        .open-pannel
+        {
+            padding: $medium-gutter;
+
+            text-align: left;
+            // border-top: 1px solid $color-sec-stroke;
+
+            @extend .interactive-item;
+            &:hover
+            {
+                @extend .interactive-item-intent;
+            }
+            &.active
+            {
+                @extend .important-item-active;
+            }
+        }
     }
-    .slide-parameters-wrapper
+
+    // components
+    .settings-type-toggler
     {
-        position: absolute;
-        top: 0;
-        left: 0;
+        display: flex;
 
-        overflow: hidden;
-        overflow: auto;
-
-        width: 100%;
-        height: 100%;
         margin: 0;
         padding: 0;
 
-        color: $background-default;
-        border-left: 1px solid $primary-color;
-        background: $color-dark;
-        .slide-parameters-container
+        flex-flow: row nowrap;
+        align-items: stretch;
+        li
         {
-            h3,
-            h4
-            {
-                margin: $medium-gutter;
-                margin-left: $large-gutter;
-            }
-            .bulgur-datamap-picker
-            {
-                margin: $medium-gutter;
-                margin-right: $large-gutter;
-                margin-left: $large-gutter;
+            padding: 0;
+            padding: $medium-gutter;
 
-                list-style-type: none;
-                h4
-                {
-                    margin: $base-gutter;
-                }
+            list-style-type: none;
+
+            cursor: pointer;
+            transition: all $time-short ease;
+
+            flex: 1;
+            @extend .important-item;
+            &:hover
+            {
+                @extend .important-item-intent;
+            }
+            &.active
+            {
+                cursor: default;
+
+                @extend .important-item-active;
             }
         }
     }
-    &.open
+
+    .tab-contents
     {
-        max-width: unset;
-        .slide-parameters-container
+        position: relative;
+        left: 0;
+
+        overflow: visible;
+
+        transition: all $time-short ease;
+
+        flex: 1;
+        .tab
         {
-            width: 100%;
-            max-width: 100%;
+            position: absolute;
+            top: 0;
+
+            overflow: auto;
+
+            width: $legend-width;
+            height: 100%;
+            padding: $medium-gutter;
+
+            h4
+            {
+                margin: $medium-gutter 0 $medium-gutter 0;
+            }
+        }
+        .categories
+        {
+            left: 0;
+        }
+        .parameters
+        {
+            left: $legend-width;
+
+            .datamap-container
+            {
+                margin-bottom: $large-gutter;
+            }
+
+            ul
+            {
+                padding: 0;
+                padding: 0;
+                li
+                {
+                    margin-bottom: $medium-gutter;
+                    padding-left: 0;
+
+                    list-style-type: 0;
+                }
+            }
+        }
+
+        &.parameters-active
+        {
+            left: -$legend-width;
         }
     }
 }

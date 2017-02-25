@@ -284,7 +284,7 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
         }
       };
     case SET_PRESENTATION_CANDIDATE_METADATA:
-      const value = action.field === 'authors' ? action.value.split(',').map(a => a.trim()) : action.value;
+      const value = action.field === 'authors' ? action.value.split(',') : action.value;
       return {
         ...state,
         presentationCandidate: {

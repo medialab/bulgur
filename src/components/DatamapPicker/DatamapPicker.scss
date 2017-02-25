@@ -7,11 +7,69 @@
 
 .bulgur-datamap-picker
 {
-    padding: $base-gutter;
+    display: flex;
 
-    background: $background-intent;
+    padding: 0;
+
+    border: #173e43;
+
+    @extend .interactive-item;
+    flex-flow: row nowrap;
+    align-items: stretch;
+
+
+    h5
+    {
+        display: flex;
+
+        margin: 0;
+        padding: $medium-gutter;
+
+        flex: 1;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+    }
+
+    .select-container
+    {
+        position: relative;
+
+        display: flex;
+
+        background: white;
+
+        @extend .normal-item;
+        flex: 1;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        justify-content: center;
+    }
     &.active
     {
-        background: $color-valid;
+        @extend .important-item-active;
+    }
+
+    // components
+    .Select
+    {
+        flex: 5;
+        *
+        {
+            outline: none!important;
+        }
+        &.is-focused
+        {
+            border: none!important;
+        }
+        .Select-control
+        {
+            border: none;
+            background: inherit;
+        }
+
+        .Select-menu-outer
+        {
+            border-radius: none!important;
+        }
     }
 }

@@ -34,10 +34,20 @@ const AsideViewLayout = ({
   setActiveSlide,
   returnToLanding,
   activeSlideId,
-}) => (
-  <aside className="bulgur-aside-view">
+}) => {
+  const onRemoveSlide = id => {
+    // determining new active slide
+    const newActive = activePresentation.order && activePresentation.order.length > 1 ?
+      activePresentation.order[activePresentation.order.indexOf(id) - 1]
+      : undefined;
+    removeSlide(id);
+    if (newActive && activeSlideId === id) {
+      setActiveSlide(newActive, activePresentation.slides[newActive]);
+    }
+  };
+  return (<aside className="bulgur-aside-view">
     <div className="aside-header">
-      <button className="returnToLanding-btn" onClick={returnToLanding} type="button">☰ Back to home</button>
+      <button className="returnToLanding-btn" onClick={returnToLanding} type="button"><span className="bulgur-icon">☰</span> Back to home</button>
       <button className="settings-btn" onClick={openSettings} type="button"><img className="bulgur-icon-image" src={require('../assets/settings.svg')} /> {activePresentation.metadata && activePresentation.metadata.title && activePresentation.metadata.title.length ? activePresentation.metadata.title : 'untitled presentation'} - <i>settings</i></button>
     </div>
     {
@@ -49,9 +59,9 @@ const AsideViewLayout = ({
           addSlide={addSlide}
           updateSlide={updateSlide}
           moveSlide={moveSlide}
-          removeSlide={removeSlide}
+          removeSlide={onRemoveSlide}
           duplicateSlide={duplicateSlide} /> : null}
-  </aside>
-);
+  </aside>);
+};
 
 export default AsideViewLayout;

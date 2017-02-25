@@ -29,7 +29,6 @@
 
         flex-flow: row nowrap;
         @extend .interactive-item;
-
         .slide-content
         {
             display: flex;
@@ -44,16 +43,18 @@
             {
                 font-size: $font-size-1; // .7rem;
 
+                padding: 0;
                 padding-right: $base-gutter;
             }
             h3
             {
-                transition : all $time-short ease;
                 display: flex;
 
                 margin: 0;
                 margin-top: 0;
                 padding: 0;
+
+                transition: all $time-short ease;
 
                 border-bottom: 1px solid $color-sec-stroke;
 
@@ -86,7 +87,7 @@
             }
             .operations-container
             {
-                font-size: .6rem!important;
+                font-size: $font-size-2;
 
                 display: flex;
 
@@ -96,15 +97,13 @@
 
                 button:hover
                 {
-                    color: $background-default!important;
-                    background: $primary-color!important;
+                    @extend .important-item;
                 }
                 .remove-btn
                 {
                     &:hover
                     {
-                        color: white!important;
-                        background: red!important;
+                        @extend .dangerous-item-intent;
                     }
                 }
                 .move-btn
@@ -113,20 +112,20 @@
                 }
             }
         }
-
         // .bulgur-slide state-related modificators
         &:hover
         {
             @extend .interactive-item-intent;
-            h3{
+            h3
+            {
                 border-bottom: 1px solid #333;
             }
         }
         &.active
         {
             @extend .interactive-item-active;
-
-            h3{
+            h3
+            {
                 border-bottom: 1px solid #333;
             }
         }
@@ -134,7 +133,6 @@
         {
             @extend .interactive-item-intent-active;
         }
-
         &.dragged
         {
             opacity: .3;
@@ -159,7 +157,7 @@
             display: block;
 
             width: 100%;
-            padding: $base-gutter;
+            padding: $medium-gutter;
 
             border: 1px solid $color-sec-stroke;
 

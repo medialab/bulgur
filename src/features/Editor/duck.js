@@ -47,7 +47,7 @@ const CLOSE_PRESENTATION_CANDIDATE_MODAL = '$Bulgur/Editor/CLOSE_PRESENTATION_CA
 const OPEN_TAKE_AWAY_MODAL = '$Bulgur/Editor/OPEN_TAKE_AWAY_MODAL';
 const CLOSE_TAKE_AWAY_MODAL = '$Bulgur/Editor/CLOSE_TAKE_AWAY_MODAL';
 const SET_UI_MODE = '$Bulgur/Editor/SET_UI_MODE';
-const TOGGLE_SLIDE_SETTINGS_PANNEL = '$Bulgur/Editor/TOGGLE_SLIDE_SETTINGS_PANNEL';
+const SET_SLIDE_SETTINGS_PANNEL_STATE = '$Bulgur/Editor/SET_SLIDE_SETTINGS_PANNEL_STATE';
 /*
  * actions related to active view
  */
@@ -175,10 +175,10 @@ export const setUiMode = (mode = 'edition') => ({
   mode
 });
 /**
- * @param {boolean} to - the state to move the slide settings pannel to
+ * @param {string | undefined} to - the state to move the slide settings pannel to
  */
-export const toggleSlideSettingsPannel = (to) => ({
-  type: TOGGLE_SLIDE_SETTINGS_PANNEL,
+export const setSlideSettingsPannelState = (to) => ({
+  type: SET_SLIDE_SETTINGS_PANNEL_STATE,
   to
 });
 /**
@@ -549,10 +549,10 @@ function globalUi(state = GLOBAL_UI_DEFAULT_STATE, action) {
         ...state,
         uiMode: action.mode
       };
-    case TOGGLE_SLIDE_SETTINGS_PANNEL:
+    case SET_SLIDE_SETTINGS_PANNEL_STATE:
       return {
         ...state,
-        slideSettingsPannelOpen: typeof action.to === 'boolean' ? action.to : !state.slideSettingsPannelOpen
+        slideSettingsPannelState: action.to
       };
     default:
       return state;
@@ -575,7 +575,7 @@ export default persistentReducer(combineReducers({
 const activePresentationId = state => state.globalUi.activePresentationId;
 const isPresentationCandidateModalOpen = state => state.globalUi.presentationCandidateModalOpen;
 const isTakeAwayModalOpen = state => state.globalUi.takeAwayModalOpen;
-const slideSettingsPannelIsOpen = state => state.globalUi.slideSettingsPannelOpen;
+const slideSettingsPannelState = state => state.globalUi.slideSettingsPannelState;
 const globalUiMode = state => state.globalUi.uiMode;
 /*
  * Selectors related to presentation edition ui management
@@ -595,5 +595,5 @@ export const selector = createStructuredSelector({
   globalUiMode,
   isPresentationCandidateModalOpen,
   isTakeAwayModalOpen,
-  slideSettingsPannelIsOpen,
+  slideSettingsPannelState,
 });

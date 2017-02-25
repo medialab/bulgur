@@ -26,7 +26,7 @@ import TakeAwayDialog from '../../TakeAwayDialog/components/TakeAwayDialogContai
  * @param {boolean} props.isPresentationCandidateModalOpen
  * @param {string} props.globalUiMode
  * @param {boolean} props.isTakeAwayModalOpen
- * @param {boolean} props.slideSettingsPannelIsOpen
+ * @param {string} props.slideSettingsPannelState
  * @param {object} props.activeViews - object containing the views being displayed in the editor
  * @param {string} props.activeSlideId
  * @param {object} props.editedColor
@@ -50,7 +50,7 @@ const EditorLayout = ({
   isPresentationCandidateModalOpen,
   globalUiMode,
   isTakeAwayModalOpen,
-  slideSettingsPannelIsOpen,
+  slideSettingsPannelState,
   // edited presentation state
   activeViews,
   activeSlideId,
@@ -70,7 +70,7 @@ const EditorLayout = ({
     setActiveSlide,
     updateSlide,
     moveSlide,
-    toggleSlideSettingsPannel,
+    setSlideSettingsPannelState,
     toggleViewColorEdition,
     setViewColor,
     setViewDatamapItem,
@@ -124,8 +124,8 @@ const EditorLayout = ({
               updateSlide={updateSlide}
               setActiveSlide={setActiveSlide}
               setViewDatamapItem={setViewDatamapItem}
-              slideSettingsPannelIsOpen={slideSettingsPannelIsOpen}
-              toggleSlideSettingsPannel={toggleSlideSettingsPannel}
+              slideSettingsPannelState={slideSettingsPannelState}
+              setSlideSettingsPannelState={setSlideSettingsPannelState}
               returnToLanding={returnToLanding}
               activeViews={activeViews}
               onUserViewChange={changeViewByUser}

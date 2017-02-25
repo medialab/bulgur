@@ -56,11 +56,14 @@
     }
     .bulgur-icon-image
     {
+        position: relative;
+        top: $base-gutter;
+
         display: inline;
 
-        width: 1em;
-        height: 1em;
-        padding-right: .5em;
+        width: $font-size-2-5;
+        height: $font-size-2-5;
+        padding-right: $base-gutter;
     }
     /*
      * Generic components styling
@@ -93,7 +96,18 @@
     textarea:focus
     {
         cursor: pointer;
+
         background: $background-intent;
+    }
+
+    button
+    {
+        text-align: left;
+    }
+
+    input
+    {
+        padding: $medium-gutter;
     }
 }
 

@@ -4,11 +4,11 @@
  */
 import React from 'react';
 
+import './MainViewLayout.scss';
+
 import VisualizationManager from '../../../components/VisualizationManager/VisualizationManager';
 import DraftEditor from '../../../components/DraftEditor/DraftEditor';
 import SlideSettingsPannel from '../../../components/SlideSettingsPannel/SlideSettingsPannel';
-
-import './MainViewLayout.scss';
 
 /**
  * Renders the layout of the main view of editor
@@ -17,13 +17,13 @@ import './MainViewLayout.scss';
  * @param {string} props.activeSlideId
  * @param {object} props.activeViews
  * @param {object} props.editedColor
- * @param {function} props.slideSettingsPannelIsOpen
+ * @param {function} props.slideSettingsPannelState
  * @param {boolean} props.isTakeAwayModalOpen
  * @param {function} props.updateSlide
  * @param {function} props.onUserViewChange
  * @param {function} props.setActiveSlide
  * @param {function} props.setViwDatamapItem
- * @param {function} props.toggleSlideSettingsPannel
+ * @param {function} props.setSlideSettingsPannelState
  * @param {function} props.toggleViewColorEdition
  * @param {function} props.setViewColor
  * @param {function} props.setShownCategories
@@ -38,13 +38,13 @@ const MainViewLayout = ({
   // ui related
   editedColor,
   // isTakeAwayModalOpen,
-  slideSettingsPannelIsOpen,
+  slideSettingsPannelState,
   // actions
   updateSlide,
   onUserViewChange,
   setActiveSlide,
   setViewDatamapItem,
-  toggleSlideSettingsPannel,
+  setSlideSettingsPannelState,
   toggleViewColorEdition,
   setViewColor,
   setShownCategories
@@ -135,8 +135,8 @@ const MainViewLayout = ({
         </section>
         {activeSlide ?
           <SlideSettingsPannel
-            isOpen={slideSettingsPannelIsOpen}
-            togglePannel={toggleSlideSettingsPannel}
+            state={slideSettingsPannelState}
+            setPannelState={setSlideSettingsPannelState}
             views={activeViews}
             setViewDatamapItem={setViewDatamapItem}
             setShownCategories={setShownCategories}

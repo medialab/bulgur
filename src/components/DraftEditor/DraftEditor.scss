@@ -25,7 +25,7 @@
 
         overflow-y: auto;
 
-        padding: $base-gutter;
+        padding: $medium-gutter;
 
         cursor: text;
         transition: background $time-short ease;
@@ -36,8 +36,8 @@
             font-style: italic;
 
             position: absolute;
-            top: $base-gutter/2;
-            left: $base-gutter;
+            top: $medium-gutter;
+            left: $medium-gutter;
 
             opacity: .5;
         }
@@ -50,7 +50,7 @@
         padding-top: $base-gutter;
         padding-bottom: $base-gutter;
 
-        border-bottom: 1px solid #dddbd9;
+        border-bottom: 1px solid $color-sec-stroke;
 
         flex-flow: row nowrap;
         align-content: space-between;
@@ -62,7 +62,8 @@
             }
             span
             {
-                &:hover{
+                &:hover
+                {
                     font-weight: 800;
                 }
             }
