@@ -61,7 +61,7 @@
             input,
             textarea
             {
-                font-size: .7rem;
+                font-size: $font-size-1; // .7rem;
 
                 padding-right: $base-gutter;
             }
@@ -134,11 +134,11 @@
     }
     .add-slide
     {
-
         .first-slide
         {
-            @extend .important-item;
             border: none;
+
+            @extend .important-item;
             &:hover
             {
                 @extend .important-item-intent;

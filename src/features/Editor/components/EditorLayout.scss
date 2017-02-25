@@ -19,16 +19,13 @@
     flex-direction: column;
 
     flex-wrap: nowrap;
-
     @extends .normal-item;
-
     input,
     textarea,
     button
     {
         transition: all $time-short ease;
     }
-
     .bulgur-main-row
     {
         position: relative;
@@ -44,7 +41,6 @@
 
             flex: 1;
         }
-
         .bulgur-main-view
         {
             min-width: 80%;
@@ -53,14 +49,11 @@
             flex: 4;
         }
     }
-
     .bulgur-footer
     {
         z-index: 1;
-
         // flex: 1;
     }
-
     .bulgur-icon-image
     {
         display: inline;
@@ -69,7 +62,6 @@
         height: 1em;
         padding-right: .5em;
     }
-
     /*
      * Generic components styling
      */
@@ -80,19 +72,20 @@
     {
         color: inherit;
     }
-
+    input,
+    textarea
+    {
+        font-family: $editable-font-stack;
+    }
     button,
     input,
     textarea
     {
-        font-family: inherit;
         // font-size: 1rem;
-
         border: none;
         outline: none;
         background: inherit;
     }
-
     button:hover,
     input:hover,
     textarea:hover,
@@ -100,7 +93,6 @@
     textarea:focus
     {
         cursor: pointer;
-
         background: $background-intent;
     }
 }

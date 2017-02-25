@@ -82,6 +82,11 @@
                 font-size: $font-size-3;
 
                 @extend .important-item;
+
+                &:hover
+                {
+                    @extend .important-item-intent;
+                }
             }
             .delete-btn
             {

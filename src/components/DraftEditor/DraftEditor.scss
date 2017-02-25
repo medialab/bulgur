@@ -17,9 +17,10 @@
 
     flex-flow: column nowrap;
     align-items: stretch;
-
     .DraftEditor-root
     {
+        font-family: $editable-font-stack;
+
         position: relative;
 
         overflow-y: auto;
@@ -30,7 +31,6 @@
         transition: background $time-short ease;
 
         flex: 5;
-
         .public-DraftEditorPlaceholder-inner
         {
             font-style: italic;
@@ -42,7 +42,6 @@
             opacity: .5;
         }
     }
-
     .rich-buttons
     {
         display: flex;
@@ -55,16 +54,20 @@
 
         flex-flow: row nowrap;
         align-content: space-between;
-
         .buttons-group
         {
             &:first-of-type
             {
                 flex: 1;
             }
+            span
+            {
+                &:hover{
+                    font-weight: 800;
+                }
+            }
         }
     }
-
     &.focused .DraftEditor-root,
     &:hover .DraftEditor-root
     {

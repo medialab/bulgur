@@ -30,7 +30,9 @@
         button
         {
             padding: $medium-gutter;
-            border-left: 1px solid #FFFFFF;
+
+            border-left: 1px solid #fff;
+
             @extend .important-item;
             &:hover
             {

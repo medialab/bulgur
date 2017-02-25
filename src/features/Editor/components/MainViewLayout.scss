@@ -51,8 +51,6 @@
     {
         position: relative;
 
-        background: #f4f4f4;
-
         display: flex;
 
         max-height: 40%;
@@ -61,6 +59,7 @@
         padding-right: 0;
 
         border-top: 1px solid #dddbd9;
+        background: #f4f4f4;
 
         flex: 1;
         flex-flow: column nowrap;
@@ -162,9 +161,9 @@
 
             transition: all $time-short ease;
 
-
             @extend .interactive-item;
-            &:hover{
+            &:hover
+            {
                 @extend .interactive-item-intent;
             }
 
