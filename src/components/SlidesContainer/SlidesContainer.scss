@@ -25,29 +25,10 @@
 
         padding: $base-gutter;
 
-        border: 1px solid #dddbd9;
+        border: 1px solid $color-sec-stroke;
 
         flex-flow: row nowrap;
         @extend .interactive-item;
-        &:hover
-        {
-            @extend .interactive-item-intent;
-        }
-        &.active
-        {
-            @extend .interactive-item-active;
-        }
-        &:hover.active
-        {
-            @extend .interactive-item-intent-active;
-        }
-
-        &.dragged
-        {
-            opacity: .3;
-
-            @extend .interactive-item-inactive;
-        }
 
         .slide-content
         {
@@ -67,13 +48,14 @@
             }
             h3
             {
+                transition : all $time-short ease;
                 display: flex;
 
                 margin: 0;
                 margin-top: 0;
                 padding: 0;
 
-                border-bottom: 1px solid #dddbd9;
+                border-bottom: 1px solid $color-sec-stroke;
 
                 flex-flow: row nowrap;
                 align-items: stretch;
@@ -131,6 +113,34 @@
                 }
             }
         }
+
+        // .bulgur-slide state-related modificators
+        &:hover
+        {
+            @extend .interactive-item-intent;
+            h3{
+                border-bottom: 1px solid #333;
+            }
+        }
+        &.active
+        {
+            @extend .interactive-item-active;
+
+            h3{
+                border-bottom: 1px solid #333;
+            }
+        }
+        &:hover.active
+        {
+            @extend .interactive-item-intent-active;
+        }
+
+        &.dragged
+        {
+            opacity: .3;
+
+            @extend .interactive-item-inactive;
+        }
     }
     .add-slide
     {
@@ -151,7 +161,7 @@
             width: 100%;
             padding: $base-gutter;
 
-            border: 1px solid #dddbd9;
+            border: 1px solid $color-sec-stroke;
 
             @extend .interactive-item;
             &:hover

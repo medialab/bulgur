@@ -92,7 +92,8 @@ class Slide extends React.Component {
       isDragging,
       isOver
     } = this.props;
-    const handleClick = () => {
+    const handleClick = (e) => {
+      e.stopPropagation();
       if (!isDragging) {
         onGlobalClick();
       }

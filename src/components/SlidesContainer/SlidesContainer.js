@@ -32,7 +32,10 @@ class SlidesContainer extends React.Component {
         .order
         .map((slideKey, slideIndex) => {
             const slide = activePresentation.slides[slideKey];
-            const onRemove = () => removeSlide(slideKey);
+            const onRemove = e => {
+              e.stopPropagation();
+              removeSlide(slideKey);
+            };
             const onGlobalClick = () => {
               if (activeSlideId !== slideKey) {
                 setActiveSlide(slideKey, slide);
