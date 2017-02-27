@@ -54,7 +54,8 @@ const models = {
     {
       title: 'Milestones in the history of data visualization',
       fileName: 'milestones-history-datavis.csv',
-      description: 'More information: http://www.datavis.ca/'
+      description: 'More information: http://www.datavis.ca/',
+      recommendedVisTypes: ['timeline']
     }
     ],
     defaultViewParameters: {
@@ -91,12 +92,14 @@ const models = {
       {
         title: 'Histoire du Fort et des combats de 1870-1871 à Issy',
         fileName: 'histoiredufort.csv',
-        description: 'Plus d\'informations: http://data.issy.com/explore/dataset/histoiredufort-feuille1/export/?disjunctive.refqr'
+        description: 'Plus d\'informations: http://data.issy.com/explore/dataset/histoiredufort-feuille1/export/?disjunctive.refqr',
+        recommendedVisTypes: ['map', 'timeline']
       },
       {
         title: 'Places',
         fileName: 'places.csv',
-        description: 'Some cities coordinates'
+        description: 'Some cities coordinates',
+        recommendedVisTypes: ['map']
       }
     ],
     slideParameters: [
@@ -127,12 +130,14 @@ const models = {
       {
         title: 'Arctic',
         fileName: 'arctic.gexf',
-        description: 'Taken from quinoa examples'
+        description: 'Taken from quinoa examples',
+        recommendedVisTypes: ['network']
       },
       {
         title: 'Les misérables Co-Occurences',
         fileName: 'miserables.json',
-        description: 'List of co-occurences of characters in the novel "les misérables", computed by Jacques Bertin and his assistants(https://bost.ocks.org/mike/miserables/)'
+        description: 'List of co-occurences of characters in the novel "les misérables", computed by Jacques Bertin and his assistants(https://bost.ocks.org/mike/miserables/)',
+        recommendedVisTypes: ['network']
       }
     ],
     dataMap: {
