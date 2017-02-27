@@ -8,7 +8,7 @@
 
 .bulgur-presentation-card
 {
-    padding: $medium-gutter;
+    padding: $gutter-medium;
 
     list-style-type: none;
 
@@ -34,7 +34,7 @@
 
             max-height: 10rem;
             margin-top: 0;
-            padding-right: $medium-gutter;
+            padding-right: $gutter-medium;
 
             flex: 3;
             h5
@@ -44,15 +44,15 @@
                 display: flex;
 
                 margin: 0;
-                margin-bottom: $medium-gutter;
+                margin-bottom: $gutter-medium;
 
                 cursor: pointer;
 
                 flex-flow: row nowrap;
                 .icons-container
                 {
-                    margin-right: $medium-gutter;
-                    padding-top: $base-gutter;
+                    margin-right: $gutter-medium;
+                    padding-top: $gutter-small;
                 }
                 img
                 {
@@ -103,6 +103,8 @@
             justify-content: stretch;
             .delete-btn
             {
+                padding: $gutter-small;
+
                 flex: 1;
                 @extend .dangerous-item;
                 &:hover

@@ -75,23 +75,23 @@ html
     {
         font-size: $font-size-3;
 
-        margin: 0 0 $large-gutter 0;
-        padding: $medium-gutter;
-        padding-left: $large-gutter;
+        margin: 0 0 $gutter-large 0;
+        padding: $gutter-medium;
+        padding-left: $gutter-large;
 
         @extend .important-item-active;
     }
 
     .modal-footer
     {
-        padding: $medium-gutter;
-        padding-left: $large-gutter;
+        padding: $gutter-medium;
+        padding-left: $gutter-large;
 
         @extend .primary-item;
 
         button
         {
-            padding: $base-gutter;
+            padding: $gutter-small;
 
             @extend .interactive-item;
             &:hover
@@ -106,7 +106,7 @@ html
         position: relative;
 
         max-height: 1000rem;
-        padding: 0 $large-gutter $large-gutter $large-gutter;
+        padding: 0 $gutter-large $gutter-large $gutter-large;
 
         transition: all $time-short ease;
         &.empty

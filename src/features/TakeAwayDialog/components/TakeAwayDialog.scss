@@ -50,10 +50,10 @@
         img
         {
             position: relative;
-            top: $base-gutter;
+            top: $gutter-small;
 
             height: $font-size-3;
-            margin-right: $medium-gutter;
+            margin-right: $gutter-medium;
         }
     }
     .sync-section
@@ -68,13 +68,13 @@
             {
                 overflow-y: auto;
 
-                padding: $medium-gutter;
+                padding: $gutter-medium;
 
                 background: $color-sec-bg;
             }
             &:not(:first-of-type)
             {
-                margin-left: $large-gutter;
+                margin-left: $gutter-large;
             }
             p
             {
@@ -84,8 +84,8 @@
             {
                 display: block;
 
-                margin-bottom: $base-gutter;
-                padding: $medium-gutter;
+                margin-bottom: $gutter-small;
+                padding: $gutter-medium;
 
                 text-decoration: none;
 
@@ -103,8 +103,8 @@
             flex-flow: column nowrap;
             button
             {
-                margin-bottom: $medium-gutter;
-                padding: $medium-gutter;
+                margin-bottom: $gutter-medium;
+                padding: $gutter-medium;
 
                 text-align: left;
 

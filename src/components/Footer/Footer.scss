@@ -21,8 +21,8 @@
 
     .left-group
     {
-        padding: $medium-gutter;
-        padding-top: $medium-gutter;
+        padding: $gutter-medium;
+        padding-top: $gutter-medium;
         padding-bottom: 0;
     }
 
@@ -36,7 +36,7 @@
         align-items: stretch;
         button
         {
-            padding: $medium-gutter;
+            padding: $gutter-medium;
 
             flex: 1;
             @extend .important-item;

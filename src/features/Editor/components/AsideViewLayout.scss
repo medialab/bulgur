@@ -24,7 +24,7 @@
         flex-flow: column nowrap;
         button
         {
-            padding: $medium-gutter;
+            padding: $gutter-medium;
 
             text-align: left;
         }
@@ -34,7 +34,7 @@
 
             .bulgur-icon
             {
-                padding-right: $base-gutter;
+                padding-right: $gutter-small;
             }
             &:hover
             {
@@ -46,7 +46,7 @@
             img
             {
                 position: relative;
-                top: $base-gutter;
+                top: $gutter-small;
             }
         }
     }
@@ -62,7 +62,7 @@
     {
         display: block;
 
-        padding: $medium-gutter 0 $medium-gutter $medium-gutter;
+        padding: $gutter-medium 0 $gutter-medium $gutter-medium;
 
         text-align: left;
     }

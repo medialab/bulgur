@@ -20,15 +20,15 @@ $color-error: brown;
 $color-sec-bg: #f4f4f4;
 $color-sec-stroke: #dddbd9;
 // gutters
-$base-gutter: .3rem;
-$medium-gutter: $base-gutter * 2.66;
-$large-gutter: $medium-gutter * 2.66;
+$gutter-small: .3rem;
+$gutter-medium: $gutter-small * 2.66;
+$gutter-large: $gutter-medium * 2.66;
 //responsive breakpoints
 $breakpoint-phone: screen and (min-device-width : 320px) and (max-device-width : 480px);
 $breakpoint-tablet: screen and (min-device-width : 768px) and (max-device-width : 1024px);
 
 // font sizes
-$font-size-1: $base-gutter * 2;
+$font-size-1: $gutter-small * 2;
 $font-size-2: $font-size-1 * 1.6;
 $font-size-2-5: $font-size-1 * 1.9;
 $font-size-3: $font-size-2 * 1.6;

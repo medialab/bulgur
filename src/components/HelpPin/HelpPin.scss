@@ -37,7 +37,7 @@
         position: absolute;
         z-index: 3000;
         top: 0;
-        left: $large-gutter;
+        left: $gutter-large;
 
         display: inline-block;
         overflow: hidden;
@@ -63,7 +63,7 @@
     {
         .pin-content-container
         {
-            right: $large-gutter;
+            right: $gutter-large;
             left: unset;
         }
     }
@@ -79,7 +79,7 @@
             min-width: 30rem;
             max-width: 100rem;
             max-height: 10rem;
-            padding: $medium-gutter;
+            padding: $gutter-medium;
 
             opacity: 1;
         }

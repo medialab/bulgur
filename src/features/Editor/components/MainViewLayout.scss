@@ -54,7 +54,7 @@
         display: flex;
 
         max-height: 40%;
-        padding: $medium-gutter;
+        padding: $gutter-medium;
         padding-top: 0;
         padding-right: 0;
 
@@ -70,7 +70,7 @@
             display: flex;
             overflow: hidden;
 
-            padding-bottom: $base-gutter;
+            padding-bottom: $gutter-small;
 
             border-bottom: 1px solid $color-sec-stroke;
 
@@ -80,8 +80,8 @@
             {
                 margin: 0;
                 padding: 0;
-                padding-top: $base-gutter;
-                padding-right: $base-gutter;
+                padding-top: $gutter-small;
+                padding-right: $gutter-small;
 
                 flex: 5;
                 input
@@ -108,7 +108,7 @@
             {
                 display: flex;
 
-                margin-right: $base-gutter;
+                margin-right: $gutter-small;
 
                 flex: 8;
                 flex-flow: column nowrap;
@@ -155,7 +155,7 @@
 
         button
         {
-            padding: $medium-gutter;
+            padding: $gutter-medium;
 
             cursor: default;
             transition: all $time-short ease;

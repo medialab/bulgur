@@ -11,7 +11,7 @@
 
     display: flex;
 
-    padding: $base-gutter;
+    padding: $gutter-small;
 
     transition: all $time-short ease;
 
@@ -25,7 +25,7 @@
 
         overflow-y: auto;
 
-        padding: $medium-gutter;
+        padding: $gutter-medium;
 
         cursor: text;
         transition: background $time-short ease;
@@ -36,8 +36,8 @@
             font-style: italic;
 
             position: absolute;
-            top: $medium-gutter;
-            left: $medium-gutter;
+            top: $gutter-medium;
+            left: $gutter-medium;
 
             opacity: .5;
         }
@@ -46,9 +46,9 @@
     {
         display: flex;
 
-        margin-bottom: $medium-gutter;
-        padding-top: $base-gutter;
-        padding-bottom: $base-gutter;
+        margin-bottom: $gutter-medium;
+        padding-top: $gutter-small;
+        padding-bottom: $gutter-small;
 
         border-bottom: 1px solid $color-sec-stroke;
 

@@ -37,7 +37,7 @@
         overflow: visible;
 
         height: 100%;
-        padding: $medium-gutter;
+        padding: $gutter-medium;
         padding-top: 3%;
 
         flex: 1;
@@ -54,11 +54,11 @@
         @media #{$breakpoint-tablet}
         {
             width: 100%;
-            padding: $medium-gutter!important;
+            padding: $gutter-medium!important;
         }
         .row-section
         {
-            margin-bottom: $medium-gutter;
+            margin-bottom: $gutter-medium;
             &.about
             {
                 font-style: italic;
@@ -88,7 +88,7 @@
         .new-presentation
         {
             height: $font-size-5 * 1.3;
-            margin-bottom: $medium-gutter;
+            margin-bottom: $gutter-medium;
         }
         .new-presentation
         {
@@ -108,7 +108,7 @@
         {
             font-size: 1.2rem;
 
-            margin-bottom: $medium-gutter;
+            margin-bottom: $gutter-medium;
         }
 
         .local-presentations-list
@@ -117,7 +117,7 @@
             padding: 0;
             .bulgur-presentation-card:not(:last-of-type)
             {
-                margin-bottom: $large-gutter;
+                margin-bottom: $gutter-large;
             }
         }
     }
@@ -132,7 +132,7 @@
 
             input[type='text']
             {
-                padding: $medium-gutter;
+                padding: $gutter-medium;
 
                 cursor: text;
 
@@ -148,7 +148,7 @@
             }
             input[type='submit']
             {
-                padding: $medium-gutter;
+                padding: $gutter-medium;
 
                 cursor: pointer;
             }

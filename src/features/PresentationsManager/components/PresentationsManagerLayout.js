@@ -79,7 +79,7 @@ const PresentationsManagerLayout = ({
         </div>
         <div className="row-section about">
           <p>
-          Bulgur is crafted for being used in innovative courses of controversy mapping led by the <a target="blank" href="https://forccast.hypotheses.org/">FORCCAST program</a>.
+          Bulgur is crafted for being used in innovative courses of controversy mapping led by the <a target="blank" href="https://forccast.hypotheses.org/">FORCCAST programme</a>.
         </p>
           <p>
           Bulgur is an open source program designed and developped at <a className="medialab" target="blank" href="http://www.medialab.sciences-po.fr/">médialab sciences po</a>.
@@ -97,7 +97,7 @@ const PresentationsManagerLayout = ({
         {allowNewPresentations ?
           <div className="row-section">
             <button className="new-presentation" onClick={onCreatePresentation}>Start a new presentation</button>
-          </div> : null }
+          </div> : <p>'You have reached the maximum number of local presentations. You have to make a bit of room before creating new ones. Remember you can save your presentations to the web and import them later !'</p> }
 
         <div className="row-section presentations-group">
           {presentationsList.length > 0 ? <h4>... or continue one of your locally stored presentations</h4> : null}
@@ -135,7 +135,7 @@ const PresentationsManagerLayout = ({
               Drop a <code>json</code> file in this zone
             </DropZone>
           </div>
-        : 'You have reached the maximum number of local presentations. You have to make a bit of room before creating new ones. Remember you can save your presentations to the web and import them later !'}
+        : null}
         {allowNewPresentations ?
           <div className="row-section import-from-url">
             <h3>... or fetch an existing project from a distant server</h3>
@@ -148,9 +148,6 @@ const PresentationsManagerLayout = ({
                 type="submit"
                 value="Import" />
             </form>
-            <p>
-              <i>You can import a project from the forccast server or from a <a target="blank" href="https://gist.github.com">gist</a> repository.</i>
-            </p>
           </div> : null}
         <div className="import-status-display">
           {importStatus}
