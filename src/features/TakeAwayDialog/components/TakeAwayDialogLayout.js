@@ -8,7 +8,7 @@ import './TakeAwayDialog.scss';
 
 import BigSelect from '../../../components/BigSelect/BigSelect';
 import Toaster from '../../../components/Toaster/Toaster';
-
+import HelpPin from '../../../components/HelpPin/HelpPin';
 /**
  * Renders the options for takeaway mode choice
  * @param {object} props - the props to render
@@ -49,25 +49,25 @@ export const ChooseTakeAwayStep = ({
   const options = [{
           id: 'project',
           icon: require('../assets/bulgur-take-away-type-project.svg'),
-          label: 'project file',
+          label: <span>project file <HelpPin>a backup of your presentation that can be imported elsewhere</HelpPin></span>,
           possible: true
         },
         {
           id: 'html',
           icon: require('../assets/bulgur-take-away-type-html.svg'),
-          label: 'html file',
+          label: <span>html file <HelpPin>a webpage file ready to upload wherever you want</HelpPin></span>,
           possible: serverAvailable === true
         },
         {
           id: 'github',
           icon: require('../assets/bulgur-take-away-type-github.svg'),
-          label: 'gist-powered website',
+          label: <span>gist-powered website <HelpPin>the presentation will be publicly available</HelpPin></span>,
           possible: serverAvailable === true && gistAvailable === true
         },
         {
           id: 'server',
           icon: require('../assets/bulgur-take-away-type-server.svg'),
-          label: 'forccast-powered website',
+          label: <span>forccast-powered website <HelpPin position="left">the presentation will be stored on the server and publicly available</HelpPin></span>,
           possible: serverAvailable === true
         }
         ]
@@ -126,8 +126,8 @@ const TakeAwayDialogLayout = ({
   return (
     <div className="bulgur-take-away-dialog-layout">
       <h1 className="modal-header">
-      Take away your presentation
-    </h1>
+        Take away your presentation
+      </h1>
       <section className="modal-content">
         <section className="modal-row">
           <ChooseTakeAwayStep
