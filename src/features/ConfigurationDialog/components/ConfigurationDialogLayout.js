@@ -6,11 +6,14 @@ import React from 'react';
 
 import {validateFileExtension} from '../../../helpers/fileLoader';
 
-import Dropzone from 'react-dropzone';
+import Textarea from 'react-textarea-autosize';
 
 import VisualizationManager from '../../../components/VisualizationManager/VisualizationManager';
 import ColorsMapPicker from '../../../components/ColorsMapPicker/ColorsMapPicker';
 import DatamapPicker from '../../../components/DatamapPicker/DatamapPicker';
+import DropZone from '../../../components/DropZone/DropZone';
+import BigSelect from '../../../components/BigSelect/BigSelect';
+import HelpPin from '../../../components/HelpPin/HelpPin';
 
 import './ConfigurationDialog.scss';
 
@@ -59,6 +62,7 @@ const previewVisualization = (visualization, models, updateParameters, visualiza
  * @param {object} props - the props to render
  * @param {object} props.presentationCandidate - the data of the presentation to configure
  * @param {string} props.fetchUserFileStatus - the status of the file the user is trying to upload
+ * @param {string} props.dataSourceTab - ui state for the source of data set by the user
  * @param {object} props.activeVisualizationTypes - models to display available visualization types
  * @param {object} props.activeVisualizationTypesModels - models to use for displaying visualization type related configurations
  * @param {object} props.actions - actions from the redux logic
@@ -73,6 +77,7 @@ const ConfigurationDialogLayout = ({
     datasets: {}
   },
   fetchUserFileStatus,
+  dataSourceTab,
   // todo : delete the following variable and do everything with visualizationTypesModels
   activeVisualizationTypes = [],
   visualizationTypesModels,
@@ -87,7 +92,8 @@ const ConfigurationDialogLayout = ({
     toggleCandidateColorEdition,
     setPresentationCandidateColor,
     applyPresentationCandidateConfiguration,
-    setPreviewViewParameters
+    setPreviewViewParameters,
+    setDataSourceTab
   },
   closePresentationCandidate,
   onFileDrop,
@@ -98,111 +104,139 @@ const ConfigurationDialogLayout = ({
   const setPresentationTitle = (e) => setCandidatePresentationMetadata('title', e.target.value);
   const setPresentationAuthors = (e) => setCandidatePresentationMetadata('authors', e.target.value);
   const setPresentationDescription = (e) => setCandidatePresentationMetadata('description', e.target.value);
+  const setDataSourceComputer = () => setDataSourceTab('computer');
+  const setDataSourceSample = () => setDataSourceTab('sample');
   const hasSlides = presentationCandidate.order && presentationCandidate.order.length;
+
   return (
     <div className="bulgur-configuration-dialog-layout">
-      <section className="options-group">
-        <h2>What is your presentation about ?</h2>
-        <form>
-          <div className="input-group">
-            <label htmlFor="title">Title</label>
-            <input
-              onChange={setPresentationTitle}
-              type="text"
-              name="title"
-              value={presentationCandidate.metadata.title} />
-          </div>
+      <h1 className="modal-header">
+        Presentation configuration
+      </h1>
+      <section className="modal-content">
+        <section className="modal-row">
+          <h2>What is your presentation about ? <HelpPin>
+              These informations will be very useful for building high-quality metadata for your presentation outputs
+            </HelpPin></h2>
+          <form className="modal-columns-container">
+            <div className="modal-column">
+              <div className="input-group">
+                <label htmlFor="title">Title of the presentation</label>
+                <input
+                  onChange={setPresentationTitle}
+                  type="text"
+                  name="title"
+                  placeholder="title of the presentation"
+                  value={presentationCandidate.metadata.title} />
+              </div>
 
-          <div className="input-group">
-            <label htmlFor="authors">Authors</label>
-            <input
-              onChange={setPresentationAuthors}
-              type="text"
-              name="authors"
-              value={presentationCandidate.metadata.authors} />
-          </div>
+              <div className="input-group">
+                <label htmlFor="authors">Authors of the presentation</label>
+                <input
+                  onChange={setPresentationAuthors}
+                  type="text"
+                  name="authors"
+                  placeholder="authors of the presentation"
+                  value={presentationCandidate.metadata.authors} />
+              </div>
+            </div>
 
-          <div className="input-group">
-            <label htmlFor="description">Description</label>
-            <textarea
-              onChange={setPresentationDescription}
-              type="text"
-              name="description"
-              value={presentationCandidate.metadata.description} />
-          </div>
-        </form>
-      </section>
+            <div className="modal-column">
+              <div className="input-group" style={{flex: 1}}>
+                <label htmlFor="description">Description of the presentation</label>
+                <Textarea
+                  onChange={setPresentationDescription}
+                  type="text"
+                  name="description"
+                  placeholder="description of the presentation"
+                  style={{flex: 1}}
+                  value={presentationCandidate.metadata.description} />
+              </div>
+            </div>
+          </form>
+        </section>
 
-      <section className="options-group">
-        <h2>What data do you want to use ?</h2>
+        <section className="modal-row">
+          <h2>
+            What data do you want to use ? <HelpPin>
+              <a className="help-link" target="blank" href="https://github.com/medialab/bulgur/wiki/What-data-formats-and--tools-can-I-use-to-build-a-presentation-dataset-%3F">What data formats and tools can I use to build a presentation dataset ?</a>
+            </HelpPin>
+          </h2>
 
-        <p className="help-link-container">
-          <a className="help-link" target="blank" href="https://github.com/medialab/bulgur/wiki/What-data-formats-and--tools-can-I-use-to-build-a-presentation-dataset-%3F">What data formats and tools can I use to build a presentation dataset ?</a>
-        </p>
-        {
-        // future-proof code for possible multi-datasets visualizations
-        presentationCandidate.datasets &&
-        Object.keys(presentationCandidate.datasets).length > 0 ?
-          <section className="second-options-group">
-            {Object.keys(presentationCandidate.datasets)
-            .map(datasetId => {
-              const dataset = presentationCandidate.datasets[datasetId];
-              const onRemoveDataset = () => unsetPresentationCandidateDataset(datasetId);
-              const onDropNewData = (files) => {
-                fetchUserFile(files[0], datasetId, true);
-              };
-              const setTitle = (e) => setCandidatePresentationDatasetMetadata(datasetId, 'title', e.target.value);
-              const setDescription = (e) => setCandidatePresentationDatasetMetadata(datasetId, 'description', e.target.value);
-              const setUrl = (e) => setCandidatePresentationDatasetMetadata(datasetId, 'url', e.target.value);
-              const setLicense = (e) => setCandidatePresentationDatasetMetadata(datasetId, 'license', e.target.value);
-              return (
-                <div key={datasetId} className="dataset-card">
-                  <h4>Dataset settings</h4>
-                  <div className="dataset-settings">
-                    <form>
-                      <p>Original file name : {dataset.metadata.fileName}</p>
-                      <p>Original file format : {dataset.metadata.format}</p>
-                      <div className="input-group">
-                        <label htmlFor="title">Title</label>
-                        <input
-                          onChange={setTitle}
-                          type="text"
-                          name="title"
-                          value={dataset.metadata.title} />
+          {/*<p className="help-link-container">
+            <a className="help-link" target="blank" href="https://github.com/medialab/bulgur/wiki/What-data-formats-and--tools-can-I-use-to-build-a-presentation-dataset-%3F">What data formats and tools can I use to build a presentation dataset ?</a>
+          </p>*/}
+          {
+          // future-proof code for possible multi-datasets visualizations
+          presentationCandidate.datasets &&
+          Object.keys(presentationCandidate.datasets).length > 0 ?
+            <section className="dataset-wrapper">
+              {Object.keys(presentationCandidate.datasets)
+              .map(datasetId => {
+                const dataset = presentationCandidate.datasets[datasetId];
+                const onRemoveDataset = () => unsetPresentationCandidateDataset(datasetId);
+                const onDropNewData = (files) => {
+                  fetchUserFile(files[0], datasetId, true);
+                };
+                const setTitle = (e) => setCandidatePresentationDatasetMetadata(datasetId, 'title', e.target.value);
+                const setDescription = (e) => setCandidatePresentationDatasetMetadata(datasetId, 'description', e.target.value);
+                const setUrl = (e) => setCandidatePresentationDatasetMetadata(datasetId, 'url', e.target.value);
+                const setLicense = (e) => setCandidatePresentationDatasetMetadata(datasetId, 'license', e.target.value);
+                return (
+                  <div key={datasetId} className="modal-columns-container">
+                    <div className="modal-column">
+                      <h4>Dataset metadata</h4>
+                      <div className="dataset-settings">
+                        <form>
+                          <div className="input-group">
+                            <label htmlFor="title">Title of the dataset</label>
+                            <input
+                              onChange={setTitle}
+                              type="text"
+                              name="title"
+                              placeholder="title of the dataset"
+                              value={dataset.metadata.title} />
+                          </div>
+                          <div className="input-group">
+                            <label htmlFor="description">Description of the dataset</label>
+                            <Textarea
+                              onChange={setDescription}
+                              type="text"
+                              name="description"
+                              placeholder="description of the dataset"
+                              value={dataset.metadata.description} />
+                          </div>
+                          <div className="input-group">
+                            <label htmlFor="url">Url of the dataset</label>
+                            <input
+                              onChange={setUrl}
+                              type="text"
+                              name="url"
+                              placeholder="url of the dataset"
+                              value={dataset.metadata.url} />
+                          </div>
+                          <div className="input-group">
+                            <label htmlFor="license">License of the dataset</label>
+                            <input
+                              onChange={setLicense}
+                              type="text"
+                              name="license"
+                              placeholder="license of the dataset"
+                              value={dataset.metadata.license} />
+                          </div>
+                        </form>
                       </div>
-                      <div className="input-group">
-                        <label htmlFor="description">Description</label>
-                        <textarea
-                          onChange={setDescription}
-                          type="text"
-                          name="description"
-                          value={dataset.metadata.description} />
-                      </div>
-                      <div className="input-group">
-                        <label htmlFor="url">Url</label>
-                        <input
-                          onChange={setUrl}
-                          type="text"
-                          name="url"
-                          value={dataset.metadata.url} />
-                      </div>
-                      <div className="input-group">
-                        <label htmlFor="license">License</label>
-                        <input
-                          onChange={setLicense}
-                          type="text"
-                          name="license"
-                          value={dataset.metadata.license} />
-                      </div>
-                    </form>
+                    </div>
 
-                    <div className="dataset-management">
-                      <Dropzone
-                        className="drop-zone"
-                        activeClassName="drop-zone-active"
+                    <div className="modal-column dataset-data">
+                      <h4>Dataset data</h4>
+                      <DropZone
                         onDrop={onDropNewData}>
-                        <div>Reupload new data for this dataset</div>
-                      </Dropzone>
+                        <div>
+                          <p>The file that was used for the current data is <code>{dataset.metadata.fileName}</code>.</p>
+                          <p>Drag a file here to update this dataset with new data.</p>
+                        </div>
+                      </DropZone>
                       {
                         // disabled if slides are present to avoid allowing bugs related to vis states without the required dataset
                         !hasSlides ?
@@ -210,8 +244,8 @@ const ConfigurationDialogLayout = ({
                         : null
                       }
                     </div>
-                    <div className="dataset-preview">
-                      <h5>Raw data being used (first 20 lines)</h5>
+                    <div className="modal-column dataset-preview">
+                      <h4>Dataset preview (20 first lines)</h4>
                       <pre>
                         <code>
                           {dataset.rawData.split('\n').slice(0, 20).join('\n')}
@@ -219,147 +253,173 @@ const ConfigurationDialogLayout = ({
                       </pre>
                     </div>
                   </div>
-                </div>
-            );
-          })}
-          </section>
-        :
-          <section className="second-options-group">
-            <section className="data-source-choice">
-              <section className="data-source-file">
-                <h4>A file from my computer</h4>
-                <Dropzone
-                  className="drop-zone"
-                  activeClassName="drop-zone-active"
-                  onDrop={onDropInput}>
-                  <div>Drop a file here</div>
-                </Dropzone>
-              </section>
-              <section className="data-source-examples">
-                <h4>A sample file</h4>
-                {Object.keys(visualizationTypesModels)
-                .map(modelType => visualizationTypesModels[modelType])
-                .map(model => model.samples.map((sample, key) => {
-                  const fetchFile = () => {
-                    fetchExampleFile(sample);
-                  };
-                  return (
-                    <div key={key} onClick={fetchFile} className="sample-file">
-                      <h3>{sample.title} ({model.type})</h3>
-                      <p>{sample.description}</p>
-                    </div>
-                  );
-                }))
-              }
-              </section>
+              );
+            })}
             </section>
-          </section>
-      }
-        {
-          fetchUserFileStatus ?
-            <div style={{background: 'red', color: 'white'}}>{fetchUserFileStatus}</div>
-          : null
-        }
-      </section>
-      <section className="options-group">
-        <h2>How to visualize the data ?</h2>
-        {
-
-        presentationCandidate.visualizations &&
-        Object.keys(presentationCandidate.visualizations)
-        .map(visualizationKey => {
-          const visualization = presentationCandidate.visualizations[visualizationKey];
-          return (
-            <section key={visualizationKey}>
-              {hasSlides ? null : <form className="visualization-type-choice">
-                {activeVisualizationTypes.map((type, key) => {
-                    const visType = type.id;
-                    const firstDataset = presentationCandidate.datasets[Object.keys(presentationCandidate.datasets)[0]];
-                    const datasetFileName = firstDataset && firstDataset.metadata.fileName;
-                    const valid = validateFileExtension(datasetFileName, visualizationTypesModels[type.id]);
-                    const active = visualization.metadata && visualization.metadata.visualizationType === visType;
-                    const switchType = () => valid && !active && setPresentationCandidateVisualizationType(visualizationKey, visType);
-                    const activeVisType = visualization.metadata && visualization.metadata.visualizationType;
-                    return (<div className={'visualization-type-item' + (valid ? ' valid' : '') + (active ? ' active' : '')}
-                      id={activeVisType === visType ? 'visualization-type-checked' : ''}
-                      onClick={switchType}
-                      key={key}>
-                      <input
-                        type="radio"
-                        id={visType}
-                        name={visType}
-                        value="type"
-                        onChange={switchType}
-                        checked={activeVisType === visType} />
-                      <label
-                        htmlFor={visType}>
-                        <img className="bulgur-icon-image" src={require('../assets/bulgur-vistype-' + visType + '.svg')} />
-                        <h3>{type.name}</h3>
-                      </label>
-                    </div>);
-                })}
-              </form>}
-              {visualization.metadata && visualization.metadata.visualizationType && visualization.dataMap ?
-                <section className="data-fields-choice">
-                  <ul className="parameters-endpoints">
-                    {
-                      Object.keys(visualization.dataMap)
-                      .map(collectionId => {
-                        const collectionMap = visualization.dataMap[collectionId];
-                        return (
-                          <div className="datamap-group" key={collectionId}>
-                            {Object.keys(visualization.dataMap).length > 1 ? <h3>{collectionId}</h3> : null}
-                            <div className="datamap-group-mosaic">
-                              {
-                              Object.keys(collectionMap)
-                              .map(parameterKey => {
-                                return (
-                                  <DatamapPicker
-                                    key={parameterKey}
-                                    parameterKey={parameterKey}
-                                    parameter={collectionMap[parameterKey]}
-                                    visualization={visualization}
-                                    visualizationKey={visualizationKey}
-                                    collectionId={collectionId}
-                                    onMappingChange={setPresentationCandidateDatamapItem} />
-                                );
-                              })
-                            }
-                            </div>
-                          </div>
-                        );
-                      })
-                      }
-                  </ul>
-                </section> : null}
-              <h2>How to color your categories ?</h2>
-
-              <section className="final-touch-container">
-                {// colors edition
-                visualization.colorsMap ?
-                  <ColorsMapPicker
-                    colorsMap={visualization.colorsMap}
-                    visualizationId={visualizationKey}
-                    editedColor={editedColor}
-                    changeColor={setPresentationCandidateColor}
-                    toggleColorEdition={toggleCandidateColorEdition} />
-               : null}
-                {// preview
-                visualization.colorsMap &&
-                visualization.dataProfile &&
-                visualization.data &&
-                visualization.dataMap ?
-                  <section className="preview">
-                    {previewVisualization(visualization, visualizationTypesModels, setPreviewViewParameters, visualizationKey)}
+          :
+            <section className="second-options-group">
+              <ul className="data-source-type-toggler">
+                <li onClick={setDataSourceComputer} className={dataSourceTab === 'computer' ? 'active' : ''}>
+                    A file from my computer
+                  </li>
+                <li onClick={setDataSourceSample} className={dataSourceTab === 'sample' ? 'active' : ''}>
+                    A sample file
+                  </li>
+              </ul>
+              <section className="data-source-choice">
+                {dataSourceTab === 'computer' ?
+                  <section className="data-source">
+                    <DropZone
+                      onDrop={onDropInput}>
+                      <div>Drop a file here</div>
+                    </DropZone>
                   </section>
-                : null}
+                :
+                  <section className="data-source sample-files-container">
+                    {Object.keys(visualizationTypesModels)
+                  .map(modelType => visualizationTypesModels[modelType])
+                  .map(model => model.samples.map((sample, key) => {
+                    const fetchFile = () => {
+                      fetchExampleFile(sample);
+                    };
+                    return (
+                      <div key={key} className="sample-file">
+                        <div onClick={fetchFile} className="sample-file-content">
+                          <div>
+                            <p className="pre-title"><i>Sample dataset</i></p>
+                            <h3>{sample.title}</h3>
+                          </div>
+                          <div>
+                            <p>{sample.description}</p>
+                            <p className="recommended-vis-types">
+                              <b>Recommended for: <i>{sample.recommendedVisTypes.map(type => type).join(', ')}</i>.</b>
+                            </p>
+                          </div>
+                          <p>
+                            <i>Select to use this dataset</i>
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  }))
+                }
+                  </section>}
               </section>
             </section>
-          );
-        })
-      }
+        }
+          {
+            fetchUserFileStatus ?
+              <div style={{background: 'red', color: 'white'}}>{fetchUserFileStatus}</div>
+            : null
+          }
+        </section>
+        {Object.keys(presentationCandidate.datasets).length > 0 ?
+          <section className="modal-row">
+            <h2>How to visualize the data ? <HelpPin>
+              Sometimes the same dataset can be visualized with different techniques. Think about the point you are trying to make for choosing the right one !
+            </HelpPin></h2>
+            {
+
+          presentationCandidate.visualizations &&
+          Object.keys(presentationCandidate.visualizations)
+          .map(visualizationKey => {
+            const firstDataset = presentationCandidate.datasets[Object.keys(presentationCandidate.datasets)[0]];
+            const datasetFileName = firstDataset && firstDataset.metadata.fileName;
+            const visualization = presentationCandidate.visualizations[visualizationKey];
+            const activeVisId = visualization.metadata && visualization.metadata.visualizationType;
+            const switchType = (type) => {
+              const id = type.id;
+              const active = activeVisId === id;
+              const valid = validateFileExtension(datasetFileName, visualizationTypesModels[id]);
+              return valid && !active && setPresentationCandidateVisualizationType(visualizationKey, id);
+            };
+            const activeVisTypes = activeVisualizationTypes.map(type => ({
+              ...type,
+              label: type.id,
+              icon: require('../assets/bulgur-vistype-' + type.id + '.svg'),
+              possible: validateFileExtension(datasetFileName, visualizationTypesModels[type.id])
+            }));
+            return (
+              <section key={visualizationKey}>
+                {hasSlides ? null :
+                <BigSelect
+                  options={activeVisTypes}
+                  onOptionSelect={switchType}
+                  activeOptionId={activeVisId} />
+                }
+                {visualization.metadata && visualization.metadata.visualizationType ?
+                  <section className="modal-columns-container">
+                    <section className="modal-column">
+                      <h4>How to map your data to the visualization ?</h4>
+                      {visualization.metadata && visualization.metadata.visualizationType && visualization.dataMap ?
+                        <ul className="parameters-endpoints">
+                          {
+                            Object.keys(visualization.dataMap)
+                            .map(collectionId => {
+                              const collectionMap = visualization.dataMap[collectionId];
+                              return (
+                                <div className="datamap-group" key={collectionId}>
+                                  {Object.keys(visualization.dataMap).length > 1 ?
+                                    <h3>{collectionId.charAt(0).toUpperCase() + collectionId.slice(1) + ' mapping parameters'}</h3>
+                                  : null}
+                                  <div className="datamap-group-mosaic">
+                                    {
+                                    Object.keys(collectionMap)
+                                    .map(parameterKey => {
+                                      return (
+                                        <DatamapPicker
+                                          key={parameterKey}
+                                          parameterKey={parameterKey}
+                                          parameter={collectionMap[parameterKey]}
+                                          visualization={visualization}
+                                          visualizationKey={visualizationKey}
+                                          collectionId={collectionId}
+                                          onMappingChange={setPresentationCandidateDatamapItem} />
+                                      );
+                                    })
+                                  }
+                                  </div>
+                                </div>
+                              );
+                            })
+                            }
+                        </ul>
+                       : null}
+                    </section>
+                    <section className="modal-column">
+                      <h4>How to color your categories ?</h4>
+                      <section className="final-touch-container">
+                        {// colors edition
+                      visualization.colorsMap ?
+                        <ColorsMapPicker
+                          colorsMap={visualization.colorsMap}
+                          visualizationId={visualizationKey}
+                          editedColor={editedColor}
+                          changeColor={setPresentationCandidateColor}
+                          toggleColorEdition={toggleCandidateColorEdition} />
+                     : null}
+                      </section>
+                    </section>
+                    <section className="modal-column">
+                      <h4>Visualization preview</h4>
+                      {// preview
+                    visualization.colorsMap &&
+                    visualization.dataProfile &&
+                    visualization.data &&
+                    visualization.dataMap ?
+                      <section className="preview">
+                        {previewVisualization(visualization, visualizationTypesModels, setPreviewViewParameters, visualizationKey)}
+                      </section>
+                    : null}
+                    </section>
+                  </section> : null}
+              </section>
+            );
+          })
+        }
+          </section> : null}
       </section>
-      <section className="options-group presentation-candidate-dialog-step final-step">
+      <section className="modal-footer">
         {
           presentationCandidate &&
           presentationCandidate.visualizations &&

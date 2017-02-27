@@ -53,6 +53,7 @@ const SET_PRESENTATION_CANDIDATE_DATAMAP_ITEM = '§Bulgur/ConfigurationDialog/SE
 const SET_PREVIEW_VIEW_PARAMETERS = '§Bulgur/ConfigurationDialog/SET_PREVIEW_VIEW_PARAMETERS';
 const SET_PRESENTATION_CANDIDATE_COLOR = '§Bulgur/ConfigurationDialog/SET_PRESENTATION_CANDIDATE_COLOR';
 const TOGGLE_CANDIDATE_COLOR_EDITION = '§Bulgur/ConfigurationDialog/TOGGLE_CANDIDATE_COLOR_EDITION';
+const SET_DATA_SOURCE_TAB = '§Bulgur/ConfigurationDialog/SET_DATA_SOURCE_TAB';
 /*
  * Action creators
  */
@@ -232,6 +233,13 @@ export const toggleCandidateColorEdition = (visualizationId, collectionId, categ
   visualizationId,
   collectionId,
   category
+});
+/**
+ * @param {string} tab - the tab to set as active
+ */
+export const setDataSourceTab = (tab) => ({
+  type: SET_DATA_SOURCE_TAB,
+  tab
 });
 /**
  * Representation of a basic, empty presentation
@@ -530,10 +538,15 @@ const PRESENTATION_CANDIDATE_UI_DEFAULT_STATE = {
    */
    previewsParameters: {},
    /**
-   * Representation of the status of file fetching status
-   * @type {string}
-   */
-   fetchUserFileStatus: undefined
+    * Representation of the status of file fetching status
+    * @type {string}
+    */
+   fetchUserFileStatus: undefined,
+   /**
+    * Representation of the datasource tab
+    * @type {string}
+    */
+    dataSourceTab: 'computer'
 };
 /**
  * This redux reducer handles the modification of the ui state of a presentation configuration dialog
@@ -579,6 +592,11 @@ function presentationCandidateUi (state = PRESENTATION_CANDIDATE_UI_DEFAULT_STAT
         ...state,
         fetchUserFileStatus: action.errorMessage
       };
+    case SET_DATA_SOURCE_TAB :
+      return {
+        ...state,
+        dataSourceTab: action.tab
+      };
     default:
       return state;
   }
@@ -606,6 +624,8 @@ const editedColor = state => state.presentationCandidateUi &&
   state.presentationCandidateUi.editedColor;
 const fetchUserFileStatus = state => state.presentationCandidateUi &&
   state.presentationCandidateUi.fetchUserFileStatus;
+const dataSourceTab = state => state.presentationCandidateUi &&
+  state.presentationCandidateUi.dataSourceTab;
 /**
  * The selector is a set of functions for accessing this feature's state
  * @type {object}
@@ -616,6 +636,7 @@ export const selector = createStructuredSelector({
   editedColor,
   invalidFileType,
   presentationCandidate,
-  fetchUserFileStatus
+  fetchUserFileStatus,
+  dataSourceTab
 });
 

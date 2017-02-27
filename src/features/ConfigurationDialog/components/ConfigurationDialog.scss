@@ -18,323 +18,242 @@
             user-select: none;
 
          -o-user-select: none;
-    .options-group
+    // components
+    ul
     {
-        display: flex;
-        flex-direction: column;
+        padding: 0;
+    }
+    pre
+    {
+        overflow-y: auto;
 
-        margin-top: $large-gutter;
-        margin-bottom: $large-gutter;
-        form
+        max-height: 15rem;
+        margin: 0;
+        padding: $medium-gutter;
+
+        white-space:      pre-wrap;       /* Since CSS 2.1 */
+        white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+        white-space: -pre-wrap;      /* Opera 4-6 */
+        white-space:   -o-pre-wrap;    /* Opera 7 */
+        word-wrap: break-word;       /* Internet Explorer 5.5+ */
+
+        @extend .primary-item;
+        flex: 1;
+    }
+    input[type='text'],
+    textarea
+    {
+        font-family: $editable-font-stack;
+        font-size: $font-size-2;
+
+        padding: $medium-gutter;
+
+        resize: none;
+        cursor: text;
+        transition: all $time-short ease;
+
+        border: none;
+        outline: none;
+
+        @extend .interactive-item;
+
+        &:hover
         {
-            display: flex;
-            flex-direction: column;
-            .input-group
-            {
-                display: flex;
-                flex-direction: column;
-
-                margin-top: $medium-gutter;
-            }
-            input,
-            textarea
-            {
-                font-family: inherit;
-                font-size: 1rem;
-
-                width: 100%;
-
-                border: none;
-                border: 1px solid $primary-color;
-                outline: none;
-                background: inherit;
-            }
-            input:hover,
-            textarea:hover,
-            input:focus,
-            textarea:focus
-            {
-                cursor: pointer;
-
-                background: $background-intent;
-            }
+            @extend .interactive-item-intent;
+        }
+        &:focus
+        {
+            @extend .interactive-item-active;
         }
     }
-    .dataset-settings
+
+    .input-group
     {
         display: flex;
 
-        flex-flow: row nowrap;
-        justify-content: stretch;
-        form,
-        .dataset-management,
-        .dataset-preview
+        flex-flow: column nowrap;
+        &:not(:last-of-type)
         {
+            margin-bottom: $medium-gutter;
+        }
+        label
+        {
+            margin-bottom: $base-gutter;
+        }
+    }
+
+    .sample-files-container
+    {
+        display: flex;
+
+        flex-flow: row wrap;
+        align-items: space-between;
+
+        .sample-file
+        {
+            display: flex;
+
+            min-width: 30%;
+            padding: 0 $medium-gutter $medium-gutter 0;
+
             flex: 1;
-        }
-        .dataset-preview
-        {
-            overflow: auto;
-
-            max-height: 20rem;
-            margin: $medium-gutter;
-            pre
+            flex-flow: column nowrap;
+            align-items: stretch;
+            .sample-file-content
             {
-                overflow: auto;
+                display: flex;
 
-                margin-top: $medium-gutter;
-                padding: $base-gutter;
+                padding: $medium-gutter;
 
-                background: $background-intent;
-            }
-            h5
-            {
-                margin: 0;
-            }
-        }
-        form
-        {
-            padding-right: $large-gutter;
-        }
-        .dataset-management
-        {
-            .drop-zone
-            {
-                height: 10rem;
-                margin-bottom: $medium-gutter;
-                padding-top: 4rem;
+                flex: 1;
+                @extend .interactive-item;
+                flex-flow: column nowrap;
+                justify-content: space-between;
 
-                text-align: center;
+                p
+                {
+                    margin: 0;
+                    margin-bottom: $base-gutter;
+                }
+                h3
+                {
+                    font-size: $font-size-3;
 
-                border: 1px dashed $primary-color;
-            }
-            .remove-dataset
-            {
-                display: block;
-
-                width: 100%;
+                    margin-top: 0;
+                    margin-bottom: $base-gutter;
+                }
+                div
+                {
+                    margin-bottom: $medium-gutter;
+                }
                 &:hover
                 {
-                    color: white;
-                    background: red;
+                    @extend .interactive-item-intent;
                 }
             }
         }
     }
-    .visualization-type-choice
+
+    .bulgur-datamap-picker
+    {
+        margin-bottom: $medium-gutter;
+    }
+
+    .remove-dataset
+    {
+        margin-top: $medium-gutter;
+        padding: $medium-gutter;
+
+        @extend .interactive-item;
+        &:hover
+        {
+            @extend .dangerous-item-intent;
+        }
+    }
+    .data-source-type-toggler
     {
         display: flex;
 
+        margin: 0;
         padding: 0;
 
-        flex-flow: row nowrap!important;
-        justify-content: space-between;
-        input
+        flex-flow: row nowrap;
+        align-items: stretch;
+        li
         {
-            display: none;
-        }
-        .visualization-type-item
-        {
-            display: flex;
-
+            padding: 0;
             padding: $medium-gutter;
 
-            text-align: center;
+            list-style-type: none;
 
-            opacity: .2;
-            border: 1px solid $background-intent;
+            cursor: pointer;
+            transition: all $time-short ease;
 
             flex: 1;
-            flex-flow: column nowrap;
-            align-items: center;
-            &.valid
+            @extend .important-item;
+            &:hover
             {
-                cursor: pointer;
-
-                opacity: 1;
+                @extend .important-item-intent;
             }
             &.active
             {
                 cursor: default;
 
-                color: white;
-                background: red;
+                @extend .important-item-active;
             }
         }
     }
+
+    // secondary layout
+    .modal-columns-container
+    {
+        position: relative;
+
+        display: flex;
+
+        flex-flow: row nowrap;
+
+        .modal-column
+        {
+            display: flex;
+
+            flex-flow: column nowrap;
+            align-items: stretch;
+            flex: 1;
+            &:not(:first-of-type)
+            {
+                margin-left: $large-gutter;
+            }
+        }
+    }
+
     .data-source-choice
     {
-        display: flex;
-
-        flex-flow: row nowrap;
-        .data-source-file
-        {
-            flex: 1;
-        }
-        .data-source-examples
-        {
-            flex: 1;
-        }
-        .data-source-file .drop-zone
-        {
-            margin-right: $large-gutter;
-            padding-top: 8rem;
-            padding-right: $medium-gutter;
-            padding-bottom: 8rem;
-
-            text-align: center;
-
-            background: $background-intent;
-        }
-        .data-source-file .drop-zone-active
-        {
-            width: 100%!important;
-            margin-right: $large-gutter;
-            padding-top: 5rem;
-            padding-bottom: 5rem;
-
-            text-align: center;
-
-            color: $background-default;
-            background: $primary-color;
-        }
-        .sample-file
-        {
-            margin-bottom: $medium-gutter;
-
-            flex: 1;
-        }
-    }
-    .data-fields-choice
-    {
-        display: flex;
-
-        flex-flow: row nowrap;
-        .parameters-endpoints
-        {
-            display: flex;
-
-            padding: 0; //$large-gutter 0 $large-gutter;
-            // flex-wrap: wrap;
-            // justify-content: space-between;
-
-            flex: 1;
-            .datamap-group
-            {
-                display: flex;
-
-                flex-flow: column nowrap;
-                flex: 1;
-                .datamap-group-mosaic
-                {
-                    display: flex;
-
-                    flex-flow: row wrap;
-                    justify-content: flex-start;
-                    .bulgur-datamap-picker
-                    {
-                        margin-right: $medium-gutter;
-                    }
-                }
-            }
-        }
-        .parameters-endpoints li
-        {
-            display: inline-block;
-
-            width: 30%;
-            margin-bottom: $medium-gutter;
-            padding: $medium-gutter;
-
-            list-style: none;
-
-            cursor: move;
-            text-align: center;
-
-            border: 1px dashed $background-intent;
-        }
-    }
-    .sample-file
-    {
-        padding: $medium-gutter;
-
-        cursor: pointer;
-
-        border: 1px dashed $primary-color;
-        &:hover
-        {
-            background: $background-intent;
-        }
-    }
-    .data-source-status
-    {
         margin-top: $medium-gutter;
-        padding: $medium-gutter;
+    }
 
-        text-align: center;
-        &.loading
+    // tertiary layout
+    .dataset-data
+    {
+        .bulgur-drop-zone
         {
-            background: $background-intent;
-        }
-        &.loaded
-        {
-            background: $color-valid;
-        }
-        &.error
-        {
-            color: $background-default;
-            background: $color-error;
+            flex: 1;
         }
     }
-    .final-touch-container
+
+    .dataset-preview
+    {
+        max-width: 33%;
+    }
+
+    .preview
+    {
+        position: relative;
+
+        width: 100%;
+        height: 15rem;
+
+        border: 1px solid $color-sec-stroke;
+
+        flex: 1;
+    }
+
+    .modal-footer
     {
         display: flex;
 
         flex-flow: row nowrap;
-        .bulgur-colors-map-picker
-        {
-            display: flex;
-
-            flex: 1;
-            flex-flow: row nowrap;
-            .colors-map-group
-            {
-                flex: 1;
-            }
-        }
-        .preview
-        {
-            position: relative;
-
-            width: 49%;
-            height: 30rem;
-
-            border: 1px solid $primary-color;
-
-            flex: 1;
-        }
-    }
-    .final-step
-    {
-        font-family: $main-font-stack;
-
-        flex-flow: row;
+        align-items: stretch;
         .valid-btn
         {
-            font-size: 1.2rem;
+            font-size: $font-size-3;
 
-            border: none;
-            background: $color-valid;
-
+            @extend .important-item;
             flex: 1;
-        }
-        .cancel-btn
-        {
-            font-size: 1.2rem;
-
-            color: $background-default;
-            border: none;
-            background: $color-error;
+            &:hover
+            {
+                @extend .important-item-intent;
+            }
         }
     }
 }
