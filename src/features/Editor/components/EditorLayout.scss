@@ -20,12 +20,6 @@
 
     flex-wrap: nowrap;
     @extends .normal-item;
-    input,
-    textarea,
-    button
-    {
-        transition: all $time-short ease;
-    }
     .bulgur-main-row
     {
         position: relative;
@@ -68,6 +62,12 @@
     /*
      * Generic components styling
      */
+    input,
+    textarea,
+    button
+    {
+        transition: all $time-short ease;
+    }
     a,
     a:hover,
     a:visited,

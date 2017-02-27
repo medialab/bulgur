@@ -36,11 +36,31 @@ html
     }
 }
 
+.ReactModalPortal > *
+{
+    // When the modal is closed, overlay div has no css class
+    // This selector should be overridden by the `&--after-open` class below
+    opacity: 0;
+}
+
 .ReactModal__Overlay
 {
     display: flex;
 
+    transition: opacity $time-short ease-in-out;
+
+    opacity: 0;
+    background: rgba(0, 0, 0, .15);
+
     align-items: center;
+    &--after-open
+    {
+        opacity: 1;
+    }
+    &--before-close
+    {
+        opacity: 0;
+    }
 }
 
 .ReactModal__Content
@@ -83,6 +103,8 @@ html
 
     .modal-row
     {
+        position: relative;
+
         max-height: 1000rem;
         padding: 0 $large-gutter $large-gutter $large-gutter;
 
