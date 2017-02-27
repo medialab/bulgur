@@ -23,7 +23,7 @@
         display: flex;
 
         margin: 0;
-        padding: $medium-gutter;
+        padding: $gutter-medium;
 
         flex: 1;
         flex-flow: row nowrap;
@@ -65,11 +65,18 @@
         {
             border: none;
             background: inherit;
+            height : 100%;
         }
 
         .Select-menu-outer
         {
             border-radius: none!important;
+        }
+
+        .Select-placeholder,
+        .Select-value
+        {
+            margin-top: $gutter-small;
         }
     }
 }
