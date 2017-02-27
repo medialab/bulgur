@@ -51,7 +51,7 @@ const SlideSettingsPannel = ({
                   Categories
                 </li>
               <li onClick={setTabToParameters} className={state === 'parameters' ? 'active' : ''}>
-                  Vis Parameters
+                  Parameters
                 </li>
             </ul>
 

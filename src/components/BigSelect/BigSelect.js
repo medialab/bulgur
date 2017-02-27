@@ -21,7 +21,7 @@ const BigSelect = ({
             onOptionSelect(option);
           };
           return (
-            <div className={'option ' + (option.id === activeOptionId ? 'active' : '')}
+            <div className={'option ' + (option.possible ? 'possible ' : 'impossible') + (option.id === activeOptionId ? 'active' : '')}
               key={key}>
               <input
                 type="radio"
@@ -31,7 +31,7 @@ const BigSelect = ({
                 checked={false} />
               <label
                 onClick={onOptionClick}
-                htmlFor={option}>
+                htmlFor={option.id}>
                 <img className="bulgur-icon-image" src={option.icon} />
                 <h3>{option.label}</h3>
               </label>
