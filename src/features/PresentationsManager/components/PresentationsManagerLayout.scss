@@ -29,11 +29,12 @@
         flex-flow: column nowrap;
     }
     @extends .normal-item;
+    // secondary layout
     .landing-group
     {
         // primary layout
         display: flex;
-        overflow: auto;
+        overflow: visible;
 
         height: 100%;
         padding: $medium-gutter;
@@ -133,6 +134,8 @@
             {
                 padding: $medium-gutter;
 
+                cursor: text;
+
                 flex: 1;
                 &:hover
                 {
@@ -149,6 +152,22 @@
 
                 cursor: pointer;
             }
+        }
+    }
+}
+
+.override-modal-footer
+{
+    display: flex;
+
+    flex-flow: row nowrap;
+    button:first-of-type
+    {
+        flex: 1;
+        @extend .dangerous-item;
+        &:hover
+        {
+            @extend .dangerous-item-intent;
         }
     }
 }

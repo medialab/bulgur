@@ -168,13 +168,19 @@ const PresentationsManagerLayout = ({
         onRequestClose={importReset}
         contentLabel="Override the existing presentation"
         isOpen={importCandidate !== undefined}>
-        <div>
-        You seem to have a working version of the presentation you are trying to import stored on your computer.
-        Do you wish to override the local version of the presentation ?
+        <h1 className="modal-header">
+          Presentation project already exists
+        </h1>
+        <div className="modal-content">
+          <div className="modal-row">
+            You seem to have already a version of the presentation you are trying to import stored in the application's memory.
+            <br /><br />
+            Do you wish to override the current version of the presentation with the one you are trying to import ?
+          </div>
         </div>
-        <div>
+        <div className="modal-footer override-modal-footer">
           <button onClick={overrideImportWithCandidate}>
-            Yes, override the local version
+            Override the existing version of the presentation
           </button>
           <button onClick={importReset}>
             Cancel
