@@ -120,7 +120,7 @@ const models = {
       cameraX: 48.8674345,
       cameraY: 2.3455482,
       cameraZoom: 4,
-      tilesUrl: 'http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png'
+      tilesUrl: 'http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.png'
     },
   },
   network: {
