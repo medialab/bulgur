@@ -234,7 +234,7 @@ const ConfigurationDialogLayout = ({
                         onDrop={onDropNewData}>
                         <div>
                           <p>The file that was used for the current data is <code>{dataset.metadata.fileName}</code>.</p>
-                          <p>Drag a file here to update this dataset with new data.</p>
+                          <p>Drop a file here to update this dataset with a new data file.</p>
                         </div>
                       </DropZone>
                       {
@@ -313,7 +313,7 @@ const ConfigurationDialogLayout = ({
             : null
           }
         </section>
-        {Object.keys(presentationCandidate.datasets).length > 0 ?
+        {presentationCandidate && presentationCandidate.datasets && Object.keys(presentationCandidate.datasets).length > 0 ?
           <section className="modal-row">
             <h2>How to visualize the data ? <HelpPin>
               Sometimes the same dataset can be visualized with different techniques. Think about the point you are trying to make for choosing the right one !

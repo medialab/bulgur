@@ -114,7 +114,25 @@
                 {
                     @extend .important-item-intent;
                 }
+
+                &.update-from
+                {
+                    @extend .dangerous-item;
+                    &:hover{
+                        @extend .dangerous-item-intent;
+                    }
+                }
             }
+        }
+    }
+
+    // bulgur-help-in
+    button .bulgur-help-pin{
+        color: $background-default;
+        margin-left: $gutter-small;
+        .pin-icon{
+            border: 1px solid $background-default;
+            color: $background-default;
         }
     }
 }

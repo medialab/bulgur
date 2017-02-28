@@ -27,7 +27,7 @@
     {
         overflow-y: auto;
 
-        max-height: 15rem;
+        max-height: 20rem;
         margin: 0;
         padding: $gutter-medium;
 
@@ -224,6 +224,11 @@
     .dataset-preview
     {
         max-width: 33%;
+    }
+    .final-touch-container
+    {
+        max-height: 40rem;
+        overflow-y: auto;
     }
 
     .preview

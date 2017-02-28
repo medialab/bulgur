@@ -10,7 +10,7 @@ import './DropZone.scss';
 const DropZone = ({
   onDrop,
   children,
-  accept = '*'
+  accept
 }) => (
   <Dropzone
     className="bulgur-drop-zone"

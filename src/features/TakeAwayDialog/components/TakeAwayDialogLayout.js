@@ -169,8 +169,14 @@ const TakeAwayDialogLayout = ({
                 </div>
                 <div className="column">
                   <div className="operations">
-                    <button onClick={updateActivePresentationToGist}>↑ Update local version to the online repository</button>
-                    <button onClick={updateActivePresentationFromGist}>↓ Update local version from the online repository</button>
+                    <button className="update-to" onClick={updateActivePresentationToGist}>
+                      ↑ Update local version to the online repository
+                      <HelpPin position="left">The online version will be overriden with this current version</HelpPin>
+                    </button>
+                    <button className="update-from" onClick={updateActivePresentationFromGist}>
+                      ↓ Update local version from the online repository
+                      <HelpPin position="left">Your current version will be overriden with the distant version</HelpPin>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -198,8 +204,14 @@ const TakeAwayDialogLayout = ({
                 </div>
                 <div className="column">
                   <div className="operations">
-                    <button onClick={updateActivePresentationToServer}>↑ Update local version to the online repository</button>
-                    <button onClick={updateActivePresentationFromServer}>↓ Update local version from the online repository</button>
+                    <button className="update-to" onClick={updateActivePresentationToServer}>
+                      ↑ Update local version to the online repository
+                      <HelpPin position="left">The online version will be overriden with this current version</HelpPin>
+                    </button>
+                    <button className="update-from" onClick={updateActivePresentationFromServer}>
+                      ↓ Update local version from the online repository
+                      <HelpPin position="left">Your current version will be overriden with the distant version</HelpPin>
+                    </button>
                   </div>
                 </div>
               </div>
