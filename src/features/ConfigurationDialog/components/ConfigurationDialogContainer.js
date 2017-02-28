@@ -43,6 +43,7 @@ class ConfigurationDialogContainer extends Component {
     this.onFileDrop = this.onFileDrop.bind(this);
     this.closeAndSetupPresentationCandidate = this.closeAndSetupPresentationCandidate.bind(this);
     this.changeVisualizationType = this.changeVisualizationType.bind(this);
+    this.validateFileExtension = this.validateFileExtension.bind(this);
   }
 
   shouldComponentUpdate() {
@@ -69,12 +70,20 @@ class ConfigurationDialogContainer extends Component {
     this.props.actions.closePresentationCandidateModal();
   }
 
+  validateFileExtension (file = {name: ''}) {
+    const fileName = typeof file === 'string' ? file : file.name;
+    const extension = fileName.split('.').pop();
+    const acceptedExtensions = Object.keys(this.props.visualizationTypesModels)
+                      .map(k => this.props.visualizationTypesModels[k])
+                      .reduce((total, t) => [...total, ...t.acceptedFileExtensions], []);
+    return acceptedExtensions.indexOf(extension) > -1;
+  }
+
    onFileDrop(file) {
-    // todo : validate entering file
-    // const fileName = file.name;
-    // const model = this.props.visualizationTypesModels[this.props.activeVisualizationType];
-    // const valid = validateFileExtension(fileName, model);
-    this.props.actions.fetchUserFile(file);
+    const validExtension = this.validateFileExtension(file);
+    if (validExtension) {
+      this.props.actions.fetchUserFile(file);
+    }
   }
 
   render() {
@@ -99,6 +108,7 @@ class ConfigurationDialogContainer extends Component {
         closePresentationCandidate={this.closePresentationCandidate}
         closeAndSetupPresentationCandidate={this.closeAndSetupPresentationCandidate}
         changeVisualizationType={this.changeVisualizationType}
+        validateFileExtension={this.validateFileExtension}
         onFileDrop={this.onFileDrop} />
     );
   }

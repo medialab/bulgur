@@ -4,7 +4,7 @@
  */
 import React from 'react';
 
-import {validateFileExtension} from '../../../helpers/fileLoader';
+// import {validateFileExtension} from '../../../helpers/fileLoader';
 
 import Textarea from 'react-textarea-autosize';
 
@@ -68,6 +68,7 @@ const previewVisualization = (visualization, models, updateParameters, visualiza
  * @param {object} props.actions - actions from the redux logic
  * @param {function} props.closePresentationCandidate - function to trigger for closing the presentation
  * @param {function} props.onFileDrop - callback function to be handled by container
+ * @param {function} props.validateFileExtension - util to validate globally a file extension
  * @param {object} props.editedColor - current edited color (allows just once at a time)
  * @return {ReactElement} markup
  */
@@ -97,6 +98,7 @@ const ConfigurationDialogLayout = ({
   },
   closePresentationCandidate,
   onFileDrop,
+  validateFileExtension,
   editedColor
 }) => {
   const onApplyChange = () => applyPresentationCandidateConfiguration(presentationCandidate);
@@ -176,7 +178,9 @@ const ConfigurationDialogLayout = ({
                 const dataset = presentationCandidate.datasets[datasetId];
                 const onRemoveDataset = () => unsetPresentationCandidateDataset(datasetId);
                 const onDropNewData = (files) => {
-                  fetchUserFile(files[0], datasetId, true);
+                  if (validateFileExtension(files[0])) {
+                    fetchUserFile(files[0], datasetId, true);
+                  }
                 };
                 const setTitle = (e) => setCandidatePresentationDatasetMetadata(datasetId, 'title', e.target.value);
                 const setDescription = (e) => setCandidatePresentationDatasetMetadata(datasetId, 'description', e.target.value);

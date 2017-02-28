@@ -118,7 +118,8 @@
                 &.update-from
                 {
                     @extend .dangerous-item;
-                    &:hover{
+                    &:hover
+                    {
                         @extend .dangerous-item-intent;
                     }
                 }
@@ -127,12 +128,15 @@
     }
 
     // bulgur-help-in
-    button .bulgur-help-pin{
-        color: $background-default;
+    button .bulgur-help-pin
+    {
         margin-left: $gutter-small;
-        .pin-icon{
-            border: 1px solid $background-default;
+
+        color: $background-default;
+        .pin-icon
+        {
             color: $background-default;
+            border: 1px solid $background-default;
         }
     }
 }
