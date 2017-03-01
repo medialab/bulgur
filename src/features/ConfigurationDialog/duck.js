@@ -50,6 +50,7 @@ const UNSET_PRESENTATION_CANDIDATE_DATASET = 'UNSET_PRESENTATION_CANDIDATE_DATAS
 
 const SET_PRESENTATION_CANDIDATE_VISUALIZATION_TYPE = '§Bulgur/ConfigurationDialog/SET_PRESENTATION_CANDIDATE_VISUALIZATION_TYPE';
 const SET_PRESENTATION_CANDIDATE_DATAMAP_ITEM = '§Bulgur/ConfigurationDialog/SET_PRESENTATION_CANDIDATE_DATAMAP_ITEM';
+const SET_PRESENTATION_CANDIDATE_VIEW_OPTION = '§Bulgur/ConfigurationDialog/SET_PRESENTATION_CANDIDATE_VIEW_OPTION';
 const SET_PREVIEW_VIEW_PARAMETERS = '§Bulgur/ConfigurationDialog/SET_PREVIEW_VIEW_PARAMETERS';
 const SET_PRESENTATION_CANDIDATE_COLOR = '§Bulgur/ConfigurationDialog/SET_PRESENTATION_CANDIDATE_COLOR';
 const TOGGLE_CANDIDATE_COLOR_EDITION = '§Bulgur/ConfigurationDialog/TOGGLE_CANDIDATE_COLOR_EDITION';
@@ -194,6 +195,17 @@ export const setPresentationCandidateDatamapItem = (visualizationId, parameterId
   parameterId,
   collectionId,
   propertyName
+});
+/**
+ * @param {string} visualizationId - the uuid of the visualization to parameter
+ * @param {string} parameterKey - the name of the parameter to set
+ * @param {string} parameterValue - the value ot set
+ */
+export const setPresentationCandidateViewOption = (visualizationId, parameterKey, parameterValue) => ({
+  type: SET_PRESENTATION_CANDIDATE_VIEW_OPTION,
+  visualizationId,
+  parameterKey,
+  parameterValue
 });
 /**
  * @param {string} visualizationId - the uuid of the presentation's visualization for the color to change
@@ -388,6 +400,7 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
         }
       }
       let dataMap = {...visualizationTypesModels[visualizationType].dataMap};
+      const viewOptions = [...visualizationTypesModels[visualizationType].viewOptions];
 
       // analyze the data to produce a datamap for the visualization
       let dataProfile;
@@ -445,7 +458,9 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
               dataProfile,
               dataMap,
               datasets: [firstDatasetId],
-              colorsMap: newcolorsMap
+              colorsMap: newcolorsMap,
+              viewParameters: {...visualizationTypesModels[visualizationType].defaultViewParameters},
+              viewOptions
             }
           }
         }
@@ -476,6 +491,23 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
                     mappedField: action.propertyName
                   }
                 }
+              }
+            }
+          }
+        }
+      };
+    case SET_PRESENTATION_CANDIDATE_VIEW_OPTION:
+      return {
+        ...state,
+        presentationCandidate: {
+          ...state.presentationCandidate,
+          visualizations: {
+            ...state.presentationCandidate.visualizations,
+            [action.visualizationId]: {
+              ...state.presentationCandidate.visualizations[action.visualizationId],
+              viewParameters: {
+                ...state.presentationCandidate.visualizations[action.visualizationId].viewParameters,
+                [action.parameterKey]: action.parameterValue
               }
             }
           }

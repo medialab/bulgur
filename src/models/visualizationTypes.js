@@ -61,17 +61,7 @@ const models = {
     defaultViewParameters: {
       fromDate: new Date().setFullYear(1900),
       toDate: new Date().setFullYear(1960),
-    },
-    slideParameters: [
-      {
-        id: 'fromDate',
-        default: new Date() - 1000 * 3600 * 24 * 365
-      },
-      {
-        id: 'toDate',
-        default: new Date().getTime()
-      }
-    ]
+    }
   },
   map: {
     type: 'map',
@@ -88,6 +78,40 @@ const models = {
         }
       }
     },
+    viewOptions: [
+      {
+        label: 'Map tiles',
+        viewParameter: 'tilesUrl',
+        optionType: 'select',
+        options: [
+          {
+            value: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+            id: 'positron',
+            label: 'CartoDB - positron'
+          },
+          {
+            value: 'https://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png',
+            id: 'cycle',
+            label: 'OSM - Cycle'
+          },
+          {
+            value: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            id: 'mapnik',
+            label: 'OSM - Mapnik'
+          },
+          {
+            value: 'http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.png',
+            id: 'terrain',
+            label: 'Stamen - terrain'
+          },
+          {
+            value: 'http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png',
+            id: 'toner',
+            label: 'Stamen - toner'
+          },
+        ]
+      }
+    ],
     samples: [
       {
         title: 'Histoire du Fort et des combats de 1870-1871 à Issy',
@@ -102,25 +126,11 @@ const models = {
         recommendedVisTypes: ['map']
       }
     ],
-    slideParameters: [
-      {
-        id: 'cameraX',
-        default: 48.8674345
-      },
-      {
-        id: 'cameraY',
-        default: 2.3455482
-      },
-      {
-        id: 'cameraZoom',
-        default: 10
-      }
-    ],
     defaultViewParameters: {
       cameraX: 48.8674345,
       cameraY: 2.3455482,
       cameraZoom: 4,
-      tilesUrl: 'http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.png'
+      tilesUrl: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png'
     },
   },
   network: {
@@ -202,25 +212,7 @@ const models = {
       labelThreshold: 7,
       minNodeSize: 1,
       sideMargin: 0,
-    },
-    slideParameters: [
-      {
-        id: 'cameraX',
-        default: 0
-      },
-      {
-        id: 'cameraY',
-        default: 0
-      },
-      {
-        id: 'cameraAngle',
-        default: 0
-      },
-      {
-        id: 'cameraRatio',
-        default: 1
-      }
-    ]
+    }
   }
 };
 export default models;

@@ -14,6 +14,7 @@ import DatamapPicker from '../../../components/DatamapPicker/DatamapPicker';
 import DropZone from '../../../components/DropZone/DropZone';
 import BigSelect from '../../../components/BigSelect/BigSelect';
 import HelpPin from '../../../components/HelpPin/HelpPin';
+import ViewOptionPicker from '../../../components/ViewOptionPicker/ViewOptionPicker';
 
 import './ConfigurationDialog.scss';
 
@@ -93,6 +94,7 @@ const ConfigurationDialogLayout = ({
     toggleCandidateColorEdition,
     setPresentationCandidateColor,
     applyPresentationCandidateConfiguration,
+    setPresentationCandidateViewOption,
     setPreviewViewParameters,
     setDataSourceTab
   },
@@ -389,6 +391,29 @@ const ConfigurationDialogLayout = ({
                             }
                         </ul>
                        : null}
+                      {visualization.viewOptions &&
+                       visualization.viewOptions.length
+                        ?
+                          <div>
+                            <h4>Visualization options</h4>
+                            <div className="view-options">
+                              {
+                              visualization
+                              .viewOptions
+                              .map((option, index) => (
+                                <ViewOptionPicker
+                                  option={option}
+                                  activeValue={
+                                    visualization.viewParameters && visualization.viewParameters[option.viewParameter]
+                                  }
+                                  onChange={setPresentationCandidateViewOption}
+                                  visualizationId={visualizationKey}
+                                  key={index} />
+                              ))
+                            }
+                            </div>
+                          </div>
+                        : null}
                     </section>
                     <section className="modal-column">
                       <h4>How to color your categories ?</h4>

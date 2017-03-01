@@ -15,8 +15,19 @@ describe('visualization types models', () => {
         done();
       });
 
-      it('should have slide parameters', (done) => {
-        expect(model).to.have.property('slideParameters');
+      it('should have default view parameters', (done) => {
+        expect(model).to.have.property('defaultViewParameters');
+        done();
+      });
+
+      it('should display all view options consistently', (done) => {
+        if (model.viewOptions) {
+          model.viewOptions.forEach(option => {
+            expect(option).to.have.property('label');
+            expect(option).to.have.property('viewParameter');
+            expect(option).to.have.property('optionType');
+          });
+        }
         done();
       });
 
