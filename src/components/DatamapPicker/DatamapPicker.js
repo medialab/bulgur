@@ -35,6 +35,9 @@ class DatamapPicker extends React.Component {
     const bindSelect = select => {
       this.select = select;
     };
+    if (!visualization.dataProfile) {
+      return null;
+    }
     return (
       <li
         key={parameterKey}
@@ -64,7 +67,7 @@ class DatamapPicker extends React.Component {
               }).map(field => (
                 {
                   value: field.propertyName,
-                  label: field.propertyName
+                  label: (<span>{field.propertyName} <span className="data-field-coverage" title="data field coverage">({field.coverage.covered}/{field.coverage.total})</span></span>)
                 }
               ))
             }
