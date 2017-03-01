@@ -15,6 +15,7 @@ import DropZone from '../../../components/DropZone/DropZone';
 import BigSelect from '../../../components/BigSelect/BigSelect';
 import HelpPin from '../../../components/HelpPin/HelpPin';
 import ViewOptionPicker from '../../../components/ViewOptionPicker/ViewOptionPicker';
+import Toaster from '../../../components/Toaster/Toaster';
 
 import './ConfigurationDialog.scss';
 
@@ -313,11 +314,10 @@ const ConfigurationDialogLayout = ({
               </section>
             </section>
         }
-          {
-            fetchUserFileStatus ?
-              <div style={{background: 'red', color: 'white'}}>{fetchUserFileStatus}</div>
-            : null
-          }
+
+          <Toaster
+            status={fetchUserFileStatus ? 'error' : undefined}
+            log={fetchUserFileStatus} />
         </section>
         {presentationCandidate && presentationCandidate.datasets && Object.keys(presentationCandidate.datasets).length > 0 ?
           <section className="modal-row">
