@@ -1,11 +1,11 @@
 import {expect} from 'chai';
 
 import {
-  validateFileExtension
+  validateFileExtensionForVisType
 } from './fileLoader';
 
 describe('fileLoader helpers', () => {
-  describe('validateFileExtension', () => {
+  describe('validateFileExtensionForVisType', () => {
     const visualizationModel = {
       acceptedFileExtensions: ['csv', 'tsv', 'dsv']
     };
@@ -14,7 +14,7 @@ describe('fileLoader helpers', () => {
 
     it('should accept valid extensions', (done) => {
       validFileNames.forEach(fileName => {
-        const valid = validateFileExtension(fileName, visualizationModel);
+        const valid = validateFileExtensionForVisType(fileName, visualizationModel);
         return expect(valid).to.be.true;
       });
       done();
@@ -22,7 +22,7 @@ describe('fileLoader helpers', () => {
 
     it('should not accept invalid extensions', (done) => {
       invalidFileNames.forEach(fileName => {
-        const valid = validateFileExtension(fileName, visualizationModel);
+        const valid = validateFileExtensionForVisType(fileName, visualizationModel);
         return expect(valid).to.be.false;
       });
       done();

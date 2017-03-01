@@ -70,6 +70,7 @@ class ConfigurationDialogContainer extends Component {
     this.props.actions.closePresentationCandidateModal();
   }
 
+  // todo : put in fileLoader helper
   validateFileExtension (file = {name: ''}) {
     const fileName = typeof file === 'string' ? file : file.name;
     const extension = fileName.split('.').pop();

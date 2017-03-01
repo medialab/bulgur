@@ -28,7 +28,7 @@ export function loadExampleFile(fileName) {
  * @param {object} visualizationModel - the model of the visualization to validate the filename against
  * @return {boolean} isValid - whether the filename is valid
  */
-export function validateFileExtension (fileName = '', visualizationModel) {
+export function validateFileExtensionForVisType (fileName = '', visualizationModel) {
   const fileExtension = fileName.split('.').pop();
   return visualizationModel.acceptedFileExtensions.find(ext => ext === fileExtension) !== undefined;
 }

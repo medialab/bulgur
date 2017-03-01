@@ -4,7 +4,7 @@
  */
 import React from 'react';
 
-// import {validateFileExtension} from '../../../helpers/fileLoader';
+import {validateFileExtensionForVisType} from '../../../helpers/fileLoader';
 
 import Textarea from 'react-textarea-autosize';
 
@@ -341,7 +341,7 @@ const ConfigurationDialogLayout = ({
               ...type,
               label: type.id,
               icon: require('../assets/bulgur-vistype-' + type.id + '.svg'),
-              possible: validateFileExtension(datasetFileName, visualizationTypesModels[type.id])
+              possible: validateFileExtensionForVisType(datasetFileName, visualizationTypesModels[type.id])
             }));
             return (
               <section key={visualizationKey}>
