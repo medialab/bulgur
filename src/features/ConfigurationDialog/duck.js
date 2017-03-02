@@ -400,7 +400,7 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
         }
       }
       let dataMap = {...visualizationTypesModels[visualizationType].dataMap};
-      const viewOptions = [...visualizationTypesModels[visualizationType].viewOptions];
+      const viewOptions = visualizationTypesModels[visualizationType].viewOptions && [...visualizationTypesModels[visualizationType].viewOptions];
 
       // analyze the data to produce a datamap for the visualization
       let dataProfile;
