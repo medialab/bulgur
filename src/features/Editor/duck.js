@@ -323,6 +323,7 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
             viewParameters: {
               ...viewParameters,
               shownCategories,
+              flattenedDataMap: dataMap,
               colorsMap
             },
             data
@@ -442,6 +443,13 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
                   ...state.activeViews[action.visualizationId].dataMap[action.collectionId][action.parameterId],
                   mappedField: action.propertyName
                 }
+              }
+            },
+            flattenedDataMap: {
+              ...state.activeViews[action.visualizationId].flattenedDataMap,
+              [action.collectionId]: {
+                ...state.activeViews[action.visualizationId].flattenedDataMap[action.collectionId],
+                [action.parameterId]: action.propertyName
               }
             }
           }

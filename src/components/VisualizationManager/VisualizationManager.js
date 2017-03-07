@@ -31,13 +31,15 @@ class VisualizationManager extends Component {
   componentWillReceiveProps(nextProps) {
     if (
     this.props.data !== nextProps.data
-    || JSON.stringify(this.props.dataMap) !== JSON.stringify(nextProps.dataMap)
+    || this.props.dataMap !== nextProps.dataMap
     ) {
       this.updateData(nextProps);
     }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+    // console.log('data is different', this.state.data !== nextState.data);
+    // console.log('view parameters are different', this.props.viewParameters !== nextProps.viewParameters);
     return this.state.data !== nextState.data
     || this.props.viewParameters !== nextProps.viewParameters;
   }
@@ -55,6 +57,7 @@ class VisualizationManager extends Component {
       dataMap,
       visualizationType
     } = props;
+
 
     switch (visualizationType) {
       case 'map':
@@ -88,6 +91,7 @@ class VisualizationManager extends Component {
     const bindVisualization = visualization => {
       this.visualization = visualization;
     };
+    // console.log('re render');
     if (data) {
        switch (visualizationType) {
           case 'map':

@@ -464,6 +464,20 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
             };
           }, newcolorsMap);
       }
+      // flatten datamap fields (todo: refactor as helper)
+      const flattenedDataMap = Object.keys(dataMap).reduce((result, collectionId) => ({
+                ...result,
+                [collectionId]: Object.keys(dataMap[collectionId]).reduce((propsMap, parameterId) => {
+                  const parameter = dataMap[collectionId][parameterId];
+                  if (parameter.mappedField) {
+                    return {
+                      ...propsMap,
+                      [parameterId]: parameter.mappedField
+                    };
+                  }
+                  return propsMap;
+                }, {})
+              }), {});
       return {
         ...state,
         presentationCandidate: {
@@ -477,9 +491,14 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
               data,
               dataProfile,
               dataMap,
+              flattenedDataMap,
               datasets: [firstDatasetId],
               colorsMap: newcolorsMap,
-              viewParameters: {...visualizationTypesModels[visualizationType].defaultViewParameters},
+              viewParameters: {
+                ...visualizationTypesModels[visualizationType].defaultViewParameters,
+                colorsMap: newcolorsMap,
+                dataMap: flattenedDataMap
+              },
               viewOptions
             }
           }
@@ -491,6 +510,28 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
         const dataset = state.presentationCandidate.visualizations[action.visualizationId].data[action.collectionId];
         newcolorsMap[action.collectionId] = generateColorsMap(dataset, action.propertyName);
       }
+     const visualizationChanges = {
+        // update colorsMap
+        colorsMap: newcolorsMap || state.presentationCandidate.visualizations[action.visualizationId].colorsMap,
+        // updatedatamap
+        dataMap: {
+          ...state.presentationCandidate.visualizations[action.visualizationId].dataMap,
+          [action.collectionId]: {
+            ...state.presentationCandidate.visualizations[action.visualizationId].dataMap[action.collectionId],
+            [action.parameterId]: {
+              ...state.presentationCandidate.visualizations[action.visualizationId].dataMap[action.collectionId][action.parameterId],
+              mappedField: action.propertyName
+            }
+          }
+        },
+        flattenedDataMap: {
+          ...state.presentationCandidate.visualizations[action.visualizationId].flattenedDataMap,
+          [action.collectionId]: {
+            ...state.presentationCandidate.visualizations[action.visualizationId].flattenedDataMap[action.collectionId],
+            [action.parameterId]: action.propertyName
+          }
+        }
+      };
      return {
         ...state,
         presentationCandidate: {
@@ -499,18 +540,10 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
             ...state.presentationCandidate.visualizations,
             [action.visualizationId]: {
               ...state.presentationCandidate.visualizations[action.visualizationId],
-              // update colorsMap
-              colorsMap: newcolorsMap || state.presentationCandidate.visualizations[action.visualizationId].colorsMap,
-              // updatedatamap
-              dataMap: {
-                ...state.presentationCandidate.visualizations[action.visualizationId].dataMap,
-                [action.collectionId]: {
-                  ...state.presentationCandidate.visualizations[action.visualizationId].dataMap[action.collectionId],
-                  [action.parameterId]: {
-                    ...state.presentationCandidate.visualizations[action.visualizationId].dataMap[action.collectionId][action.parameterId],
-                    mappedField: action.propertyName
-                  }
-                }
+              ...visualizationChanges,
+              viewParameters: {
+                ...state.presentationCandidate.visualizations[action.visualizationId].viewParameters,
+                ...visualizationChanges
               }
             }
           }

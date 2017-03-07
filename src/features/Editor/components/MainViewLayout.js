@@ -53,25 +53,11 @@ const MainViewLayout = ({
   const setVisualization = (view, id) => {
     const onChange = (event) => onUserViewChange(id, event);
     const data = activePresentation.visualizations[id].data;
-    // flatten datamap fields (todo: refactor as helper)
-    const dataMap = Object.keys(view.dataMap).reduce((result, collectionId) => ({
-      ...result,
-      [collectionId]: Object.keys(view.dataMap[collectionId]).reduce((propsMap, parameterId) => {
-        const parameter = view.dataMap[collectionId][parameterId];
-        if (parameter.mappedField) {
-          return {
-            ...propsMap,
-            [parameterId]: parameter.mappedField
-          };
-        }
-        return propsMap;
-      }, {})
-    }), {});
     return (
       <VisualizationManager
         visualizationType={view.metadata.visualizationType}
         data={data}
-        dataMap={dataMap}
+        dataMap={view.flattenedDataMap}
         viewParameters={view.viewParameters}
         onUserChange={onChange} />
     );

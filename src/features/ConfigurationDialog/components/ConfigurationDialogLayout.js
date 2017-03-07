@@ -397,7 +397,6 @@ const ConfigurationDialogLayout = ({
                     visualization.dataMap ?
                       <VisualizationPreviewContainer
                         visualization={visualization}
-                        visualizationTypesModels={visualizationTypesModels}
                         visualizationKey={visualizationKey}
                         hasSlides={hasSlides} />
                     : null}

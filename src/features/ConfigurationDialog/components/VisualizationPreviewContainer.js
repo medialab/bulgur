@@ -40,32 +40,13 @@ export default class VisualizationPreviewContainer extends Component {
   render() {
     const {
       visualization,
-      visualizationTypesModels,
       visualizationKey,
       hasSlides
     } = this.props;
     const setIsSpatializing = () => this.props.actions.setVisualizationIsSpatializing(visualizationKey);
     const isSpatializing = visualization.isSpatializing;
 
-    const baseViewParameters = visualization.viewParameters || visualizationTypesModels[visualization.metadata.visualizationType].defaultViewParameters;
-    const viewParameters = {
-      ...baseViewParameters,
-      colorsMap: visualization.colorsMap
-    };
-    // flatten datamap fields (todo: refactor as helper)
-    const dataMap = Object.keys(visualization.dataMap).reduce((result, collectionId) => ({
-      ...result,
-      [collectionId]: Object.keys(visualization.dataMap[collectionId]).reduce((propsMap, parameterId) => {
-        const parameter = visualization.dataMap[collectionId][parameterId];
-        if (parameter.mappedField) {
-          return {
-            ...propsMap,
-            [parameterId]: parameter.mappedField
-          };
-        }
-        return propsMap;
-      }, {})
-    }), {});
+    const viewParameters = visualization.viewParameters;
     const onChange = e => this.props.actions.setPreviewViewParameters(visualizationKey, e.viewParameters);
 
     const bindVisualizationRef = (vis) => {
@@ -76,7 +57,7 @@ export default class VisualizationPreviewContainer extends Component {
         <VisualizationManager
           visualizationType={visualization.metadata.visualizationType}
           data={visualization.data}
-          dataMap={dataMap}
+          dataMap={visualization.flattenedDataMap}
           viewParameters={viewParameters}
           isSpatializing={isSpatializing}
           ref={bindVisualizationRef}
