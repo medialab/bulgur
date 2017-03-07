@@ -114,7 +114,8 @@
     /*
      * DIRTY HACKS
      */
-    .slide-caption-container .nav-container .quick-nav li{
+    .slide-caption-container .nav-container .quick-nav li
+    {
         margin-left: $gutter-medium * 1.5;
     }
 }

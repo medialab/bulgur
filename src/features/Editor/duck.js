@@ -299,6 +299,12 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
         shownCategories = Object.keys(visualization.colorsMap).reduce((currentObject, collectionId) => ({
           ...currentObject,
           [collectionId]: Object.keys(visualization.colorsMap[collectionId])
+                          .map(key => {
+                            if (!isNaN(+key)) {
+                              return +key;
+                            }
+                            return key;
+                          })
         }), {});
         switch (visualization.metadata.visualizationType) {
           case 'map':
@@ -418,6 +424,12 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
         shownCategories = Object.keys(newcolorsMap).reduce((result, thatCollectionId) => ({
           ...result,
           [thatCollectionId]: Object.keys(newcolorsMap[thatCollectionId])
+                              .map(key => {
+                                if (!isNaN(+key)) {
+                                  return +key;
+                                }
+                                return key;
+                              })
         }), {});
       }
       return {
@@ -460,6 +472,12 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
               shownCategories: {
                 ...state.activeViews[action.visualizationId].viewParameters.shownCategories,
                 [action.collectionId]: action.shownCategories
+                                        .map(key => {
+                                          if (!isNaN(+key)) {
+                                            return +key;
+                                          }
+                                          return key;
+                                        })
               }
             }
           }
