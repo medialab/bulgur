@@ -38,8 +38,6 @@ class VisualizationManager extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    // console.log('data is different', this.state.data !== nextState.data);
-    // console.log('view parameters are different', this.props.viewParameters !== nextProps.viewParameters);
     return this.state.data !== nextState.data
     || this.props.viewParameters !== nextProps.viewParameters;
   }
@@ -91,7 +89,6 @@ class VisualizationManager extends Component {
     const bindVisualization = visualization => {
       this.visualization = visualization;
     };
-    // console.log('re render');
     if (data) {
        switch (visualizationType) {
           case 'map':

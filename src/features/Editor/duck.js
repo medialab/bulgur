@@ -366,6 +366,7 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
             ...state.activeViews[id],
             // update data map
             dataMap: action.slide.views[id].dataMap,
+            flattenedDataMap: action.slide.views[id].viewParameters.flattenedDataMap,
             // updated view parameters
             viewParameters: action.slide.views[id].viewParameters
           }
@@ -432,7 +433,25 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
               ...state.activeViews[action.visualizationId].viewParameters,
               // update colorsMap
               colorsMap: newcolorsMap || state.activeViews[action.visualizationId].viewParameters.colorsMap,
-              shownCategories: shownCategories || state.activeViews[action.visualizationId].viewParameters.shownCategories
+              shownCategories: shownCategories || state.activeViews[action.visualizationId].viewParameters.shownCategories,
+              // update datamap
+              dataMap: {
+                ...state.activeViews[action.visualizationId].dataMap,
+                [action.collectionId]: {
+                  ...state.activeViews[action.visualizationId].dataMap[action.collectionId],
+                  [action.parameterId]: {
+                    ...state.activeViews[action.visualizationId].dataMap[action.collectionId][action.parameterId],
+                    mappedField: action.propertyName
+                  }
+                }
+              },
+              flattenedDataMap: {
+                ...state.activeViews[action.visualizationId].flattenedDataMap,
+                [action.collectionId]: {
+                  ...state.activeViews[action.visualizationId].flattenedDataMap[action.collectionId],
+                  [action.parameterId]: action.propertyName
+                }
+              }
             },
             // update datamap
             dataMap: {
