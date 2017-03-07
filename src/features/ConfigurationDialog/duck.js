@@ -55,6 +55,8 @@ const SET_PREVIEW_VIEW_PARAMETERS = '§Bulgur/ConfigurationDialog/SET_PREVIEW_VI
 const SET_PRESENTATION_CANDIDATE_COLOR = '§Bulgur/ConfigurationDialog/SET_PRESENTATION_CANDIDATE_COLOR';
 const TOGGLE_CANDIDATE_COLOR_EDITION = '§Bulgur/ConfigurationDialog/TOGGLE_CANDIDATE_COLOR_EDITION';
 const SET_DATA_SOURCE_TAB = '§Bulgur/ConfigurationDialog/SET_DATA_SOURCE_TAB';
+const SET_VISUALIZATION_IS_SPATIALIZING = '§Bulgur/ConfigurationDialog/SET_VISUALIZATION_IS_SPATIALIZING';
+const SET_VISUALIZATION_NODES_POSITIONS = '§Bulgur/ConfigurationDialog/SET_VISUALIZATION_NODES_POSITIONS';
 /*
  * Action creators
  */
@@ -245,6 +247,24 @@ export const toggleCandidateColorEdition = (visualizationId, collectionId, categ
   visualizationId,
   collectionId,
   category
+});
+/**
+ * @param {string} visualizationId - the uuid of the presentation's visualization for the isSpatializing toggling
+ * @param {boolean} isSpatializing - the value to set
+ */
+export const setVisualizationIsSpatializing = (visualizationId, isSpatializing) => ({
+  type: SET_VISUALIZATION_IS_SPATIALIZING,
+  visualizationId,
+  isSpatializing
+});
+/**
+ * @param {string} visualizationId - the uuid of the presentation's visualization for the isSpatializing toggling
+ * @param {array} nodes - the nodes to set
+ */
+export const setVisualizationNodesPosition = (visualizationId, nodes) => ({
+  type: SET_VISUALIZATION_NODES_POSITIONS,
+  visualizationId,
+  nodes
 });
 /**
  * @param {string} tab - the tab to set as active
@@ -546,6 +566,44 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
             [action.visualizationId]: {
               ...state.presentationCandidate.visualizations[action.visualizationId],
               viewParameters
+            }
+          }
+        }
+      };
+    case SET_VISUALIZATION_IS_SPATIALIZING:
+      return {
+        ...state,
+        presentationCandidate: {
+          ...state.presentationCandidate,
+          visualizations: {
+            ...state.presentationCandidate.visualizations,
+            [action.visualizationId]: {
+              ...state.presentationCandidate.visualizations[action.visualizationId],
+              isSpatializing: action.isSpatializing !== undefined ? action.isSpatializing : (!state.presentationCandidate.visualizations[action.visualizationId].isSpatializing || false)
+            }
+          }
+        }
+      };
+    case SET_VISUALIZATION_NODES_POSITIONS:
+      const nodes = action.nodes;
+      return {
+        ...state,
+        presentationCandidate: {
+          ...state.presentationCandidate,
+          visualizations: {
+            ...state.presentationCandidate.visualizations,
+            [action.visualizationId]: {
+              ...state.presentationCandidate.visualizations[action.visualizationId],
+              data: {
+                ...state.presentationCandidate.visualizations[action.visualizationId].data,
+                nodes: state.presentationCandidate.visualizations[action.visualizationId].data.nodes.map(node => {
+                  const nodeChanges = nodes.find(n2 => n2.id === node.id);
+                  return {
+                    ...node,
+                    ...nodeChanges
+                  };
+                })
+              }
             }
           }
         }

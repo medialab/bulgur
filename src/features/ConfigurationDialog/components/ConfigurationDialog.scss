@@ -247,6 +247,47 @@
         border: 1px solid $color-sec-stroke;
 
         flex: 1;
+
+        .spatialization-controls
+        {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: stretch;
+            position: relative;
+            #save-nodes,
+            #spatialize-nodes
+            {
+                cursor: pointer;
+                flex: 1;
+                padding: $gutter-medium;
+                transition: all $time-short ease;
+            }
+            #spatialize-nodes
+            {
+                @extend .important-item;
+                &:hover{
+                    @extend .important-item-intent;
+                }
+
+                &.active
+                {
+                    @extend .dangerous-item;
+                    &:hover{
+                        @extend .dangerous-item-intent;
+                    }
+                }
+            }
+            #save-nodes{
+                @extend .important-item;
+                &:hover{
+                    @extend .important-item-intent;
+                }
+
+                &:active{
+                    @extend .important-item-intent-active;
+                }
+            }
+        }
     }
 
     .modal-footer

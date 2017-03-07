@@ -207,7 +207,7 @@ const models = {
     defaultViewParameters: {
       cameraX: 0,
       cameraY: 0,
-      cameraRatio: 2,
+      cameraRatio: 5,
       cameraAngle: 0,
       labelThreshold: 7,
       minNodeSize: 1,

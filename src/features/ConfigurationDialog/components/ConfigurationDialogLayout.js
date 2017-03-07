@@ -8,7 +8,8 @@ import {validateFileExtensionForVisType} from '../../../helpers/fileLoader';
 
 import Textarea from 'react-textarea-autosize';
 
-import VisualizationManager from '../../../components/VisualizationManager/VisualizationManager';
+import VisualizationPreviewContainer from './VisualizationPreviewContainer';
+
 import ColorsMapPicker from '../../../components/ColorsMapPicker/ColorsMapPicker';
 import DatamapPicker from '../../../components/DatamapPicker/DatamapPicker';
 import DropZone from '../../../components/DropZone/DropZone';
@@ -18,46 +19,6 @@ import ViewOptionPicker from '../../../components/ViewOptionPicker/ViewOptionPic
 import Toaster from '../../../components/Toaster/Toaster';
 
 import './ConfigurationDialog.scss';
-
-/**
- * Renders a preview of the given visualization
- * @param {object} props - the props to render
- * @param {object} props.visualization - the definition of the visualization to preview
- * @param {object} props.models - the models to use in order to populate default view parameters
- * @param {function} props.updateParameters - the callback function to use for updating the state
- * @param {string} props.visualizationId - the id of the visualization to preview
- * @return {ReactElement} markup
- */
-const previewVisualization = (visualization, models, updateParameters, visualizationId) => {
-  const baseViewParameters = visualization.viewParameters || models[visualization.metadata.visualizationType].defaultViewParameters;
-  const viewParameters = {
-    ...baseViewParameters,
-    colorsMap: visualization.colorsMap
-  };
-  // flatten datamap fields (todo: refactor as helper)
-  const dataMap = Object.keys(visualization.dataMap).reduce((result, collectionId) => ({
-    ...result,
-    [collectionId]: Object.keys(visualization.dataMap[collectionId]).reduce((propsMap, parameterId) => {
-      const parameter = visualization.dataMap[collectionId][parameterId];
-      if (parameter.mappedField) {
-        return {
-          ...propsMap,
-          [parameterId]: parameter.mappedField
-        };
-      }
-      return propsMap;
-    }, {})
-  }), {});
-  const onChange = e => updateParameters(visualizationId, e.viewParameters);
-  return (
-    <VisualizationManager
-      visualizationType={visualization.metadata.visualizationType}
-      data={visualization.data}
-      dataMap={dataMap}
-      viewParameters={viewParameters}
-      onUserChange={onChange} />
-    );
-};
 
 /**
  * Renders the configuration dialog layout
@@ -96,7 +57,6 @@ const ConfigurationDialogLayout = ({
     setPresentationCandidateColor,
     applyPresentationCandidateConfiguration,
     setPresentationCandidateViewOption,
-    setPreviewViewParameters,
     setDataSourceTab
   },
   closePresentationCandidate,
@@ -436,9 +396,11 @@ const ConfigurationDialogLayout = ({
                     visualization.dataProfile &&
                     visualization.data &&
                     visualization.dataMap ?
-                      <section className="preview">
-                        {previewVisualization(visualization, visualizationTypesModels, setPreviewViewParameters, visualizationKey)}
-                      </section>
+                      <VisualizationPreviewContainer
+                        visualization={visualization}
+                        visualizationTypesModels={visualizationTypesModels}
+                        visualizationKey={visualizationKey}
+                        hasSlides={hasSlides} />
                     : null}
                     </section>
                   </section> : null}

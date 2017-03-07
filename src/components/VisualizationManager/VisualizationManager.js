@@ -21,6 +21,8 @@ class VisualizationManager extends Component {
     super(props);
     this.updateData = this.updateData.bind(this);
 
+    this.getNodesPositions = this.getNodesPositions.bind(this);
+
     this.state = {
       data: undefined
     };
@@ -38,6 +40,12 @@ class VisualizationManager extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     return this.state.data !== nextState.data
     || this.props.viewParameters !== nextProps.viewParameters;
+  }
+
+  getNodesPositions() {
+    if (this.visualization && this.visualization.getNodesPositions) {
+      return this.visualization.getNodesPositions();
+    }
   }
 
   updateData(props) {
@@ -70,11 +78,16 @@ class VisualizationManager extends Component {
     const {
       visualizationType,
       viewParameters,
+      isSpatializing = false,
       onUserChange
     } = this.props;
     const {
       data
     } = this.state;
+
+    const bindVisualization = visualization => {
+      this.visualization = visualization;
+    };
     if (data) {
        switch (visualizationType) {
           case 'map':
@@ -88,6 +101,8 @@ class VisualizationManager extends Component {
               allowUserViewChange
               data={data}
               onUserViewChange={onUserChange}
+              forceAtlasActive={isSpatializing}
+              ref={bindVisualization}
               viewParameters={viewParameters} />);
           case 'timeline':
             return (<Timeline
