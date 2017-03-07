@@ -19,7 +19,6 @@ import ViewOptionPicker from '../../../components/ViewOptionPicker/ViewOptionPic
 import Toaster from '../../../components/Toaster/Toaster';
 
 import './ConfigurationDialog.scss';
-
 /**
  * Renders the configuration dialog layout
  * @param {object} props - the props to render

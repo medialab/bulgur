@@ -250,40 +250,49 @@
 
         .spatialization-controls
         {
+            position: relative;
+
             display: flex;
+
             flex-flow: row nowrap;
             align-items: stretch;
-            position: relative;
             #save-nodes,
             #spatialize-nodes
             {
-                cursor: pointer;
-                flex: 1;
                 padding: $gutter-medium;
+
+                cursor: pointer;
                 transition: all $time-short ease;
+
+                flex: 1;
             }
             #spatialize-nodes
             {
                 @extend .important-item;
-                &:hover{
+                &:hover
+                {
                     @extend .important-item-intent;
                 }
 
                 &.active
                 {
                     @extend .dangerous-item;
-                    &:hover{
+                    &:hover
+                    {
                         @extend .dangerous-item-intent;
                     }
                 }
             }
-            #save-nodes{
+            #save-nodes
+            {
                 @extend .important-item;
-                &:hover{
+                &:hover
+                {
                     @extend .important-item-intent;
                 }
 
-                &:active{
+                &:active
+                {
                     @extend .important-item-intent-active;
                 }
             }
