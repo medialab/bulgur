@@ -56,7 +56,7 @@ const ColorsMapPicker = ({
             activeColor = color;
           }
           const onClick = () => toggleColorEdition(visualizationId, colorCollectionId, category);
-          const shown = shownCategories && shownCategories[colorCollectionId] ? shownCategories[colorCollectionId].indexOf(category) > -1 : true;
+          const shown = shownCategories && shownCategories[colorCollectionId] ? shownCategories[colorCollectionId].find(cat => cat === category) !== undefined : true;
           const onFilterClick = (e) => {
             e.stopPropagation();
             if (shownCategories && typeof setShownCategories === 'function') {
