@@ -31,6 +31,7 @@
   },
   "homepage": "https://github.com/medialab/bulgur#readme",
   "dependencies": {
+    "chroma": "0.0.1",
     "codemirror": "^5.19.0",
     "color-scheme": "0.0.5",
     "d3-dsv": "^1.0.3",

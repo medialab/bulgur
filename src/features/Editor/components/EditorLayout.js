@@ -99,7 +99,6 @@ const EditorLayout = ({
       setUiMode('edition');
     }
   };
-
   return (<div id={id} className={className}>
     {activePresentationId ?
       <div className={className}>

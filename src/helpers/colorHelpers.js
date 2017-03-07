@@ -1,4 +1,6 @@
 import ColorScheme from 'color-scheme';
+import {uniq} from 'lodash';
+import chroma from 'chroma-js';
 
 const scheme = new ColorScheme;
 
@@ -9,6 +11,8 @@ const scheme = new ColorScheme;
 export function generateColorsMap (collection = [], propertyName) {
   const palette = scheme.from_hue(21).scheme('triade').colors();
   let paletteIndex = 1;
+  const values = uniq(collection.map(obj => obj[propertyName]));
+  if (values.length < 12) {
    return collection.reduce((cMap, obj) => {
     const entry = obj[propertyName];
     if (cMap[entry] === undefined) {
@@ -19,4 +23,16 @@ export function generateColorsMap (collection = [], propertyName) {
    }, {
     default: '#' + palette[0]
    });
+  }
+ else {
+    const vLength = values.length;
+    const scale = chroma.scale(['red', 'blue']);
+    return values.reduce((pal, value, index) => ({
+      ...pal,
+      [value]: scale(index / vLength).hex()
+    })
+    , {
+      default: '#000000'
+    });
+  }
 }
