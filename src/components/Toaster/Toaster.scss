@@ -7,12 +7,16 @@
 
 .bulgur-toaster
 {
+    /*
+     * root component
+     */
     max-height: 0;
     margin: 0;
     padding: 0;
 
-    transition: all $time-short ease;
     text-align: center;
+
+    @extend .animated;
 
     &.success,
     &.error,

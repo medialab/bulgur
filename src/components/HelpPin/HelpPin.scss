@@ -7,11 +7,18 @@
 
 .bulgur-help-pin
 {
+    /*
+     * root component
+     */
     position: relative;
 
     overflow: visible;
+    // height is set in em here to be proportional to local font size
 
     height: 2em;
+    /*
+     * specific micro-components
+     */
     .pin-icon
     {
         font-size: .7em;
@@ -22,12 +29,13 @@
         height: 1.3em;
 
         cursor: pointer;
-        transition: all $time-short ease;
         text-align: center;
 
         color: #333;
         border: 1px solid #333;
         border-radius: 50%;
+
+        @extend .animated;
     }
     .pin-content-container
     {
@@ -47,12 +55,13 @@
         max-height: 0;
         padding: 0;
 
-        transition: all $time-short ease;
         text-align: left;
 
         opacity: .00001;
         color: $background-default;
         background: #333;
+
+        @extend .animated;
         a
         {
             color: inherit;

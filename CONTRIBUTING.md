@@ -67,10 +67,7 @@ Example :
 .bulgur-my-component-class
 {
     /*
-     * root component layout styling
-     */
-     /*
-     * root component display styling
+     * root component
      */
      font-size: $font-size-1;
     /*
@@ -97,9 +94,12 @@ Example :
 }
 ```
 
+
+Please also note that there's a `npm run comb` command available that formats and prettifies all scss files.
+
 ### Parametric design
 
-Please use, as much as possible, the scss parameters set in the `./src/parameters.scss` file. They are supposed to keep the project easily configurable in terms of UI/graphic design.
+Please use, as much as possible, the scss parameters and abstract classes set in the `./src/parameters.scss` file. They are supposed to keep the project easily configurable in terms of UI/graphic design and to reduce styling code complexity.
 
 
 

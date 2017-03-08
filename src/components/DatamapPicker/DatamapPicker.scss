@@ -7,17 +7,18 @@
 
 .bulgur-datamap-picker
 {
-    display: flex;
-
     padding: 0;
 
     border: #173e43;
+    /*
+     * root component
+     */
 
+    @extend .flex-stretched-row;
     @extend .interactive-item;
-    flex-flow: row nowrap;
-    align-items: stretch;
-
-
+    /*
+     * specific micro-components
+     */
     h5
     {
         display: flex;
@@ -34,13 +35,11 @@
     {
         position: relative;
 
-        display: flex;
-
         background: white;
 
+        @extend .flex-stretched-row;
         @extend .normal-item;
         flex: 1;
-        flex-flow: row nowrap;
         justify-content: space-between;
         justify-content: center;
     }
@@ -49,7 +48,6 @@
         @extend .important-item-active;
     }
 
-    // components
     .Select
     {
         flex: 5;

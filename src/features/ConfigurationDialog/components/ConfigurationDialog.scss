@@ -7,6 +7,9 @@
 
 .bulgur-configuration-dialog-layout
 {
+    /*
+     * root component
+     */
     font-family: $main-font-stack;
 
     display: flex;
@@ -18,7 +21,9 @@
             user-select: none;
 
          -o-user-select: none;
-    // components
+    /*
+     * specific micro-components
+     */
     ul
     {
         padding: 0;
@@ -50,11 +55,11 @@
 
         resize: none;
         cursor: text;
-        transition: all $time-short ease;
 
         border: none;
         outline: none;
 
+        @extend .animated;
         @extend .interactive-item;
 
         &:hover
@@ -86,7 +91,9 @@
     {
         margin-top: $gutter-medium;
     }
-
+    /*
+     * secondary layout components
+     */
     .sample-files-container
     {
         display: flex;
@@ -96,14 +103,11 @@
 
         .sample-file
         {
-            display: flex;
-
             min-width: 30%;
             padding: 0 $gutter-medium $gutter-medium 0;
 
+            @extend .flex-stretched-column;
             flex: 1;
-            flex-flow: column nowrap;
-            align-items: stretch;
             .sample-file-content
             {
                 display: flex;
@@ -157,13 +161,11 @@
     }
     .data-source-type-toggler
     {
-        display: flex;
-
         margin: 0;
         padding: 0;
 
-        flex-flow: row nowrap;
-        align-items: stretch;
+        @extend .flex-stretched-row;
+
         li
         {
             padding: 0;
@@ -172,8 +174,8 @@
             list-style-type: none;
 
             cursor: pointer;
-            transition: all $time-short ease;
 
+            @extend .animated;
             flex: 1;
             @extend .important-item;
             &:hover
@@ -200,10 +202,7 @@
 
         .modal-column
         {
-            display: flex;
-
-            flex-flow: column nowrap;
-            align-items: stretch;
+            @extend .flex-stretched-column;
             flex: 1;
             &:not(:first-of-type)
             {
@@ -252,18 +251,16 @@
         {
             position: relative;
 
-            display: flex;
+            @extend .flex-stretched-row;
 
-            flex-flow: row nowrap;
-            align-items: stretch;
             #save-nodes,
             #spatialize-nodes
             {
                 padding: $gutter-medium;
 
                 cursor: pointer;
-                transition: all $time-short ease;
 
+                @extend .animated;
                 flex: 1;
             }
             #spatialize-nodes
@@ -301,10 +298,7 @@
 
     .modal-footer
     {
-        display: flex;
-
-        flex-flow: row nowrap;
-        align-items: stretch;
+        @extend .flex-stretched-row;
         .valid-btn
         {
             font-size: $font-size-3;

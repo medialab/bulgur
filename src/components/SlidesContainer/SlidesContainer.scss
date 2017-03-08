@@ -7,11 +7,17 @@
 
 .bulgur-slides-container
 {
+    /*
+     * root component
+     */
     margin: 0;
     padding: 0;
     padding-left: $gutter-medium;
 
-    transition: all $time-short ease;
+    @extend .animated;
+    /*
+     * specific micro-components
+     */
     li
     {
         min-height: 3rem;
@@ -19,6 +25,9 @@
 
         list-style-type: none;
     }
+    /*
+     * secondary layout components
+     */
     .bulgur-slide
     {
         display: flex;
@@ -48,18 +57,15 @@
             }
             h3
             {
-                display: flex;
-
                 margin: 0;
                 margin-top: 0;
                 padding: 0;
 
-                transition: all $time-short ease;
-
                 border-bottom: 1px solid $color-sec-stroke;
 
-                flex-flow: row nowrap;
-                align-items: stretch;
+                @extend .flex-stretched-row;
+                @extend .animated;
+
                 input
                 {
                     border: none;
@@ -89,10 +95,7 @@
             {
                 font-size: $font-size-2;
 
-                display: flex;
-
-                flex-flow: row nowrap;
-                align-items: stretch;
+                @extend .flex-stretched-row;
                 justify-content: space-between;
 
                 button:hover

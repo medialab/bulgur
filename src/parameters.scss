@@ -45,13 +45,44 @@ $legend-width: 20rem;
 @import './mixins';
 
 // abstract classes
-// supposed to use in other scss definition
+// supposed to be used in other scss definition
 // with @extend operator
 .text-editable
 {
     font-style: $editable-font-stack;
 
     cursor: text;
+}
+
+.animated
+{
+    transition: all $time-short ease;
+}
+
+.absolute-stretched
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+}
+
+.flex-stretched-column
+{
+    display: flex;
+
+    flex-flow: column nowrap;
+    align-items: stretch;
+}
+
+.flex-stretched-row
+{
+    display: flex;
+
+    flex-flow: row nowrap;
+    align-items: stretch;
 }
 
 .normal-item

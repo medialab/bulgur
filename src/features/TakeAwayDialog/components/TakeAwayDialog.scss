@@ -8,17 +8,17 @@
 
 .bulgur-take-away-dialog-layout
 {
+    /*
+     * root component
+     */
     font-family: $main-font-stack;
-
-    display: flex;
 
     -webkit-user-select: none; /* Chrome/Safari */
        -moz-user-select: none; /* Firefox */
         -ms-user-select: none; /* IE10+ */
             user-select: none;
 
-    flex-flow: column nowrap;
-    align-items: stretch;
+    @extend .flex-stretched-column;
          -o-user-select: none;
     .modal-content
     {
@@ -26,6 +26,9 @@
 
         flex: 1;
     }
+    /*
+     * specific micro-components
+     */
     // for iframes code
     pre
     {
@@ -56,6 +59,21 @@
             margin-right: $gutter-medium;
         }
     }
+    // bulgur-help-pin
+    button .bulgur-help-pin
+    {
+        margin-left: $gutter-small;
+
+        color: $background-default;
+        .pin-icon
+        {
+            color: $background-default;
+            border: 1px solid $background-default;
+        }
+    }
+    /*
+     * secondary layout components
+     */
     .sync-section
     {
         display: flex;
@@ -114,7 +132,6 @@
                 {
                     @extend .important-item-intent;
                 }
-
                 &.update-from
                 {
                     @extend .dangerous-item;
@@ -124,19 +141,6 @@
                     }
                 }
             }
-        }
-    }
-
-    // bulgur-help-in
-    button .bulgur-help-pin
-    {
-        margin-left: $gutter-small;
-
-        color: $background-default;
-        .pin-icon
-        {
-            color: $background-default;
-            border: 1px solid $background-default;
         }
     }
 }

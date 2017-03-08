@@ -6,11 +6,13 @@
 @import '../../parameters.scss';
 .bulgur-settings-pannel
 {
+    /*
+     * root component
+     */
     position: absolute;
     right: 0;
     bottom: 0;
 
-    display: flex;
     overflow: hidden;
 
     width: $legend-width;
@@ -22,77 +24,18 @@
 
     background: transparent;
 
-    align-items: stretch;
-    .settings-wrapper
-    {
-        display: flex;
+    @extend .flex-stretched-column;
 
-        pointer-events: none;
-
-        background: transparent;
-
-        flex: 1;
-        flex-flow: column nowrap;
-        align-items: stretch;
-        .settings-container
-        {
-            position: relative;
-
-            flex: 1;
-            .settings-contents
-            {
-                position: absolute;
-                top: 0;
-                left: $legend-width;
-
-                display: flex;
-
-                width: $legend-width;
-                height: 100%;
-
-                transition: all $time-short ease;
-
-                border-left: 1px solid $color-sec-stroke;
-
-                @extend .normal-item;
-                flex-flow: column nowrap;
-                align-items: stretch;
-                &.visible
-                {
-                    left: 0;
-
-                    pointer-events: all;
-                }
-            }
-        }
-        .open-pannel
-        {
-            padding: $gutter-medium;
-
-            text-align: left;
-            pointer-events: all;
-
-            @extend .interactive-item;
-            &:hover
-            {
-                @extend .interactive-item-intent;
-            }
-            &.active
-            {
-                @extend .important-item-active;
-            }
-        }
-    }
-    // components
+    /*
+     * specific micro-components
+     */
     .settings-type-toggler
     {
-        display: flex;
-
         margin: 0;
         padding: 0;
 
-        flex-flow: row nowrap;
-        align-items: stretch;
+        @extend .flex-stretched-row;
+
         li
         {
             padding: 0;
@@ -101,8 +44,8 @@
             list-style-type: none;
 
             cursor: pointer;
-            transition: all $time-short ease;
 
+            @extend .animated;
             flex: 1;
             @extend .important-item;
             &:hover
@@ -124,19 +67,16 @@
 
         overflow: visible;
 
-        transition: all $time-short ease;
-
+        @extend .animated;
         flex: 1;
         .tab
         {
-            position: absolute;
-            top: 0;
-
             overflow: auto;
 
             width: $legend-width;
-            height: 100%;
             padding: $gutter-medium;
+
+            @extend .absolute-stretched;
             h4
             {
                 margin: $gutter-medium 0 $gutter-medium 0;
@@ -169,6 +109,62 @@
         &.parameters-active
         {
             left: -$legend-width;
+        }
+    }
+    /*
+     * secondary layout components
+     */
+    .settings-wrapper
+    {
+        pointer-events: none;
+
+        background: transparent;
+
+        @extend .flex-stretched-column;
+        flex: 1;
+        .settings-container
+        {
+            position: relative;
+
+            flex: 1;
+            .settings-contents
+            {
+                position: absolute;
+                top: 0;
+                left: $legend-width;
+
+                width: $legend-width;
+                height: 100%;
+
+                border-left: 1px solid $color-sec-stroke;
+
+                @extend .flex-stretched-column;
+                @extend .animated;
+                @extend .normal-item;
+                &.visible
+                {
+                    left: 0;
+
+                    pointer-events: all;
+                }
+            }
+        }
+        .open-pannel
+        {
+            padding: $gutter-medium;
+
+            text-align: left;
+            pointer-events: all;
+
+            @extend .interactive-item;
+            &:hover
+            {
+                @extend .interactive-item-intent;
+            }
+            &.active
+            {
+                @extend .important-item-active;
+            }
         }
     }
 }

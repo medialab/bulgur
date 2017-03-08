@@ -11,12 +11,18 @@
 
 .bulgur-aside-view
 {
+    /*
+     * root component
+     */
     display: flex;
     overflow: hidden;
     flex-direction: column;
 
     border-right: 1px solid $color-sec-stroke;
     background: $color-sec-bg;
+    /*
+     * secondary layout components
+     */
     .aside-header
     {
         display: flex;

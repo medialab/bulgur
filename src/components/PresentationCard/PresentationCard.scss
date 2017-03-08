@@ -8,17 +8,22 @@
 
 .bulgur-presentation-card
 {
+    /*
+     * root component
+     */
     padding: $gutter-medium;
 
     list-style-type: none;
 
-    transition: all $time-short ease;
-
+    @extend .animated;
     @extend .primary-item;
     &:hover
     {
         @extend .primary-item-intent;
     }
+    /*
+     * secondary layout components
+     */
     .card-header,
     .card-body
     {

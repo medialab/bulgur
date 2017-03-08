@@ -108,7 +108,7 @@ html
         max-height: 1000rem;
         padding: 0 $gutter-large $gutter-large $gutter-large;
 
-        transition: all $time-short ease;
+        @extend .animated;
         &.empty
         {
             max-height: 0;

@@ -7,18 +7,20 @@
 
 .bulgur-footer
 {
-    display: flex;
-
     padding: 0;
 
     border-top: 1px solid $color-sec-stroke;
-    // background: $color-sec-bg;
+    /*
+     * root component
+     */
 
+    @extend .flex-stretched-row;
     @extend .primary-item;
-    flex-flow: row nowrap;
-    align-items: stretch;
     justify-content: space-between;
 
+    /*
+     * secondary layout components
+     */
     .left-group
     {
         padding: $gutter-medium;
@@ -28,12 +30,10 @@
 
     .right-group
     {
-        display: flex;
-
         width: $legend-width;
 
-        flex-flow: row nowrap;
-        align-items: stretch;
+        @extend .flex-stretched-row;
+
         button
         {
             padding: $gutter-medium;

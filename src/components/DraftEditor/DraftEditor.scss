@@ -7,16 +7,24 @@
 
 .bulgur-draft-editor
 {
-    font-size: 1rem;
-
-    display: flex;
+    /*
+     * root component
+     */
+    font-size: $font-size-2;
 
     padding: $gutter-small;
 
-    transition: all $time-short ease;
+    @extend .flex-stretched-column;
+    @extend .animated;
 
-    flex-flow: column nowrap;
-    align-items: stretch;
+    &.focused .DraftEditor-root,
+    &:hover .DraftEditor-root
+    {
+        background: $background-intent;
+    }
+    /*
+     * secondary layout components
+     */
     .DraftEditor-root
     {
         font-family: $editable-font-stack;
@@ -68,10 +76,5 @@
                 }
             }
         }
-    }
-    &.focused .DraftEditor-root,
-    &:hover .DraftEditor-root
-    {
-        background: $background-intent;
     }
 }

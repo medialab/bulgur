@@ -7,18 +7,41 @@
 
 .bulgur-ColorPicker
 {
+    /*
+     * root component
+     */
     margin-bottom: $gutter-medium;
+    /*
+     * specific micro-components
+     */
+    #save-color
+    {
+        @extend .important-item;
+        &:hover
+        {
+            @extend .important-item-intent;
+        }
+    }
+    #cancel
+    {
+        @extend .dangerous-item;
+        &:hover
+        {
+            @extend .dangerous-item-intent;
+        }
+    }
+    /*
+     * secondary layout components
+     */
     .slider-picker
     {
-        border: 1px solid $color-sec-stroke;
         padding: $gutter-medium;
+
+        border: 1px solid $color-sec-stroke;
     }
     .buttons-container
     {
-        display: flex;
-
-        flex-flow: row nowrap;
-        align-items: stretch;
+        @extend .flex-stretched-row;
         #save-color,
         #cancel
         {
@@ -26,27 +49,14 @@
 
             flex: 1;
         }
-        #save-color
-        {
-            @extend .important-item;
-            &:hover
-            {
-                @extend .important-item-intent;
-            }
-        }
-        #cancel
-        {
-            @extend .dangerous-item;
-            &:hover
-            {
-                @extend .dangerous-item-intent;
-            }
-        }
     }
 }
 
 .bulgur-colors-map-picker
 {
+    /*
+     * secondary layout components
+     */
     .colors-map-group
     {
         padding: $gutter-small;
@@ -55,8 +65,8 @@
             display: flex;
 
             cursor: pointer;
-            transition: all $time-short ease;
 
+            @extend .animated;
             flex-flow: column nowrap;
             .twitter-picker
             {
@@ -66,8 +76,6 @@
             {
                 font-size: $font-size-2;
 
-                display: flex;
-
                 margin-bottom: $gutter-small;
                 padding: $gutter-small;
 
@@ -75,8 +83,8 @@
 
                 border: 1px solid $color-sec-stroke;
 
-                flex-flow: row nowrap;
-                align-items: stretch;
+                @extend .flex-stretched-row;
+
                 .color
                 {
                     position: relative;

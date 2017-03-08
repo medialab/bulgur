@@ -11,10 +11,15 @@
 
 .bulgur-main-view
 {
+    /*
+     * root component
+     */
     display: flex;
 
     flex-flow: column nowrap;
-
+    /*
+     * secondary layout components
+     */
     .visualizations-row
     {
         position: relative;
@@ -51,8 +56,6 @@
     {
         position: relative;
 
-        display: flex;
-
         max-height: 40%;
         padding: $gutter-medium;
         padding-top: 0;
@@ -61,21 +64,19 @@
         border-top: 1px solid $color-sec-stroke;
         background: $color-sec-bg;
 
+        @extend .flex-stretched-column;
         flex: 1;
-        flex-flow: column nowrap;
-        align-items: stretch;
 
         .caption-header
         {
-            display: flex;
             overflow: hidden;
 
             padding-bottom: $gutter-small;
 
             border-bottom: 1px solid $color-sec-stroke;
 
-            align-items: stretch;
-            flex-flow: row nowrap;
+            @extend .flex-stretched-row;
+
             h1
             {
                 margin: 0;
@@ -106,13 +107,10 @@
             flex-grow: row nowrap;
             .editor-areas-container
             {
-                display: flex;
-
                 margin-right: $gutter-small;
 
+                @extend .flex-stretched-column;
                 flex: 8;
-                flex-flow: column nowrap;
-                align-items: stretch;
             }
 
             .editor-helpers li
@@ -143,25 +141,22 @@
 
     .view-operations
     {
-        display: flex;
         overflow: hidden;
 
         width: $legend-width;
 
-        transition: all $time-short ease;
-
-        flex-flow: row nowrap;
-        align-items: stretch;
+        @extend .flex-stretched-row;
+        @extend .animated;
 
         button
         {
             padding: $gutter-medium;
 
             cursor: default;
-            transition: all $time-short ease;
 
             opacity: .1;
 
+            @extend .animated;
             flex: 1;
             @extend .interactive-item;
             &:hover
