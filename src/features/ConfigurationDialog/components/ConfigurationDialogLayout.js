@@ -380,7 +380,7 @@ const ConfigurationDialogLayout = ({
                         {// colors edition
                       visualization.colorsMap ?
                         <ColorsMapPicker
-                          colorsMap={visualization.colorsMap}
+                          colorsMap={visualization.viewParameters.colorsMap}
                           visualizationId={visualizationKey}
                           editedColor={editedColor}
                           changeColor={setPresentationCandidateColor}
