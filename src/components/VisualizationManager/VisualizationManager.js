@@ -57,8 +57,6 @@ class VisualizationManager extends Component {
       viewParameters,
       visualizationType
     } = props;
-
-
     switch (visualizationType) {
       case 'map':
         visData = mapMapData(data, viewParameters.flattenedDataMap);

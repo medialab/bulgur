@@ -497,7 +497,8 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
               viewParameters: {
                 ...visualizationTypesModels[visualizationType].defaultViewParameters,
                 colorsMap: newcolorsMap,
-                dataMap: flattenedDataMap
+                dataMap,
+                flattenedDataMap
               },
               viewOptions
             }

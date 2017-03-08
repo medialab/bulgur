@@ -37,7 +37,7 @@ export function generateColorsMap (collection = [], propertyName) {
     else {
       const vLength = values.length;
       const scale = chroma.scale(['red', 'blue']);
-      return values.reduce((pal, value, index) => ({
+      return values.sort().reduce((pal, value, index) => ({
         ...pal,
         [value]: scale(index / vLength).hex()
       })
