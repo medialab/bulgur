@@ -1,12 +1,64 @@
+/* eslint react/no-set-state: 0 */
+
 /**
  * This module provides a reusable colorsmap picker component
  * @module bulgur/components/ColorMapPicker
  */
-import React from 'react';
+import React, {Component} from 'react';
 
-import {TwitterPicker} from 'react-color';
+import {SliderPicker} from 'react-color';
 
 import './ColorsMapPicker.scss';
+
+class ColorPicker extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      color: props.color,
+      initialColor: props.color
+    };
+    this.onColorChange = this.onColorChange.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.state.color !== nextProps.color) {
+      this.setState({
+        color: nextProps.color
+      });
+    }
+  }
+
+  onColorChange(color) {
+    this.props.onChange(color);
+    this.setState({
+      color
+    });
+  }
+
+  render() {
+    const {
+      color
+    } = this.state;
+    const onValidate = () => {
+      this.props.onValidate(this.state.color);
+    };
+    const onCancel = () => {
+      this.props.onCancel(this.state.initialColor);
+    };
+    return (
+      <div className="bulgur-ColorPicker">
+        <div className="buttons-container">
+          {this.state.color.hex !== this.state.initialColor
+            ? <button id="save-color" onClick={onValidate}>Save color</button> : null }
+          <button id="cancel" onClick={onCancel}>Cancel</button>
+        </div>
+        <SliderPicker
+          color={color}
+          onChangeComplete={this.onColorChange} />
+      </div>
+    );
+  }
+}
 
 const ColorsMapPicker = ({
   colorsMap,
@@ -24,7 +76,9 @@ const ColorsMapPicker = ({
     .map(colorCollectionId => {
     const collectionMap = colorsMap[colorCollectionId];
     let activeColor;
-    const onColorChange = (color) => changeColor(visualizationId, editedColor.collectionId, editedColor.category, color.hex);
+    const onColorChange = (color) => {
+      changeColor(visualizationId, editedColor.collectionId, editedColor.category, color.hex);
+    };
 
     const showAll = () => {
       const list = Object.keys(collectionMap);
@@ -55,7 +109,19 @@ const ColorsMapPicker = ({
           if (active) {
             activeColor = color;
           }
-          const onClick = () => toggleColorEdition(visualizationId, colorCollectionId, category);
+          const onClick = () => {
+            if (!active) {
+              toggleColorEdition(visualizationId, colorCollectionId, category);
+            }
+          };
+          const onValidate = (thatColor) => {
+            changeColor(visualizationId, editedColor.collectionId, editedColor.category, thatColor);
+            toggleColorEdition(visualizationId, colorCollectionId, category);
+          };
+          const onCancel = (thatColor) => {
+            changeColor(visualizationId, editedColor.collectionId, editedColor.category, thatColor);
+            toggleColorEdition(visualizationId, colorCollectionId, category);
+          };
           const shown = shownCategories && shownCategories[colorCollectionId] ? shownCategories[colorCollectionId].find(cat => cat === category) !== undefined : true;
           const onFilterClick = (e) => {
             e.stopPropagation();
@@ -75,10 +141,7 @@ const ColorsMapPicker = ({
           };
           return (
             <div onClick={onClick} key={index} className={'colors-map-item ' + (shown ? 'shown' : 'hidden')}>
-              <div className={'color-card ' + (editedColor &&
-                  editedColor.visualizationId === visualizationId &&
-                  editedColor.collectionId === colorCollectionId &&
-                  editedColor.category === category ? ' active' : '')}>
+              <div className={'color-card ' + (active ? ' active' : '')}>
                 <span
                   className="color"
                   style={{
@@ -100,7 +163,11 @@ const ColorsMapPicker = ({
                   editedColor.visualizationId === visualizationId &&
                   editedColor.collectionId === colorCollectionId &&
                   editedColor.category === category ?
-                    <TwitterPicker color={activeColor} onChangeComplete={onColorChange} />
+                    <ColorPicker
+                      onCancel={onCancel}
+                      onValidate={onValidate}
+                      onChange={onColorChange}
+                      color={activeColor} />
                     : null
                 }
             </div>

@@ -135,10 +135,9 @@ const EditorLayout = ({
           </section>
         :
           <section className="bulgur-main-row">
-            <QuinoaPresentationPlayer 
-              presentation={activePresentation} 
-              beginAt={activePresentation.order.indexOf(activeSlideId)}
-            />
+            <QuinoaPresentationPlayer
+              presentation={activePresentation}
+              beginAt={activePresentation.order.indexOf(activeSlideId)} />
           </section>}
         <Footer
           returnToLanding={returnToLanding}
@@ -146,8 +145,7 @@ const EditorLayout = ({
           togglePreview={togglePreview}
           uiMode={globalUiMode} />
       </div>
-      : <PresentationsManagerContainer 
-        />}
+      : <PresentationsManagerContainer />}
     <Modal
       onRequestClose={closeModal}
       contentLabel="new presentation"

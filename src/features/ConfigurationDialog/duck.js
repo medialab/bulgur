@@ -569,6 +569,7 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
       };
     case SET_PRESENTATION_CANDIDATE_COLOR:
       const {collectionId, category, color} = action;
+      const finalColor = color.hex || color;
       return {
         ...state,
         presentationCandidate: {
@@ -577,12 +578,15 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
             ...state.presentationCandidate.visualizations,
             [action.visualizationId]: {
               ...state.presentationCandidate.visualizations[action.visualizationId],
-              // update colorsMap
-              colorsMap: {
-                ...state.presentationCandidate.visualizations[action.visualizationId].colorsMap,
-                [collectionId]: {
-                  ...state.presentationCandidate.visualizations[action.visualizationId].colorsMap[collectionId],
-                  [category]: color
+              viewParameters: {
+                ...state.presentationCandidate.visualizations[action.visualizationId].viewParameters,
+                // update colorsMap
+                colorsMap: {
+                  ...state.presentationCandidate.visualizations[action.visualizationId].colorsMap,
+                  [collectionId]: {
+                    ...state.presentationCandidate.visualizations[action.visualizationId].colorsMap[collectionId],
+                    [category]: finalColor
+                  }
                 }
               }
             }
@@ -702,11 +706,6 @@ function presentationCandidateUi (state = PRESENTATION_CANDIDATE_UI_DEFAULT_STAT
           editedColor: undefined
         };
       }
-    case SET_PRESENTATION_CANDIDATE_COLOR:
-      return {
-        ...state,
-        editedColor: undefined
-      };
     case FETCH_USER_FILE:
       return {
         ...state,

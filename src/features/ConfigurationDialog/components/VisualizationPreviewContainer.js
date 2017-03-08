@@ -52,7 +52,6 @@ export default class VisualizationPreviewContainer extends Component {
     const isSpatializing = visualization.isSpatializing;
     const viewParameters = visualization.viewParameters;
     const onChange = e => this.props.actions.setPreviewViewParameters(visualizationKey, e.viewParameters);
-
     const bindVisualizationRef = (vis) => {
       this.visualization = vis;
     };

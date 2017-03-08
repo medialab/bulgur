@@ -5,6 +5,46 @@
  */
 @import '../../parameters.scss';
 
+.bulgur-ColorPicker
+{
+    margin-bottom: $gutter-medium;
+    .slider-picker
+    {
+        border: 1px solid $color-sec-stroke;
+        padding: $gutter-medium;
+    }
+    .buttons-container
+    {
+        display: flex;
+
+        flex-flow: row nowrap;
+        align-items: stretch;
+        #save-color,
+        #cancel
+        {
+            padding: $gutter-medium;
+
+            flex: 1;
+        }
+        #save-color
+        {
+            @extend .important-item;
+            &:hover
+            {
+                @extend .important-item-intent;
+            }
+        }
+        #cancel
+        {
+            @extend .dangerous-item;
+            &:hover
+            {
+                @extend .dangerous-item-intent;
+            }
+        }
+    }
+}
+
 .bulgur-colors-map-picker
 {
     .colors-map-group
@@ -18,7 +58,6 @@
             transition: all $time-short ease;
 
             flex-flow: column nowrap;
-
             .twitter-picker
             {
                 width: 100%!important;
@@ -32,11 +71,12 @@
                 margin-bottom: $gutter-small;
                 padding: $gutter-small;
 
+                cursor: pointer;
+
                 border: 1px solid $color-sec-stroke;
 
                 flex-flow: row nowrap;
                 align-items: stretch;
-
                 .color
                 {
                     position: relative;
@@ -47,20 +87,19 @@
                     height: $font-size-2;
                     margin-right: $gutter-medium;
                 }
-
                 .category
                 {
                     flex: 1;
                 }
-
-
-
                 &:hover
                 {
                     @extend .interactive-item-intent;
                 }
+                &.active
+                {
+                    @extend .interactive-item-active;
+                }
             }
-
             &.hidden
             {
                 .color,
@@ -71,7 +110,6 @@
             }
         }
     }
-
     .global-operations
     {
         display: flex;

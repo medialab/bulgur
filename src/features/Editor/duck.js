@@ -373,7 +373,7 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
       const {color} = action;
       return {
         ...state,
-        editedColor: undefined,
+        // editedColor: undefined,
         activeViews: {
           ...state.activeViews,
           [action.visualizationId]: {
