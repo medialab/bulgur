@@ -80,12 +80,12 @@ const SlideSettingsPannel = ({
                     return (
                       <div key={viewKey} className="datamap-wrapper">
                         {
-                        Object.keys(view.dataMap)
+                        Object.keys(view.viewParameters.dataMap)
                         .map(collectionId => {
-                          const collection = view.dataMap[collectionId];
+                          const collection = view.viewParameters.dataMap[collectionId];
                           return (
                             <div key={collectionId} className="datamap-container">
-                              {Object.keys(view.dataMap).length > 1 ? <h4>{collectionId.charAt(0).toUpperCase() + collectionId.slice(1)} parameters</h4> : null}
+                              {Object.keys(view.viewParameters.dataMap).length > 1 ? <h4>{collectionId.charAt(0).toUpperCase() + collectionId.slice(1)} parameters</h4> : null}
                               <ul>
                                 {
                                 Object.keys(collection).map((parameterKey) => {

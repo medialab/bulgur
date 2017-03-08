@@ -57,7 +57,6 @@ const MainViewLayout = ({
       <VisualizationManager
         visualizationType={view.metadata.visualizationType}
         data={data}
-        dataMap={view.flattenedDataMap}
         viewParameters={view.viewParameters}
         onUserChange={onChange} />
     );
@@ -69,8 +68,7 @@ const MainViewLayout = ({
   const activeViewsAsSlides = Object.keys(activeViews).reduce((views, id) => ({
     ...views,
     [id]: {
-      viewParameters: activeViews[id].viewParameters,
-      dataMap: activeViews[id].dataMap
+      viewParameters: activeViews[id].viewParameters
     }
   }), {});
   const viewsEqualActiveSlideViews = activeSlide &&
@@ -83,8 +81,7 @@ const MainViewLayout = ({
       views: Object.keys(activeViews).reduce((views, id) => ({
         ...views,
         [id]: {
-          viewParameters: activeViews[id].viewParameters,
-          dataMap: activeViews[id].dataMap
+          viewParameters: activeViews[id].viewParameters
         }
       }), {})
     });

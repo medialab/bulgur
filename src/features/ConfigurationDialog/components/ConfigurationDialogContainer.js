@@ -48,11 +48,6 @@ class ConfigurationDialogContainer extends Component {
 
   shouldComponentUpdate() {
     return true;
-    // return newProps.activeVisualizationType !== this.props.activeVisualizationType ||
-    //       newProps.activeDataStatus !== this.props.activeDataStatus ||
-    //       newProps.activeData !== this.props.activeData ||
-    //       newProps.invalidFileType !== this.props.invalidFileType ||
-    //       this.props.dataMap !== newProps.dataMap;
   }
 
   closePresentationCandidate() {

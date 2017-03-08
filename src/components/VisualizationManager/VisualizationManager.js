@@ -31,7 +31,7 @@ class VisualizationManager extends Component {
   componentWillReceiveProps(nextProps) {
     if (
     this.props.data !== nextProps.data
-    || this.props.dataMap !== nextProps.dataMap
+    || this.props.viewParameters.flattenedDataMap !== nextProps.viewParameters.flattenedDataMap
     ) {
       this.updateData(nextProps);
     }
@@ -39,7 +39,9 @@ class VisualizationManager extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     return this.state.data !== nextState.data
-    || this.props.viewParameters !== nextProps.viewParameters;
+    || this.props.viewParameters !== nextProps.viewParameters
+    || this.props.isSpatializing !== nextProps.isSpatializing
+    ;
   }
 
   getNodesPositions() {
@@ -52,20 +54,20 @@ class VisualizationManager extends Component {
     let visData;
     const {
       data,
-      dataMap,
+      viewParameters,
       visualizationType
     } = props;
 
 
     switch (visualizationType) {
       case 'map':
-        visData = mapMapData(data, dataMap);
+        visData = mapMapData(data, viewParameters.flattenedDataMap);
         break;
       case 'network':
-        visData = mapNetworkData(data, dataMap);
+        visData = mapNetworkData(data, viewParameters.flattenedDataMap);
         break;
       case 'timeline':
-        visData = mapTimelineData(data, dataMap);
+        visData = mapTimelineData(data, viewParameters.flattenedDataMap);
         break;
       default:
         return null;

@@ -627,6 +627,7 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
             ...state.presentationCandidate.visualizations,
             [action.visualizationId]: {
               ...state.presentationCandidate.visualizations[action.visualizationId],
+              isSpatializing: undefined,
               data: {
                 ...state.presentationCandidate.visualizations[action.visualizationId].data,
                 nodes: state.presentationCandidate.visualizations[action.visualizationId].data.nodes.map(node => {

@@ -45,7 +45,6 @@ export default class VisualizationPreviewContainer extends Component {
     } = this.props;
     const setIsSpatializing = () => this.props.actions.setVisualizationIsSpatializing(visualizationKey);
     const isSpatializing = visualization.isSpatializing;
-
     const viewParameters = visualization.viewParameters;
     const onChange = e => this.props.actions.setPreviewViewParameters(visualizationKey, e.viewParameters);
 
@@ -57,7 +56,6 @@ export default class VisualizationPreviewContainer extends Component {
         <VisualizationManager
           visualizationType={visualization.metadata.visualizationType}
           data={visualization.data}
-          dataMap={visualization.flattenedDataMap}
           viewParameters={viewParameters}
           isSpatializing={isSpatializing}
           ref={bindVisualizationRef}

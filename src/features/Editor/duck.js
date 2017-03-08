@@ -278,54 +278,34 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
       // todo : refactor as a helper
       const defaultViews = Object.keys(action.presentation.visualizations).reduce((result, visualizationKey) => {
         const visualization = action.presentation.visualizations[visualizationKey];
-        const viewParameters = {
-          ...models[visualization.metadata.visualizationType].defaultViewParameters,
-          colorsMap: visualization.colorsMap
-        };
-        // flatten datamap fields (#todo: refactor as helper)
-        const dataMap = Object.keys(visualization.dataMap).reduce((dataMapResult, collectionId) => ({
-          ...dataMapResult,
-          [collectionId]: Object.keys(visualization.dataMap[collectionId]).reduce((propsMap, parameterId) => {
-            const parameter = visualization.dataMap[collectionId][parameterId];
-            if (parameter.mappedField) {
-              return {
-                ...propsMap,
-                [parameterId]: parameter.mappedField
-              };
-            }
-            return propsMap;
-          }, {})
-        }), {});
         shownCategories = Object.keys(visualization.colorsMap).reduce((currentObject, collectionId) => ({
           ...currentObject,
           [collectionId]: Object.keys(visualization.colorsMap[collectionId])
         }), {});
+        const viewParameters = {
+          ...models[visualization.metadata.visualizationType].defaultViewParameters,
+          ...visualization.viewParameters,
+          shownCategories
+        };
         switch (visualization.metadata.visualizationType) {
           case 'map':
-            data = mapMapData(visualization.data, dataMap);
+            data = mapMapData(visualization.data, viewParameters.flattenedDataMap);
             break;
           case 'timeline':
-            data = mapTimelineData(visualization.data, dataMap);
+            data = mapTimelineData(visualization.data, viewParameters.flattenedDataMap);
             break;
           case 'network':
-            data = mapNetworkData(visualization.data, dataMap);
+            data = mapNetworkData(visualization.data, viewParameters.flattenedDataMap);
             break;
           default:
             data = visualization.data;
             break;
         }
-        const colorsMap = visualization.colorsMap;
-        // delete visualization.colorsMap;
         return {
           ...result,
           [visualizationKey]: {
             ...visualization,
-            viewParameters: {
-              ...viewParameters,
-              shownCategories,
-              flattenedDataMap: dataMap,
-              colorsMap
-            },
+            viewParameters,
             data
           }
         };
@@ -365,7 +345,7 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
           [id]: {
             ...state.activeViews[id],
             // update data map
-            dataMap: action.slide.views[id].dataMap,
+            dataMap: action.slide.views[id].viewParameters.dataMap,
             flattenedDataMap: action.slide.views[id].viewParameters.flattenedDataMap,
             // updated view parameters
             viewParameters: action.slide.views[id].viewParameters
@@ -436,11 +416,11 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
               shownCategories: shownCategories || state.activeViews[action.visualizationId].viewParameters.shownCategories,
               // update datamap
               dataMap: {
-                ...state.activeViews[action.visualizationId].dataMap,
+                ...state.activeViews[action.visualizationId].viewParameters.dataMap,
                 [action.collectionId]: {
-                  ...state.activeViews[action.visualizationId].dataMap[action.collectionId],
+                  ...state.activeViews[action.visualizationId].viewParameters.dataMap[action.collectionId],
                   [action.parameterId]: {
-                    ...state.activeViews[action.visualizationId].dataMap[action.collectionId][action.parameterId],
+                    ...state.activeViews[action.visualizationId].viewParameters.dataMap[action.collectionId][action.parameterId],
                     mappedField: action.propertyName
                   }
                 }
@@ -451,24 +431,6 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
                   ...state.activeViews[action.visualizationId].flattenedDataMap[action.collectionId],
                   [action.parameterId]: action.propertyName
                 }
-              }
-            },
-            // update datamap
-            dataMap: {
-              ...state.activeViews[action.visualizationId].dataMap,
-              [action.collectionId]: {
-                ...state.activeViews[action.visualizationId].dataMap[action.collectionId],
-                [action.parameterId]: {
-                  ...state.activeViews[action.visualizationId].dataMap[action.collectionId][action.parameterId],
-                  mappedField: action.propertyName
-                }
-              }
-            },
-            flattenedDataMap: {
-              ...state.activeViews[action.visualizationId].flattenedDataMap,
-              [action.collectionId]: {
-                ...state.activeViews[action.visualizationId].flattenedDataMap[action.collectionId],
-                [action.parameterId]: action.propertyName
               }
             }
           }

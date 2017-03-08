@@ -104,6 +104,10 @@
                         "required": false,
                         "type": "object"
                       },
+                      "flattenedDataMap": {
+                        "required": false,
+                        "type": "object"
+                      },
                       "colorsMap": {
                         "required": false,
                         "type": "object"
@@ -152,10 +156,6 @@
                                 "$each": {
                                     "type": "object",
                                     "keys": {
-                                        "dataMap": {
-                                            "type": "object",
-                                            "required": true
-                                        },
                                         "viewParameters": {
                                             "type": "object",
                                             "required": true

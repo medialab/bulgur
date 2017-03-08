@@ -48,12 +48,6 @@ class EditorContainer extends Component {
 
   shouldComponentUpdate() {
     return true;
-    // return newProps.isPresentationCandidateModalOpen !== this.props.isPresentationCandidateModalOpen ||
-    //        newProps.isTakeAwayModalOpen !== this.props.isTakeAwayModalOpen ||
-    //        newProps.currentSlide !== this.props.currentSlide ||
-    //        JSON.stringify(newProps.visualizationData.viewParameters) !== JSON.stringify(this.props.visualizationData.viewParameters) ||
-    //        JSON.stringify(newProps.quinoaSlideParameters) !== JSON.stringify(this.props.quinoaSlideParameters) ||
-    //        newProps.doesViewEqualsSlideParameters !== this.props.doesViewEqualsSlideParameters;
   }
 
 
@@ -77,8 +71,7 @@ class EditorContainer extends Component {
       views: Object.keys(this.props.activeViews).reduce((views, id) => ({
         ...views,
         [id]: {
-          viewParameters: this.props.activeViews[id].viewParameters,
-          dataMap: this.props.activeViews[id].dataMap
+          viewParameters: this.props.activeViews[id].viewParameters
         }
       }), {}),
       title: '',
