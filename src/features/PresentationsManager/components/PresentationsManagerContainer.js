@@ -23,7 +23,8 @@ import validatePresentation from '../../../helpers/presentationValidator';
  */
 @connect(
   state => ({
-    ...duck.selector(state.presentations)
+    ...duck.selector(state.presentations),
+    ...globalDuck.selector(state.bulgurEditor)
   }),
   dispatch => ({
     actions: bindActionCreators({
@@ -43,8 +44,8 @@ export default class PresentationsManagerContainer extends Component {
     this.attemptImport = this.attemptImport.bind(this);
   }
 
-  shouldComponentUpdate() {
-    return true;
+  shouldComponentUpdate(nextProps) {
+    return nextProps.isPresentationCandidateModalOpen === false;
   }
 
   attemptImport (str) {

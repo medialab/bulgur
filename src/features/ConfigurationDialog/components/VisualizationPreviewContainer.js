@@ -30,6 +30,11 @@ export default class VisualizationPreviewContainer extends Component {
     this.saveNodesPositions = this.saveNodesPositions.bind(this);
   }
 
+  shouldComponentUpdate(nextProps) {
+    return this.props.visualization.isSpatializing !== nextProps.visualization.isSpatializing
+            || this.props.visualization.viewParameters !== nextProps.visualization.viewParameters;
+  }
+
   saveNodesPositions() {
     if (this.visualization && this.visualization.getNodesPositions) {
       const nodes = this.visualization.getNodesPositions();
