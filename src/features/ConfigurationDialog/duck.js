@@ -490,10 +490,8 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
               },
               data,
               dataProfile,
-              dataMap,
               flattenedDataMap,
               datasets: [firstDatasetId],
-              colorsMap: newcolorsMap,
               viewParameters: {
                 ...visualizationTypesModels[visualizationType].defaultViewParameters,
                 colorsMap: newcolorsMap,
@@ -582,9 +580,9 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
                 ...state.presentationCandidate.visualizations[action.visualizationId].viewParameters,
                 // update colorsMap
                 colorsMap: {
-                  ...state.presentationCandidate.visualizations[action.visualizationId].colorsMap,
+                  ...state.presentationCandidate.visualizations[action.visualizationId].viewParameters.colorsMap,
                   [collectionId]: {
-                    ...state.presentationCandidate.visualizations[action.visualizationId].colorsMap[collectionId],
+                    ...state.presentationCandidate.visualizations[action.visualizationId].viewParameters.colorsMap[collectionId],
                     [category]: finalColor
                   }
                 }

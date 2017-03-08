@@ -278,9 +278,9 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
       // todo : refactor as a helper
       const defaultViews = Object.keys(action.presentation.visualizations).reduce((result, visualizationKey) => {
         const visualization = action.presentation.visualizations[visualizationKey];
-        shownCategories = Object.keys(visualization.colorsMap).reduce((currentObject, collectionId) => ({
+        shownCategories = Object.keys(visualization.viewParameters.colorsMap).reduce((currentObject, collectionId) => ({
           ...currentObject,
-          [collectionId]: Object.keys(visualization.colorsMap[collectionId])
+          [collectionId]: Object.keys(visualization.viewParameters.colorsMap[collectionId])
         }), {});
         const viewParameters = {
           ...models[visualization.metadata.visualizationType].defaultViewParameters,

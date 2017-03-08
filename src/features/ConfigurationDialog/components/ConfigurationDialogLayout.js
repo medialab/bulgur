@@ -316,15 +316,18 @@ const ConfigurationDialogLayout = ({
                   <section className="modal-columns-container">
                     <section className="modal-column">
                       <h4>How to map your data to the visualization ?</h4>
-                      {visualization.metadata && visualization.metadata.visualizationType && visualization.dataMap ?
-                        <ul className="parameters-endpoints">
-                          {
-                            Object.keys(visualization.dataMap)
+                      {visualization.metadata
+                        && visualization.metadata.visualizationType
+                        && visualization.viewParameters
+                        && visualization.viewParameters.dataMap ?
+                          <ul className="parameters-endpoints">
+                            {
+                            Object.keys(visualization.viewParameters.dataMap)
                             .map(collectionId => {
-                              const collectionMap = visualization.dataMap[collectionId];
+                              const collectionMap = visualization.viewParameters.dataMap[collectionId];
                               return (
                                 <div className="datamap-group" key={collectionId}>
-                                  {Object.keys(visualization.dataMap).length > 1 ?
+                                  {Object.keys(visualization.viewParameters.dataMap).length > 1 ?
                                     <h3>{collectionId.charAt(0).toUpperCase() + collectionId.slice(1) + ' mapping parameters'}</h3>
                                   : null}
                                   <div className="datamap-group-mosaic">
@@ -348,7 +351,7 @@ const ConfigurationDialogLayout = ({
                               );
                             })
                             }
-                        </ul>
+                          </ul>
                        : null}
                       {visualization.viewOptions &&
                        visualization.viewOptions.length
@@ -378,7 +381,7 @@ const ConfigurationDialogLayout = ({
                       <h4>How to color your categories ?</h4>
                       <section className="final-touch-container">
                         {// colors edition
-                      visualization.colorsMap ?
+                      visualization.viewParameters && visualization.viewParameters.colorsMap ?
                         <ColorsMapPicker
                           colorsMap={visualization.viewParameters.colorsMap}
                           visualizationId={visualizationKey}
@@ -391,10 +394,11 @@ const ConfigurationDialogLayout = ({
                     <section className="modal-column">
                       <h4>Visualization preview</h4>
                       {// preview
-                    visualization.colorsMap &&
                     visualization.dataProfile &&
                     visualization.data &&
-                    visualization.dataMap ?
+                    visualization.viewParameters &&
+                    visualization.viewParameters.colorsMap &&
+                    visualization.viewParameters.dataMap ?
                       <VisualizationPreviewContainer
                         visualization={visualization}
                         visualizationKey={visualizationKey}
@@ -414,10 +418,11 @@ const ConfigurationDialogLayout = ({
           presentationCandidate.visualizations &&
           typeof presentationCandidate.visualizations === 'object' &&
           Object.keys(presentationCandidate.visualizations).length > 0 &&
-          presentationCandidate.visualizations[Object.keys(presentationCandidate.visualizations)[0]].colorsMap &&
+          presentationCandidate.visualizations[Object.keys(presentationCandidate.visualizations)[0]].viewParameters &&
+          presentationCandidate.visualizations[Object.keys(presentationCandidate.visualizations)[0]].viewParameters.colorsMap &&
+          presentationCandidate.visualizations[Object.keys(presentationCandidate.visualizations)[0]].viewParameters.dataMap &&
           presentationCandidate.visualizations[Object.keys(presentationCandidate.visualizations)[0]].dataProfile &&
-          presentationCandidate.visualizations[Object.keys(presentationCandidate.visualizations)[0]].data &&
-          presentationCandidate.visualizations[Object.keys(presentationCandidate.visualizations)[0]].dataMap
+          presentationCandidate.visualizations[Object.keys(presentationCandidate.visualizations)[0]].data
         ?
           <button
             className="valid-btn"

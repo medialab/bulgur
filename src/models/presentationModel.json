@@ -100,18 +100,6 @@
                         "required": false,
                         "type": "object"
                       },
-                      "dataMap": {
-                        "required": false,
-                        "type": "object"
-                      },
-                      "flattenedDataMap": {
-                        "required": false,
-                        "type": "object"
-                      },
-                      "colorsMap": {
-                        "required": false,
-                        "type": "object"
-                      },
                       "datasets": {
                           "type": "array",
                           "required": true,
