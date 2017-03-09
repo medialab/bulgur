@@ -511,22 +511,22 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
       }
      const visualizationChanges = {
         // update colorsMap
-        colorsMap: newcolorsMap || state.presentationCandidate.visualizations[action.visualizationId].colorsMap,
+        colorsMap: newcolorsMap || state.presentationCandidate.visualizations[action.visualizationId].viewParameters.colorsMap,
         // updatedatamap
         dataMap: {
-          ...state.presentationCandidate.visualizations[action.visualizationId].dataMap,
+          ...state.presentationCandidate.visualizations[action.visualizationId].viewParameters.dataMap,
           [action.collectionId]: {
-            ...state.presentationCandidate.visualizations[action.visualizationId].dataMap[action.collectionId],
+            ...state.presentationCandidate.visualizations[action.visualizationId].viewParameters.dataMap[action.collectionId],
             [action.parameterId]: {
-              ...state.presentationCandidate.visualizations[action.visualizationId].dataMap[action.collectionId][action.parameterId],
+              ...state.presentationCandidate.visualizations[action.visualizationId].viewParameters.dataMap[action.collectionId][action.parameterId],
               mappedField: action.propertyName
             }
           }
         },
         flattenedDataMap: {
-          ...state.presentationCandidate.visualizations[action.visualizationId].flattenedDataMap,
+          ...state.presentationCandidate.visualizations[action.visualizationId].viewParameters.flattenedDataMap,
           [action.collectionId]: {
-            ...state.presentationCandidate.visualizations[action.visualizationId].flattenedDataMap[action.collectionId],
+            ...state.presentationCandidate.visualizations[action.visualizationId].viewParameters.flattenedDataMap[action.collectionId],
             [action.parameterId]: action.propertyName
           }
         }
@@ -539,7 +539,6 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
             ...state.presentationCandidate.visualizations,
             [action.visualizationId]: {
               ...state.presentationCandidate.visualizations[action.visualizationId],
-              ...visualizationChanges,
               viewParameters: {
                 ...state.presentationCandidate.visualizations[action.visualizationId].viewParameters,
                 ...visualizationChanges
