@@ -8,15 +8,16 @@
 
 .bulgur-lang-toggler
 {
-  cursor: pointer;
-  @extend .interactive-item;
-  &:hover
-  {
-    @extend .interactive-item-intent;
-  }
+    cursor: pointer;
 
-  .active
-  {
-    font-weight: 800;
-  }
+    @extend .interactive-item;
+    &:hover
+    {
+        @extend .interactive-item-intent;
+    }
+
+    .active
+    {
+        font-weight: 800;
+    }
 }

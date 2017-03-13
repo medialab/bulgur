@@ -1,6 +1,6 @@
 {
   "name": "bulgur",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Quinoa presentations editor",
   "main": "dist/entry.js",
   "scripts": {
@@ -17,14 +17,16 @@
     "translations:update:po": "node updateTranslationsToPo --locales ./src/translations/locales --dest ./translations",
     "translations:import:from:po": "node importTranslationsFromPo --locales ./src/translations/locales --src ./translations",
     "translations:update": "npm run translations:backfill;npm run translations:discover;npm run translations:update:po",
-    "translations:addlanguage": "node addTranslationLanguage --translations-folder ./src/translations"
+    "translations:addlanguage": "node addTranslationLanguage --translations-folder ./src/translations",
+    "translations:gitaddpo": "git add translations"
   },
   "pre-commit": [
     "lint",
     "build",
     "comb",
     "test",
-    "translations:update"
+    "translations:update",
+    "translations:gitaddpo"
   ],
   "repository": {
     "type": "git",
