@@ -89,6 +89,7 @@ class VisualizationManager extends Component {
     const bindVisualization = visualization => {
       this.visualization = visualization;
     };
+    // console.log('re render vis', viewParameters);
     if (data) {
        switch (visualizationType) {
           case 'map':

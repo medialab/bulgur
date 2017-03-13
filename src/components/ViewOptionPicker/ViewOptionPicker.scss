@@ -4,3 +4,34 @@
  * @module bulgur/components/Toaster
  */
 @import '../../parameters.scss';
+
+.bulgur-view-option-picker
+{
+  .slider-wrapper
+  {
+    .slider
+    {
+      height: $gutter-medium;
+      @extend .interactive-item;
+
+      cursor: pointer;
+
+      .handle
+      {
+        @extend .important-item;
+      width: $gutter-medium;
+      height: $gutter-medium;
+      border-radius: 50%;
+      }
+    }
+
+    .active-value
+    {
+      padding: $gutter-small;
+      margin-top: $gutter-medium;
+      @extend .interactive-item;
+      display: inline-block;
+      width: $gutter-large * 2;
+    }
+  }
+}

@@ -505,7 +505,7 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
       };
     case SET_PRESENTATION_CANDIDATE_DATAMAP_ITEM:
       if (action.parameterId === 'category') {
-        newcolorsMap = {...state.presentationCandidate.visualizations[action.visualizationId].colorsMap} || {};
+        newcolorsMap = {...state.presentationCandidate.visualizations[action.visualizationId].viewParameters.colorsMap} || {};
         const dataset = state.presentationCandidate.visualizations[action.visualizationId].data[action.collectionId];
         newcolorsMap[action.collectionId] = generateColorsMap(dataset, action.propertyName);
       }

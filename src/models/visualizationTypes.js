@@ -212,7 +212,29 @@ const models = {
       labelThreshold: 7,
       minNodeSize: 1,
       sideMargin: 0,
-    }
+    },
+    viewOptions: [
+      {
+        label: 'Labels threshold',
+        viewParameter: 'labelThreshold',
+        optionType: 'slider',
+        options: {
+          defaultValue: 7,
+          minimum: 1,
+          maximum: 12
+        }
+      },
+      {
+        label: 'Minimum node sizes',
+        viewParameter: 'minNodeSize',
+        optionType: 'slider',
+        options: {
+          defaultValue: 1,
+          minimum: 1,
+          maximum: 20
+        }
+      }
+    ],
   }
 };
 export default models;

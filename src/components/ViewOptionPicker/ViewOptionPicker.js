@@ -5,6 +5,7 @@
 
 import React from 'react';
 import Select from 'react-select';
+import Slider from 'react-slider';
 
 import './ViewOptionPicker.scss';
 
@@ -26,6 +27,28 @@ const OptionSelect = ({
   );
 };
 
+const SliderWrapper = ({
+  option,
+  activeValue,
+  visualizationId,
+  onChange
+}) => {
+  const onSliderChange = (newValue) => onChange(visualizationId, option.viewParameter, newValue);
+  return (
+    <div className="slider-wrapper">
+      <Slider
+        min={option.options.minimum}
+        max={option.options.maximum}
+        defaultValue={option.options.defaultValue}
+        value={activeValue}
+        onChange={onSliderChange}
+        pearling />
+      <span
+        className="active-value">{activeValue}</span>
+    </div>
+  );
+};
+
 const ViewOptionPicker = ({
   option,
   activeValue,
@@ -35,9 +58,13 @@ const ViewOptionPicker = ({
 
   let OptionComponent;
   switch (option.optionType) {
+    case 'slider':
+      OptionComponent = SliderWrapper;
+      break;
     case 'select':
     default:
       OptionComponent = OptionSelect;
+      break;
   }
 
   return (
