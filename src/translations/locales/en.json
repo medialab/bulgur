@@ -113,5 +113,10 @@
   "Features.TakeAway.the-online-version-will-be-overriden-with-your-current-version": "the online version will be overriden with your current version",
   "Features.TakeAway.update-local-version-from-the-repository": "update local version from the repository",
   "Features.TakeAway.update-local-version-to-the-repository": "update local version to the repository",
-  "Features.TakeAway.your-current-version-will-be-overriden-with-the-distant-version": "your current version will be overriden with the distant version"
+  "Features.TakeAway.your-current-version-will-be-overriden-with-the-distant-version": "your current version will be overriden with the distant version",
+  "Features.ConfigurationDialog.stop-spatialization": "stop spatialization",
+  "Features.ConfigurationDialog.run-spatialization": "run spatialization",
+  "Features.ConfigurationDialog.run-spatialization-help": "the forceAtlas2 algorithm will be ran to spatialize the network",
+  "Features.ConfigurationDialog.save-nodes-positions": "save nodes positions",
+  "Features.ConfigurationDialog.save-nodes-positions-help": "Current positions will be saved in visualization's data and used for the presentation"
 }

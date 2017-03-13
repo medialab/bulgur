@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Sample Project\n"
 "POT-Creation-Date: 2017-3-13\n"
-"PO-Revision-Date: Mon Mar 13 2017 18:35:39 GMT+0100 (CET)\n"
+"PO-Revision-Date: Mon Mar 13 2017 18:51:02 GMT+0100 (CET)\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -358,3 +358,18 @@ msgstr "update local version to the repository"
 
 msgid "Features.TakeAway.your-current-version-will-be-overriden-with-the-distant-version"
 msgstr "your current version will be overriden with the distant version"
+
+msgid "Features.ConfigurationDialog.stop-spatialization"
+msgstr "stop spatialization"
+
+msgid "Features.ConfigurationDialog.run-spatialization"
+msgstr "run spatialization"
+
+msgid "Features.ConfigurationDialog.run-spatialization-help"
+msgstr "the forceAtlas2 algorithm will be ran to spatialize the network"
+
+msgid "Features.ConfigurationDialog.save-nodes-positions"
+msgstr "save nodes positions"
+
+msgid "Features.ConfigurationDialog.save-nodes-positions-help"
+msgstr "Current positions will be saved in visualization's data and used for the presentation"

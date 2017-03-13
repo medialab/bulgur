@@ -441,7 +441,7 @@ const ConfigurationDialogLayout = ({
         <button
           className="cancel-btn"
           onClick={closePresentationCandidate}>
-        translate('cancel')
+        {translate('cancel')}
       </button>
       </section>
     </div>

@@ -4,12 +4,14 @@
  * @module bulgur/features/ConfigurationDialog
  */
 
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import VisualizationManager from '../../../components/VisualizationManager/VisualizationManager';
 import HelpPin from '../../../components/HelpPin/HelpPin';
+
+import {translateNameSpacer} from '../../../helpers/translateUtils';
 
 import * as duck from '../duck';
 
@@ -25,6 +27,10 @@ import * as duck from '../duck';
   })
 )
 export default class VisualizationPreviewContainer extends Component {
+
+  static contextTypes = {
+    t: PropTypes.func.isRequired
+  }
 
   constructor(props) {
     super(props);
@@ -44,6 +50,7 @@ export default class VisualizationPreviewContainer extends Component {
   }
 
   render() {
+  const translate = translateNameSpacer(this.context.t, 'Features.ConfigurationDialog');
     const {
       visualization,
       visualizationKey,
@@ -71,16 +78,16 @@ export default class VisualizationPreviewContainer extends Component {
           ?
             <div className="spatialization-controls">
               <button id="spatialize-nodes" className={isSpatializing ? 'active' : ''} onClick={setIsSpatializing}>
-                {isSpatializing ? 'Stop spatialization'
+                {isSpatializing ? translate('stop-spatialization')
               : <span>
-                  Run spatialization <HelpPin position="left">
-              The network will be spatialized with ForceAtlas2 algorithm
+                  {translate('run-spatialization')} <HelpPin position="left">
+                  {translate('run-spatialization-help')}
             </HelpPin>
               </span>}
               </button>
               <button id="save-nodes" onClick={this.saveNodesPositions}>
-              Save nodes positions<HelpPin position="left">
-              Current positions will be saved in visualization's data and used for the presentation
+              {translate('save-nodes-positions')}<HelpPin position="left">
+              {translate('save-nodes-positions-help')}
             </HelpPin>
               </button>
             </div>
