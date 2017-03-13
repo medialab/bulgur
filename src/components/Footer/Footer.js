@@ -2,34 +2,49 @@
  * This module provides a reusable Footer picker component for bulgur
  * @module bulgur/components/Footer
  */
-import React from 'react';
+import React, {PropTypes} from 'react';
+
+import LangToggler from '../LangToggler/LangToggler';
 
 import './Footer.scss';
+import {translateNameSpacer} from '../../helpers/translateUtils';
 
 const Footer = ({
   openTakeAwayModal,
   togglePreview,
   returnToLanding,
-  uiMode
-}) => (
-  <footer className="bulgur-footer">
-    <div className="left-group">
-      <span><button onClick={returnToLanding}>Bulgur</button> | by <a href="http://www.medialab.sciences-po.fr/fr/" target="blank">médialab</a></span>
-    </div>
-    <div className="right-group">
-      <button className="mode-btn" onClick={togglePreview}>{
-        uiMode === 'edition' ?
-          <span>
-            <img className="bulgur-icon-image" src={require('./assets/preview.svg')} />Preview
-        </span>
-        :
-          <span>
-            <img className="bulgur-icon-image" src={require('./assets/edit.svg')} />Edit
-        </span>
-      }</button>
-      <button className="takeaway-btn" onClick={openTakeAwayModal}><img className="bulgur-icon-image" src={require('./assets/take-away.svg')} />Take away</button>
-    </div>
-  </footer>
-);
+  uiMode,
+  lang,
+  setLanguage
+}, context) => {
+  const translate = translateNameSpacer(context.t, 'Components.Footer');
+  return (
+    <footer className="bulgur-footer">
+      <div className="left-group">
+        <span><button onClick={returnToLanding}>Bulgur</button> | {translate('by')} <a href="http://www.medialab.sciences-po.fr/fr/" target="blank">médialab</a></span>
+        <LangToggler
+          lang={lang}
+          onChange={setLanguage} />
+      </div>
+      <div className="right-group">
+        <button className="mode-btn" onClick={togglePreview}>{
+          uiMode === 'edition' ?
+            <span>
+              <img className="bulgur-icon-image" src={require('./assets/preview.svg')} />{translate('preview')}
+            </span>
+          :
+            <span>
+              <img className="bulgur-icon-image" src={require('./assets/edit.svg')} />{translate('edit')}
+            </span>
+        }</button>
+        <button className="takeaway-btn" onClick={openTakeAwayModal}><img className="bulgur-icon-image" src={require('./assets/take-away.svg')} />{translate('take-away')}</button>
+      </div>
+    </footer>
+  );
+};
+
+Footer.contextTypes = {
+  t: PropTypes.func.isRequired
+};
 
 export default Footer;

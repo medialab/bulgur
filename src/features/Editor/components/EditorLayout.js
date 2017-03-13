@@ -21,6 +21,7 @@ import TakeAwayDialog from '../../TakeAwayDialog/components/TakeAwayDialogContai
 /**
  * Renders the main layout component of the editor
  * @param {object} props - the props to render
+ * @param {string} props.lang - the active language
  * @param {string} props.id
  * @param {string} props.className
  * @param {boolean} props.isPresentationCandidateModalOpen
@@ -42,6 +43,7 @@ import TakeAwayDialog from '../../TakeAwayDialog/components/TakeAwayDialogContai
  * @return {ReactElement} markup
  */
 const EditorLayout = ({
+  lang,
   // setup related
   id,
   className,
@@ -74,7 +76,8 @@ const EditorLayout = ({
     toggleViewColorEdition,
     setViewColor,
     setViewDatamapItem,
-    setShownCategories
+    setShownCategories,
+    setLanguage
   },
   addSlide,
   duplicateSlide,
@@ -143,6 +146,8 @@ const EditorLayout = ({
           returnToLanding={returnToLanding}
           openTakeAwayModal={openTakeAwayModal}
           togglePreview={togglePreview}
+          lang={lang}
+          setLanguage={setLanguage}
           uiMode={globalUiMode} />
       </div>
       : <PresentationsManagerContainer />}

@@ -2,7 +2,7 @@
  * This module exports a stateless component rendering the layout of the configuration dialog feature interface
  * @module bulgur/features/ConfigurationDialog
  */
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 import {validateFileExtensionForVisType} from '../../../helpers/fileLoader';
 
@@ -17,6 +17,7 @@ import BigSelect from '../../../components/BigSelect/BigSelect';
 import HelpPin from '../../../components/HelpPin/HelpPin';
 import ViewOptionPicker from '../../../components/ViewOptionPicker/ViewOptionPicker';
 import Toaster from '../../../components/Toaster/Toaster';
+import {translateNameSpacer} from '../../../helpers/translateUtils';
 
 import './ConfigurationDialog.scss';
 /**
@@ -62,7 +63,8 @@ const ConfigurationDialogLayout = ({
   onFileDrop,
   validateFileExtension,
   editedColor
-}) => {
+}, context) => {
+  const translate = translateNameSpacer(context.t, 'Features.ConfigurationDialog');
   const onApplyChange = () => applyPresentationCandidateConfiguration(presentationCandidate);
   const onDropInput = (files) => onFileDrop(files[0]);
   const setPresentationTitle = (e) => setCandidatePresentationMetadata('title', e.target.value);
@@ -75,44 +77,46 @@ const ConfigurationDialogLayout = ({
   return (
     <div className="bulgur-configuration-dialog-layout">
       <h1 className="modal-header">
-        Presentation configuration
+        {translate('presentation-configuration')}
       </h1>
       <section className="modal-content">
         <section className="modal-row">
-          <h2>What is your presentation about ? <HelpPin>
-              These informations will be very useful for building high-quality metadata for your presentation outputs
-            </HelpPin></h2>
+          <h2>{translate('what-is-your-presentation-about')}
+            <HelpPin>
+              {translate('what-is-your-presentation-about-help')}
+            </HelpPin>
+          </h2>
           <form className="modal-columns-container">
             <div className="modal-column">
               <div className="input-group">
-                <label htmlFor="title">Title of the presentation</label>
+                <label htmlFor="title">{translate('title-of-the-presentation')}</label>
                 <input
                   onChange={setPresentationTitle}
                   type="text"
                   name="title"
-                  placeholder="title of the presentation"
+                  placeholder={translate('title-of-the-presentation')}
                   value={presentationCandidate.metadata.title} />
               </div>
 
               <div className="input-group">
-                <label htmlFor="authors">Authors of the presentation</label>
+                <label htmlFor="authors">{translate('authors-of-the-presentation')}</label>
                 <input
                   onChange={setPresentationAuthors}
                   type="text"
                   name="authors"
-                  placeholder="authors of the presentation"
+                  placeholder={translate('authors-of-the-presentation')}
                   value={presentationCandidate.metadata.authors} />
               </div>
             </div>
 
             <div className="modal-column">
               <div className="input-group" style={{flex: 1}}>
-                <label htmlFor="description">Description of the presentation</label>
+                <label htmlFor="description">{translate('description-of-the-presentation')}</label>
                 <Textarea
                   onChange={setPresentationDescription}
                   type="text"
                   name="description"
-                  placeholder="description of the presentation"
+                  placeholder={translate('description-of-the-presentation')}
                   style={{flex: 1}}
                   value={presentationCandidate.metadata.description} />
               </div>
@@ -122,8 +126,11 @@ const ConfigurationDialogLayout = ({
 
         <section className="modal-row">
           <h2>
-            What data do you want to use ? <HelpPin>
-              <a className="help-link" target="blank" href="https://github.com/medialab/bulgur/wiki/What-data-formats-and--tools-can-I-use-to-build-a-presentation-dataset-%3F">What data formats and tools can I use to build a presentation dataset ?</a>
+            {translate('what-data-do-you-want-to-use')}
+            <HelpPin>
+              <a className="help-link" target="blank" href="https://github.com/medialab/bulgur/wiki/What-data-formats-and--tools-can-I-use-to-build-a-presentation-dataset-%3F">
+                {translate('what-data-do-you-want-to-use-help')}
+              </a>
             </HelpPin>
           </h2>
 
@@ -151,43 +158,43 @@ const ConfigurationDialogLayout = ({
                 return (
                   <div key={datasetId} className="modal-columns-container">
                     <div className="modal-column">
-                      <h4>Dataset metadata</h4>
+                      <h4>{translate('dataset-metadata')}</h4>
                       <div className="dataset-settings">
                         <form>
                           <div className="input-group">
-                            <label htmlFor="title">Title of the dataset</label>
+                            <label htmlFor="title">{translate('title-of-the-dataset')}</label>
                             <input
                               onChange={setTitle}
                               type="text"
                               name="title"
-                              placeholder="title of the dataset"
+                              placeholder={translate('title-of-the-dataset')}
                               value={dataset.metadata.title} />
                           </div>
                           <div className="input-group">
-                            <label htmlFor="description">Description of the dataset</label>
+                            <label htmlFor="description">{translate('description-of-the-dataset')}</label>
                             <Textarea
                               onChange={setDescription}
                               type="text"
                               name="description"
-                              placeholder="description of the dataset"
+                              placeholder={translate('description-of-the-dataset')}
                               value={dataset.metadata.description} />
                           </div>
                           <div className="input-group">
-                            <label htmlFor="url">Url of the dataset</label>
+                            <label htmlFor="url">{translate('url-of-the-dataset')}</label>
                             <input
                               onChange={setUrl}
                               type="text"
                               name="url"
-                              placeholder="url of the dataset"
+                              placeholder={translate('url-of-the-dataset')}
                               value={dataset.metadata.url} />
                           </div>
                           <div className="input-group">
-                            <label htmlFor="license">License of the dataset</label>
+                            <label htmlFor="license">{translate('license-of-the-dataset')}</label>
                             <input
                               onChange={setLicense}
                               type="text"
                               name="license"
-                              placeholder="license of the dataset"
+                              placeholder={translate('license-of-the-dataset')}
                               value={dataset.metadata.license} />
                           </div>
                         </form>
@@ -195,23 +202,23 @@ const ConfigurationDialogLayout = ({
                     </div>
 
                     <div className="modal-column dataset-data">
-                      <h4>Dataset data</h4>
+                      <h4>{translate('dataset-data')}</h4>
                       <DropZone
                         onDrop={onDropNewData}>
                         <div>
-                          <p>The file that was used for the current data is <code>{dataset.metadata.fileName}</code>.</p>
-                          <p>Drop a file here to update this dataset with a new data file.</p>
+                          <p>{translate('the-file-used-for-current-data-is')} <code>{dataset.metadata.fileName}</code>.</p>
+                          <p>{translate('drop-a-file-to-update-with-new-data')}</p>
                         </div>
                       </DropZone>
                       {
                         // disabled if slides are present to avoid allowing bugs related to vis states without the required dataset
                         !hasSlides ?
-                          <button className="remove-dataset" onClick={onRemoveDataset}>Remove this dataset</button>
+                          <button className="remove-dataset" onClick={onRemoveDataset}>{translate('remove-this-dataset')}</button>
                         : null
                       }
                     </div>
                     <div className="modal-column dataset-preview">
-                      <h4>Dataset preview (20 first lines)</h4>
+                      <h4>{translate('dataset-preview')}</h4>
                       <pre>
                         <code>
                           {dataset.rawData.split('\n').slice(0, 20).join('\n')}
@@ -226,18 +233,18 @@ const ConfigurationDialogLayout = ({
             <section className="second-options-group">
               <ul className="data-source-type-toggler">
                 <li onClick={setDataSourceComputer} className={dataSourceTab === 'computer' ? 'active' : ''}>
-                    A file from my computer
-                  </li>
+                  {translate('a-file-from-my-computer')}
+                </li>
                 <li onClick={setDataSourceSample} className={dataSourceTab === 'sample' ? 'active' : ''}>
-                    A sample file
-                  </li>
+                  {translate('a-sample-file')}
+                </li>
               </ul>
               <section className="data-source-choice">
                 {dataSourceTab === 'computer' ?
                   <section className="data-source">
                     <DropZone
                       onDrop={onDropInput}>
-                      <div>Drop a file here</div>
+                      <div>{translate('drop-a-file-here')}</div>
                     </DropZone>
                   </section>
                 :
@@ -252,17 +259,19 @@ const ConfigurationDialogLayout = ({
                       <div key={key} className="sample-file">
                         <div onClick={fetchFile} className="sample-file-content">
                           <div>
-                            <p className="pre-title"><i>Sample dataset</i></p>
+                            <p className="pre-title"><i>{translate('sample-dataset')}</i></p>
                             <h3>{sample.title}</h3>
                           </div>
                           <div>
                             <p>{sample.description}</p>
                             <p className="recommended-vis-types">
-                              <b>Recommended for: <i>{sample.recommendedVisTypes.map(type => type).join(', ')}</i>.</b>
+                              <b>{translate('recommended-for')} <i>{sample.recommendedVisTypes.map(type => type).join(', ')}</i>.</b>
                             </p>
                           </div>
                           <p>
-                            <i>Select to use this dataset</i>
+                            <i>
+                              {translate('select-to-use-this-dataset')}
+                            </i>
                           </p>
                         </div>
                       </div>
@@ -280,8 +289,8 @@ const ConfigurationDialogLayout = ({
         </section>
         {presentationCandidate && presentationCandidate.datasets && Object.keys(presentationCandidate.datasets).length > 0 ?
           <section className="modal-row">
-            <h2>How to visualize the data ? <HelpPin>
-              Sometimes the same dataset can be visualized with different techniques. Think about the point you are trying to make for choosing the right one !
+            <h2>{translate('how-to-visualize-the-data')} <HelpPin>
+              {translate('how-to-visualize-the-data-help')}
             </HelpPin></h2>
             {
 
@@ -315,7 +324,7 @@ const ConfigurationDialogLayout = ({
                 {visualization.metadata && visualization.metadata.visualizationType ?
                   <section className="modal-columns-container">
                     <section className="modal-column">
-                      <h4>How to map your data to the visualization ?</h4>
+                      <h4>{translate('how-to-map-your-data-to-the-visualization')}</h4>
                       {visualization.metadata
                         && visualization.metadata.visualizationType
                         && visualization.viewParameters
@@ -357,7 +366,7 @@ const ConfigurationDialogLayout = ({
                        visualization.viewOptions.length
                         ?
                           <div>
-                            <h4>Visualization options</h4>
+                            <h4>{translate('visualization-options')}</h4>
                             <div className="view-options">
                               {
                               visualization
@@ -378,7 +387,7 @@ const ConfigurationDialogLayout = ({
                         : null}
                     </section>
                     <section className="modal-column">
-                      <h4>How to color your categories ?</h4>
+                      <h4>{translate('how-to-color-your-categories')}</h4>
                       <section className="final-touch-container">
                         {// colors edition
                       visualization.viewParameters && visualization.viewParameters.colorsMap ?
@@ -392,7 +401,7 @@ const ConfigurationDialogLayout = ({
                       </section>
                     </section>
                     <section className="modal-column">
-                      <h4>Visualization preview</h4>
+                      <h4>{translate('visualization-preview')}</h4>
                       {// preview
                     visualization.dataProfile &&
                     visualization.data &&
@@ -426,17 +435,20 @@ const ConfigurationDialogLayout = ({
         ?
           <button
             className="valid-btn"
-            onClick={onApplyChange}>{hasSlides ? 'Apply changes and continue presentation edition' : 'Start to edit this presentation'}</button>
+            onClick={onApplyChange}>{hasSlides ? translate('apply-changes-and-continue-presentation-edition') : translate('start-to-edit-this-presentation')}</button>
         : ''
       }
         <button
           className="cancel-btn"
           onClick={closePresentationCandidate}>
-        Cancel
+        translate('cancel')
       </button>
       </section>
     </div>
 );
 };
 
+ConfigurationDialogLayout.contextTypes = {
+  t: PropTypes.func.isRequired
+};
 export default ConfigurationDialogLayout;

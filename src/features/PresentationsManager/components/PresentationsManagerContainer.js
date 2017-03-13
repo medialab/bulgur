@@ -3,10 +3,11 @@
  * dedicated to rendering the presentations manager feature interface
  * @module bulgur/features/PresentationsManager
  */
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {get} from 'superagent';
+import {setLanguage} from 'redux-i18n';
 
 import PresentationsManagerLayout from './PresentationsManagerLayout';
 import * as duck from '../duck';
@@ -24,16 +25,23 @@ import validatePresentation from '../../../helpers/presentationValidator';
 @connect(
   state => ({
     ...duck.selector(state.presentations),
-    ...globalDuck.selector(state.bulgurEditor)
+    ...globalDuck.selector(state.bulgurEditor),
+    lang: state.i18nState.lang
   }),
   dispatch => ({
     actions: bindActionCreators({
       ...duck,
-      ...globalDuck
+      ...globalDuck,
+      setLanguage
     }, dispatch)
   })
 )
 export default class PresentationsManagerContainer extends Component {
+
+  static contextTypes = {
+    t: React.PropTypes.func.isRequired,
+    store: PropTypes.object.isRequired
+  }
   /**
    * constructor
    */
@@ -138,7 +146,6 @@ export default class PresentationsManagerContainer extends Component {
     });
   }
 
-
   render () {
     const overrideImportWithCandidate = () => this.props.actions.importSuccess(this.props.importCandidate);
     return (
@@ -151,3 +158,4 @@ export default class PresentationsManagerContainer extends Component {
     );
   }
 }
+

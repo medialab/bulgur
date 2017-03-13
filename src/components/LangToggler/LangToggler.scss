@@ -1,0 +1,22 @@
+/**
+ * style definitions for the LangToggler component
+ *
+ * @module bulgur/components/LangToggler
+ */
+
+@import '../../parameters.scss';
+
+.bulgur-lang-toggler
+{
+  cursor: pointer;
+  @extend .interactive-item;
+  &:hover
+  {
+    @extend .interactive-item-intent;
+  }
+
+  .active
+  {
+    font-weight: 800;
+  }
+}

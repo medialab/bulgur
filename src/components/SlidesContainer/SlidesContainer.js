@@ -4,7 +4,7 @@
  * @module bulgur/components/SlidesContainer
  */
 
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 import {DragDropContext} from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -12,8 +12,15 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import Slide from './Slide';
 import './SlidesContainer.scss';
 
+import {translateNameSpacer} from '../../helpers/translateUtils';
+
 class SlidesContainer extends React.Component {
+
+  static contextTypes = {
+    t: PropTypes.func.isRequired
+  }
   render() {
+    const translate = translateNameSpacer(this.context.t, 'Components.SlidesContainer');
     const {
       activePresentation,
       activeSlideId,
@@ -83,7 +90,10 @@ class SlidesContainer extends React.Component {
           && activePresentation.order.length === 0 ? 'first-slide' : ''} type="button" onClick={addSlide}>
             {activePresentation
           && activePresentation.order
-          && activePresentation.order.length === 0 ? '+ Click here to add a first slide' : '+ Add slide'}</button>
+          && activePresentation.order.length === 0 ?
+          '+ ' + translate('click-to-add-first-slide') :
+          '+ ' + translate('add-slide')
+        }</button>
         </li>
       </ul>
   );

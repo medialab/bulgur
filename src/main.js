@@ -8,9 +8,12 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {Provider} from 'react-redux';
+import I18n from 'redux-i18n';
 
 import configureStore from './redux/configureStore';
 import Application from './Application';
+
+import translations from './translations/index.js';
 
 let CurrentApplication = Application;
 
@@ -27,7 +30,9 @@ const mountNode = document.getElementById('mount');
 export function renderApplication() {
   const group = (
     <Provider store={store}>
-      <CurrentApplication />
+      <I18n translations={translations}>
+        <CurrentApplication />
+      </I18n>
     </Provider>
   );
   render(group, mountNode);

@@ -3,10 +3,11 @@
  * dedicated to rendering the editor feature interface
  * @module bulgur/features/Editor
  */
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {v4 as uuid} from 'uuid';
+import {setLanguage} from 'redux-i18n';
 
 import EditorLayout from './EditorLayout';
 import * as duck from '../duck';
@@ -23,18 +24,25 @@ import {
 @connect(
   state => ({
     ...duck.selector(state.bulgurEditor),
-    ...managerDuck.selector(state.presentations)
+    ...managerDuck.selector(state.presentations),
+    lang: state.i18nState.lang
   }),
   dispatch => ({
     actions: bindActionCreators({
       ...duck,
       // ...quinoaActions,
       resetPresentationCandidateSettings,
-      setupPresentationCandidate
+      setupPresentationCandidate,
+      setLanguage
     }, dispatch)
   })
 )
 class EditorContainer extends Component {
+
+  static contextTypes = {
+    t: React.PropTypes.func.isRequired,
+    store: PropTypes.object.isRequired
+  }
 
   constructor(props) {
     super(props);
@@ -49,7 +57,6 @@ class EditorContainer extends Component {
   shouldComponentUpdate() {
     return true;
   }
-
 
   closeAndResetDialog() {
     this.props.actions.resetPresentationCandidateSettings();

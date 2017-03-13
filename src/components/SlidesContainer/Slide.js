@@ -3,12 +3,14 @@
  * This module provides a reusable draggable slide component
  * @module bulgur/components/Slide
  */
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {findDOMNode} from 'react-dom';
 
 import Textarea from 'react-textarea-autosize';
 
 import {DragSource, DropTarget} from 'react-dnd';
+
+import {translateNameSpacer} from '../../helpers/translateUtils';
 
 const slideSource = {
   beginDrag(props) {
@@ -77,7 +79,13 @@ const slideTarget = {
   isOver: monitor.isOver()
 }))
 class Slide extends React.Component {
+
+  static contextTypes = {
+    t: PropTypes.func.isRequired
+  }
+
   render() {
+    const translate = translateNameSpacer(this.context.t, 'Components.Slide');
     const {
       slide = {},
       active,
@@ -105,22 +113,22 @@ class Slide extends React.Component {
         <div className="slide-content">
           <h3>
             <input
-              placeholder="slide title"
+              placeholder={translate('slide-title')}
               type="text"
               value={slide.title}
               onChange={onTitleChange} />
           </h3>
           <div className="comment-container">
             <Textarea
-              placeholder="slide comment"
+              placeholder={translate('slide-comment')}
               maxRows={15}
               value={slide.markdown}
               onChange={onTextChange} />
           </div>
           <div className="operations-container">
-            {connectDragSource(<button className="move-btn">■ Move</button>)}
-            <button onClick={onDuplicateSlide}>⎘ Duplicate</button>
-            <button className="remove-btn" onClick={onRemove}>⌫ Remove</button>
+            {connectDragSource(<button className="move-btn">■ {translate('move')}</button>)}
+            <button onClick={onDuplicateSlide}>⎘ {translate('duplicate')}</button>
+            <button className="remove-btn" onClick={onRemove}>⌫ {translate('remove')}</button>
           </div>
         </div>
       </li>

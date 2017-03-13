@@ -15,7 +15,8 @@ import * as duck from '../duck';
 
 @connect(
   state => ({
-    ...duck.selector(state.presentationCandidate)
+    ...duck.selector(state.presentationCandidate),
+    lang: state.i18nState.lang
   }),
   dispatch => ({
     actions: bindActionCreators({

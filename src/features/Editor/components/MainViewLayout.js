@@ -2,13 +2,14 @@
  * This module exports a stateless component rendering the main view contents of the editor feature interface
  * @module bulgur/features/Editor
  */
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 import './MainViewLayout.scss';
 
 import VisualizationManager from '../../../components/VisualizationManager/VisualizationManager';
 import DraftEditor from '../../../components/DraftEditor/DraftEditor';
 import SlideSettingsPannel from '../../../components/SlideSettingsPannel/SlideSettingsPannel';
+import {translateNameSpacer} from '../../../helpers/translateUtils';
 
 /**
  * Renders the layout of the main view of editor
@@ -48,8 +49,9 @@ const MainViewLayout = ({
   toggleViewColorEdition,
   setViewColor,
   setShownCategories
-}) => {
+}, context) => {
 
+  const translate = translateNameSpacer(context.t, 'Features.Editor');
   const setVisualization = (view, id) => {
     const onChange = (event) => onUserViewChange(id, event);
     const data = activePresentation.visualizations[id].data;
@@ -135,11 +137,15 @@ const MainViewLayout = ({
               type="text"
               value={activeSlide.title}
               onChange={updateTitle}
-              placeholder="Write your slide title here" />
+              placeholder={translate('write-your-slide-title-here')} />
           </h1>
           <div className={'view-operations ' + (viewsEqualActiveSlideViews ? '' : 'visible')}>
-            <button id="take-snapshot-btn" className={viewsEqualActiveSlideViews ? 'inactive' : 'active'} onClick={clickOnRecord}><img className="bulgur-icon-image" src={require('../assets/snapshot.svg')} /> Take snapshot</button>
-            <button id="reset-view-btn" onClick={clickOnReset}><img className="bulgur-icon-image" src={require('../assets/reset.svg')} /> Reset view</button>
+            <button id="take-snapshot-btn" className={viewsEqualActiveSlideViews ? 'inactive' : 'active'} onClick={clickOnRecord}><img className="bulgur-icon-image" src={require('../assets/snapshot.svg')} />
+              {translate('take-snapshot')}
+            </button>
+            <button id="reset-view-btn" onClick={clickOnReset}><img className="bulgur-icon-image" src={require('../assets/reset.svg')} />
+              {translate('reset-view')}
+            </button>
           </div>
         </section>
         <div className="caption-editor">
@@ -152,6 +158,10 @@ const MainViewLayout = ({
       </figcaption> : null}
     </figure>
   );
+};
+
+MainViewLayout.contextTypes = {
+  t: PropTypes.func.isRequired
 };
 
 export default MainViewLayout;

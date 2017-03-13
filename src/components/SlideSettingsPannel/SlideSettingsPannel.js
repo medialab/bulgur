@@ -2,9 +2,11 @@
  * This module provides a reusable slide settings pannel for the editor
  * @module bulgur/components/SlideSettingsPannel
  */
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 import './SlideSettingsPannel.scss';
+
+import {translateNameSpacer} from '../../helpers/translateUtils';
 
 import ColorsMapPicker from '../ColorsMapPicker/ColorsMapPicker';
 import DatamapPicker from '../DatamapPicker/DatamapPicker';
@@ -20,7 +22,7 @@ const SlideSettingsPannel = ({
   editedColor,
   setShownCategories,
   presentation
-}) => {
+}, context) => {
   const isOpen = state !== undefined;
   const togglePannel = () => {
     if (isOpen) {
@@ -41,6 +43,7 @@ const SlideSettingsPannel = ({
     }
   };
 
+  const translate = translateNameSpacer(context.t, 'Components.SlidesSettingsPannel');
   return (
     <aside className={'bulgur-settings-pannel ' + (isOpen ? 'open' : '')}>
       <div className="settings-wrapper">
@@ -48,11 +51,11 @@ const SlideSettingsPannel = ({
           <div className={'settings-contents ' + (isOpen ? 'visible' : '')}>
             <ul className="settings-type-toggler">
               <li onClick={setTabToCategories} className={state === 'categories' ? 'active' : ''}>
-                  Categories
-                </li>
+                {translate('Categories')}
+              </li>
               <li onClick={setTabToParameters} className={state === 'parameters' ? 'active' : ''}>
-                  Parameters
-                </li>
+                {translate('Parameters')}
+              </li>
             </ul>
 
             <div className={'tab-contents ' + state + '-active'}>
@@ -85,7 +88,11 @@ const SlideSettingsPannel = ({
                           const collection = view.viewParameters.dataMap[collectionId];
                           return (
                             <div key={collectionId} className="datamap-container">
-                              {Object.keys(view.viewParameters.dataMap).length > 1 ? <h4>{collectionId.charAt(0).toUpperCase() + collectionId.slice(1)} parameters</h4> : null}
+                              {Object.keys(view.viewParameters.dataMap).length > 1 ?
+                                <h4>
+                                  {translate('parameters-title', {parameters: collectionId})}
+                                </h4>
+                                  : null}
                               <ul>
                                 {
                                 Object.keys(collection).map((parameterKey) => {
@@ -119,13 +126,17 @@ const SlideSettingsPannel = ({
         <button className={'open-pannel ' + (isOpen ? 'active' : '')}
           onClick={togglePannel}>
           {isOpen ?
-            <span><img className="bulgur-icon-image" src={require('./assets/close.svg')} />Close view settings</span>
+            <span><img className="bulgur-icon-image" src={require('./assets/close.svg')} />{translate('close-advanced-options')}</span>
               :
-            <span><img className="bulgur-icon-image" src={require('./assets/settings.svg')} />Open view settings</span>
+            <span><img className="bulgur-icon-image" src={require('./assets/settings.svg')} />{translate('open-advanced-options')}</span>
           }</button>
       </div>
     </aside>
   );
+};
+
+SlideSettingsPannel.contextTypes = {
+  t: PropTypes.func.isRequired
 };
 
 export default SlideSettingsPannel;

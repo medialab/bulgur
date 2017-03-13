@@ -5,53 +5,6 @@
  */
 @import '../../parameters.scss';
 
-.bulgur-ColorPicker
-{
-    /*
-     * root component
-     */
-    margin-bottom: $gutter-medium;
-    /*
-     * specific micro-components
-     */
-    #save-color
-    {
-        @extend .important-item;
-        &:hover
-        {
-            @extend .important-item-intent;
-        }
-    }
-    #cancel
-    {
-        @extend .dangerous-item;
-        &:hover
-        {
-            @extend .dangerous-item-intent;
-        }
-    }
-    /*
-     * secondary layout components
-     */
-    .slider-picker
-    {
-        padding: $gutter-medium;
-
-        border: 1px solid $color-sec-stroke;
-    }
-    .buttons-container
-    {
-        @extend .flex-stretched-row;
-        #save-color,
-        #cancel
-        {
-            padding: $gutter-medium;
-
-            flex: 1;
-        }
-    }
-}
-
 .bulgur-colors-map-picker
 {
     /*

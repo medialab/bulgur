@@ -2,11 +2,13 @@
  * This module exports a stateless component rendering the aside contents of the editor feature interface
  * @module bulgur/features/Editor
  */
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 import './AsideViewLayout.scss';
 
 import SlidesContainer from '../../../components/SlidesContainer/SlidesContainer';
+import {translateNameSpacer} from '../../../helpers/translateUtils';
+
 
 /**
  * Renders the aside view of the editor
@@ -34,7 +36,8 @@ const AsideViewLayout = ({
   setActiveSlide,
   returnToLanding,
   activeSlideId,
-}) => {
+}, context) => {
+  const translate = translateNameSpacer(context.t, 'Features.Editor');
   const onRemoveSlide = id => {
     // determining new active slide
     const newActive = activePresentation.order && activePresentation.order.length > 1 ?
@@ -47,8 +50,8 @@ const AsideViewLayout = ({
   };
   return (<aside className="bulgur-aside-view">
     <div className="aside-header">
-      <button className="returnToLanding-btn" onClick={returnToLanding} type="button"><span className="bulgur-icon">☰</span> Back to home</button>
-      <button className="settings-btn" onClick={openSettings} type="button"><img className="bulgur-icon-image" src={require('../assets/settings.svg')} /> {activePresentation.metadata && activePresentation.metadata.title && activePresentation.metadata.title.length ? activePresentation.metadata.title : 'untitled presentation'} - <i>settings</i></button>
+      <button className="returnToLanding-btn" onClick={returnToLanding} type="button"><span className="bulgur-icon">☰</span> {translate('back-to-home')}</button>
+      <button className="settings-btn" onClick={openSettings} type="button"><img className="bulgur-icon-image" src={require('../assets/settings.svg')} /> {activePresentation.metadata && activePresentation.metadata.title && activePresentation.metadata.title.length ? activePresentation.metadata.title : translate('untitled-presentation')} - <i>{translate('settings')}</i></button>
     </div>
     {
       activePresentation.order ?
@@ -62,6 +65,10 @@ const AsideViewLayout = ({
           removeSlide={onRemoveSlide}
           duplicateSlide={duplicateSlide} /> : null}
   </aside>);
+};
+
+AsideViewLayout.contextTypes = {
+  t: PropTypes.func.isRequired
 };
 
 export default AsideViewLayout;

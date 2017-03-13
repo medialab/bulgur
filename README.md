@@ -1,4 +1,4 @@
-# WIP
+# Bulgur - *data presentations editor*
 
 Bulgur is a tool dedicated to the making of guided tours into data visualizations, called *data presentations*.
 Users import their data from their computer, then compose their data presentation, then finally export it to static html or to a web publication.
@@ -63,6 +63,10 @@ npm run dev
 ```
 
 Bulgur is compatible with the [Redux Devtools](https://github.com/gaearon/redux-devtools) browser extension for an optimal developer experience.
+
+# Contributing
+
+See the [contributing guide](https://github.com/medialab/bulgur/blob/master/CONTRIBUTING.md) in order to give a hand on translations, report bugs, or propose pull requests.
 
 # Deployment
 

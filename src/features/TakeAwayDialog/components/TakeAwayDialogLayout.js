@@ -2,13 +2,14 @@
  * This module exports a stateless component rendering the layout of the takeway dialog feature interface
  * @module bulgur/features/TakeAwayDialog
  */
-import React from 'react';
+import React, {PropTypes} from 'react';
 
 import './TakeAwayDialog.scss';
 
 import BigSelect from '../../../components/BigSelect/BigSelect';
 import Toaster from '../../../components/Toaster/Toaster';
 import HelpPin from '../../../components/HelpPin/HelpPin';
+import {translateNameSpacer} from '../../../helpers/translateUtils';
 /**
  * Renders the options for takeaway mode choice
  * @param {object} props - the props to render
@@ -27,7 +28,8 @@ export const ChooseTakeAwayStep = ({
   gistAvailable,
   serverHtmlUrl,
   gistId
-}) => {
+}, context) => {
+  const translate = translateNameSpacer(context.t, 'Features.TakeAway');
   const optionSelect = (option) => {
     switch (option.id) {
       case 'server':
@@ -49,25 +51,43 @@ export const ChooseTakeAwayStep = ({
   const options = [{
           id: 'project',
           icon: require('../assets/bulgur-take-away-type-project.svg'),
-          label: <span>project file <HelpPin>a backup of your presentation that can be imported elsewhere</HelpPin></span>,
+          label: <span>
+            {translate('project-file')}
+            <HelpPin>
+              {translate('project-file-help')}
+            </HelpPin></span>,
           possible: true
         },
         {
           id: 'html',
           icon: require('../assets/bulgur-take-away-type-html.svg'),
-          label: <span>html file <HelpPin>a webpage file ready to upload wherever you want</HelpPin></span>,
+          label: <span>
+            {translate('html-file')}
+            <HelpPin>
+              {translate('html-file-help')}
+            </HelpPin>
+          </span>,
           possible: serverAvailable === true
         },
         {
           id: 'github',
           icon: require('../assets/bulgur-take-away-type-github.svg'),
-          label: <span>gist-powered website <HelpPin>the presentation will be publicly available</HelpPin></span>,
+          label: <span>
+            {translate('gist-powered-website')}
+            <HelpPin>
+              {translate('gist-powered-website-help')}
+            </HelpPin></span>,
           possible: serverAvailable === true && gistAvailable === true
         },
         {
           id: 'server',
           icon: require('../assets/bulgur-take-away-type-server.svg'),
-          label: <span>forccast-powered website <HelpPin position="left">the presentation will be stored on the server and publicly available</HelpPin></span>,
+          label: <span>
+            {translate('forccast-website')}
+            <HelpPin position="left">
+              {translate('forccast-website-help')}
+            </HelpPin>
+          </span>,
           possible: serverAvailable === true
         }
         ]
@@ -78,6 +98,10 @@ export const ChooseTakeAwayStep = ({
       activeOptionId={takeAwayType}
       onOptionSelect={optionSelect} />
   );
+};
+
+ChooseTakeAwayStep.contextTypes = {
+  t: PropTypes.func.isRequired
 };
 
 /**
@@ -120,13 +144,14 @@ const TakeAwayDialogLayout = ({
     closeTakeAwayModal,
     setTakeAwayType
   },
-}) => {
+}, context) => {
+  const translate = translateNameSpacer(context.t, 'Features.TakeAway');
   const updateActivePresentationToServer = () => takeAway({id: 'server'});
   const updateActivePresentationToGist = () => takeAway({id: 'github'});
   return (
     <div className="bulgur-take-away-dialog-layout">
       <h1 className="modal-header">
-        Take away your presentation
+        {translate('take-away-your-presentation')}
       </h1>
       <section className="modal-content">
         <section className="modal-row">
@@ -154,13 +179,13 @@ const TakeAwayDialogLayout = ({
                 <div className="column">
                   <p>
                     <a target="blank" href={activePresentation.metadata.gistUrl}>
-                      → Go to the gist source code of your presentation
+                      → {translate('go-to-the-gist-source-code-of-your-presentation')}
                     </a>
                     <a target="blank" href={serverUrl + '/gist-presentation/' + activePresentation.metadata.gistId}>
-                      → Go to the gist-based webpage of your presentation
+                      → {translate('go-to-the-gist-based-webpage-of-your-presentation')}
                     </a>
                   </p>
-                  <p>Embed inside an html webpage :</p>
+                  <p>{translate('embed-inside-an-html-webpage')}</p>
                   <pre>
                     <code>
                       {`<iframe allowfullscreen src="${serverUrl + '/gist-presentation/' + activePresentation.metadata.gistId}" width="1000" height="500" frameborder=0></iframe>`}
@@ -170,12 +195,16 @@ const TakeAwayDialogLayout = ({
                 <div className="column">
                   <div className="operations">
                     <button className="update-to" onClick={updateActivePresentationToGist}>
-                      ↑ Update local version to the online repository
-                      <HelpPin position="left">The online version will be overriden with this current version</HelpPin>
+                      ↑ {translate('update-local-version-to-the-repository')}
+                      <HelpPin position="left">
+                        {translate('the-online-version-will-be-overriden-with-your-current-version')}
+                      </HelpPin>
                     </button>
                     <button className="update-from" onClick={updateActivePresentationFromGist}>
-                      ↓ Update local version from the online repository
-                      <HelpPin position="left">Your current version will be overriden with the distant version</HelpPin>
+                      ↓ {translate('update-local-version-from-the-repository')}
+                      <HelpPin position="left">
+                        {translate('your-current-version-will-be-overriden-with-the-distant-version')}
+                      </HelpPin>
                     </button>
                   </div>
                 </div>
@@ -192,10 +221,10 @@ const TakeAwayDialogLayout = ({
                 <div className="column">
                   <p>
                     <a target="blank" href={activePresentation.metadata.serverHTMLUrl}>
-                    → Go to the forccast server's webpage of your presentation
+                    → {translate('go-to-the-online-webpage')}
                     </a>
                   </p>
-                  <p>Embed inside an html webpage :</p>
+                  <p>{translate('embed-inside-an-html-webpage')}</p>
                   <pre>
                     <code>
                       {`<iframe allowfullscreen src="${activePresentation.metadata.serverHTMLUrl}" width="1000" height="500" frameborder=0></iframe>`}
@@ -205,12 +234,16 @@ const TakeAwayDialogLayout = ({
                 <div className="column">
                   <div className="operations">
                     <button className="update-to" onClick={updateActivePresentationToServer}>
-                      ↑ Update local version to the online repository
-                      <HelpPin position="left">The online version will be overriden with this current version</HelpPin>
+                      ↑ {translate('update-local-version-to-the-repository')}
+                      <HelpPin position="left">
+                        {translate('the-online-version-will-be-overriden-with-your-current-version')}
+                      </HelpPin>
                     </button>
                     <button className="update-from" onClick={updateActivePresentationFromServer}>
-                      ↓ Update local version from the online repository
-                      <HelpPin position="left">Your current version will be overriden with the distant version</HelpPin>
+                      ↓ {translate('update-local-version-from-the-repository')}
+                      <HelpPin position="left">
+                        {translate('your-current-version-will-be-overriden-with-the-distant-version')}
+                      </HelpPin>
                     </button>
                   </div>
                 </div>
@@ -223,10 +256,14 @@ const TakeAwayDialogLayout = ({
       <section className="modal-footer">
         <button
           onClick={closeTakeAwayModal}>
-        Close
-      </button>
+          {translate('close')}
+        </button>
       </section>
     </div>);
+};
+
+TakeAwayDialogLayout.contextTypes = {
+  t: PropTypes.func.isRequired
 };
 
 export default TakeAwayDialogLayout;

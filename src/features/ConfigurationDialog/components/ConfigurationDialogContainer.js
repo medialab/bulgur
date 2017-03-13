@@ -22,7 +22,8 @@ import ConfigurationDialogLayout from './ConfigurationDialogLayout';
 @connect(
   state => ({
     ...duck.selector(state.presentationCandidate),
-    visualizationTypesModels: state.models.visualizationTypes
+    visualizationTypesModels: state.models.visualizationTypes,
+    lang: state.i18nState.lang
   }),
   dispatch => ({
     actions: bindActionCreators({

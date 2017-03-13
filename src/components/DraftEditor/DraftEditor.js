@@ -4,7 +4,7 @@
  * This module provides a reusable draft-powered text wysiwig editor component
  * @module bulgur/components/DraftEditor
  */
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import Editor from 'draft-js-plugins-editor';
 import {
   RichUtils,
@@ -19,6 +19,9 @@ import createRichButtonsPlugin from 'draft-js-richbuttons-plugin';
 const richButtonsPlugin = createRichButtonsPlugin();
 
 import './DraftEditor.scss';
+
+
+import {translateNameSpacer} from '../../helpers/translateUtils';
 
 const {
   // inline buttons
@@ -41,6 +44,10 @@ const {
 } = richButtonsPlugin;
 
 export default class QuinoaDraftSlide extends Component {
+
+  static contextTypes = {
+    t: PropTypes.func.isRequired
+  }
 
   constructor (props) {
     super(props);
@@ -106,6 +113,7 @@ export default class QuinoaDraftSlide extends Component {
   }
 
   render() {
+    const translate = translateNameSpacer(this.context.t, 'Components.DraftEditor');
     const onChange = state => this.onEditorChange(state);
     const onGlobalClick = e => {
       e.stopPropagation();
@@ -119,9 +127,9 @@ export default class QuinoaDraftSlide extends Component {
         onClick={onGlobalClick}>
         <div className="rich-buttons">
           <div className="buttons-group">
-            <BoldButton />
-            <ItalicButton />
-            <UnderlineButton />
+            <BoldButton label={translate('bold')} />
+            <ItalicButton label={translate('italic')} />
+            <UnderlineButton label={translate('underline')} />
           </div>
 
           {/*
@@ -136,7 +144,7 @@ export default class QuinoaDraftSlide extends Component {
           editorState={this.state.editorState}
           onChange={onChange}
           handleKeyCommand={this.handleKeyCommand}
-          placeholder="Write your slide's comment here"
+          placeholder={translate('write-your-slide-comment-here')}
           ref={(editorComponent) => {
 this.editorComponent = editorComponent;
 }}

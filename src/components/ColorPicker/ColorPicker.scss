@@ -1,0 +1,53 @@
+/**
+ * style definitions for the ColorsMapPicker component
+ *
+ * @module bulgur/components/ColorsMapPicker
+ */
+@import '../../parameters.scss';
+
+.bulgur-color-picker
+{
+    /*
+     * root component
+     */
+    margin-bottom: $gutter-medium;
+    /*
+     * specific micro-components
+     */
+    #save-color
+    {
+        @extend .important-item;
+        &:hover
+        {
+            @extend .important-item-intent;
+        }
+    }
+    #cancel
+    {
+        @extend .dangerous-item;
+        &:hover
+        {
+            @extend .dangerous-item-intent;
+        }
+    }
+    /*
+     * secondary layout components
+     */
+    .slider-picker
+    {
+        padding: $gutter-medium;
+
+        border: 1px solid $color-sec-stroke;
+    }
+    .buttons-container
+    {
+        @extend .flex-stretched-row;
+        #save-color,
+        #cancel
+        {
+            padding: $gutter-medium;
+
+            flex: 1;
+        }
+    }
+}
