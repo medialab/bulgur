@@ -121,7 +121,7 @@
             @extend .interactive-item-intent;
             h3
             {
-                border-bottom: 1px solid #333;
+                border-bottom: 1px solid $color-very-dark;
             }
         }
         &.active
@@ -129,7 +129,7 @@
             @extend .interactive-item-active;
             h3
             {
-                border-bottom: 1px solid #333;
+                border-bottom: 1px solid $color-very-dark;
             }
         }
         &:hover.active

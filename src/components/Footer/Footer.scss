@@ -43,7 +43,7 @@
 
             &:not(:first-of-type)
             {
-                border-left: 1px solid #fff;
+                border-left: 1px solid $color-very-light;
             }
             &:hover
             {

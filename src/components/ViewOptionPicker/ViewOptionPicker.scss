@@ -7,31 +7,36 @@
 
 .bulgur-view-option-picker
 {
-  .slider-wrapper
-  {
-    .slider
+    .slider-wrapper
     {
-      height: $gutter-medium;
-      @extend .interactive-item;
+        .slider
+        {
+            height: $gutter-medium;
 
-      cursor: pointer;
+            cursor: pointer;
 
-      .handle
-      {
-        @extend .important-item;
-      width: $gutter-medium;
-      height: $gutter-medium;
-      border-radius: 50%;
-      }
+            @extend .interactive-item;
+
+            .handle
+            {
+                width: $gutter-medium;
+                height: $gutter-medium;
+
+                border-radius: 50%;
+
+                @extend .important-item;
+            }
+        }
+
+        .active-value
+        {
+            display: inline-block;
+
+            width: $gutter-large * 2;
+            margin-top: $gutter-medium;
+            padding: $gutter-small;
+
+            @extend .interactive-item;
+        }
     }
-
-    .active-value
-    {
-      padding: $gutter-small;
-      margin-top: $gutter-medium;
-      @extend .interactive-item;
-      display: inline-block;
-      width: $gutter-large * 2;
-    }
-  }
 }

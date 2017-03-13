@@ -18,7 +18,7 @@
 
     text-align: center;
 
-    border: 1px dashed #333;
+    border: 1px dashed $color-very-dark;
 
     @extend .interactive-item;
     /*

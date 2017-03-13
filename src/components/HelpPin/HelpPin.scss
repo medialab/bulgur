@@ -31,8 +31,8 @@
         cursor: pointer;
         text-align: center;
 
-        color: #333;
-        border: 1px solid #333;
+        color: $color-very-dark;
+        border: 1px solid $color-very-dark;
         border-radius: 50%;
 
         @extend .animated;
@@ -59,7 +59,7 @@
 
         opacity: .00001;
         color: $background-default;
-        background: #333;
+        background: $color-very-dark;
 
         @extend .animated;
         a
@@ -81,7 +81,7 @@
         .pin-icon
         {
             color: $background-default;
-            background: #333;
+            background: $color-very-dark;
         }
         .pin-content-container
         {

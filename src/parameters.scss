@@ -11,14 +11,28 @@ $display-font-stack: 'Source Sans Pro', serif;
 $primary-color: #333;
 $background-default: #f4f4f4;
 $background-intent: #d6cfc4;
-$color-dark: #353635;
-$color-light: #fff;
-$color-valid: #68ce74;
-$color-error: brown;
-
 // new colors
 $color-sec-bg: #f4f4f4;
 $color-sec-stroke: #dddbd9;
+
+$color-very-dark: #333;
+$color-very-light: #e5e7e6;
+$color-warm-grey: #d6cfc4;
+
+$color-savannah-grey : #c3baac;
+$color-fade-grey : #a4a1a1;
+
+$color-turkoise-blue: #3fb0ac;
+$color-dark-blue: #173e43;
+$color-darkest-blue: #072024;
+$color-light-blue: #b8e4e3;
+
+$color-fade-red: #b56969;
+$color-brillant-red: #c83c3c;
+$color-medium-red: #692323;
+$color-dark-red: #3f1010;
+$color-pale-red: #d9c3c3;
+
 // gutters
 $gutter-small: .3rem;
 $gutter-medium: $gutter-small * 2.66;
@@ -87,7 +101,7 @@ $legend-width: 20rem;
 
 .normal-item
 {
-    color: #333;
+    color: $color-very-dark;
     background: $color-sec-bg;
 }
 .normal-item-inactive
@@ -105,13 +119,13 @@ $legend-width: 20rem;
 
 .primary-item
 {
-    color: #333;
-    background: #e5e7e6;
+    color: $color-very-dark;
+    background: $color-very-light;
 }
 
 .primary-item-intent
 {
-    color: #333;
+    color: $color-very-dark;
     background: $color-sec-stroke;
 }
 
@@ -119,86 +133,86 @@ $legend-width: 20rem;
 {
     cursor: pointer;
 
-    color: #333;
-    background: #e5e7e6;
+    color: $color-very-dark;
+    background: $color-very-light;
 }
 .interactive-item-intent
 {
-    color: #333;
+    color: $color-very-dark;
     background: $color-sec-stroke;
 }
 .interactive-item-active
 {
-    color: #333;
-    background: #d6cfc4;
+    color: $color-very-dark;
+    background: $color-warm-grey;
 }
 .interactive-item-intent-active
 {
-    color: #333;
-    background: #c3baac;
+    color: $color-very-dark;
+    background: $color-savannah-grey;
 }
 .interactive-item-inactive
 {
     cursor: default;
 
-    color: #a4a1a1;
-    background: #e5e7e6;
+    color: $color-fade-grey;
+    background: $color-very-light;
 }
 
 .important-item
 {
-    color: #fff;
-    background: #3fb0ac;
+    color: $color-very-light;
+    background: $color-turkoise-blue;
 }
 
 .important-item-intent
 {
-    color: #fff;
-    background: #173e43;
+    color: $color-very-light;
+    background: $color-dark-blue;
 }
 .important-item-active
 {
-    color: #fff;
-    background: #173e43;
+    color: $color-very-light;
+    background: $color-dark-blue;
 }
 .important-item-intent-active
 {
-    color: #fff;
-    background: #072024;
+    color: $color-very-light;
+    background: $color-darkest-blue;
 }
 .important-item-inactive
 {
     cursor: default;
 
-    color: #fff;
-    background: #b8e4e3;
+    color: $color-very-light;
+    background: $color-light-blue;
 }
 
 .dangerous-item
 {
-    color: #fff;
-    background: #b56969;
+    color: $color-very-light;
+    background: $color-fade-red;
 }
 
 .dangerous-item-intent
 {
-    color: #fff;
-    background: #c83c3c;
+    color: $color-very-light;
+    background: $color-brillant-red;
 }
 .dangerous-item-active
 {
-    color: #fff;
-    background: #692323;
+    color: $color-very-light;
+    background: $color-medium-red;
 }
 .dangerous-item-intent-active
 {
-    color: #fff;
-    background: #3f1010;
+    color: $color-very-light;
+    background: $color-dark-red;
 }
 .dangerous-item-inactive
 {
     cursor: default;
 
-    color: #fff;
-    background: #d9c3c3;
+    color: $color-very-light;
+    background: $color-pale-red;
 }
