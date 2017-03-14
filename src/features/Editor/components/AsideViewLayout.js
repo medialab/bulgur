@@ -51,20 +51,19 @@ const AsideViewLayout = ({
   return (<aside className="bulgur-aside-view">
     <div className="aside-header">
       <button className="returnToLanding-btn" onClick={returnToLanding} type="button"><span className="bulgur-icon">☰</span> {translate('back-to-home')}</button>
-      <button 
-        className="settings-btn" 
-        onClick={openSettings} 
+      <button
+        className="settings-btn"
+        onClick={openSettings}
         type="button">
-          <img 
-            className="bulgur-icon-image" 
-            src={require('../assets/settings.svg')} 
-          /> 
-          {activePresentation.metadata && 
-            activePresentation.metadata.title && 
-            activePresentation.metadata.title.length ? 
-              activePresentation.metadata.title 
+        <img
+          className="bulgur-icon-image"
+          src={require('../assets/settings.svg')} />
+        {activePresentation.metadata &&
+            activePresentation.metadata.title &&
+            activePresentation.metadata.title.length ?
+              activePresentation.metadata.title
               : translate('untitled-presentation')} - <i>
-              {translate('settings')}</i>
+                {translate('settings')}</i>
       </button>
     </div>
     {

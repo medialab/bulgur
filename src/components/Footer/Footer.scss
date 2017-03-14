@@ -23,9 +23,9 @@
      */
     .left-group
     {
+        min-width: $gutter-large * 10;
         padding: $gutter-medium;
 
-        min-width: $gutter-large * 10;
         @extend .flex-stretched-row;
         align-items: center;
         justify-content: space-between;
