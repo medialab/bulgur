@@ -21,7 +21,7 @@ const Footer = ({
   return (
     <footer className="bulgur-footer">
       <div className="left-group">
-        <span><button onClick={returnToLanding}>Bulgur</button> | {translate('by')} <a href="http://www.medialab.sciences-po.fr/fr/" target="blank">médialab</a></span>
+        <span className="mini-brand"><button onClick={returnToLanding}>Bulgur</button>| {translate('by')} <a href="http://www.medialab.sciences-po.fr/fr/" target="blank">médialab</a></span>
         <LangToggler
           lang={lang}
           onChange={setLanguage} />

@@ -24,8 +24,16 @@
     .left-group
     {
         padding: $gutter-medium;
-        padding-top: $gutter-medium;
-        padding-bottom: 0;
+
+        min-width: $gutter-large * 10;
+        @extend .flex-stretched-row;
+        align-items: center;
+        justify-content: space-between;
+
+        .bulgur-lang-toggler
+        {
+            margin-left: $gutter-medium;
+        }
     }
 
     .right-group
