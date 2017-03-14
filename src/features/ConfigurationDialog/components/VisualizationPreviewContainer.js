@@ -80,15 +80,15 @@ export default class VisualizationPreviewContainer extends Component {
               <button id="spatialize-nodes" className={isSpatializing ? 'active' : ''} onClick={setIsSpatializing}>
                 {isSpatializing ? translate('stop-spatialization')
               : <span>
-                  {translate('run-spatialization')} <HelpPin position="left">
+                {translate('run-spatialization')} <HelpPin position="left">
                   {translate('run-spatialization-help')}
-            </HelpPin>
+                </HelpPin>
               </span>}
               </button>
               <button id="save-nodes" onClick={this.saveNodesPositions}>
-              {translate('save-nodes-positions')}<HelpPin position="left">
-              {translate('save-nodes-positions-help')}
-            </HelpPin>
+                {translate('save-nodes-positions')}<HelpPin position="left">
+                  {translate('save-nodes-positions-help')}
+                </HelpPin>
               </button>
             </div>
           : null

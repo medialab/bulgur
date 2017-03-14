@@ -337,7 +337,7 @@ const ConfigurationDialogLayout = ({
                               return (
                                 <div className="datamap-group" key={collectionId}>
                                   {Object.keys(visualization.viewParameters.dataMap).length > 1 ?
-                                    <h3>{collectionId.charAt(0).toUpperCase() + collectionId.slice(1) + ' mapping parameters'}</h3>
+                                    <h5>{translate('collection-mapping-parameters', {collection: collectionId})}</h5>
                                   : null}
                                   <div className="datamap-group-mosaic">
                                     {
@@ -441,8 +441,8 @@ const ConfigurationDialogLayout = ({
         <button
           className="cancel-btn"
           onClick={closePresentationCandidate}>
-        {translate('cancel')}
-      </button>
+          {translate('cancel')}
+        </button>
       </section>
     </div>
 );
