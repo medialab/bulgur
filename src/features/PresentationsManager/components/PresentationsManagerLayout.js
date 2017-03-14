@@ -154,7 +154,6 @@ const PresentationsManagerLayout = ({
               accept="application/json"
               onDrop={onDropInput}>
               {translate('drop-a-json-file-here')}
-              Drop a <code>json</code> file in this zone
             </DropZone>
           </div>
         : null}
