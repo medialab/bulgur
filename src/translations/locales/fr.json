@@ -79,7 +79,7 @@
   "Features.PresentationManager.cancel": "annuler",
   "Features.PresentationManager.copy-paste-url-of-the-project": "Coller l'url du projet",
   "Features.PresentationManager.description-$1-goal": "Bulgur est un outil dédié à la fabrication de visites guidées dans des visualisations de données, baptisées présentations de données.",
-  "Features.PresentationManager.description-$2-flow": "Importez un fichier de données depuis votre ordinateur, puis choisissez une techniques de présentation, build your presentation. Then export it to an html file or to an online webpage.",
+  "Features.PresentationManager.description-$2-flow": "Importez un fichier de données depuis votre ordinateur, puis choisissez une techniques de présentation, puis composez votre présentation. Vous pourrez ensuite l'exporter comme fichier html ou page web en ligne.",
   "Features.PresentationManager.do-you-wish-to-override-presentation": "Voulez-vous écraser la version actuelle de la présentation avec celle que vous essayez d'importer ?",
   "Features.PresentationManager.drop-a-json-file-here": "Déposer un fichier .json dans cette zone",
   "Features.PresentationManager.fetch-an-existant-project-from-distant-server": "... ou récupérer un fichier existant depuis un serveur distant",
