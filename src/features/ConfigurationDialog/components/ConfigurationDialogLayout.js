@@ -289,9 +289,9 @@ const ConfigurationDialogLayout = ({
         </section>
         {presentationCandidate && presentationCandidate.datasets && Object.keys(presentationCandidate.datasets).length > 0 ?
           <section className="modal-row">
-            <h2>{translate('how-to-visualize-the-data')} <HelpPin>
+            {hasSlides ? <h2>{translate('how-to-visualize-the-data')} <HelpPin>
               {translate('how-to-visualize-the-data-help')}
-            </HelpPin></h2>
+            </HelpPin></h2> : null}
             {
 
           presentationCandidate.visualizations &&
