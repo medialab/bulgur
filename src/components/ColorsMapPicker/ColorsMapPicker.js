@@ -74,11 +74,13 @@ const ColorsMapPicker = ({
               }
             };
             const onValidate = (thatColor) => {
-              changeColor(visualizationId, editedColor.collectionId, editedColor.category, thatColor);
+              const finalColor = typeof thatColor === 'string' ? thatColor : thatColor.hex;
+              changeColor(visualizationId, editedColor.collectionId, editedColor.category, finalColor);
               toggleColorEdition(visualizationId, colorCollectionId, category);
             };
             const onCancel = (thatColor) => {
-              changeColor(visualizationId, editedColor.collectionId, editedColor.category, thatColor);
+              const finalColor = typeof thatColor === 'string' ? thatColor : thatColor.hex;
+              changeColor(visualizationId, editedColor.collectionId, editedColor.category, finalColor);
               toggleColorEdition(visualizationId, colorCollectionId, category);
             };
             const shown = shownCategories && shownCategories[colorCollectionId] ? shownCategories[colorCollectionId].find(cat => cat === category) !== undefined : true;
@@ -126,7 +128,8 @@ const ColorsMapPicker = ({
                         onCancel={onCancel}
                         onValidate={onValidate}
                         onChange={onColorChange}
-                        color={activeColor} />
+                        color={activeColor}
+                      />
                       : null
                   }
               </div>

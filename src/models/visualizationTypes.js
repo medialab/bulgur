@@ -8,9 +8,17 @@ const models = {
     acceptedFileExtensions: ['csv'],
     dataMap: {
       main: {
-        'name': {
-          id: 'name',
+        'title': {
+          id: 'title',
           acceptedValueTypes: ['string', 'number']
+        },
+        'description': {
+          id: 'description',
+          acceptedValueTypes: ['string']
+        },
+        'source': {
+          id: 'source',
+          acceptedValueTypes: ['string']
         },
         'category': {
           id: 'category',
