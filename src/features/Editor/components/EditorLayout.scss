@@ -112,14 +112,6 @@
     {
         padding: $gutter-medium;
     }
-
-    /*
-     * DIRTY HACKS
-     */
-    .slide-caption-container .nav-container .quick-nav li
-    {
-        margin-left: $gutter-medium * 1.5;
-    }
 }
 
 .ReactModal__Content.ReactModal__Content--after-open
