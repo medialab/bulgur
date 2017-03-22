@@ -128,8 +128,7 @@ const ColorsMapPicker = ({
                         onCancel={onCancel}
                         onValidate={onValidate}
                         onChange={onColorChange}
-                        color={activeColor}
-                      />
+                        color={activeColor} />
                       : null
                   }
               </div>
