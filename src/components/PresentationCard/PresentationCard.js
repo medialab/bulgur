@@ -16,23 +16,17 @@ const computeVisIcons = (presentation) => {
           Object.keys(presentation.visualizations)
           .map(k => presentation.visualizations[k])
           .map((visualization, index) => {
-            let icon = '';
             const type = visualization.metadata.visualizationType;
             switch (type) {
               case 'map':
-                icon = './assets/bulgur-vistype-map.svg';
-                break;
+                return (<img key={index} src={require('./assets/bulgur-vistype-map.svg')} />);
               case 'network':
-                icon = './assets/bulgur-vistype-network.svg';
-                break;
+                return (<img key={index} src={require('./assets/bulgur-vistype-network.svg')} />);
               case 'timeline':
-                icon = './assets/bulgur-vistype-timeline.svg';
-                break;
+                return (<img key={index} src={require('./assets/bulgur-vistype-timeline.svg')} />);
               default:
-                icon = './assets/bulgur-vistype-network.svg';
-                break;
+                return (<img key={index} src={require('./assets/bulgur-vistype-network.svg')} />);
             }
-            return (<img key={index} src={require(icon)} />);
           })
         }
       </span>
