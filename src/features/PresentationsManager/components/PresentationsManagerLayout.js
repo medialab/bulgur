@@ -56,7 +56,7 @@ const PresentationsManagerLayout = ({
     setLanguage
   }
 }, context) => {
-  const translate = translateNameSpacer(context.t, 'Features.PresentationManager');
+  const translate = translateNameSpacer(context.t, 'Features.PresentationsManager');
   const onCreatePresentation = () => {
     startPresentationCandidateConfiguration();
   };

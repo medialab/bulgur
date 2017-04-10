@@ -116,9 +116,7 @@ class VisualizationManager extends Component {
             return null;
       }
     }
- else {
-      return null;
-    }
+    return null;
   }
 }
 
@@ -126,7 +124,7 @@ VisualizationManager.propTypes = {
   // dataMap: PropTypes.Object // commented to avoid messing with the linter
   // data: PropTypes.Object, // commented to avoid messing with the linter
   // viewParameters: PropTypes.Object, // commented to avoid messing with the linter
-  visualizationType: PropTypes.String,
+  visualizationType: PropTypes.string,
   onUserChange: PropTypes.func
 };
 
