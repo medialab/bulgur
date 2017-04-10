@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sample Project\n"
-"POT-Creation-Date: 2017-3-14\n"
-"PO-Revision-Date: Tue Mar 14 2017 11:59:56 GMT+0100 (CET)\n"
+"POT-Creation-Date: 2017-3-24\n"
+"PO-Revision-Date: Fri Mar 24 2017 16:47:36 GMT+0100 (CET)\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -236,70 +236,70 @@ msgstr "Présentation sans titre"
 msgid "Features.Editor.write-your-slide-title-here"
 msgstr "écrire le titre de votre diapositive ici"
 
-msgid "Features.PresentationManager.about-forccast"
+msgid "Features.PresentationsManager.about-forccast"
 msgstr "Bulgur est conçu pour être utilisé lors de cours innovants portant sur les cartographies de controverses pilotés par le programme FORCCAST."
 
-msgid "Features.PresentationManager.about-medialab"
+msgid "Features.PresentationsManager.about-medialab"
 msgstr "Bulgur est un programme open source développé par le médialab sciences po."
 
-msgid "Features.PresentationManager.cancel"
+msgid "Features.PresentationsManager.cancel"
 msgstr "annuler"
 
-msgid "Features.PresentationManager.copy-paste-url-of-the-project"
+msgid "Features.PresentationsManager.copy-paste-url-of-the-project"
 msgstr "Coller l'url de la présentation à télécharger"
 
-msgid "Features.PresentationManager.description-$1-goal"
+msgid "Features.PresentationsManager.description-$1-goal"
 msgstr "Bulgur est un outil dédié à la fabrication de visites guidées dans des visualisations de données, baptisées présentations de données."
 
-msgid "Features.PresentationManager.description-$2-flow"
+msgid "Features.PresentationsManager.description-$2-flow"
 msgstr "Importez un fichier de données depuis votre ordinateur, puis choisissez une techniques de présentation, puis composez votre présentation. Vous pourrez ensuite l'exporter comme fichier html ou page web en ligne."
 
-msgid "Features.PresentationManager.do-you-wish-to-override-presentation"
+msgid "Features.PresentationsManager.do-you-wish-to-override-presentation"
 msgstr "Voulez-vous écraser la version actuelle de la présentation avec celle que vous essayez d'importer ?"
 
-msgid "Features.PresentationManager.drop-a-json-file-here"
+msgid "Features.PresentationsManager.drop-a-json-file-here"
 msgstr "Déposer un fichier .json dans cette zone"
 
-msgid "Features.PresentationManager.fetch-an-existant-project-from-distant-server"
+msgid "Features.PresentationsManager.fetch-an-existant-project-from-distant-server"
 msgstr "... ou récupérer un fichier stocké sur un serveur distant"
 
-msgid "Features.PresentationManager.import"
+msgid "Features.PresentationsManager.import"
 msgstr "importer"
 
-msgid "Features.PresentationManager.import-project-from-computer"
+msgid "Features.PresentationsManager.import-project-from-computer"
 msgstr "... ou importer un fichier de présentation sauvegardé sur votre ordinateur"
 
-msgid "Features.PresentationManager.maximum-presentations-reached"
+msgid "Features.PresentationsManager.maximum-presentations-reached"
 msgstr "Vous avez atteint le nombre maximum de présentation stockées localement. Il vous faut créer un peu de place avant d'en créer de nouvelles. Rappellez-vous que vous pouvez télécharger vos présentation ou les déposer sur le web et les réimporter plus tard !"
 
-msgid "Features.PresentationManager.or-continue-locally-stored-presentation"
+msgid "Features.PresentationsManager.or-continue-locally-stored-presentation"
 msgstr "... ou continuer l'une de vos présentation stockées localement"
 
-msgid "Features.PresentationManager.override-existing-version-of-presentation"
+msgid "Features.PresentationsManager.override-existing-version-of-presentation"
 msgstr "Écraser la version existante de la présentation"
 
-msgid "Features.PresentationManager.presentation-already-exists"
+msgid "Features.PresentationsManager.presentation-already-exists"
 msgstr "La présentation existe déjà"
 
-msgid "Features.PresentationManager.start-a-new-presentation"
+msgid "Features.PresentationsManager.start-a-new-presentation"
 msgstr "Commencer une nouvelle présentation"
 
-msgid "Features.PresentationManager.the-fetching-process-failed"
+msgid "Features.PresentationsManager.the-fetching-process-failed"
 msgstr "Le processus de téléchargement de la présentation a échoué"
 
-msgid "Features.PresentationManager.the-gist-is-not-properly-formatted"
+msgid "Features.PresentationsManager.the-gist-is-not-properly-formatted"
 msgstr "Le dépôt gist n'est pas correctement formatté"
 
-msgid "Features.PresentationManager.the-url-did-not-point-to-a-valid-presentation"
+msgid "Features.PresentationsManager.the-url-did-not-point-to-a-valid-presentation"
 msgstr "L'url ne pointe pas vers une présentation valide"
 
-msgid "Features.PresentationManager.you-seem-to-have-already-this-presentation"
+msgid "Features.PresentationsManager.you-seem-to-have-already-this-presentation"
 msgstr "Vous semblez disposer déjà une version de la présentation que vous essayez d'importer dans la mémoire locale de l'application."
 
-msgid "Features.PresentationManager.your-file-is-badly-formatted"
+msgid "Features.PresentationsManager.your-file-is-badly-formatted"
 msgstr "Le fichier est mal formatté"
 
-msgid "Features.PresentationManager.your-file-is-not-a-valid-presentation"
+msgid "Features.PresentationsManager.your-file-is-not-a-valid-presentation"
 msgstr "Le fichier n'est pas une presentation valide"
 
 msgid "Features.TakeAway.close"
@@ -373,3 +373,69 @@ msgstr "Les positions des données seront sauvegardées dans les données utilis
 
 msgid "Features.ConfigurationDialog.collection-mapping-parameters"
 msgstr "Correspondances de la collection {collection}"
+
+msgid "Features.PresentationManager.description-$1-goal"
+msgstr "description-$1-goal"
+
+msgid "Features.PresentationManager.description-$2-flow"
+msgstr "description-$2-flow"
+
+msgid "Features.PresentationManager.about-forccast"
+msgstr "about-forccast"
+
+msgid "Features.PresentationManager.about-medialab"
+msgstr "about-medialab"
+
+msgid "Features.PresentationManager.start-a-new-presentation"
+msgstr "start-a-new-presentation"
+
+msgid "Features.PresentationManager.maximum-presentations-reached"
+msgstr "maximum-presentations-reached"
+
+msgid "Features.PresentationManager.or-continue-locally-stored-presentation"
+msgstr "or-continue-locally-stored-presentation"
+
+msgid "Features.PresentationManager.import-project-from-computer"
+msgstr "import-project-from-computer"
+
+msgid "Features.PresentationManager.drop-a-json-file-here"
+msgstr "drop-a-json-file-here"
+
+msgid "Features.PresentationManager.fetch-an-existant-project-from-distant-server"
+msgstr "fetch-an-existant-project-from-distant-server"
+
+msgid "Features.PresentationManager.copy-paste-url-of-the-project"
+msgstr "copy-paste-url-of-the-project"
+
+msgid "Features.PresentationManager.import"
+msgstr "import"
+
+msgid "Features.PresentationManager.your-file-is-badly-formatted"
+msgstr "your-file-is-badly-formatted"
+
+msgid "Features.PresentationManager.your-file-is-not-a-valid-presentation"
+msgstr "your-file-is-not-a-valid-presentation"
+
+msgid "Features.PresentationManager.the-url-did-not-point-to-a-valid-presentation"
+msgstr "the-url-did-not-point-to-a-valid-presentation"
+
+msgid "Features.PresentationManager.the-gist-is-not-properly-formatted"
+msgstr "the-gist-is-not-properly-formatted"
+
+msgid "Features.PresentationManager.the-fetching-process-failed"
+msgstr "the-fetching-process-failed"
+
+msgid "Features.PresentationManager.presentation-already-exists"
+msgstr "presentation-already-exists"
+
+msgid "Features.PresentationManager.you-seem-to-have-already-this-presentation"
+msgstr "you-seem-to-have-already-this-presentation"
+
+msgid "Features.PresentationManager.do-you-wish-to-override-presentation"
+msgstr "do-you-wish-to-override-presentation"
+
+msgid "Features.PresentationManager.override-existing-version-of-presentation"
+msgstr "override-existing-version-of-presentation"
+
+msgid "Features.PresentationManager.cancel"
+msgstr "cancel"
