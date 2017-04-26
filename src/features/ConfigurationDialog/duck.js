@@ -592,19 +592,22 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
       };
     case SET_PREVIEW_VIEW_PARAMETERS:
       const {viewParameters} = action;
-      return {
-        ...state,
-        presentationCandidate: {
-          ...state.presentationCandidate,
-          visualizations: {
-            ...state.presentationCandidate.visualizations,
-            [action.visualizationId]: {
-              ...state.presentationCandidate.visualizations[action.visualizationId],
-              viewParameters
+      if (state.presentationCandidate && state.presentationCandidate.visualizations) {
+        return {
+          ...state,
+          presentationCandidate: {
+            ...state.presentationCandidate,
+            visualizations: {
+              ...state.presentationCandidate.visualizations,
+              [action.visualizationId]: {
+                ...state.presentationCandidate.visualizations[action.visualizationId],
+                viewParameters
+              }
             }
           }
-        }
-      };
+        };
+      }
+      return state;
     case SET_VISUALIZATION_IS_SPATIALIZING:
       return {
         ...state,

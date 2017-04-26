@@ -96,7 +96,7 @@ const ConfigurationDialogLayout = ({
                   type="text"
                   name="title"
                   placeholder={translate('title-of-the-presentation')}
-                  value={presentationCandidate.metadata.title} />
+                  value={presentationCandidate.metadata.title || ''} />
               </div>
 
               <div className="input-group">
@@ -106,7 +106,7 @@ const ConfigurationDialogLayout = ({
                   type="text"
                   name="authors"
                   placeholder={translate('authors-of-the-presentation')}
-                  value={presentationCandidate.metadata.authors} />
+                  value={presentationCandidate.metadata.authors || ''} />
               </div>
             </div>
 
@@ -119,7 +119,7 @@ const ConfigurationDialogLayout = ({
                   name="description"
                   placeholder={translate('description-of-the-presentation')}
                   style={{flex: 1}}
-                  value={presentationCandidate.metadata.description} />
+                  value={presentationCandidate.metadata.description || ''} />
               </div>
             </div>
           </form>
@@ -169,7 +169,7 @@ const ConfigurationDialogLayout = ({
                               type="text"
                               name="title"
                               placeholder={translate('title-of-the-dataset')}
-                              value={dataset.metadata.title} />
+                              value={dataset.metadata.title || ''} />
                           </div>
                           <div className="input-group">
                             <label htmlFor="description">{translate('description-of-the-dataset')}</label>
@@ -178,7 +178,7 @@ const ConfigurationDialogLayout = ({
                               type="text"
                               name="description"
                               placeholder={translate('description-of-the-dataset')}
-                              value={dataset.metadata.description} />
+                              value={dataset.metadata.description || ''} />
                           </div>
                           <div className="input-group">
                             <label htmlFor="url">{translate('url-of-the-dataset')}</label>
@@ -187,7 +187,7 @@ const ConfigurationDialogLayout = ({
                               type="text"
                               name="url"
                               placeholder={translate('url-of-the-dataset')}
-                              value={dataset.metadata.url} />
+                              value={dataset.metadata.url || ''} />
                           </div>
                           <div className="input-group">
                             <label htmlFor="license">{translate('license-of-the-dataset')}</label>
@@ -196,7 +196,7 @@ const ConfigurationDialogLayout = ({
                               type="text"
                               name="license"
                               placeholder={translate('license-of-the-dataset')}
-                              value={dataset.metadata.license} />
+                              value={dataset.metadata.license || ''} />
                           </div>
                         </form>
                       </div>
