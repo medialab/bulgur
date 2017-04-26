@@ -3,7 +3,8 @@
  * dedicated to rendering the presentations manager feature interface
  * @module bulgur/features/PresentationsManager
  */
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {get} from 'superagent';

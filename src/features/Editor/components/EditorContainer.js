@@ -3,7 +3,8 @@
  * dedicated to rendering the editor feature interface
  * @module bulgur/features/Editor
  */
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {v4 as uuid} from 'uuid';
@@ -103,7 +104,6 @@ class EditorContainer extends Component {
         {...this.props}
         openSettings={this.openSettings}
         closeAndResetDialog={this.closeAndResetDialog}
-        updateSlide={this.updateSlide}
         duplicateSlide={this.duplicateSlide}
         returnToLanding={this.returnToLanding}
         addSlide={this.addSlide}

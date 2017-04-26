@@ -4,7 +4,8 @@
  * This module provides a reusable draft-powered text wysiwig editor component
  * @module bulgur/components/DraftEditor
  */
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import Editor from 'draft-js-plugins-editor';
 import {
   RichUtils,

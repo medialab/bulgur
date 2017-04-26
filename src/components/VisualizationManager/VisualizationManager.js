@@ -4,7 +4,8 @@
  * optimizations related to re-mapping the data / re-rendering the vis
  * @module bulgur/components/VisualizationManager
  */
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 import {
   Timeline,

@@ -2,7 +2,8 @@
  * This module exports a stateless component rendering the layout of the takeway dialog feature interface
  * @module bulgur/features/TakeAwayDialog
  */
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import './TakeAwayDialog.scss';
 

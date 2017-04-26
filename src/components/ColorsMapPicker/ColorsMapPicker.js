@@ -4,8 +4,8 @@
  * This module provides a reusable colorsmap picker component
  * @module bulgur/components/ColorMapPicker
  */
-import React, {PropTypes} from 'react';
-
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import {translateNameSpacer} from '../../helpers/translateUtils';
 

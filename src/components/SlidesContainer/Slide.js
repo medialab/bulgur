@@ -3,7 +3,8 @@
  * This module provides a reusable draggable slide component
  * @module bulgur/components/Slide
  */
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {findDOMNode} from 'react-dom';
 
 import Textarea from 'react-textarea-autosize';

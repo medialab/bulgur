@@ -2,7 +2,8 @@
  * This module provides a reusable Footer picker component for bulgur
  * @module bulgur/components/Footer
  */
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import LangToggler from '../LangToggler/LangToggler';
 

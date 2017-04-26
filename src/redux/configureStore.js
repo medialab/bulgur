@@ -30,7 +30,7 @@ export default function configureStore (initialState = {}) {
 
 
   // Create final store and subscribe router in debug env ie. for devtools
-  const createStoreWithMiddleware = window.__REDUX_DEVTOOLS_EXTENSION__ ? 
+  const createStoreWithMiddleware = window.__REDUX_DEVTOOLS_EXTENSION__ ?
       compose(
         // related middlewares
         middleware,
@@ -38,8 +38,8 @@ export default function configureStore (initialState = {}) {
         persistentStore(db),
         // connection to redux dev tools
         window.__REDUX_DEVTOOLS_EXTENSION__()
-      )(createStore) 
-    : 
+      )(createStore)
+    :
       compose(middleware, persistentStore(db))(createStore);
 
   const store = createStoreWithMiddleware(

@@ -2,7 +2,8 @@
  * This module provides a reusable slide settings pannel for the editor
  * @module bulgur/components/SlideSettingsPannel
  */
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import './SlideSettingsPannel.scss';
 
