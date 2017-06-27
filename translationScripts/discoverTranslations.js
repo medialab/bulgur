@@ -54,13 +54,25 @@ var discoverTranslations = function() {
   const msgs = [];
 
   locales.forEach(locale => {
+        // Object.keys(keys).map(key => {
+    //   if (locale.translations[key] === undefined) {
+    //     const shortKey = key.split('.').pop();
+    //     locale.translations[key] = shortKey;
+    //     console.log(colors.red('Automatically adding the key ' + shortKey + ' to locale ' + locale.fileName));
+    //   }
+    // });
+    const newTranslations = {};
     Object.keys(keys).map(key => {
-      if (locale.translations[key] === undefined) {
+      if (locale.translations[key] !== undefined) {
         const shortKey = key.split('.').pop();
-        locale.translations[key] = shortKey;
+        console.log(colors.green(shortKey + ' for locale ' + locale.fileName + ' already exists'));
+      } else {
+        const shortKey = key.split('.').pop();
+        newTranslations = shortKey;
         console.log(colors.red('Automatically adding the key ' + shortKey + ' to locale ' + locale.fileName));
       }
     });
+    locale.translations = newTranslations;
   });
 
   locales.forEach(locale => {

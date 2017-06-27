@@ -83,7 +83,8 @@
             margin: 0;
 
             @extend .flex-stretched-row;
-            img{
+            img
+            {
                 height: $font-size-5;
                 margin-right: $gutter-medium;
             }
