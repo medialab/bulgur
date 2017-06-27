@@ -20,13 +20,13 @@ const computeVisIcons = (presentation) => {
             const type = visualization.metadata.visualizationType;
             switch (type) {
               case 'map':
-                return (<img key={index} src={require('./assets/bulgur-vistype-map.svg')} />);
+                return (<img key={index} src={require('../../sharedAssets/bulgur-vistype-map.svg')} />);
               case 'network':
-                return (<img key={index} src={require('./assets/bulgur-vistype-network.svg')} />);
+                return (<img key={index} src={require('../../sharedAssets/bulgur-vistype-network.svg')} />);
               case 'timeline':
-                return (<img key={index} src={require('./assets/bulgur-vistype-timeline.svg')} />);
+                return (<img key={index} src={require('../../sharedAssets/bulgur-vistype-timeline.svg')} />);
               default:
-                return (<img key={index} src={require('./assets/bulgur-vistype-network.svg')} />);
+                return (<img key={index} src={require('../../sharedAssets/bulgur-vistype-network.svg')} />);
             }
           })
         }
@@ -63,15 +63,15 @@ const PresentationCard = ({
         </div>
         <div className="buttons-column">
           <button className="edit-btn" onClick={setToActive}>
-            <img src={require('./assets/edit.svg')} className="bulgur-icon-image" />
+            <img src={require('../../sharedAssets/edit-white.svg')} className="bulgur-icon-image" />
             {translate('edit')}
           </button>
           <button className="settings-btn" onClick={configure}>
-            <img src={require('./assets/settings.svg')} className="bulgur-icon-image" />
+            <img src={require('../../sharedAssets/settings-black.svg')} className="bulgur-icon-image" />
             {translate('settings')}
           </button>
           <button className={'delete-btn ' + (promptedToDelete ? 'inactive' : '')} onClick={onClickPrompt}>
-            <img src={require('./assets/close.svg')} className="bulgur-icon-image" />
+            <img src={require('../../sharedAssets/close-white.svg')} className="bulgur-icon-image" />
             {translate('delete')}
           </button>
         </div>

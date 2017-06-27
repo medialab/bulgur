@@ -127,9 +127,9 @@ const SlideSettingsPannel = ({
         <button className={'open-pannel ' + (isOpen ? 'active' : '')}
           onClick={togglePannel}>
           {isOpen ?
-            <span><img className="bulgur-icon-image" src={require('./assets/close.svg')} />{translate('close-advanced-options')}</span>
+            <span><img className="bulgur-icon-image" src={require('../../sharedAssets/close-white.svg')} />{translate('close-advanced-options')}</span>
               :
-            <span><img className="bulgur-icon-image" src={require('./assets/settings.svg')} />{translate('open-advanced-options')}</span>
+            <span><img className="bulgur-icon-image" src={require('../../sharedAssets/settings-black.svg')} />{translate('open-advanced-options')}</span>
           }</button>
       </div>
     </aside>

@@ -52,11 +52,11 @@ const ColorsMapPicker = ({
           {shownCategories && Object.keys(collectionMap).length > 1 ?
             <div className="global-operations">
               <button onClick={showAll} className={shownCategories[colorCollectionId].length !== Object.keys(collectionMap).length ? 'active' : 'inactive'}>
-                <img className="bulgur-icon-image" src={require('./assets/show.svg')} />
+                <img className="bulgur-icon-image" src={require('../../sharedAssets/show-black.svg')} />
                 {translate('show-all')}
               </button>
               <button onClick={hideAll} className={shownCategories[colorCollectionId].length ? 'active' : 'inactive'}>
-                <img className="bulgur-icon-image" src={require('./assets/hide.svg')} />
+                <img className="bulgur-icon-image" src={require('../../sharedAssets/hide-black.svg')} />
                 {translate('hide-all')}
               </button>
             </div> : null}
@@ -112,9 +112,9 @@ const ColorsMapPicker = ({
                   {shownCategories ?
                     <button title={shown ? translate('hide') : translate('show')} onClick={onFilterClick} className="filter">
                       {shown ?
-                        <img className="bulgur-icon-image" src={require('./assets/hide.svg')} />
+                        <img className="bulgur-icon-image" src={require('../../sharedAssets/hide-black.svg')} />
                         :
-                        <img className="bulgur-icon-image" src={require('./assets/show.svg')} />
+                        <img className="bulgur-icon-image" src={require('../../sharedAssets/show-black.svg')} />
                     }
                     </button>
                   : null}
