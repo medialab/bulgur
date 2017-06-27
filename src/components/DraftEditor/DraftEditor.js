@@ -6,6 +6,7 @@
  */
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {debounce} from 'lodash';
 import Editor from 'draft-js-plugins-editor';
 import {
   RichUtils,
@@ -64,12 +65,12 @@ export default class QuinoaDraftSlide extends Component {
 
     this.onEditorChange = (editorState) => {
       if (this.state.initialized) {
-        const markdown = stateToMarkdown(editorState.getCurrentContent());
         this.setState({
           editorState,
-          markdown
+          // markdown
         });
-        this.props.update(markdown);
+        this.sendUpdate(editorState);
+        // this.props.update(markdown);
       }
       else {
         this.setState({
@@ -77,14 +78,16 @@ export default class QuinoaDraftSlide extends Component {
         });
       }
     };
+    this.sendUpdate = debounce(this.sendUpdate, 400);
     this.handleKeyCommand = this.handleKeyCommand.bind(this);
   }
 
   componentWillReceiveProps() {
     // update editor if markdown representation of content is different between props and state
     if (this.props.slide && this.props.slide.markdown && this.props.slide.markdown !== this.state.markdown) {
+      const contentState = stateFromMarkdown(this.props.slide.markdown);
       this.setState({
-        editorState: EditorState.createWithContent(stateFromMarkdown(this.props.slide.markdown)),
+        editorState: EditorState.createWithContent(contentState),
         markdown: this.props.slide.markdown
       });
     }
@@ -95,13 +98,24 @@ export default class QuinoaDraftSlide extends Component {
     //this.state.markdown !== nextState.markdown;
   }
 
-  componentDidUpdate() {
-    if (this.props.slide && typeof this.props.slide.markdown === 'string' && this.props.slide.markdown !== this.state.markdown) {
-      this.setState({
-        editorState: EditorState.createWithContent(stateFromMarkdown(this.props.slide.markdown)),
-        markdown: this.props.slide.markdown
-      });
-    }
+  // componentDidUpdate() {
+  //   console.log('component did update')
+  //   if (this.props.slide && typeof this.props.slide.markdown === 'string' && this.props.slide.markdown !== this.state.markdown) {
+  //     console.time('convert to markdown');
+  //     this.setState({
+  //       editorState: EditorState.createWithContent(stateFromMarkdown(this.props.slide.markdown)),
+  //       markdown: this.props.slide.markdown
+  //     });
+  //     console.timeEnd('convert to markdown');
+  //   }
+  // }
+
+  sendUpdate (editorState) {
+    const markdown = stateToMarkdown(editorState.getCurrentContent());
+    this.props.update(markdown);
+    this.setState({
+      markdown
+    });
   }
 
   handleKeyCommand(command) {

@@ -81,6 +81,12 @@
             font-size: $font-size-5;
 
             margin: 0;
+
+            @extend .flex-stretched-row;
+            img{
+                height: $font-size-5;
+                margin-right: $gutter-medium;
+            }
         }
         h1,
         .new-presentation

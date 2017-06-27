@@ -66,7 +66,9 @@ const PresentationsManagerLayout = ({
   return (
     <section className="bulgur-presentations-manager-layout">
       <section className="landing-group">
-        <h1>Bulgur</h1>
+        <h1>
+          <img src={require('../assets/logo-bulgur.png')} />
+        bulgur</h1>
         <div className="row-section">
           <p>
             <LangToggler lang={lang} onChange={setLanguage} />
@@ -78,14 +80,14 @@ const PresentationsManagerLayout = ({
             {translate('description-$2-flow')}
           </p>
         </div>
-        <div className="row-section">
+        {/*<div className="row-section">
           <iframe
             width="100%"
             height="300"
             src="https://www.youtube.com/embed/VsnhrYjP02M"
             frameBorder="0"
             allowFullScreen />
-        </div>
+        </div>*/}
         <div className="row-section about">
           <p>
             {translate('about-forccast')}
@@ -165,7 +167,7 @@ const PresentationsManagerLayout = ({
             </h3>
             <form onSubmit={importFromDistantJSON}>
               <input
-                value={importFromUrlCandidate}
+                value={importFromUrlCandidate || ''}
                 onChange={onImportFromUrlChange} type="text"
                 placeholder={translate('copy-paste-url-of-the-project')} />
               <input
