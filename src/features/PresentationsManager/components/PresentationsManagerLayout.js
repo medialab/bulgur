@@ -66,18 +66,22 @@ const PresentationsManagerLayout = ({
   return (
     <section className="bulgur-presentations-manager-layout">
       <section className="landing-group">
-        <h1>
+        <div className="brand-cartel">
           <img src={require('../assets/logo-bulgur.png')} />
-        bulgur</h1>
+          <div className="title">
+            <h1><span>Bulgur</span></h1>
+            <h2 className="app-baseline">{translate('bulgur-baseline')}</h2>
+          </div>
+        </div>
         <div className="row-section">
-          <p>
-            <LangToggler lang={lang} onChange={setLanguage} />
-          </p>
-          <p>
+          <p className="important-explanation">
             {translate('description-$1-goal')}
           </p>
-          <p>
+          <p className="important-explanation">
             {translate('description-$2-flow')}
+          </p>
+          <p className="important-explanation">
+            <LangToggler lang={lang} onChange={setLanguage} />
           </p>
         </div>
         {/*<div className="row-section">
