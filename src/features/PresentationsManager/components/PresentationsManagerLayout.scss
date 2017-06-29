@@ -42,8 +42,9 @@
         flex-flow: column nowrap;
         &:first-of-type
         {
-            padding-left: 10%;
             display: block;
+
+            padding-left: 10%;
         }
         &:last-of-type
         {
@@ -77,31 +78,39 @@
                 max-width: 8rem;
             }
         }
-        .brand-cartel{
-            @extend .flex-stretched-row;
+        .brand-cartel
+        {
             margin-bottom: $gutter-large;
-            img{
+
+            @extend .flex-stretched-row;
+            img
+            {
                 width: $gutter-large * 2;
                 height: $gutter-large * 2;
                 margin-right: $gutter-medium;
             }
-            .title{
+            .title
+            {
                 flex: 1;
 
                 h1
                 {
                     font-size: $font-size-5;
+
                     margin: 0;
                 }
 
-                .app-baseline{
+                .app-baseline
+                {
                     font-style: italic;
+
                     margin: 0;
                 }
             }
         }
 
-        .important-explanation{
+        .important-explanation
+        {
             font-size: $font-size-3;
         }
         /*

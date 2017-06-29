@@ -3,7 +3,9 @@
  * @module bulgur/features/Editor
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import Modal from 'react-modal';
+import Helmet from 'react-helmet';
 
 import './EditorLayout.scss';
 
@@ -12,6 +14,7 @@ import QuinoaPresentationPlayer from 'quinoa-presentation-player';
 import AsideViewLayout from './AsideViewLayout';
 import MainViewLayout from './MainViewLayout';
 import Footer from '../../../components/Footer/Footer';
+import {translateNameSpacer} from '../../../helpers/translateUtils';
 
 import PresentationsManagerContainer from '../../PresentationsManager/components/PresentationsManagerContainer';
 
@@ -83,7 +86,7 @@ const EditorLayout = ({
   duplicateSlide,
   openSettings,
   closeAndResetDialog,
-}) => {
+}, context) => {
 
   const closeModal = () => {
     if (isPresentationCandidateModalOpen) {
@@ -102,11 +105,15 @@ const EditorLayout = ({
       setUiMode('edition');
     }
   };
+  const translate = translateNameSpacer(context.t, 'Features.Editor');
   return (<div id={id} className={className}>
     {activePresentationId ?
       <div className={className}>
         {globalUiMode === 'edition' ?
           <section className="bulgur-main-row">
+            <Helmet>
+                <title>Bulgur - {activePresentation.metadata.title || translate('untitled-presentation')}</title>
+            </Helmet>
             <AsideViewLayout
               activePresentation={activePresentation}
               openSettings={openSettings}
@@ -162,6 +169,10 @@ const EditorLayout = ({
       }
     </Modal>
   </div>);
+};
+
+EditorLayout.contextTypes = {
+  t: PropTypes.func.isRequired
 };
 
 export default EditorLayout;
