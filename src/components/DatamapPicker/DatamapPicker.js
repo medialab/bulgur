@@ -56,6 +56,8 @@ class DatamapPicker extends React.Component {
             clearable={false}
             ref={bindSelect}
             options={
+              (visualization &&
+              visualization.dataProfile[collectionId] &&
               visualization.dataProfile[collectionId]
               // filter fields correct value type
               .filter(field => {
@@ -70,6 +72,7 @@ class DatamapPicker extends React.Component {
                   label: (<span>{field.propertyName} <span className="data-field-coverage" title="data field coverage">({field.coverage.covered}/{field.coverage.total})</span></span>)
                 }
               ))
+              ) || []
             }
             onChange={onChange} />
         </div>
