@@ -68,7 +68,7 @@ const ViewOptionPicker = ({
   }
 
   return (
-    <div className="bulgur-view-option-picker">
+    <div className="bulgur-ViewOptionPicker">
       <h5>{option.label}</h5>
       <div>
         <OptionComponent

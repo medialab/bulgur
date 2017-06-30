@@ -46,7 +46,7 @@ const SlideSettingsPannel = ({
 
   const translate = translateNameSpacer(context.t, 'Components.SlidesSettingsPannel');
   return (
-    <aside className={'bulgur-settings-pannel ' + (isOpen ? 'open' : '')}>
+    <aside className={'bulgur-SlideSettingsPannel ' + (isOpen ? 'open' : '')}>
       <div className="settings-wrapper">
         <div className="settings-container">
           <div className={'settings-contents ' + (isOpen ? 'visible' : '')}>

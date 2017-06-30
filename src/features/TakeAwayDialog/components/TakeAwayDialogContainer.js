@@ -13,7 +13,7 @@ import * as duck from '../duck';
 import {
   closeTakeAwayModal,
   selector as bulgurSelector
-} from '../../Editor/duck';
+} from '../../PresentationEditor/duck';
 
 import {
   selector as presentationsSelector,
@@ -41,7 +41,7 @@ import TakeAwayDialogLayout from './TakeAwayDialogLayout';
 @connect(
   state => ({
     ...duck.selector(state.takeAway),
-    ...bulgurSelector(state.bulgurEditor),
+    ...bulgurSelector(state.bulgurPresentationEditor),
     ...presentationsSelector(state.presentations),
     lang: state.i18nState.lang
   }),

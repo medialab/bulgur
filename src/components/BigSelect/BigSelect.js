@@ -12,7 +12,7 @@ const BigSelect = ({
   activeOptionId
 }) => {
   return (
-    <form className="bulgur-big-select">
+    <form className="bulgur-BigSelect">
       {
         options
         .map((option, key) => {

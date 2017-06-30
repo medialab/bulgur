@@ -5,7 +5,7 @@
  */
 @import '../../../parameters.scss';
 
-.bulgur-configuration-dialog-layout
+.bulgur-ConfigurationDialogLayout
 {
     /*
      * root component
@@ -97,7 +97,7 @@
         }
     }
 
-    .bulgur-toaster
+    .bulgur-Toaster
     {
         margin-top: $gutter-medium;
     }
@@ -153,7 +153,7 @@
         }
     }
 
-    .bulgur-datamap-picker
+    .bulgur-DatamapPicker
     {
         margin-bottom: $gutter-medium;
     }
@@ -229,7 +229,7 @@
     // tertiary layout
     .dataset-data
     {
-        .bulgur-drop-zone
+        .bulgur-DropZone
         {
             flex: 1;
         }

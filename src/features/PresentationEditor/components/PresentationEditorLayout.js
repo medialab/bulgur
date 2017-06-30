@@ -1,13 +1,13 @@
 /**
  * This module exports a stateless component rendering the layout of the editor feature interface
- * @module bulgur/features/Editor
+ * @module bulgur/features/PresentationEditor
  */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-modal';
 import Helmet from 'react-helmet';
 
-import './EditorLayout.scss';
+import './PresentationEditorLayout.scss';
 
 import QuinoaPresentationPlayer from 'quinoa-presentation-player';
 
@@ -45,7 +45,7 @@ import TakeAwayDialog from '../../TakeAwayDialog/components/TakeAwayDialogContai
  * @param {function} props.closeAndResetDialog
  * @return {ReactElement} markup
  */
-const EditorLayout = ({
+const PresentationEditorLayout = ({
   lang,
   // setup related
   id,
@@ -105,14 +105,14 @@ const EditorLayout = ({
       setUiMode('edition');
     }
   };
-  const translate = translateNameSpacer(context.t, 'Features.Editor');
-  return (<div id={id} className={className}>
+  const translate = translateNameSpacer(context.t, 'Features.PresentationEditor');
+  return (<div id={id} className={'bulgur-PresentationEditorLayout ' + (className || '')}>
     {activePresentationId ?
-      <div className={className}>
+      <div>
         {globalUiMode === 'edition' ?
           <section className="bulgur-main-row">
             <Helmet>
-                <title>Bulgur - {activePresentation.metadata.title || translate('untitled-presentation')}</title>
+              <title>Bulgur - {activePresentation.metadata.title || translate('untitled-presentation')}</title>
             </Helmet>
             <AsideViewLayout
               activePresentation={activePresentation}
@@ -171,8 +171,8 @@ const EditorLayout = ({
   </div>);
 };
 
-EditorLayout.contextTypes = {
+PresentationEditorLayout.contextTypes = {
   t: PropTypes.func.isRequired
 };
 
-export default EditorLayout;
+export default PresentationEditorLayout;

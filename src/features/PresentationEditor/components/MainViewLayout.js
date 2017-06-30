@@ -1,6 +1,6 @@
 /**
  * This module exports a stateless component rendering the main view contents of the editor feature interface
- * @module bulgur/features/Editor
+ * @module bulgur/features/PresentationEditor
  */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -52,7 +52,7 @@ const MainViewLayout = ({
   setShownCategories
 }, context) => {
 
-  const translate = translateNameSpacer(context.t, 'Features.Editor');
+  const translate = translateNameSpacer(context.t, 'Features.PresentationEditor');
   const setVisualization = (view, id) => {
     const onChange = (event) => onUserViewChange(id, event);
     const data = activePresentation.visualizations[id].data;

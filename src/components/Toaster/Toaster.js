@@ -11,7 +11,7 @@ const Toaster = ({
   log
 }) => {
   return (
-    <p className={'bulgur-toaster ' + status}>
+    <p className={'bulgur-Toaster ' + status}>
       {log}
     </p>
   );

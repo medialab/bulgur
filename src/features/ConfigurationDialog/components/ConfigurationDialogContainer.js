@@ -12,7 +12,7 @@ import {
   closePresentationCandidateModal,
   applyPresentationCandidateConfiguration,
   setActivePresentationId
-} from '../../Editor/duck';
+} from '../../PresentationEditor/duck';
 
 import ConfigurationDialogLayout from './ConfigurationDialogLayout';
 

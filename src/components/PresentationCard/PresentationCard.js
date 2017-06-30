@@ -50,7 +50,7 @@ const PresentationCard = ({
 
   const translate = translateNameSpacer(context.t, 'Components.PresentationCard');
   return (
-    <li className="bulgur-presentation-card">
+    <li className="bulgur-PresentationCard">
       <div className="card-body">
         <div className="info-column">
           <h5 onClick={setToActive}>

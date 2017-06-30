@@ -20,7 +20,7 @@ const Footer = ({
 }, context) => {
   const translate = translateNameSpacer(context.t, 'Components.Footer');
   return (
-    <footer className="bulgur-footer">
+    <footer className="bulgur-Footer">
       <div className="left-group">
         <span className="mini-brand"><button onClick={returnToLanding}>Bulgur</button>| {translate('by')} <a href="http://www.medialab.sciences-po.fr/fr/" target="blank">médialab</a></span>
         <LangToggler

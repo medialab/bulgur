@@ -26,7 +26,7 @@ const ColorsMapPicker = ({
 }, context) => {
   const translate = translateNameSpacer(context.t, 'Components.ColorsMapPicker');
   return (
-    <section className="bulgur-colors-map-picker">
+    <section className="bulgur-ColorsMapPicker">
       {Object.keys(colorsMap)
       .filter(id => id !== 'default')
       .map(colorCollectionId => {

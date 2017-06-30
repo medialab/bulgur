@@ -1,6 +1,6 @@
 /**
  * This module exports a stateless component rendering the aside contents of the editor feature interface
- * @module bulgur/features/Editor
+ * @module bulgur/features/PresentationEditor
  */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -38,7 +38,7 @@ const AsideViewLayout = ({
   returnToLanding,
   activeSlideId,
 }, context) => {
-  const translate = translateNameSpacer(context.t, 'Features.Editor');
+  const translate = translateNameSpacer(context.t, 'Features.PresentationEditor');
   const onRemoveSlide = id => {
     // determining new active slide
     const newActive = activePresentation.order && activePresentation.order.length > 1 ?

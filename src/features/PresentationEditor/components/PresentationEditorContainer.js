@@ -1,7 +1,7 @@
 /**
  * This module exports a stateful component connected to the redux logic of the app,
  * dedicated to rendering the editor feature interface
- * @module bulgur/features/Editor
+ * @module bulgur/features/PresentationEditor
  */
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
@@ -10,7 +10,7 @@ import {connect} from 'react-redux';
 import {v4 as uuid} from 'uuid';
 import {setLanguage} from 'redux-i18n';
 
-import EditorLayout from './EditorLayout';
+import PresentationEditorLayout from './PresentationEditorLayout';
 import * as duck from '../duck';
 import * as managerDuck from '../../PresentationsManager/duck';
 
@@ -24,7 +24,7 @@ import {
  */
 @connect(
   state => ({
-    ...duck.selector(state.bulgurEditor),
+    ...duck.selector(state.bulgurPresentationEditor),
     ...managerDuck.selector(state.presentations),
     lang: state.i18nState.lang
   }),
@@ -38,7 +38,7 @@ import {
     }, dispatch)
   })
 )
-class EditorContainer extends Component {
+class PresentationEditorContainer extends Component {
 
   static contextTypes = {
     t: React.PropTypes.func.isRequired,
@@ -100,7 +100,7 @@ class EditorContainer extends Component {
 
   render() {
     return (
-      <EditorLayout
+      <PresentationEditorLayout
         {...this.props}
         openSettings={this.openSettings}
         closeAndResetDialog={this.closeAndResetDialog}
@@ -112,4 +112,4 @@ class EditorContainer extends Component {
   }
 }
 
-export default EditorContainer;
+export default PresentationEditorContainer;

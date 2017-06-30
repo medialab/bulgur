@@ -13,7 +13,7 @@ const DropZone = ({
   accept
 }) => (
   <Dropzone
-    className="bulgur-drop-zone"
+    className="bulgur-DropZone"
     activeClassName="active"
     accept={accept}
     onDrop={onDrop}>

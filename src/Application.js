@@ -10,16 +10,16 @@ import React from 'react';
 import './core.scss';
 import './Application.scss';
 
-import Editor from './features/Editor/components/EditorContainer.js';
+import PresentationEditor from './features/PresentationEditor/components/PresentationEditorContainer.js';
 
 /**
  * Renders the whole bulgur application
  * @return {ReactComponent} component
  */
 const Application = ({}) => (
-  <Editor
+  <PresentationEditor
     id="wrapper"
-    className="bulgur-editor" />
+  />
 );
 
 export default Application;

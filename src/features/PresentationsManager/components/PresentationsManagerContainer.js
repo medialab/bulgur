@@ -12,7 +12,7 @@ import {setLanguage} from 'redux-i18n';
 
 import PresentationsManagerLayout from './PresentationsManagerLayout';
 import * as duck from '../duck';
-import * as globalDuck from '../../Editor/duck';
+import * as globalDuck from '../../PresentationEditor/duck';
 import {maxNumberOfLocalPresentations} from '../../../../config';
 
 import {
@@ -26,7 +26,7 @@ import validatePresentation from '../../../helpers/presentationValidator';
 @connect(
   state => ({
     ...duck.selector(state.presentations),
-    ...globalDuck.selector(state.bulgurEditor),
+    ...globalDuck.selector(state.bulgurPresentationEditor),
     lang: state.i18nState.lang
   }),
   dispatch => ({

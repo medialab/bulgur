@@ -76,7 +76,7 @@ const ConfigurationDialogLayout = ({
   const hasSlides = presentationCandidate.order && presentationCandidate.order.length;
 
   return (
-    <div className="bulgur-configuration-dialog-layout">
+    <div className="bulgur-ConfigurationDialogLayout">
       <h1 className="modal-header">
         {translate('presentation-configuration')}
       </h1>

@@ -7,7 +7,7 @@
 /*
  * Primary layout
  */
-.bulgur-presentations-manager-layout
+.bulgur-PresentationsManagerLayout
 {
     display: flex;
     overflow-y: auto;
@@ -25,7 +25,7 @@
 
         flex-flow: column nowrap;
     }
-    @extends .normal-item;
+    @extend .normal-item;
     /*
      * secondary layout components
      */
@@ -159,7 +159,7 @@
         {
             margin: 0;
             padding: 0;
-            .bulgur-presentation-card:not(:last-of-type)
+            .bulgur-PresentationCard:not(:last-of-type)
             {
                 margin-bottom: $gutter-large;
             }

@@ -42,7 +42,7 @@ class DatamapPicker extends React.Component {
       <li
         key={parameterKey}
         onClick={this.openSelect}
-        className={'bulgur-datamap-picker ' + (parameter.mappedField ? 'active' : '')}>
+        className={'bulgur-DatamapPicker ' + (parameter.mappedField ? 'active' : '')}>
         <h5>
           <b>{parameter.id}</b>
           <span>►</span>{/* - <i>{parameter.acceptedValueTypes.join(', ')}</i>*/}

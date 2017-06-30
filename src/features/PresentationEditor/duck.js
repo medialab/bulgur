@@ -2,7 +2,7 @@
  * This module exports logic-related elements for the bulgur editor feature
  * This module follows the ducks convention for putting in the same place actions, action types,
  * state selectors and reducers about a given feature (see https://github.com/erikras/ducks-modular-redux)
- * @module bulgur/features/Editor
+ * @module bulgur/features/PresentationEditor
  */
 
 import {combineReducers} from 'redux';
@@ -27,35 +27,35 @@ export const RESET_APP = 'RESET_APP';
 /*
  * actions related to global presentations management in ui
  */
-export const START_PRESENTATION_CANDIDATE_CONFIGURATION = '$Bulgur/Editor/START_PRESENTATION_CANDIDATE_CONFIGURATION';
-export const APPLY_PRESENTATION_CANDIDATE_CONFIGURATION = '$Bulgur/Editor/APPLY_PRESENTATION_CANDIDATE_CONFIGURATION';
-export const SET_ACTIVE_PRESENTATION = '$Bulgur/Editor/SET_ACTIVE_PRESENTATION';
-export const UNSET_ACTIVE_PRESENTATION = '$Bulgur/Editor/UNSET_ACTIVE_PRESENTATION';
+export const START_PRESENTATION_CANDIDATE_CONFIGURATION = '$Bulgur/PresentationEditor/START_PRESENTATION_CANDIDATE_CONFIGURATION';
+export const APPLY_PRESENTATION_CANDIDATE_CONFIGURATION = '$Bulgur/PresentationEditor/APPLY_PRESENTATION_CANDIDATE_CONFIGURATION';
+export const SET_ACTIVE_PRESENTATION = '$Bulgur/PresentationEditor/SET_ACTIVE_PRESENTATION';
+export const UNSET_ACTIVE_PRESENTATION = '$Bulgur/PresentationEditor/UNSET_ACTIVE_PRESENTATION';
 /*
  * actions related to active presentation's slides
  */
-export const ADD_SLIDE = '$Bulgur/Editor/ADD_SLIDE';
-export const REMOVE_SLIDE = '$Bulgur/Editor/REMOVE_SLIDE';
-export const SET_ACTIVE_SLIDE = '$Bulgur/Editor/SET_ACTIVE_SLIDE';
-export const UPDATE_SLIDE = '$Bulgur/Editor/UPDATE_SLIDE';
-export const MOVE_SLIDE = '$Bulgur/Editor/MOVE_SLIDE';
+export const ADD_SLIDE = '$Bulgur/PresentationEditor/ADD_SLIDE';
+export const REMOVE_SLIDE = '$Bulgur/PresentationEditor/REMOVE_SLIDE';
+export const SET_ACTIVE_SLIDE = '$Bulgur/PresentationEditor/SET_ACTIVE_SLIDE';
+export const UPDATE_SLIDE = '$Bulgur/PresentationEditor/UPDATE_SLIDE';
+export const MOVE_SLIDE = '$Bulgur/PresentationEditor/MOVE_SLIDE';
 /*
  * actions related to global ui
  */
-const OPEN_PRESENTATION_CANDIDATE_MODAL = '$Bulgur/Editor/OPEN_PRESENTATION_CANDIDATE_MODAL';
-const CLOSE_PRESENTATION_CANDIDATE_MODAL = '$Bulgur/Editor/CLOSE_PRESENTATION_CANDIDATE_MODAL';
-const OPEN_TAKE_AWAY_MODAL = '$Bulgur/Editor/OPEN_TAKE_AWAY_MODAL';
-const CLOSE_TAKE_AWAY_MODAL = '$Bulgur/Editor/CLOSE_TAKE_AWAY_MODAL';
-const SET_UI_MODE = '$Bulgur/Editor/SET_UI_MODE';
-const SET_SLIDE_SETTINGS_PANNEL_STATE = '$Bulgur/Editor/SET_SLIDE_SETTINGS_PANNEL_STATE';
+const OPEN_PRESENTATION_CANDIDATE_MODAL = '$Bulgur/PresentationEditor/OPEN_PRESENTATION_CANDIDATE_MODAL';
+const CLOSE_PRESENTATION_CANDIDATE_MODAL = '$Bulgur/PresentationEditor/CLOSE_PRESENTATION_CANDIDATE_MODAL';
+const OPEN_TAKE_AWAY_MODAL = '$Bulgur/PresentationEditor/OPEN_TAKE_AWAY_MODAL';
+const CLOSE_TAKE_AWAY_MODAL = '$Bulgur/PresentationEditor/CLOSE_TAKE_AWAY_MODAL';
+const SET_UI_MODE = '$Bulgur/PresentationEditor/SET_UI_MODE';
+const SET_SLIDE_SETTINGS_PANNEL_STATE = '$Bulgur/PresentationEditor/SET_SLIDE_SETTINGS_PANNEL_STATE';
 /*
  * actions related to active view
  */
-export const CHANGE_VIEW_BY_USER = '$Bulgur/Editor/CHANGE_VIEW_BY_USER';
-export const SET_VIEW_COLOR = '$Bulgur/Editor/SET_VIEW_COLOR';
-const TOGGLE_VIEW_COLOR_EDITION = '$Bulgur/Editor/TOGGLE_VIEW_COLOR_EDITION';
-export const SET_VIEW_DATAMAP_ITEM = '$Bulgur/Editor/SET_VIEW_DATAMAP_ITEM';
-export const SET_SHOWN_CATEGORIES = '$Bulgur/Editor/SET_SHOWN_CATEGORIES';
+export const CHANGE_VIEW_BY_USER = '$Bulgur/PresentationEditor/CHANGE_VIEW_BY_USER';
+export const SET_VIEW_COLOR = '$Bulgur/PresentationEditor/SET_VIEW_COLOR';
+const TOGGLE_VIEW_COLOR_EDITION = '$Bulgur/PresentationEditor/TOGGLE_VIEW_COLOR_EDITION';
+export const SET_VIEW_DATAMAP_ITEM = '$Bulgur/PresentationEditor/SET_VIEW_DATAMAP_ITEM';
+export const SET_SHOWN_CATEGORIES = '$Bulgur/PresentationEditor/SET_SHOWN_CATEGORIES';
 
 /*
  * Action creators

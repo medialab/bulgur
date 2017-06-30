@@ -23,7 +23,7 @@ import {
   REMOVE_SLIDE,
   UPDATE_SLIDE,
   MOVE_SLIDE
-} from '../Editor/duck';
+} from '../PresentationEditor/duck';
 
 import {
   EXPORT_TO_GIST,

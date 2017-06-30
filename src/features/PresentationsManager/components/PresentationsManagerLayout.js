@@ -64,7 +64,7 @@ const PresentationsManagerLayout = ({
   const onImportFromUrlChange = (e) => setImportFromUrlCandidate(e.target.value);
   const allowNewPresentations = presentationsList.length < maxNumberOfLocalPresentations;
   return (
-    <section className="bulgur-presentations-manager-layout">
+    <section className="bulgur-PresentationsManagerLayout">
       <section className="landing-group">
         <div className="brand-cartel">
           <img src={require('../assets/logo-bulgur.png')} />

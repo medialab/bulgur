@@ -1,7 +1,7 @@
 /**
  * style definitions for the MainViewLayout component
  *
- * @module bulgur/features/Editor
+ * @module bulgur/features/PresentationEditor
  */
 @import '../../../parameters.scss';
 
@@ -29,7 +29,7 @@
         flex-flow: row nowrap;
         flex: 2;
 
-        .bulgur-settings-pannel
+        .bulgur-SlideSettingsPannel
         {
             flex: 1;
         }

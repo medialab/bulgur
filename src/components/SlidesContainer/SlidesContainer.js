@@ -33,7 +33,7 @@ class SlidesContainer extends React.Component {
       removeSlide
     } = this.props;
     return (
-      <ul className="bulgur-slides-container">
+      <ul className="bulgur-SlidesContainer">
         {
         activePresentation &&
         activePresentation

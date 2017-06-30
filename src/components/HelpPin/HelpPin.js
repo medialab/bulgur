@@ -12,7 +12,7 @@ const HelpPin = ({
   position
 }) => (
   <span
-    className={'bulgur-help-pin ' + (position || '')}>
+    className={'bulgur-HelpPin ' + (position || '')}>
     <span className="pin-icon">
       ?
     </span>

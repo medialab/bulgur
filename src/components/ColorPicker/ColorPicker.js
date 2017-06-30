@@ -50,7 +50,7 @@ class ColorPicker extends Component {
       this.props.onCancel(this.state.initialColor);
     };
     return (
-      <div className="bulgur-color-picker">
+      <div className="bulgur-ColorPicker">
         <div className="buttons-container">
           {this.state.color.hex !== this.state.initialColor
             ? <button id="save-color" onClick={onValidate}>{translate('save-color')}</button> : null }

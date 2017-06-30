@@ -7,10 +7,10 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {debounce} from 'lodash';
-import Editor from 'draft-js-plugins-editor';
+import PresentationEditor from 'draft-js-plugins-editor';
 import {
   RichUtils,
-  EditorState
+  PresentationEditorState
 } from 'draft-js';
 
 import {stateFromMarkdown} from 'draft-js-import-markdown';
@@ -59,11 +59,11 @@ export default class QuinoaDraftSlide extends Component {
     this.state = {
       initialized: false,
       focused: false,
-      editorState: props.slide && props.slide.markdown ? EditorState.createWithContent(stateFromMarkdown(props.slide.markdown)) : EditorState.createEmpty(),
+      editorState: props.slide && props.slide.markdown ? PresentationEditorState.createWithContent(stateFromMarkdown(props.slide.markdown)) : PresentationEditorState.createEmpty(),
       markdown: props.slide && props.slide.markdown ? props.slide.markdown : ''
     };
 
-    this.onEditorChange = (editorState) => {
+    this.onPresentationEditorChange = (editorState) => {
       if (this.state.initialized) {
         this.setState({
           editorState,
@@ -87,7 +87,7 @@ export default class QuinoaDraftSlide extends Component {
     if (this.props.slide && this.props.slide.markdown && this.props.slide.markdown !== this.state.markdown) {
       const contentState = stateFromMarkdown(this.props.slide.markdown);
       this.setState({
-        editorState: EditorState.createWithContent(contentState),
+        editorState: PresentationEditorState.createWithContent(contentState),
         markdown: this.props.slide.markdown
       });
     }
@@ -103,7 +103,7 @@ export default class QuinoaDraftSlide extends Component {
   //   if (this.props.slide && typeof this.props.slide.markdown === 'string' && this.props.slide.markdown !== this.state.markdown) {
   //     console.time('convert to markdown');
   //     this.setState({
-  //       editorState: EditorState.createWithContent(stateFromMarkdown(this.props.slide.markdown)),
+  //       editorState: PresentationEditorState.createWithContent(stateFromMarkdown(this.props.slide.markdown)),
   //       markdown: this.props.slide.markdown
   //     });
   //     console.timeEnd('convert to markdown');
@@ -121,7 +121,7 @@ export default class QuinoaDraftSlide extends Component {
   handleKeyCommand(command) {
     const newState = RichUtils.handleKeyCommand(this.state.editorState, command);
     if (newState && typeof this.props.update === 'function') {
-      this.onEditorChange(newState);
+      this.onPresentationEditorChange(newState);
       return 'handled';
     }
     return 'not-handled';
@@ -129,7 +129,7 @@ export default class QuinoaDraftSlide extends Component {
 
   render() {
     const translate = translateNameSpacer(this.context.t, 'Components.DraftEditor');
-    const onChange = state => this.onEditorChange(state);
+    const onChange = state => this.onPresentationEditorChange(state);
     const onGlobalClick = e => {
       e.stopPropagation();
       this.editorComponent.focus();
@@ -138,7 +138,7 @@ export default class QuinoaDraftSlide extends Component {
     const onBlur = () => this.setState({focused: false});
     return (
       <div
-        className={'bulgur-draft-editor ' + (this.state.focused ? 'focused' : '')}
+        className={'bulgur-DraftEditor ' + (this.state.focused ? 'focused' : '')}
         onClick={onGlobalClick}>
         <div className="rich-buttons">
           <div className="buttons-group">
@@ -155,7 +155,7 @@ export default class QuinoaDraftSlide extends Component {
           </div>
         */}
         </div>
-        <Editor
+        <PresentationEditor
           editorState={this.state.editorState}
           onChange={onChange}
           handleKeyCommand={this.handleKeyCommand}

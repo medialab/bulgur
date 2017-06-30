@@ -150,7 +150,7 @@ const TakeAwayDialogLayout = ({
   const updateActivePresentationToServer = () => takeAway({id: 'server'});
   const updateActivePresentationToGist = () => takeAway({id: 'github'});
   return (
-    <div className="bulgur-take-away-dialog-layout">
+    <div className="bulgur-TakeAwayDialogLayout">
       <h1 className="modal-header">
         {translate('take-away-your-presentation')}
       </h1>

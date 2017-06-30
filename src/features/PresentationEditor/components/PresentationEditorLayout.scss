@@ -1,7 +1,7 @@
 /**
- * style definitions for the EditorLayout component
+ * style definitions for the PresentationEditorLayout component
  *
- * @module bulgur/features/Editor
+ * @module bulgur/features/PresentationEditor
  */
 
 @import '../../../parameters.scss';
@@ -10,7 +10,7 @@
  * Primary layout
  */
 
-.bulgur-editor
+.bulgur-PresentationEditorLayout
 {
     /*
      * root component
@@ -19,7 +19,17 @@
     font-size: $font-size-2;
 
     @extend .flex-stretched-column;
-    @extends .normal-item;
+    @extend .normal-item;
+
+    // todo: this is temp
+    > div{
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        @extend .flex-stretched-column;
+    }
     /*
      * secondary layout components
      */
@@ -46,7 +56,7 @@
             flex: 4;
         }
     }
-    .bulgur-footer
+    .bulgur-Footer
     {
         z-index: 1;
         // flex: 1;

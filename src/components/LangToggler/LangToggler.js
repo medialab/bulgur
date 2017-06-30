@@ -20,7 +20,7 @@ const LangToggler = ({
     }
   };
   return (
-    <button onClick={onClick} className="bulgur-lang-toggler">
+    <button onClick={onClick} className="bulgur-LangToggler">
       <span className="active">{lang}</span>/<span>{otherLang}</span>
     </button>
   );

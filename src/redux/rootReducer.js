@@ -12,7 +12,7 @@ import {persistentReducer} from 'redux-pouchdb';
 
 
 import presentations from './../features/PresentationsManager/duck';
-import bulgurEditor from './../features/Editor/duck';
+import bulgurPresentationEditor from './../features/PresentationEditor/duck';
 import presentationCandidate from './../features/ConfigurationDialog/duck';
 import takeAway from './../features/TakeAwayDialog/duck';
 
@@ -22,7 +22,7 @@ const models = (state = modelsModels) => state;
 
 export default combineReducers({
   presentations,
-  bulgurEditor,
+  bulgurPresentationEditor,
   presentationCandidate,
   takeAway,
   models,

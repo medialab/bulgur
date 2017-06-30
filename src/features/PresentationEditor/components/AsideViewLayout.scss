@@ -1,7 +1,7 @@
 /**
  * style definitions for the MainViewLayout component
  *
- * @module bulgur/features/Editor
+ * @module bulgur/features/PresentationEditor
  */
 @import '../../../parameters.scss';
 
@@ -56,7 +56,7 @@
             }
         }
     }
-    .bulgur-slides-container
+    .bulgur-SlidesContainer
     {
         overflow: auto;
 
