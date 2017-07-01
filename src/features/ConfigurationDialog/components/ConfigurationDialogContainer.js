@@ -11,8 +11,11 @@ import * as duck from '../duck';
 import {
   closePresentationCandidateModal,
   applyPresentationCandidateConfiguration,
-  setActivePresentationId
 } from '../../PresentationEditor/duck';
+
+import {
+  setActivePresentationId,
+} from '../../GlobalUi/duck';
 
 import ConfigurationDialogLayout from './ConfigurationDialogLayout';
 

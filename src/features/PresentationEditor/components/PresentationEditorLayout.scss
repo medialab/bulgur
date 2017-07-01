@@ -21,139 +21,24 @@
     @extend .flex-stretched-column;
     @extend .normal-item;
 
-    // todo: this is temp
-    > div{
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        @extend .flex-stretched-column;
-    }
-    /*
-     * secondary layout components
-     */
-    .bulgur-main-row
+    position: relative;
+
+    display: flex;
+    flex-direction: row;
+
+    flex-wrap: nowrap;
+    flex: 10;
+    .bulgur-aside-view
     {
-        position: relative;
+        max-width: 20%;
 
-        display: flex;
-        flex-direction: row;
-
-        flex-wrap: nowrap;
-        flex: 10;
-        .bulgur-aside-view
-        {
-            max-width: 20%;
-
-            flex: 1;
-        }
-        .bulgur-main-view
-        {
-            min-width: 80%;
-            margin: 0;
-
-            flex: 4;
-        }
-    }
-    .bulgur-Footer
-    {
-        z-index: 1;
-        // flex: 1;
-    }
-    .bulgur-icon-image
-    {
-        position: relative;
-        top: $gutter-small;
-
-        display: inline;
-
-        width: $font-size-2-5;
-        height: $font-size-2-5;
-        padding-right: $gutter-small;
-    }
-    /*
-     * Generic components styling
-     */
-    input,
-    textarea,
-    button
-    {
-        @extend .animated;
-    }
-    a,
-    a:hover,
-    a:visited,
-    a:active
-    {
-        color: inherit;
-    }
-    input,
-    textarea
-    {
-        font-family: $editable-font-stack;
-    }
-    button,
-    input,
-    textarea
-    {
-        // font-size: 1rem;
-        border: none;
-        outline: none;
-        background: inherit;
-    }
-    button:hover,
-    input:hover,
-    textarea:hover,
-    input:focus,
-    textarea:focus
-    {
-        cursor: pointer;
-
-        background: $background-intent;
-    }
-
-    button
-    {
-        text-align: left;
-    }
-
-    input
-    {
-        padding: $gutter-medium;
-    }
-}
-
-.ReactModal__Content.ReactModal__Content--after-open
-{
-    border: 1px solid $color-sec-stroke!important;
-    border-radius: 0!important;
-}
-
-/*
- * Responsive layout adjustments
- */
-
-@media #{$breakpoint-phone}
-{
-    .bulgur
-    {
-        flex-direction: column;
-    }
-
-    .bulgur .bulgur-aside-view
-    {
-        flex-direction: row;
-
-        max-width: 100%;
-
-        order: 2;
-    }
-    .bulgur .bulgur-aside-view .quinoa-editor
-    {
         flex: 1;
     }
-}
-@media #{$breakpoint-tablet}
-{
+    .bulgur-main-view
+    {
+        min-width: 80%;
+        margin: 0;
+
+        flex: 4;
+    }
 }

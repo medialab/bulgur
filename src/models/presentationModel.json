@@ -162,6 +162,30 @@
             "children": {
                 "type": "uuid"
             }
+        },
+        "settings": {
+            "type": "object",
+            "required": false,
+            "keys": {
+                "template": {
+                    "type": "string",
+                    "default": "garlic"
+                },
+                "options": {
+                    "type": "object",
+                    "keys": {
+                        "notesPosition": {
+                            "type": "string"
+                        },
+                        "allowDisqusComments": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "css": {
+                    "type": "string"
+                }
+            }
         }
     }
 }

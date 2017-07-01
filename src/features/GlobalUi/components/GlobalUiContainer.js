@@ -1,16 +1,15 @@
 /**
  * This module exports a stateful component connected to the redux logic of the app,
- * dedicated to rendering the editor feature interface
- * @module bulgur/features/PresentationEditor
+ * dedicated to rendering the interface container
+ * @module fonio/features/GlobalUi
  */
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {v4 as uuid} from 'uuid';
 import {setLanguage} from 'redux-i18n';
 
-import PresentationEditorLayout from './PresentationEditorLayout';
+import GlobalUiLayout from './GlobalUiLayout';
 import * as duck from '../duck';
 import * as managerDuck from '../../PresentationsManager/duck';
 
@@ -24,21 +23,20 @@ import {
  */
 @connect(
   state => ({
-    ...duck.selector(state.presentationEditor),
+    ...duck.selector(state.globalUi),
     ...managerDuck.selector(state.presentations),
-    lang: state.i18nState.lang
+    lang: state.i18nState.lang,
   }),
   dispatch => ({
     actions: bindActionCreators({
       ...duck,
-      // ...quinoaActions,
       resetPresentationCandidateSettings,
       setupPresentationCandidate,
-      setLanguage
+      setLanguage,
     }, dispatch)
   })
 )
-class PresentationEditorContainer extends Component {
+class GlobalUiContainer extends Component {
 
   static contextTypes = {
     t: React.PropTypes.func.isRequired,
@@ -50,9 +48,6 @@ class PresentationEditorContainer extends Component {
     this.closeAndResetDialog = this.closeAndResetDialog.bind(this);
     this.returnToLanding = this.returnToLanding.bind(this);
     this.openSettings = this.openSettings.bind(this);
-
-    this.addSlide = this.addSlide.bind(this);
-    this.duplicateSlide = this.duplicateSlide.bind(this);
   }
 
   shouldComponentUpdate() {
@@ -72,44 +67,17 @@ class PresentationEditorContainer extends Component {
     this.props.actions.startPresentationCandidateConfiguration(this.props.activePresentation);
   }
 
-  addSlide () {
-    // build slide
-    // todo : factorize that
-    const slide = {
-      views: Object.keys(this.props.activeViews).reduce((views, id) => ({
-        ...views,
-        [id]: {
-          viewParameters: this.props.activeViews[id].viewParameters
-        }
-      }), {}),
-      title: '',
-      markdown: ''
-    };
-    const id = uuid();
-    this.props.actions.addSlide(id, slide);
-  }
-
-  duplicateSlide (slide, slideIndex) {
-    const id = uuid();
-    const newSlide = {
-      ...slide
-    };
-    const position = slideIndex + 1;
-    this.props.actions.addSlide(id, newSlide, position);
-  }
-
   render() {
+
     return (
-      <PresentationEditorLayout
+      <GlobalUiLayout
         {...this.props}
         openSettings={this.openSettings}
         closeAndResetDialog={this.closeAndResetDialog}
-        duplicateSlide={this.duplicateSlide}
         returnToLanding={this.returnToLanding}
-        addSlide={this.addSlide}
-        resetView={this.resetView} />
+        updatePresentationContent={this.updatePresentationContent} />
     );
   }
 }
 
-export default PresentationEditorContainer;
+export default GlobalUiContainer;

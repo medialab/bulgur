@@ -19,13 +19,13 @@
     flex-flow: row nowrap;
     align-items: center;
     justify-content: center;
+    @extend .normal-item;
     @media #{$breakpoint-tablet}
     {
         overflow: auto;
 
         flex-flow: column nowrap;
     }
-    @extend .normal-item;
     /*
      * secondary layout components
      */

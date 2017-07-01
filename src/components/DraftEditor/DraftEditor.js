@@ -10,7 +10,7 @@ import {debounce} from 'lodash';
 import PresentationEditor from 'draft-js-plugins-editor';
 import {
   RichUtils,
-  PresentationEditorState
+  EditorState,
 } from 'draft-js';
 
 import {stateFromMarkdown} from 'draft-js-import-markdown';
@@ -59,7 +59,7 @@ export default class QuinoaDraftSlide extends Component {
     this.state = {
       initialized: false,
       focused: false,
-      editorState: props.slide && props.slide.markdown ? PresentationEditorState.createWithContent(stateFromMarkdown(props.slide.markdown)) : PresentationEditorState.createEmpty(),
+      editorState: props.slide && props.slide.markdown ? EditorState.createWithContent(stateFromMarkdown(props.slide.markdown)) : EditorState.createEmpty(),
       markdown: props.slide && props.slide.markdown ? props.slide.markdown : ''
     };
 
@@ -87,7 +87,7 @@ export default class QuinoaDraftSlide extends Component {
     if (this.props.slide && this.props.slide.markdown && this.props.slide.markdown !== this.state.markdown) {
       const contentState = stateFromMarkdown(this.props.slide.markdown);
       this.setState({
-        editorState: PresentationEditorState.createWithContent(contentState),
+        editorState: EditorState.createWithContent(contentState),
         markdown: this.props.slide.markdown
       });
     }
@@ -153,7 +153,7 @@ export default class QuinoaDraftSlide extends Component {
             <BlockquoteButton />
             <ULButton>List</ULButton>
           </div>
-        */}
+          */}
         </div>
         <PresentationEditor
           editorState={this.state.editorState}

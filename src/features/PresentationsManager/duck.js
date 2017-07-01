@@ -30,6 +30,11 @@ import {
   EXPORT_TO_SERVER
 } from '../TakeAwayDialog/duck';
 
+import {
+  SET_PRESENTATION_CSS,
+  SET_PRESENTATION_TEMPLATE,
+} from '../PresentationSettingsManager/duck';
+
 const CREATE_PRESENTATION = '§Bulgur/PresentationsManager/CREATE_PRESENTATION';
 const DELETE_PRESENTATION = '§Bulgur/PresentationsManager/DELETE_PRESENTATION';
 const UPDATE_PRESENTATION = '§Bulgur/PresentationsManager/UPDATE_PRESENTATION';
@@ -328,6 +333,35 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
       newOrder = [...order.slice(0, position), ...order.slice(position + 1)];
       newState.presentations[state.activePresentationId].order = newOrder;
       return newState;
+
+    case SET_PRESENTATION_CSS :
+      return {
+        ...state,
+          presentations: {
+            ...state.presentations,
+            [action.id]: {
+              ...state.presentations[action.id],
+              settings: {
+                ...state.presentations[action.id].settings,
+                css: action.css
+              }
+            }
+          }
+      };
+    case SET_PRESENTATION_TEMPLATE :
+      return {
+        ...state,
+          presentations: {
+            ...state.presentations,
+            [action.id]: {
+              ...state.presentations[action.id],
+              settings: {
+                ...state.presentations[action.id].settings,
+                template: action.template
+              }
+            }
+          }
+      };
     /*
      * EXPORT-RELATED
      */

@@ -26,7 +26,7 @@ import validatePresentation from '../../../helpers/presentationValidator';
 @connect(
   state => ({
     ...duck.selector(state.presentations),
-    ...globalDuck.selector(state.bulgurPresentationEditor),
+    ...globalDuck.selector(state.presentationEditor),
     lang: state.i18nState.lang
   }),
   dispatch => ({

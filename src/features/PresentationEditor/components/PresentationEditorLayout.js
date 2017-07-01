@@ -1,25 +1,25 @@
 /**
- * This module exports a stateless component rendering the layout of the editor feature interface
+ * This module exports a stateless component rendering the layout of the presentation editor feature interface
  * @module bulgur/features/PresentationEditor
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import Modal from 'react-modal';
+// import Modal from 'react-modal';
 import Helmet from 'react-helmet';
 
 import './PresentationEditorLayout.scss';
 
-import QuinoaPresentationPlayer from 'quinoa-presentation-player';
+// import QuinoaPresentationPlayer from 'quinoa-presentation-player';
 
 import AsideViewLayout from './AsideViewLayout';
 import MainViewLayout from './MainViewLayout';
-import Footer from '../../../components/Footer/Footer';
+// import Footer from '../../../components/Footer/Footer';
 import {translateNameSpacer} from '../../../helpers/translateUtils';
 
-import PresentationsManagerContainer from '../../PresentationsManager/components/PresentationsManagerContainer';
+// import PresentationsManagerContainer from '../../PresentationsManager/components/PresentationsManagerContainer';
 
-import ConfigurationDialog from '../../ConfigurationDialog/components/ConfigurationDialogContainer.js';
-import TakeAwayDialog from '../../TakeAwayDialog/components/TakeAwayDialogContainer.js';
+// import ConfigurationDialog from '../../ConfigurationDialog/components/ConfigurationDialogContainer.js';
+// import TakeAwayDialog from '../../TakeAwayDialog/components/TakeAwayDialogContainer.js';
 
 /**
  * Renders the main layout component of the editor
@@ -88,87 +88,42 @@ const PresentationEditorLayout = ({
   closeAndResetDialog,
 }, context) => {
 
-  const closeModal = () => {
-    if (isPresentationCandidateModalOpen) {
-      closeAndResetDialog();
-    }
-    else {
-      closeTakeAwayModal();
-    }
-  };
-
-  const togglePreview = () => {
-    if (globalUiMode === 'edition') {
-      setUiMode('preview');
-    }
-   else {
-      setUiMode('edition');
-    }
-  };
   const translate = translateNameSpacer(context.t, 'Features.PresentationEditor');
-  return (<div id={id} className={'bulgur-PresentationEditorLayout ' + (className || '')}>
-    {activePresentationId ?
-      <div>
-        {globalUiMode === 'edition' ?
-          <section className="bulgur-main-row">
-            <Helmet>
-              <title>Bulgur - {activePresentation.metadata.title || translate('untitled-presentation')}</title>
-            </Helmet>
-            <AsideViewLayout
-              activePresentation={activePresentation}
-              openSettings={openSettings}
-              returnToLanding={returnToLanding}
-              addSlide={addSlide}
-              duplicateSlide={duplicateSlide}
-              removeSlide={removeSlide}
-              setActiveSlide={setActiveSlide}
-              activeSlideId={activeSlideId}
-              updateSlide={updateSlide}
-              moveSlide={moveSlide} />
-            <MainViewLayout
-              activePresentation={activePresentation}
-              isTakeAwayModalOpen={isTakeAwayModalOpen}
-              activeSlideId={activeSlideId}
-              onProjectImport={onProjectImport}
-              updateSlide={updateSlide}
-              setActiveSlide={setActiveSlide}
-              setViewDatamapItem={setViewDatamapItem}
-              slideSettingsPannelState={slideSettingsPannelState}
-              setSlideSettingsPannelState={setSlideSettingsPannelState}
-              returnToLanding={returnToLanding}
-              activeViews={activeViews}
-              onUserViewChange={changeViewByUser}
-              toggleViewColorEdition={toggleViewColorEdition}
-              setViewColor={setViewColor}
-              setShownCategories={setShownCategories}
-              editedColor={editedColor} />
-          </section>
-        :
-          <section className="bulgur-main-row">
-            <QuinoaPresentationPlayer
-              presentation={activePresentation}
-              beginAt={activePresentation.order.indexOf(activeSlideId)} />
-          </section>}
-        <Footer
-          returnToLanding={returnToLanding}
-          openTakeAwayModal={openTakeAwayModal}
-          togglePreview={togglePreview}
-          lang={lang}
-          setLanguage={setLanguage}
-          uiMode={globalUiMode} />
-      </div>
-      : <PresentationsManagerContainer />}
-    <Modal
-      onRequestClose={closeModal}
-      contentLabel="new presentation"
-      isOpen={isPresentationCandidateModalOpen || isTakeAwayModalOpen}>
-      {
-        isPresentationCandidateModalOpen ?
-          <ConfigurationDialog /> :
-          <TakeAwayDialog />
-      }
-    </Modal>
-  </div>);
+  return (
+    <div id={id} className={'bulgur-PresentationEditorLayout ' + (className || '')}>
+      <Helmet>
+        <title>Bulgur - {activePresentation.metadata.title || translate('untitled-presentation')}</title>
+      </Helmet>
+      <AsideViewLayout
+        activePresentation={activePresentation}
+        openSettings={openSettings}
+        returnToLanding={returnToLanding}
+        addSlide={addSlide}
+        duplicateSlide={duplicateSlide}
+        removeSlide={removeSlide}
+        setActiveSlide={setActiveSlide}
+        activeSlideId={activeSlideId}
+        updateSlide={updateSlide}
+        moveSlide={moveSlide} />
+      <MainViewLayout
+        activePresentation={activePresentation}
+        isTakeAwayModalOpen={isTakeAwayModalOpen}
+        activeSlideId={activeSlideId}
+        onProjectImport={onProjectImport}
+        updateSlide={updateSlide}
+        setActiveSlide={setActiveSlide}
+        setViewDatamapItem={setViewDatamapItem}
+        slideSettingsPannelState={slideSettingsPannelState}
+        setSlideSettingsPannelState={setSlideSettingsPannelState}
+        returnToLanding={returnToLanding}
+        activeViews={activeViews}
+        onUserViewChange={changeViewByUser}
+        toggleViewColorEdition={toggleViewColorEdition}
+        setViewColor={setViewColor}
+        setShownCategories={setShownCategories}
+        editedColor={editedColor} />
+    </div>
+  );
 };
 
 PresentationEditorLayout.contextTypes = {
