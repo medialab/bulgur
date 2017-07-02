@@ -22,7 +22,7 @@ const ColorsMapPicker = ({
   toggleColorEdition,
 
   shownCategories,
-  setShownCategories
+  setShownCategories,
 }, context) => {
   const translate = translateNameSpacer(context.t, 'Components.ColorsMapPicker');
   return (

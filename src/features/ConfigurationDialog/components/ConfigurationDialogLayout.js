@@ -28,7 +28,7 @@ import './ConfigurationDialog.scss';
  * @param {string} props.fetchUserFileStatus - the status of the file the user is trying to upload
  * @param {string} props.dataSourceTab - ui state for the source of data set by the user
  * @param {object} props.activeVisualizationTypes - models to display available visualization types
- * @param {object} props.activeVisualizationTypesModels - models to use for displaying visualization type related configurations
+ * @param {object} props.visualizationTypesModels - models to use for displaying visualization type related configurations
  * @param {object} props.actions - actions from the redux logic
  * @param {function} props.closePresentationCandidate - function to trigger for closing the presentation
  * @param {function} props.onFileDrop - callback function to be handled by container
@@ -43,7 +43,6 @@ const ConfigurationDialogLayout = ({
   },
   fetchUserFileStatus,
   dataSourceTab,
-  // todo : delete the following variable and do everything with visualizationTypesModels
   activeVisualizationTypes = [],
   visualizationTypesModels,
   actions: {
@@ -135,9 +134,6 @@ const ConfigurationDialogLayout = ({
             </HelpPin>
           </h2>
 
-          {/*<p className="help-link-container">
-            <a className="help-link" target="blank" href="https://github.com/medialab/bulgur/wiki/What-data-formats-and--tools-can-I-use-to-build-a-presentation-dataset-%3F">What data formats and tools can I use to build a presentation dataset ?</a>
-          </p>*/}
           {
           // future-proof code for possible multi-datasets visualizations
           presentationCandidate.datasets &&
@@ -251,34 +247,34 @@ const ConfigurationDialogLayout = ({
                 :
                   <section className="data-source sample-files-container">
                     {Object.keys(visualizationTypesModels)
-                  .map(modelType => visualizationTypesModels[modelType])
-                  .map(model => model.samples.map((sample, key) => {
-                    const fetchFile = () => {
-                      fetchExampleFile(sample);
-                    };
-                    return (
-                      <div key={key} className="sample-file">
-                        <div onClick={fetchFile} className="sample-file-content">
-                          <div>
-                            <p className="pre-title"><i>{translate('sample-dataset')}</i></p>
-                            <h3>{sample.title}</h3>
+                      .map(modelType => visualizationTypesModels[modelType])
+                      .map(model => model.samples.map((sample, key) => {
+                        const fetchFile = () => {
+                          fetchExampleFile(sample);
+                        };
+                        return (
+                          <div key={key} className="sample-file">
+                            <div onClick={fetchFile} className="sample-file-content">
+                              <div>
+                                <p className="pre-title"><i>{translate('sample-dataset')}</i></p>
+                                <h3>{sample.title}</h3>
+                              </div>
+                              <div>
+                                <p>{sample.description}</p>
+                                <p className="recommended-vis-types">
+                                  <b>{translate('recommended-for')} <i>{sample.recommendedVisTypes.map(type => type).join(', ')}</i>.</b>
+                                </p>
+                              </div>
+                              <p>
+                                <i>
+                                  {translate('select-to-use-this-dataset')}
+                                </i>
+                              </p>
+                            </div>
                           </div>
-                          <div>
-                            <p>{sample.description}</p>
-                            <p className="recommended-vis-types">
-                              <b>{translate('recommended-for')} <i>{sample.recommendedVisTypes.map(type => type).join(', ')}</i>.</b>
-                            </p>
-                          </div>
-                          <p>
-                            <i>
-                              {translate('select-to-use-this-dataset')}
-                            </i>
-                          </p>
-                        </div>
-                      </div>
-                    );
-                  }))
-                }
+                        );
+                      }))
+                    }
                   </section>}
               </section>
             </section>

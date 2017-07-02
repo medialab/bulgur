@@ -39,7 +39,6 @@ const MainViewLayout = ({
 
   // ui related
   editedColor,
-  // isTakeAwayModalOpen,
   slideSettingsPannelState,
   // actions
   updateSlide,
@@ -65,28 +64,24 @@ const MainViewLayout = ({
     );
   };
 
+  const viewsToSlides = (inputViews) => 
+    Object.keys(inputViews).reduce((views, id) => ({
+      ...views,
+      [id]: {
+        viewParameters: activeViews[id].viewParameters
+      }
+    }), {});
+
   const activeSlide = activePresentation.slides && activeSlideId && activePresentation.slides[activeSlideId];
 
-  // todo : factorize that
-  const activeViewsAsSlides = Object.keys(activeViews).reduce((views, id) => ({
-    ...views,
-    [id]: {
-      viewParameters: activeViews[id].viewParameters
-    }
-  }), {});
+  const activeViewsAsSlides = viewsToSlides(activeViews);
   const viewsEqualActiveSlideViews = activeSlide &&
                                 JSON.stringify(activeViewsAsSlides) === JSON.stringify(activeSlide.views);
 
   const clickOnRecord = () => {
     updateSlide(activeSlideId, {
       ...activeSlide,
-      // todo : factorize that
-      views: Object.keys(activeViews).reduce((views, id) => ({
-        ...views,
-        [id]: {
-          viewParameters: activeViews[id].viewParameters
-        }
-      }), {})
+      views: viewsToSlides(activeViews)
     });
   };
   const clickOnReset = () => setActiveSlide(activeSlideId, activeSlide);

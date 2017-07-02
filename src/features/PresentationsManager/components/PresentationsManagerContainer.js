@@ -137,7 +137,6 @@ export default class PresentationsManagerContainer extends Component {
       return;
     }
     getFileAsText(files[0], (err, str) => {
-      // todo : remove
       if (err) {
         this.props.actions.importFail('invalidProject');
       }

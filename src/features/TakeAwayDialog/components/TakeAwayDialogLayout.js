@@ -48,7 +48,6 @@ export const ChooseTakeAwayStep = ({
         return takeAway(option);
     }
   };
- // todo : put this data in a model file ? to decide
   const options = [{
           id: 'project',
           icon: require('../assets/project.svg'),

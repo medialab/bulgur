@@ -67,7 +67,6 @@ class TakeAwayDialogContainer extends Component {
   }
 
   updateActivePresentationFromServer() {
-    // todo : rewrite that as an action
     this.props.actions.setExportToServerStatus('processing', 'updating from the distant server');
     const url = this.props.activePresentation.metadata.serverJSONUrl;
     get(url)
@@ -80,13 +79,12 @@ class TakeAwayDialogContainer extends Component {
           this.props.actions.updatePresentation(project.id, project);
           this.props.actions.setExportToServerStatus('success', 'your presentation is now synchronized with the forccast server');
         }
- catch (e) {
+        catch (e) {
           this.props.actions.setExportToServerStatus('failure', 'The distant version is badly formatted');
         }
       });
   }
   updateActivePresentationFromGist() {
-    // todo : rewrite that as an action
     const gistId = this.props.activePresentation.metadata.gistId;
     const entryUrl = 'https://api.github.com/gists/' + gistId;
     return get(entryUrl)

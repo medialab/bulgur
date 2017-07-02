@@ -74,7 +74,6 @@ class PresentationEditorContainer extends Component {
 
   addSlide () {
     // build slide
-    // todo : factorize that
     const slide = {
       views: Object.keys(this.props.activeViews).reduce((views, id) => ({
         ...views,

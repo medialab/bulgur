@@ -396,8 +396,10 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
       const visId = action.visualizationId;
       const visualizationType = action.visualizationType;
       let data;
-      // todo : here the fact of choosing by default the first dataset is temp - dataset picking should be allowed
-      // when multi-datasets use cases appear
+      // concerning the following : here the fact of choosing by default the first dataset is temporary.
+      // When/if we allow multiple datasets for a specific visualization type or several visualizations in a presentation this should be changed.
+
+      // choose the first dataset in order to assess for data-compatible visualization types
       const firstDatasetId = state.presentationCandidate && state.presentationCandidate.datasets ? Object.keys(state.presentationCandidate.datasets)[0] : undefined;
       // normalize the data before analyzing it
       if (firstDatasetId) {
@@ -463,21 +465,27 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
               }
             };
           }, newcolorsMap);
-      };
-      // flatten datamap fields (todo: refactor as helper)
-      const flattenedDataMap = Object.keys(dataMap).reduce((result, collectionId) => ({
-                ...result,
-                [collectionId]: Object.keys(dataMap[collectionId]).reduce((propsMap, parameterId) => {
-                  const parameter = dataMap[collectionId][parameterId];
-                  if (parameter.mappedField) {
-                    return {
-                      ...propsMap,
-                      [parameterId]: parameter.mappedField
-                    };
-                  }
-                  return propsMap;
-                }, {})
-              }), {});
+      }
+      // flatten datamap fields
+      const flattenedDataMap = Object.keys(dataMap).reduce(
+        (result, collectionId) => ({
+          ...result,
+          [collectionId]: Object.keys(dataMap[collectionId])
+            .reduce(
+              (propsMap, parameterId) => {
+                const parameter = dataMap[collectionId][parameterId];
+                if (parameter.mappedField) {
+                  return {
+                    ...propsMap,
+                    [parameterId]: parameter.mappedField
+                  };
+                }
+                return propsMap;
+              }, 
+            {})
+        }), 
+        {}
+      );
       return {
         ...state,
         presentationCandidate: {

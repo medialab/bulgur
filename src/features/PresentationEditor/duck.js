@@ -275,7 +275,6 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
 
     case APPLY_PRESENTATION_CANDIDATE_CONFIGURATION:
     case SET_ACTIVE_PRESENTATION:
-      // todo : refactor as a helper
       const defaultViews = Object.keys(action.presentation.visualizations).reduce((result, visualizationKey) => {
         const visualization = action.presentation.visualizations[visualizationKey];
         shownCategories = Object.keys(visualization.viewParameters.colorsMap).reduce((currentObject, collectionId) => ({
