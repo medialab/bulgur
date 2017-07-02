@@ -45,7 +45,7 @@ const ColorsMapPicker = ({
       };
       return (
         <div className="colors-map-group" key={colorCollectionId}>
-          {Object.keys(colorsMap).length > 2 ?
+          {Object.keys(colorsMap).length > 1 ?
             <h5>
               {translate('categories-title', {categories: colorCollectionId})}</h5>
             : null}

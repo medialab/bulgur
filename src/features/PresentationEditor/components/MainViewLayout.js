@@ -64,7 +64,7 @@ const MainViewLayout = ({
     );
   };
 
-  const viewsToSlides = (inputViews) => 
+  const viewsToSlides = (inputViews) =>
     Object.keys(inputViews).reduce((views, id) => ({
       ...views,
       [id]: {

@@ -12,13 +12,12 @@ export function generateColorsMap (collection = [], propertyName) {
   const palette = scheme.from_hue(21).scheme('triade').colors();
   let paletteIndex = 1;
   const values = uniq(collection.map(obj => obj[propertyName]));
-
   if (propertyName === 'color' || propertyName === 'couleur') {
     return values.reduce((pal, value) => ({
       ...pal,
       [value]: chroma(value).hex()
     }), {
-      default: '#000000'
+      // default: '#000000'
     });
   }
  else {
@@ -31,7 +30,7 @@ export function generateColorsMap (collection = [], propertyName) {
       }
       return cMap;
      }, {
-      default: '#' + palette[0]
+      // default: '#' + palette[0]
      });
     }
     else {
@@ -42,7 +41,7 @@ export function generateColorsMap (collection = [], propertyName) {
         [value]: scale(index / vLength).hex()
       })
       , {
-        default: '#000000'
+        // default: '#000000'
       });
     }
   }
