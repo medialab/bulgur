@@ -52,7 +52,7 @@ const SlideSettingsPannel = ({
           <div className={'settings-contents ' + (isOpen ? 'visible' : '')}>
             <ul className="settings-type-toggler">
               <li onClick={setTabToCategories} className={state === 'categories' ? 'active' : ''}>
-                {translate('Categories')}
+                {translate('Filters')}
               </li>
               <li onClick={setTabToParameters} className={state === 'parameters' ? 'active' : ''}>
                 {translate('Parameters')}
@@ -71,12 +71,17 @@ const SlideSettingsPannel = ({
                         setShownCategories={setShownCategories}
                         visualizationId={viewKey}
                         toggleColorEdition={toggleViewColorEdition}
+                        allowColorChange={false}
                         changeColor={setViewColor}
-                        editedColor={editedColor} />
+                        editedColor={editedColor} 
+                      />
                     ))
                   }
               </div>
               <div className="tab parameters">
+                <h3>
+                  {translate('parameters-header')}
+                </h3>
                 {
                   Object.keys(views)
                   .map(viewKey => {
@@ -120,6 +125,23 @@ const SlideSettingsPannel = ({
                       );
                   })
                 }
+                <h3>
+                  {translate('colors-mapping-header')}
+                  {
+                    Object.keys(views)
+                    .map(viewKey => (
+                      <ColorsMapPicker
+                        key={viewKey}
+                        colorsMap={views[viewKey].viewParameters.colorsMap}
+                        visualizationId={viewKey}
+                        toggleColorEdition={toggleViewColorEdition}
+                        allowColorChange={true}
+                        changeColor={setViewColor}
+                        editedColor={editedColor} 
+                      />
+                    ))
+                  }
+                </h3>
               </div>
             </div>
           </div>

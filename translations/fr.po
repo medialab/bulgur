@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Sample Project\n"
 "POT-Creation-Date: 2017-7-2\n"
-"PO-Revision-Date: Sun Jul 02 2017 16:32:46 GMT+0200 (CEST)\n"
+"PO-Revision-Date: Sun Jul 02 2017 16:46:21 GMT+0200 (CEST)\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -394,3 +394,12 @@ msgstr "aller sur la page en ligne"
 
 msgid "Features.TakeAway.close"
 msgstr "fermer"
+
+msgid "Components.SlidesSettingsPannel.Filters"
+msgstr "Filters"
+
+msgid "Components.SlidesSettingsPannel.parameters-header"
+msgstr "parameters-header"
+
+msgid "Components.SlidesSettingsPannel.colors-mapping-header"
+msgstr "colors-mapping-header"

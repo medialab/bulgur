@@ -21,6 +21,9 @@ const ColorsMapPicker = ({
   changeColor,
   toggleColorEdition,
 
+  allowColorChange = true,
+  allowShowingToggling,
+
   shownCategories,
   setShownCategories,
 }, context) => {
@@ -68,11 +71,6 @@ const ColorsMapPicker = ({
             if (active) {
               activeColor = color;
             }
-            const onClick = () => {
-              if (!active) {
-                toggleColorEdition(visualizationId, colorCollectionId, category);
-              }
-            };
             const onValidate = (thatColor) => {
               const finalColor = typeof thatColor === 'string' ? thatColor : thatColor.hex;
               changeColor(visualizationId, editedColor.collectionId, editedColor.category, finalColor);
@@ -98,6 +96,15 @@ const ColorsMapPicker = ({
                   newList = [...shownCategories[colorCollectionId], category];
                 }
                 setShownCategories(visualizationId, colorCollectionId, newList);
+              }
+            };
+            const onClick = e => {
+              if (!active) {
+                if (allowColorChange) {
+                  toggleColorEdition(visualizationId, colorCollectionId, category);
+                } else {
+                  onFilterClick(e);
+                }
               }
             };
             return (
