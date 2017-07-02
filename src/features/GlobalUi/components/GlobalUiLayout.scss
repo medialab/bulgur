@@ -125,13 +125,30 @@
         z-index: 1;
         // flex: 1;
     }
-
 }
 
 .ReactModal__Content.ReactModal__Content--after-open
 {
     border: 1px solid $color-sec-stroke!important;
     border-radius: 0!important;
+
+    @extend .flex-stretched-column;
+
+    > div
+    {
+        // flex: 1;
+        @extend .flex-stretched-column;
+        .modal-content
+        {
+            overflow: auto;
+
+            flex: 1;
+        }
+        .modal-footer
+        {
+            min-height: $gutter-large * 2;
+        }
+    }
 }
 
 /*
