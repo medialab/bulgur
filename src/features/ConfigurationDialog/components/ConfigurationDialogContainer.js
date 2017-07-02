@@ -17,6 +17,10 @@ import {
   setActivePresentationId,
 } from '../../GlobalUi/duck';
 
+import {
+  validateFileExtension
+} from '../../../helpers/fileLoader';
+
 import ConfigurationDialogLayout from './ConfigurationDialogLayout';
 
 /**
@@ -47,7 +51,6 @@ class ConfigurationDialogContainer extends Component {
     this.onFileDrop = this.onFileDrop.bind(this);
     this.closeAndSetupPresentationCandidate = this.closeAndSetupPresentationCandidate.bind(this);
     this.changeVisualizationType = this.changeVisualizationType.bind(this);
-    this.validateFileExtension = this.validateFileExtension.bind(this);
   }
 
   shouldComponentUpdate() {
@@ -69,18 +72,8 @@ class ConfigurationDialogContainer extends Component {
     this.props.actions.closePresentationCandidateModal();
   }
 
-  // todo : put in fileLoader helper
-  validateFileExtension (file = {name: ''}) {
-    const fileName = typeof file === 'string' ? file : file.name;
-    const extension = fileName.split('.').pop();
-    const acceptedExtensions = Object.keys(this.props.visualizationTypesModels)
-                      .map(k => this.props.visualizationTypesModels[k])
-                      .reduce((total, t) => [...total, ...t.acceptedFileExtensions], []);
-    return acceptedExtensions.indexOf(extension) > -1;
-  }
-
    onFileDrop(file) {
-    const validExtension = this.validateFileExtension(file);
+    const validExtension = validateFileExtension(file, this.props.visualizationTypesModels);
     if (validExtension) {
       this.props.actions.fetchUserFile(file);
     }
@@ -101,6 +94,10 @@ class ConfigurationDialogContainer extends Component {
       name: 'network'
     }
     ];
+
+    const onValidateFileExtension = (file) => {
+      return validateFileExtension(file, this.props.visualizationTypesModels);
+    };
     return (
       <ConfigurationDialogLayout
         {...this.props}
@@ -108,7 +105,7 @@ class ConfigurationDialogContainer extends Component {
         closePresentationCandidate={this.closePresentationCandidate}
         closeAndSetupPresentationCandidate={this.closeAndSetupPresentationCandidate}
         changeVisualizationType={this.changeVisualizationType}
-        validateFileExtension={this.validateFileExtension}
+        validateFileExtension={onValidateFileExtension}
         onFileDrop={this.onFileDrop} />
     );
   }

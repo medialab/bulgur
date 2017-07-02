@@ -51,3 +51,12 @@ export function getFileAsText(fileToRead, callback) {
   // Read file into memory as UTF-8
   reader.readAsText(fileToRead);
 }
+
+export function validateFileExtension (file = {name: ''}, visualizationTypesModels) {
+  const fileName = typeof file === 'string' ? file : file.name;
+  const extension = fileName.split('.').pop();
+  const acceptedExtensions = Object.keys(visualizationTypesModels)
+                    .map(k => visualizationTypesModels[k])
+                    .reduce((total, t) => [...total, ...t.acceptedFileExtensions], []);
+  return acceptedExtensions.indexOf(extension) > -1;
+}

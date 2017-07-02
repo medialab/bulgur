@@ -463,7 +463,7 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
               }
             };
           }, newcolorsMap);
-      }
+      };
       // flatten datamap fields (todo: refactor as helper)
       const flattenedDataMap = Object.keys(dataMap).reduce((result, collectionId) => ({
                 ...result,
