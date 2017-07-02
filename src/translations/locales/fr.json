@@ -63,6 +63,7 @@
   "Features.ConfigurationDialog.how-to-visualize-the-data-help": "Certains jeux de données peuvent être visualisés avec des techniques différentes. Pensez à l'argument que vous voulez construire pour choisir le bon !",
   "Features.ConfigurationDialog.how-to-map-your-data-to-the-visualization": "Comment traduire vos données ?",
   "Features.ConfigurationDialog.collection-mapping-parameters": "Correspondances de la collection {collection}",
+  "Features.ConfigurationDialog.latitude-and-longitude-are-not-mapped": "La latitude et la longitude ne sont pas présentes dans la liste. Vous devez indiquer un champ 'latitude' et un champ 'longitude' dans vos données pour qu'elles s'affichent bien.",
   "Features.ConfigurationDialog.visualization-options": "options de la visualisation",
   "Features.ConfigurationDialog.how-to-color-your-categories": "Comment colorier les catégories ?",
   "Features.ConfigurationDialog.visualization-preview": "aperçu de la visualisation",

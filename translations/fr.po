@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sample Project\n"
-"POT-Creation-Date: 2017-7-1\n"
-"PO-Revision-Date: Sat Jul 01 2017 19:19:45 GMT+0200 (CEST)\n"
+"POT-Creation-Date: 2017-7-2\n"
+"PO-Revision-Date: Sun Jul 02 2017 16:32:46 GMT+0200 (CEST)\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -11,26 +11,26 @@ msgstr ""
 "Language: fr\n"
 "X-Generator: None\n"
 
-msgid "Components.ColorPicker.cancel"
-msgstr "annuler"
-
 msgid "Components.ColorPicker.save-color"
 msgstr "sauvegarder la couleur"
+
+msgid "Components.ColorPicker.cancel"
+msgstr "annuler"
 
 msgid "Components.ColorsMapPicker.categories-title"
 msgstr "Catégories de la collection {categories}"
 
-msgid "Components.ColorsMapPicker.hide"
-msgstr "cacher"
+msgid "Components.ColorsMapPicker.show-all"
+msgstr "tout montrer"
 
 msgid "Components.ColorsMapPicker.hide-all"
 msgstr "tout cacher"
 
+msgid "Components.ColorsMapPicker.hide"
+msgstr "cacher"
+
 msgid "Components.ColorsMapPicker.show"
 msgstr "montrer"
-
-msgid "Components.ColorsMapPicker.show-all"
-msgstr "tout montrer"
 
 msgid "Components.DraftEditor.bold"
 msgstr "gras"
@@ -47,71 +47,44 @@ msgstr "écriver votre commentaire pour la diapositive ici"
 msgid "Components.Footer.by"
 msgstr "une production "
 
-msgid "Components.Footer.edit"
-msgstr "édition"
-
 msgid "Components.Footer.preview"
 msgstr "aperçu"
+
+msgid "Components.Footer.edit"
+msgstr "édition"
 
 msgid "Components.Footer.take-away"
 msgstr "emporter"
 
-msgid "Components.PresentationCard.cancel"
-msgstr "annuler"
-
-msgid "Components.PresentationCard.delete"
-msgstr "supprimer"
-
-msgid "Components.PresentationCard.delete_confirm"
-msgstr "Oui, supprimer cette présentation"
-
-msgid "Components.PresentationCard.duplicate"
-msgstr "dupliquer"
-
-msgid "Components.PresentationCard.edit"
-msgstr "éditer"
+msgid "Components.PresentationCard.untitled_presentation"
+msgstr "présentation sans titre"
 
 msgid "Components.PresentationCard.no_description"
 msgstr "pas de description"
 
+msgid "Components.PresentationCard.edit"
+msgstr "éditer"
+
 msgid "Components.PresentationCard.settings"
 msgstr "réglages"
+
+msgid "Components.PresentationCard.delete"
+msgstr "supprimer"
 
 msgid "Components.PresentationCard.sure_delete"
 msgstr "Voulez-vous vraiment supprimer cette présentation ? l'opération est irréversible."
 
-msgid "Components.PresentationCard.untitled_presentation"
-msgstr "présentation sans titre"
+msgid "Components.PresentationCard.delete_confirm"
+msgstr "Oui, supprimer cette présentation"
 
-msgid "Components.Slide.duplicate"
+msgid "Components.PresentationCard.cancel"
+msgstr "annuler"
+
+msgid "Components.PresentationCard.duplicate"
 msgstr "dupliquer"
-
-msgid "Components.Slide.move"
-msgstr "déplacer"
-
-msgid "Components.Slide.remove"
-msgstr "supprimer"
-
-msgid "Components.Slide.slide-comment"
-msgstr "commentaire de la diapositive"
-
-msgid "Components.Slide.slide-title"
-msgstr "titre de la diapositive"
-
-msgid "Components.SlidesContainer.add-slide"
-msgstr "ajouter une diapositive"
-
-msgid "Components.SlidesContainer.click-to-add-first-slide"
-msgstr "cliquer ici pour ajouter une première diapositive"
 
 msgid "Components.SlidesSettingsPannel.Categories"
 msgstr "Catégories"
-
-msgid "Components.SlidesSettingsPannel.close-advanced-options"
-msgstr "Fermer les options de vue avancées"
-
-msgid "Components.SlidesSettingsPannel.open-advanced-options"
-msgstr "Ouvrir les options de vue avancées"
 
 msgid "Components.SlidesSettingsPannel.Parameters"
 msgstr "Paramètres"
@@ -119,98 +92,35 @@ msgstr "Paramètres"
 msgid "Components.SlidesSettingsPannel.parameters-title"
 msgstr "Paramètres de la collection {parameters}"
 
-msgid "Features.ConfigurationDialog.a-file-from-my-computer"
-msgstr "un fichier présent sur mon ordinateur"
+msgid "Components.SlidesSettingsPannel.close-advanced-options"
+msgstr "Fermer les options de vue avancées"
 
-msgid "Features.ConfigurationDialog.a-sample-file"
-msgstr "un fichier d'exemple"
+msgid "Components.SlidesSettingsPannel.open-advanced-options"
+msgstr "Ouvrir les options de vue avancées"
 
-msgid "Features.ConfigurationDialog.apply-changes-and-continue-presentation-edition"
-msgstr "appliquer les changements et continuer à éditer la présentation"
+msgid "Components.Slide.slide-title"
+msgstr "titre de la diapositive"
 
-msgid "Features.ConfigurationDialog.authors-of-the-presentation"
-msgstr "auteurs de la présentation"
+msgid "Components.Slide.slide-comment"
+msgstr "commentaire de la diapositive"
 
-msgid "Features.ConfigurationDialog.cancel"
-msgstr "annuler"
+msgid "Components.Slide.move"
+msgstr "déplacer"
 
-msgid "Features.ConfigurationDialog.dataset-data"
-msgstr "données du jeu de données"
+msgid "Components.Slide.duplicate"
+msgstr "dupliquer"
 
-msgid "Features.ConfigurationDialog.dataset-metadata"
-msgstr "métadonnées du jeu de données"
+msgid "Components.Slide.remove"
+msgstr "supprimer"
 
-msgid "Features.ConfigurationDialog.dataset-preview"
-msgstr "aperçu des données"
+msgid "Components.SlidesContainer.click-to-add-first-slide"
+msgstr "cliquer ici pour ajouter une première diapositive"
 
-msgid "Features.ConfigurationDialog.description-of-the-dataset"
-msgstr "description du jeu de données"
-
-msgid "Features.ConfigurationDialog.description-of-the-presentation"
-msgstr "description de la présentation"
-
-msgid "Features.ConfigurationDialog.drop-a-file-here"
-msgstr "déposer un fichier ici"
-
-msgid "Features.ConfigurationDialog.drop-a-file-to-update-with-new-data"
-msgstr "déposer un fichier ici pour mettre à jour votre jeu de données"
-
-msgid "Features.ConfigurationDialog.how-to-color-your-categories"
-msgstr "Comment colorier les catégories ?"
-
-msgid "Features.ConfigurationDialog.how-to-map-your-data-to-the-visualization"
-msgstr "Comment traduire vos données ?"
-
-msgid "Features.ConfigurationDialog.how-to-visualize-the-data"
-msgstr "Comment visualiser les données ?"
-
-msgid "Features.ConfigurationDialog.how-to-visualize-the-data-help"
-msgstr "Certains jeux de données peuvent être visualisés avec des techniques différentes. Pensez à l'argument que vous voulez construire pour choisir le bon !"
-
-msgid "Features.ConfigurationDialog.license-of-the-dataset"
-msgstr "license du jeu de données"
+msgid "Components.SlidesContainer.add-slide"
+msgstr "ajouter une diapositive"
 
 msgid "Features.ConfigurationDialog.presentation-configuration"
 msgstr "configuration de la présentation"
-
-msgid "Features.ConfigurationDialog.recommended-for"
-msgstr "Recommandé pour : "
-
-msgid "Features.ConfigurationDialog.remove-this-dataset"
-msgstr "supprimer ce jeu de données"
-
-msgid "Features.ConfigurationDialog.sample-dataset"
-msgstr "jeu de données d'exemple"
-
-msgid "Features.ConfigurationDialog.select-to-use-this-dataset"
-msgstr "cliquer pour utiliser ce jeu de données"
-
-msgid "Features.ConfigurationDialog.start-to-edit-this-presentation"
-msgstr "commencer à éditer la présentation"
-
-msgid "Features.ConfigurationDialog.the-file-used-for-current-data-is"
-msgstr "le fichier utilisé pour les données actuelles est "
-
-msgid "Features.ConfigurationDialog.title-of-the-dataset"
-msgstr "titre du jeu de données"
-
-msgid "Features.ConfigurationDialog.title-of-the-presentation"
-msgstr "titre de la présentation"
-
-msgid "Features.ConfigurationDialog.url-of-the-dataset"
-msgstr "url du jeu de données"
-
-msgid "Features.ConfigurationDialog.visualization-options"
-msgstr "options de la visualisation"
-
-msgid "Features.ConfigurationDialog.visualization-preview"
-msgstr "aperçu de la visualisation"
-
-msgid "Features.ConfigurationDialog.what-data-do-you-want-to-use"
-msgstr "Quelles données voulez-vous utiliser ?"
-
-msgid "Features.ConfigurationDialog.what-data-do-you-want-to-use-help"
-msgstr "Quels formats de données et outils puis-je utiliser pour fabriquer un jeu de données pour ma présentation ?"
 
 msgid "Features.ConfigurationDialog.what-is-your-presentation-about"
 msgstr "Quel est le propos de votre présentation ?"
@@ -218,143 +128,101 @@ msgstr "Quel est le propos de votre présentation ?"
 msgid "Features.ConfigurationDialog.what-is-your-presentation-about-help"
 msgstr "Ces informations seront très utiles pour construire des métadonnées de haute qualité lors de la publication de votre présentation"
 
-msgid "Features.Editor.back-to-home"
-msgstr "Retour à l'accueil"
+msgid "Features.ConfigurationDialog.title-of-the-presentation"
+msgstr "titre de la présentation"
 
-msgid "Features.Editor.reset-view"
-msgstr "réinitialiser"
+msgid "Features.ConfigurationDialog.authors-of-the-presentation"
+msgstr "auteurs de la présentation"
 
-msgid "Features.Editor.settings"
-msgstr "paramètres"
+msgid "Features.ConfigurationDialog.description-of-the-presentation"
+msgstr "description de la présentation"
 
-msgid "Features.Editor.take-snapshot"
-msgstr "capturer la vue"
+msgid "Features.ConfigurationDialog.what-data-do-you-want-to-use"
+msgstr "Quelles données voulez-vous utiliser ?"
 
-msgid "Features.Editor.untitled-presentation"
-msgstr "Présentation sans titre"
+msgid "Features.ConfigurationDialog.what-data-do-you-want-to-use-help"
+msgstr "Quels formats de données et outils puis-je utiliser pour fabriquer un jeu de données pour ma présentation ?"
 
-msgid "Features.Editor.write-your-slide-title-here"
-msgstr "écrire le titre de votre diapositive ici"
+msgid "Features.ConfigurationDialog.dataset-metadata"
+msgstr "métadonnées du jeu de données"
 
-msgid "Features.PresentationsManager.about-forccast"
-msgstr "Bulgur est conçu pour être utilisé lors de cours innovants portant sur les cartographies de controverses pilotés par le programme FORCCAST."
+msgid "Features.ConfigurationDialog.title-of-the-dataset"
+msgstr "titre du jeu de données"
 
-msgid "Features.PresentationsManager.about-medialab"
-msgstr "Bulgur est un programme open source développé par le médialab sciences po."
+msgid "Features.ConfigurationDialog.description-of-the-dataset"
+msgstr "description du jeu de données"
 
-msgid "Features.PresentationsManager.cancel"
+msgid "Features.ConfigurationDialog.url-of-the-dataset"
+msgstr "url du jeu de données"
+
+msgid "Features.ConfigurationDialog.license-of-the-dataset"
+msgstr "license du jeu de données"
+
+msgid "Features.ConfigurationDialog.dataset-data"
+msgstr "données du jeu de données"
+
+msgid "Features.ConfigurationDialog.the-file-used-for-current-data-is"
+msgstr "le fichier utilisé pour les données actuelles est "
+
+msgid "Features.ConfigurationDialog.drop-a-file-to-update-with-new-data"
+msgstr "déposer un fichier ici pour mettre à jour votre jeu de données"
+
+msgid "Features.ConfigurationDialog.remove-this-dataset"
+msgstr "supprimer ce jeu de données"
+
+msgid "Features.ConfigurationDialog.dataset-preview"
+msgstr "aperçu des données"
+
+msgid "Features.ConfigurationDialog.a-file-from-my-computer"
+msgstr "un fichier présent sur mon ordinateur"
+
+msgid "Features.ConfigurationDialog.a-sample-file"
+msgstr "un fichier d'exemple"
+
+msgid "Features.ConfigurationDialog.drop-a-file-here"
+msgstr "déposer un fichier ici"
+
+msgid "Features.ConfigurationDialog.sample-dataset"
+msgstr "jeu de données d'exemple"
+
+msgid "Features.ConfigurationDialog.recommended-for"
+msgstr "Recommandé pour : "
+
+msgid "Features.ConfigurationDialog.select-to-use-this-dataset"
+msgstr "cliquer pour utiliser ce jeu de données"
+
+msgid "Features.ConfigurationDialog.how-to-visualize-the-data"
+msgstr "Comment visualiser les données ?"
+
+msgid "Features.ConfigurationDialog.how-to-visualize-the-data-help"
+msgstr "Certains jeux de données peuvent être visualisés avec des techniques différentes. Pensez à l'argument que vous voulez construire pour choisir le bon !"
+
+msgid "Features.ConfigurationDialog.how-to-map-your-data-to-the-visualization"
+msgstr "Comment traduire vos données ?"
+
+msgid "Features.ConfigurationDialog.collection-mapping-parameters"
+msgstr "Correspondances de la collection {collection}"
+
+msgid "Features.ConfigurationDialog.latitude-and-longitude-are-not-mapped"
+msgstr "La latitude et la longitude ne sont pas présentes dans la liste. Vous devez indiquer un champ 'latitude' et un champ 'longitude' dans vos données pour qu'elles s'affichent bien."
+
+msgid "Features.ConfigurationDialog.visualization-options"
+msgstr "options de la visualisation"
+
+msgid "Features.ConfigurationDialog.how-to-color-your-categories"
+msgstr "Comment colorier les catégories ?"
+
+msgid "Features.ConfigurationDialog.visualization-preview"
+msgstr "aperçu de la visualisation"
+
+msgid "Features.ConfigurationDialog.apply-changes-and-continue-presentation-edition"
+msgstr "appliquer les changements et continuer à éditer la présentation"
+
+msgid "Features.ConfigurationDialog.start-to-edit-this-presentation"
+msgstr "commencer à éditer la présentation"
+
+msgid "Features.ConfigurationDialog.cancel"
 msgstr "annuler"
-
-msgid "Features.PresentationsManager.copy-paste-url-of-the-project"
-msgstr "Coller l'url de la présentation à télécharger"
-
-msgid "Features.PresentationsManager.description-$1-goal"
-msgstr "Bulgur est un outil dédié à la fabrication de visites guidées dans des visualisations de données, baptisées présentations de données."
-
-msgid "Features.PresentationsManager.description-$2-flow"
-msgstr "Importez un fichier de données depuis votre ordinateur, puis choisissez une techniques de présentation, puis composez votre présentation. Vous pourrez ensuite l'exporter comme fichier html ou page web en ligne."
-
-msgid "Features.PresentationsManager.do-you-wish-to-override-presentation"
-msgstr "Voulez-vous écraser la version actuelle de la présentation avec celle que vous essayez d'importer ?"
-
-msgid "Features.PresentationsManager.drop-a-json-file-here"
-msgstr "Déposer un fichier .json dans cette zone"
-
-msgid "Features.PresentationsManager.fetch-an-existant-project-from-distant-server"
-msgstr "... ou récupérer un fichier stocké sur un serveur distant"
-
-msgid "Features.PresentationsManager.import"
-msgstr "importer"
-
-msgid "Features.PresentationsManager.import-project-from-computer"
-msgstr "... ou importer un fichier de présentation sauvegardé sur votre ordinateur"
-
-msgid "Features.PresentationsManager.maximum-presentations-reached"
-msgstr "Vous avez atteint le nombre maximum de présentation stockées localement. Il vous faut créer un peu de place avant d'en créer de nouvelles. Rappellez-vous que vous pouvez télécharger vos présentation ou les déposer sur le web et les réimporter plus tard !"
-
-msgid "Features.PresentationsManager.or-continue-locally-stored-presentation"
-msgstr "... ou continuer l'une de vos présentation stockées localement"
-
-msgid "Features.PresentationsManager.override-existing-version-of-presentation"
-msgstr "Écraser la version existante de la présentation"
-
-msgid "Features.PresentationsManager.presentation-already-exists"
-msgstr "La présentation existe déjà"
-
-msgid "Features.PresentationsManager.start-a-new-presentation"
-msgstr "Commencer une nouvelle présentation"
-
-msgid "Features.PresentationsManager.the-fetching-process-failed"
-msgstr "Le processus de téléchargement de la présentation a échoué"
-
-msgid "Features.PresentationsManager.the-gist-is-not-properly-formatted"
-msgstr "Le dépôt gist n'est pas correctement formatté"
-
-msgid "Features.PresentationsManager.the-url-did-not-point-to-a-valid-presentation"
-msgstr "L'url ne pointe pas vers une présentation valide"
-
-msgid "Features.PresentationsManager.you-seem-to-have-already-this-presentation"
-msgstr "Vous semblez disposer déjà une version de la présentation que vous essayez d'importer dans la mémoire locale de l'application."
-
-msgid "Features.PresentationsManager.your-file-is-badly-formatted"
-msgstr "Le fichier est mal formatté"
-
-msgid "Features.PresentationsManager.your-file-is-not-a-valid-presentation"
-msgstr "Le fichier n'est pas une presentation valide"
-
-msgid "Features.TakeAway.close"
-msgstr "fermer"
-
-msgid "Features.TakeAway.embed-inside-an-html-webpage"
-msgstr "Code à copier pour embarquer dans une page html"
-
-msgid "Features.TakeAway.forccast-website"
-msgstr "Le site FORCCAST"
-
-msgid "Features.TakeAway.forccast-website-help"
-msgstr "la présentation sera stockée sur le serveur et accessible publiquement"
-
-msgid "Features.TakeAway.gist-powered-website"
-msgstr "site web hébergé par gist"
-
-msgid "Features.TakeAway.gist-powered-website-help"
-msgstr "la présentation sera accessible publiquement"
-
-msgid "Features.TakeAway.go-to-the-gist-based-webpage-of-your-presentation"
-msgstr "aller sur la page basée sur gist de la présentation"
-
-msgid "Features.TakeAway.go-to-the-gist-source-code-of-your-presentation"
-msgstr "aller sur le code source de la présentation sur gist"
-
-msgid "Features.TakeAway.go-to-the-online-webpage"
-msgstr "aller sur la page en ligne"
-
-msgid "Features.TakeAway.html-file"
-msgstr "fichier html"
-
-msgid "Features.TakeAway.html-file-help"
-msgstr "une page web à téléverser où vous le souhaitez sur le web"
-
-msgid "Features.TakeAway.project-file"
-msgstr "fichier de présentation (pour sauvegarde)"
-
-msgid "Features.TakeAway.project-file-help"
-msgstr "une sauvegarde de votre présentation qui peut être importée ailleurs"
-
-msgid "Features.TakeAway.take-away-your-presentation"
-msgstr "emporter votre présentation"
-
-msgid "Features.TakeAway.the-online-version-will-be-overriden-with-your-current-version"
-msgstr "le dépôt en ligne sera écrasé par votre version actuelle de la présentation"
-
-msgid "Features.TakeAway.update-local-version-from-the-repository"
-msgstr "update local version from the repository"
-
-msgid "Features.TakeAway.update-local-version-to-the-repository"
-msgstr "update local version to the repository"
-
-msgid "Features.TakeAway.your-current-version-will-be-overriden-with-the-distant-version"
-msgstr "votre version actuelle de la présentation sera écrasée par celle du dépôt en ligne"
 
 msgid "Features.ConfigurationDialog.stop-spatialization"
 msgstr "arrêter la spatialisation"
@@ -371,80 +239,8 @@ msgstr "sauvegarder les positions"
 msgid "Features.ConfigurationDialog.save-nodes-positions-help"
 msgstr "Les positions des données seront sauvegardées dans les données utilisées pour la visualisation"
 
-msgid "Features.ConfigurationDialog.collection-mapping-parameters"
-msgstr "Correspondances de la collection {collection}"
-
-msgid "Features.PresentationManager.description-$1-goal"
-msgstr "description-$1-goal"
-
-msgid "Features.PresentationManager.description-$2-flow"
-msgstr "description-$2-flow"
-
-msgid "Features.PresentationManager.about-forccast"
-msgstr "about-forccast"
-
-msgid "Features.PresentationManager.about-medialab"
-msgstr "about-medialab"
-
-msgid "Features.PresentationManager.start-a-new-presentation"
-msgstr "start-a-new-presentation"
-
-msgid "Features.PresentationManager.maximum-presentations-reached"
-msgstr "maximum-presentations-reached"
-
-msgid "Features.PresentationManager.or-continue-locally-stored-presentation"
-msgstr "or-continue-locally-stored-presentation"
-
-msgid "Features.PresentationManager.import-project-from-computer"
-msgstr "import-project-from-computer"
-
-msgid "Features.PresentationManager.drop-a-json-file-here"
-msgstr "drop-a-json-file-here"
-
-msgid "Features.PresentationManager.fetch-an-existant-project-from-distant-server"
-msgstr "fetch-an-existant-project-from-distant-server"
-
-msgid "Features.PresentationManager.copy-paste-url-of-the-project"
-msgstr "copy-paste-url-of-the-project"
-
-msgid "Features.PresentationManager.import"
-msgstr "import"
-
-msgid "Features.PresentationManager.your-file-is-badly-formatted"
-msgstr "your-file-is-badly-formatted"
-
-msgid "Features.PresentationManager.your-file-is-not-a-valid-presentation"
-msgstr "your-file-is-not-a-valid-presentation"
-
-msgid "Features.PresentationManager.the-url-did-not-point-to-a-valid-presentation"
-msgstr "the-url-did-not-point-to-a-valid-presentation"
-
-msgid "Features.PresentationManager.the-gist-is-not-properly-formatted"
-msgstr "the-gist-is-not-properly-formatted"
-
-msgid "Features.PresentationManager.the-fetching-process-failed"
-msgstr "the-fetching-process-failed"
-
-msgid "Features.PresentationManager.presentation-already-exists"
-msgstr "presentation-already-exists"
-
-msgid "Features.PresentationManager.you-seem-to-have-already-this-presentation"
-msgstr "you-seem-to-have-already-this-presentation"
-
-msgid "Features.PresentationManager.do-you-wish-to-override-presentation"
-msgstr "do-you-wish-to-override-presentation"
-
-msgid "Features.PresentationManager.override-existing-version-of-presentation"
-msgstr "override-existing-version-of-presentation"
-
-msgid "Features.PresentationManager.cancel"
-msgstr "cancel"
-
-msgid "Features.PresentationsManager.bulgur-baseline"
-msgstr "bulgur-baseline"
-
-msgid "Features.GlobalUi.edit-story"
-msgstr "edit-story"
+msgid "Features.GlobalUi.edit-presentation"
+msgstr "edit-presentation"
 
 msgid "Features.PresentationEditor.back-to-home"
 msgstr "Retour à l'accueil"
@@ -464,17 +260,137 @@ msgstr "capturer la vue"
 msgid "Features.PresentationEditor.reset-view"
 msgstr "réinitialiser"
 
-msgid "Features.GlobalUi.edit-presentation"
-msgstr "edit-presentation"
-
 msgid "Features.PresentationSettingsManager.story-settings-title"
-msgstr "story-settings-title"
-
-msgid "Features.PresentationSettingsManager.customize-css-title"
-msgstr "customize-css-title"
+msgstr "réglages"
 
 msgid "Features.PresentationSettingsManager.template-title"
-msgstr "template-title"
+msgstr "gabarit de présentation"
 
 msgid "Features.PresentationSettingsManager.choose-a-template"
-msgstr "choose-a-template"
+msgstr "choisir un gabarit"
+
+msgid "Features.PresentationSettingsManager.customize-css-title"
+msgstr "code css (utilisateur avancé)"
+
+msgid "Features.PresentationsManager.bulgur-baseline"
+msgstr "l'éditeur de présentations de données"
+
+msgid "Features.PresentationsManager.description-$1-goal"
+msgstr "Bulgur est un outil dédié à la fabrication de visites guidées dans des visualisations de données, baptisées présentations de données."
+
+msgid "Features.PresentationsManager.description-$2-flow"
+msgstr "Importez un fichier de données depuis votre ordinateur, puis choisissez une techniques de présentation, puis composez votre présentation. Vous pourrez ensuite l'exporter comme fichier html ou page web en ligne."
+
+msgid "Features.PresentationsManager.about-forccast"
+msgstr "Bulgur est conçu pour être utilisé lors de cours innovants portant sur les cartographies de controverses pilotés par le programme FORCCAST."
+
+msgid "Features.PresentationsManager.about-medialab"
+msgstr "Bulgur est un programme open source développé par le médialab sciences po."
+
+msgid "Features.PresentationsManager.start-a-new-presentation"
+msgstr "Commencer une nouvelle présentation"
+
+msgid "Features.PresentationsManager.maximum-presentations-reached"
+msgstr "Vous avez atteint le nombre maximum de présentation stockées localement. Il vous faut créer un peu de place avant d'en créer de nouvelles. Rappellez-vous que vous pouvez télécharger vos présentation ou les déposer sur le web et les réimporter plus tard !"
+
+msgid "Features.PresentationsManager.or-continue-locally-stored-presentation"
+msgstr "... ou continuer l'une de vos présentation stockées localement"
+
+msgid "Features.PresentationsManager.import-project-from-computer"
+msgstr "... ou importer un fichier de présentation sauvegardé sur votre ordinateur"
+
+msgid "Features.PresentationsManager.drop-a-json-file-here"
+msgstr "Déposer un fichier .json dans cette zone"
+
+msgid "Features.PresentationsManager.fetch-an-existant-project-from-distant-server"
+msgstr "... ou récupérer un fichier stocké sur un serveur distant"
+
+msgid "Features.PresentationsManager.copy-paste-url-of-the-project"
+msgstr "Coller l'url de la présentation à télécharger"
+
+msgid "Features.PresentationsManager.import"
+msgstr "importer"
+
+msgid "Features.PresentationsManager.your-file-is-badly-formatted"
+msgstr "Le fichier est mal formatté"
+
+msgid "Features.PresentationsManager.your-file-is-not-a-valid-presentation"
+msgstr "Le fichier n'est pas une presentation valide"
+
+msgid "Features.PresentationsManager.the-url-did-not-point-to-a-valid-presentation"
+msgstr "L'url ne pointe pas vers une présentation valide"
+
+msgid "Features.PresentationsManager.the-gist-is-not-properly-formatted"
+msgstr "Le dépôt gist n'est pas correctement formatté"
+
+msgid "Features.PresentationsManager.the-fetching-process-failed"
+msgstr "Le processus de téléchargement de la présentation a échoué"
+
+msgid "Features.PresentationsManager.presentation-already-exists"
+msgstr "La présentation existe déjà"
+
+msgid "Features.PresentationsManager.you-seem-to-have-already-this-presentation"
+msgstr "Vous semblez disposer déjà une version de la présentation que vous essayez d'importer dans la mémoire locale de l'application."
+
+msgid "Features.PresentationsManager.do-you-wish-to-override-presentation"
+msgstr "Voulez-vous écraser la version actuelle de la présentation avec celle que vous essayez d'importer ?"
+
+msgid "Features.PresentationsManager.override-existing-version-of-presentation"
+msgstr "Écraser la version existante de la présentation"
+
+msgid "Features.PresentationsManager.cancel"
+msgstr "annuler"
+
+msgid "Features.TakeAway.project-file"
+msgstr "fichier de présentation (pour sauvegarde)"
+
+msgid "Features.TakeAway.project-file-help"
+msgstr "une sauvegarde de votre présentation qui peut être importée ailleurs"
+
+msgid "Features.TakeAway.html-file"
+msgstr "fichier html"
+
+msgid "Features.TakeAway.html-file-help"
+msgstr "une page web à téléverser où vous le souhaitez sur le web"
+
+msgid "Features.TakeAway.gist-powered-website"
+msgstr "site web hébergé par gist"
+
+msgid "Features.TakeAway.gist-powered-website-help"
+msgstr "la présentation sera accessible publiquement"
+
+msgid "Features.TakeAway.forccast-website"
+msgstr "Le site FORCCAST"
+
+msgid "Features.TakeAway.forccast-website-help"
+msgstr "la présentation sera stockée sur le serveur et accessible publiquement"
+
+msgid "Features.TakeAway.take-away-your-presentation"
+msgstr "emporter votre présentation"
+
+msgid "Features.TakeAway.go-to-the-gist-source-code-of-your-presentation"
+msgstr "aller sur le code source de la présentation sur gist"
+
+msgid "Features.TakeAway.go-to-the-gist-based-webpage-of-your-presentation"
+msgstr "aller sur la page basée sur gist de la présentation"
+
+msgid "Features.TakeAway.embed-inside-an-html-webpage"
+msgstr "Code à copier pour embarquer dans une page html"
+
+msgid "Features.TakeAway.update-local-version-to-the-repository"
+msgstr "update local version to the repository"
+
+msgid "Features.TakeAway.the-online-version-will-be-overriden-with-your-current-version"
+msgstr "le dépôt en ligne sera écrasé par votre version actuelle de la présentation"
+
+msgid "Features.TakeAway.update-local-version-from-the-repository"
+msgstr "update local version from the repository"
+
+msgid "Features.TakeAway.your-current-version-will-be-overriden-with-the-distant-version"
+msgstr "votre version actuelle de la présentation sera écrasée par celle du dépôt en ligne"
+
+msgid "Features.TakeAway.go-to-the-online-webpage"
+msgstr "aller sur la page en ligne"
+
+msgid "Features.TakeAway.close"
+msgstr "fermer"

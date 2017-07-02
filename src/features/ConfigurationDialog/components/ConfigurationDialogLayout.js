@@ -359,6 +359,13 @@ const ConfigurationDialogLayout = ({
                             }
                           </ul>
                        : null}
+                      {visualization.metadata
+                        && visualization.metadata.visualizationType === 'map'
+                        &&
+                        <p className="info-button">
+                          ⓘ <i>{translate('latitude-and-longitude-are-not-mapped')}</i>
+                        </p>
+                      }
                       {visualization.viewOptions &&
                        visualization.viewOptions.length
                         ?

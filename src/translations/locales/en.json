@@ -63,6 +63,7 @@
   "Features.ConfigurationDialog.how-to-visualize-the-data-help": "Sometimes the same dataset can be visualized with different techniques. Think about the point you are trying to make for choosing the right one !",
   "Features.ConfigurationDialog.how-to-map-your-data-to-the-visualization": "How to map your data ?",
   "Features.ConfigurationDialog.collection-mapping-parameters": "correspondances for the collection {collection}",
+  "Features.ConfigurationDialog.latitude-and-longitude-are-not-mapped": "Latitude and longitude are not present in this list. You must indicate a 'latitude' and 'longitude' field in your data fields in order to display them properly.",
   "Features.ConfigurationDialog.visualization-options": "Visualization options",
   "Features.ConfigurationDialog.how-to-color-your-categories": "How to color your categories ?",
   "Features.ConfigurationDialog.visualization-preview": "Visualization preview",
