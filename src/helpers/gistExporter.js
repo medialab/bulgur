@@ -1,5 +1,5 @@
 /**
- * This module helps to export a presenetation to the gist service
+ * This module helps to export a presentation to the gist service
  * @module bulgur/utils/gistExporter
  */
 import GitHub from 'github-api';
@@ -39,38 +39,79 @@ export default function publishGist(htmlContent = '', JSONbundle = {}, dispatch,
           }
         }
       };
+      let gist = gh.getGist(gistId);
+      // gistId is specified ==> update routine
       if (gistId) {
         dispatch({
           type: statusActionName,
           log: 'updating gist',
           status: 'processing'
         });
+        gist.update(gistContent)
+          .then(() => {
+            return gist.read();
+          })
+          .then(response => {
+            const gistData = response.data;
+            // const ownerName = gistData.owner.login;
+            const gistUrl = gistData.html_url;
+            const results = {
+              gistUrl,
+              gistId: gistData.id,
+              gist
+            };
+            return resolve(results);
+          })
+          .catch(reject);
       }
+      // create routine
       else {
         dispatch({
           type: statusActionName,
           log: 'creating gist',
           status: 'processing'
         });
-      }
-      const gist = gh.getGist(gistId);
-
-      gist.create(gistContent)
-        .then(() => {
-          return gist.read();
-        })
-        .then(response => {
-          const gistData = response.data;
-          // const ownerName = gistData.owner.login;
-          const gistUrl = gistData.html_url;
-          const results = {
-            gistUrl,
-            gistId: gistData.id,
-            gist
-          };
-          return resolve(results);
+        gist.create(gistContent)
+          .then(() => {
+            return gist.read();
+          })
+          .then(response => {
+            const gistData = response.data;
+            // const ownerName = gistData.owner.login;
+            const gistUrl = gistData.html_url;
+            // as this is a new presentation, reuploading the presentation with correct gist id
+            const newGistContent = {
+              ...gistContent,
+              files: {
+                ...gistContent.files,
+                'project.json': {
+                  content: JSON.stringify({
+                    ...JSONbundle,
+                    metadata: {
+                      ...JSONbundle.metadata,
+                      gistUrl,
+                      gistId: gistData.id
+                    }
+                  }, null, 2)
+                }
+              }
+            };
+            gist = gh.getGist(gistData.id);
+            gist.update(newGistContent)
+              .then(() => {
+                return gist.read();
+              })
+              .then(() => {
+                const results = {
+                  gistUrl,
+                  gistId: gistData.id,
+                  gist
+                };
+                return resolve(results);
+              });
         })
         .catch(reject);
+      }
     })
     .catch(reject);
   });
