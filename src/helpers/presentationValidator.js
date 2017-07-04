@@ -34,7 +34,7 @@ const validateObject = (model, obj) => {
       const invalidKey = keys.find(modelKey => {
         const isRequired = model.keys[modelKey].required;
         // the object has the prop or the prop is not required
-        if (obj[modelKey] || !isRequired) {
+        if (obj[modelKey] !== undefined || !isRequired) {
           return !validateEntity(model.keys[modelKey], obj[modelKey]);
         // the object does not have the prop and it is required
         }

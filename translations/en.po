@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Sample Project\n"
-"POT-Creation-Date: 2017-7-2\n"
-"PO-Revision-Date: Sun Jul 02 2017 16:46:21 GMT+0200 (CEST)\n"
+"POT-Creation-Date: 2017-7-4\n"
+"PO-Revision-Date: Tue Jul 04 2017 16:10:11 GMT+0200 (CEST)\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -403,3 +403,6 @@ msgstr "parameters-header"
 
 msgid "Components.SlidesSettingsPannel.colors-mapping-header"
 msgstr "colors-mapping-header"
+
+msgid "Features.PresentationsManager.your-file-is-not-a-valid-story"
+msgstr "your-file-is-not-a-valid-story"

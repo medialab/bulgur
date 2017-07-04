@@ -11,6 +11,8 @@ import './PresentationsManagerLayout.scss';
 import DropZone from '../../../components/DropZone/DropZone';
 import PresentationCard from '../../../components/PresentationCard/PresentationCard';
 import LangToggler from '../../../components/LangToggler/LangToggler';
+import Toaster from '../../../components/Toaster/Toaster';
+
 import {translateNameSpacer} from '../../../helpers/translateUtils';
 
 /**
@@ -179,27 +181,29 @@ const PresentationsManagerLayout = ({
                 value={translate('import')} />
             </form>
           </div> : null}
-        <div className="import-status-display">
-          {importStatus}
-        </div>
-        <div className="import-error-display">
-          {
-            importError === 'badJSON' ?
-            translate('your-file-is-badly-formatted')
-            : ''
-          }
-          {importError === 'invalidProject' ?
-            translate('your-file-is-not-a-valid-presentation')
-            : ''}
-          {importError === 'invalidUrl' ?
-            translate('the-url-did-not-point-to-a-valid-presentation')
-            : ''}
-          {importError === 'invalidGist' ?
-            translate('the-gist-is-not-properly-formatted')
-            : ''}
-          {importError === 'fetchError' ?
-            translate('the-fetching-process-failed')
-            : ''}
+          <div className="import-status-display">
+          <Toaster
+            status={importStatus} log={
+              <div className="import-error-display">
+                {
+              importError === 'badJSON' ?
+              translate('your-file-is-badly-formatted')
+              : ''
+            }
+                {importError === 'invalidProject' ?
+              translate('your-file-is-not-a-valid-story')
+              : ''}
+                {importError === 'invalidUrl' ?
+              translate('the-url-did-not-point-to-a-valid-presentation')
+              : ''}
+                {importError === 'invalidGist' ?
+              translate('the-gist-is-not-properly-formatted')
+              : ''}
+                {importError === 'fetchError' ?
+              translate('the-fetching-process-failed')
+              : ''}
+              </div>
+          } />
         </div>
       </section>
 
