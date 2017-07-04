@@ -178,11 +178,11 @@ const TakeAwayDialogLayout = ({
               <div className="sync-section">
                 <div className="column">
                   <p>
-                    <a target="blank" href={activePresentation.metadata.gistUrl}>
-                      → {translate('go-to-the-gist-source-code-of-your-presentation')}
-                    </a>
                     <a target="blank" href={serverUrl + '/gist-presentation/' + activePresentation.metadata.gistId}>
                       → {translate('go-to-the-gist-based-webpage-of-your-presentation')}
+                    </a>
+                    <a target="blank" href={activePresentation.metadata.gistUrl}>
+                      → {translate('go-to-the-gist-source-code-of-your-presentation')}
                     </a>
                   </p>
                   <p>{translate('embed-inside-an-html-webpage')}</p>

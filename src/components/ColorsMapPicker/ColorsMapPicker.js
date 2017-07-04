@@ -102,7 +102,8 @@ const ColorsMapPicker = ({
               if (!active) {
                 if (allowColorChange) {
                   toggleColorEdition(visualizationId, colorCollectionId, category);
-                } else {
+                }
+ else {
                   onFilterClick(e);
                 }
               }

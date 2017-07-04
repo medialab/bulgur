@@ -73,8 +73,7 @@ const SlideSettingsPannel = ({
                         toggleColorEdition={toggleViewColorEdition}
                         allowColorChange={false}
                         changeColor={setViewColor}
-                        editedColor={editedColor} 
-                      />
+                        editedColor={editedColor} />
                     ))
                   }
               </div>
@@ -135,10 +134,9 @@ const SlideSettingsPannel = ({
                         colorsMap={views[viewKey].viewParameters.colorsMap}
                         visualizationId={viewKey}
                         toggleColorEdition={toggleViewColorEdition}
-                        allowColorChange={true}
+                        allowColorChange
                         changeColor={setViewColor}
-                        editedColor={editedColor} 
-                      />
+                        editedColor={editedColor} />
                     ))
                   }
                 </h3>
