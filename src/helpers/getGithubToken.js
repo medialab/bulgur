@@ -23,7 +23,7 @@ export default function getGithubToken () {
         // clean the code
         code = code.split('&')[0];
         // exchange the code for a token
-        post(serverUrl + '/oauth-proxy')
+        post(serverUrl + '/oauth-proxy/bulgur')
         .set('Accept', 'application/json')
         .send({code})
         .end((err, response) => {
