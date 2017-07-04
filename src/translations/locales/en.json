@@ -102,7 +102,7 @@
   "Features.PresentationsManager.copy-paste-url-of-the-project": "Paste the url of the presentation to import",
   "Features.PresentationsManager.import": "import",
   "Features.PresentationsManager.your-file-is-badly-formatted": "The file is badly formatted",
-  "Features.PresentationsManager.your-file-is-not-a-valid-presentation": "The file is not a valid presentation",
+  "Features.PresentationsManager.your-file-is-not-a-valid-story": "your-file-is-not-a-valid-story",
   "Features.PresentationsManager.the-url-did-not-point-to-a-valid-presentation": "The url do not point to a valid presentation",
   "Features.PresentationsManager.the-gist-is-not-properly-formatted": "The gist is not properly formatted",
   "Features.PresentationsManager.the-fetching-process-failed": "The fetching process of the presentation failed",

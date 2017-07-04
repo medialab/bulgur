@@ -1,3 +1,4 @@
+/* eslint react/no-danger : 0 */
 /**
  * This module exports a stateless component rendering the layout of the configuration dialog feature interface
  * @module bulgur/features/ConfigurationDialog
@@ -216,11 +217,19 @@ const ConfigurationDialogLayout = ({
                     </div>
                     <div className="modal-column dataset-preview">
                       <h4>{translate('dataset-preview')}</h4>
-                      <pre>
-                        <code>
-                          {dataset.rawData.split('\n').slice(0, 20).join('\n')}
-                        </code>
-                      </pre>
+                      {dataset.metadata.format === 'svgm' || dataset.metadata.format === 'svg' ?
+                        <div
+                          className="svg-preview-container"
+                          dangerouslySetInnerHTML={{
+                          __html: dataset.rawData
+                        }} />
+                      :
+                        <pre>
+                          <code>
+                            {dataset.rawData.split('\n').slice(0, 20).join('\n')}
+                          </code>
+                        </pre>
+                      }
                     </div>
                   </div>
               );

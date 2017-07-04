@@ -102,7 +102,7 @@
   "Features.PresentationsManager.copy-paste-url-of-the-project": "Coller l'url de la présentation à télécharger",
   "Features.PresentationsManager.import": "importer",
   "Features.PresentationsManager.your-file-is-badly-formatted": "Le fichier est mal formatté",
-  "Features.PresentationsManager.your-file-is-not-a-valid-presentation": "Le fichier n'est pas une presentation valide",
+  "Features.PresentationsManager.your-file-is-not-a-valid-story": "your-file-is-not-a-valid-story",
   "Features.PresentationsManager.the-url-did-not-point-to-a-valid-presentation": "L'url ne pointe pas vers une présentation valide",
   "Features.PresentationsManager.the-gist-is-not-properly-formatted": "Le dépôt gist n'est pas correctement formatté",
   "Features.PresentationsManager.the-fetching-process-failed": "Le processus de téléchargement de la présentation a échoué",

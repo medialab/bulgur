@@ -243,7 +243,25 @@ const models = {
         }
       }
     ],
-  }
+  },
+  svg: {
+    type: 'svg',
+    acceptedFileExtensions: ['svg'],
+    dataMap: {
+      main: {
+      }
+    },
+    samples: [
+      {
+        title: 'SVG example',
+        fileName: 'linkedin-network.svgm',
+        description: 'A network svg file',
+        recommendedVisTypes: ['svg']
+      }
+    ],
+    defaultViewParameters: {
+    },
+  },
 };
 export default models;
 
