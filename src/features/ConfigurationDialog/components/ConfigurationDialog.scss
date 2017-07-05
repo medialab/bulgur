@@ -238,8 +238,10 @@
     .dataset-preview
     {
         max-width: 33%;
-        .svg-preview-container{
-            svg{
+        .svg-preview-container
+        {
+            svg
+            {
                 max-width: 100%;
                 max-height: 100%;
             }

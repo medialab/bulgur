@@ -75,6 +75,31 @@ const ConfigurationDialogLayout = ({
   const setDataSourceSample = () => setDataSourceTab('sample');
   const hasSlides = presentationCandidate.order && presentationCandidate.order.length;
 
+  let readyToApply;
+  if (
+    presentationCandidate &&
+    presentationCandidate.visualizations &&
+    typeof presentationCandidate.visualizations === 'object' &&
+    Object.keys(presentationCandidate.visualizations).length > 0
+  ) {
+    // we rely on the first visualization to decide wether presentationCandidate is ready to be edited
+    const firstVisualization = presentationCandidate.visualizations[Object.keys(presentationCandidate.visualizations)[0]];
+    // first visualization can be an empty object if its related dataset has been removed
+    if (firstVisualization.metadata && firstVisualization.metadata.visualizationType) {
+      const firstVisualizationType = firstVisualization.metadata.visualizationType;
+      if (firstVisualizationType === 'svg') {
+        readyToApply = true;
+      }
+      else {
+        readyToApply = firstVisualization.viewParameters &&
+                       firstVisualization.viewParameters.colorsMap &&
+                       firstVisualization.viewParameters.dataMap &&
+                       firstVisualization.dataProfile &&
+                       firstVisualization.data;
+      }
+    }
+  }
+
   return (
     <div className="bulgur-ConfigurationDialogLayout">
       <h1 className="modal-header">
@@ -147,6 +172,11 @@ const ConfigurationDialogLayout = ({
                 const onDropNewData = (files) => {
                   if (validateFileExtension(files[0])) {
                     fetchUserFile(files[0], datasetId, true);
+                    // case of svg automatically set vis type to svg
+                    if (files[0].name.indexOf('.svg') === files[0].name.length - 4) {
+                      const firstVisualizationId = Object.keys(presentationCandidate.visualizations)[0];
+                      setPresentationCandidateVisualizationType(firstVisualizationId, 'svg');
+                    }
                   }
                 };
                 const setTitle = (e) => setCandidatePresentationDatasetMetadata(datasetId, 'title', e.target.value);
@@ -260,6 +290,11 @@ const ConfigurationDialogLayout = ({
                       .map(model => model.samples.map((sample, key) => {
                         const fetchFile = () => {
                           fetchExampleFile(sample);
+                          if (sample.recommendedVisTypes.indexOf('svg') > -1) {
+                            // case of svg automatically set vis type to svg
+                            const firstVisualizationId = Object.keys(presentationCandidate.visualizations)[0];
+                            setPresentationCandidateVisualizationType(firstVisualizationId, 'svg');
+                          }
                         };
                         return (
                           <div key={key} className="sample-file">
@@ -321,17 +356,20 @@ const ConfigurationDialogLayout = ({
             }));
             return (
               <section key={visualizationKey}>
-                {hasSlides ? null :
+                {hasSlides || visualization.metadata.visualizationType === 'svg' ? null :
                 <BigSelect
                   options={activeVisTypes}
                   onOptionSelect={switchType}
                   activeOptionId={activeVisId} />
                 }
-                {visualization.metadata && visualization.metadata.visualizationType ?
-                  <section className="modal-columns-container">
-                    <section className="modal-column">
-                      <h4>{translate('how-to-map-your-data-to-the-visualization')}</h4>
-                      {visualization.metadata
+                {visualization.metadata
+                  && visualization.metadata.visualizationType
+                  && visualization.metadata.visualizationType !== 'svg'
+                  ?
+                    <section className="modal-columns-container">
+                      <section className="modal-column">
+                        <h4>{translate('how-to-map-your-data-to-the-visualization')}</h4>
+                        {visualization.metadata
                         && visualization.metadata.visualizationType
                         && visualization.viewParameters
                         && visualization.viewParameters.dataMap ?
@@ -368,14 +406,14 @@ const ConfigurationDialogLayout = ({
                             }
                           </ul>
                        : null}
-                      {visualization.metadata
+                        {visualization.metadata
                         && visualization.metadata.visualizationType === 'map'
                         &&
                         <p className="info-button">
                           ⓘ <i>{translate('latitude-and-longitude-are-not-mapped')}</i>
                         </p>
                       }
-                      {visualization.viewOptions &&
+                        {visualization.viewOptions &&
                        visualization.viewOptions.length
                         ?
                           <div>
@@ -398,11 +436,11 @@ const ConfigurationDialogLayout = ({
                             </div>
                           </div>
                         : null}
-                    </section>
-                    <section className="modal-column">
-                      <h4>{translate('how-to-color-your-categories')}</h4>
-                      <section className="final-touch-container">
-                        {// colors edition
+                      </section>
+                      <section className="modal-column">
+                        <h4>{translate('how-to-color-your-categories')}</h4>
+                        <section className="final-touch-container">
+                          {// colors edition
                       visualization.viewParameters && visualization.viewParameters.colorsMap ?
                         <ColorsMapPicker
                           colorsMap={visualization.viewParameters.colorsMap}
@@ -411,11 +449,11 @@ const ConfigurationDialogLayout = ({
                           changeColor={setPresentationCandidateColor}
                           toggleColorEdition={toggleCandidateColorEdition} />
                      : null}
+                        </section>
                       </section>
-                    </section>
-                    <section className="modal-column">
-                      <h4>{translate('visualization-preview')}</h4>
-                      {// preview
+                      <section className="modal-column">
+                        <h4>{translate('visualization-preview')}</h4>
+                        {// preview
                     visualization.dataProfile &&
                     visualization.data &&
                     visualization.viewParameters &&
@@ -426,8 +464,8 @@ const ConfigurationDialogLayout = ({
                         visualizationKey={visualizationKey}
                         hasSlides={hasSlides} />
                     : null}
-                    </section>
-                  </section> : null}
+                      </section>
+                    </section> : null}
               </section>
             );
           })
@@ -436,20 +474,12 @@ const ConfigurationDialogLayout = ({
       </section>
       <section className="modal-footer">
         {
-          presentationCandidate &&
-          presentationCandidate.visualizations &&
-          typeof presentationCandidate.visualizations === 'object' &&
-          Object.keys(presentationCandidate.visualizations).length > 0 &&
-          presentationCandidate.visualizations[Object.keys(presentationCandidate.visualizations)[0]].viewParameters &&
-          presentationCandidate.visualizations[Object.keys(presentationCandidate.visualizations)[0]].viewParameters.colorsMap &&
-          presentationCandidate.visualizations[Object.keys(presentationCandidate.visualizations)[0]].viewParameters.dataMap &&
-          presentationCandidate.visualizations[Object.keys(presentationCandidate.visualizations)[0]].dataProfile &&
-          presentationCandidate.visualizations[Object.keys(presentationCandidate.visualizations)[0]].data
+          readyToApply
         ?
           <button
             className="valid-btn"
             onClick={onApplyChange}>{hasSlides ? translate('apply-changes-and-continue-presentation-edition') : translate('start-to-edit-this-presentation')}</button>
-        : ''
+        : null
       }
         <button
           className="cancel-btn"
