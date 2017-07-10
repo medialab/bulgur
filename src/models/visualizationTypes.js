@@ -243,7 +243,32 @@ const models = {
         }
       }
     ],
-  }
+  },
+  svg: {
+    type: 'svg',
+    acceptedFileExtensions: ['svg'],
+    dataMap: {
+      main: {
+      }
+    },
+    samples: [
+      {
+        title: 'SVG example',
+        fileName: 'linkedin-network.svgm',
+        description: 'A network svg file',
+        recommendedVisTypes: ['svg']
+      }
+    ],
+    defaultViewParameters: {
+      maxZoomLevel: 1000,
+      minZoomLevel: -2000,
+      perspectiveLevel: 1000,
+      x: 0,
+      y: 0,
+      zoomFactor: 50,
+      zoomLevel: 1
+    },
+  },
 };
 export default models;
 

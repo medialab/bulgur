@@ -99,7 +99,6 @@ const MainViewLayout = ({
       markdown
     });
   };
-
   return (
     <figure className="bulgur-main-view">
       <section className="visualizations-row">
@@ -114,17 +113,20 @@ const MainViewLayout = ({
           ))
         }
         </section>
-        {activeSlide ?
-          <SlideSettingsPannel
-            state={slideSettingsPannelState}
-            setPannelState={setSlideSettingsPannelState}
-            views={activeViews}
-            setViewDatamapItem={setViewDatamapItem}
-            setShownCategories={setShownCategories}
-            toggleViewColorEdition={toggleViewColorEdition}
-            setViewColor={setViewColor}
-            editedColor={editedColor}
-            presentation={activePresentation} /> : null }
+        {activeSlide &&
+          activeViews &&
+          activeViews[Object.keys(activeViews)[0]].metadata.visualizationType !== 'svg'
+         ?
+           <SlideSettingsPannel
+             state={slideSettingsPannelState}
+             setPannelState={setSlideSettingsPannelState}
+             views={activeViews}
+             setViewDatamapItem={setViewDatamapItem}
+             setShownCategories={setShownCategories}
+             toggleViewColorEdition={toggleViewColorEdition}
+             setViewColor={setViewColor}
+             editedColor={editedColor}
+             presentation={activePresentation} /> : null }
       </section>
       {activeSlide ? <figcaption className="caption-container">
         <section className="caption-header">

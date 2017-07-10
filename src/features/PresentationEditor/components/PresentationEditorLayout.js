@@ -46,31 +46,24 @@ import {translateNameSpacer} from '../../../helpers/translateUtils';
  * @return {ReactElement} markup
  */
 const PresentationEditorLayout = ({
-  lang,
   // setup related
   id,
   className,
 
   // global ui related
-  isPresentationCandidateModalOpen,
-  globalUiMode,
   isTakeAwayModalOpen,
   slideSettingsPannelState,
   // edited presentation state
   activeViews,
   activeSlideId,
   editedColor,
-  activePresentationId,
   activePresentation,
 
   // actions
   onProjectImport,
   returnToLanding,
   actions: {
-    openTakeAwayModal,
-    closeTakeAwayModal,
     changeViewByUser,
-    setUiMode,
     removeSlide,
     setActiveSlide,
     updateSlide,
@@ -80,15 +73,14 @@ const PresentationEditorLayout = ({
     setViewColor,
     setViewDatamapItem,
     setShownCategories,
-    setLanguage
   },
   addSlide,
   duplicateSlide,
   openSettings,
-  closeAndResetDialog,
 }, context) => {
 
   const translate = translateNameSpacer(context.t, 'Features.PresentationEditor');
+
   return (
     <div id={id} className={'bulgur-PresentationEditorLayout ' + (className || '')}>
       <Helmet>

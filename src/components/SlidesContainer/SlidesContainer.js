@@ -86,7 +86,8 @@ class SlidesContainer extends React.Component {
           )
       }
         <li className="add-slide">
-          <button className={activePresentation
+          <button
+            className={activePresentation
           && activePresentation.order
           && activePresentation.order.length === 0 ? 'first-slide' : ''} type="button" onClick={addSlide}>
             {activePresentation

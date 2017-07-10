@@ -181,10 +181,10 @@ const PresentationsManagerLayout = ({
                 value={translate('import')} />
             </form>
           </div> : null}
-          <div className="import-status-display">
+        <div className="import-status-display">
           <Toaster
             status={importStatus} log={
-              <div className="import-error-display">
+              <span className="import-error-display">
                 {
               importError === 'badJSON' ?
               translate('your-file-is-badly-formatted')
@@ -202,7 +202,7 @@ const PresentationsManagerLayout = ({
                 {importError === 'fetchError' ?
               translate('the-fetching-process-failed')
               : ''}
-              </div>
+              </span>
           } />
         </div>
       </section>

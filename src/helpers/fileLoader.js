@@ -1,14 +1,17 @@
+/* eslint no-eval: 0 */
 /**
  * This module helps to load files from app server or user own file system
  * @module bulgur/utils/fileLoader
  */
 
 let req;
+let rawReq;
 // as require.context does not work in test environment, this is a little hack
 // to prevent its use
 // (note: but loadExampleFile, which depends on require.context, is still not testable then)
 if (global.window !== undefined) {
   req = require.context('../../example_datasets/');
+  rawReq = require.context('raw-loader!../../example_datasets/');
 }
 /**
  * Loads a file from the app example files
@@ -16,7 +19,14 @@ if (global.window !== undefined) {
  * @return {string} rawContent - the raw string content of the file loaded
  */
 export function loadExampleFile(fileName) {
-  const data = req('./' + fileName);
+  let data;
+  if (fileName.split('.').pop() === 'svgm') {
+    data = rawReq('./' + fileName);
+    data = eval(data);
+  }
+ else {
+    data = req('./' + fileName);
+  }
   if (typeof data === 'object') {
     return JSON.stringify(data);
   }

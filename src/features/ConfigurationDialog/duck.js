@@ -417,6 +417,9 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
           case 'timeline':
             data = parseTimelineData(str, dataFormat);
             break;
+          case 'svg':
+            data = str;
+            break;
           default:
             break;
         }
@@ -432,7 +435,8 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
       let newcolorsMap = {
         // default: '#d8d8d8'
       };
-      if (data) {
+      let flattenedDataMap;
+      if (data && visualizationType !== 'svg') {
         dataProfile = analyzeDataset(data);
         dataMap = Object.keys(dataMap).reduce((finDataMap, collectionId) => {
           const newCollection = Object.keys(dataMap[collectionId]).reduce((finCollection, parameterId) => {
@@ -470,27 +474,27 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
               }
             };
           }, newcolorsMap);
+          // flatten datamap fields
+          flattenedDataMap = Object.keys(dataMap).reduce(
+            (result, collectionId) => ({
+              ...result,
+              [collectionId]: Object.keys(dataMap[collectionId])
+                .reduce(
+                  (propsMap, parameterId) => {
+                    const parameter = dataMap[collectionId][parameterId];
+                    if (parameter.mappedField) {
+                      return {
+                        ...propsMap,
+                        [parameterId]: parameter.mappedField
+                      };
+                    }
+                    return propsMap;
+                  },
+                {})
+            }),
+            {}
+          );
       }
-      // flatten datamap fields
-      const flattenedDataMap = Object.keys(dataMap).reduce(
-        (result, collectionId) => ({
-          ...result,
-          [collectionId]: Object.keys(dataMap[collectionId])
-            .reduce(
-              (propsMap, parameterId) => {
-                const parameter = dataMap[collectionId][parameterId];
-                if (parameter.mappedField) {
-                  return {
-                    ...propsMap,
-                    [parameterId]: parameter.mappedField
-                  };
-                }
-                return propsMap;
-              },
-            {})
-        }),
-        {}
-      );
       return {
         ...state,
         presentationCandidate: {

@@ -76,6 +76,11 @@ class ConfigurationDialogContainer extends Component {
     const validExtension = validateFileExtension(file, this.props.visualizationTypesModels);
     if (validExtension) {
       this.props.actions.fetchUserFile(file);
+      // case of svg automatically set vis type to svg
+      if (file.name.indexOf('.svg') === file.name.length - 4) {
+        const firstVisualizationId = Object.keys(this.props.presentationCandidate.visualizations)[0];
+        this.props.actions.setPresentationCandidateVisualizationType(firstVisualizationId, 'svg');
+      }
     }
   }
 
