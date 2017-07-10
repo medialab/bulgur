@@ -11,6 +11,7 @@ import {
   Timeline,
   Network,
   Map,
+  SVGViewer,
   mapMapData,
   mapTimelineData,
   mapNetworkData
@@ -68,6 +69,9 @@ class VisualizationManager extends Component {
       case 'timeline':
         visData = mapTimelineData(data, viewParameters.flattenedDataMap);
         break;
+      case 'svg':
+        visData = data;
+        break;
       default:
         return null;
     }
@@ -86,6 +90,7 @@ class VisualizationManager extends Component {
     const {
       data
     } = this.state;
+
 
     const bindVisualization = visualization => {
       this.visualization = visualization;
@@ -113,6 +118,14 @@ class VisualizationManager extends Component {
               data={data}
               onUserViewChange={onUserChange}
               viewParameters={viewParameters} />);
+          case 'svg':
+            return (
+              <SVGViewer
+                allowUserViewChange
+                data={data}
+                onUserViewChange={onUserChange}
+                viewParameters={viewParameters} />
+            );
           default:
             return null;
       }

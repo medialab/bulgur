@@ -356,7 +356,7 @@ const ConfigurationDialogLayout = ({
             }));
             return (
               <section key={visualizationKey}>
-                {hasSlides || visualization.metadata.visualizationType === 'svg' ? null :
+                {hasSlides || (visualization.metadata && visualization.metadata.visualizationType === 'svg') ? null :
                 <BigSelect
                   options={activeVisTypes}
                   onOptionSelect={switchType}
@@ -478,7 +478,14 @@ const ConfigurationDialogLayout = ({
         ?
           <button
             className="valid-btn"
-            onClick={onApplyChange}>{hasSlides ? translate('apply-changes-and-continue-presentation-edition') : translate('start-to-edit-this-presentation')}</button>
+            onClick={onApplyChange}>
+            {
+              hasSlides ?
+                translate('apply-changes-and-continue-presentation-edition')
+                :
+                translate('start-to-edit-this-presentation')
+            }
+          </button>
         : null
       }
         <button

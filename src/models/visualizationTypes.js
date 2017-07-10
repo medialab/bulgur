@@ -260,6 +260,13 @@ const models = {
       }
     ],
     defaultViewParameters: {
+      maxZoomLevel: 1000,
+      minZoomLevel: -2000,
+      perspectiveLevel: 1000,
+      x: 0,
+      y: 0,
+      zoomFactor: 50,
+      zoomLevel: 1
     },
   },
 };

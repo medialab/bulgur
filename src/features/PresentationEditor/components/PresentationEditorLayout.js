@@ -89,6 +89,7 @@ const PresentationEditorLayout = ({
 }, context) => {
 
   const translate = translateNameSpacer(context.t, 'Features.PresentationEditor');
+
   return (
     <div id={id} className={'bulgur-PresentationEditorLayout ' + (className || '')}>
       <Helmet>
