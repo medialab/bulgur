@@ -7,11 +7,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {findDOMNode} from 'react-dom';
 
-import Textarea from 'react-textarea-autosize';
-
 import {DragSource, DropTarget} from 'react-dnd';
 
 import {translateNameSpacer} from '../../helpers/translateUtils';
+import DebouncedInput from '../DebouncedInput/DebouncedInput';
+import DebouncedTextarea from '../DebouncedTextarea/DebouncedTextarea';
 
 const slideSource = {
   beginDrag(props) {
@@ -113,14 +113,13 @@ class Slide extends React.Component {
         onClick={handleClick}>
         <div className="slide-content">
           <h3>
-            <input
+            <DebouncedInput
               placeholder={translate('slide-title')}
-              type="text"
               value={slide.title}
               onChange={onTitleChange} />
           </h3>
           <div className="comment-container">
-            <Textarea
+            <DebouncedTextarea
               placeholder={translate('slide-comment')}
               maxRows={15}
               value={slide.markdown}

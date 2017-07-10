@@ -50,16 +50,16 @@ class SlidesContainer extends React.Component {
               }
             };
 
-            const onTitleChange = (e) => {
+            const onTitleChange = (title) => {
               updateSlide(slideKey, {
                 ...slide,
-                title: e.target.value
+                title
               });
             };
-            const onTextChange = (e) => {
+            const onTextChange = markdown => {
               updateSlide(slideKey, {
                 ...slide,
-                markdown: e.target.value
+                markdown
               });
             };
             const onDuplicateSlide = () => {

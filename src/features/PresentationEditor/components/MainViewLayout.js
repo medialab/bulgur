@@ -9,6 +9,7 @@ import './MainViewLayout.scss';
 
 import VisualizationManager from '../../../components/VisualizationManager/VisualizationManager';
 import DraftEditor from '../../../components/DraftEditor/DraftEditor';
+import DebouncedInput from '../../../components/DebouncedInput/DebouncedInput';
 import SlideSettingsPannel from '../../../components/SlideSettingsPannel/SlideSettingsPannel';
 import {translateNameSpacer} from '../../../helpers/translateUtils';
 
@@ -86,14 +87,14 @@ const MainViewLayout = ({
   };
   const clickOnReset = () => setActiveSlide(activeSlideId, activeSlide);
 
-  const updateTitle = (e) => {
+  const updateTitle = title => {
     updateSlide(activeSlideId, {
       ...activeSlide,
-      title: e.target.value
+      title,
     });
   };
 
-  const updateDraft = (markdown) => {
+  const updateDraft = markdown => {
     updateSlide(activeSlideId, {
       ...activeSlide,
       markdown
@@ -131,7 +132,7 @@ const MainViewLayout = ({
       {activeSlide ? <figcaption className="caption-container">
         <section className="caption-header">
           <h1>
-            <input
+            <DebouncedInput
               type="text"
               value={activeSlide.title}
               onChange={updateTitle}
