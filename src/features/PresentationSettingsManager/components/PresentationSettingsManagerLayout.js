@@ -23,7 +23,6 @@ const PresentationSettingsManagerLayout = ({
 
   actions: {
     setPresentationCss,
-    setPresentationSettingOption,
     setSettingsVisibility,
     setPresentationTemplate,
   }

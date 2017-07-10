@@ -419,6 +419,7 @@ function presentationCandidateData(state = DEFAULT_PRESENTATION_CANDIDATE_DATA, 
             break;
           case 'svg':
             data = str;
+            break;
           default:
             break;
         }

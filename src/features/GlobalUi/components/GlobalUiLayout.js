@@ -51,16 +51,10 @@ const GlobalUiLayout = ({
   // global ui related
   isPresentationCandidateModalOpen,
   globalUiMode,
-  asideUiMode,
   isTakeAwayModalOpen,
-  activeSectionId,
   // edited presentation state
   activePresentationId,
   activePresentation,
-  editorStates,
-  editorFocus,
-  assetRequestState,
-  assetRequested,
 
   // actions
   returnToLanding,
@@ -69,31 +63,8 @@ const GlobalUiLayout = ({
     closeTakeAwayModal,
     setUiMode,
     setLanguage,
-    // updatePresentationContent,
-    updatePresentationMetadataField,
-    promptAssetEmbed,
-    unpromptAssetEmbed,
-    updateAsset,
-    setAsideUiMode,
-    // embedAsset,
-    updateSection,
-    setGlobalUiFocus,
-    updateDraftGlobalUiState,
-    updateDraftGlobalUisStates,
-
-    updateContextualizer,
-    updateResource,
-    deleteContextualization,
-    deleteContextualizer,
-    setActiveSectionId,
   },
-  // custom functions
-  openSettings,
-  closeAndResetDialog,
-  updatePresentationContent,
-  embedAsset,
-  onCreateNewSection,
-  summonAsset,
+  closeAndResetDialog
 }, context) => {
 
   // callback for takeaway modal tweaking

@@ -22,7 +22,6 @@ const ColorsMapPicker = ({
   toggleColorEdition,
 
   allowColorChange = true,
-  allowShowingToggling,
 
   shownCategories,
   setShownCategories,
