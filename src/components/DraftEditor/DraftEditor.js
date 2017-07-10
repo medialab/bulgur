@@ -82,13 +82,13 @@ export default class QuinoaDraftSlide extends Component {
     this.handleKeyCommand = this.handleKeyCommand.bind(this);
   }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps(nextProps) {
     // update editor if markdown representation of content is different between props and state
-    if (this.props.slide && this.props.slide.markdown && this.props.slide.markdown !== this.state.markdown) {
-      const contentState = stateFromMarkdown(this.props.slide.markdown);
+    if (nextProps.slide && nextProps.slide.markdown && nextProps.slide.markdown !== this.state.markdown) {
+      const contentState = stateFromMarkdown(nextProps.slide.markdown);
       this.setState({
         editorState: EditorState.createWithContent(contentState),
-        markdown: this.props.slide.markdown
+        markdown: nextProps.slide.markdown
       });
     }
   }
