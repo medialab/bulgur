@@ -19,7 +19,7 @@ import {generateColorsMap} from '../../helpers/colorHelpers';
 
 import visualizationTypesModels from '../../models/visualizationTypes';
 
-import {maxDataFileSizeInBytes} from '../../../config';
+import {maxDataFileSizeInBytes, timers} from '../../../config';
 
 import {
   parseNetworkData,
@@ -144,7 +144,7 @@ export const fetchUserFile = (file, datasetId, update = false) => ({
     return new Promise((resolve, reject) => {
       if (file.size > maxDataFileSizeInBytes) {
         // fading the message away
-        setTimeout(() => dispatch({type: FETCH_USER_FILE}), 5000);
+        setTimeout(() => dispatch({type: FETCH_USER_FILE}), timers.ultraLong);
         return reject('File is too big (maximum allowed : ' + maxDataFileSizeInBytes / 1000 + ' kb)');
       }
       getFileAsText(file, (err, str) => {

@@ -10,6 +10,10 @@ import publishToGist from '../../helpers/gistExporter';
 import publishToServer from '../../helpers/serverExporter';
 import {persistentReducer} from 'redux-pouchdb';
 
+import config from '../../../config';
+const {timers} = config;
+
+
 import {
   RESET_APP,
   OPEN_TAKE_AWAY_MODAL,
@@ -41,7 +45,7 @@ export const setBundleHtmlStatus = (status, log) => dispatch => {
         status: undefined,
         log: undefined
       });
-    }, 5000);
+    }, timers.ultraLong);
   }
   dispatch({
     type: SET_BUNDLE_HTML_STATUS,
@@ -68,7 +72,7 @@ export const setExportToGistStatus = (status, log) => dispatch => {
         status: undefined,
         log: undefined
       });
-    }, 5000);
+    }, timers.ultraLong);
   }
   dispatch({
     type: EXPORT_TO_GIST_STATUS,
@@ -88,7 +92,7 @@ export const setExportToServerStatus = (status, log) => dispatch => {
         status: undefined,
         log: undefined
       });
-    }, 5000);
+    }, timers.ultraLong);
   }
   dispatch({
     type: EXPORT_TO_SERVER_STATUS,
@@ -119,7 +123,7 @@ export const exportToGist = (htmlContent, presentation, gistId) => ({
                     type: EXPORT_TO_GIST_STATUS,
                     takeAwayGistLog: undefined,
                     takeAwayGistLogStatus: undefined
-                  }), 5000);
+                  }), timers.ultraLong);
               })
               .catch((e) => {
                 reject(e);
@@ -129,7 +133,7 @@ export const exportToGist = (htmlContent, presentation, gistId) => ({
                     type: EXPORT_TO_GIST_STATUS,
                     takeAwayGistLog: undefined,
                     takeAwayGistLogStatus: undefined
-                  }), 5000);
+                  }), timers.ultraLong);
               });
     });
   }
@@ -151,7 +155,7 @@ export const exportToServer = (presentation) => ({
                     type: EXPORT_TO_SERVER_STATUS,
                     takeAwayGistLog: undefined,
                     takeAwayGistLogStatus: undefined
-                  }), 5000);
+                  }), timers.ultraLong);
               })
               .catch((e) => {
                 reject(e);
@@ -161,7 +165,7 @@ export const exportToServer = (presentation) => ({
                     type: EXPORT_TO_SERVER_STATUS,
                     takeAwayGistLog: undefined,
                     takeAwayGistLogStatus: undefined
-                  }), 5000);
+                  }), timers.ultraLong);
               });
     });
   }

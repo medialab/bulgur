@@ -74,7 +74,6 @@
     "redux": "^3.6.0",
     "redux-i18n": "^1.1.4",
     "redux-pouchdb": "^0.1.1",
-    "redux-thunk": "^2.1.0",
     "reselect": "^3.0.0",
     "superagent": "^3.2.1",
     "svg-loader": "0.0.2",
