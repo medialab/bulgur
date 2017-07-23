@@ -255,7 +255,7 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
       const original = action.presentation;
       const newId = uuid();
       const newPresentation = {
-        ...original,
+        ...JSON.parse(JSON.stringify(original)),
         id: newId,
         metadata: {
           ...original.metadata,
