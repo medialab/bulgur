@@ -84,7 +84,7 @@ export default class QuinoaDraftSlide extends Component {
 
   componentWillReceiveProps(nextProps) {
     // update editor if markdown representation of content is different between props and state
-    if (nextProps.slide && nextProps.slide.markdown && nextProps.slide.markdown !== this.state.markdown) {
+    if (nextProps.slide && nextProps.slide.markdown !== undefined && nextProps.slide.markdown !== this.state.markdown) {
       const contentState = stateFromMarkdown(nextProps.slide.markdown);
       this.setState({
         editorState: EditorState.createWithContent(contentState),
