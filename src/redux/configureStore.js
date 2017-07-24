@@ -12,7 +12,7 @@ import rootReducer from './rootReducer';
 import promiseMiddleware from './promiseMiddleware';
 import {persistentStore} from 'redux-pouchdb';
 
-const PouchDB = require('pouchdb');
+import PouchDB from 'pouchdb';
 const db = new PouchDB('bulgur');
 
 /**
