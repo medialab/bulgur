@@ -28,7 +28,6 @@ import {
 } from '../../../helpers/projectBundler';
 
 import {
-  githubTokenProviderUrl,
   githubAPIClientId,
   serverUrl
 } from '../../../../secrets';
@@ -165,7 +164,7 @@ class TakeAwayDialogContainer extends Component {
 
   render() {
     const serverAvailable = serverUrl !== undefined;
-    const gistAvailable = githubTokenProviderUrl !== undefined && githubAPIClientId !== undefined;
+    const gistAvailable = githubAPIClientId !== undefined;
     return (
       <TakeAwayDialogLayout
         {...this.props}
