@@ -4,8 +4,8 @@
   "description": "Quinoa presentations editor",
   "main": "dist/entry.js",
   "scripts": {
-    "dev": "kotatsu serve --config ./webpack.config.js --progress --babel --index ./index.html --public ./ ./src/main.js",
-    "build": "kotatsu build client ./src/main.js -o build --config ./webpack.config.js --babel --minify",
+    "dev": "kotatsu serve --config ./webpack.config.dev.js --progress --babel --index ./index.html --public ./ ./src/main.js",
+    "build": "kotatsu build client ./src/main.js -o build --progress --config ./webpack.config.js --babel --minify",
     "lint": "eslint --fix src",
     "comb": "csscomb src",
     "test": "mocha --compilers js:babel-core/register -R spec --recursive $(find src -name '*.spec.js')",
