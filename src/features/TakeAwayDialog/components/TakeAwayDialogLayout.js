@@ -181,6 +181,9 @@ const TakeAwayDialogLayout = ({
                     <a target="blank" href={serverUrl + '/gist-presentation/' + activePresentation.metadata.gistId}>
                       → {translate('go-to-the-gist-based-webpage-of-your-presentation')}
                     </a>
+                  </p>
+                  <iframe className="website-preview" src={serverUrl + '/gist-presentation/' + activePresentation.metadata.gistId} />
+                  <p>
                     <a target="blank" href={activePresentation.metadata.gistUrl}>
                       → {translate('go-to-the-gist-source-code-of-your-presentation')}
                     </a>
@@ -224,6 +227,9 @@ const TakeAwayDialogLayout = ({
                     → {translate('go-to-the-online-webpage')}
                     </a>
                   </p>
+
+                  <iframe className="website-preview" src={activePresentation.metadata.serverHTMLUrl} />
+
                   <p>{translate('embed-inside-an-html-webpage')}</p>
                   <pre>
                     <code>

@@ -108,6 +108,7 @@
     "react-addons-test-utils": "^15.3.2",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.18.2",
+    "uglify-es-webpack-plugin": "0.0.3",
     "wrench": "^1.5.9"
   },
   "babel": {
