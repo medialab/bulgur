@@ -14,6 +14,7 @@ import * as presentationsManagerDuck from '../../PresentationsManager/duck';
 import * as editorDuck from '../../PresentationEditor/duck';
 import * as globalUiDuck from '../../GlobalUi/duck';
 
+
 /**
  * Redux-decorated component class rendering the takeaway dialog feature to the app
  */
@@ -33,18 +34,40 @@ import * as globalUiDuck from '../../GlobalUi/duck';
 )
 class PresentationSettingsManagerContainer extends Component {
 
+
+  /**
+   * Context data used by the component
+   */
   static contextTypes = {
     t: React.PropTypes.func.isRequired,
     store: PropTypes.object.isRequired
   }
 
+
+  /**
+   * constructor
+   * @param {object} props - properties given to instance at instanciation
+   */
   constructor(props) {
     super(props);
   }
 
+
+  /**
+   * Defines whether the component should re-render
+   * @param {object} nextProps - the props to come
+   * @param {object} nextState - the state to come
+   * @return {boolean} shouldUpdate - whether to update or not
+   */
   shouldComponentUpdate() {
+    // todo: optimize component when stabilized
     return true;
   }
+
+  /**
+   * Renders the component
+   * @return {ReactElement} component - the component
+   */
   render() {
     return (
       <PresentationSettingsManagerLayout

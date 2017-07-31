@@ -2,6 +2,12 @@
  * This module exports the models related to visualization types (mappable values, parameters, default values, example files, ...)
  * @module bulgur/models/visualizationTypes
  */
+
+
+/**
+ * Visualization models
+ * @type {object}
+ */
 const models = {
   timeline: {
     type: 'timeline',
@@ -272,6 +278,12 @@ const models = {
 };
 export default models;
 
+
+/**
+ * Generates default slides parameters for a given visualization type
+ * @param {string} type - visualization type
+ * @return {object} visualizationParameters - default parameters for a specific visualization
+ */
 export function createDefaultSlideParameters(type) {
   const slideModel = models[type].defaultViewParameters;
   // populate slide data with default where needed

@@ -1,7 +1,6 @@
 /* eslint react/no-set-state: 0 */
-
 /**
- * This module provides a reusable colorsmap picker component
+ * This module provides a reusable colors map picker component
  * @module bulgur/components/ColorMapPicker
  */
 import React from 'react';
@@ -14,15 +13,20 @@ import ColorPicker from '../ColorPicker/ColorPicker';
 import './ColorsMapPicker.scss';
 
 
+/**
+ * Renders the ColorsMapPicker component as a pure function
+ * @param {object} props - used props (see prop types below)
+ * @param {object} context - used context data (see context types below)
+ * @return {ReactElement} component - the resulting component
+ */
 const ColorsMapPicker = ({
   colorsMap,
   visualizationId,
   editedColor,
-  changeColor,
-  toggleColorEdition,
-
   allowColorChange = true,
 
+  changeColor,
+  toggleColorEdition,
   shownCategories,
   setShownCategories,
 }, context) => {
@@ -102,7 +106,7 @@ const ColorsMapPicker = ({
                 if (allowColorChange) {
                   toggleColorEdition(visualizationId, colorCollectionId, category);
                 }
- else {
+                else {
                   onFilterClick(e);
                 }
               }
@@ -149,6 +153,56 @@ const ColorsMapPicker = ({
   );
 };
 
+
+/**
+ * Component's properties types
+ */
+ColorsMapPicker.propTypes = {
+
+  /**
+   * representation of the current color map (keys are data collection ids)
+   */
+  colorsMap: PropTypes.object,
+
+  /**
+   * id of the visualization being edited
+   */
+  visualizationId: PropTypes.string,
+
+  /**
+   * representation of the color being edited currently
+   */
+  editedColor: PropTypes.object,
+
+  /**
+   * whether to allow to open colors edition module
+   */
+  allowColorChange: PropTypes.bool,
+
+  /**
+   * callbacks when a color is changed
+   */
+  changeColor: PropTypes.func,
+
+  /**
+   * callbacks for opening or closing the color edition ui of an item
+   */
+  toggleColorEdition: PropTypes.func,
+
+  /**
+   * representation of the items to filter-in
+   */
+  shownCategories: PropTypes.array,
+
+  /**
+   * callbacks for updating the list of filtered-in elements
+   */
+  setShownCategories: PropTypes.func,
+};
+
+/**
+ * Component's context used properties
+ */
 ColorsMapPicker.contextTypes = {
   t: PropTypes.func.isRequired
 };

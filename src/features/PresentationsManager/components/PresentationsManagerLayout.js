@@ -15,6 +15,7 @@ import Toaster from '../../../components/Toaster/Toaster';
 
 import {translateNameSpacer} from '../../../helpers/translateUtils';
 
+
 /**
  * Renders the layout component of the feature
  * @param {object} props - the props to render
@@ -59,7 +60,12 @@ const PresentationsManagerLayout = ({
     setLanguage
   }
 }, context) => {
+  // namespacing the translation keys with feature id
   const translate = translateNameSpacer(context.t, 'Features.PresentationsManager');
+
+  /**
+   * Callbacks
+   */
   const onCreatePresentation = () => {
     startPresentationCandidateConfiguration();
   };

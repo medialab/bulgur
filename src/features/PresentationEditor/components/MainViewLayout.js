@@ -13,6 +13,7 @@ import DebouncedInput from '../../../components/DebouncedInput/DebouncedInput';
 import SlideSettingsPannel from '../../../components/SlideSettingsPannel/SlideSettingsPannel';
 import {translateNameSpacer} from '../../../helpers/translateUtils';
 
+
 /**
  * Renders the layout of the main view of editor
  * @param {object} props - the props to render
@@ -52,19 +53,13 @@ const MainViewLayout = ({
   setShownCategories
 }, context) => {
 
+  // namespacing the translation keys with feature id
   const translate = translateNameSpacer(context.t, 'Features.PresentationEditor');
-  const setVisualization = (view, id) => {
-    const onChange = (event) => onUserViewChange(id, event);
-    const data = activePresentation.visualizations[id].data;
-    return (
-      <VisualizationManager
-        visualizationType={view.metadata.visualizationType}
-        data={data}
-        viewParameters={view.viewParameters}
-        onUserChange={onChange} />
-    );
-  };
 
+
+  /**
+   * Preparing data for rendering
+   */
   const viewsToSlides = (inputViews) =>
     Object.keys(inputViews).reduce((views, id) => ({
       ...views,
@@ -79,6 +74,21 @@ const MainViewLayout = ({
   const viewsEqualActiveSlideViews = activeSlide &&
                                 JSON.stringify(activeViewsAsSlides) === JSON.stringify(activeSlide.views);
 
+
+  /**
+   * Callbacks
+   */
+  const setVisualization = (view, id) => {
+    const onChange = (event) => onUserViewChange(id, event);
+    const data = activePresentation.visualizations[id].data;
+    return (
+      <VisualizationManager
+        visualizationType={view.metadata.visualizationType}
+        data={data}
+        viewParameters={view.viewParameters}
+        onUserChange={onChange} />
+    );
+  };
   const clickOnRecord = () => {
     updateSlide(activeSlideId, {
       ...activeSlide,
@@ -151,7 +161,7 @@ const MainViewLayout = ({
           <div className="editor-areas-container">
             <DraftEditor
               slide={activeSlide}
-              update={updateDraft} />
+              onUpdate={updateDraft} />
           </div>
         </div>
       </figcaption> : null}

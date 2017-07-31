@@ -32,9 +32,12 @@ export const EXPORT_TO_GIST = '§Bulgur/TakeAwayDialog/EXPORT_TO_GIST';
 /*
  * Action creators
  */
+
 /**
+ * Handles the process of displaying the status of "bundle to html" operation
  * @param {string} status - the status of the html bundling process to display
  * @param {string} log - the log message of the html bundling process to display
+ * @return {function} handler - the function passed to handle the process
  */
 export const setBundleHtmlStatus = (status, log) => dispatch => {
   // remove message after a while if it is an "end-of-operation" status
@@ -53,16 +56,22 @@ export const setBundleHtmlStatus = (status, log) => dispatch => {
     log
   });
 };
+
 /**
+ * Sets in the ui which take away type is choosen by user
  * @param {string} takeAwayType - the type to set for the interface
+ * @return {object} action - the redux action to dispatch
  */
 export const setTakeAwayType = (takeAwayType) => ({
   type: SET_TAKE_AWAY_TYPE,
   takeAwayType
 });
+
 /**
+ * Manages in the ui the process of exporting to gest
  * @param {string} status - the status of the gist export process to display
  * @param {string} log - the log message of the gist export process to display
+ * @return {function} handler - the function used to handle the process
  */
 export const setExportToGistStatus = (status, log) => dispatch => {
   if (status === 'failure' || status === 'success') {
@@ -80,9 +89,12 @@ export const setExportToGistStatus = (status, log) => dispatch => {
     log
   });
 };
+
 /**
+ * Handles the monitoring  of the export to server status
  * @param {string} status - the status of the server export process to display
  * @param {string} log - the log message of the server export process to display
+ * @return {function} handler - the function passed as action to handle the process
  */
 export const setExportToServerStatus = (status, log) => dispatch => {
   if (status === 'failure' || status === 'success') {
@@ -100,10 +112,13 @@ export const setExportToServerStatus = (status, log) => dispatch => {
     log
   });
 };
+
 /**
+ * Handles the process of exporting a presentation to gist
  * @param {object} htmlContent - the html content of the app to export to gist
  * @param {object} presentation - the presentation data to export to gist
  * @param {string} id - the id of the gist to which the presentation is stored (if it has already been exported once)
+ * @return {object} action - the redux action to dispatch
  */
 export const exportToGist = (htmlContent, presentation, gistId) => ({
   type: EXPORT_TO_GIST,
@@ -139,8 +154,11 @@ export const exportToGist = (htmlContent, presentation, gistId) => ({
   }
 });
 
+
 /**
+ * Handles the process of exporting a presentation to the server
  * @param {object} presentation - the presentation to export to the distant server
+ * @return {object} action - the redux action to dispatch
  */
 export const exportToServer = (presentation) => ({
   type: EXPORT_TO_SERVER,
@@ -173,60 +191,78 @@ export const exportToServer = (presentation) => ({
 /*
  * Reducers
  */
+
+
+/**
+ * Default state of the take away ui
+ */
 const DEFAULT_TAKE_AWAY_UI_SETTINGS = {
+
     /**
      * The type of export being processed
      * @type {string}
      */
     takeAwayType: undefined,
+
     /**
      * The global status of gist export (processing, success, error)
      * @type {string}
      */
     takeAwayGistLogStatus: undefined,
+
     /**
      * The precise status of gist export
      * @type {string}
      */
     takeAwayGistLog: undefined,
+
     /**
      * The global status of server export (processing, success, error)
      * @type {string}
      */
     takeAwayServerLogStatus: undefined,
+
     /**
      * The precise status of server export
      * @type {string}
      */
     takeAwayServerLog: undefined,
+
     /**
      * The global status of html bundling
      * @type {string}
      */
     bundleToHtmlLogStatus: undefined,
+
     /**
      * The precise status of html bundling
      * @type {string}
      */
     bundleToHtmlLog: undefined,
 };
+
 /**
  * This redux reducer handles the modification of the ui state for take away choices
  * @param {object} state - the state given to the reducer
  * @param {object} action - the action to use to produce new state
+ * @return {object} newState - the resulting state
  */
 function takeAwayUi(state = DEFAULT_TAKE_AWAY_UI_SETTINGS, action) {
   switch (action.type) {
+    // cases state has to be reset
     case OPEN_TAKE_AWAY_MODAL:
     case CLOSE_TAKE_AWAY_MODAL:
     case RESET_APP:
       return DEFAULT_TAKE_AWAY_UI_SETTINGS;
+
+    // take away type is changed
     case SET_TAKE_AWAY_TYPE:
       return {
         ...state,
         takeAwayType: action.takeAwayType
       };
 
+    // handling the display of export status
     case EXPORT_TO_GIST_STATUS:
       return {
         ...state,
@@ -274,6 +310,7 @@ function takeAwayUi(state = DEFAULT_TAKE_AWAY_UI_SETTINGS, action) {
       return state;
   }
 }
+
 /**
  * The module exports a reducer connected to pouchdb thanks to redux-pouchdb
  */
@@ -297,6 +334,7 @@ const bundleToHtmlLog = state => state.takeAwayUi &&
   state.takeAwayUi.bundleToHtmlLog;
 const bundleToHtmlLogStatus = state => state.takeAwayUi &&
   state.takeAwayUi.bundleToHtmlLogStatus;
+
 /**
  * The selector is a set of functions for accessing this feature's state
  * @type {object}

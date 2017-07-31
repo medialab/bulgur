@@ -1,4 +1,5 @@
 /* eslint no-eval: 0 */
+
 /**
  * This module helps to load files from app server or user own file system
  * @module bulgur/utils/fileLoader
@@ -13,6 +14,7 @@ if (global.window !== undefined) {
   req = require.context('../../example_datasets/');
   rawReq = require.context('raw-loader!../../example_datasets/');
 }
+
 /**
  * Loads a file from the app example files
  * @param {string} fileName - the name of the file to load
@@ -32,6 +34,7 @@ export function loadExampleFile(fileName) {
   }
   return data;
 }
+
 /**
  * Validates whether the extension of a file is valid against its visualization model
  * @param {string} fileName - the name of the file to validate
@@ -42,6 +45,7 @@ export function validateFileExtensionForVisType (fileName = '', visualizationMod
   const fileExtension = fileName.split('.').pop();
   return visualizationModel.acceptedFileExtensions.find(ext => ext === fileExtension) !== undefined;
 }
+
 /**
  * Reads the raw string content of a file from user file system
  * @param {File} fileToRead - the file to read
@@ -58,10 +62,18 @@ export function getFileAsText(fileToRead, callback) {
     callback(event.target.error);
     reader = undefined;
   };
-  // Read file into memory as UTF-8
+  // Read file as UTF-8
   reader.readAsText(fileToRead);
 }
 
+
+/**
+ * Determines if a file can be visualized by one or more visualization techniques availables
+ * based on its file extension and visualization techniques models.
+ * @param {object} file - representation of the file
+ * @param {object} visualizationTypesModel - models to consume to check compatibility
+ * @return {boolean} isValid - whether the file could be visualized
+ */
 export function validateFileExtension (file = {name: ''}, visualizationTypesModels) {
   const fileName = typeof file === 'string' ? file : file.name;
   const extension = fileName.split('.').pop();

@@ -38,6 +38,8 @@
 
         li
         {
+            flex: 1;
+
             padding: 0;
             padding: $gutter-medium;
 
@@ -46,7 +48,6 @@
             cursor: pointer;
 
             @extend .animated;
-            flex: 1;
             @extend .important-item;
             &:hover
             {
@@ -66,9 +67,9 @@
         left: 0;
 
         overflow: visible;
+        flex: 1;
 
         @extend .animated;
-        flex: 1;
         .tab
         {
             overflow: auto;
@@ -116,12 +117,13 @@
      */
     .settings-wrapper
     {
+        flex: 1;
+
         pointer-events: none;
 
         background: transparent;
 
         @extend .flex-stretched-column;
-        flex: 1;
         .settings-container
         {
             position: relative;

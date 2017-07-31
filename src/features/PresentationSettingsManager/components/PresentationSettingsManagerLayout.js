@@ -29,10 +29,15 @@ const PresentationSettingsManagerLayout = ({
 }, context) => {
   // namespacing the translation keys
   const translate = translateNameSpacer(context.t, 'Features.PresentationSettingsManager');
+  // safely retrieving active settings
   const activeCss = (activePresentation && activePresentation.settings && activePresentation.settings.css) || '';
   const activeTemplate = (activePresentation && activePresentation.settings && activePresentation.settings.template) || 'stepper';
   // const activeTemplateData = templates.find(template => template.id === activeTemplate);
 
+
+  /**
+   * Callbacks
+   */
   const toggleSettingsVisibility = () => {
     if (settingsVisible) {
       setSettingsVisibility(false);

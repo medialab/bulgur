@@ -15,11 +15,23 @@ import './SlidesContainer.scss';
 
 import {translateNameSpacer} from '../../helpers/translateUtils';
 
+/**
+ * SlidesContainer class for building react component instances
+ */
 class SlidesContainer extends React.Component {
 
+  /**
+   * Component's context used properties
+   */
   static contextTypes = {
     t: PropTypes.func.isRequired
   }
+
+
+  /**
+   * Renders the component
+   * @return {ReactElement} component - the component
+   */
   render() {
     const translate = translateNameSpacer(this.context.t, 'Components.SlidesContainer');
     const {
@@ -101,4 +113,52 @@ class SlidesContainer extends React.Component {
   );
   }
 }
+
+
+/**
+ * Component's properties types
+ */
+SlidesContainer.propTypes = {
+
+  /**
+   * presentation being edited
+   */
+  activePresentation: PropTypes.object,
+
+  /**
+   * id of the active slide
+   */
+  activeSlideId: PropTypes.string,
+
+  /**
+   * sets the active slide
+   */
+  setActiveSlide: PropTypes.func,
+
+  /**
+   * callbacks for adding a slide
+   */
+  addSlide: PropTypes.func,
+
+  /**
+   * callbacks for updating a specific slide
+   */
+  updateSlide: PropTypes.func,
+
+  /**
+   * callbacks for setting a specific slide
+   */
+  moveSlide: PropTypes.func,
+
+  /**
+   * callbacks for duplicating a slide
+   */
+  duplicateSlide: PropTypes.func,
+
+  /**
+   * callbacks for removing a slide
+   */
+  removeSlide: PropTypes.func,
+};
+
 export default DragDropContext(HTML5Backend)(SlidesContainer);

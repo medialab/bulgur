@@ -24,6 +24,7 @@ window.store = store;
 
 const mountNode = document.getElementById('mount');
 
+
 /**
  * Mounts the application to the given mount node
  */
@@ -39,6 +40,7 @@ export function renderApplication() {
 }
 
 renderApplication();
+
 
 /**
  * Hot-reloading.

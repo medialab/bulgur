@@ -21,23 +21,24 @@
     position: relative;
 
     display: flex;
+    flex: 10;
     flex-direction: row;
+    flex-wrap: nowrap;
 
     @extend .flex-stretched-column;
     @extend .normal-item;
-    flex-wrap: nowrap;
-    flex: 10;
+    
     .bulgur-aside-view
     {
-        max-width: 20%;
-
         flex: 1;
+
+        max-width: 20%;
     }
     .bulgur-main-view
     {
+        flex: 4;
+
         min-width: 80%;
         margin: 0;
-
-        flex: 4;
     }
 }

@@ -9,6 +9,13 @@ import {translateNameSpacer} from '../../helpers/translateUtils';
 
 import './PresentationCard.scss';
 
+
+/**
+ * Picks the proper presentation icon regarding the type
+ * of the visualizations featured in the presentation
+ * @param {object} presentation - the presentation to parse
+ * @return {ReactElement} icon - the proper icon(s)
+ */
 const computeVisIcons = (presentation) => {
   if (presentation.visualizations && Object.keys(presentation.visualizations).length) {
     return (
@@ -36,6 +43,12 @@ const computeVisIcons = (presentation) => {
   return null;
 };
 
+/**
+ * Renders the PresentationCard component as a pure function
+ * @param {object} props - used props (see prop types below)
+ * @param {object} context - used context data (see context types below)
+ * @return {ReactElement} component - the resulting component
+ */
 const PresentationCard = ({
   presentation,
   promptedToDelete,
@@ -92,6 +105,57 @@ const PresentationCard = ({
   );
 };
 
+
+/**
+ * Component's properties types
+ */
+PresentationCard.propTypes = {
+
+  /**
+   * presentation to display
+   */
+  presentation: PropTypes.object,
+
+  /**
+   * represents whether presentation is asked to be deleted ("are you sure ...")
+   */
+  promptedToDelete: PropTypes.bool,
+  // actions
+
+  /**
+   * callbacks when slide is set to active
+   */
+  setToActive: PropTypes.func,
+
+  /**
+   * callbacks when slide is asked to be configured
+   */
+  configure: PropTypes.func,
+
+  /**
+   * callbacks when slide asks to be deleted
+   */
+  onClickDelete: PropTypes.func,
+
+  /**
+   * callbacks when user opens the delete prompt
+   */
+  onClickPrompt: PropTypes.func,
+
+  /**
+   * callbacks when user dismisses the delete prompt
+   */
+  onClickUnprompt: PropTypes.func,
+
+  /**
+   * callbacks when slide asks to be duplicated
+   */
+  onClickCopy: PropTypes.func
+};
+
+/**
+ * Component's context used properties
+ */
 PresentationCard.contextTypes = {
   t: PropTypes.func.isRequired
 };

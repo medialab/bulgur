@@ -7,7 +7,6 @@
 
 import {combineReducers} from 'redux';
 import {createStructuredSelector} from 'reselect';
-import {v4 as uuid} from 'uuid';
 import {persistentReducer} from 'redux-pouchdb';
 
 import {
@@ -23,14 +22,11 @@ import models from '../../models/visualizationTypes';
 /*
  * Action names
  */
-export const RESET_APP = 'RESET_APP';
-/*
- * actions related to global presentations management in ui
- */
-export const START_PRESENTATION_CANDIDATE_CONFIGURATION = '$Bulgur/PresentationEditor/START_PRESENTATION_CANDIDATE_CONFIGURATION';
-export const APPLY_PRESENTATION_CANDIDATE_CONFIGURATION = '$Bulgur/PresentationEditor/APPLY_PRESENTATION_CANDIDATE_CONFIGURATION';
-export const SET_ACTIVE_PRESENTATION = '$Bulgur/PresentationEditor/SET_ACTIVE_PRESENTATION';
-export const UNSET_ACTIVE_PRESENTATION = '$Bulgur/PresentationEditor/UNSET_ACTIVE_PRESENTATION';
+import {
+  RESET_APP,
+  SET_ACTIVE_PRESENTATION,
+  APPLY_PRESENTATION_CANDIDATE_CONFIGURATION,
+} from '../GlobalUi/duck';
 /*
  * actions related to active presentation's slides
  */
@@ -40,17 +36,9 @@ export const SET_ACTIVE_SLIDE = '$Bulgur/PresentationEditor/SET_ACTIVE_SLIDE';
 export const UPDATE_SLIDE = '$Bulgur/PresentationEditor/UPDATE_SLIDE';
 export const MOVE_SLIDE = '$Bulgur/PresentationEditor/MOVE_SLIDE';
 /*
- * actions related to global ui
- */
-const OPEN_PRESENTATION_CANDIDATE_MODAL = '$Bulgur/PresentationEditor/OPEN_PRESENTATION_CANDIDATE_MODAL';
-const CLOSE_PRESENTATION_CANDIDATE_MODAL = '$Bulgur/PresentationEditor/CLOSE_PRESENTATION_CANDIDATE_MODAL';
-const OPEN_TAKE_AWAY_MODAL = '$Bulgur/PresentationEditor/OPEN_TAKE_AWAY_MODAL';
-const CLOSE_TAKE_AWAY_MODAL = '$Bulgur/PresentationEditor/CLOSE_TAKE_AWAY_MODAL';
-const SET_UI_MODE = '$Bulgur/PresentationEditor/SET_UI_MODE';
-const SET_SLIDE_SETTINGS_PANNEL_STATE = '$Bulgur/PresentationEditor/SET_SLIDE_SETTINGS_PANNEL_STATE';
-/*
  * actions related to active view
  */
+export const SET_SLIDE_SETTINGS_PANNEL_STATE = '$Bulgur/PresentationEditor/SET_SLIDE_SETTINGS_PANNEL_STATE';
 export const CHANGE_VIEW_BY_USER = '$Bulgur/PresentationEditor/CHANGE_VIEW_BY_USER';
 export const SET_VIEW_COLOR = '$Bulgur/PresentationEditor/SET_VIEW_COLOR';
 const TOGGLE_VIEW_COLOR_EDITION = '$Bulgur/PresentationEditor/TOGGLE_VIEW_COLOR_EDITION';
@@ -61,47 +49,27 @@ export const SET_SHOWN_CATEGORIES = '$Bulgur/PresentationEditor/SET_SHOWN_CATEGO
  * Action creators
  */
 
+
 /**
- * @param {object} presentation - the data to use for bootstrapping presentation configuration
- */
-export const startPresentationCandidateConfiguration = (presentation) => ({
-  type: START_PRESENTATION_CANDIDATE_CONFIGURATION,
-  presentation,
-  id: presentation !== undefined && presentation.id ? presentation.id : uuid()
-});
-/**
- * @param {object} presentation - the data to use for merging back presentation data from presentation configuration state
- */
-export const applyPresentationCandidateConfiguration = (presentation) => ({
-  type: APPLY_PRESENTATION_CANDIDATE_CONFIGURATION,
-  presentation
-});
-/**
- * @param {object} presentation - the presentation to set as editor's edited presentation
- */
-export const setActivePresentation = (presentation) => ({
-  type: SET_ACTIVE_PRESENTATION,
-  presentation
-});
-/**
- * @param {object} presentation - the presentation to unset as editor's edited presentation
- */
-export const unsetActivePresentation = () => ({
-  type: UNSET_ACTIVE_PRESENTATION
-});
-/**
+ * Sets new view parameters for one of the visualizations of the editor
+ * (reminder: there can be several visualizations for a presentation, even
+ * if not allowed in the editor for now)
  * @param {string} id - the id of the view that has been changed
  * @param {object} event - the event object representing the interaction (contains two keys: lastEventType and viewParameters)
+ * @return {object} action - the redux action to dispatch
  */
 export const changeViewByUser = (id, event) => ({
   type: CHANGE_VIEW_BY_USER,
   event,
   id
 });
+
 /**
+ * Adds a new slide to the current presentation being edited
  * @param {string} id - the id of the slide to add
  * @param {object} slide - the content of the slide to add
  * @param {object} order - the position in slides list in which to add the slide
+ * @return {object} action - the redux action to dispatch
  */
 export const addSlide = (id, slide = {}, order) => ({
   type: ADD_SLIDE,
@@ -109,82 +77,69 @@ export const addSlide = (id, slide = {}, order) => ({
   id,
   order
 });
+
 /**
+ * Updates a slide in the current presentation
  * @param {string} id - the id of the slide to update
  * @param {object} slide - the content of the slide to update
+ * @return {object} action - the redux action to dispatch
  */
 export const updateSlide = (id, slide = {}) => ({
   type: UPDATE_SLIDE,
   slide,
   id
 });
+
 /**
+ * Moves a slide in the current presentation
  * @param {number} fromIndex - the original index of the slide to move
  * @param {number} toIndex - the target index of the slide to move
+ * @return {object} action - the redux action to dispatch
  */
 export const moveSlide = (fromIndex, toIndex) => ({
   type: MOVE_SLIDE,
   fromIndex,
   toIndex
 });
+
 /**
+ * Removes a slide in the current presentation
  * @param {string} id - the id of the slide to remove
+ * @return {object} action - the redux action to dispatch
  */
 export const removeSlide = (id) => ({
   type: REMOVE_SLIDE,
   id
 });
+
 /**
+ * Sets the active slide in the editor
  * @param {string} id - the id of the slide to set as active
  * @param {object} slide - the content of the slide to set as active (because related reducers may not have it)
+ * @return {object} action - the redux action to dispatch
  */
 export const setActiveSlide = (id, slide) => ({
   type: SET_ACTIVE_SLIDE,
   slide,
   id
 });
+
 /**
- *
- */
-export const openPresentationCandidateModal = () => ({
-  type: OPEN_PRESENTATION_CANDIDATE_MODAL
-});
-/**
- *
- */
-export const closePresentationCandidateModal = () => ({
-  type: CLOSE_PRESENTATION_CANDIDATE_MODAL
-});
-/**
- *
- */
-export const openTakeAwayModal = () => ({
-  type: OPEN_TAKE_AWAY_MODAL
-});
-/**
- *
- */
-export const closeTakeAwayModal = () => ({
-  type: CLOSE_TAKE_AWAY_MODAL
-});
-/**
- *
- */
-export const setUiMode = (mode = 'edition') => ({
-  type: SET_UI_MODE,
-  mode
-});
-/**
+ * Sets the state of the settings pannel (in [undefined, 'categories', 'parameters'])
  * @param {string | undefined} to - the state to move the slide settings pannel to
+ * @return {object} action - the redux action to dispatch
  */
 export const setSlideSettingsPannelState = (to) => ({
   type: SET_SLIDE_SETTINGS_PANNEL_STATE,
   to
 });
+
 /**
+ * Toogles the color edition interface of a category in a specific visualization
  * @param {string} visualizationId - the uuid of the categoric value's color's visualisation id to toggle
  * @param {string} collectionId - the uuid of the categoric value's color's collection id (e.g. : "nodes", "edges", "main") to toggle
  * @param {string} category - the name of the categoric value to edit
+ * @return {object} action - the redux action to dispatch
  */
 export const toggleViewColorEdition = (visualizationId, collectionId, category) => ({
   type: TOGGLE_VIEW_COLOR_EDITION,
@@ -192,11 +147,14 @@ export const toggleViewColorEdition = (visualizationId, collectionId, category) 
   collectionId,
   category
 });
+
 /**
+ * Sets the color for a specific category of a specific visualization of the edited view
  * @param {string} visualizationId - the categoric value's color's visualisation id to toggle
  * @param {string} collectionId - the categoric value's color's collection id (e.g. : "nodes", "edges", "main") to toggle
  * @param {string} category - the name of the categoric value to set to edition
  * @param {string} color - the color (hex, color name, rgb) to set to the given category
+ * @return {object} action - the redux action to dispatch
  */
 export const setViewColor = (visualizationId, collectionId, category, color) => ({
   type: SET_VIEW_COLOR,
@@ -205,12 +163,15 @@ export const setViewColor = (visualizationId, collectionId, category, color) => 
   category,
   color
 });
+
 /**
+ * Sets the data map value of current view for a specific visualization & datamap item
  * @param {object} visualizations - the visualizations of the active presentation to use for data mapping
  * @param {string} visualizationId - the changed parameter's visualisation id to change
  * @param {string} parameterId - the id of the visualization's parameter to changed
  * @param {string} collectionId - the changed parameter's collection id to change
  * @param {string} propertyName - the property name to set for the new data map parameter
+ * @return {object} action - the redux action to dispatch
  */
 export const setViewDatamapItem = (visualizations, visualizationId, parameterId, collectionId, propertyName) => ({
   type: SET_VIEW_DATAMAP_ITEM,
@@ -220,11 +181,13 @@ export const setViewDatamapItem = (visualizations, visualizationId, parameterId,
   propertyName,
   visualizations
 });
+
 /**
  * Sets the list of categories to show for a given data collection in a given visualization
  * @param {string} visualizationId - the changed parameter's visualisation id to change
  * @param {string} collectionId - the changed parameter's collection id to change
  * @param {string} shownCategories - the array of new categories to set
+ * @return {object} action - the redux action to dispatch
  */
 export const setShownCategories = (visualizationId, collectionId, shownCategories) => ({
   type: SET_SHOWN_CATEGORIES,
@@ -232,47 +195,61 @@ export const setShownCategories = (visualizationId, collectionId, shownCategorie
   collectionId,
   shownCategories
 });
-/**
- *
- */
-export const resetApp = () => ({
-  type: RESET_APP
-});
 
 /*
  * Reducers
  */
 
+
+/**
+ * Default state of the presentation editor
+ */
 const EDITOR_DEFAULT_STATE = {
+
     /**
      * Representation of all the editor's active views (should contain anything necessary to render the views)
      * @type {object}
      */
     activeViews: undefined,
+
     /**
      * uuid of the slide being edited in editor
      * @type {string}
      */
     activeSlideId: undefined,
+
     /**
      * Representation of the legend's color being edited in the editor
      * @type {object}
      */
-    editedColor: undefined
+    editedColor: undefined,
+
+    /**
+     * Represents the state of the advanced options pannel
+     * (in [undefined, 'categories', 'parameters'])
+     */
+    slideSettingsPannelState: undefined,
 };
+
 /**
  * This redux reducer handles the modification of the active presentation edited by user and related ui states
  * @param {object} state - the state given to the reducer
  * @param {object} action - the action to use to produce new state
+ * @return {object} newState - the resulting state
  */
 function editor(state = EDITOR_DEFAULT_STATE, action) {
   let newcolorsMap;
   let data;
   let shownCategories;
   switch (action.type) {
+
+    // cases application is reset
     case RESET_APP:
       return EDITOR_DEFAULT_STATE;
 
+    // a new presentation is set
+    // reducer builds the proper data for displaying current views
+    // according with the presentation data
     case APPLY_PRESENTATION_CANDIDATE_CONFIGURATION:
     case SET_ACTIVE_PRESENTATION:
       const defaultViews = Object.keys(action.presentation.visualizations).reduce((result, visualizationKey) => {
@@ -318,6 +295,7 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
           action.presentation.order[0]
           : state.activeSlideId
       };
+    // user changes the view parameters of one of the views
     case CHANGE_VIEW_BY_USER:
       return {
         ...state,
@@ -333,7 +311,7 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
         }
       };
 
-
+    // user adds a new slide or set one as active
     case ADD_SLIDE:
     case SET_ACTIVE_SLIDE:
       return {
@@ -352,6 +330,7 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
         }), {})
       };
 
+    // a category color is edited
     case TOGGLE_VIEW_COLOR_EDITION:
       const {collectionId, category, visualizationId} = action;
       if (state.editedColor === undefined || state.editedColor.collectionId !== collectionId || state.editedColor.category !== category) {
@@ -368,6 +347,7 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
         ...state,
         editedColor: undefined
       };
+    // a category color is set
     case SET_VIEW_COLOR:
       const {color} = action;
       return {
@@ -390,7 +370,11 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
           }
         }
       };
+    // a datamap dimension is changed
     case SET_VIEW_DATAMAP_ITEM:
+      // in case datamap is "category" we have to update colors map
+      // as it is built on top of the "category" unique values of data points
+      // todo: this is a bit dirty
       if (action.parameterId === 'category') {
         const visualization = state.activeViews[action.visualizationId];
         newcolorsMap = {...visualization.viewParameters.colorsMap} || {};
@@ -435,6 +419,7 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
           }
         }
       };
+    // filters are changed
     case SET_SHOWN_CATEGORIES:
       return {
         ...state,
@@ -453,104 +438,23 @@ function editor(state = EDITOR_DEFAULT_STATE, action) {
           }
         }
       };
-
-    default:
-      return state;
-  }
-}
-
-const GLOBAL_UI_DEFAULT_STATE = {
-    /**
-     * Represents whether configuration/new presentation modal is open
-     * @type {boolean}
-     */
-    presentationCandidateModalOpen: false,
-    /**
-     * Represents whether take away / export modal is open
-     * @type {boolean}
-     */
-    takeAwayModalOpen: false,
-    /**
-     * Represents  the uuid of the presentation being edited
-     * @type {string}
-     */
-    activePresentationId: undefined,
-    /**
-     * Represents whether settings are visible for selected slide
-     * @type {boolean}
-     */
-    slideSettingsPannelOpen: false,
-    /**
-     * Represent a state machine for the ui screens
-     * @type {string}
-     */
-    uiMode: 'edition' // in ['edition', 'preview']
-};
-/**
- * This redux reducer handles the global ui state management (screen & modals opening)
- * @param {object} state - the state given to the reducer
- * @param {object} action - the action to use to produce new state
- */
-function globalUi(state = GLOBAL_UI_DEFAULT_STATE, action) {
-  switch (action.type) {
-    case RESET_APP:
-      return GLOBAL_UI_DEFAULT_STATE;
-    case APPLY_PRESENTATION_CANDIDATE_CONFIGURATION:
-      return {
-        ...state,
-        presentationCandidateModalOpen: false,
-        activePresentationId: action.presentation.id
-      };
-    case SET_ACTIVE_PRESENTATION:
-      return {
-        ...state,
-        activePresentationId: action.presentation.id
-      };
-    case UNSET_ACTIVE_PRESENTATION:
-      return {
-        ...state,
-        activePresentationId: undefined
-      };
-    case START_PRESENTATION_CANDIDATE_CONFIGURATION:
-    case OPEN_PRESENTATION_CANDIDATE_MODAL:
-      return {
-        ...state,
-        presentationCandidateModalOpen: true
-      };
-    case CLOSE_PRESENTATION_CANDIDATE_MODAL:
-      return {
-        ...state,
-        presentationCandidateModalOpen: false
-      };
-    case OPEN_TAKE_AWAY_MODAL:
-      return {
-        ...state,
-        takeAwayModalOpen: true
-      };
-    case CLOSE_TAKE_AWAY_MODAL:
-      return {
-        ...state,
-        takeAwayModalOpen: false
-      };
-    case SET_UI_MODE:
-      return {
-        ...state,
-        uiMode: action.mode
-      };
+    // view's advanced settings pannel is changed ([undefined, 'categories', 'parameters'])
     case SET_SLIDE_SETTINGS_PANNEL_STATE:
       return {
         ...state,
         slideSettingsPannelState: action.to
       };
+
     default:
       return state;
   }
 }
+
+
 /**
  * The module exports a reducer connected to pouchdb thanks to redux-pouchdb
  */
 export default persistentReducer(combineReducers({
-  globalUi,
   editor
 }), 'bulgur-editor');
 
@@ -558,30 +462,20 @@ export default persistentReducer(combineReducers({
  * Selectors
  */
 /*
- * Selectors related to global ui
- */
-const activePresentationId = state => state.globalUi.activePresentationId;
-const isPresentationCandidateModalOpen = state => state.globalUi.presentationCandidateModalOpen;
-const isTakeAwayModalOpen = state => state.globalUi.takeAwayModalOpen;
-const slideSettingsPannelState = state => state.globalUi.slideSettingsPannelState;
-const globalUiMode = state => state.globalUi.uiMode;
-/*
  * Selectors related to presentation edition ui management
  */
 const editedColor = state => state.editor.editedColor;
 const activeViews = state => state.editor.activeViews;
 const activeSlideId = state => state.editor.activeSlideId;
+const slideSettingsPannelState = state => state.editor.slideSettingsPannelState;
+
 /**
  * The selector is a set of functions for accessing this feature's state
  * @type {object}
  */
 export const selector = createStructuredSelector({
-  activePresentationId,
   activeSlideId,
   activeViews,
   editedColor,
-  globalUiMode,
-  isPresentationCandidateModalOpen,
-  isTakeAwayModalOpen,
   slideSettingsPannelState,
 });

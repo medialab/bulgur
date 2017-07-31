@@ -34,6 +34,7 @@ import {
 
 import TakeAwayDialogLayout from './TakeAwayDialogLayout';
 
+
 /**
  * Redux-decorated component class rendering the takeaway dialog feature to the app
  */
@@ -54,6 +55,10 @@ import TakeAwayDialogLayout from './TakeAwayDialogLayout';
 )
 class TakeAwayDialogContainer extends Component {
 
+  /**
+   * constructor
+   * @param {object} props - properties given to instance at instanciation
+   */
   constructor(props) {
     super(props);
     this.takeAway = debounce(this.takeAway.bind(this), 300);
@@ -61,11 +66,25 @@ class TakeAwayDialogContainer extends Component {
     this.updateActivePresentationFromGist = this.updateActivePresentationFromGist.bind(this);
   }
 
+
+  /**
+   * Defines whether the component should re-render
+   * @param {object} nextProps - the props to come
+   * @param {object} nextState - the state to come
+   * @return {boolean} shouldUpdate - whether to update or not
+   */
   shouldComponentUpdate() {
+    // todo: update component when stabilized
     return true;
   }
 
+
+  /**
+   * Fetches active presentation data from the server
+   * and merge it with locally-stored presentation.
+   */
   updateActivePresentationFromServer() {
+    // todo: should this be handled in a promise-based action ?
     this.props.actions.setExportToServerStatus('processing', 'updating from the distant server');
     const url = this.props.activePresentation.metadata.serverJSONUrl;
     get(url)
@@ -83,7 +102,14 @@ class TakeAwayDialogContainer extends Component {
         }
       });
   }
+
+
+  /**
+   * Fetches active presentation data from gist
+   * and merge it with locally-stored presentation.
+   */
   updateActivePresentationFromGist() {
+    // todo: should this be handled in a promise-based action ?
     const gistId = this.props.activePresentation.metadata.gistId;
     const entryUrl = 'https://api.github.com/gists/' + gistId;
     return get(entryUrl)
@@ -120,7 +146,14 @@ class TakeAwayDialogContainer extends Component {
     });
   }
 
+
+  /**
+   * Wraps the different options for taking the presentation away,
+   * launching proper actions or directly using proper utils
+   * @param {string} takeAway - the take away method that is asked
+   */
   takeAway(takeAwayType) {
+    // todo: should this be handled in a promise-based action ?
     const JSONbundle = cleanPresentationForExport(this.props.activePresentation); // bundleProjectAsJSON(this.props.activePresentation);
     const title = this.props.activePresentation.metadata.title;
     switch (takeAwayType.id) {
@@ -162,6 +195,11 @@ class TakeAwayDialogContainer extends Component {
     }
   }
 
+
+  /**
+   * Renders the component
+   * @return {ReactElement} component - the component
+   */
   render() {
     const serverAvailable = serverUrl !== undefined;
     const gistAvailable = githubAPIClientId !== undefined;

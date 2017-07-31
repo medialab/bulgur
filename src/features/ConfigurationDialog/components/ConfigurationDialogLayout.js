@@ -1,6 +1,7 @@
 /* eslint react/no-danger : 0 */
 /**
  * This module exports a stateless component rendering the layout of the configuration dialog feature interface
+ * @todo: render body is too big, it should be split into several smaller components modules
  * @module bulgur/features/ConfigurationDialog
  */
 import React from 'react';
@@ -22,6 +23,7 @@ import Toaster from '../../../components/Toaster/Toaster';
 import {translateNameSpacer} from '../../../helpers/translateUtils';
 
 import './ConfigurationDialog.scss';
+
 /**
  * Renders the configuration dialog layout
  * @param {object} props - the props to render
@@ -65,7 +67,13 @@ const ConfigurationDialogLayout = ({
   validateFileExtension,
   editedColor
 }, context) => {
+  // namespacing the translation keys with feature id
   const translate = translateNameSpacer(context.t, 'Features.ConfigurationDialog');
+
+
+  /**
+   * Callbacks
+   */
   const onApplyChange = () => applyPresentationCandidateConfiguration(presentationCandidate);
   const onDropInput = (files) => onFileDrop(files[0]);
   const setPresentationTitle = (e) => setCandidatePresentationMetadata('title', e.target.value);
@@ -75,6 +83,10 @@ const ConfigurationDialogLayout = ({
   const setDataSourceSample = () => setDataSourceTab('sample');
   const hasSlides = presentationCandidate.order && presentationCandidate.order.length;
 
+
+  /**
+   * Preparing data for rendering
+   */
   let readyToApply;
   if (
     presentationCandidate &&

@@ -32,18 +32,18 @@
      */
     .presentation-editor-container
     {
-        @extend .flex-stretched-column;
         flex: 1;
+
+        @extend .flex-stretched-column;
     }
     .bulgur-main-row
     {
         position: relative;
 
         display: flex;
-        flex-direction: row;
-
-        flex-wrap: nowrap;
         flex: 10;
+        flex-direction: row;
+        flex-wrap: nowrap;
         .bulgur-AsideViewLayout
         {
             // min-width: 16.6%;
@@ -134,14 +134,13 @@
 
     @extend .flex-stretched-column;
 
-    > div
+     > div
     {
         // flex: 1;
         @extend .flex-stretched-column;
         .modal-content
         {
             overflow: auto;
-
             flex: 1;
         }
         .modal-footer

@@ -3,9 +3,16 @@
  * @module bulgur/components/BigSelect
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './BigSelect.scss';
 
+
+/**
+ * Renders the BigSelect component as a pure function
+ * @param {object} props - used props (see prop types below)
+ * @return {ReactElement} component - the resulting component
+ */
 const BigSelect = ({
   options,
   onOptionSelect,
@@ -28,8 +35,8 @@ const BigSelect = ({
               key={key}>
               <input
                 type="radio"
-                id={option}
-                name={option}
+                id={option.id}
+                name={option.label}
                 value="type"
                 checked={false} />
               <label
@@ -43,6 +50,38 @@ const BigSelect = ({
       }
     </form>
   );
+};
+
+
+/**
+ * Component's properties types
+ */
+BigSelect.propTypes = {
+
+  /**
+   * options proposed by the component
+   */
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.element,
+      ]),
+      id: PropTypes.string,
+      possible: PropTypes.bool,
+      icon: PropTypes.string,
+    })
+  ),
+
+  /**
+   * Current active option
+   */
+  activeOptionId: PropTypes.string,
+
+  /**
+   * Callbacks when an option is selected
+   */
+  onOptionSelect: PropTypes.func,
 };
 
 export default BigSelect;

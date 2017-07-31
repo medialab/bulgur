@@ -1,30 +1,43 @@
 /**
- * This module provides a reusable colorsmap picker component
+ * This module provides a reusable data map picker component
  * @module bulgur/components/DatamapPicker
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Select from 'react-select';
 
 import 'react-select/dist/react-select.css';
 import './DatamapPicker.scss';
 
+
+/**
+ * DatamapPicker class for building react component instances
+ */
 class DatamapPicker extends React.Component {
 
+  /**
+   * constructor
+   * @param {object} props - properties given to instance at instanciation
+   */
   constructor(props) {
     super(props);
 
     this.openSelect = () => this.select.focus();
   }
 
+  /**
+   * Renders the component
+   * @return {ReactElement} component - the component
+   */
   render() {
     const {
-    parameter,
-    parameterKey,
-    visualization,
-    visualizationKey,
-    collectionId,
-    onMappingChange
+      parameter,
+      parameterKey,
+      visualization,
+      visualizationKey,
+      collectionId,
+      onMappingChange
     } = this.props;
     const onChange = (e) => {
       if (e) {
@@ -80,5 +93,46 @@ class DatamapPicker extends React.Component {
     );
   }
 }
+
+
+/**
+ * Component's properties types
+ */
+DatamapPicker.propTypes = {
+
+  /**
+   * data of the parameter being edited
+   */
+  parameter: PropTypes.shape({
+    mappedField: PropTypes.string,
+    acceptedValueTypes: PropTypes.array,
+    id: PropTypes.string,
+  }),
+
+  /**
+   * key/id of the parameter being edited
+   */
+  parameterKey: PropTypes.string,
+
+  /**
+   * target visualization data
+   */
+  visualization: PropTypes.object,
+
+  /**
+   * target visualization id
+   */
+  visualizationKey: PropTypes.string,
+
+  /**
+   * target data collection id (e.g. 'main')
+   */
+  collectionId: PropTypes.string,
+
+  /**
+   * callbacks when mapped field is changed
+   */
+  onMappingChange: PropTypes.func,
+};
 
 export default DatamapPicker;

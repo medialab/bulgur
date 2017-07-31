@@ -23,6 +23,9 @@ import {
   APPLY_PRESENTATION_CANDIDATE_CONFIGURATION,
   UNSET_ACTIVE_PRESENTATION,
   SET_ACTIVE_PRESENTATION,
+} from '../GlobalUi/duck';
+
+import {
   ADD_SLIDE,
   REMOVE_SLIDE,
   UPDATE_SLIDE,
@@ -57,10 +60,13 @@ const SET_IMPORT_FROM_URL_CANDIDATE = '§Bulgur/PresentationsManager/SET_IMPORT_
 /*
  * Action creators
  */
+
 /**
+ * Creates a new presentation, setting optionally it as active in the editor
  * @param {string} id - the uuid of the presentation to create
  * @param {object} presentation - the data of the presentation to create
  * @param {boolean} setActive - whether to set the presentation as active (edited) presentation in app
+ * @return {object} action - the redux action to dispatch
  */
 export const createPresentation = (id, presentation, setActive = true) => ({
   type: CREATE_PRESENTATION,
@@ -68,63 +74,87 @@ export const createPresentation = (id, presentation, setActive = true) => ({
   setActive,
   id
 });
+
 /**
+ * Duplicates a presentation to create a new one
  * @param {object} presentation - the data of the presentation to copy
+ * @return {object} action - the redux action to dispatch
  */
 export const copyPresentation = (presentation) => ({
   type: COPY_PRESENTATION,
   presentation
 });
+
 /**
+ * Opens the display of a deletion prompt for a specific presentation ('are you sure ...')
  * @param {string} id - the uuid of the presentation to query for deletion
+ * @return {object} action - the redux action to dispatch
  */
 export const promptDeletePresentation = (id) => ({
   type: PROMPT_DELETE_PRESENTATION,
   id
 });
+
 /**
- *
+ * Dismisses the display of deletion prompt
+ * @return {object} action - the redux action to dispatch
  */
 export const unpromptDeletePresentation = () => ({
   type: UNPROMPT_DELETE_PRESENTATION
 });
+
 /**
+ * Deletes a presentation from state
  * @param {string} id - the uuid of the presentation to delete
+ * @return {object} action - the redux action to dispatch
  */
 export const deletePresentation = (id) => ({
   type: DELETE_PRESENTATION,
   id
 });
+
 /**
+ * Updates an existing presentation with new data
  * @param {string} id - the uuid of the presentation to update
  * @param {object} presentation - the data of the presentation to update
+ * @return {object} action - the redux action to dispatch
  */
 export const updatePresentation = (id, presentation) => ({
   type: UPDATE_PRESENTATION,
   id,
   presentation
 });
+
 /**
- *
+ * Resets the import state
+ * @return {object} action - the redux action to dispatch
  */
 export const importReset = () => ({
   type: IMPORT_RESET
 });
+
 /**
- *
+ * Abords the import process
+ * @return {object} action - the redux action to dispatch
  */
 export const abordImport = () => ({
   type: IMPORT_ABORD
 });
+
 /**
+ * Notifies the app current import candidate is a duplicate with an existing presentation
  * @param {object} candidate - the data of the presentation waiting to be imported or not instead of existing one
+ * @return {object} action - the redux action to dispatch
  */
 export const promptOverrideImport = (candidate) => ({
   type: IMPORT_OVERRIDE_PROMPT,
   candidate
 });
+
 /**
+ * Notifies the app import is a success
  * @param {object} data - the data of the imported presentation
+ * @return {function} function - function to execute as the action
  */
 export const importSuccess = (data) => (dispatch) => {
   dispatch({
@@ -134,8 +164,11 @@ export const importSuccess = (data) => (dispatch) => {
   // resets import state after a while
   setTimeout(() => dispatch(importReset()), timers.ultraLong);
 };
+
 /**
+ * Notifies the app import is a failure
  * @param {string} error - the error type for the import failure
+ * @return {function} function - function to execute as the action
  */
 export const importFail = (error) => (dispatch) => {
   dispatch({
@@ -145,8 +178,11 @@ export const importFail = (error) => (dispatch) => {
   // resets import state after a while
   setTimeout(() => dispatch(importReset()), timers.ultraLong);
 };
+
 /**
+ * Sets the url that user tries to import a presentation from
  * @param {string}  value - the new value to set for import from url candidate
+ * @return {object} action - the redux action to dispatch
  */
  export const setImportFromUrlCandidate = (value) => ({
   type: SET_IMPORT_FROM_URL_CANDIDATE,
@@ -156,22 +192,31 @@ export const importFail = (error) => (dispatch) => {
 /*
  * Reducers
  */
+
+
+/**
+ * Default state of the presentations manager
+ */
 const PRESENTATIONS_DEFAULT_STATE = {
+
   /**
-   * Representation of all the presentations stored in application's state
+   * Representation of all the presentations stored in application's state (keys are uuids)
    * @type {object}
    */
   presentations: {},
+
   /**
    * Representation of the id of the presentation being edited in editor
    * @type {string}
    */
   activePresentationId: undefined
 };
+
 /**
  * This redux reducer handles the modification of the data state for the presentations stored in the application's state
  * @param {object} state - the state given to the reducer
  * @param {object} action - the action to use to produce new state
+ * @return {object} newState - the resulting state
  */
 function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
   let position;
@@ -404,22 +449,30 @@ function presentations(state = PRESENTATIONS_DEFAULT_STATE, action) {
   }
 }
 
+
+/**
+ * Default state of the presentations manager ui
+ */
 const PRESENTATIONS_UI_DEFAULT_STATE = {
+
   /**
    * Representation of the id of the presentation being edited in editor
    * @type {string}
    */
   activePresentationId: undefined,
+
   /**
    * Representation of the id of the item being prompted to delete
    * @type {string}
    */
   promptedToDelete: undefined
 };
+
 /**
  * This redux reducer handles the modification of the ui state for presentations management
  * @param {object} state - the state given to the reducer
  * @param {object} action - the action to use to produce new state
+ * @return {object} newState - the resulting state
  */
 function presentationsUi(state = PRESENTATIONS_UI_DEFAULT_STATE, action) {
   switch (action.type) {
@@ -454,32 +507,41 @@ function presentationsUi(state = PRESENTATIONS_UI_DEFAULT_STATE, action) {
 }
 
 
+/**
+ * Default state of the import-related state
+ */
 const PRESENTATION_IMPORT_DEFAULT_STATE = {
+
   /**
    * Representation of a presentation waiting to be imported or not
    * @type {object}
    */
   importCandidate: undefined,
+
   /**
    * Representation of the import state
    * @type {object}
    */
   importStatus: undefined,
+
   /**
    * Representation of the import error occured after an import failed
    * @type {string}
    */
   importError: undefined,
+
   /**
    * Representation of the content of import from url input
    * @type {string}
    */
   importFromUrlCandidate: ''
 };
+
 /**
  * This redux reducer handles the modifications related to importing presentations in application's state
  * @param {object} state - the state given to the reducer
  * @param {object} action - the action to use to produce new state
+ * @return {object} newState - the resulting state
  */
 function presentationImport(state = PRESENTATION_IMPORT_DEFAULT_STATE, action) {
   switch (action.type) {
@@ -510,6 +572,7 @@ function presentationImport(state = PRESENTATION_IMPORT_DEFAULT_STATE, action) {
       return state;
   }
 }
+
 /**
  * The module exports a reducer connected to pouchdb thanks to redux-pouchdb
  */
@@ -534,6 +597,7 @@ const importStatus = state => state.presentationImport.importStatus;
 const importError = state => state.presentationImport.importError;
 const importCandidate = state => state.presentationImport.importCandidate;
 const importFromUrlCandidate = state => state.presentationImport.importFromUrlCandidate;
+
 /**
  * The selector is a set of functions for accessing this feature's state
  * @type {object}

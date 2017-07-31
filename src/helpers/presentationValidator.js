@@ -110,6 +110,7 @@ validateEntity = (model, entity) => {
   }
 };
 
+
 /**
  * Validates the given presentation
  * @param {object} data - the data to validate

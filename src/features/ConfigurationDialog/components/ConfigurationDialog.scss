@@ -31,6 +31,7 @@
     pre
     {
         overflow-y: auto;
+        flex: 1;
 
         max-height: 20rem;
         margin: 0;
@@ -43,7 +44,6 @@
         word-wrap: break-word;       /* Internet Explorer 5.5+ */
 
         @extend .primary-item;
-        flex: 1;
     }
     h4
     {
@@ -85,7 +85,6 @@
     .input-group
     {
         display: flex;
-
         flex-flow: column nowrap;
         &:not(:last-of-type)
         {
@@ -107,27 +106,27 @@
     .sample-files-container
     {
         display: flex;
-
-        flex-flow: row wrap;
         align-items: space-between;
+        flex-flow: row wrap;
 
         .sample-file
         {
+            flex: 1;
+
             min-width: 30%;
             padding: 0 $gutter-medium $gutter-medium 0;
 
             @extend .flex-stretched-column;
-            flex: 1;
             .sample-file-content
             {
                 display: flex;
+                flex: 1;
+                flex-flow: column nowrap;
+                justify-content: space-between;
 
                 padding: $gutter-medium;
 
-                flex: 1;
                 @extend .interactive-item;
-                flex-flow: column nowrap;
-                justify-content: space-between;
 
                 p
                 {
@@ -178,6 +177,8 @@
 
         li
         {
+            flex: 1;
+
             padding: 0;
             padding: $gutter-medium;
 
@@ -186,7 +187,6 @@
             cursor: pointer;
 
             @extend .animated;
-            flex: 1;
             @extend .important-item;
             &:hover
             {
@@ -207,13 +207,13 @@
         position: relative;
 
         display: flex;
-
         flex-flow: row nowrap;
 
         .modal-column
         {
-            @extend .flex-stretched-column;
             flex: 1;
+
+            @extend .flex-stretched-column;
             &:not(:first-of-type)
             {
                 margin-left: $gutter-large;
@@ -258,12 +258,12 @@
     {
         position: relative;
 
+        flex: 1;
+
         width: 100%;
         max-height: 30rem;
 
         border: 1px solid $color-sec-stroke;
-
-        flex: 1;
 
         .spatialization-controls
         {
@@ -274,12 +274,13 @@
             #save-nodes,
             #spatialize-nodes
             {
+                flex: 1;
+
                 padding: $gutter-medium;
 
                 cursor: pointer;
 
                 @extend .animated;
-                flex: 1;
             }
             #spatialize-nodes
             {
@@ -321,8 +322,9 @@
         {
             font-size: $font-size-3;
 
-            @extend .important-item;
             flex: 1;
+
+            @extend .important-item;
             &:hover
             {
                 @extend .important-item-intent;

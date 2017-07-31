@@ -15,6 +15,7 @@ import {persistentStore} from 'redux-pouchdb';
 import PouchDB from 'pouchdb';
 const db = new PouchDB('bulgur');
 
+
 /**
  * Configures store with a possible inherited state and appropriate reducers
  * @param initialState - the state to use to bootstrap the reducer
@@ -25,7 +26,6 @@ export default function configureStore (initialState = {}) {
   const middleware = applyMiddleware(
     promiseMiddleware()
   );
-
 
   // Create final store and subscribe router in debug env ie. for devtools
   const createStoreWithMiddleware = window.__REDUX_DEVTOOLS_EXTENSION__ ?

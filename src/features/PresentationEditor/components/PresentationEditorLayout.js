@@ -4,22 +4,14 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-// import Modal from 'react-modal';
 import Helmet from 'react-helmet';
 
 import './PresentationEditorLayout.scss';
 
-// import QuinoaPresentationPlayer from 'quinoa-presentation-player';
-
 import AsideViewLayout from './AsideViewLayout';
 import MainViewLayout from './MainViewLayout';
-// import Footer from '../../../components/Footer/Footer';
 import {translateNameSpacer} from '../../../helpers/translateUtils';
 
-// import PresentationsManagerContainer from '../../PresentationsManager/components/PresentationsManagerContainer';
-
-// import ConfigurationDialog from '../../ConfigurationDialog/components/ConfigurationDialogContainer.js';
-// import TakeAwayDialog from '../../TakeAwayDialog/components/TakeAwayDialogContainer.js';
 
 /**
  * Renders the main layout component of the editor
@@ -79,8 +71,8 @@ const PresentationEditorLayout = ({
   openSettings,
 }, context) => {
 
+  // namespacing the translation keys with feature id
   const translate = translateNameSpacer(context.t, 'Features.PresentationEditor');
-
   return (
     <div id={id} className={'bulgur-PresentationEditorLayout ' + (className || '')}>
       <Helmet>

@@ -18,7 +18,6 @@ import PresentationsManagerContainer from '../../PresentationsManager/components
 import ConfigurationDialog from '../../ConfigurationDialog/components/ConfigurationDialogContainer';
 import TakeAwayDialog from '../../TakeAwayDialog/components/TakeAwayDialogContainer';
 
-// import DraftGlobalUi from '../../../components/DraftGlobalUi/DraftGlobalUi';
 
 /**
  * Renders the main layout component of the editor
@@ -66,6 +65,11 @@ const GlobalUiLayout = ({
   },
   closeAndResetDialog
 }, context) => {
+
+
+  /**
+   * Callbacks
+   */
 
   // callback for takeaway modal tweaking
   const closeModal = () => {

@@ -1,3 +1,8 @@
+/**
+ * This module provides unit tests to ensure all visualization types are formatted identically
+ * @module bulgur/models/visualizationTypes
+ */
+
 import {expect} from 'chai';
 import {exists} from 'fs';
 import {resolve} from 'path';

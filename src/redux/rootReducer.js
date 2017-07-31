@@ -22,6 +22,12 @@ import * as modelsModels from './../models';
 
 const models = (state = modelsModels) => state;
 
+
+/**
+ * Combines all the reducers of the app into one
+ * New features' reducers are plugged into logic here.
+ * @return {function} reducer - the combined reducer
+ */
 export default combineReducers({
   presentations,
   presentationEditor,

@@ -31,22 +31,21 @@
     .bulgur-slide
     {
         display: flex;
+        flex-flow: row nowrap;
 
         padding: $gutter-small;
 
         border: 1px solid $color-sec-stroke;
 
-        flex-flow: row nowrap;
         @extend .interactive-item;
         .slide-content
         {
             display: flex;
+            flex: 3;
+            flex-flow: column nowrap;
 
             max-width: 100%;
             padding-right: $gutter-small;
-
-            flex: 3;
-            flex-flow: column nowrap;
             input,
             textarea
             {
@@ -68,9 +67,9 @@
 
                 input
                 {
-                    border: none;
-
                     flex: 5;
+
+                    border: none;
                 }
             }
             .comment-container
@@ -95,8 +94,9 @@
             {
                 font-size: $font-size-1;
 
-                @extend .flex-stretched-row;
                 justify-content: space-between;
+
+                @extend .flex-stretched-row;
 
                 button:hover
                 {

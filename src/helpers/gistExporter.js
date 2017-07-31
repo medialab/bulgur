@@ -6,6 +6,7 @@ import GitHub from 'github-api';
 
 import getGithubToken from './getGithubToken';
 
+
 /**
  * @param {string} htmlContent - the content to publish to the index.html file of the gist
  * @param {object} JSONbundle - the JSON representation of the presentation to publish to project.json file of the gist

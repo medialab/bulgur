@@ -3,10 +3,16 @@
  * @module bulgur/components/HelpPin
  */
 import React from 'react';
-
+import PropTypes from 'prop-types';
 
 import './HelpPin.scss';
 
+
+/**
+ * Renders the HelpPin component as a pure function
+ * @param {object} props - used props (see prop types below)
+ * @return {ReactElement} component - the resulting component
+ */
 const HelpPin = ({
   children,
   position
@@ -22,5 +28,22 @@ const HelpPin = ({
     </div>
   </span>
 );
+
+
+/**
+ * Component's properties types
+ */
+HelpPin.propTypes = {
+
+  /**
+   * children elements of the component
+   */
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
+
+  /**
+   * position of the component ('top', 'left', 'bottom', 'right')
+   */
+  position: PropTypes.string,
+};
 
 export default HelpPin;

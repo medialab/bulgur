@@ -26,7 +26,6 @@
     .aside-header
     {
         display: flex;
-
         flex-flow: column nowrap;
         button
         {
@@ -59,12 +58,11 @@
     .bulgur-SlidesContainer
     {
         overflow: auto;
+        flex: 5;
 
         max-height: 100%;
-
-        flex: 5;
     }
-    > button
+     > button
     {
         display: block;
 
@@ -72,11 +70,11 @@
 
         text-align: left;
     }
-    > button:first-of-type
+     > button:first-of-type
     {
         border-bottom: 1px solid $primary-color;
     }
-    > button:last-of-type
+     > button:last-of-type
     {
         border-top: 1px solid $primary-color;
     }

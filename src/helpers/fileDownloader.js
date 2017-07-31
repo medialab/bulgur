@@ -3,6 +3,7 @@
  * @module bulgur/utils/fileDownloader
  */
 import FileSaver from 'file-saver';
+
 /**
  * @param {string} text - the text to put in the file
  * @param {string} extension - the extension to append to file name

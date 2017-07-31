@@ -38,7 +38,13 @@ const AsideViewLayout = ({
   returnToLanding,
   activeSlideId,
 }, context) => {
+  // namespacing the translation keys with feature id
   const translate = translateNameSpacer(context.t, 'Features.PresentationEditor');
+
+
+  /**
+   * Callbacks
+   */
   const onRemoveSlide = id => {
     // determining new active slide
     const newActive = activePresentation.order && activePresentation.order.length > 1 ?
@@ -49,6 +55,7 @@ const AsideViewLayout = ({
       setActiveSlide(newActive, activePresentation.slides[newActive]);
     }
   };
+
   return (<aside className="bulgur-aside-view">
     <div className="aside-header">
       <button className="returnToLanding-btn" onClick={returnToLanding} type="button"><span className="bulgur-icon">☰</span> {translate('back-to-home')}</button>

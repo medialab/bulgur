@@ -11,19 +11,18 @@
 {
     display: flex;
     overflow-y: auto;
+    align-items: center;
+    flex-flow: row nowrap;
+    justify-content: center;
     /*
      * root component
      */
 
     @extend .absolute-stretched;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: center;
     @extend .normal-item;
     @media #{$breakpoint-tablet}
     {
         overflow: auto;
-
         flex-flow: column nowrap;
     }
     /*
@@ -33,13 +32,12 @@
     {
         display: flex;
         overflow: visible;
+        flex: 1;
+        flex-flow: column nowrap;
 
         height: 100%;
         padding: $gutter-medium;
         padding-top: 3%;
-
-        flex: 1;
-        flex-flow: column nowrap;
         &:first-of-type
         {
             display: block;
@@ -170,17 +168,17 @@
         form
         {
             display: flex;
-
             flex-flow: row nowrap;
+
             @extend .interactive-item;
 
             input[type='text']
             {
+                flex: 1;
+
                 padding: $gutter-medium;
 
                 cursor: text;
-
-                flex: 1;
                 &:hover
                 {
                     @extend .interactive-item-intent;
@@ -203,11 +201,11 @@
 .override-modal-footer
 {
     display: flex;
-
     flex-flow: row nowrap;
     button:first-of-type
     {
         flex: 1;
+
         @extend .dangerous-item;
         &:hover
         {

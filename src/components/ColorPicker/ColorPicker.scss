@@ -1,7 +1,7 @@
 /**
- * style definitions for the ColorsMapPicker component
+ * style definitions for the ColorPicker component
  *
- * @module bulgur/components/ColorsMapPicker
+ * @module bulgur/components/ColorPicker
  */
 @import '../../parameters.scss';
 
@@ -45,9 +45,9 @@
         #save-color,
         #cancel
         {
-            padding: $gutter-medium;
-
             flex: 1;
+
+            padding: $gutter-medium;
         }
     }
 }

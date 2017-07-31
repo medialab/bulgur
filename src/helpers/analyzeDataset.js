@@ -3,6 +3,7 @@
  * @module bulgur/utils/analyzeDataset
  */
 
+
 /**
  * Analyzes a collection
  * @param {array} collection - the collection to analyse
@@ -52,6 +53,7 @@ const analyzeCollection = (collection) => {
   // return the collection map
   return propertiesMap;
 };
+
 
 /**
  * Analyses, for each collection of a dataset, and for each dimension/property, coverage (number of undefined values) and value types

@@ -12,12 +12,14 @@ import {setLanguage} from 'redux-i18n';
 
 import PresentationEditorLayout from './PresentationEditorLayout';
 import * as duck from '../duck';
+import * as globalUiDuck from '../../GlobalUi/duck';
 import * as managerDuck from '../../PresentationsManager/duck';
 
 import {
   resetPresentationCandidateSettings,
-  setupPresentationCandidate
+  setupPresentationCandidate,
 } from '../../ConfigurationDialog/duck';
+
 
 /**
  * Redux-decorated component class rendering the takeaway dialog feature to the app
@@ -26,12 +28,13 @@ import {
   state => ({
     ...duck.selector(state.presentationEditor),
     ...managerDuck.selector(state.presentations),
+    ...globalUiDuck.selector(state.globalUi),
     lang: state.i18nState.lang
   }),
   dispatch => ({
     actions: bindActionCreators({
       ...duck,
-      // ...quinoaActions,
+      ...globalUiDuck,
       resetPresentationCandidateSettings,
       setupPresentationCandidate,
       setLanguage
@@ -40,11 +43,18 @@ import {
 )
 class PresentationEditorContainer extends Component {
 
+  /**
+   * Context data used by the component
+   */
   static contextTypes = {
     t: React.PropTypes.func.isRequired,
     store: PropTypes.object.isRequired
   }
 
+  /**
+   * constructor
+   * @param {object} props - properties given to instance at instanciation
+   */
   constructor(props) {
     super(props);
     this.closeAndResetDialog = this.closeAndResetDialog.bind(this);
@@ -55,25 +65,51 @@ class PresentationEditorContainer extends Component {
     this.duplicateSlide = this.duplicateSlide.bind(this);
   }
 
+
+  /**
+   * Defines whether the component should re-render
+   * @param {object} nextProps - the props to come
+   * @param {object} nextState - the state to come
+   * @return {boolean} shouldUpdate - whether to update or not
+   */
   shouldComponentUpdate() {
+    // todo: optimize component when stabilized
     return true;
   }
 
+
+  /**
+   * Closes and reset the presentation settings view
+   */
   closeAndResetDialog() {
     this.props.actions.resetPresentationCandidateSettings();
     this.props.actions.closePresentationCandidateModal();
   }
 
+
+  /**
+   * Unsets current presentation therefore falling back
+   * to the home view
+   */
   returnToLanding() {
     this.props.actions.unsetActivePresentation();
   }
 
+
+  /**
+   * Opens settings with an existing presentation
+   */
   openSettings () {
     this.props.actions.startPresentationCandidateConfiguration(this.props.activePresentation);
   }
 
+
+  /**
+   * adds a new slide to the current presentation
+   */
   addSlide () {
     // build slide
+    // todo: wrap this in a createDefaultSlide helper ?
     const slide = {
       views: Object.keys(this.props.activeViews).reduce((views, id) => ({
         ...views,
@@ -88,6 +124,12 @@ class PresentationEditorContainer extends Component {
     this.props.actions.addSlide(id, slide);
   }
 
+
+  /**
+   * Duplicates an existing slide
+   * @param {object} slide - the slide to duplicate
+   * @param {number} slideIndex - the index of the slide to duplicate in slides order
+   */
   duplicateSlide (slide, slideIndex) {
     const id = uuid();
     const newSlide = {
@@ -97,6 +139,11 @@ class PresentationEditorContainer extends Component {
     this.props.actions.addSlide(id, newSlide, position);
   }
 
+
+  /**
+   * Renders the component
+   * @return {ReactElement} component - the component
+   */
   render() {
     return (
       <PresentationEditorLayout

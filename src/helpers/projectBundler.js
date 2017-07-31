@@ -5,6 +5,7 @@
 import {post} from 'superagent';
 import {serverUrl} from '../../secrets';
 
+
 /**
  * Prepares a presentation data for a clean version to export
  * @param {object} presentation - the input data to clean
@@ -25,7 +26,8 @@ export function cleanPresentationForExport(presentation) {
   };
 }
 
-/*
+
+/**
  * Wraps a server call for rendering a presentation as all-in-one html presentation file
  * @param {object} presentation - the presentation to bundle
  * @param {function} callback
@@ -35,7 +37,8 @@ export function bundleProjectAsHtml (presentation, callback) {
     .send(cleanPresentationForExport(presentation))
     .end((err, response) => callback(err, response && response.text));
 }
-/*
+
+/**
  * Cleans and serializes a presentation representation
  * @param {object} presentation - the presentation to bundle
  * @return {string} result - the resulting serialized presentation

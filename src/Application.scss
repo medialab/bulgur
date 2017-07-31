@@ -46,13 +46,12 @@ html
 .ReactModal__Overlay
 {
     display: flex;
+    align-items: center;
 
     transition: opacity $time-short ease-in-out;
 
     opacity: 0;
     background: rgba(0, 0, 0, .15);
-
-    align-items: center;
     &--after-open
     {
         opacity: 1;

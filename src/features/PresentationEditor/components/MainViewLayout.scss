@@ -15,7 +15,6 @@
      * root component
      */
     display: flex;
-
     flex-flow: column nowrap;
     /*
      * secondary layout components
@@ -25,9 +24,8 @@
         position: relative;
 
         display: flex;
-
-        flex-flow: row nowrap;
         flex: 2;
+        flex-flow: row nowrap;
 
         .bulgur-SlideSettingsPannel
         {
@@ -40,14 +38,13 @@
 
             display: flex;
             overflow: hide;
-
             flex: 5;
             flex-flow: row nowrap;
             .visualization-container
             {
-                height: 100%;
-
                 flex: 1;
+
+                height: 100%;
             }
         }
     }
@@ -55,6 +52,8 @@
     .caption-container
     {
         position: relative;
+
+        flex: 1;
 
         max-height: 40%;
         padding: $gutter-medium;
@@ -65,7 +64,6 @@
         background: $color-sec-bg;
 
         @extend .flex-stretched-column;
-        flex: 1;
 
         .caption-header
         {
@@ -79,12 +77,12 @@
 
             h1
             {
+                flex: 5;
+
                 margin: 0;
                 padding: 0;
                 padding-top: $gutter-small;
                 padding-right: $gutter-small;
-
-                flex: 5;
                 input
                 {
                     font-size: $font-size-2;
@@ -98,19 +96,19 @@
         .caption-editor
         {
             display: flex;
+            flex: 5;
+            flex-grow: row nowrap;
 
             width: 100%;
             height: 100%;
             margin: 0;
-
-            flex: 5;
-            flex-grow: row nowrap;
             .editor-areas-container
             {
+                flex: 8;
+
                 margin-right: $gutter-small;
 
                 @extend .flex-stretched-column;
-                flex: 8;
             }
 
             .editor-helpers li
@@ -150,6 +148,8 @@
 
         button
         {
+            flex: 1;
+
             padding: $gutter-medium;
 
             cursor: default;
@@ -157,7 +157,6 @@
             opacity: .1;
 
             @extend .animated;
-            flex: 1;
             @extend .interactive-item;
             &:hover
             {

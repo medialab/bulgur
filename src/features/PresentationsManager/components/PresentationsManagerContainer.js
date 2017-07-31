@@ -12,7 +12,7 @@ import {setLanguage} from 'redux-i18n';
 
 import PresentationsManagerLayout from './PresentationsManagerLayout';
 import * as duck from '../duck';
-import * as globalDuck from '../../PresentationEditor/duck';
+import * as globalDuck from '../../GlobalUi/duck';
 import {maxNumberOfLocalPresentations} from '../../../../config';
 
 import {
@@ -20,13 +20,14 @@ import {
 } from '../../../helpers/fileLoader';
 
 import validatePresentation from '../../../helpers/presentationValidator';
+
 /**
  * Redux-decorated component class rendering the presentations manager feature to the app
  */
 @connect(
   state => ({
     ...duck.selector(state.presentations),
-    ...globalDuck.selector(state.presentationEditor),
+    ...globalDuck.selector(state.globalUi),
     lang: state.i18nState.lang
   }),
   dispatch => ({
@@ -39,12 +40,17 @@ import validatePresentation from '../../../helpers/presentationValidator';
 )
 export default class PresentationsManagerContainer extends Component {
 
+  /**
+   * Context data used by the component
+   */
   static contextTypes = {
     t: React.PropTypes.func.isRequired,
     store: PropTypes.object.isRequired
   }
+
   /**
    * constructor
+   * @param {object} props - properties given to instance at instanciation
    */
   constructor (props) {
     super(props);
@@ -53,10 +59,22 @@ export default class PresentationsManagerContainer extends Component {
     this.attemptImport = this.attemptImport.bind(this);
   }
 
+
+  /**
+   * Defines whether the component should re-render
+   * @param {object} nextProps - the props to come
+   * @param {object} nextState - the state to come
+   * @return {boolean} shouldUpdate - whether to update or not
+   */
   shouldComponentUpdate(nextProps) {
     return nextProps.isPresentationCandidateModalOpen === false;
   }
 
+
+  /**
+   * Tries to import a new presentation presented as a string
+   * @param {string} str - a possibly valid story as a string
+   */
   attemptImport (str) {
     try {
       const project = JSON.parse(str);
@@ -81,6 +99,11 @@ export default class PresentationsManagerContainer extends Component {
     }
   }
 
+
+  /**
+   * Tries to import a new presentation from a url
+   * @param {event} e - initial click event (wtf ?)
+   */
   importFromDistantJSON (e) {
     e.preventDefault();
     const url = this.props.importFromUrlCandidate;
@@ -132,6 +155,12 @@ export default class PresentationsManagerContainer extends Component {
     });
   }
 
+
+  /**
+   * callbacks when presentation files are dropped
+   * to the import zone.
+   * @param {array<File>} files - the files being dropped
+   */
   onProjectImportPrompt (files) {
     if (!files || !files.length) {
       return;
@@ -146,6 +175,11 @@ export default class PresentationsManagerContainer extends Component {
     });
   }
 
+
+  /**
+   * Renders the component
+   * @return {ReactElement} component - the component
+   */
   render () {
     const overrideImportWithCandidate = () => this.props.actions.importSuccess(this.props.importCandidate);
     return (

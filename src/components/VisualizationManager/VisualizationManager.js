@@ -17,8 +17,15 @@ import {
   mapNetworkData
 } from 'quinoa-vis-modules';
 
+/**
+ * VisualizationManager class for building react component instances
+ */
 class VisualizationManager extends Component {
 
+  /**
+   * constructor
+   * @param {object} props - properties given to instance at instanciation
+   */
   constructor(props) {
     super(props);
     this.updateData = this.updateData.bind(this);
@@ -28,8 +35,15 @@ class VisualizationManager extends Component {
     this.state = {
       data: undefined
     };
+    // todo: why did I have to do that ?
     setTimeout(() => this.updateData(props));
   }
+
+
+  /**
+   * Executes code when component receives new properties
+   * @param {object} nextProps - the future properties of the component
+   */
   componentWillReceiveProps(nextProps) {
     if (
     this.props.data !== nextProps.data
@@ -39,6 +53,13 @@ class VisualizationManager extends Component {
     }
   }
 
+
+  /**
+   * Defines whether the component should re-render
+   * @param {object} nextProps - the props to come
+   * @param {object} nextState - the state to come
+   * @return {boolean} shouldUpdate - whether to update or not
+   */
   shouldComponentUpdate(nextProps, nextState) {
     return this.state.data !== nextState.data
     || this.props.viewParameters !== nextProps.viewParameters
@@ -46,12 +67,22 @@ class VisualizationManager extends Component {
     ;
   }
 
+
+  /**
+   * Retrieves current positions of the nodes of a network visualization
+   * @return {array} positions - an array of nodes positions in the form {x, y, id}
+   */
   getNodesPositions() {
     if (this.visualization && this.visualization.getNodesPositions) {
       return this.visualization.getNodesPositions();
     }
   }
 
+
+  /**
+   * Maps properly the visualization's data with provided datamap
+   * @param {object} props - the props to inspect
+   */
   updateData(props) {
     let visData;
     const {
@@ -80,6 +111,10 @@ class VisualizationManager extends Component {
     });
   }
 
+  /**
+   * Renders the component
+   * @return {ReactElement} component - the component
+   */
   render() {
     const {
       visualizationType,
@@ -91,11 +126,9 @@ class VisualizationManager extends Component {
       data
     } = this.state;
 
-
     const bindVisualization = visualization => {
       this.visualization = visualization;
     };
-    // console.log('re render vis', viewParameters);
     if (data) {
        switch (visualizationType) {
           case 'map':
@@ -134,12 +167,36 @@ class VisualizationManager extends Component {
   }
 }
 
+
+/**
+ * Component's properties types
+ */
 VisualizationManager.propTypes = {
-  // dataMap: PropTypes.Object // commented to avoid messing with the linter
-  // data: PropTypes.Object, // commented to avoid messing with the linter
-  // viewParameters: PropTypes.Object, // commented to avoid messing with the linter
+
+  /**
+   * datamap to use for displaying the visualization (keys are data's collections)
+   */
+  dataMap: PropTypes.object,
+
+  /**
+   * data to use for displaying the visualization (keys are data's collections)
+   */
+  data: PropTypes.object,
+
+  /**
+   * active view parameters to use for displaying the visualization
+   */
+  viewParameters: PropTypes.object,
+
+  /**
+   * type of the visualization to display
+   */
   visualizationType: PropTypes.string,
-  onUserChange: PropTypes.func
+
+  /**
+   * callbacks when user changes the view
+   */
+  onUserChange: PropTypes.func,
 };
 
 export default VisualizationManager;

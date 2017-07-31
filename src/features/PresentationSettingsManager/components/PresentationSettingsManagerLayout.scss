@@ -9,16 +9,18 @@
 .fonio-PresentationSettingsManagerLayout
 {
     flex: 1;
+
     @extend .flex-stretched-row;
     .settings-pannel
     {
         z-index: 2;
 
+        flex: 1;
+
         padding: $gutter-medium;
 
         transition: all $time-short ease;
 
-        flex: 1;
         @extend .flex-stretched-column;
         &.hidden
         {
@@ -44,10 +46,9 @@
             .settings-pannel-header
             {
                 display: flex;
-
+                align-items: center;
                 flex: 5;
                 flex-flow: column nowrap;
-                align-items: center;
                 justify-content: center;
             }
             .settings-pannel-body
@@ -86,14 +87,13 @@
         .settings-pannel-body
         {
             overflow-y: auto;
+            flex: 1;
 
             padding-bottom: $gutter-large * 2;
 
             transition: all $time-short ease;
 
             opacity: 1;
-
-            flex: 1;
         }
     }
     .preview-container

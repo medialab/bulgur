@@ -16,11 +16,11 @@
         .colors-map-item
         {
             display: flex;
+            flex-flow: column nowrap;
 
             cursor: pointer;
 
             @extend .animated;
-            flex-flow: column nowrap;
             .twitter-picker
             {
                 width: 100%!important;
@@ -74,13 +74,13 @@
     .global-operations
     {
         display: flex;
+        flex-flow: row nowrap;
 
         margin-bottom: $gutter-medium;
-
-        flex-flow: row nowrap;
         button
         {
             flex: 1;
+
             @extend .interactive-item;
             &:hover
             {

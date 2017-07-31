@@ -12,6 +12,13 @@ import {translateNameSpacer} from '../../helpers/translateUtils';
 import ColorsMapPicker from '../ColorsMapPicker/ColorsMapPicker';
 import DatamapPicker from '../DatamapPicker/DatamapPicker';
 
+
+/**
+ * Renders the SlideSettingsPannel component as a pure function
+ * @param {object} props - used props (see prop types below)
+ * @param {object} context - used context data (see context types below)
+ * @return {ReactElement} component - the resulting component
+ */
 const SlideSettingsPannel = ({
   state,
   setPannelState,
@@ -29,7 +36,7 @@ const SlideSettingsPannel = ({
     if (isOpen) {
       setPannelState(undefined);
     }
- else {
+    else {
       setPannelState('categories');
     }
   };
@@ -157,6 +164,61 @@ const SlideSettingsPannel = ({
   );
 };
 
+
+/**
+ * Component's properties types
+ */
+SlideSettingsPannel.propTypes = {
+
+  /**
+   * presentation to work with
+   */
+  presentation: PropTypes.object,
+
+  /**
+   * settings type on which the pannel is focused ('categories' or 'parameters')
+   */
+  state: PropTypes.string,
+
+  /**
+   * list of current views/visualizations
+   */
+  views: PropTypes.object,
+
+  /**
+   * current color being edited
+   */
+  editedColor: PropTypes.object,
+
+  /**
+   * changes the state of the pannel ('categories' or 'parameters')
+   */
+  setPannelState: PropTypes.func,
+
+  /**
+   * sets the data of a specific data map item
+   */
+  setViewDatamapItem: PropTypes.func,
+
+  /**
+   * opens or closes the edition of a color
+   */
+  toggleViewColorEdition: PropTypes.func,
+
+  /**
+   * sets the color of a specific color entry
+   */
+  setViewColor: PropTypes.func,
+
+  /**
+   * changes the list of filtered-in categories
+   */
+  setShownCategories: PropTypes.func,
+};
+
+/**
+ * Component's context used properties
+ */
 SlideSettingsPannel.contextTypes = {
   t: PropTypes.func.isRequired
 };

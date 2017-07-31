@@ -1,8 +1,14 @@
+/**
+ * This module provides helpers to handle colors in the application
+ * @module bulgur/utils/colorHelper
+ */
+
 import ColorScheme from 'color-scheme';
 import {uniq} from 'lodash';
 import chroma from 'chroma-js';
 
 const scheme = new ColorScheme;
+
 
 /**
  * This module discriminates uniques properties values for a set of objects

@@ -1,3 +1,8 @@
+/**
+ * This module provides unit tests for the presentationValidator helper
+ * @module bulgur/utils/presentationValidator
+ */
+
 const validPresentations = [
     require('../../mocks/simple-map-presentation.json')
 ];

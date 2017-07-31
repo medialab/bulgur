@@ -13,6 +13,14 @@ import {translateNameSpacer} from '../../helpers/translateUtils';
 import DebouncedInput from '../DebouncedInput/DebouncedInput';
 import DebouncedTextarea from '../DebouncedTextarea/DebouncedTextarea';
 
+
+/**
+ * react-dnd drag & drop handlers
+ */
+
+/**
+ * drag source handler
+ */
 const slideSource = {
   beginDrag(props) {
     return {
@@ -22,7 +30,11 @@ const slideSource = {
   }
 };
 
+/**
+ * drag target handler
+ */
 const slideTarget = {
+
   /**
    * Drag on hover behavior
    * Initial design & implementation @yomguithereal
@@ -70,6 +82,12 @@ const slideTarget = {
   }
 };
 
+
+/**
+ * These two decorators allow to drag and drop the card
+ * thanks to react-dnd
+ * see https://react-dnd.github.io/react-dnd/
+ */
 @DragSource('SLIDE', slideSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
   connectDragPreview: connect.dragPreview(),
@@ -79,12 +97,23 @@ const slideTarget = {
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver()
 }))
+
+/**
+ * Slide class for building react component instances
+ */
 class Slide extends React.Component {
 
+  /**
+   * Component's used context data
+   */
   static contextTypes = {
     t: PropTypes.func.isRequired
   }
 
+  /**
+   * Renders the component
+   * @return {ReactElement} component - the component
+   */
   render() {
     const translate = translateNameSpacer(this.context.t, 'Components.Slide');
     const {
@@ -135,5 +164,72 @@ class Slide extends React.Component {
     ));
   }
 }
+
+
+/**
+ * Component's properties types
+ */
+Slide.propTypes = {
+
+  /**
+   * slide to display
+   */
+  slide: PropTypes.object,
+
+  /**
+   * whether the slide is edited
+   */
+  active: PropTypes.bool,
+
+  /**
+   * callbacks when slide asks to be removed
+   */
+  onRemove: PropTypes.func,
+
+  /**
+   * callbacks when slide is clicked
+   */
+  onGlobalClick: PropTypes.func,
+
+  /**
+   * callbacks when slide title is changed
+   */
+  onTitleChange: PropTypes.func,
+
+  /**
+   * callbacks when slide text is changed
+   */
+  onTextChange: PropTypes.func,
+
+  /**
+   * callbacks when slide asks to be duplicated
+   */
+  onDuplicateSlide: PropTypes.func,
+
+  /**
+   * callbacks when slide is asked to be dragged
+   */
+  connectDragSource: PropTypes.func,
+
+  /**
+   * callbacks when slide is asked to be previewed
+   */
+  connectDragPreview: PropTypes.func,
+
+  /**
+   * callbacks when slide is dropped
+   */
+  connectDropTarget: PropTypes.func,
+
+  /**
+   * represents whether slide is dragged
+   */
+  isDragging: PropTypes.bool,
+
+  /**
+   * represent whether slide is hovered
+   */
+  isOver: PropTypes.bool,
+};
 
 export default Slide;

@@ -6,6 +6,7 @@ import {post} from 'superagent';
 
 import {serverUrl} from '../../secrets';
 
+
 /**
  * @param {object} presentation - the presentation to publish to server
  * @param {function} dispatch - the dispatch function to use to connect the process to redux logic

@@ -32,13 +32,12 @@
         position: relative;
 
         overflow-y: auto;
+        flex: 5;
 
         padding: $gutter-medium;
 
         cursor: text;
         transition: background $time-short ease;
-
-        flex: 5;
         .public-DraftEditorPlaceholder-inner
         {
             font-style: italic;
@@ -53,15 +52,14 @@
     .rich-buttons
     {
         display: flex;
+        align-content: space-between;
+        flex-flow: row nowrap;
 
         margin-bottom: $gutter-medium;
         padding-top: $gutter-small;
         padding-bottom: $gutter-small;
 
         border-bottom: 1px solid $color-sec-stroke;
-
-        flex-flow: row nowrap;
-        align-content: space-between;
         .buttons-group
         {
             &:first-of-type
