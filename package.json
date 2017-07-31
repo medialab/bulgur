@@ -5,7 +5,7 @@
   "main": "dist/entry.js",
   "scripts": {
     "dev": "kotatsu serve --config ./webpack.config.dev.js --progress --babel --index ./index.html --public ./ ./src/main.js",
-    "build": "kotatsu build client ./src/main.js -o build --progress --config ./webpack.config.js --babel --minify",
+    "build": "kotatsu build client ./src/main.js -o build --progress --config ./webpack.config.prod.js --babel --minify",
     "lint": "eslint --fix src",
     "comb": "csscomb src",
     "test": "mocha --compilers js:babel-core/register -R spec --recursive $(find src -name '*.spec.js')",
@@ -128,6 +128,11 @@
     "extends": [
       "@yomguithereal/eslint-config/es7",
       "@yomguithereal/eslint-config/react"
-    ]
+    ],
+    "rules": {
+      "react/no-set-state": 0,
+      "react/forbid-prop-types": 0,
+      "require-jsdoc": 2
+    }
   }
 }
