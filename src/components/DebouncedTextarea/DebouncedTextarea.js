@@ -103,4 +103,4 @@ DebouncedTextArea.propTypes = {
    * callbacks when value is changed by user
    */
   onChange: PropTypes.func,
-}
+};

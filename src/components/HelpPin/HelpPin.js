@@ -34,7 +34,7 @@ const HelpPin = ({
  * Component's properties types
  */
 HelpPin.propTypes = {
-  
+
   /**
    * position of the component ('top', 'left', 'bottom', 'right')
    */
