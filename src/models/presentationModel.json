@@ -169,7 +169,7 @@
             "keys": {
                 "template": {
                     "type": "string",
-                    "default": "garlic"
+                    "default": "scroller"
                 },
                 "options": {
                     "type": "object",
