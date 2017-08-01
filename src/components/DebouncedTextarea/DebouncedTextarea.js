@@ -16,27 +16,6 @@ import Textarea from 'react-textarea-autosize';
 export default class DebouncedTextArea extends Component {
 
   /**
-   * Component's properties types
-   */
-  propTypes = {
-
-    /**
-     * the current value of the input
-     */
-    value: PropTypes.string,
-
-    /**
-     * the placeholder to display
-     */
-    placeHolder: PropTypes.string,
-
-    /**
-     * callbacks when value is changed by user
-     */
-    onChange: PropTypes.func,
-  }
-
-  /**
    * constructor
    * @param {object} props - properties given to instance at instanciation
    */
@@ -103,4 +82,25 @@ export default class DebouncedTextArea extends Component {
       </Textarea>
     );
   }
+}
+
+/**
+ * Component's properties types
+ */
+DebouncedTextArea.propTypes = {
+
+  /**
+   * the current value of the input
+   */
+  value: PropTypes.string,
+
+  /**
+   * the placeholder to display
+   */
+  placeHolder: PropTypes.string,
+
+  /**
+   * callbacks when value is changed by user
+   */
+  onChange: PropTypes.func,
 }

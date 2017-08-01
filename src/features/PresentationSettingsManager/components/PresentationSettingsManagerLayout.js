@@ -83,7 +83,7 @@ const PresentationSettingsManagerLayout = ({
                 minRows={10}
                 maxRows={12}
                 defaultValue="Write custom css code here"
-                value={activeCss}
+                value={activeCss || ''}
                 onChange={onCssChange} />
               {!activeCss.length &&
               <pre className="css-example">

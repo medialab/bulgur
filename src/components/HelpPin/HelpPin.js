@@ -34,12 +34,7 @@ const HelpPin = ({
  * Component's properties types
  */
 HelpPin.propTypes = {
-
-  /**
-   * children elements of the component
-   */
-  children: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-
+  
   /**
    * position of the component ('top', 'left', 'bottom', 'right')
    */

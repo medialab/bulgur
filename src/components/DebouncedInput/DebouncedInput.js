@@ -15,27 +15,6 @@ import {debounce} from 'lodash';
 export default class DebouncedInput extends Component {
 
   /**
-   * Component's properties types
-   */
-  propTypes = {
-
-    /**
-     * the current value of the input
-     */
-    value: PropTypes.string,
-
-    /**
-     * the placeholder to display
-     */
-    placeHolder: PropTypes.string,
-
-    /**
-     * callbacks when value is changed by user
-     */
-    onChange: PropTypes.func,
-  }
-
-  /**
    * constructor
    * @param {object} props - properties given to instance at instanciation
    */
@@ -103,3 +82,24 @@ export default class DebouncedInput extends Component {
     );
   }
 }
+
+/**
+ * Component's properties types
+ */
+DebouncedInput.propTypes = {
+
+    /**
+     * the current value of the input
+     */
+    value: PropTypes.string,
+
+    /**
+     * the placeholder to display
+     */
+    placeHolder: PropTypes.string,
+
+    /**
+     * callbacks when value is changed by user
+     */
+    onChange: PropTypes.func,
+  }

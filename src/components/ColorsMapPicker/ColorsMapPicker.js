@@ -190,9 +190,9 @@ ColorsMapPicker.propTypes = {
   toggleColorEdition: PropTypes.func,
 
   /**
-   * representation of the items to filter-in
+   * representation of the items to filter-in (keys are data collections, e.g. 'main')
    */
-  shownCategories: PropTypes.array,
+  shownCategories: PropTypes.object,
 
   /**
    * callbacks for updating the list of filtered-in elements

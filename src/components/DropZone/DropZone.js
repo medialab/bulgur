@@ -40,14 +40,9 @@ const DropZone = ({
 DropZone.propTypes = {
 
   /**
-   * the children elements of the component
-   */
-  children: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-
-  /**
    * accepted file extensions
    */
-  accept: PropTypes.array,
+  accept: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
 
   /**
    * callbacks when a file is dropped on the component
